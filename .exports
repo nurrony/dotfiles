@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+#Set Development zone
+export DEV_ZONE='/media/devzone'
+
 # Make vim the default editor.
 export EDITOR='vim';
 

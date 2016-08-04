@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 # Bash wrappers for docker run commands
+# Special thanks Jess Frazelle. You are really awesome!!!
+# https://github.com/jfrazelle/dotfiles/
 
 export JESS_DOCKER_REPO_PREFIX=jess
 export NMR_DOCKER_REPO_PREFIX=nmrony

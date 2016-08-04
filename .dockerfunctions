@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Bash wrappers for docker run commands
 
-export DOCKER_REPO_PREFIX=nmrony
+export JESS_DOCKER_REPO_PREFIX=jess
+export NMR_DOCKER_REPO_PREFIX=nmrony
 
 #
 # Helper Functions
@@ -73,7 +74,7 @@ aws(){
 		-v $HOME/.aws:/root/.aws \
 		--log-driver none \
 		--name aws \
-		${DOCKER_REPO_PREFIX}/awscli "$@"
+		${JESS_DOCKER_REPO_PREFIX}/awscli "$@"
 }
 
 bees(){
@@ -84,7 +85,7 @@ bees(){
 		-v $HOME/.dev:/root/.ssh:ro \
 		--log-driver none \
 		--name bees \
-		${DOCKER_REPO_PREFIX}/beeswithmachineguns "$@"
+		${JESS_DOCKER_REPO_PREFIX}/beeswithmachineguns "$@"
 }
 
 cadvisor(){

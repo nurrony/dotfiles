@@ -10,6 +10,9 @@ alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v exten
 alias hosts='sudo vim /etc/hosts'
 alias hostess='sudo hostess'
 
+# Alias for docker-compose
+alias dcompose='docker-compose'
+
 # Pipe my public key to my clipboard.
 alias pubkey="more ~/.ssh/nurrony-homepc.pub | xclip -selection clipboard | echo '=> Public key copied to pasteboard.'"
 

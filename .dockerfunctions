@@ -24,6 +24,13 @@ del_stopped(){
 	fi
 }
 
+is_running(){
+  local name=$1
+  local state=$(docker inspect --format "{{.State.Running}}" $name 2>/dev/null)
+
+  return $state
+}
+
 relies_on(){
 	local containers=$@
 

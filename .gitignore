@@ -17,3 +17,4 @@ Session.vim
 !.gnupg/gpg.conf
 
 .nginx/conf.d/*
+.idea/

@@ -1,15 +1,15 @@
 #Save it in ~/.ssh/config
 # Default GitHub user
 Host github.com
- HostName github.com
- User git
- PreferredAuthentications publickey
- IdentityFile ~/.ssh/nurrony-homepc
- 
+  HostName github.com
+  User git
+  PreferredAuthentications publickey
+  IdentityFile ~/.ssh/nurrony-homepc
+
 # Work user account
 Host bitbucket.org
- HostName bitbucket.org
- User git
- PreferredAuthentications publickey
- IdentityFile ~/.ssh/nurrony-homepc
+  HostName bitbucket.org
+  User git
+  PreferredAuthentications publickey
+  IdentityFile ~/.ssh/nurrony-homepc
 

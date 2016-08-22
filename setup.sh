@@ -11,4 +11,6 @@ cd $HOME && \
 curl -SsLo hostess https://github.com/cbednarski/hostess/releases/download/v0.2.0/hostess_linux_amd64 && \
 sudo mv hostess /usr/local/bin/ && sudo chmod +x /usr/local/bin/hostess && \
 sudo -H pip3 install thefuck
+mkdir $HOME/.marker && cd $HOME/.marker && \
+git clone https://github.com/pindexis/marker . && ./install.py
 rm -fr $HOME/.git

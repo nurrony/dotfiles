@@ -40,19 +40,14 @@ relies_on(){
   done
 }
 
-couchdb() {
+couchdb(){
   del_stopped couchdb
+  local state=$(docker inspect --format "{{.State.Running}}" couchdb 2>/dev/null)
 
-  local state=$(is_running couchdb)
-  local COUCH_DB_ADMIN=${1:-nmrony}
-  local COUCH_DB_PASS=${2:-test}
-
-  if [[ "$state" == "true" ]]; then
-    echo 'couchdb server is already running'
-  else
-    # Removed stopped couchdb containers first
-    del_stopped couchdb
-
+  if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
+    echo "couchdb server is not running, starting it for you."
+    local COUCH_DB_ADMIN=${1:-root}
+    local COUCH_DB_PASS=${2:-nmrony}
     # create new couchdb container
     docker run -it -d \
       -v ${DEV_ZONE}/storage/couchdb:/usr/local/var/lib/couchdb \
@@ -63,27 +58,33 @@ couchdb() {
       -e VIRTUAL_HOST=couchdb.nmrony.docker \
       --net ronsvpn \
       --name couchdb \
-      couchdb
+      couchdb > /dev/null 2>&1
+  else
+    echo 'couchdb is already running'
   fi
 }
 
 mongodb(){
-  # first check mongodb container is running or not
-  local running=$(is_running mongo-server)
-  if [[ "$running" == "true" ]]; then
-    echo 'mongodb server container is already running'
-  else
-    # remove stopped container
-    del_stopped mongo-server
+  del_stopped mongodb
+  local state=$(docker inspect --format "{{.State.Running}}" mongodb 2>/dev/null)
 
-    # create new container
+  if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
+    echo "mongodb server is not running, starting it for you."
     docker run -it -d \
       -v ${DEV_ZONE}/storage/mongodb:/data/db \
       -p 27017:27017 \
       --net ronsvpn \
-      --name mongo-server \
-      mvertes/alpine-mongo
+      --name mongodb \
+      mvertes/alpine-mongo > /dev/null 2>&1
+  else
+    echo 'mongodb is already running'
   fi
+}
+
+mongo() {
+  relies_on mongodb
+  sleep 4s;
+  docker exec -it mongodb mongo
 }
 
 sysdig() {

@@ -7,7 +7,7 @@ alias pbpaste='xclip -selection clipboard -o'
 
 alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
 # vhosts
-alias hosts='sudo vim /etc/hosts'
+# alias hosts='sudo vim /etc/hosts'
 alias hostess='sudo hostess'
 
 # Pipe my public key to my clipboard.

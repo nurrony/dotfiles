@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #Set Development zone
-export DEV_ZONE='/media/devzone'
+export DEV_ZONE='~/Devzone'
 
 # Make vim the default editor.
 export EDITOR='vim';
@@ -34,4 +34,12 @@ export LESS_TERMCAP_md="${yellow}";
 # Don’t clear the screen after quitting a manual page.
 export MANPAGER='less -X';
 
-export NVM_DIR="$HOME/.nvm"
+# Load NVM
+export NVM_DIR="/Users/nurrony/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# http://stackoverflow.com/a/23832208/1294213
+export PHANTOMJS_CDNURL='http://cnpmjs.org/downloads'
+
+# about.gitlab.com live reload variable
+export ENABLE_LIVERELOAD=1

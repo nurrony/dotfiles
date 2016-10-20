@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #Set Development zone
-export DEV_ZONE='~/Devzone'
+export DEV_ZONE="$HOME/Devzone"
 
 # Make vim the default editor.
 export EDITOR='vim';
@@ -43,3 +43,6 @@ export PHANTOMJS_CDNURL='http://cnpmjs.org/downloads'
 
 # about.gitlab.com live reload variable
 export ENABLE_LIVERELOAD=1
+
+# java home path
+export JAVA_HOME=$(/usr/libexec/java_home)

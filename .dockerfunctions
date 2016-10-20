@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 # Bash wrappers for docker run commands
-
-export DOCKER_REPO_PREFIX=nmrony
+export DOCKER_REPO_PREFIX=jess
 
 #
 # Helper Functions
@@ -21,12 +20,6 @@ del_stopped(){
   fi
 }
 
-is_running(){
-  local name=$1
-  local state=$(docker inspect --format "{{.State.Running}}" $name)
-  return "$state"
-}
-
 relies_on(){
   local containers=$@
 
@@ -38,6 +31,137 @@ relies_on(){
       $container
     fi
   done
+}
+# creates an nginx config for a local route
+nginx_config(){
+  server=$1
+  route=$2
+
+cat >${HOME}/.nginx/conf.d/${server}.conf <<-EOF
+upstream ${server} { server ${route}; }
+  server {
+    server_name ${server};
+    location / {
+    proxy_pass  http://${server};
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade \$http_upgrade;
+    proxy_set_header Connection "upgrade";
+    proxy_set_header Host \$http_host;
+    proxy_set_header X-Forwarded-Proto \$scheme;
+    proxy_set_header X-Forwarded-For \$remote_addr;
+    proxy_set_header X-Forwarded-Port \$server_port;
+    proxy_set_header X-Request-Start \$msec;
+  }
+}
+EOF
+
+  # restart nginx
+  docker restart nginx
+
+ # add host to /etc/hosts
+  hostess add $server 127.0.0.1
+
+  # open browser
+  open "http://${server}"
+}
+
+aws(){
+  docker run -it --rm \
+    -v $HOME/.aws:/root/.aws \
+    --log-driver none \
+    --name aws \
+    ${DOCKER_REPO_PREFIX}/awscli "$@"
+}
+
+cadvisor(){
+  docker run -d \
+    --restart always \
+    -v /:/rootfs:ro \
+    -v /var/run:/var/run:rw \
+    -v /sys:/sys:ro  \
+    -v /var/lib/docker/:/var/lib/docker:ro \
+    -p 1234:8080 \
+    --name cadvisor \
+    google/cadvisor
+
+  sudo hostess add cadvisor $(docker inspect --format "{{.NetworkSettings.Networks.bridge.IPAddress}}" cadvisor)
+  open "http://cadvisor:8080"
+}
+
+consul(){
+  del_stopped consul
+
+  # check if we passed args and if consul is running
+  local args=$@
+  local state=$(docker inspect --format "{{.State.Running}}" consul 2>/dev/null)
+  if [[ "$state" == "true" ]] && [[ ! -z "$args" ]]; then
+    docker exec -it consul consul "$@"
+    return 0
+  fi
+
+  docker run -d \
+    --restart always \
+    -v $HOME/.consul:/etc/consul.d \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    --net host \
+    -e GOMAXPROCS=2 \
+    --name consul \
+    ${DOCKER_REPO_PREFIX}/consul agent \
+    -bootstrap-expect 1 \
+    -config-dir /etc/consul.d \
+    -data-dir /data \
+    -encrypt $(docker run --rm ${DOCKER_REPO_PREFIX}/consul keygen) \
+    -ui-dir /usr/src/consul \
+    -server \
+    -dc neverland \
+    -bind 0.0.0.0
+
+  hostess add consul $(docker inspect --format "{{.NetworkSettings.Networks.bridge.IPAddress}}" consul)
+  open "http://consul:8500"
+}
+dcos(){
+  docker run -it --rm \
+    -v $HOME/.dcos:/root/.dcos \
+    -v $(pwd):/root/apps \
+    -w /root/apps \
+    ${DOCKER_REPO_PREFIX}/dcos-cli "$@"
+}
+
+htop(){
+  docker run --rm -it \
+    --pid host \
+    --net none \
+    --name htop \
+    ${DOCKER_REPO_PREFIX}/htop
+}
+
+http(){
+  docker run -t --rm \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    --log-driver none \
+    ${DOCKER_REPO_PREFIX}/httpie "$@"
+}
+imagemin(){
+  local image=$1
+  local extension="${image##*.}"
+  local filename="${image%.*}"
+
+  docker run --rm -it \
+    -v /etc/localtime:/etc/localtime:ro \
+    -v $HOME/Pictures:/root/Pictures \
+    ${DOCKER_REPO_PREFIX}/imagemin sh -c "imagemin /root/Pictures/${image} > /root/Pictures/${filename}_min.${extension}"
+}
+
+irssi() {
+  del_stopped irssi
+  # relies_on notify_osd
+
+  docker run --rm -it \
+    -v /etc/localtime:/etc/localtime:ro \
+    -v $HOME/.irssi:/home/user/.irssi \
+    --read-only \
+    --name irssi \
+    ${DOCKER_REPO_PREFIX}/irssi
 }
 
 couchdb(){
@@ -101,48 +225,6 @@ sysdig() {
     sysdig/sysdig
 }
 
-# creates an nginx config for a local route
-nginx_config(){
-  server=$1
-  route=$2
-
-  cat >${HOME}/.nginx/conf.d/${server}.conf <<-EOF
-  upstream ${server} { server ${route}; }
-  server {
-    server_name ${server};
-    location / {
-      proxy_pass  http://${server};
-      proxy_http_version 1.1;
-      proxy_set_header Upgrade \$http_upgrade;
-      proxy_set_header Connection "upgrade";
-      proxy_set_header Host \$http_host;
-      proxy_set_header X-Forwarded-Proto \$scheme;
-      proxy_set_header X-Forwarded-For \$remote_addr;
-      proxy_set_header X-Forwarded-Port \$server_port;
-      proxy_set_header X-Request-Start \$msec;
-    }
-  }
-  EOF
-
-  # restart nginx
-  docker restart nginx
-
-  # add host to /etc/hosts
-  sudo hostess add $server 127.0.0.1
-
-  # open browser
-  browser-exec "http://${server}"
-}
-
-
-aws(){
-  docker run -it --rm \
-    -v $HOME/.aws:/root/.aws \
-    --log-driver none \
-    --name aws \
-    ${DOCKER_REPO_PREFIX}/awscli "$@"
-}
-
 bees(){
   docker run -it --rm \
     -e NOTARY_TOKEN \
@@ -154,17 +236,29 @@ bees(){
     ${DOCKER_REPO_PREFIX}/beeswithmachineguns "$@"
 }
 
-cadvisor(){
-  docker run -d \
-    --restart always \
-    -v /:/rootfs:ro \
-    -v /var/run:/var/run:rw \
-    -v /sys:/sys:ro  \
-    -v /var/lib/docker/:/var/lib/docker:ro \
-    -p 1234:8080 \
-    --name cadvisor \
-    google/cadvisor
+###
+### Awesome sauce by @jpetazzo
+###
+command_not_found_handle () {
+ # Check if there is a container image with that name
+ if ! docker inspect --format '{{ .Author }}' "$1" >&/dev/null ; then
+  echo "$0: $1: command not found"
+  return
+ fi
 
-  sudo hostess add cadvisor $(docker inspect --format "{{.NetworkSettings.Networks.bridge.IPAddress}}" cadvisor)
-  browser-exec "http://cadvisor:8080"
+ # Check that it's really the name of the image, not a prefix
+ if docker inspect --format '{{ .Id }}' "$1" | grep -q "^$1" ; then
+  echo "$0: $1: command not found"
+  return
+ fi
+
+ docker run -ti -u $(whoami) -w "$HOME" \
+  $(env | cut -d= -f1 | awk '{print "-e", $1}') \
+  --device /dev/snd \
+  -v /etc/passwd:/etc/passwd:ro \
+  -v /etc/group:/etc/group:ro \
+  -v /etc/localtime:/etc/localtime:ro \
+  -v /home:/home \
+  -v /tmp/.X11-unix:/tmp/.X11-unix \
+  "${DOCKER_REPO_PREFIX}/$@"
 }

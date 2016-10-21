@@ -56,6 +56,19 @@ function fs() {
   fi;
 }
 
+# Get colors in manual pages
+man() {
+  env \
+    LESS_TERMCAP_mb="$(printf '\e[1;31m')" \
+    LESS_TERMCAP_md="$(printf '\e[1;31m')" \
+    LESS_TERMCAP_me="$(printf '\e[0m')" \
+    LESS_TERMCAP_se="$(printf '\e[0m')" \
+    LESS_TERMCAP_so="$(printf '\e[1;44;33m')" \
+    LESS_TERMCAP_ue="$(printf '\e[0m')" \
+    LESS_TERMCAP_us="$(printf '\e[1;32m')" \
+    man "$@"
+}
+
 # Use Git’s colored diff when available
 hash git &>/dev/null;
 if [ $? -eq 0 ]; then
@@ -259,4 +272,16 @@ ii() {
     echo -e "\n${RED}Current network location :$NC " ; scselect
     echo -e "\n${RED}Public facing IP Address :$NC " ; pubip
     #echo -e "\n${RED}DNS Configuration:$NC " ; scutil --dns
+}
+
+# who is using the laptop's iSight camera?
+camerausedby() {
+  echo "Checking to see who is using the iSight camera… 📷"
+  usedby=$(lsof | grep -w "AppleCamera\|USBVDC\|iSight" | awk '{printf $2"\n"}' | xargs ps)
+  echo -e "Recent camera uses:\n$usedby"
+}
+
+# direct it all to /dev/null
+function nullify() {
+  "$@" >/dev/null 2>&1
 }

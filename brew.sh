@@ -103,5 +103,7 @@ brew tap caskroom/cask
 brew cask install vlc
 brew cask install java
 brew cask install iterm2
+brew cask install gpgtools
+brew cask install utorrent
 brew cask install virtualbox
 brew cask install google-chrome-canary

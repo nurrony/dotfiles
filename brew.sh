@@ -95,6 +95,13 @@ brew install webkit2png
 brew install zopfli
 
 # Remove outdated versions from the cellar.
-brew tap caskroom/cask
-
 brew cleanup
+
+# CASK Install
+brew update
+brew tap caskroom/cask
+brew cask install vlc
+brew cask install java
+brew cask install iterm2
+brew cask install virtualbox
+brew cask install google-chrome-canary

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+cd $HOME && \
 printf "\npreparing your new Mac for awesomeness!!\n\n"
 which -s brew
 if [[ $? != 0 ]] ; then
@@ -31,6 +32,19 @@ cd $HOME && \
 curl -SsLo hostess https://github.com/cbednarski/hostess/releases/download/v0.2.0/hostess_darwin_amd64 >/dev/null 2>&1 && \
 sudo mv hostess /usr/local/bin/ && sudo chmod +x /usr/local/bin/hostess
 mkdir $HOME/.marker && cd $HOME/.marker && \
-git clone https://github.com/pindexis/marker . >/dev/null 2>&1 && ./install.py
+git clone https://github.com/pindexis/marker . >/dev/null 2>&1 && ./install.py && cd $HOME && rm -fr .marker
 
+# clone .dotfile
+rm -fr $HOME/.dotfiles/.git && \
+mv .zshrc .zshrc.pre-nurrony-dotfiles && cp $HOME/.dotfiles/.zshrc $HOME && \
+ln -s $HOME/.dotfiles/.{gitignore,gitconfig,gitattributes,gemrc,inputrc,curlrc,gvimrc,hushlogin,wgetrc,screenrc} $HOME/
+echo 'All are done. Applying changes..'
+source $HOME/.zshrc
+printf "\nTo prepare your pc more developer friendly you can run the following scripts\n\n"
+printf 'chmod +x ./brew.sh && ./brew.sh\n\n'
 
+printf "To customise your macOS installation according to most developer\'s preferences run the following command\n"
+
+printf 'chmod +x ./macos.sh && ./macos.sh\n\n'
+
+echo 'Happy Hacking!!!'

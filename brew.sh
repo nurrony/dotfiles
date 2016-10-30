@@ -93,7 +93,7 @@ brew install tree
 brew install vbindiff
 brew install webkit2png
 brew install zopfli
-
+brew install git-extras
 # Remove outdated versions from the cellar.
 brew cleanup
 

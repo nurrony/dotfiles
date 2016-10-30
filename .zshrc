@@ -50,7 +50,7 @@ ZSH_THEME="steeef"
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
-for file in ~/.{path,exports,aliases,functions,extra}; do
+for file in ~/.dotfiles/.{path,exports,aliases,functions,dockerfunctions,extra}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
@@ -59,7 +59,7 @@ unset file;
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(alias-tips aws brew bundler gem gitfast git-flow-avh git-extras boot2docker bower common-aliases composer docker docker-compose extract laravel5 last-working-dir node npm nvm python pylint rails rake rbenv ruby rvm ssh-agent thefuck urltools vagrant z zsh-syntax-highlighting)
+plugins=(alias-tips aws brew bundler gem gitfast git-flow-avh git-extras boot2docker common-aliases composer docker docker-compose extract laravel5 last-working-dir node npm nvm python pylint rails rake rbenv ruby rvm ssh-agent thefuck urltools vagrant z zsh-syntax-highlighting)
 
 
 source $ZSH/oh-my-zsh.sh
@@ -100,8 +100,3 @@ zstyle :omz:plugins:ssh-agent agent-forwarding on
 
 # MacOS Settings
 ##################
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-export GO_PATH=/usr/local/opt/go/libexec/bin
-export PATH="$PATH:$GO_PATH"
-export PATH="/usr/local/sbin:$PATH"'

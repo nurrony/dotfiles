@@ -45,6 +45,6 @@ printf 'chmod +x ./brew.sh && ./brew.sh\n\n'
 
 printf "To customise your macOS installation according to most developer\'s preferences run the following command\n"
 
-printf 'chmod +x ./macos.sh && ./macos.sh\n\n'
+printf 'chmod +x ./.macos.sh && ./.macos.sh\n\n'
 
 echo 'Happy Hacking!!!'

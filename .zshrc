@@ -59,7 +59,7 @@ unset file;
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(alias-tips aws brew bundler gem git-extras gitfast git-flow common-aliases docker docker-compose extract last-working-dir node npm nvm python pylint rails rake rbenv ruby rvm ssh-agent thefuck urltools vagrant z zsh-syntax-highlighting)
+plugins=(alias-tips aws brew bundler common-aliases composer docker docker-compose extract gem gitfast git-flow git-extras laravel5 last-working-dir node npm nvm python pylint rails rake rbenv ruby rvm ssh-agent thefuck urltools vagrant z zsh-syntax-highlighting)
 
 
 source $ZSH/oh-my-zsh.sh

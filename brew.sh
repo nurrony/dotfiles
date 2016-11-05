@@ -76,9 +76,9 @@ brew install xz
 # Install other useful binaries.
 brew install ack
 
-#brew install exiv2
 brew install git
 brew install git-lfs
+brew install git-extras
 brew install imagemagick --with-webp
 brew install lua
 brew install lynx
@@ -93,7 +93,7 @@ brew install tree
 brew install vbindiff
 brew install webkit2png
 brew install zopfli
-brew install git-extras
+
 # Remove outdated versions from the cellar.
 brew cleanup
 
@@ -101,6 +101,7 @@ brew cleanup
 brew update
 brew tap caskroom/cask
 brew cask install vlc
+brew cask install atom
 brew cask install java
 brew cask install iterm2
 brew cask install gpgtools

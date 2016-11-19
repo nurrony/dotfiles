@@ -141,6 +141,7 @@ http(){
     --log-driver none \
     ${DOCKER_REPO_PREFIX}/httpie "$@"
 }
+
 imagemin(){
   local image=$1
   local extension="${image##*.}"

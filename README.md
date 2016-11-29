@@ -15,14 +15,14 @@ When setting up a new Mac, you may want to set some sensible macOS defaults:
 ```sh
 ./.macos
 ```
-###Install Homebrew formulae
+### Install Homebrew formulae
 
 When setting up a new Mac, you may want to install some common Homebrew formulae (after installing Homebrew, of course):
 ```sh
 ./brew.sh
 ```
 
-###Special thanks to
+### Special thanks to
 
 - [Mathias Bynens](https://twitter.com/mathias)
 - [Jess Frazelle](https://twitter.com/jessfraz)

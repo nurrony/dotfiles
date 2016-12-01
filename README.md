@@ -26,7 +26,7 @@ When setting up a new Mac, you may want to install some common Homebrew formulae
  <img src="./cli-snap.png" alt="cli snap" />
 </p>
 
-I use **iTerm2** and **Zsh** together and **[Powerlevel9][1]** as theme. 
+I use **iTerm2** and **Zsh** together and **[PowerLevel9][1]** as theme. 
 You need to install these followings to get look like my terminal theme
 
 1. [Dracula theme for iTerm2][2]
@@ -39,6 +39,7 @@ You can import my settings from [iterm2][4] directory
 - [Mathias Bynens](https://twitter.com/mathias)
 - [Jess Frazelle](https://twitter.com/jessfraz)
 - [Paul Irish](https://twitter.com/paul_irish)
+- [Ben Hilburn](https://twitter.com/bhilburn) for PowerLevel9 theme
 
 [1]: https://github.com/bhilburn/powerlevel9k
 [2]: https://draculatheme.com/iterm/

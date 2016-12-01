@@ -22,10 +22,11 @@ When setting up a new Mac, you may want to install some common Homebrew formulae
 ./brew.sh
 ```
 ### Terminal theme and tweaks
-<p align center>
-![cli-snap][1]
+<p align="center">
+ <img src="./cli-snap.png" alt="cli snap" />
 </p>
-I use **iTerm2** and **Zsh** together and **[Powerlevel9][2]** as theme. 
+
+I use **iTerm2** and **Zsh** together and **[Powerlevel9][1]** as theme. 
 You need to install these followings to get look like my terminal theme
 
 1. [Dracula theme for iTerm2][2]
@@ -39,8 +40,7 @@ You can import my settings from [iterm2][4] directory
 - [Jess Frazelle](https://twitter.com/jessfraz)
 - [Paul Irish](https://twitter.com/paul_irish)
 
-[1]: cli-snap.png
-[2]: https://github.com/bhilburn/powerlevel9k
-[3]: https://draculatheme.com/iterm/
-[4]: fonts/SourceCodePro+Powerline+Awesome+Regular.ttf
-[5]: iterm2/
+[1]: https://github.com/bhilburn/powerlevel9k
+[2]: https://draculatheme.com/iterm/
+[3]: fonts/SourceCodePro+Powerline+Awesome+Regular.ttf
+[4]: iterm2/

@@ -7,7 +7,19 @@
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="steeef"
+# DEFAULT_USER=$(whoami)
+POWERLEVEL9K_MODE='awesome-patched'
+POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator rvm nvm time)
+POWERLEVEL9K_NVM_BACKGROUND='magenta'
+POWERLEVEL9K_NVM_FOREGROUND='green'
+POWERLEVEL9K_RVM_BACKGROUND='red'
+POWERLEVEL9K_RVM_FOREGROUND='cyan'
+POWERLEVEL9K_TIME_FORMAT="%D{%H:%M \uE868  %d.%m.%y}"
+
+ZSH_THEME="powerlevel9k/powerlevel9k"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"

@@ -21,9 +21,22 @@ When setting up a new Mac, you may want to install some common Homebrew formulae
 ```sh
 ./brew.sh
 ```
+### Terminal theme and tweaks
+I use **iTerm2** and **Zsh** together and **[Powerlevel9][1]** as theme. 
+You need to install these followings to get look like my terminal theme
+
+1. [Dracula theme for iTerm2][2]
+1. [SourceCodePro Powerline Awesome Regular][3] - Font size: 15
+
+You can import my settings from [iterm2][4] directory
 
 ### Special thanks to
 
 - [Mathias Bynens](https://twitter.com/mathias)
 - [Jess Frazelle](https://twitter.com/jessfraz)
 - [Paul Irish](https://twitter.com/paul_irish)
+
+[1]: https://github.com/bhilburn/powerlevel9k#Installation
+[2]: https://draculatheme.com/iterm/
+[3]: fonts/SourceCodePro+Powerline+Awesome+Regular.ttf
+[4]: iterm2/

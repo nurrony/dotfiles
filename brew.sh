@@ -75,22 +75,17 @@ brew install xz
 
 # Install other useful binaries.
 brew install ack
-
 brew install git
 brew install git-lfs
 brew install git-extras
 brew install imagemagick --with-webp
-brew install lua
-brew install lynx
 brew install p7zip
 brew install pigz
-brew install pv
 brew install rename
 brew install speedtest_cli
 brew install ssh-copy-id
 brew install testssl
 brew install tree
-brew install vbindiff
 brew install webkit2png
 brew install zopfli
 

@@ -110,5 +110,3 @@ zstyle :omz:plugins:ssh-agent agent-forwarding on
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# MacOS Settings
-##################

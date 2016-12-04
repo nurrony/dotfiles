@@ -8,6 +8,8 @@ brew update
 # Upgrade any already-installed formulae.
 brew upgrade --all
 
+brew tap homebrew/dupes
+
 # Install GNU core utilities (those that come with macOS are outdated).
 # Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
 brew install coreutils
@@ -72,6 +74,14 @@ brew install ack
 brew install git
 brew install git-lfs
 brew install git-extras
+brew install redis
+brew install postgresql
+brew install libiconv
+brew install icu4c
+brew install pkg-config
+brew install cmake
+brew install go
+brew install openssl
 brew install imagemagick --with-webp
 brew install p7zip
 brew install pigz

@@ -305,11 +305,11 @@ function! XTermPasteBegin()
   return ""
 endfunction
 
-" set 80 character line limit
+" set 120 character line limit
 if exists('+colorcolumn')
-  set colorcolumn=80
+  set colorcolumn=120
 else
-  au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+  au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>120v.\+', -1)
 endif
 
 " ----------------------------------------- "

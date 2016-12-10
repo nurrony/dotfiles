@@ -42,6 +42,14 @@ brew install vim --override-system-vi
 brew install homebrew/dupes/grep
 brew install homebrew/dupes/openssh
 brew install homebrew/dupes/screen
+brew install autoconf
+brew install automake
+brew install libtool
+brew install pkg-config
+brew install libyaml
+brew install readline
+brew install libksba
+brew install openssl
 
 # Install some CTF tools; see https://github.com/ctfs/write-ups.
 brew install aircrack-ng

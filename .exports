@@ -42,7 +42,7 @@ export NVM_DIR="$HOME/.nvm"
 export PHANTOMJS_CDNURL='http://cnpmjs.org/downloads'
 
 # about.gitlab.com live reload variable
-export ENABLE_LIVERELOAD=1
+export ENABLE_LIVERELOAD=0
 
 # java home path
 export JAVA_HOME=$(/usr/libexec/java_home)

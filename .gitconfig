@@ -76,6 +76,32 @@
     fi \
   }; f"
 
+	mdiff = "!f() { git stash | head -1 | grep -q 'No local changes to save'; x=$?; git merge --no-commit $1 &>/dev/null; git add -u &>/dev/null; git diff --staged; git reset --hard &>/dev/null; test $x -ne 0 && git stash pop &>/dev/null; }; f"
+
+	# Codereview aliases
+	change = codereview change
+	gofmt = codereview gofmt
+	mail = codereview mail
+	pending = codereview pending
+	submit = codereview submit
+	sync = codereview sync
+
+	unreleased = "!f() { git fetch --tags && git diff $(git tag | tail -n 1); }; f"
+	up = !git pull origin master && git remote prune origin && git submodule update --init --recursive
+	undo = !git reset HEAD~1 --mixed
+	top = !git log --format=format:%an | sort | uniq -c | sort -r | head -n 20
+
+	# from trevor bramble https://twitter.com/TrevorBramble/status/774292970681937920
+	alias=!git config -l | grep ^alias | cut -c 7- | sort
+
+	# from myles borins https://github.com/TheAlphaNerd/Dot-files/blob/master/.gitconfig
+	# github broke some workflow... this will make it less painful
+	patchit = "!f() { echo $1.patch | sed s_pull/[0-9]*/commits_commit_ | xargs curl -L | git am --whitespace=fix; }; f"
+	# patchit = "!f() { curl -L $1.patch | git am --whitespace=fix; }; f"
+	patchit-please = "!f() { echo $1.patch | sed s_pull/[0-9]*/commits_commit_ | xargs curl -L | git am -3 --whitespace=fix; }; f"
+	# patchit-please = "!f() { curl -L $1.patch | git am -3 --whitespace=fix; }; f"
+
+
 [apply]
 
   # Detect whitespace errors when applying a patch
@@ -117,9 +143,9 @@
 [color "diff"]
 
   meta = yellow bold
-  frag = magenta bold # line info
-  old = red # deletions
-  new = green # additions
+	frag = magenta bold # line info
+	old = red # deletions
+	new = green # additions
 
 [color "status"]
 
@@ -157,7 +183,7 @@
   # Use the Git 1.x.x default to avoid errors on machines with old Git
   # installations. To use `simple` instead, add this to your `~/.extra` file:
   # `git config --global push.default simple`. See http://git.io/mMah-w.
-  default = matching
+  default = simple
   # Make `git push` push relevant annotated tags when pushing branches out.
   followTags = true
 

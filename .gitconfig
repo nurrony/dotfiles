@@ -156,7 +156,7 @@
 [commit]
 
   # https://help.github.com/articles/signing-commits-using-gpg/
-  gpgsign = false
+  gpgsign = true
 
 [diff]
 
@@ -209,8 +209,9 @@
 
   insteadOf = "gist:"
 [user]
-  name = Nur Rony
-  email = pro.nmrony@gmail.com
+	name = Nur Rony
+	email = pro.nmrony@gmail.com
+	signingkey = C81C7EA1631632D5
 
 [gpg]
 	program = gpg2

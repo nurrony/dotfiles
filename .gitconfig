@@ -211,3 +211,6 @@
 [user]
   name = Nur Rony
   email = pro.nmrony@gmail.com
+
+[gpg]
+	program = gpg2

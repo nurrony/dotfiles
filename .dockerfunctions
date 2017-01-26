@@ -148,7 +148,7 @@ dcos(){
     ${DOCKER_REPO_PREFIX}/dcos-cli "$@"
 }
 
-htop(){
+htopdocker(){
   docker run --rm -it \
     --pid host \
     --net none \

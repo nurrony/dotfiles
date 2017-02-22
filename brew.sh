@@ -100,6 +100,8 @@ brew install testssl
 brew install tree
 brew install webkit2png
 brew install zopfli
+# See here: https://github.com/ggreer/the_silver_searcher
+brew install the_silver_searcher
 
 # Remove outdated versions from the cellar.
 brew cleanup

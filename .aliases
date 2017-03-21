@@ -56,10 +56,10 @@ alias week='date +%V'
 alias hostess='sudo hostess'
 
 # Pipe my public key to my clipboard.
-alias pubkey="more ~/.ssh/nur-macbookpro.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
+alias pubkey="more ~/.ssh/$SSH_KEY_NAME.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
 
 # Pipe my private key to my clipboard.
-alias prikey="more ~/.ssh/nur-macbookpro | pbcopy | echo '=> Private key copied to pasteboard.'"
+alias prikey="more ~/.ssh/$SSH_KEY_NAME | pbcopy | echo '=> Private key copied to pasteboard.'"
 
 # copy working directory
 alias cwd='pwd | tr -d "\r\n" | pbcopy'

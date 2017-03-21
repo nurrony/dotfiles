@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
-#Set Development zone
+# Set ssh key file name
+export SSH_KEY_NAME='nur-macbookpro'
+
+# Set Development zone
 export DEV_ZONE="/Volumes/Devzone"
 
 # Make vim the default editor.

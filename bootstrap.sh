@@ -1,16 +1,4 @@
 #!/usr/bin/env bash
-cd $HOME && \
-printf "\nPreparing your new Mac for awesomeness!!\n\n"
-which -s brew
-if [[ $? != 0 ]] ; then
-  # Install Homebrew
-  echo "Homebrew not found installing it for you..."
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" >/dev/null 2>&1
-else
-  echo 'Updating Homebrew...'
-  brew update >/dev/null 2>&1
-fi
-
 echo "Installing Zsh and set is as default login shell" && \
 brew install zsh
 # Switch to using brew-installed bash as default shell

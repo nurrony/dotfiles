@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 cd $HOME && \
-printf "\npreparing your new Mac for awesomeness!!\n\n"
+printf "\nPreparing your new Mac for awesomeness!!\n\n"
 which -s brew
 if [[ $? != 0 ]] ; then
   # Install Homebrew
@@ -11,6 +11,7 @@ else
   brew update >/dev/null 2>&1
 fi
 
+echo "Installing Zsh and set is as default login shell" && \
 brew install zsh
 # Switch to using brew-installed bash as default shell
 if ! fgrep -q '/usr/local/bin/zsh' /etc/shells; then
@@ -23,7 +24,7 @@ fi;
 echo 'Installing Oh My Zsh'
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" >/dev/null 2>&1 && \
 #Install Shell plugins
-echo "installing custom plugins"
+echo "installing custom plugins: thefuck, alias-tips, zsh-syntax-highlighting, hostess, marker"
 brew install thefuck >/dev/null 2>&1
 mkdir -p ~/.oh-my-zsh/custom/plugins && cd $_ &&  \
 git clone https://github.com/djui/alias-tips.git >/dev/null 2>&1 && \

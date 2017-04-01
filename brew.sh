@@ -50,6 +50,7 @@ brew install libyaml
 brew install readline
 brew install libksba
 brew install openssl
+brew install thefuck
 
 # Install some CTF tools; see https://github.com/ctfs/write-ups.
 brew install aircrack-ng

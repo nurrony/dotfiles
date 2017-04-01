@@ -101,6 +101,7 @@ brew install webkit2png
 brew install zopfli
 # See here: https://github.com/ggreer/the_silver_searcher
 brew install the_silver_searcher
+brew install yarn
 
 # Remove outdated versions from the cellar.
 brew cleanup
@@ -116,6 +117,7 @@ brew cask install iterm2
 brew cask install java
 brew cask install spectacle
 brew cask install the-unarchiver
+brew cask install vagrant
 brew cask install vlc
 brew cask install virtualbox
 brew cask install virtualbox-extension-pack

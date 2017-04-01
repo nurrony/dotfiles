@@ -209,9 +209,9 @@
 
   insteadOf = "gist:"
 [user]
-	name = Nur Rony
-	email = pro.nmrony@gmail.com
-	signingkey = C81C7EA1631632D5
+  name = Nur Rony
+  email = pro.nmrony@gmail.com
+  signingkey = B3AB4E8B84CF752A
 
 [gpg]
-	program = gpg2
+  program = gpg2

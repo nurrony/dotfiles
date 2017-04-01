@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 cd $HOME && \
-printf "\nPreparing your new Mac for awesomeness!!\n\n"
+echo -e "\nPreparing your new Mac for awesomeness!!\n\n"
 which -s brew
 if [[ $? != 0 ]] ; then
   # Install Homebrew
@@ -21,10 +21,10 @@ else
   git clone https://github.com/nmrony/dotfiles $HOME/.dotfiles
 fi
 cd $HOME/.dotfiles && \
-echo 'Making your Terminal WOWsome!!!' &&
-sh $HOME/.dotfiles/bootstrap.shs
+echo 'Making your Terminal WOWsome!!!' && \
+sh $HOME/.dotfiles/bootstrap.sh && \
 cat <<-EOF
-        There is a brew.sh and .macos script which makes your Mac
-        more friendly for development. I highly recommend to CHECK and
-        ADD/EDIT those files before running it.
+		There is a brew.sh and .macos script which makes your Mac
+		more friendly for development. I highly recommend to CHECK and
+		ADD/EDIT those files before running it.
 EOF

@@ -82,8 +82,6 @@ brew install ack
 brew install git
 brew install git-lfs
 brew install git-extras
-brew install redis
-brew install postgresql
 brew install libiconv
 brew install icu4c
 brew install pkg-config
@@ -109,11 +107,15 @@ brew cleanup
 # CASK Install
 brew update
 brew tap caskroom/cask
-brew cask install vlc
-brew cask install atom
-brew cask install java
-brew cask install iterm2
+brew cask install appcleaner
+brew cask install docker
+brew cask install google-chrome
 brew cask install gpgtools
-brew cask install utorrent
+brew cask install iterm2
+brew cask install java
+brew cask install spectacle
+brew cask install the-unarchiver
+brew cask install vlc
 brew cask install virtualbox
-brew cask install google-chrome-canary
+brew cask install virtualbox-extension-pack
+brew cask install visual-studio-code

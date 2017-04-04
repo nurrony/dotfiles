@@ -102,7 +102,7 @@ brew install zopfli
 # See here: https://github.com/ggreer/the_silver_searcher
 brew install the_silver_searcher
 brew install yarn
-
+brew install git-flow-avh
 # Remove outdated versions from the cellar.
 brew cleanup
 
@@ -122,3 +122,4 @@ brew cask install vlc
 brew cask install virtualbox
 brew cask install virtualbox-extension-pack
 brew cask install visual-studio-code
+brew cask cleanup

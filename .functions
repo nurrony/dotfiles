@@ -280,7 +280,7 @@ function nullify() {
 gbrp() {
   vared -p "This will remove your remote branches with '$@' prefix. Are you sure? [yn] " -c answer
   if [[ $answer = y ]] ; then
-    git branch -r | awk -F/ "/\/$@/{print $2}" | xargs -I {} git push origin :{}
+    git branch -r | awk -F/ '/\/'$@'/{print ":" $2}' | xargs git push origin
   fi
 }
 

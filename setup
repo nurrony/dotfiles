@@ -1,11 +1,36 @@
 #!/usr/bin/env bash
 
 function setup_nmr_dotfiles() {
+  cd $HOME && \
+  echo -e "\nPreparing your new Mac for awesomeness!!\n\n"
+  which -s brew
+  if [[ $? != 0 ]] ; then
+    # Install Homebrew
+    echo "Homebrew not found installing it for you..."
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  else
+    echo 'Updating Homebrew...'
+    brew update >/dev/null 2>&1
+  fi
+
+  which -s git
+  if [[ $? != 0 ]] ; then
+    # Install Homebrew
+    echo "Git is not installed. Installing it for you.."
+    brew install git
+  else
+    echo 'Cloning nmrony/dotfiles repository in ~/.dotfiles'
+    git clone https://github.com/nmrony/dotfiles $HOME/.dotfiles
+  fi
+  cd $HOME/.dotfiles && \
+  echo 'Making your Terminal WOWsome!!!' && \
+  sh $HOME/.dotfiles/bootstrap.sh && \
   # Intentionally mixing tab and space here for pretty output
 	cat <<-EOF
     There is a brew.sh and .macos script which makes your Mac
-    more friendly for development. I highly recommend to CHECK and
-    ADD/EDIT those files before running it.
+    more friendly for development. I highly recommend to take
+    a look into those files. Please do CHECK andADD/EDIT those
+    files before running.
 	EOF
 }
 

@@ -1,8 +1,15 @@
 Nur Rony's Dotfiles
 ===================
-My dotfiles :smile: for Zsh on **MacOS**. Clone the repository and Run `setup.sh` to setup some initial requirements 
+My dotfiles :smile: for Zsh on **MacOS**. Clone the repository and Run `setup.sh` to setup some initial requirements
 
 My most favourite parts are `.functions` and `.dockerfunctions`
+
+### Installation
+To get all done in a minutes you can use the [setup script](https://github.com/nmrony/dotfiles/blob/master/setup) script
+
+```sh
+curl -s https://raw.githubusercontent.com/nmrony/dotfiles/master/setup | bash
+```
 
 ### Customization
 Do not forget to edit git username and email in `.extra` and `.gitconfig` with yours.
@@ -26,7 +33,7 @@ When setting up a new Mac, you may want to install some common Homebrew formulae
  <img src="./cli-snap.png" alt="cli snap" />
 </p>
 
-I use **iTerm2** and **Zsh** together and **[PowerLevel9][1]** as theme. 
+I use **iTerm2** and **Zsh** together and **[PowerLevel9][1]** as theme.
 You need to install these followings to get look like my terminal theme
 
 1. [Dracula theme for iTerm2][2]

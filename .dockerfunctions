@@ -87,7 +87,7 @@ EOF
 
 aws(){
   docker run -it --rm \
-    -v $(pwd)/.aws:/root/.aws \
+    -v $(pwd)/awsconfig:/root/.aws \
     --log-driver none \
     --name aws \
     ${DOCKER_REPO_PREFIX}/awscli "$@"

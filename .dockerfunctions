@@ -210,7 +210,7 @@ couchdb(){
   fi
 }
 
-mvn2() {
+mvn() {
   del_stopped mvn
   docker run \
          -it \

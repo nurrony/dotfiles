@@ -210,6 +210,17 @@ couchdb(){
   fi
 }
 
+mvn2() {
+  del_stopped mvn
+  docker run \
+         -it \
+        --rm \
+        --name mvn \
+        -v "$PWD":/usr/src/mymaven \
+        -w /usr/src/mymaven \
+        maven:alpine mvn "$@"
+}
+
 mysql(){
   del_stopped mysql
   local state=$(docker inspect --format "{{.State.Running}}" mysql 2>/dev/null)

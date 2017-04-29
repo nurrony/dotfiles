@@ -103,6 +103,8 @@ brew install zopfli
 brew install the_silver_searcher
 brew install yarn
 brew install git-flow-avh
+brew install docker-machine-driver-xhyve
+brew install kubectl
 # Remove outdated versions from the cellar.
 brew cleanup
 
@@ -115,6 +117,7 @@ brew cask install google-chrome
 brew cask install gpgtools
 brew cask install iterm2
 brew cask install java
+brew cask install minikube
 brew cask install spectacle
 brew cask install the-unarchiver
 brew cask install vagrant

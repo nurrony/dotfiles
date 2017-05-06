@@ -199,3 +199,7 @@ alias gflrs='git flow release start'
 alias gflff='git flow feature finish'
 alias gflhf='git flow hotfix finish'
 alias gflrf='git flow release finish'
+
+# Minikube alias
+alias minikube-create='minikube start --cpus 4 --disk-size "50g" --memory 4096'
+alias minikube-reg='minikube start --insecure-registry localhost:5000'

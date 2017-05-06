@@ -238,6 +238,28 @@ mysql(){
   fi
 }
 
+node() {
+  del_stopped node
+  docker run \
+    -it \
+    --rm \
+    --name node \
+    -v "$PWD":/node-app \
+    -w /node-app \
+    node:alpine node "$@"
+}
+
+npm() {
+  del_stopped npm
+  docker run \
+    -it \
+    --rm \
+    --name npm \
+    -v "$PWD":/node-app \
+    -w /node-app \
+    node:alpine npm "$@"
+}
+
 pma() {
   del_stopped pma
   relies_on mysql

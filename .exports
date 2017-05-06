@@ -38,8 +38,8 @@ export LESS_TERMCAP_md="${yellow}";
 export MANPAGER='less -X';
 
 # Load NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # http://stackoverflow.com/a/23832208/1294213
 export PHANTOMJS_CDNURL='http://cnpmjs.org/downloads'

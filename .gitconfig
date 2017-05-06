@@ -211,7 +211,7 @@
 [user]
 	name = Nur Rony
 	email = pro.nmrony@gmail.com
-  signingkey = B3AB4E8B84CF752A
+  signingkey = 265C66B0EB6140CD
 
 [gpg]
   program = gpg2

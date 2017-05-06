@@ -238,39 +238,6 @@ mysql(){
   fi
 }
 
-node() {
-  del_stopped node
-  docker run \
-    -it \
-    --rm \
-    --name node \
-    -v "$PWD":/node-app \
-    -w /node-app \
-    node:alpine node "$@"
-}
-
-npm() {
-  del_stopped npm
-  docker run \
-    -it \
-    --rm \
-    --name npm \
-    -v "$PWD":/node-app \
-    -w /node-app \
-    node:alpine npm "$@"
-}
-
-yarn() {
-  del_stopped yarn
-  docker run \
-    -it \
-    --rm \
-    --name yarn \
-    -v "$PWD":/node-app \
-    -w /node-app \
-    node:alpine yarn "$@"
-}
-
 pma() {
   del_stopped pma
   relies_on mysql

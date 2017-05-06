@@ -290,7 +290,7 @@ mongodb(){
       -p 27017:27017 \
       --net ronsvpn \
       --name mongodb \
-      mvertes/alpine-mongo > /dev/null 2>&1
+      nmrony/alpine-mongo > /dev/null 2>&1
   else
     echo 'mongodb is already running'
   fi

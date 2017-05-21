@@ -103,6 +103,9 @@ brew install zopfli
 brew install the_silver_searcher
 brew install yarn
 brew install git-flow-avh
+brew install docker
+brew install docker-machine
+brew install docker-compose
 brew install docker-machine-driver-xhyve
 brew install kubectl
 # Remove outdated versions from the cellar.

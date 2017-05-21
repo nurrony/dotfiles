@@ -107,7 +107,11 @@ brew install docker
 brew install docker-machine
 brew install docker-compose
 brew install docker-machine-driver-xhyve
+# Kubernetes
 brew install kubectl
+brew install kops
+brew install kubernetes-helm
+
 # Remove outdated versions from the cellar.
 brew cleanup
 

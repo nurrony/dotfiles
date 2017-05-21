@@ -111,9 +111,10 @@ brew cleanup
 # CASK Install
 brew update
 brew tap caskroom/cask
+brew tap caskroom/versions
 brew cask install appcleaner
 brew cask install docker
-brew cask install google-chrome
+brew cask install google-chrome-canary
 brew cask install gpgtools
 brew cask install iterm2
 brew cask install java

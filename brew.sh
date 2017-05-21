@@ -107,6 +107,9 @@ brew install docker
 brew install docker-machine
 brew install docker-compose
 brew install docker-machine-driver-xhyve
+sudo chown root:wheel $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
+sudo chmod u+s $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
+
 # Kubernetes
 brew install kubectl
 brew install kops

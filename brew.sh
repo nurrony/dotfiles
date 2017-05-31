@@ -38,10 +38,10 @@ brew install wget --with-iri
 
 
 # Install more recent versions of some macOS tools.
-brew install vim --override-system-vi
-brew install homebrew/dupes/grep
-brew install homebrew/dupes/openssh
-brew install homebrew/dupes/screen
+brew install vim --with-override-system-vi
+brew install grep
+brew install openssh
+brew install screen
 brew install autoconf
 brew install automake
 brew install libtool
@@ -54,7 +54,7 @@ brew install thefuck
 
 # Install some CTF tools; see https://github.com/ctfs/write-ups.
 brew install aircrack-ng
-brew install bfg
+brew install bfg # reinstall after java
 brew install binutils
 brew install binwalk
 brew install cifer
@@ -75,7 +75,6 @@ brew install tcpflow
 brew install tcpreplay
 brew install tcptrace
 brew install ucspi-tcp # `tcpserver` etc.
-brew install xpdf
 brew install xz
 
 # Install other useful binaries.

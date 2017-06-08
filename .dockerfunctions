@@ -222,24 +222,29 @@ mvn() {
 }
 
 mysqlserver(){
-  del_stopped mysql
-  local state=$(docker inspect --format "{{.State.Running}}" mysql-server 2>/dev/null)
+  del_stopped mysqlserver
+  local state=$(docker inspect --format "{{.State.Running}}" mysqlserver 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "mysql server is not running, starting it for you."
     docker run -it -d \
       -v ${DEV_ZONE}/storage/mysql:/var/lib/mysql \
       -e MYSQL_ROOT_PASSWORD=nmrony \
-      --name mysql-server \
+      --name mysqlserver \
       k0st/alpine-mariadb > /dev/null 2>&1
   else
-    echo 'mysql is already running'
+    echo 'mysql server is already running'
   fi
+}
+
+mysql(){
+  relies_on mysqlserver
+  docker run -it -d --rm k0st/alpine-mariadb mysql "@"
 }
 
 pma() {
   del_stopped pma
-  relies_on mysql
+  relies_on mysqlserver
   sleep 3;
   local state=$(docker inspect --format "{{.State.Running}}" pma 2>/dev/null)
 

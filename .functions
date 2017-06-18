@@ -285,8 +285,8 @@ gbrp() {
 }
 
 setgitlab() {
-  git remote set-url --add --push origin git@github.com:nmrony/$1.git && \
-  git remote set-url --add --push origin git@gitlab.com:nmrony/$1.git
+  git remote set-url --add --push origin git@github.com:nmrony/${1}.git && \
+  git remote set-url --add --push origin git@gitlab.com:nmrony/${1}.git
 }
 
 autoload -U add-zsh-hook
@@ -307,3 +307,5 @@ load_nvmrc() {
 }
 add-zsh-hook chpwd load_nvmrc
 load_nvmrc
+
+(command -v "ng" > /dev/null 2>&1) && source <(ng completion --zsh)

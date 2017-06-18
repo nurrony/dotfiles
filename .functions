@@ -307,5 +307,3 @@ load_nvmrc() {
 }
 add-zsh-hook chpwd load_nvmrc
 load_nvmrc
-
-(command -v "ng" > /dev/null 2>&1) && source <(ng completion --zsh)

@@ -71,12 +71,35 @@ unset file;
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(alias-tips aws bundler common-aliases composer docker docker-compose docker-machine extract gem gitfast git-flow-avh git-extras kubectl last-working-dir node npm nvm python pylint rails rake rbenv ruby rvm ssh-agent thefuck urltools vagrant yarn z zsh-syntax-highlighting)
+plugins=(alias-tips \
+aws \
+bundler \
+common-aliases \
+composer \
+extract \
+gem \
+gitfast \
+git-flow-avh \
+git-extras \
+last-working-dir \
+node \
+npm \
+nvm \
+python \
+pylint \
+ssh-agent \
+thefuck \
+urltools \
+vagrant \
+yarn \
+z \
+zsh-syntax-highlighting)
 
 
 source $ZSH/oh-my-zsh.sh
-eval "$(thefuck --alias)"
-
+(command -v "ng" > /dev/null 2>&1) && source <(ng completion --zsh)
+(command -v "kubectl" > /dev/null 2>&1) && source <(kubectl completion zsh)
+(command -v "kops" > /dev/null 2>&1) && source <(kops completion zsh)
 # ssh-agent forwarding support
 zstyle :omz:plugins:ssh-agent agent-forwarding on
 

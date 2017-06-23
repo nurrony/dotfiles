@@ -79,7 +79,6 @@ composer \
 extract \
 gem \
 gitfast \
-git-flow-avh \
 git-extras \
 last-working-dir \
 node \

@@ -17,7 +17,7 @@ set showcmd                     " Show me what I'm typing
 set showmode                    " Show current mode.
 
 set noswapfile                  " Don't use swapfile
-set nobackup					" Don't create annoying backup files
+set nobackup                    " Don't create annoying backup files
 set nowritebackup
 set splitright                  " Split vertical windows right to the current windows
 set splitbelow                  " Split horizontal windows below to the current windows
@@ -40,7 +40,7 @@ set ignorecase                  " Search case insensitive...
 set smartcase                   " ... but not when search pattern contains upper case characters
 set ttyfast
 " set ttyscroll=3               " noop on linux ?
-set lazyredraw          	      " Wait to redraw "
+set lazyredraw                  " Wait to redraw "
 
 " speed up syntax highlighting
 set nocursorcolumn
@@ -108,7 +108,7 @@ if !&sidescrolloff
 endif
 set display+=lastline
 
-" CTRL-U in insert mode deletes a lot.	Use CTRL-G u to first break undo,
+" CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
 inoremap <C-U> <C-G>u<C-U>
 
@@ -127,8 +127,8 @@ endif
 " file it was loaded from, thus the changes you made.
 " Only define it when not defined already.
 "if !exists(":DiffOrig")
-""	command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
-""				\ | wincmd p | diffthis
+""  command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
+""        \ | wincmd p | diffthis
 "endif
 
 " Only do this part when compiled with support for autocommands.
@@ -154,7 +154,7 @@ if has("autocmd")
     " position when opening a file.
     autocmd BufReadPost *
           \ if line("'\"") > 1 && line("'\"") <= line("$") |
-          \	exe "normal! g`\"" |
+          \  exe "normal! g`\"" |
           \ endif
 
   augroup END
@@ -313,7 +313,7 @@ else
 endif
 
 " ----------------------------------------- "
-" File Type settings 			    		"
+" File Type settings               "
 " ----------------------------------------- "
 
 au BufNewFile,BufRead *.vim setlocal noet ts=2 sw=2 sts=2
@@ -385,16 +385,16 @@ set wildignore+=*.orig                           " Merge resolution files
 
 
 " ----------------------------------------- "
-" Plugin configs 			    			"
+" Plugin configs                 "
 " ----------------------------------------- "
 
 " ==================== CtrlP ====================
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_max_height = 10		" maxiumum height of match window
-let g:ctrlp_switch_buffer = 'et'	" jump to a file if it's open already
-let g:ctrlp_mruf_max=450 		" number of recently opened files
-let g:ctrlp_max_files=0  		" do not limit the number of searchable files
+let g:ctrlp_max_height = 10    " maxiumum height of match window
+let g:ctrlp_switch_buffer = 'et'  " jump to a file if it's open already
+let g:ctrlp_mruf_max=450     " number of recently opened files
+let g:ctrlp_max_files=0      " do not limit the number of searchable files
 let g:ctrlp_use_caching = 1
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'

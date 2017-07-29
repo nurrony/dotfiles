@@ -85,7 +85,6 @@ node \
 npm \
 nvm \
 python \
-pylint \
 ssh-agent \
 thefuck \
 urltools \
@@ -102,7 +101,10 @@ source $ZSH/oh-my-zsh.sh
 # ssh-agent forwarding support
 zstyle :omz:plugins:ssh-agent agent-forwarding on
 
-
+# zsh completion brew path fix
+fpath=(/usr/local/share/zsh-completions $fpath)
+autoload -U compinit
+compinit -i
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"

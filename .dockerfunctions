@@ -219,21 +219,20 @@ mvn() {
         --name mvn \
         -v "$PWD":/usr/src/mymaven \
         -w /usr/src/mymaven \
-        --user "$(id -u):$(id -g)" \
         maven:alpine mvn "$@"
 }
 
 gradle() {
   del_stopped gradle
   docker run \
-         -it \
+        -it \
         --rm \
         --name gradle \
-        --env GRADLE_USER_HOME=/project/.gradle
+        --env GRADLE_USER_HOME=/project/.gradle \
         --user "$(id -u):$(id -g)" \
         -v "$PWD":/project \
         -w /project \
-        gradle:alpine gradle "$@" 2>/dev/null
+        gradle:alpine gradle "$@"
 }
 
 mysqlserver(){
@@ -246,7 +245,7 @@ mysqlserver(){
       -v ${DEV_ZONE}/storage/mysql:/var/lib/mysql \
       -e MYSQL_ROOT_PASSWORD=nmrony \
       --name mysqlserver \
-      mysql/mysql-server > /dev/null 2>&1
+      mysql/mysql-server 2>/dev/null
   else
     echo 'mysql server is already running'
   fi
@@ -254,7 +253,7 @@ mysqlserver(){
 
 mysql(){
   relies_on mysqlserver
-  docker exec -it mysqlserver mysql "@"
+  docker exec -it mysqlserver mysql "$@"
 }
 
 pma() {

@@ -230,7 +230,7 @@ gradle() {
         --rm \
         --name gradle \
         --env GRADLE_USER_HOME=/project/.gradle
-        --user "$(id -u):$(id -g)"
+        --user "$(id -u):$(id -g)" \
         -v "$PWD":/project \
         -w /project \
         gradle:alpine gradle "$@" 2>/dev/null

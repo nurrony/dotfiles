@@ -287,13 +287,13 @@ myblog(){
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "blog server is not running, starting it for you."
     docker run -it -d \
-      -v ${DEV_ZONE}/open-sources/nmrony.info:/var/lib/ghost \
+      -v ${DEV_ZONE}/open-sources/nmrony.info:/var/lib/ghost/content \
       -e VIRTUAL_HOST=blog.nmrony.docker \
       -e DEV_DOMAIN=http://blog.nmrony.docker \
       -p 2368:2368 \
       --net ronsvpn \
       --name personal-blog \
-      zzrot/alpine-ghost > /dev/null 2>&1
+      ghost:alpine 2>/dev/null
   else
     echo 'blog is already running'
   fi
@@ -310,7 +310,7 @@ mongodb(){
       -p 27017:27017 \
       --net ronsvpn \
       --name mongodb \
-      nmrony/alpine-mongo > /dev/null 2>&1
+      nmrony/alpine-mongo 2>/dev/null
   else
     echo 'mongodb is already running'
   fi
@@ -319,7 +319,7 @@ mongodb(){
 mongo() {
   relies_on mongodb
   sleep 4s;
-  docker exec -it mongodb mongo
+  docker exec -it mongodb mongo "$@"
 }
 
 sysdig() {

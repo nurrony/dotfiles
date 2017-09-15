@@ -41,12 +41,13 @@ nginx_proxy() {
     echo "proxy server is not running, starting it for you."
     docker run -it -d \
       -v /var/run/docker.sock:/tmp/docker.sock:ro \
-      -v ${DEV_ZONE}/nginx/vhost.d:/etc/nginx/vhost.d \
+      -v ${DEV_ZONE}/storage/docker-configs/nginx/vhost.d:/etc/nginx/vhost.d:ro \
+      -v ${DEV_ZONE}/storage/docker-configs/nginx/certs:/etc/nginx/certs:ro
       -p 80:80 \
       -p 443:443 \
       --net ronsvpn \
       --name nginx_proxy \
-      jwilder/nginx-proxy > /dev/null 2>&1
+      jwilder/nginx-proxy:alpine 2>/dev/null
   else
     echo 'proxy is already running'
   fi
@@ -231,7 +232,7 @@ mysqlserver(){
       -v ${DEV_ZONE}/storage/mysql:/var/lib/mysql \
       -e MYSQL_ROOT_PASSWORD=nmrony \
       --name mysqlserver \
-      k0st/alpine-mariadb > /dev/null 2>&1
+      mysql/mysql-server > /dev/null 2>&1
   else
     echo 'mysql server is already running'
   fi
@@ -239,7 +240,7 @@ mysqlserver(){
 
 mysql(){
   relies_on mysqlserver
-  docker run -it -d --rm k0st/alpine-mariadb mysql "@"
+  docker exec -it mysqlserver mysql "@"
 }
 
 pma() {

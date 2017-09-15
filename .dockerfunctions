@@ -41,12 +41,12 @@ nginx_proxy() {
     echo "proxy server is not running, starting it for you."
     docker run -it -d \
       -v /var/run/docker.sock:/tmp/docker.sock:ro \
-      -v ${DEV_ZONE}/storage/docker-configs/nginx/vhost.d:/etc/nginx/vhost.d:ro \
-      -v ${DEV_ZONE}/storage/docker-configs/nginx/certs:/etc/nginx/certs:ro
+      -v ${DEV_ZONE}/storage/nginx/vhost.d:/etc/nginx/vhost.d:ro \
+      -v ${DEV_ZONE}/storage/nginx/certs:/etc/nginx/certs:ro
       -p 80:80 \
       -p 443:443 \
       --net ronsvpn \
-      --name nginx_proxy \
+      --name nginx-proxy \
       jwilder/nginx-proxy:alpine 2>/dev/null
   else
     echo 'proxy is already running'
@@ -58,7 +58,7 @@ nginx_config() {
   server=$1
   route=$2
 
-cat >${HOME}/.nginx/conf.d/${server}.conf <<-EOF
+cat >${DEV_ZONE}/nginx/conf.d/${server}.conf <<-EOF
 upstream ${server} { server ${route}; }
   server {
     server_name ${server};
@@ -137,7 +137,7 @@ consul(){
     -dc neverland \
     -bind 0.0.0.0
 
-  hostess add consul $(docker inspect --format "{{.NetworkSettings.Networks.bridge.IPAddress}}" consul)
+  sudo hostess add consul $(docker inspect --format "{{.NetworkSettings.Networks.bridge.IPAddress}}" consul)
   open "http://consul:8500"
 }
 
@@ -161,7 +161,7 @@ http(){
   docker run -t --rm \
     -v /var/run/docker.sock:/var/run/docker.sock \
     --log-driver none \
-    ${DOCKER_REPO_PREFIX}/httpie "$@"
+    alpine/httpie "$@"
 }
 
 imagemin(){
@@ -171,7 +171,7 @@ imagemin(){
 
   docker run --rm -it \
     -v /etc/localtime:/etc/localtime:ro \
-    -v $HOME/Pictures:/root/Pictures \
+    -v $HOME/Documents:/root/Pictures \
     ${DOCKER_REPO_PREFIX}/imagemin sh -c "imagemin /root/Pictures/${image} > /root/Pictures/${filename}_min.${extension}"
 }
 
@@ -205,7 +205,7 @@ couchdb(){
       -e VIRTUAL_HOST=couchdb.nmrony.docker \
       --net ronsvpn \
       --name couchdb \
-      couchdb > /dev/null 2>&1
+      couchdb 2>/dev/null
   else
     echo 'couchdb is already running'
   fi
@@ -219,7 +219,21 @@ mvn() {
         --name mvn \
         -v "$PWD":/usr/src/mymaven \
         -w /usr/src/mymaven \
+        --user "$(id -u):$(id -g)" \
         maven:alpine mvn "$@"
+}
+
+gradle() {
+  del_stopped gradle
+  docker run \
+         -it \
+        --rm \
+        --name gradle \
+        --env GRADLE_USER_HOME=/project/.gradle
+        --user "$(id -u):$(id -g)"
+        -v "$PWD":/project \
+        -w /project \
+        gradle:alpine gradle "$@" 2>/dev/null
 }
 
 mysqlserver(){
@@ -246,6 +260,7 @@ mysql(){
 pma() {
   del_stopped pma
   relies_on mysqlserver
+  relies_on nginx_proxy
   sleep 3;
   local state=$(docker inspect --format "{{.State.Running}}" pma 2>/dev/null)
 

@@ -1,3 +1,9 @@
+# Development directory path
+DEV_DIR=/Volumes/Devzone
+
+# Set ssh key file name
+SSH_KEY_FILE_NAME='nur-macbookpro'
+
 # Git credentials
 # Not in the repository, to prevent people from accidentally committing under my name
 GIT_AUTHOR_NAME="Nur Rony"

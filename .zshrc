@@ -73,18 +73,15 @@ unset file;
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(alias-tips \
 aws \
-bundler \
 common-aliases \
 composer \
 extract \
-gem \
 gitfast \
 git-extras \
 last-working-dir \
 node \
 npm \
 nvm \
-python \
 ssh-agent \
 thefuck \
 urltools \

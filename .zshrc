@@ -79,7 +79,6 @@ extract \
 gitfast \
 git-extras \
 last-working-dir \
-node \
 npm \
 nvm \
 ssh-agent \

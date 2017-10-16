@@ -211,30 +211,6 @@ couchdb(){
   fi
 }
 
-mvn() {
-  del_stopped mvn
-  docker run \
-         -it \
-        --rm \
-        --name mvn \
-        -v "$PWD":/usr/src/mymaven \
-        -w /usr/src/mymaven \
-        maven:alpine mvn "$@"
-}
-
-gradle() {
-  del_stopped gradle
-  docker run \
-        -it \
-        --rm \
-        --name gradle \
-        --env GRADLE_USER_HOME=/project/.gradle \
-        --user "$(id -u):$(id -g)" \
-        -v "$PWD":/project \
-        -w /project \
-        gradle:alpine gradle "$@"
-}
-
 mysqlserver(){
   del_stopped mysqlserver
   local state=$(docker inspect --format "{{.State.Running}}" mysqlserver 2>/dev/null)

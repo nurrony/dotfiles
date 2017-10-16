@@ -1,9 +1,12 @@
-export ANDROID_HOME=/Volumes/Devzone/storage/android/sdk
+
+export ANDROID_HOME=$DEV_DIR/storage/android/sdk
 export ANDROID_PLATFORM_TOOLS=$ANDROID_HOME/platform-tools
 export ANDROID_TOOLS=$ANDROID_HOME/tools
 export PATH="$PATH:$ANDROID_HOME:$ANDROID_PLATFORM_TOOLS:$ANDROID_TOOLS"
+
 export RVM_PATH="$HOME/.rvm/bin"
 export PATH="$RVM_PATH:$PATH" # Add RVM to PATH for scripting
+
 export GO_PATH=/usr/local/opt/go/libexec/bin
 export GOPATH="$HOME/.go"
 export PATH="$PATH:$GO_PATH:$GOPATH/bin"

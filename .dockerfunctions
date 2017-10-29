@@ -6,25 +6,29 @@ export DOCKER_REPO_PREFIX=jess
 # Helper Functions
 #
 dcleanup(){
-  docker rm $(docker ps -aq 2>/dev/null) 2>/dev/null
-  docker rm -v $(docker ps --filter status=exited -q 2>/dev/null) 2>/dev/null
-  docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2>/dev/null
+  local containers
+  containers=( $(docker ps -aq 2>/dev/null) )
+  docker rm "${containers[@]}" 2>/dev/null
+  local volumes
+  volumes=( $(docker ps --filter status=exited -q 2>/dev/null) )
+  docker rm -v "${volumes[@]}" 2>/dev/null
+  local images
+  images=( $(docker images --filter dangling=true -q 2>/dev/null) )
+  docker rmi "${images[@]}" 2>/dev/null
 }
-
 del_stopped(){
   local name=$1
-  local state=$(docker inspect --format "{{.State.Running}}" $name 2>/dev/null)
+  local state
+  state=$(docker inspect --format "{{.State.Running}}" "$name" 2>/dev/null)
 
   if [[ "$state" == "false" ]]; then
-    docker rm $name
+    docker rm "$name"
   fi
 }
-
 relies_on(){
-  local containers=$@
-
-  for container in $containers; do
-    local state=$(docker inspect --format "{{.State.Running}}" $container 2>/dev/null)
+  for container in "$@"; do
+    local state
+    state=$(docker inspect --format "{{.State.Running}}" "$container" 2>/dev/null)
 
     if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
       echo "$container is not running, starting it for you."

@@ -16,6 +16,7 @@ dcleanup(){
   images=( $(docker images --filter dangling=true -q 2>/dev/null) )
   docker rmi "${images[@]}" 2>/dev/null
 }
+
 del_stopped(){
   local name=$1
   local state
@@ -25,6 +26,7 @@ del_stopped(){
     docker rm "$name"
   fi
 }
+
 relies_on(){
   for container in "$@"; do
     local state
@@ -46,7 +48,8 @@ nginx_proxy() {
     docker run -it -d \
       -v /var/run/docker.sock:/tmp/docker.sock:ro \
       -v ${DEV_ZONE}/storage/nginx/vhost.d:/etc/nginx/vhost.d:ro \
-      -v ${DEV_ZONE}/storage/nginx/certs:/etc/nginx/certs:ro
+      -v ${DEV_ZONE}/storage/nginx/certs:/etc/nginx/certs:ro \
+      -v ${DEV_ZONE}/storage/nginx/conf.d/custom_settings.conf:/etc/nginx/conf.d/custom_settings.conf:ro \
       -p 80:80 \
       -p 443:443 \
       --net ronsvpn \
@@ -62,7 +65,7 @@ nginx_config() {
   server=$1
   route=$2
 
-cat >${DEV_ZONE}/nginx/conf.d/${server}.conf <<-EOF
+cat >${DEV_ZONE}/storage/nginx/conf.d/${server}.conf <<-EOF
 upstream ${server} { server ${route}; }
   server {
     server_name ${server};
@@ -224,10 +227,9 @@ mysqlserver(){
     docker run -it -d \
       -v ${DEV_ZONE}/storage/mysql:/var/lib/mysql \
       -e MYSQL_ROOT_PASSWORD=nmrony \
-      --user "$(id -u):$(id -g)" \
-      -p 3306:3306 \
+      --net ronsvpn \
       --name mysqlserver \
-      mysql/mysql-server 2>/dev/null
+      mysql 2>/dev/null
   else
     echo 'mysql server is already running'
   fi
@@ -249,7 +251,7 @@ pma() {
       echo "phpMyAdmin is not running, starting it for you."
       docker run -it -d \
         -e VIRTUAL_HOST=pma.nmrony.docker \
-        -e PMA_HOSTS=mysql,test_mariadb \
+        -e PMA_HOSTS=mysqlserver,mysql.futurevault.com \
         --net ronsvpn \
         --name pma \
         phpmyadmin/phpmyadmin > /dev/null 2>&1
@@ -268,10 +270,15 @@ myblog(){
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "blog server is not running, starting it for you."
     docker run -it -d \
-      -v ${DEV_ZONE}/open-sources/nmrony.info:/var/lib/ghost/content \
-      -e VIRTUAL_HOST=blog.nmrony.docker \
-      -e DEV_DOMAIN=http://blog.nmrony.docker \
-      -p 2368:2368 \
+      --volume ${DEV_ZONE}/projects/open-sources/nmrony.info:/var/lib/ghost/content \
+      --env VIRTUAL_HOST=blog.nmrony.docker \
+      --env url=http://blog.nmrony.docker \
+      --env database__client=mysql \
+      --env database__connection__host=mysqlserver \
+      --env database__connection__user=root \
+      --env database__connection__password=nmrony \
+      --env database__connection__database=nmrony_blog \
+      --env DEV_DOMAIN=http://blog.nmrony.docker \
       --net ronsvpn \
       --name personal-blog \
       ghost:alpine 2>/dev/null

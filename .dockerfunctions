@@ -270,7 +270,7 @@ myblog(){
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "blog server is not running, starting it for you."
     docker run -it -d \
-      --volume ${DEV_ZONE}/projects/open-sources/nmrony.info:/var/lib/ghost/content \
+      --volume ${DEV_ZONE}/projects/open-sources/nmrony.info/ghost-content:/var/lib/ghost/content \
       --env VIRTUAL_HOST=blog.nmrony.docker \
       --env url=http://blog.nmrony.docker \
       --env database__client=mysql \

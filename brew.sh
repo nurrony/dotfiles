@@ -121,13 +121,17 @@ brew cleanup
 brew update
 brew tap caskroom/cask
 brew tap caskroom/versions
+brew cask install alfred
 brew cask install appcleaner
 brew cask install docker
 brew cask install google-chrome-canary
 brew cask install gpgtools
 brew cask install iterm2
-brew cask install java
+brew cask install java8
 brew cask install minikube
+brew cask install rocket-chat
+brew cask install skype
+brew cask install slack
 brew cask install spectacle
 brew cask install the-unarchiver
 brew cask install vagrant

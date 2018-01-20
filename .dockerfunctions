@@ -295,7 +295,6 @@ mongodb(){
     echo "mongodb server is not running, starting it for you."
     docker run -it -d \
       -v ${DEV_ZONE}/storage/mongodb:/data/db \
-      --user "$(id -u):$(id -g)" \
       -p 27017:27017 \
       --net ronsvpn \
       --name mongodb \

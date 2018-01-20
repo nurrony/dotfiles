@@ -113,6 +113,8 @@ sudo chmod u+s $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machi
 brew install kubectl
 brew install kops
 brew install kubernetes-helm
+# Installs tools with names kctx and kns to prevent prefix collision with kubectl name
+brew install kubectx --with-short-names
 
 # Remove outdated versions from the cellar.
 brew cleanup

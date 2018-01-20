@@ -12,7 +12,7 @@ POWERLEVEL9K_MODE='awesome-patched'
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status kubecontext root_indicator nvm time)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator nvm time)
 POWERLEVEL9K_NVM_BACKGROUND='magenta'
 POWERLEVEL9K_NVM_FOREGROUND='green'
 POWERLEVEL9K_KUBECONTEXT_BACKGROUND='blue'
@@ -129,3 +129,10 @@ compinit -i
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /Users/nurrony/.config/yarn/global/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/nurrony/.config/yarn/global/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /Users/nurrony/.config/yarn/global/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/nurrony/.config/yarn/global/node_modules/tabtab/.completions/sls.zsh

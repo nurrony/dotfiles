@@ -128,6 +128,7 @@ brew cask install appcleaner
 brew cask install docker
 brew cask install google-chrome-canary
 brew cask install gpgtools
+brew cask install insomnia
 brew cask install iterm2
 brew cask install java8
 brew cask install minikube

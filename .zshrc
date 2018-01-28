@@ -136,3 +136,4 @@ compinit -i
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f /Users/nurrony/.config/yarn/global/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/nurrony/.config/yarn/global/node_modules/tabtab/.completions/sls.zsh
+[ -s "/Users/nurrony/.jabba/jabba.sh" ] && source "/Users/nurrony/.jabba/jabba.sh"

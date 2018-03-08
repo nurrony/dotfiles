@@ -340,6 +340,12 @@ setgitlab() {
   git remote set-url --add --push origin git@gitlab.com:nmrony/${1}.git
 }
 
+gittrackbranches() {
+  for branch in `git branch -a | grep remotes | grep -v HEAD | grep -v master `; do
+    git branch --track ${branch#remotes/origin/} $branch
+  done
+}
+
 autoload -U add-zsh-hook
 load_nvmrc() {
   local node_version="$(nvm version)"

@@ -60,6 +60,26 @@ nginx_proxy() {
   fi
 }
 
+portainer() {
+	relies_on nginx_proxy
+	del_stopped portainer
+  local state=$(docker inspect --format "{{.State.Running}}" portainer 2>/dev/null)
+
+  if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
+    echo "portainer server is not running, starting it for you."
+    docker run -it -d \
+      -v /var/run/docker.sock:/var/run/docker.sock:ro \
+      -v ${DEV_ZONE}/storage/portainer:/data \
+      -e VIRTUAL_HOST=portainer.nmrony.local \
+      --expose 9000 \
+      --net ronsvpn \
+      --name portainer \
+      portainer/portainer 2>/dev/null
+  else
+    echo 'portainer is already running'
+  fi
+}
+
 # creates an nginx config for a local route
 nginx_config() {
   server=$1

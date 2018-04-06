@@ -74,7 +74,6 @@ unset file;
 plugins=(alias-tips \
 aws \
 common-aliases \
-composer \
 extract \
 gitfast \
 git-extras \

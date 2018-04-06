@@ -115,10 +115,10 @@ EOF
 
 aws(){
   docker run -it --rm \
-    -v $HOME/.aws:/root/.aws \
+    --volume $HOME/.aws:/root/.aws \
     --log-driver none \
-    --name aws \
-    ${DOCKER_REPO_PREFIX}/awscli "$@"
+    --name aws-cli \
+    nmrony/awscli "$@"
 }
 
 cadvisor(){
@@ -328,6 +328,13 @@ mongo() {
   relies_on mongodb
   sleep 4s;
   docker exec -it mongodb mongo "$@"
+}
+
+composer() {
+	docker run --rm --interactive --tty \
+    --volume $PWD:/app \
+    --user $(id -u):$(id -g) \
+    composer "$@"
 }
 
 sysdig() {

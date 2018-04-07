@@ -162,6 +162,14 @@
 
   # Detect copies as well as renames
   renames = copies
+  tool = kdiff3
+
+[difftool "kdiff3"]
+    path = /Applications/kdiff3.app/Contents/MacOS/kdiff3
+    trustExitCode = false
+
+[difftool]
+    prompt = false
 
 [diff "bin"]
 
@@ -177,6 +185,14 @@
 
   # Include summaries of merged commits in newly created merge commit messages
   log = true
+  tool = kdiff3
+
+[mergetool]
+  keepBackup = false
+
+[mergetool "kdiff3"]
+  path = /Applications/kdiff3.app/Contents/MacOS/kdiff3
+  trustExitCode = false
 
 [push]
 
@@ -209,12 +225,9 @@
 
   insteadOf = "gist:"
 [user]
-	name = Nur Rony
-	email = pro.nmrony@gmail.com
+  name = Nur Rony
+  email = pro.nmrony@gmail.com
   signingkey = 06B3A1B73F55F441
 
 [gpg]
   program = gpg2
-
-[mergetool]
-  keepBackup = false

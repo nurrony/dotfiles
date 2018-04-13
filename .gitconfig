@@ -225,8 +225,8 @@
 
   insteadOf = "gist:"
 [user]
-  name = Nur Rony
-  email = pro.nmrony@gmail.com
+	name = Nur Rony
+	email = pro.nmrony@gmail.com
   signingkey = 06B3A1B73F55F441
 
 [gpg]

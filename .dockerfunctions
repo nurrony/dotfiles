@@ -125,17 +125,6 @@ aws(){
     nmrony/awscli "$@"
 }
 
-eb(){
-  docker run --rm --interactive \
-    --tty \
-    --name aws-eb-cli \
-    --volume $HOME/.aws:/.aws \
-    --log-driver none \
-    --user $(id -u):$(id -g) \
-    --volume $PWD:/app \
-    nmrony/awscli eb "$@"
-}
-
 cadvisor(){
   docker run -d \
     --restart always \

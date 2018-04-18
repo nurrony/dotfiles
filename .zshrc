@@ -81,6 +81,7 @@ last-working-dir \
 npm \
 nvm \
 ssh-agent \
+terraform \
 urltools \
 vagrant \
 yarn \

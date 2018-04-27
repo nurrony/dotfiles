@@ -253,7 +253,7 @@ mysqlserver(){
       -e MYSQL_ROOT_PASSWORD=nmrony \
       --net ronsvpn \
       --name mysqlserver \
-      mysql 2>/dev/null
+      mysql:5 2>/dev/null
   else
     echo 'mysql server is already running'
   fi

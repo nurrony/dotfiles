@@ -116,6 +116,10 @@ brew install kubernetes-helm
 # Installs tools with names kctx and kns to prevent prefix collision with kubectl name
 brew install kubectx --with-short-names
 
+# Install Dart SDK Dartium and Dart VM for web
+brew tap dart-lang/dart
+brew install dart --with-content-shell --with-dartium
+
 # Remove outdated versions from the cellar.
 brew cleanup
 

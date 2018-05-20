@@ -11,6 +11,10 @@ export PATH="$RVM_PATH:$PATH" # Add RVM to PATH for scripting
 # Golang variables
 export GO_PATH=/usr/local/opt/go/libexec/bin
 export GOPATH="$HOME/.go"
-export PATH="$PATH:$GO_PATH:$GOPATH/bin"
+
+# Dart Pub global bin path
+export DART_PUB_BIN=$HOME/.pub-cache/bin
+
+export PATH="$PATH:$GO_PATH:$GOPATH/bin:$DART_PUB_BIN"
 export PATH="/usr/local/sbin:$PATH"
 export CDPATH=${CDPATH}:$GOPATH/src/github.com:$GOPATH/src/golang.org:$GOPATH/src

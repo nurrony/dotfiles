@@ -366,6 +366,14 @@ bees(){
     ${DOCKER_REPO_PREFIX}/beeswithmachineguns "$@"
 }
 
+kubebox() {
+  del_stopped kubebox
+  docker run -it --rm \
+    --name kubebox \
+    --volume $HOME/.kube/:/home/node/.kube/:ro \
+    astefanutti/kubebox
+}
+
 ###
 ### Awesome sauce by @jpetazzo
 ###
@@ -382,13 +390,13 @@ command_not_found_handle () {
   return
  fi
 
- docker run -ti -u $(whoami) -w "$HOME" \
-  $(env | cut -d= -f1 | awk '{print "-e", $1}') \
-  --device /dev/snd \
-  -v /etc/passwd:/etc/passwd:ro \
-  -v /etc/group:/etc/group:ro \
-  -v /etc/localtime:/etc/localtime:ro \
-  -v /home:/home \
-  -v /tmp/.X11-unix:/tmp/.X11-unix \
-  "${DOCKER_REPO_PREFIX}/$@"
+#  docker run -ti -u $(whoami) -w "$HOME" \
+#   $(env | cut -d= -f1 | awk '{print "-e", $1}') \
+#   --device /dev/snd \
+#   -v /etc/passwd:/etc/passwd:ro \
+#   -v /etc/group:/etc/group:ro \
+#   -v /etc/localtime:/etc/localtime:ro \
+#   -v /home:/home \
+#   -v /tmp/.X11-unix:/tmp/.X11-unix \
+#   "${DOCKER_REPO_PREFIX}/$@"
 }

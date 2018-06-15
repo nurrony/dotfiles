@@ -82,6 +82,8 @@ brew install git
 brew install git-lfs
 brew install git-extras
 brew install git-secrets
+# deletes unwanted file from git faster
+brew install --ignore-dependencies bfg
 brew install libiconv
 brew install icu4c
 brew install pkg-config

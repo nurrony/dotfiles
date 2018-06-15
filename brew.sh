@@ -26,6 +26,7 @@ brew install gnu-sed --with-default-names
 brew install zsh
 brew tap homebrew/versions
 brew install bash-completion2
+brew install zsh-completions
 
 # Switch to using brew-installed bash as default shell
 if ! fgrep -q '/usr/local/bin/zsh' /etc/shells; then
@@ -53,8 +54,6 @@ brew install openssl
 brew install thefuck
 
 # Install some CTF tools; see https://github.com/ctfs/write-ups.
-brew install aircrack-ng
-brew install bfg # reinstall after java
 brew install binutils
 brew install binwalk
 brew install cifer
@@ -63,7 +62,7 @@ brew install dns2tcp
 brew install fcrackzip
 brew install foremost
 brew install hashpump
-brew install hydra
+# brew install hydra # brute force tool
 brew install john
 brew install knock
 brew install netpbm
@@ -82,6 +81,7 @@ brew install ack
 brew install git
 brew install git-lfs
 brew install git-extras
+brew install git-secrets
 brew install libiconv
 brew install icu4c
 brew install pkg-config
@@ -100,7 +100,7 @@ brew install webkit2png
 brew install zopfli
 # See here: https://github.com/BurntSushi/ripgrep
 brew install ripgrep
-brew install yarn
+brew install --ignore-dependencies yarn
 brew install git-flow-avh
 brew install docker
 brew install docker-machine
@@ -118,7 +118,7 @@ brew install kubectx --with-short-names
 
 # Install Dart SDK Dartium and Dart VM for web
 brew tap dart-lang/dart
-brew install dart --with-content-shell --with-dartium
+brew install dart --devel
 
 # Remove outdated versions from the cellar.
 brew cleanup
@@ -131,15 +131,13 @@ brew cask install alfred
 brew cask install appcleaner
 brew cask install docker
 brew cask install google-chrome-canary
-brew cask install gpgtools
+brew cask install gpg-suite
 brew cask install insomnia
 brew cask install iterm2
-brew cask install java8
 brew cask install minikube
 brew cask install rocket-chat
 brew cask install skype
 brew cask install slack
-brew cask install spectacle
 brew cask install the-unarchiver
 brew cask install vagrant
 brew cask install vlc

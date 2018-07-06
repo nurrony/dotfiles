@@ -52,6 +52,7 @@ brew install readline
 brew install libksba
 brew install openssl
 brew install thefuck
+brew install bat
 
 # Install some CTF tools; see https://github.com/ctfs/write-ups.
 brew install binutils

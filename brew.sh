@@ -112,6 +112,13 @@ brew install docker-machine-driver-xhyve
 sudo chown root:wheel $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
 sudo chmod u+s $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
 
+# Maven, Gradle ElasticBeanstalk and Ahoy
+brew tap devinci-code/tap
+brew install ahoy
+brew install maven
+brew install gradle
+brew install shellcheck
+brew install aws-elasticbeanstalk
 # Kubernetes
 brew install kubectl
 brew install kops

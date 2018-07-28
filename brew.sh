@@ -105,6 +105,8 @@ brew install zopfli
 brew install ripgrep
 brew install --ignore-dependencies yarn
 brew install git-flow-avh
+
+# Docker
 brew install docker
 brew install docker-machine
 brew install docker-compose
@@ -118,7 +120,9 @@ brew install ahoy
 brew install maven
 brew install gradle
 brew install shellcheck
+
 brew install aws-elasticbeanstalk
+
 # Kubernetes
 brew install kubectl
 brew install kops
@@ -130,8 +134,12 @@ brew install kubectx --with-short-names
 brew tap dart-lang/dart
 brew install dart --devel
 
+# Lastpass
+brew install lastpass-cli --with-pinentry
+
 # Remove outdated versions from the cellar.
 brew cleanup
+
 
 # CASK Install
 brew update

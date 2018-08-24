@@ -127,8 +127,7 @@ brew install aws-elasticbeanstalk
 brew install kubectl
 brew install kops
 brew install kubernetes-helm
-brew tap garethr/kubeval
-brew install kubeval
+
 # Installs tools with names kctx and kns to prevent prefix collision with kubectl name
 brew install kubectx --with-short-names
 

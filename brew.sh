@@ -8,8 +8,6 @@ brew update
 # Upgrade any already-installed formulae.
 brew upgrade
 
-brew tap homebrew/dupes
-
 # Install GNU core utilities (those that come with macOS are outdated).
 # Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
 brew install coreutils
@@ -24,7 +22,6 @@ brew install gnu-sed --with-default-names
 # Note: don’t forget to add `/usr/local/bin/zsh` to `/etc/shells` before
 # running `chsh`.
 brew install zsh
-brew tap homebrew/versions
 brew install bash-completion2
 brew install zsh-completions
 

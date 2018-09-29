@@ -121,13 +121,15 @@ brew install maven
 brew install gradle
 brew install shellcheck
 
+brew install awscli
 brew install aws-elasticbeanstalk
 
 # Kubernetes
 brew install kubectl
 brew install kops
 brew install kubernetes-helm
-
+brew tap azure/draft
+brew install draft # this also installs kubernetes-helm
 # Installs tools with names kctx and kns to prevent prefix collision with kubectl name
 brew install kubectx --with-short-names
 

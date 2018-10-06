@@ -361,14 +361,6 @@ bees(){
     ${DOCKER_REPO_PREFIX}/beeswithmachineguns "$@"
 }
 
-kubebox() {
-  del_stopped kubebox
-  docker run -it --rm \
-    --name kubebox \
-    --volume $HOME/.kube/:/home/node/.kube/:ro \
-    astefanutti/kubebox
-}
-
 ###
 ### Awesome sauce by @jpetazzo
 ###

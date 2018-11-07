@@ -346,6 +346,21 @@ gittrackbranches() {
   done
 }
 
+mvn-create-app() {
+  if [ -z "$1" ];
+  if [ -z "$1" ] || [ -z "$2" ] ; then
+    cat <<-EOF
+		Usage:
+				mvn-create-app <group-id> <artifact-id>
+		EOF
+  else
+  mvn archetype:generate -DgroupId=$1 \
+      -DartifactId=$2 \
+      -DarchetypeArtifactId=maven-archetype-quickstart \
+      -DinteractiveMode=false
+  fi
+}
+
 autoload -U add-zsh-hook
 load_nvmrc() {
   local node_version="$(nvm version)"

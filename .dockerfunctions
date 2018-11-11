@@ -387,3 +387,14 @@ command_not_found_handle () {
 #   -v /tmp/.X11-unix:/tmp/.X11-unix \
 #   "${DOCKER_REPO_PREFIX}/$@"
 }
+
+dive() {
+  del_stopped dive
+  docker run --rm -it \
+    --net ronsvpn \
+    --name dive \
+    --volume /var/run/docker.sock:/var/run/docker.sock:ro \
+    --volume $(which docker):/bin/docker:ro \
+    --volume ${DEV_ZONE}/storage/dive.yaml:$HOME/.dive.yaml \
+    wagoodman/dive:latest "$@"
+}

@@ -3,6 +3,9 @@
 # make directory and cd into it
 mcd () { mkdir -p "$@" && cd "$@"; }
 
+# http://www.zsh.org/mla/users//2014/msg00715.html
+zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 }
+
 # Change working directory to the top-most Finder window location
 function cdf() { # short for `cdfinder`
   cd "$(osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)')";

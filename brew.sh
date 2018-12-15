@@ -118,8 +118,11 @@ brew install maven
 brew install gradle
 brew install shellcheck
 
+brew tap aws/tap
+
 brew install awscli
 brew install aws-elasticbeanstalk
+brew install aws-sam-cli
 
 # Kubernetes
 brew install kubectl

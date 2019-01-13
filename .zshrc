@@ -77,9 +77,14 @@ unset file;
 plugins=(alias-tips \
 aws \
 common-aliases \
+docker \
+docker-compose \
+docker-machine \
 extract \
 gitfast \
 git-extras \
+kubectl \
+kops \
 last-working-dir \
 npm \
 nvm \
@@ -93,9 +98,6 @@ zsh-syntax-highlighting)
 
 
 source $ZSH/oh-my-zsh.sh
-(command -v "ng" > /dev/null 2>&1) && source <(ng completion --zsh)
-(command -v "kubectl" > /dev/null 2>&1) && source <(kubectl completion zsh)
-(command -v "kops" > /dev/null 2>&1) && source <(kops completion zsh)
 (command -v "minikube" > /dev/null 2>&1) && source <(minikube completion zsh)
 
 # ssh-agent forwarding support

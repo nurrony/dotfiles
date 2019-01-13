@@ -157,6 +157,7 @@ brew cask install insomnia
 brew cask install iterm2
 brew cask install minikube
 brew cask install rocket-chat
+brew cask install sequel-pro
 brew cask install skype
 brew cask install slack
 brew cask install the-unarchiver

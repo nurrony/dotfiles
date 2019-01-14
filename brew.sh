@@ -104,22 +104,21 @@ brew install --ignore-dependencies yarn
 brew install git-flow-avh
 
 # Docker
-brew install docker
+# brew install docker
 brew install docker-machine
-brew install docker-compose
+# brew install docker-compose
 brew install docker-machine-driver-xhyve
 sudo chown root:wheel $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
 sudo chmod u+s $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
 
 # Maven, Gradle ElasticBeanstalk and Ahoy
-brew tap devinci-code/tap
-brew install ahoy
+# brew tap devinci-code/tap
+# brew install ahoy
 brew install maven
 brew install gradle
-brew install shellcheck
 
+# AWS CLIs
 brew tap aws/tap
-
 brew install awscli
 brew install aws-elasticbeanstalk
 brew install aws-sam-cli

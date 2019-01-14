@@ -149,6 +149,7 @@ brew update
 brew tap caskroom/cask
 brew tap caskroom/versions
 brew cask install alfred
+brew cask install android-file-transfer
 brew cask install appcleaner
 brew cask install docker
 brew cask install google-chrome-canary

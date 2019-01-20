@@ -394,3 +394,12 @@ create-react-app() {
 ng() {
   npx -p @angular/cli ng "$@"
 }
+
+cordova() {
+  npx cordova "$@"
+}
+
+
+cordova() {
+  npx cordova "$@"
+}

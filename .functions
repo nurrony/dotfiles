@@ -399,7 +399,6 @@ cordova() {
   npx cordova "$@"
 }
 
-
-cordova() {
-  npx cordova "$@"
+sls() {
+  npx serverless "$@"
 }

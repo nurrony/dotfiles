@@ -136,6 +136,18 @@ brew install kubectx --with-short-names
 brew tap dart-lang/dart
 brew install dart --devel
 
+# Flutter packages
+# Run these following after installing XCode
+# sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
+brew update --verbose
+brew install --HEAD usbmuxd
+brew link usbmuxd
+brew install --HEAD libimobiledevice
+brew install ideviceinstaller
+brew install ios-deploy
+brew install cocoapods
+pod setup
+
 # Lastpass
 brew install lastpass-cli --with-pinentry
 

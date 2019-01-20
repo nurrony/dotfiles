@@ -338,12 +338,12 @@ gbrp() {
   fi
 }
 
-setgitlab() {
+set-gitlab() {
   git remote set-url --add --push origin git@github.com:nmrony/${1}.git && \
   git remote set-url --add --push origin git@gitlab.com:nmrony/${1}.git
 }
 
-gittrackbranches() {
+git-track-branches() {
   for branch in `git branch -a | grep remotes | grep -v HEAD | grep -v master `; do
     git branch --track ${branch#remotes/origin/} $branch
   done

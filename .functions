@@ -390,3 +390,7 @@ load_nvmrc
 create-react-app() {
   npx create-react-app "$@" --use-npm
 }
+
+ng() {
+  npx -p @angular/cli ng "$@"
+}

@@ -386,3 +386,7 @@ load_nvmrc() {
 }
 add-zsh-hook chpwd load_nvmrc
 load_nvmrc
+
+create-react-app() {
+  npx create-react-app "$@" --use-npm
+}

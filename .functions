@@ -402,3 +402,7 @@ cordova() {
 sls() {
   npx serverless "$@"
 }
+
+ionic() {
+  npx ionic "$@"
+}

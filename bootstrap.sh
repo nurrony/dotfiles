@@ -22,9 +22,6 @@ mkdir -p ~/.oh-my-zsh/custom/plugins && cd $_ &&  \
 git clone https://github.com/djui/alias-tips.git >/dev/null 2>&1 && \
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting >/dev/null 2>&1 && \
 cd $HOME && \
-curl -SsLo hostess https://github.com/cbednarski/hostess/releases/download/v0.2.0/hostess_darwin_amd64 >/dev/null 2>&1 && \
-sudo mv hostess /usr/local/bin/ && sudo chmod +x /usr/local/bin/hostess && \
-echo "done" && \
 echo -ne 'Installing NVM... '
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash 2>&1 && \
 echo 'done'

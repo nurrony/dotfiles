@@ -17,7 +17,7 @@ git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/theme
 echo 'done' && \
 #Install Shell plugins
 echo -ne "installing custom plugins: thefuck, alias-tips, zsh-syntax-highlighting, hostess... "
-brew install thefuck >/dev/null 2>&1
+brew install thefuck hostess >/dev/null 2>&1
 mkdir -p ~/.oh-my-zsh/custom/plugins && cd $_ &&  \
 git clone https://github.com/djui/alias-tips.git >/dev/null 2>&1 && \
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting >/dev/null 2>&1 && \
@@ -31,7 +31,7 @@ echo 'done'
 # clone .dotfile
 rm -fr $HOME/.dotfiles/.git && \
 mv .zshrc .zshrc.pre-nurrony-dotfiles && \
-ln -sf $HOME/.dotfiles/.{zshrc,curlrc,gemrc,gitattribute,gitconfig,gitignore,gvimrc,hgignore,hushlogin,inputrc,screenrc,spectacles-keymap,vimrc,wgetrc} $HOME/
+ln -sf $HOME/.dotfiles/.{zshrc,curlrc,gemrc,cli-packages,gitattribute,gitconfig,gitignore,gvimrc,hgignore,hushlogin,inputrc,screenrc,spectacles-keymap,vimrc,wgetrc} $HOME/
 echo 'All are done. Applying changes..'
 source $HOME/.zshrc && \
 printf "\nTo prepare your pc more developer friendly you can run the following scripts\n\n"

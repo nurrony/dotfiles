@@ -65,7 +65,7 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
-for file in ~/.dotfiles/.{extra,path,exports,aliases,functions,dockerfunctions}; do
+for file in ~/.dotfiles/.{extra,path,exports,aliases,functions,cli-packages,dockerfunctions}; do
   [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
@@ -86,7 +86,6 @@ git-extras \
 kubectl \
 kops \
 last-working-dir \
-npm \
 nvm \
 ssh-agent \
 terraform \

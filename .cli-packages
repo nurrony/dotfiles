@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+create-mvn-app() {
+  if [ -z "$1" ] || [ -z "$2" ] ; then
+    cat <<-EOF
+		Usage: create-mvn-app <group-id> <artifact-id> [archetype-artifact-id]
+
+		Options:
+			group-id                   which package it should belong i.e: info.nmrony.app.example
+			artifact-id                name of the artifact
+			archetype-artifact-id      maven archetypeArtifactId (optional) (default: maven-archetype-quickstart)
+		EOF
+  else
+  ARC_TYPE_ID=${3:-maven-archetype-quickstart}
+  mvn archetype:generate -DgroupId=$1 \
+      -DartifactId=$2 \
+      -DarchetypeArtifactId=${ARC_TYPE_ID} \
+      -DinteractiveMode=false
+  fi
+}
+create-react-app() {
+  npx create-react-app "$@" --use-npm
+}
+
+ng() {
+  npx -p @angular/cli ng "$@"
+}
+
+cordova() {
+  npx cordova "$@"
+}
+
+sls() {
+  npx serverless "$@"
+}
+
+ionic() {
+  npx ionic "$@"
+}

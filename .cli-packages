@@ -37,3 +37,7 @@ sls() {
 ionic() {
   npx ionic "$@"
 }
+
+nest() {
+  npx @nestjs/cli "$@"
+}

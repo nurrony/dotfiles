@@ -98,6 +98,7 @@ zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 (command -v "minikube" > /dev/null 2>&1) && source <(minikube completion zsh)
+(command -v "flutter" > /dev/null 2>&1) && source <(flutter bash-completion)
 
 # ssh-agent forwarding support
 zstyle :omz:plugins:ssh-agent agent-forwarding on
@@ -143,3 +144,7 @@ compinit -i
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f /Volumes/Devzone/storage/npm/_npx/42491/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Volumes/Devzone/storage/npm/_npx/42491/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
+
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[[ -f /Volumes/Devzone/storage/npm/cache/_npx/28479/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh ]] && . /Volumes/Devzone/storage/npm/cache/_npx/28479/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh

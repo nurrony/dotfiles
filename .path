@@ -1,8 +1,9 @@
 # Android Variables
 export ANDROID_HOME=$DEV_DIR/storage/android/sdk
+export ANDROID_SDK_ROOT=$DEV_DIR/storage/android/sdk
 export ANDROID_PLATFORM_TOOLS=$ANDROID_HOME/platform-tools
 export ANDROID_TOOLS=$ANDROID_HOME/tools
-export PATH="$PATH:$ANDROID_HOME:$ANDROID_PLATFORM_TOOLS:$ANDROID_TOOLS"
+export PATH="$PATH:$ANDROID_HOME:$ANDROID_SDK_ROOT:$ANDROID_PLATFORM_TOOLS:$ANDROID_TOOLS"
 
 # Ruby Language Paths
 export RVM_PATH="$HOME/.rvm/bin"

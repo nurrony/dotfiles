@@ -1,5 +1,6 @@
 [alias]
 
+  parent = "!git show-branch | grep '*' | grep -v \"$(git rev-parse --abbrev-ref HEAD)\" | head -n1 | sed 's/.*\\[\\(.*\\)\\].*/\\1/' | sed 's/[\\^~].*//' #"
   # View abbreviated SHA, description, and history graph of the latest 20 commits
   l = log --pretty=oneline -n 20 --graph --abbrev-commit
 
@@ -231,3 +232,6 @@
 
 [gpg]
   program = gpg2
+[http]
+	postBuffer = 1048576000
+	proxy =

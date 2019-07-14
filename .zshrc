@@ -8,16 +8,16 @@ export ZSH=$HOME/.oh-my-zsh
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # DEFAULT_USER=$(whoami)
-POWERLEVEL9K_MODE='awesome-patched'
+POWERLEVEL9K_MODE='nerdfont-complete'
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(nvm background_jobs aws root_indicator time battery)
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time root_indicator nvm time)
 POWERLEVEL9K_NVM_BACKGROUND='magenta'
 POWERLEVEL9K_NVM_FOREGROUND='green'
-POWERLEVEL9K_KUBECONTEXT_BACKGROUND='blue'
-POWERLEVEL9K_KUBECONTEXT_FOREGROUND='black'
-POWERLEVEL9K_TIME_FORMAT="%D{%H:%M \uE868 %d.%m.%y}"
+# POWERLEVEL9K_KUBECONTEXT_BACKGROUND='blue'
+# POWERLEVEL9K_KUBECONTEXT_FOREGROUND='black'
+POWERLEVEL9K_TIME_FORMAT="%D{%H:%M}"
 POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND='blue'
 POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND='green'
 POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=0
@@ -81,7 +81,7 @@ docker \
 docker-compose \
 docker-machine \
 extract \
-gitfast \
+git \
 git-extras \
 kubectl \
 kops \

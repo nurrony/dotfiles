@@ -163,9 +163,8 @@ brew cask install alfred
 brew cask install android-file-transfer
 brew cask install appcleaner
 brew cask install docker
-brew cask install google-chrome-canary
+brew cask install google-chrome
 brew cask install gpg-suite
-brew cask install insomnia
 brew cask install iterm2
 brew cask install minikube
 brew cask install rocket-chat

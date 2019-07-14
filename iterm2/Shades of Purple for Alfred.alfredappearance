@@ -1,0 +1,61 @@
+{
+  "alfredtheme" : {
+    "result" : {
+      "textSpacing" : 4,
+      "subtext" : {
+        "size" : 12,
+        "colorSelected" : "#1D1D3FFF",
+        "font" : "Menlo",
+        "color" : "#343370FF"
+      },
+      "shortcut" : {
+        "size" : 20,
+        "colorSelected" : "#0E2232FF",
+        "font" : "Menlo",
+        "color" : "#4C00FFFF"
+      },
+      "backgroundSelected" : "#FBD100FF",
+      "text" : {
+        "size" : 19,
+        "colorSelected" : "#4C00FFFF",
+        "font" : "Menlo",
+        "color" : "#CDD6DBFF"
+      },
+      "iconPaddingHorizontal" : 7,
+      "paddingVertical" : 8,
+      "iconSize" : 36
+    },
+    "search" : {
+      "paddingVertical" : 11,
+      "background" : "#1D1B40FF",
+      "spacing" : 0,
+      "text" : {
+        "size" : 30,
+        "colorSelected" : "#000000FF",
+        "font" : "Helvetica Neue",
+        "color" : "#FBD100FF"
+      },
+      "backgroundSelected" : "#B2D7FFFF"
+    },
+    "window" : {
+      "color" : "#1D1B40FF",
+      "paddingHorizontal" : 9,
+      "width" : 560,
+      "borderPadding" : 0,
+      "borderColor" : "#F3C600FF",
+      "blur" : 0,
+      "roundness" : -16,
+      "paddingVertical" : 0
+    },
+    "credit" : "Ahmad Awais",
+    "separator" : {
+      "color" : "#00000000",
+      "thickness" : 0
+    },
+    "scrollbar" : {
+      "color" : "#B2B2B2FF",
+      "thickness" : 0
+    },
+    "name" : "Shades of Purple for Alfred"
+  }
+}

@@ -137,14 +137,3 @@ compinit -i
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # tmutil  listlocalsnapshotdates / |grep 20|while read f; do tmutil deletelocalsnapshots $f; done
-
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /Volumes/Devzone/storage/npm/_npx/42491/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /Volumes/Devzone/storage/npm/_npx/42491/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /Volumes/Devzone/storage/npm/_npx/42491/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Volumes/Devzone/storage/npm/_npx/42491/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
-
-# tabtab source for slss package
-# uninstall by removing these lines or running `tabtab uninstall slss`
-[[ -f /Volumes/Devzone/storage/npm/cache/_npx/28479/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh ]] && . /Volumes/Devzone/storage/npm/cache/_npx/28479/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh

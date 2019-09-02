@@ -166,7 +166,8 @@ brew cask install alfred
 brew cask install android-file-transfer
 brew cask install appcleaner
 brew cask install docker
-brew cask install google-chrome
+brew cask install google-chrome-canary
+brew cask install graalvm/tap/graalvm-ce
 brew cask install gpg-suite
 brew cask install iterm2
 brew cask install minikube

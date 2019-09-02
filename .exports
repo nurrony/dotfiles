@@ -35,29 +35,17 @@ export LESS_TERMCAP_md="${yellow}";
 export MANPAGER='less -X';
 
 # Load NVM
-export NVM_DIR="${DEV_ZONE}/storage/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
-
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /Users/nurrony/.config/yarn/global/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/nurrony/.config/yarn/global/node_modules/tabtab/.completions/serverless.zsh
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /Users/nurrony/.config/yarn/global/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/nurrony/.config/yarn/global/node_modules/tabtab/.completions/sls.zsh
+# export NVM_DIR="${DEV_ZONE}/storage/nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 
 # Load Java Version Manager
-[ -s "/Users/nurrony/.jabba/jabba.sh" ] && source "/Users/nurrony/.jabba/jabba.sh"
-
-# http://stackoverflow.com/a/23832208/1294213
-export PHANTOMJS_CDNURL='http://cnpmjs.org/downloads'
-
-# about.gitlab.com live reload variable
-export ENABLE_LIVERELOAD=0
+# [ -s "/Users/nurrony/.jabba/jabba.sh" ] && source "/Users/nurrony/.jabba/jabba.sh"
 
 # java home path
-# export JAVA_HOME=$(/usr/libexec/java_home)
+export JAVA_HOME=$(/usr/libexec/java_home)
 
 # turn on go vendoring experiment
 export GO15VENDOREXPERIMENT=1
 
+# Docker content trust check
 export DOCKER_CONTENT_TRUST=0

@@ -148,8 +148,11 @@ brew install ios-deploy
 brew install cocoapods
 pod setup
 
+# Azure CLI
+brew install azure-cli
+
 # Lastpass
-brew install lastpass-cli --with-pinentry
+# brew install lastpass-cli --with-pinentry
 
 # Remove outdated versions from the cellar.
 brew cleanup

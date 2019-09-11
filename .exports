@@ -43,6 +43,7 @@ export MANPAGER='less -X';
 
 # java home path
 export JAVA_HOME=$(/usr/libexec/java_home)
+export GRAALVM_HOME=$(/usr/libexec/java_home)
 
 # turn on go vendoring experiment
 export GO15VENDOREXPERIMENT=1

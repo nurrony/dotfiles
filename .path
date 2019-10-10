@@ -25,7 +25,7 @@ export GNU_TOOL_PATH=/usr/local/opt/findutils/libexec/gnubin
 export PATH="$GNU_TOOL_PATH:$PATH"
 
 # GraalVM Paths
-export GRAALVM_BIN_PATH="/Library/Java/JavaVirtualMachines/graalvm-ce-19.2.0/Contents/Home/bin"
-export PATH="$GRAALVM_BIN_PATH:$PATH"
+# export GRAALVM_BIN_PATH="/Library/Java/JavaVirtualMachines/graalvm-ce-19.2.0/Contents/Home/bin"
+# export PATH="$GRAALVM_BIN_PATH:$PATH"
 
 export PATH="/usr/local/sbin:$PATH"

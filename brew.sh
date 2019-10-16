@@ -32,11 +32,10 @@ if ! fgrep -q '/usr/local/bin/zsh' /etc/shells; then
 fi;
 
 # Install `wget` with IRI support.
-brew install wget --with-iri
-
+brew install wget
 
 # Install more recent versions of some macOS tools.
-brew install vim --with-override-system-vi
+brew install vim
 brew install grep
 brew install openssh
 brew install screen
@@ -50,6 +49,7 @@ brew install libksba
 brew install openssl
 brew install thefuck
 brew install bat
+brew install watch
 
 # Install some CTF tools; see https://github.com/ctfs/write-ups.
 brew install binutils
@@ -104,9 +104,7 @@ brew install --ignore-dependencies yarn
 brew install git-flow-avh
 
 # Docker
-# brew install docker
 brew install docker-machine
-# brew install docker-compose
 brew install docker-machine-driver-xhyve
 sudo chown root:wheel $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
 sudo chmod u+s $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
@@ -148,6 +146,9 @@ brew install ios-deploy
 brew install cocoapods
 pod setup
 
+# Scala Language
+brew install sbt
+
 # Azure CLI
 brew install azure-cli
 
@@ -165,9 +166,8 @@ brew tap caskroom/versions
 brew cask install alfred
 brew cask install android-file-transfer
 brew cask install appcleaner
+brew cask install brave-browser
 brew cask install docker
-brew cask install google-chrome-canary
-brew cask install graalvm/tap/graalvm-ce
 brew cask install gpg-suite
 brew cask install iterm2
 brew cask install minikube

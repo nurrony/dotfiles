@@ -33,6 +33,8 @@ fi;
 
 # Install `wget` with IRI support.
 brew install wget
+brew install htaccess
+brew install  httpie --HEAD
 
 # Install more recent versions of some macOS tools.
 brew install vim
@@ -73,6 +75,7 @@ brew install tcpreplay
 brew install tcptrace
 brew install ucspi-tcp # `tcpserver` etc.
 brew install xz
+brew install
 
 # Install other useful binaries.
 brew install ack
@@ -128,11 +131,11 @@ brew install kubernetes-helm
 brew tap azure/draft
 brew install draft # this also installs kubernetes-helm
 # Installs tools with names kctx and kns to prevent prefix collision with kubectl name
-brew install kubectx --with-short-names
+brew install kubectx
 
 # Install Dart SDK Dartium and Dart VM for web
 brew tap dart-lang/dart
-brew install dart --devel
+brew install dart
 
 # Flutter packages
 # Run these following after installing XCode

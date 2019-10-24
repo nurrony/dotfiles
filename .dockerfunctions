@@ -170,12 +170,12 @@ htopdocker(){
     ${DOCKER_REPO_PREFIX}/htop
 }
 
-http(){
-  docker run -t --rm \
-    -v /var/run/docker.sock:/var/run/docker.sock \
-    --log-driver none \
-    alpine/httpie "$@"
-}
+# http(){
+#   docker run -t --rm \
+#     -v /var/run/docker.sock:/var/run/docker.sock \
+#     --log-driver none \
+#     alpine/httpie "$@"
+# }
 
 imagemin(){
   local image=$1
@@ -248,9 +248,8 @@ mysql(){
 
 pma() {
   del_stopped pma
-  relies_on mysqlserver
   relies_on nginx_proxy
-  sleep 3;
+  sleep 2;
   local state=$(docker inspect --format "{{.State.Running}}" pma 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then

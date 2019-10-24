@@ -203,7 +203,7 @@ alias gflrf='git flow release finish'
 alias gcz='git cz'
 
 # Minikube alias
-alias minikube-create='minikube start --cpus 2 --disk-size "50g" --memory 4096 --extra-config=apiserver.authorization-mode=RBAC'
+alias minikube-start='minikube start --cpus 2 --disk-size "50g" --memory 4096 --extra-config=apiserver.authorization-mode=RBAC --extra-config=apiserver.runtime-config=settings.k8s.io/v1alpha1=true'
 alias minikube-reg='minikube start --insecure-registry localhost:5000'
 
 # # npx tricks

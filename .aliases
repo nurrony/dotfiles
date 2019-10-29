@@ -18,6 +18,7 @@ alias j="jobs"
 alias cask='brew cask'
 alias where=which
 alias brwe=brew # ;-D
+alias clearhistory="cat /dev/null > ~/.zsh_history && history -c && exit"
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
@@ -205,9 +206,3 @@ alias gcz='git cz'
 # Minikube alias
 alias minikube-start='minikube start --cpus 2 --disk-size "50g" --memory 4096 --extra-config=apiserver.authorization-mode=RBAC --extra-config=apiserver.runtime-config=settings.k8s.io/v1alpha1=true'
 alias minikube-reg='minikube start --insecure-registry localhost:5000'
-
-# # npx tricks
-# alias ng='npx @angular/cli'
-# alias 'create-react-app'='npx create-react-app'
-# alias cordova='npx cordova'
-# alias

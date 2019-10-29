@@ -53,3 +53,8 @@ ionic() {
 nest() {
   npx @nestjs/cli "$@"
 }
+
+create-scala-app() {
+  echo "Not implemented yet."
+  exit 0;
+}

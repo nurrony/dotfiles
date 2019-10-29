@@ -258,6 +258,7 @@ pma() {
         -e VIRTUAL_HOST=pma.nmrony.docker \
         -e PMA_ARBITRARY=1 \
         --net ronsvpn \
+        --expose 80 \
         --name pma \
         phpmyadmin/phpmyadmin > /dev/null 2>&1
     else

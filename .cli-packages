@@ -67,11 +67,71 @@ create-scala-app() {
   NMR_SCALA_PROJECT_ORG=${NMR_SCALA_PROJECT_ORG:-info.nmrony}
   NMR_SCALA_PROJECT_VERSION=${NMR_SCALA_PROJECT_VERSION:-v1.0.0-SNAPSHOT}
   NMR_SCALA_PROJECT_SCALA_VERSION=${NMR_SCALA_PROJECT_SCALA_VERSION:-2.13.1}
-  echo -n 'Creating necessary directories...'
   if [ -d "$NMR_SCALA_PROJECT_NAME" ] ; then
-    echo 'dir ache';
+    echo $NMR_SCALA_PROJECT_NAME ' directory is already exists.';
   else
+    echo -n 'Creating necessary directories and files... '
     mkdir -p $NMR_SCALA_PROJECT_NAME/src/{main/{java,resources,scala},test/{java,resources,scala}}
-    # cd $NMR_SCALA_PROJECT_NAME && ( cat <<EOF )
+    cd $NMR_SCALA_PROJECT_NAME > /dev/null && \
+    cat > ./build.sbt <<-EOF
+name := "$NMR_SCALA_PROJECT_NAME"
+organization := "$NMR_SCALA_PROJECT_ORG"
+version := "$NMR_SCALA_PROJECT_VERSION"
+scalaVersion := "$NMR_SCALA_PROJECT_SCALA_VERSION"
+
+
+// Library Dependencies
+libraryDependencies ++= Seq(
+  "org.typelevel" %% "cats-core" % "2.0.0",
+  "org.scalatest" %% "scalatest" % "3.0.8" % "test"
+)
+
+
+// Scala Compiler Options
+scalacOptions ++= Seq(
+  "-deprecation",                      // Emit warning and location for usages of deprecated APIs.
+  "-encoding", "utf-8",                // Specify character encoding used by source files.
+  "-explaintypes",                     // Explain type errors in more detail.
+  "-feature",                          // Emit warning and location for usages of features that should be imported explicitly.
+  "-unchecked",                        // Enable additional warnings where generated code depends on assumptions.
+  "-language:implicitConversions",     // Allow definition of implicit functions called views
+  "-language:higherKinds",             // Allow higher-kinded types
+  "-language:existentials",            // Existential types (besides wildcard types) can be written and inferred
+  "-Xfatal-warnings",                  // Fail the compilation if there are any warnings.
+  "-Ywarn-unused:implicits",           // Warn if an implicit parameter is unused.
+  "-Ywarn-unused:imports",             // Warn if an import selector is not referenced.
+  "-Ywarn-unused:locals",              // Warn if a local definition is unused.
+  "-Ywarn-unused:params",              // Warn if a value parameter is unused.
+  "-Ywarn-unused:patvars",             // Warn if a variable bound in a pattern is unused.
+  "-Ywarn-unused:privates",            // Warn if a private member is unused.
+  "-Ywarn-value-discard"               // Warn when non-Unit expression results are unused.
+)
+EOF
+cat > ./scalafmt.conf <<-EOF
+style                           = defaultWithAlign
+danglingParentheses             = true
+indentOperator                  = spray
+includeCurlyBraceInSelectChains = true
+maxColumn                       = 120
+project.excludeFilters          = [sample]
+rewrite.rules                   = [RedundantParens, SortImports, PreferCurlyFors]
+spaces.inImportCurlyBraces      = true
+binPack.literalArgumentLists    = false
+unindentTopLevelOperators       = true
+EOF
+mkdir -p ./project && echo 'sbt.version=1.3.3' > ./project/build.properties
+cat > ./src/main/scala/HelloWorld.scala <<-EOF
+object HelloWorld {
+  def main(args: Array[String]): Unit = {
+    println("Hello, world!")
+  }
+}
+EOF
+echo '';
+echo 'To run application...' && cd ..
+echo ''
+echo 'cd ' $NMR_SCALA_PROJECT_NAME ' && sbt clean run'
+echo ''
+
   fi
 }

@@ -268,7 +268,7 @@ pma() {
 
 myblog(){
   relies_on nginx_proxy
-  relies_on pma
+  relies_on mysqlserver
   sleep 5
   del_stopped personal-blog
   local state=$(docker inspect --format "{{.State.Running}}" personal-blog 2>/dev/null)
@@ -283,11 +283,11 @@ myblog(){
       --env database__connection__host=mysqlserver \
       --env database__connection__user=root \
       --env database__connection__password=nmrony \
-      --env database__connection__database=nmrony_blog \
+      --env database__connection__database=rons_blog \
       --env DEV_DOMAIN=http://blog.nmrony.docker \
       --net ronsvpn \
       --name personal-blog \
-      ghost:alpine 2>/dev/null
+      ghost:2-alpine 2>/dev/null
   else
     echo 'blog is already running'
   fi

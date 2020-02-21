@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -e
+echo 'removing Google Chrome...'
+rm -fr /Applications/Google\ Chrome.app/
+rm -fr ~/Library/Application\ Support/Google/Chrome/
+rm -fr ~/Library/Application\ Support/CrashReporter/Google\ Chrome*
+rm -fr ~/Library/Preferences/com.google.Chrome*
+rm -fr ~/Library/Preferences/Google\ Chrome*
+rm -fr ~/Library/Caches/com.google.Chrome*
+rm -fr ~/Library/Saved\ Application\ State/com.google.Chrome.savedState/
+rm -fr ~/Library/Google/GoogleSoftwareUpdate/Actives/com.google.Chrome
+rm -fr ~/Library/Google/Google\ Chrome*
+rm -fr ~/Library/Speech/Speakable\ Items/Application\ Speakable\ Items/Google\ Chrome/
+rm -fr ~/Library/Google/Google\ Chrome\ Brand.plist
+rm -fr ~/Library/LaunchAgents/com.google.keystone.agent.plist
+rm -fr ~/Library/Preferences/com.google.Keystone.Agent.plist
+rm -fr ~/Library/Caches/com.google.Keystone*
+rm -fr ~/Library/Caches/com.google.SoftwareUpdate
+rm -fr ~/Library/Application Support/Google/RLZ
+rm -rf ~/Applications/Chrome\ Apps

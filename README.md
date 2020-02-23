@@ -44,7 +44,7 @@ I use **iTerm2** and **Zsh** together and **[PowerLevel10k][1]** as theme.
 You need to install these followings to get look like my terminal theme
 
 1. [Shade of Purple for iTerm2][2]
-1. [MesloLGS NF Regular][3] - Font size: 15
+1. [MesloLGS NF Regular][3] - Font size: 16
 
 You can import my settings from [iterm2][4] directory
 

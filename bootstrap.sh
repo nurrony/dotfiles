@@ -13,7 +13,7 @@ echo -ne 'Installing Oh My Zsh... '
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" >/dev/null 2>&1 && \
 echo 'done' && \
 echo -ne 'Installing PowerLevel9k theme...'
-git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k  2>&1 && \
+git clone --depth=1 https://github.com/romkatv/powerlevel10k ~/.oh-my-zsh/custom/themes/powerlevel10k  2>&1 && \
 echo 'done' && \
 #Install Shell plugins
 echo -ne "installing custom plugins: thefuck, alias-tips, zsh-syntax-highlighting, hostess... "
@@ -28,7 +28,7 @@ echo 'done'
 # clone .dotfile
 rm -fr $HOME/.dotfiles/.git && \
 mv .zshrc .zshrc.pre-nurrony-dotfiles && \
-ln -sf $HOME/.dotfiles/.{zshrc,curlrc,gemrc,cli-packages,gitattribute,gitconfig,gitignore,gvimrc,hgignore,hushlogin,inputrc,screenrc,spectacles-keymap,vimrc,wgetrc} $HOME/
+ln -sf $HOME/.dotfiles/.{zshrc,p10k.zsh,curlrc,gemrc,cli-packages,gitattribute,gitconfig,gitignore,gvimrc,hgignore,hushlogin,inputrc,screenrc,spectacles-keymap,vimrc,wgetrc} $HOME/
 echo 'All are done. Applying changes..'
 source $HOME/.zshrc && \
 printf "\nTo prepare your pc more developer friendly you can run the following scripts\n\n"

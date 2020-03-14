@@ -40,12 +40,12 @@ nginx_proxy() {
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     docker run -it -d \
-      -v /var/run/docker.sock:/tmp/docker.sock:ro \
-      -v ${DEV_ZONE}/storage/nginx/vhost.d:/etc/nginx/vhost.d:ro \
-      -v ${DEV_ZONE}/storage/nginx/certs:/etc/nginx/certs:ro \
-      -v ${DEV_ZONE}/storage/nginx/conf.d/custom_settings.conf:/etc/nginx/conf.d/custom_settings.conf:ro \
-      -p 80:80 \
-      -p 443:443 \
+      --volume /var/run/docker.sock:/tmp/docker.sock:ro \
+      --volume ${DEV_ZONE}/storage/nginx/vhost.d:/etc/nginx/vhost.d:ro \
+      --volume ${DEV_ZONE}/storage/nginx/certs:/etc/nginx/certs:ro \
+      --volume ${DEV_ZONE}/storage/nginx/conf.d/custom_settings.conf:/etc/nginx/conf.d/custom_settings.conf:ro \
+      --publish 80:80 \
+      --publish 443:443 \
       --net ronsvpn \
       --name nginx_proxy \
       jwilder/nginx-proxy:alpine 2>/dev/null
@@ -62,9 +62,9 @@ portainer() {
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "portainer server is not running, starting it for you."
     docker run -it -d \
-      -v /var/run/docker.sock:/var/run/docker.sock:ro \
-      -v ${DEV_ZONE}/storage/portainer:/data \
-      -e VIRTUAL_HOST=portainer.nmrony.local \
+      --volume /var/run/docker.sock:/var/run/docker.sock:ro \
+      --volume ${DEV_ZONE}/storage/portainer:/data \
+      --env VIRTUAL_HOST=portainer.nmrony.local \
       --expose 9000 \
       --net ronsvpn \
       --name portainer \
@@ -110,11 +110,11 @@ EOF
 cadvisor(){
   docker run -d \
     --restart always \
-    -v /:/rootfs:ro \
-    -v /var/run:/var/run:rw \
-    -v /sys:/sys:ro  \
-    -v /var/lib/docker/:/var/lib/docker:ro \
-    -p 1234:8080 \
+    --volume /:/rootfs:ro \
+    --volume /var/run:/var/run:rw \
+    --volume /sys:/sys:ro  \
+    --volume /var/lib/docker/:/var/lib/docker:ro \
+    --publish 1234:8080 \
     --name cadvisor \
     google/cadvisor
 
@@ -135,10 +135,10 @@ consul(){
 
   docker run -d \
     --restart always \
-    -v $HOME/.consul:/etc/consul.d \
-    -v /var/run/docker.sock:/var/run/docker.sock \
+    --volume $HOME/.consul:/etc/consul.d \
+    --volume /var/run/docker.sock:/var/run/docker.sock \
     --net host \
-    -e GOMAXPROCS=2 \
+    --env GOMAXPROCS=2 \
     --name consul \
     ${DOCKER_REPO_PREFIX}/consul agent \
     -bootstrap-expect 1 \
@@ -156,8 +156,8 @@ consul(){
 
 dcos(){
   docker run -it --rm \
-    -v $HOME/.dcos:/root/.dcos \
-    -v $(pwd):/root/apps \
+    --volume $HOME/.dcos:/root/.dcos \
+    --volume $(pwd):/root/apps \
     -w /root/apps \
     ${DOCKER_REPO_PREFIX}/dcos-cli "$@"
 }
@@ -172,7 +172,7 @@ htopdocker(){
 
 # http(){
 #   docker run -t --rm \
-#     -v /var/run/docker.sock:/var/run/docker.sock \
+#     --volume /var/run/docker.sock:/var/run/docker.sock \
 #     --log-driver none \
 #     alpine/httpie "$@"
 # }
@@ -183,8 +183,8 @@ imagemin(){
   local filename="${image%.*}"
 
   docker run --rm -it \
-    -v /etc/localtime:/etc/localtime:ro \
-    -v $HOME/Documents:/root/Pictures \
+    --volume /etc/localtime:/etc/localtime:ro \
+    --volume $HOME/Documents:/root/Pictures \
     ${DOCKER_REPO_PREFIX}/imagemin sh -c "imagemin /root/Pictures/${image} > /root/Pictures/${filename}_min.${extension}"
 }
 
@@ -193,8 +193,8 @@ irssi() {
   # relies_on notify_osd
 
   docker run --rm -it \
-    -v /etc/localtime:/etc/localtime:ro \
-    -v $HOME/.irssi:/home/user/.irssi \
+    --volume /etc/localtime:/etc/localtime:ro \
+    --volume $HOME/.irssi:/home/user/.irssi \
     --read-only \
     --name irssi \
     ${DOCKER_REPO_PREFIX}/irssi
@@ -210,12 +210,12 @@ couchdb(){
     local COUCH_DB_PASS=${2:-nmrony}
     # create new couchdb container
     docker run -it -d \
-      -v ${DEV_ZONE}/storage/couchdb:/usr/local/var/lib/couchdb \
-      -p 5984:5984 \
-      -p 2049:2049 \
-      -e COUCHDB_USER=${COUCH_DB_ADMIN} \
-      -e COUCHDB_PASSWORD=${COUCH_DB_PASS} \
-      -e VIRTUAL_HOST=couchdb.nmrony.docker \
+      --volume ${DEV_ZONE}/storage/couchdb:/usr/local/var/lib/couchdb \
+      --publish 5984:5984 \
+      --publish 2049:2049 \
+      --env COUCHDB_USER=${COUCH_DB_ADMIN} \
+      --env COUCHDB_PASSWORD=${COUCH_DB_PASS} \
+      --env VIRTUAL_HOST=couchdb.nmrony.docker \
       --net ronsvpn \
       --name couchdb \
       couchdb 2>/dev/null
@@ -231,8 +231,8 @@ mysqlserver(){
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "mysql server is not running, starting it for you."
     docker run -it -d \
-      -v ${DEV_ZONE}/storage/mysql:/var/lib/mysql \
-      -e MYSQL_ROOT_PASSWORD=nmrony \
+      --volume ${DEV_ZONE}/storage/mysql:/var/lib/mysql \
+      --env MYSQL_ROOT_PASSWORD=nmrony \
       --net ronsvpn \
       --name mysqlserver \
       mysql:5 2>/dev/null
@@ -255,8 +255,8 @@ pma() {
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
       echo "phpMyAdmin is not running, starting it for you."
       docker run -it -d \
-        -e VIRTUAL_HOST=pma.nmrony.docker \
-        -e PMA_ARBITRARY=1 \
+        --env VIRTUAL_HOST=pma.nmrony.docker \
+        --env PMA_ARBITRARY=1 \
         --net ronsvpn \
         --expose 80 \
         --name pma \
@@ -300,11 +300,11 @@ mongodb(){
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "mongodb server is not running, starting it for you."
     docker run -it -d \
-      -v ${DEV_ZONE}/storage/mongodb:/data/db \
-      -p 27017:27017 \
+      --volume ${DEV_ZONE}/storage/mongodb:/data/db \
+      --publish 27017:27017 \
       --net ronsvpn \
       --name mongodb \
-      mongo 2>/dev/null
+      mongo "$@" 2>/dev/null
   else
     echo 'mongodb is already running'
   fi
@@ -314,6 +314,38 @@ mongo() {
   relies_on mongodb
   sleep 4s;
   docker exec -it mongodb mongo "$@"
+}
+
+elasticsearch(){
+  # Add these extra environment variables if needed
+  # --env "bootstrap.memory_lock=true"
+  # --env "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+  del_stopped elasticsearch
+  local state=$(docker inspect --format "{{.State.Running}}" elasticsearch 2>/dev/null)
+
+  if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
+    echo "elasticsearch server is not running, starting it for you."
+    docker run -it -d \
+      --volume ${DEV_ZONE}/storage/elasticsearch/data:/usr/share/elasticsearch/data \
+      --publish 9200:9200 \
+      --publish 9300:9300 \
+      --net ronsvpn \
+      --ulimit memlock=-1:-1 \
+      --env "discovery.type=single-node" \
+      --env "xpack.security.enabled=true" \
+      --env "http.max_content_length=200mb" \
+      --env "cluster.name=nmr-elasticsearch-cluser" \
+      --env "node.name=nmr-elasticsearch-node" \
+      --env "ELASTIC_PASSWORD=nmrony" \
+      --name elasticsearch \
+      docker.elastic.co/elasticsearch/elasticsearch:7.6.1 "$@" 2>/dev/null
+  else
+    echo 'elasticsearch is already running'
+  fi
+}
+
+containerssh() {
+  docker exec -it "$@"
 }
 
 composer() {
@@ -328,21 +360,21 @@ sysdig() {
   docker run -it \
     --name sysdig-container \
     --privileged \
-    -v /var/run/docker.sock:/host/var/run/docker.sock \
-    -v /dev:/host/dev \
-    -v /proc:/host/proc:ro \
-    -v /boot:/host/boot:ro \
-    -v /lib/modules:/host/lib/modules:ro \
-    -v /usr:/host/usr:ro \
+    --volume /var/run/docker.sock:/host/var/run/docker.sock \
+    --volume /dev:/host/dev \
+    --volume /proc:/host/proc:ro \
+    --volume /boot:/host/boot:ro \
+    --volume /lib/modules:/host/lib/modules:ro \
+    --volume /usr:/host/usr:ro \
     sysdig/sysdig
 }
 
 bees(){
   docker run -it --rm \
-    -e NOTARY_TOKEN \
-    -v $HOME/.bees:/root/.bees \
-    -v $HOME/.boto:/root/.boto \
-    -v $HOME/.dev:/root/.ssh:ro \
+    --env NOTARY_TOKEN \
+    --volume $HOME/.bees:/root/.bees \
+    --volume $HOME/.boto:/root/.boto \
+    --volume $HOME/.dev:/root/.ssh:ro \
     --log-driver none \
     --name bees \
     ${DOCKER_REPO_PREFIX}/beeswithmachineguns "$@"
@@ -367,11 +399,11 @@ command_not_found_handle () {
 #  docker run -ti -u $(whoami) -w "$HOME" \
 #   $(env | cut -d= -f1 | awk '{print "-e", $1}') \
 #   --device /dev/snd \
-#   -v /etc/passwd:/etc/passwd:ro \
-#   -v /etc/group:/etc/group:ro \
-#   -v /etc/localtime:/etc/localtime:ro \
-#   -v /home:/home \
-#   -v /tmp/.X11-unix:/tmp/.X11-unix \
+#   --volume /etc/passwd:/etc/passwd:ro \
+#   --volume /etc/group:/etc/group:ro \
+#   --volume /etc/localtime:/etc/localtime:ro \
+#   --volume /home:/home \
+#   --volume /tmp/.X11-unix:/tmp/.X11-unix \
 #   "${DOCKER_REPO_PREFIX}/$@"
 }
 

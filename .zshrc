@@ -58,7 +58,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
-for file in ~/.dotfiles/.{extra,path,exports,aliases,functions,cli-packages,dockerfunctions}; do
+for file in ~/.dotfiles/.{extra,aliases,functions,cli-packages,dockerfunctions,path,exports}; do
   [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
@@ -130,3 +130,7 @@ compinit -i
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # tmutil  listlocalsnapshotdates / |grep 20|while read f; do tmutil deletelocalsnapshots $f; done
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/nurrony/.sdkman"
+[[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"

@@ -39,7 +39,7 @@ export NVM_DIR="${DEV_ZONE}/storage/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 
 # Load Java Version Manager
-[ -s "/Users/nurrony/.jabba/jabba.sh" ] && source "/Users/nurrony/.jabba/jabba.sh"
+# [ -s "/Users/nurrony/.jabba/jabba.sh" ] && source "/Users/nurrony/.jabba/jabba.sh"
 
 # java home path
 # export JAVA_HOME=$(/usr/libexec/java_home)

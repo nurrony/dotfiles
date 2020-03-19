@@ -150,7 +150,7 @@ brew install cocoapods
 pod setup
 
 # Scala Language
-brew install sbt
+# brew install sbt
 
 # Azure CLI
 brew install azure-cli

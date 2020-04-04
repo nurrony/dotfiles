@@ -101,6 +101,7 @@ brew install testssl
 brew install tree
 brew install webkit2png
 brew install zopfli
+brew install zlib
 # See here: https://github.com/BurntSushi/ripgrep
 brew install ripgrep
 brew install --ignore-dependencies yarn
@@ -159,7 +160,7 @@ brew install azure-cli
 # brew install lastpass-cli --with-pinentry
 
 # Remove outdated versions from the cellar.
-brew cleanup
+brew cleanup -s
 
 
 # CASK Install
@@ -184,4 +185,4 @@ brew cask install vlc
 brew cask install virtualbox
 brew cask install virtualbox-extension-pack
 brew cask install visual-studio-code
-brew cleanup
+brew cleanup -s

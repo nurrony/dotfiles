@@ -1,3 +1,7 @@
+# cURL Paths
+export CURL_PATH=/usr/local/opt/curl-openssl/bin
+export PATH="$CURL_PATH:$PATH"
+
 # Android Variables
 export ANDROID_HOME=$DEV_DIR/storage/android/sdk
 export ANDROID_SDK_ROOT=$DEV_DIR/storage/android/sdk

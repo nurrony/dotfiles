@@ -355,6 +355,22 @@ composer() {
     composer "$@"
 }
 
+apache-php() {
+  docker run --rm --interactive --tty \
+    --volume $PWD:/var/www/html \
+    --user $(id -u):$(id -g) \
+    --net ronsvpn \
+    nmrony/php7-apache "$@"
+}
+
+start-lamp-stack() {
+  nginx_proxy && pma && mysqlserver && echo 'LAMP stack started successfully.'
+}
+
+stop-lamp-stack() {
+  docker rm -f nginx_proxy pma mysqlserver && echo 'LAMP stack stopped successfully.'
+}
+
 sysdig() {
   del_stopped sysdig-container
   docker run -it \

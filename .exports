@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Export starship theme config location
+export STARSHIP_CONFIG=~/.starship
+
 # Set Development zone
 export DEV_ZONE=$DEV_DIR
 

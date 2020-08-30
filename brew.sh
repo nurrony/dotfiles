@@ -18,18 +18,11 @@ brew install moreutils
 brew install findutils
 # Install GNU `sed`, overwriting the built-in `sed`.
 brew install gnu-sed --with-default-names
-# Install latest zsh.
-# Note: don’t forget to add `/usr/local/bin/zsh` to `/etc/shells` before
-# running `chsh`.
+
 brew install zsh
 brew install bash-completion2
 brew install zsh-completions
-
-# Switch to using brew-installed bash as default shell
-if ! fgrep -q '/usr/local/bin/zsh' /etc/shells; then
-  echo '/usr/local/bin/zsh' | sudo tee -a /etc/shells;
-  chsh -s /usr/local/bin/zsh;
-fi;
+brew install starship
 
 # Install `wget` with IRI support.
 brew install wget
@@ -85,6 +78,7 @@ brew install git-lfs
 brew install git-extras
 brew install git-secrets
 brew install gitui
+
 # deletes unwanted file from git faster
 brew install --ignore-dependencies bfg
 brew install libiconv
@@ -104,6 +98,7 @@ brew install tree
 brew install webkit2png
 brew install zopfli
 brew install zlib
+
 # See here: https://github.com/BurntSushi/ripgrep
 brew install ripgrep
 brew install --ignore-dependencies yarn

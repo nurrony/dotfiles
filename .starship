@@ -1,0 +1,27 @@
+[aws]
+displayed_items = "all"
+
+[battery]
+disabled = true
+
+[git_commit]
+commit_hash_length = 8
+
+[directory]
+truncation_length = 2
+
+[docker_context]
+only_with_files = true
+disabled = false
+
+[java]
+style = "bold purple"
+
+[kubernetes]
+disabled = false
+
+[package]
+display_private = true
+
+[username]
+show_always = false

@@ -233,9 +233,10 @@ mysqlserver(){
     docker run -it -d \
       --volume ${DEV_ZONE}/storage/mysql:/var/lib/mysql \
       --env MYSQL_ROOT_PASSWORD=nmrony \
+      --publish 3306:3306 \
       --net ronsvpn \
       --name mysqlserver \
-      mysql:5 2>/dev/null
+      mysql:8 2>/dev/null
   else
     echo 'mysql server is already running'
   fi
@@ -314,6 +315,29 @@ mongo() {
   relies_on mongodb
   sleep 4s;
   docker exec -it mongodb mongo "$@"
+}
+
+postgres() {
+  del_stopped postgres
+  local state=$(docker inspect --format "{{.State.Running}}" postgres 2>/dev/null)
+  local VERSION=${2:-alpine}
+  local DBNAME=${1:-experiments}
+
+  if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
+    docker run -it -d \
+      --net ronsvpn \
+      --ulimit memlock=-1:-1 \
+      --memory-swappiness=0 \
+      --volume ${DEV_ZONE}/storage/postgres:/var/lib/postgresql/data \
+      --env POSTGRES_USER=root \
+      --env POSTGRES_DB=$DBNAME \
+      --env POSTGRES_PASSWORD=nmrony \
+      --publish 5432:5432 \
+      --name postgres \
+      postgres:$VERSION
+  else
+    echo 'postgres is already running'
+  fi
 }
 
 elasticsearch(){

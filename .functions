@@ -81,8 +81,8 @@ repo() {
 
   # Validate that this folder is a git folder
   if ! git branch 2>/dev/null 1>&2 ; then
-  echo "Not a git repo!"
-  exit $?
+    echo "Not a git repo!"
+    exit $?
   fi
 
   # Find current directory relative to .git parent

@@ -93,6 +93,9 @@ source $ZSH/oh-my-zsh.sh
 (command -v "minikube" > /dev/null 2>&1) && source <(minikube completion zsh)
 (command -v "flutter" > /dev/null 2>&1) && source <(flutter bash-completion)
 
+# load custom aliases
+source ~/.dotfiles/.aliases
+
 # ssh-agent forwarding support
 zstyle :omz:plugins:ssh-agent agent-forwarding on
 

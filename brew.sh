@@ -52,6 +52,7 @@ brew install openssl
 brew install thefuck
 brew install bat
 brew install watch
+brew install exa
 
 # Install some CTF tools; see https://github.com/ctfs/write-ups.
 brew install binutils

@@ -15,7 +15,8 @@ only_with_files = true
 disabled = false
 
 [java]
-style = "bold purple"
+symbol = "☕️ "
+style = "bold green"
 
 [kubernetes]
 disabled = false
@@ -25,3 +26,4 @@ display_private = true
 
 [username]
 show_always = false
+

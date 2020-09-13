@@ -15,7 +15,7 @@ export ZSH=$HOME/.oh-my-zsh
 # ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f $HOME/.p10k.zsh ]] || source $HOME/.p10k.zsh
+# [[ ! -f $HOME/.p10k.zsh ]] || source $HOME/.p10k.zsh
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"

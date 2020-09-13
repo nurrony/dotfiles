@@ -15,7 +15,6 @@ only_with_files = true
 disabled = false
 
 [java]
-symbol = "☕️ "
 style = "bold green"
 
 [kubernetes]

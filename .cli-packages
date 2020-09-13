@@ -58,6 +58,10 @@ nest() {
   npx @nestjs/cli "$@"
 }
 
+npm-upgrade() {
+  npx npm-upgrade "$@"
+}
+
 create-scala-app() {
   local NMR_SCALA_PROJECT_NAME;
   local NMR_SCALA_PROJECT_ORG;

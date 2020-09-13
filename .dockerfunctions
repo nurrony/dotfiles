@@ -384,7 +384,7 @@ apache-php() {
     --volume $PWD:/var/www/html \
     --user $(id -u):$(id -g) \
     --net ronsvpn \
-    nmrony/php7-apache "$@"
+    nmrony/php:7-apache "$@"
 }
 
 start-lamp-stack() {

@@ -224,14 +224,14 @@ couchdb(){
   fi
 }
 
-mysqlserver(){
+mysqlserver8(){
   del_stopped mysqlserver
   local state=$(docker inspect --format "{{.State.Running}}" mysqlserver 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
-    echo "mysql server is not running, starting it for you."
+    echo "mysql 8.x server is not running, starting it for you."
     docker run -it -d \
-      --volume ${DEV_ZONE}/storage/mysql:/var/lib/mysql \
+      --volume ${DEV_ZONE}/storage/mysql/8:/var/lib/mysql \
       --env MYSQL_ROOT_PASSWORD=nmrony \
       --publish 3306:3306 \
       --net ronsvpn \
@@ -242,9 +242,32 @@ mysqlserver(){
   fi
 }
 
-mysql(){
+mysqlserver5(){
+  del_stopped mysqlserver5
+  local state=$(docker inspect --format "{{.State.Running}}" mysqlserver5 2>/dev/null)
+
+  if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
+    echo "mysql 5.x server is not running, starting it for you."
+    docker run -it -d \
+      --volume ${DEV_ZONE}/storage/mysql/5:/var/lib/mysql \
+      --env MYSQL_ROOT_PASSWORD=nmrony \
+      --publish 3306:3306 \
+      --net ronsvpn \
+      --name mysqlserver5 \
+      mysql:5.7 2>/dev/null
+  else
+    echo 'mysql server is already running'
+  fi
+}
+
+mysql8(){
   relies_on mysqlserver
   docker exec -it mysqlserver mysql "$@"
+}
+
+mysql5(){
+  relies_on mysqlserver5
+  docker exec -it mysqlserver5 mysql "$@"
 }
 
 pma() {

@@ -76,6 +76,7 @@ docker-machine \
 extract \
 git \
 git-extras \
+jhipster \
 kubectl \
 kops \
 last-working-dir \

@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-jhipster() {
-  npx generator-jhipster "$@" --skip-cache --skip-git --skip-commit-hook
-}
+# jhipster() {
+#   npx generator-jhipster "$@" --skip-cache --skip-git --skip-commit-hook
+# }
 
 create-mvn-app() {
   if [ -z "$1" ] || [ -z "$2" ] ; then

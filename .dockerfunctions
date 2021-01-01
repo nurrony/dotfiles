@@ -254,7 +254,7 @@ mysqlserver5(){
       --publish 3306:3306 \
       --net ronsvpn \
       --name mysqlserver5 \
-      mysql:5.7 2>/dev/null
+      mysql:5.7 mysqld --wait-timeout=28800 2>/dev/null
   else
     echo 'mysql server is already running'
   fi

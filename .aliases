@@ -15,7 +15,6 @@ alias dt="cd ~/Desktop"
 alias devzone="cd $DEV_DIR"
 alias h="history"
 alias j="jobs"
-alias cask='brew cask'
 alias where=which
 alias brwe=brew # ;-D
 alias clearhistory="cat /dev/null > ~/.zsh_history && history -c && exit"
@@ -93,7 +92,7 @@ command -v md5sum > /dev/null || alias md5sum="md5"
 command -v sha1sum > /dev/null || alias sha1sum="shasum"
 
 # Get macOS Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
-alias update='brew update --verbose && brew upgrade && brew cask upgrade && brew cleanup -s && flutter upgrade && yarn global upgrade'
+alias update='brew update --verbose && brew update --cask  && brew upgrade && brew upgrade --cask && brew cleanup -s && flutter upgrade && yarn global upgrade'
 
 # Flush Directory Service cache
 alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"

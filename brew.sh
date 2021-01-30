@@ -17,7 +17,7 @@ brew install moreutils
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed.
 brew install findutils
 # Install GNU `sed`, overwriting the built-in `sed`.
-brew install gnu-sed --with-default-names
+brew install gnu-sed
 
 brew install zsh
 brew install bash-completion2
@@ -26,8 +26,7 @@ brew install starship
 
 # Install `wget` with IRI support.
 brew install wget
-brew install htaccess
-brew install  httpie --HEAD
+brew install httpie --HEAD
 
 # Install more recent versions of some macOS tools.
 brew install vim
@@ -106,11 +105,7 @@ brew install git-flow-avh
 
 # Docker
 brew install docker-machine
-brew install docker-machine-driver-xhyve
-sudo chown root:wheel $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
-sudo chmod u+s $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
 
-# Maven, Gradle ElasticBeanstalk and Ahoy
 # brew tap devinci-code/tap
 # brew install ahoy
 brew install maven
@@ -126,6 +121,7 @@ brew install aws-sam-cli
 brew install kubectl
 brew install kops
 brew install kubernetes-helm
+brew install minikube
 brew tap azure/draft
 brew install draft # this also installs kubernetes-helm
 # Installs tools with names kctx and kns to prevent prefix collision with kubectl name
@@ -147,8 +143,6 @@ brew install ios-deploy
 brew install cocoapods
 pod setup
 
-# Scala Language
-# brew install sbt
 
 # Azure CLI
 brew install azure-cli
@@ -161,25 +155,22 @@ brew cleanup -s
 
 
 # CASK Install
-brew update
-brew tap caskroom/cask
-brew tap caskroom/versions
-brew cask install alfred
-brew cask install android-file-transfer
-brew cask install appcleaner
-brew cask install brave-browser
-brew cask install docker
-brew cask install gpg-suite
-brew cask install iterm2
-brew cask install minikube
-brew cask install rocket-chat
-brew cask install sequel-pro
-brew cask install skype
-brew cask install slack
-brew cask install the-unarchiver
-brew cask install vagrant
-brew cask install vlc
-brew cask install virtualbox
-brew cask install virtualbox-extension-pack
-brew cask install visual-studio-code
+brew update --verbose
+brew tap homebrew/cask
+brew tap homebrew/cask-versions
+brew install --cask alfred \
+android-file-transfer \
+appcleaner \
+brave-browser \
+docker \
+gpg-suite \
+iterm2 \
+skype \
+slack \
+the-unarchiver \
+vagrant \
+vlc \
+virtualbox \
+virtualbox-extension-pack \
+visual-studio-code
 brew cleanup -s

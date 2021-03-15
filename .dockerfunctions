@@ -340,27 +340,55 @@ mongo() {
   docker exec -it mongodb mongo "$@"
 }
 
-postgres() {
-  del_stopped postgres
-  local state=$(docker inspect --format "{{.State.Running}}" postgres 2>/dev/null)
-  local VERSION=${2:-alpine}
+postgresserver13() {
+  del_stopped postgresserver13
+  local state=$(docker inspect --format "{{.State.Running}}" postgresserver13 2>/dev/null)
+  local VERSION=${2:-13-alpine}
   local DBNAME=${1:-experiments}
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
+    echo "postgres 13.x.x server is not running, starting it for you."
     docker run -it -d \
       --net ronsvpn \
       --ulimit memlock=-1:-1 \
       --memory-swappiness=0 \
-      --volume ${DEV_ZONE}/storage/postgres:/var/lib/postgresql/data \
-      --env POSTGRES_USER=root \
+      --volume ${DEV_ZONE}/storage/postgres/13:/var/lib/postgresql/data \
+      --env POSTGRES_USER=postgres \
       --env POSTGRES_DB=$DBNAME \
       --env POSTGRES_PASSWORD=nmrony \
       --publish 5432:5432 \
-      --name postgres \
+      --name postgresserver13 \
       postgres:$VERSION
   else
-    echo 'postgres is already running'
+    echo 'postgres 13.x.x is already running'
   fi
+}
+
+psql13() {
+  relies_on postgresserver13;
+  docker exec -it postgresserver13 psql "$@"
+}
+
+pga() {
+  del_stopped pga
+  relies_on nginx_proxy
+  sleep 2;
+  local state=$(docker inspect --format "{{.State.Running}}" pga 2>/dev/null)
+
+  if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
+      echo "pgAdmin4 is not running, starting it for you."
+      docker run -dit \
+        --env VIRTUAL_HOST=pga.nmrony.docker \
+        --env PGADMIN_DEFAULT_EMAIL=rony@nmrony.info \
+        --env PGADMIN_DEFAULT_PASSWORD=nmrony \
+        --env PGADMIN_DISABLE_POSTFIX=yes \
+        --net ronsvpn \
+        --expose 80 \
+        --name pga \
+        dpage/pgadmin4 > /dev/null 2>&1
+    else
+      echo 'pgAdmin4 is already running'
+    fi
 }
 
 elasticsearch(){

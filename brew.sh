@@ -147,8 +147,9 @@ pod setup
 # Azure CLI
 brew install azure-cli
 
-# Lastpass
-# brew install lastpass-cli --with-pinentry
+# Bitwarden
+brew install bitwarden-cli
+
 
 # Remove outdated versions from the cellar.
 brew cleanup -s
@@ -161,6 +162,7 @@ brew tap homebrew/cask-versions
 brew install --cask alfred \
 android-file-transfer \
 appcleaner \
+bitwarden \
 brave-browser \
 docker \
 gpg-suite \

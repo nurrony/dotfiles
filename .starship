@@ -1,11 +1,11 @@
-[aws]
-displayed_items = "all"
+[cmd_duration]
+min_time = 500
 
 [battery]
 disabled = true
 
-[git_commit]
-commit_hash_length = 8
+[dart]
+format = "via [🔰$version](bold green) "
 
 [directory]
 truncation_length = 2
@@ -13,6 +13,9 @@ truncation_length = 2
 [docker_context]
 only_with_files = true
 disabled = false
+
+[git_commit]
+commit_hash_length = 8
 
 [java]
 style = "bold green"
@@ -23,6 +26,8 @@ disabled = false
 [package]
 display_private = true
 
+[scala]
+symbol = " "
+
 [username]
 show_always = false
-

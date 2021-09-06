@@ -116,6 +116,11 @@ brew tap aws/tap
 brew install awscli
 brew install aws-elasticbeanstalk
 brew install aws-sam-cli
+brew install cfn-lint
+
+# AWLESS CLI
+brew tap wallix/awless
+brew install awless
 
 # Kubernetes
 brew install kubectl

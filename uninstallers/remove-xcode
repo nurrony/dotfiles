@@ -13,12 +13,11 @@ sudo rm -fr /System/Library/Receipts/com.apple.pkg.XcodeExtensionSupport.plist
 sudo rm -fr /System/Library/Receipts/com.apple.pkg.XcodeSystemResources.bom
 sudo rm -fr /System/Library/Receipts/com.apple.pkg.XcodeSystemResources.plist
 
-read 'Do you want to delete customizations? [Y/N]' -n 1 -r
-echo    # (optional) move to a new line
-if [[ ! $REPLY =~ ^[Yy]$ ]]
-then
-  exit 0;
-fi
+#read 'Do you want to delete customizations? [Y/N]' REPLY
+#if [[ ! $REPLY =~ ^[Yy]$ ]]
+#then
+#  exit 0;
+#fi
 sudo rm -fr ~/Library/Developer/Xcode/UserData/CodeSnippets
 sudo rm -fr ~/Library/Developer/Xcode/UserData/FontAndColorThemes
 sudo rm -fr ~/Library/Developer/Xcode/UserData/KeyBindings

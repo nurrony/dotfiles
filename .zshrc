@@ -71,9 +71,6 @@ unset file;
 plugins=(alias-tips \
 aws \
 common-aliases \
-docker \
-docker-compose \
-docker-machine \
 extract \
 git \
 git-extras \

@@ -46,9 +46,9 @@ cordova() {
   npx cordova "$@"
 }
 
-sls() {
-  npx serverless "$@"
-}
+# sls() {
+#   npx serverless "$@"
+# }
 
 ionic() {
   npx ionic "$@"

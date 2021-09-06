@@ -5,29 +5,51 @@ min_time = 500
 disabled = true
 
 [dart]
+symbol = " "
 format = "via [🔰$version](bold green) "
 
 [directory]
 truncation_length = 2
+read_only = " "
 
 [docker_context]
+symbol = " "
 only_with_files = true
 disabled = false
+
+[git_branch]
+symbol = " "
 
 [git_commit]
 commit_hash_length = 8
 
+[golang]
+symbol = " "
+
 [java]
+symbol = " "
 style = "bold green"
 
 [kubernetes]
 disabled = false
+
+[memory_usage]
+symbol = " "
 
 [package]
 display_private = true
 
 [scala]
 symbol = " "
+
+[python]
+symbol = " "
+
+[ruby]
+symbol = " "
+
+[rust]
+symbol = " "
 
 [username]
 show_always = false

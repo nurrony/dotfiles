@@ -286,6 +286,7 @@ dynamodb() {
         --net ronsvpn \
         --name dynamodb \
         amazon/dynamodb-local -jar DynamoDBLocal.jar -sharedDb -optimizeDbBeforeStartup -dbPath ./data 2>/dev/null
+        docker network connect $1 dynamodb
     else
       echo 'local dynamodb server is already running'
     fi

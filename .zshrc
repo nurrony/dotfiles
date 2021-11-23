@@ -78,6 +78,7 @@ jhipster \
 kubectl \
 kops \
 last-working-dir \
+macos \
 nvm \
 ssh-agent \
 terraform \

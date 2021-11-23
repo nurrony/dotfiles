@@ -176,6 +176,7 @@ skype \
 slack \
 the-unarchiver \
 vagrant \
+vagrant-vmware-utility \
 vlc \
 virtualbox \
 virtualbox-extension-pack \

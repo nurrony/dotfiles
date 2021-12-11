@@ -450,6 +450,8 @@ elasticsearch(){
 
 elastic-gui() {
   del_stopped elastic-gui
+  relies_on elasticsearch
+  sleep 2;
   local state=$(docker inspect --format "{{.State.Running}}" elastic-gui 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then

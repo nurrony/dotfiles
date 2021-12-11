@@ -281,12 +281,15 @@ dynamodb() {
       docker run -dit \
         --volume ${DEV_ZONE}/storage/databases/dynamodb:/home/dynamodblocal/data \
         --workdir /home/dynamodblocal \
+		--publish "8000:8000" \
         --expose 8000 \
         --env VIRTUAL_HOST=dynamodb.nmrony.docker \
         --net ronsvpn \
         --name dynamodb \
         amazon/dynamodb-local -jar DynamoDBLocal.jar -sharedDb -optimizeDbBeforeStartup -dbPath ./data 2>/dev/null
-        docker network connect $1 dynamodb
+        if [ "$1" != "" ]; then
+          docker network connect $1 dynamodb
+		fi
     else
       echo 'local dynamodb server is already running'
     fi
@@ -429,17 +432,36 @@ elasticsearch(){
       --publish 9300:9300 \
       --net ronsvpn \
       --ulimit memlock=-1:-1 \
+      --env "http.cors.enabled=true" \
+      --env "ELASTIC_PASSWORD=nmrony" \
       --env "discovery.type=single-node" \
       --env "xpack.security.enabled=true" \
+      --env "http.cors.allow-origin=/.*/" \
       --env "http.max_content_length=200mb" \
-      --env "cluster.name=nmr-elasticsearch-cluser" \
       --env "node.name=nmr-elasticsearch-node" \
-      --env "ELASTIC_PASSWORD=nmrony" \
+      --env "cluster.name=nmr-elasticsearch-cluser" \
+      --env "http.cors.allow-headers: X-Requested-With,Content-Type,Content-Length,Authorization" \
       --name elasticsearch \
-      docker.elastic.co/elasticsearch/elasticsearch:7.6.1 "$@" 2>/dev/null
+      docker.elastic.co/elasticsearch/elasticsearch:7 "$@" 2>/dev/null
   else
     echo 'elasticsearch is already running'
   fi
+}
+
+elastic-gui() {
+  del_stopped elastic-gui
+  local state=$(docker inspect --format "{{.State.Running}}" elastic-gui 2>/dev/null)
+
+  if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
+    docker run -dit \
+       --publish 9000:8080 \
+       --env VIRTUAL_HOST=elasticgui.nmrony.docker \
+       --name elastic-gui \
+       cars10/elasticvue
+  else
+    echo 'elasticsearch gui is already running'
+  fi
+
 }
 
 containerssh() {

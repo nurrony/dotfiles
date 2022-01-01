@@ -1,12 +1,17 @@
 [cmd_duration]
 min_time = 500
 
+[aws]
+format = 'on [$symbol($profile )(\($region\) )(\[$duration\])]($style)'
+style = "bold green"
+symbol = " "
+
 [battery]
 disabled = true
 
 [dart]
 symbol = " "
-format = "via [🔰$version](bold green) "
+format = "via [$version](bold green) "
 
 [directory]
 truncation_length = 2
@@ -26,12 +31,15 @@ commit_hash_length = 8
 [golang]
 symbol = " "
 
+[helm]
+format = 'via [$symbol]($style)'
+
 [java]
 symbol = " "
 style = "bold green"
 
 [kubernetes]
-disabled = false
+format = 'on [$symbol]($style)'
 
 [memory_usage]
 symbol = " "
@@ -52,4 +60,8 @@ symbol = " "
 symbol = " "
 
 [username]
-show_always = false
+style_user = "white bold"
+style_root = "black bold"
+format = "($style) "
+disabled = false
+show_always = true

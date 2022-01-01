@@ -88,6 +88,9 @@ yarn \
 z \
 zsh-syntax-highlighting)
 
+
+source $ZSH/oh-my-zsh.sh
+
 # ssh-agent forwarding support
 zstyle :omz:plugins:ssh-agent agent-forwarding on
 
@@ -129,4 +132,6 @@ compinit -i
 eval "$(starship init zsh)"
 eval "$(direnv hook zsh)"
 
-source ~/.dotfiles/.source
+
+# load custom aliases
+source ~/.dotfiles/.aliases

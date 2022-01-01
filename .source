@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # Kubernetes Completion
 (command -v "kubectl" > /dev/null 2>&1) && source <(kubectl completion zsh)
 (command -v "nerdctl" > /dev/null 2>&1) && source <(nerdctl completion zsh)

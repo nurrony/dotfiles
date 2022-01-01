@@ -39,7 +39,10 @@ symbol = " "
 style = "bold green"
 
 [kubernetes]
-format = 'on [$symbol]($style)'
+symbol = 'ﴱ '
+style = "bold blue"
+format = 'on [$symbol$context( \($namespace\))]($style) in '
+disabled = false
 
 [memory_usage]
 symbol = " "
@@ -48,9 +51,11 @@ symbol = " "
 display_private = true
 
 [scala]
+style = "bold red"
 symbol = " "
 
 [python]
+style = "bold yellow"
 symbol = " "
 
 [ruby]
@@ -62,6 +67,6 @@ symbol = " "
 [username]
 style_user = "white bold"
 style_root = "black bold"
-format = "($style) "
+format = " [$user]($style) "
 disabled = false
 show_always = true

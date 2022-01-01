@@ -69,22 +69,15 @@ unset file;
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(alias-tips \
-aws \
 common-aliases \
+docker-compose \
 extract \
-git \
 git-extras \
-jhipster \
-kubectl \
-kops \
 last-working-dir \
 macos \
-nvm \
 ssh-agent \
 terraform \
 urltools \
-vagrant \
-yarn \
 z \
 zsh-syntax-highlighting)
 
@@ -95,9 +88,9 @@ source $ZSH/oh-my-zsh.sh
 zstyle :omz:plugins:ssh-agent agent-forwarding on
 
 # zsh completion brew path fix
-fpath=(/usr/local/share/zsh-completions $fpath)
-autoload -U compinit
-compinit -i
+FPATH=/usr/local/share/zsh-completions:$FPATH
+autoload -Uz compinit
+compinit
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -129,9 +122,7 @@ compinit -i
 
 # tmutil  listlocalsnapshotdates / |grep 20|while read f; do tmutil deletelocalsnapshots $f; done
 
-eval "$(starship init zsh)"
 eval "$(direnv hook zsh)"
+eval "$(starship init zsh)"
 
-
-# load custom aliases
-source ~/.dotfiles/.aliases
+source ~/.dotfiles/.source

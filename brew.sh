@@ -125,7 +125,7 @@ brew tap wallix/awless
 brew install awless
 
 # Kubernetes
-# Note: Replaced by Rancher Desktop and NerdCtl
+# Note: Replaced by Rancher Desktop and NerdCtl, Kim, docker, k3d
 
 # brew install kubectl
 # brew install kops
@@ -134,7 +134,11 @@ brew install awless
 # brew tap azure/draft
 # brew install draft # this also installs kubernetes-helm
 # Installs tools with names kctx and kns to prevent prefix collision with kubectl name
-# brew install kubectx
+brew install kubectx
+brew install docker-compose
+brew install docker-machine
+brew install docker-machine-completion
+brew install docker-machine-driver-vmware
 
 # Install Dart SDK Dartium and Dart VM for web
 brew tap dart-lang/dart

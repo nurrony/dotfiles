@@ -5,9 +5,6 @@
 (command -v "minikube" > /dev/null 2>&1) && source <(minikube completion zsh)
 (command -v "flutter" > /dev/null 2>&1) && source <(flutter bash-completion)
 
-# load custom aliases
-source ~/.dotfiles/.aliases
-
 # fzf is a general-purpose command-line fuzzy finder.
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

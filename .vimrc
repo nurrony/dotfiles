@@ -1,557 +1,1960 @@
-" load plugins
-execute pathogen#infect()
-call pathogen#helptags()
-
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
-filetype plugin indent on    " required
-
+"----------------------------------------------------------------
+"            _
+"     _   __(_)___ ___  __________
+"    | | / / / __ `__ \/ ___/ ___/
+"   _| |/ / / / / / / / /  / /__
+"  (_)___/_/_/ /_/ /_/_/   \___/
 "
-" Settings
-"
-set noerrorbells                " No beeps
-set number                      " Show line numbers
-set backspace=indent,eol,start  " Makes backspace key more powerful.
-set showcmd                     " Show me what I'm typing
-set showmode                    " Show current mode.
+"----------------------------------------------------------------
+"  Version : 1.0.0
+"  License : MIT
+"  Author  : Nur Rony
+"  URL     : https://github.com/nmrony/vimrc
+"----------------------------------------------------------------
+"  Index:
+"   1. General settings
+"   2. Plugins (Plug)
+"   3. Plugins settings
+"   4. User interface
+"   5. Scheme and colors
+"   6. Files and backup
+"   7. Buffers management
+"   8. Tabs management
+"   9. Multiple windows
+"  10. Indentation tabs
+"  11. Moving around lines
+"  12. Paste mode
+"  13. Search, vimgrep and grep
+"  14. Text edition
+"  15. Make settings
+"  16. Filetype settings
+"  17. Helper functions
+"  18. External tools integration
+"----------------------------------------------------------------
 
-set noswapfile                  " Don't use swapfile
-set nobackup                    " Don't create annoying backup files
-set nowritebackup
-set splitright                  " Split vertical windows right to the current windows
-set splitbelow                  " Split horizontal windows below to the current windows
-set encoding=utf-8              " Set default encoding to UTF-8
-set autowrite                   " Automatically save before :next, :make etc.
-set autoread                    " Automatically reread changed files without asking me anything
+"----------------------------------------------------------------
+" 1. General settings
+"----------------------------------------------------------------
+" Disable vi compatibility
+if !has("nvim")
+	set nocompatible
+endif
+
+" Reload .vimrc
+nnoremap <F12> :so $MYVIMRC<CR>
+
+" Lines of memory to remember
+set history=10000
+
+" Leader key to add extra key combinations
+let mapleader = ','
+let g:mapleader = ','
+
+" Time delay on <Leader> key
+set timeoutlen=3000 ttimeoutlen=100
+
+" Update time
+set updatetime=250
+
+" Trigger InsertLeave autocmd
+inoremap <C-c> <Esc>
+
+" No need for Ex mode
+nnoremap Q <NOP>
+
+" Open help in a vertical window
+cnoreabbrev help vert help
+
+" Terminal (nvim)
+if has("terminal") && has("nvim")
+	nnoremap <silent> <F7> :call <SID>ToggleTerminal()<CR>
+	tnoremap <silent> <F7> <C-\><C-n><Bar>:wincmd p<CR>
+	tnoremap <Esc> <C-\><C-n>
+endif
+
+" Set inc/dec
+set nrformats-=octal
+
+"----------------------------------------------------------------
+" 2. Plugins (Plug)
+"----------------------------------------------------------------
+" List of plugins installed
+call plug#begin('~/.vim/plugged')
+
+	" Statusbar
+	Plug 'vim-airline/vim-airline'
+	Plug 'vim-airline/vim-airline-themes'
+
+	" Git tools
+	Plug 'airblade/vim-gitgutter'
+	Plug 'tpope/vim-fugitive'
+	Plug 'junegunn/gv.vim'
+
+	" Sessions
+	Plug 'xolox/vim-session'
+	Plug 'xolox/vim-misc'
+
+	" Tools
+	Plug 'preservim/nerdcommenter', { 'commit': 'a5d1663' }
+	Plug 'preservim/nerdtree'
+	Plug 'valloric/listtoggle'
+	Plug 'majutsushi/tagbar'
+	Plug 'ctrlpvim/ctrlp.vim'
+	Plug 'mbbill/undotree'
+	Plug 'dense-analysis/ale'
+	Plug 'junegunn/fzf'
+	Plug 'junegunn/fzf.vim'
+
+	" Deoplete, specific for Vim8
+	if !has("nvim")
+		Plug 'roxma/nvim-yarp'
+		Plug 'roxma/vim-hug-neovim-rpc'
+	endif
+
+	" Autocomplete
+	Plug 'Shougo/deoplete.nvim', { 'commit': '17ffeb9' }
+	Plug 'Shougo/neosnippet.vim', { 'commit': '037b7a7' }
+	Plug 'Shougo/neosnippet-snippets'
+	Plug 'Shougo/context_filetype.vim'
+	Plug 'ervandew/supertab'
+
+	" C/C++ support
+	Plug 'deoplete-plugins/deoplete-clang', { 'commit': '30f17cb' }
+
+	" Go support
+	Plug 'fatih/vim-go', { 'tag': 'v1.19' }
+	Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
+	Plug 'deoplete-plugins/deoplete-go', { 'commit': 'fa73f06'}
+
+	" Perl support
+	Plug 'c9s/perlomni.vim'
+
+	" Python support
+	Plug 'deoplete-plugins/deoplete-jedi', { 'commit': '46121d9' }
+
+	" Ruby support
+	Plug 'vim-ruby/vim-ruby'
+	Plug 'tpope/vim-rails'
+	Plug 'tpope/vim-endwise'
+	Plug 'tpope/vim-liquid'
+
+	" PHP support
+	Plug 'shawncplus/phpcomplete.vim'
+
+	" Haskell support
+	Plug 'eagletmt/neco-ghc'
+
+	" Rust support
+	Plug 'racer-rust/vim-racer'
+
+	" Zsh support
+	Plug 'deoplete-plugins/deoplete-zsh', { 'commit': '12141ad' }
+
+	" JavaScript support
+	Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
+	Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+	Plug 'othree/jspc.vim'
+	Plug 'maksimr/vim-jsbeautify'
+
+	" VimL support
+	Plug 'Shougo/neco-vim', { 'commit' : '4c0203b' }
+
+	" Additional syntax files
+	Plug 'othree/html5.vim'
+	Plug 'vim-language-dept/css-syntax.vim'
+	Plug 'hail2u/vim-css3-syntax'
+	Plug 'pangloss/vim-javascript'
+	Plug 'Shougo/neco-syntax', { 'commit': '98cba4a' }
+	Plug 'mboughaba/i3config.vim'
+	Plug 'aklt/plantuml-syntax'
+	Plug 'gerardbm/asy.vim'
+	Plug 'gerardbm/eukleides.vim'
+	Plug 'zaid/vim-rec'
+
+	" Edition
+	Plug 'junegunn/vim-easy-align'
+	Plug 'godlygeek/tabular'
+	Plug 'jiangmiao/auto-pairs'
+	Plug 'alvan/vim-closetag'
+	Plug 'tpope/vim-surround'
+	Plug 'tpope/vim-repeat'
+	Plug 'tpope/vim-capslock'
+	Plug 'wellle/targets.vim'
+	Plug 'christoomey/vim-sort-motion'
+	Plug 'terryma/vim-expand-region'
+	Plug 'Valloric/MatchTagAlways'
+	Plug 'FooSoft/vim-argwrap'
+	Plug 'gerardbm/vim-md-headings'
+	Plug 'matze/vim-move'
+
+	" Misc
+	Plug 'christoomey/vim-tmux-navigator'
+	Plug 'tpope/vim-characterize'
+	Plug 'tyru/open-browser.vim'
+	Plug 'junegunn/goyo.vim'
+	Plug 'mattn/webapi-vim'
+	Plug 'mattn/emmet-vim'
+	Plug 'vimwiki/vimwiki', { 'branch': 'master' }
+
+	" Color schemes
+	Plug 'Rigellute/shades-of-purple.vim'
+
+call plug#end()
+
+"----------------------------------------------------------------
+" 3. Plugins settings
+"----------------------------------------------------------------
+" --- Statusbar ---
+" Airline settings
+let g:airline_theme                       = 'dracula'
+let g:airline_powerline_fonts             = 1
+let g:airline#extensions#tabline#enabled  = 0
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline_section_z                   = airline#section#create([
+			\ '%1p%% ',
+			\ 'Ξ%l%',
+			\ '\⍿%c'])
+" call airline#parts#define_accent('mode', 'black')
+
+" --- Git tools ---
+" Gitgutter settings
+let g:gitgutter_max_signs             = 5000
+let g:gitgutter_sign_added            = '+'
+let g:gitgutter_sign_modified         = '»'
+let g:gitgutter_sign_removed          = '_'
+let g:gitgutter_sign_modified_removed = '»╌'
+let g:gitgutter_map_keys              = 0
+let g:gitgutter_diff_args             = '--ignore-space-at-eol'
+
+nmap <Leader>j <Plug>(GitGutterNextHunk)zz
+nmap <Leader>k <Plug>(GitGutterPrevHunk)zz
+nnoremap <silent> <C-g> :call <SID>ToggleGGPrev()<CR>zz
+nnoremap <Leader>ga :GitGutterStageHunk<CR>
+nnoremap <Leader>gu :GitGutterUndoHunk<CR>
+
+" Fugitive settings
+nnoremap <C-s> :call <SID>ToggleGstatus()<CR>
+nnoremap <Leader>gv :Gvdiffsplit<CR>:windo set wrap<CR>
+nnoremap <Leader>gh :Gvdiffsplit HEAD<CR>:windo set wrap<CR>
+nnoremap <Leader>gb :Gblame<CR>
+
+" Searching for text added or removed by a commit
+nnoremap <Leader>gg :call <SID>GrepWrapper('Gclog', '-i -G', '--')<CR>
+
+" GV settings
+nnoremap <silent> <Leader>gz :call <SID>PreventGV()<CR>
+vnoremap <silent> <Leader>gz :call <SID>PreventGV()<CR>
+
+" --- Sessions ---
+" Vim-session settings
+let g:session_autosave  = 'no'
+let g:session_autoload  = 'no'
+let g:session_directory = '~/.vim/sessions/'
+
+nnoremap <C-b> :OpenSession<CR>
+
+" --- Tools ---
+" NERDCommenter settings
+let g:NERDDefaultAlign          = 'left'
+let g:NERDSpaceDelims           = 1
+let g:NERDCompactSexyComs       = 1
+let g:NERDCommentEmptyLines     = 0
+let g:NERDCreateDefaultMappings = 0
+let g:NERDCustomDelimiters      = {
+	\ 'python': {'left': '#'},
+	\ }
+
+nnoremap cc :call NERDComment(0,'toggle')<CR>
+vnoremap cc :call NERDComment(0,'toggle')<CR>
+
+" NERDTree settings
+nnoremap <silent> <C-n> :call <SID>ToggleNERDTree()<CR>
+
+" ALE settings
+let g:ale_linters = {
+	\ 'c'          : ['clang'],
+	\ 'vim'        : ['vint'],
+	\ 'python'     : ['pylint'],
+	\ 'javascript' : ['jshint'],
+	\ 'css'        : ['csslint'],
+	\ 'tex'        : ['chktex'],
+	\ }
+
+" FZF settings
+let $FZF_PREVIEW_COMMAND = 'cat {}'
+nnoremap <C-f><C-f> :Files<CR>
+nnoremap <C-f><C-g> :Commits<CR>
+nnoremap <C-f><Space> :BLines<CR>
+
+" Navigate between errors
+nnoremap <Leader>h :lprevious<CR>zz
+nnoremap <Leader>l :lnext<CR>zz
+
+" Listtoggle settings
+let g:lt_location_list_toggle_map = '<leader>e'
+let g:lt_quickfix_list_toggle_map = '<leader>q'
+
+" Tagbar toggle (custom function)
+nnoremap <silent> <C-t> :call <SID>ToggleTagbar()<CR>
+let g:tagbar_autofocus        = 1
+let g:tagbar_show_linenumbers = 2
+let g:tagbar_sort             = 0
+
+" CtrlP settings
+let g:ctrlp_map                 = '<C-p>'
+let g:ctrlp_cmd                 = 'CtrlPBuffer'
+let g:ctrlp_working_path_mode   = 'rc'
+let g:ctrlp_custom_ignore       = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_match_window        = 'bottom,order:btt,min:1,max:10,results:85'
+let g:ctrlp_show_hidden         = 1
+let g:ctrlp_follow_symlinks     = 1
+let g:ctrlp_open_multiple_files = '0i'
+let g:ctrlp_prompt_mappings     = {
+	\ 'PrtHistory(1)'        : [''],
+	\ 'PrtHistory(-1)'       : [''],
+	\ 'ToggleType(1)'        : ['<C-l>', '<C-up>'],
+	\ 'ToggleType(-1)'       : ['<C-h>', '<C-down>'],
+	\ 'PrtCurLeft()'         : ['<C-b>', '<Left>'],
+	\ 'PrtCurRight()'        : ['<C-f>', '<Right>'],
+	\ 'PrtBS()'              : ['<C-s>', '<BS>'],
+	\ 'PrtDelete()'          : ['<C-d>', '<DEL>'],
+	\ 'PrtDeleteWord()'      : ['<C-w>'],
+	\ 'PrtClear()'           : ['<C-u>'],
+	\ 'ToggleByFname()'      : ['<C-g>'],
+	\ 'AcceptSelection("e")' : ['<C-m>', '<CR>'],
+	\ 'AcceptSelection("h")' : ['<C-x>'],
+	\ 'AcceptSelection("t")' : ['<C-t>'],
+	\ 'AcceptSelection("v")' : ['<C-v>'],
+	\ 'OpenMulti()'          : ['<C-o>'],
+	\ 'MarkToOpen()'         : ['<c-z>'],
+	\ 'PrtExit()'            : ['<esc>', '<c-c>', '<c-p>'],
+	\ }
+
+" Undotree toggle
+nnoremap <Leader>u :UndotreeToggle<CR>
+
+" --- Languages ---
+" Go settings
+let g:go_highlight_functions         = 1
+let g:go_highlight_methods           = 1
+let g:go_highlight_fields            = 1
+let g:go_highlight_types             = 1
+let g:go_highlight_operators         = 1
+let g:go_highlight_build_constraints = 1
+let g:go_bin_path                    = expand('~/.gotools')
+let g:go_list_type                   = 'quickfix'
+let g:go_version_warning             = 0 " Keep until vim v8.0.1453, nvim v3.2
+
+" CSS3 settings
+augroup VimCSS3Syntax
+	autocmd!
+	autocmd FileType css setlocal iskeyword+=-
+augroup END
+
+" Javascript settings
+let g:javascript_plugin_jsdoc = 1
+let g:javascript_plugin_ngdoc = 1
+let g:javascript_plugin_flow  = 1
+
+" Tern_for_vim settings
+let g:tern#command   = ['tern']
+let g:tern#arguments = ['--persistent']
+
+" JS-Beautify
+let g:config_Beautifier = {}
+let g:config_Beautifier['js'] = {}
+let g:config_Beautifier['js'].indent_style = 'space'
+let g:config_Beautifier['jsx'] = {}
+let g:config_Beautifier['jsx'].indent_style = 'space'
+let g:config_Beautifier['json'] = {}
+let g:config_Beautifier['json'].indent_style = 'space'
+let g:config_Beautifier['css'] = {}
+let g:config_Beautifier['css'].indent_style = 'space'
+let g:config_Beautifier['html'] = {}
+let g:config_Beautifier['html'].indent_style = 'space'
+
+augroup beautify
+	autocmd!
+	autocmd FileType javascript nnoremap <buffer> <Leader>bf :call JsBeautify()<cr>
+	autocmd FileType javascript vnoremap <buffer> <Leader>bf :call RangeJsBeautify()<cr>
+	autocmd FileType json nnoremap <buffer> <Leader>bf :call JsonBeautify()<cr>
+	autocmd FileType json vnoremap <buffer> <Leader>bf :call RangeJsonBeautify()<cr>
+	autocmd FileType jsx nnoremap <buffer> <Leader>bf :call JsxBeautify()<cr>
+	autocmd FileType jsx vnoremap <buffer> <Leader>bf :call RangeJsxBeautify()<cr>
+	autocmd FileType html nnoremap <buffer> <Leader>bf :call HtmlBeautify()<cr>
+	autocmd FileType html vnoremap <buffer> <Leader>bf :call RangeHtmlBeautify()<cr>
+	autocmd FileType css nnoremap <buffer> <Leader>bf :call CSSBeautify()<cr>
+	autocmd FileType css vnoremap <buffer> <Leader>bf :call RangeCSSBeautify()<cr>
+augroup end
+
+" --- Autocomplete ---
+" SuperTab settings
+let g:SuperTabDefaultCompletionType = '<TAB>'
+
+" Deoplete settings
+" - «Deoplete requires Neovim with Python3 enabled»
+let g:python3_host_prog       = '/usr/local/bin/python3'
+let g:python3_host_skip_check = 1
+
+autocmd CompleteDone * if pumvisible() == 0 | pclose | endif
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#omni#functions    = {}
+call deoplete#custom#option('auto_complete_delay', 250)
+
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" Python autocompletion
+let g:deoplete#sources#jedi#show_docstring = 1
+
+" Go autocompletion
+let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
+let g:deoplete#sources#go#sort_class    = ['package', 'func', 'type', 'var', 'const']
+let g:deoplete#sources#go#use_cache     = 1
+
+" Javascript autocompletion
+let g:deoplete#omni#functions.javascript = [
+	\ 'tern#Complete',
+	\ 'jspc#omni',
+	\ ]
+
+" Clang autocompletion
+let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-4.0/lib/libclang.so'
+let g:deoplete#sources#clang#clang_header = '/usr/lib/clang'
+
+" --- Snippets ---
+" Neosnippet settings
+imap <C-s> <Plug>(neosnippet_expand_or_jump)
+smap <C-s> <Plug>(neosnippet_expand_or_jump)
+xmap <C-s> <Plug>(neosnippet_expand_target)
+
+" Behaviour like SuperTab
+smap <expr><TAB>
+	\ neosnippet#expandable_or_jumpable() ?
+	\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For conceal markers
+if has('conceal')
+	set conceallevel=0 concealcursor=niv
+	nnoremap <silent> coi :set conceallevel=0<CR>:set concealcursor=niv<CR>
+	nnoremap <silent> coo :set conceallevel=2<CR>:set concealcursor=vc<CR>
+	nnoremap <silent> cop :set conceallevel=2<CR>:set concealcursor=niv<CR>
+	nnoremap <silent> com :set conceallevel=3<CR>:set concealcursor=niv<CR>
+endif
+
+augroup all
+	autocmd InsertLeave * NeoSnippetClearMarkers
+augroup end
+
+" --- Edition ---
+" Easy align settings
+xmap gi <Plug>(EasyAlign)
+nmap gi <Plug>(EasyAlign)
+
+" Tabularize (e.g. /= or /:)
+vnoremap <Leader>x :Tabularize /
+
+" Tabularize only the first match on the line (e.g. /=.*/)
+vnoremap <Leader>X :Tabularize /.*/<Left><Left><Left>
+
+" Auto-pairs settings
+" Maps for normal and insert modes
+let g:AutoPairsFlyMode        = 0
+let g:AutoPairsMultilineClose = 0
+let g:AutoPairsShortcutJump   = '<C-z>'
+let g:AutoPairsShortcutToggle = '<C-q>'
+
+" Workaround to fix an Auto-pairs bug until it gets fixed
+if has("nvim")
+	autocmd VimEnter,BufEnter,BufWinEnter * silent! iunmap <buffer> <M-">
+endif
+
+" Closetag settings
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.xml,*.html.erb,*.md'
+
+" Surround settings
+" Use 'yss?', 'yss%' or 'yss=' to surround a line
+autocmd FileType php let b:surround_{char2nr('p')} = "<?php \r ?>"
+autocmd FileType erb let b:surround_{char2nr('=')} = "<%= \r %>"
+autocmd FileType erb let b:surround_{char2nr('-')} = "<% \r %>"
+autocmd FileType html,markdown,liquid let b:surround_{char2nr('p')} = "{% \r %}"
+autocmd FileType markdown,liquid let b:surround_{char2nr('i')} = "_\r_"
+autocmd FileType markdown,liquid let b:surround_{char2nr('o')} = "**\r**"
+autocmd FileType markdown,liquid let b:surround_{char2nr('x')} = "«\r»"
+autocmd FileType markdown,liquid let b:surround_{char2nr('h')} = "\[\r\]\(//\)"
+autocmd FileType markdown,liquid let b:surround_{char2nr('e')} = "\[\r\]
+			\\(\){:rel=\"nofollow noopener noreferrer\" target=\"_blank\"}"
+autocmd FileType markdown,liquid let b:surround_{char2nr('j')} = "!\[\r\]
+			\\(/images/\){: .align-}"
+
+" Caps Lock settings
+imap <expr><C-l> deoplete#smart_close_popup()."\<Plug>CapsLockToggle"
+cmap <silent> <C-l> <Plug>CapsLockToggle
+
+" Expand region settings
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
+
+" MatchTagAlways settings
+let g:mta_filetypes = {
+	\ 'html'  : 1,
+	\ 'xhtml' : 1,
+	\ 'xml'   : 1,
+	\ 'jinja' : 1,
+	\ 'php'   : 1,
+	\ }
+
+" ArgWrap settings
+let g:argwrap_tail_comma    = 1
+let g:argwrap_padded_braces = '[{'
+
+nnoremap <Leader>W :ArgWrap<CR>
+
+" Vim-move settings. Use Shift
+let g:move_key_modifier = 'S'
+
+" --- Misc ---
+" Vim-tmux navigator settings
+let g:tmux_navigator_no_mappings = 1
+
+" Open-browser settings
+let g:openbrowser_browser_commands = [{
+	\ 'name': 'w3m',
+	\ 'args': 'tmux new-window w3m {uri}',
+	\ }]
+
+nmap <Leader>gl <Plug>(openbrowser-open)
+
+" Goyo settings
+let g:goyo_width  = "80"
+let g:goyo_height = "100%"
+let g:goyo_linenr = 0
+
+nnoremap <F11> :Goyo<CR>
+
+" Vimwiki settings
+let g:vimwiki_url_maxsave   = 0
+let g:vimwiki_global_ext    = 0
+let g:vimwiki_syntax        = 'markdown'
+let g:vimwiki_list          = [
+	\ {'path': '~/Workspace/vimwiki'},
+	\ {'path': '~/Workspace/vimwiki/Articles'},
+	\ {'path': '~/Workspace/vimwiki/Codes'},
+	\ {'path': '~/Workspace/vimwiki/Notes'},
+	\ {'path': '~/Workspace/vimwiki/Projects'},
+	\ {'path': '~/Workspace/vimwiki/Studies'},
+	\ {'path': '~/Workspace/vimwiki/ToDos'},
+	\ {'path': '~/Workspace/vimwiki/Unix'}
+	\ ]
+
+nnoremap <Leader>we :VimwikiToggleListItem<CR>
+vnoremap <Leader>we :VimwikiToggleListItem<CR>
+
+"----------------------------------------------------------------
+" 4. User interface
+"----------------------------------------------------------------
+" Set X lines to the cursor when moving vertically
+set scrolloff=0
+
+" Always show mode
+set showmode
+
+" Show command keys pressed
+set showcmd
+
+" Enable the WiLd menu
+set wildmenu
+
+" Show the current position
+set ruler
+
+" Set vim to save the file on focus out.
+au FocusLost * :wa
+
+" Command bar height
+set cmdheight=2
+
+" Backspace works on Insert mode
+set backspace=eol,start,indent
+
+" Don't redraw while executing macros (good performance config)
+set lazyredraw
+
+" Show matching brackets when text indicator is over them
+set showmatch
+
+" How many tenths of a second to blink when matching brackets
+set matchtime=2
+
+" No annoying sound on errors
+set noerrorbells
+set novisualbell
+
+if !has("nvim")
+	set t_vb=
+
+	" Terminal keycodes
+	if &term =~ 'screen'
+		set <F1>=[11~
+		set <F2>=[12~
+		set <F3>=[13~
+		set <F4>=[14~
+		set <F5>=[15~
+		set <F6>=[17~
+		set <F7>=[18~
+		set <F8>=[19~
+		set <F9>=[20~
+		set <F10>=[21~
+		set <F11>=[23~
+		set <F12>=[24~
+		set <S-F1>=[11;2~
+		set <S-F2>=[12;2~
+		set <S-F3>=[13;2~
+		set <S-F4>=[14;2~
+		set <S-F5>=[15;2~
+		set <S-F6>=[17;2~
+		set <S-F7>=[18;2~
+		set <S-F8>=[19;2~
+		set <S-F9>=[20;2~
+		set <S-F10>=[21;2~
+		set <S-F11>=[23;2~
+		set <S-F12>=[24;2~
+	endif
+endif
+
+" Mouse
+set mouse=a
+
+" Highlight cursor line and cursor column
+set cursorline
+" set nocursorcolumn
+
+" Always show the status line
 set laststatus=2
-set hidden
 
-set ruler                       " Show the cursor position all the time
-au FocusLost * :wa              " Set vim to save the file on focus out.
+" Change the cursor shape
+if !has("nvim")
+	let &t_SI = "\<Esc>[6 q"
+	let &t_SR = "\<Esc>[4 q"
+	let &t_EI = "\<Esc>[2 q"
+else
+	set guicursor=n-v:block-Cursor/lCursor-blinkon0
+	set guicursor+=i-ci-c:ver100-Cursor/lCursor-blinkon0
+	set guicursor+=r-cr:hor100-Cursor/lCursor-blinkon0
+endif
 
-set fileformats=unix,dos,mac    " Prefer Unix over Windows over OS 9 formats
+" Omni completion
+if has('autocmd') && exists('+omnifunc')
+autocmd Filetype *
+	\ if &omnifunc == "" |
+	\     setlocal omnifunc=syntaxcomplete#Complete |
+	\ endif
+endif
 
-set noshowmatch                 " Do not show matching brackets by flickering
+" Fix italics issue
+if !has("nvim")
+	let &t_ZH="\e[3m"
+	let &t_ZR="\e[23m"
+endif
+
+"----------------------------------------------------------------
+" 5. Scheme and colors
+"----------------------------------------------------------------
+" Syntax highlighting
+syntax enable
+
+" Color scheme
+" colorscheme dracula
+
+" Show syntax highlighting groups
+nnoremap <Leader>B :call <SID>SynStack()<CR>
+
+if (has("termguicolors"))
+ set termguicolors
+endif
+
+"----------------------------------------------------------------
+" 6. Files and backup
+"----------------------------------------------------------------
+" Disable swap files
+set noswapfile
+
+" No backup (use Git instead)
+set nobackup
+
+" Prevents automatic write backup
+set nowritebackup
+
+" Use UTF-8 as default encoding
+set encoding=utf-8
+
+" Use Unix as the standard file type
+set fileformats=unix,dos,mac
+
+" Autoread a file when it is changed from the outside
+set autoread
+
 set noshowmode                  " We show the mode with airline or lightline
 set incsearch                   " Shows the match while typing
 set hlsearch                    " Highlight found searches
 set ignorecase                  " Search case insensitive...
 set smartcase                   " ... but not when search pattern contains upper case characters
 set ttyfast
-" set ttyscroll=3               " noop on linux ?
-set lazyredraw                  " Wait to redraw "
+" noop on linux ?
+" set ttyscroll=3
 
-" speed up syntax highlighting
-set nocursorcolumn
-set nocursorline
+" Wait to redraw "
+set lazyredraw
 
-syntax sync minlines=256
-set synmaxcol=300
-set re=1
-
-" open help vertically
-command! -nargs=* -complete=help Help vertical belowright help <args>
-autocmd FileType help wincmd L
-
-" Make Vim to handle long lines nicely.
-set wrap
-set textwidth=79
-set formatoptions=qrn1
-"set colorcolumn=79
-"set relativenumber
-"set norelativenumber
-
-" mail line wrapping
-au BufRead /tmp/mutt-* set tw=72
-
+" Apply the indentation of the current line to the next line.
 set autoindent
+set smartindent
 set complete-=i
 set showmatch
 set smarttab
 
-set et
-set tabstop=4
-set shiftwidth=4
-set expandtab
+" Reload a file when it is changed from the outside
+let g:f5msg = 'Buffer reloaded.'
+nnoremap <F5> :e<CR>:echo g:f5msg<CR>
 
-set nrformats-=octal
-set shiftround
+" Enable filetype plugins
+filetype plugin on
+filetype indent on
 
-" Time out on key codes but not mappings.
-" Basically this makes terminal Vim work sanely.
-set notimeout
-set ttimeout
-set ttimeoutlen=10
-
-" Better Completion
-set complete=.,w,b,u,t
-set completeopt=longest,menuone
-
-if &history < 1000
-  set history=50
+" Allow us to use Ctrl-s and Ctrl-q as keybinds
+" Restore default behaviour when leaving Vim.
+if !has("nvim")
+	silent !stty -ixon
+	autocmd VimLeave * silent !stty ixon
 endif
 
-if &tabpagemax < 50
-  set tabpagemax=50
+" Save the current buffer
+nnoremap <Leader>s :update<CR>
+
+" Save all buffers
+nnoremap <Leader>S :bufdo update<CR>
+
+" :W sudo saves the file
+" (useful for handling the permission-denied error)
+cnoremap WW w !sudo tee > /dev/null %
+
+" Rename file
+nnoremap <F2> :call <SID>RenameFile()<CR>
+
+" Work on buffer
+nnoremap yab :%y<CR>
+nnoremap dab :%d<CR>
+nnoremap vab ggVG
+
+"----------------------------------------------------------------
+" 7. Buffers management
+"----------------------------------------------------------------
+" Buffer hidden when it is abandoned
+set hidden
+
+" Close the current buffer
+nnoremap <Leader>bd :call <SID>CustomCloseBuffer()<CR>
+
+" Move between buffers
+nnoremap <C-h> :bprev<CR>
+nnoremap <C-l> :bnext<CR>
+
+" Edit and explore buffers
+nnoremap <Leader>bb :edit <C-R>=expand("%:p:h")<CR>/
+nnoremap <Leader>bg :buffers<CR>:buffer<Space>
+
+" Switch CWD to the directory of the current buffer
+nnoremap <Leader>bw :lcd %:p:h<CR>:pwd<CR>
+
+" Copy the filepath to clipboard
+nnoremap <Leader>by :let @+=expand("%:p")<CR>
+
+" Ignore case when autocompletes when browsing files
+set fileignorecase
+
+" Specify the behavior when switching between buffers
+try
+	set switchbuf=useopen,usetab,newtab
+	set showtabline=2
+catch
+endtry
+
+" Remember info about open buffers on close
+" set viminfo^=%
+
+"----------------------------------------------------------------
+" 8. Tabs management
+"----------------------------------------------------------------
+" Create and close tabs
+nnoremap <Leader>td :tabclose<CR>
+nnoremap <Leader>to :tabonly<CR>
+
+" Open a new tab with the current buffer's path
+" Useful when editing files in the same directory
+nnoremap <Leader>tt :tabedit <C-R>=expand("%:p:h")<CR>/
+
+" Move tabs position
+nnoremap <Leader>tr :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
+nnoremap <Leader>ty :execute 'silent! tabmove ' . tabpagenr()<CR>
+
+"----------------------------------------------------------------
+" 9. Multiple windows
+"----------------------------------------------------------------
+" Remap wincmd
+map <Leader>, <C-w>
+
+set winminheight=0
+set winminwidth=0
+set splitbelow
+set splitright
+set fillchars+=stlnc:\/,vert:│,fold:―,diff:―
+
+" Split windows
+map <C-w>- :split<CR>
+map <C-w>. :vsplit<CR>
+map <C-w>j :close<CR>
+map <C-w>x :q!<CR>
+map <C-w>, <C-w>=
+
+" Resize windows
+if bufwinnr(1)
+	map + :resize +1<CR>
+	map - :resize -1<CR>
+	map < :vertical resize +1<CR>
+	map > :vertical resize -1<CR>
 endif
 
-if !empty(&viminfo)
-  set viminfo^=!
+" Toggle resize window
+nnoremap <silent> <C-w>f :call <SID>ToggleResize()<CR>
+
+" Last, previous and next window; and only one window
+nnoremap <silent> <C-w>l :wincmd p<CR>:echo "Last window."<CR>
+nnoremap <silent> <C-w>p :wincmd w<CR>:echo "Previous window."<CR>
+nnoremap <silent> <C-w>n :wincmd W<CR>:echo "Next window."<CR>
+nnoremap <silent> <C-w>o :wincmd o<CR>:echo "Only one window."<CR>
+
+" Move between Vim windows and Tmux panes
+" - It requires the corresponding configuration into Tmux.
+" - Check it at my .tmux.conf from my dotfiles repository.
+" - URL: https://github.com/gerardbm/dotfiles/blob/master/tmux/.tmux.conf
+" - Plugin required: https://github.com/christoomey/vim-tmux-navigator
+if !has("nvim")
+	set <M-h>=h
+	set <M-j>=j
+	set <M-k>=k
+	set <M-l>=l
 endif
 
-if !&scrolloff
-  set scrolloff=1
-endif
-if !&sidescrolloff
-  set sidescrolloff=5
-endif
-set display+=lastline
+nnoremap <silent> <M-h> :TmuxNavigateLeft<CR>
+nnoremap <silent> <M-j> :TmuxNavigateDown<CR>
+nnoremap <silent> <M-k> :TmuxNavigateUp<CR>
+nnoremap <silent> <M-l> :TmuxNavigateRight<CR>
 
-" CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
-" so that you can undo CTRL-U after inserting a line break.
-inoremap <C-U> <C-G>u<C-U>
+" Remove the Windows ^M - when the encodings gets messed up
+noremap <Leader><BS> mmHmt:%s/<C-v><CR>//ge<CR>'tzt`m
 
-" In many terminal emulators the mouse works just fine, thus enable it.
-if has('mouse')
-  set mouse=a
-endif
+" Close the preview window
+nnoremap <silent> <Leader>. :pclose<CR>
 
-" If linux then set ttymouse
-let s:uname = system("echo -n \"$(uname)\"")
-if !v:shell_error && s:uname == "Linux" && !has('nvim')
-  set ttymouse=xterm
+" Scroll the preview window
+if !has("nvim")
+	set <M-d>=d
+	set <M-u>=u
 endif
 
-" Convenient command to see the difference between the current buffer and the
-" file it was loaded from, thus the changes you made.
-" Only define it when not defined already.
-"if !exists(":DiffOrig")
-""  command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
-""        \ | wincmd p | diffthis
-"endif
+nnoremap <silent> <M-d> :wincmd P<CR>5<C-e>:wincmd p<CR>
+nnoremap <silent> <M-u> :wincmd P<CR>5<C-y>:wincmd p<CR>
 
-" Only do this part when compiled with support for autocommands.
-if has("autocmd")
+"----------------------------------------------------------------
+" 10. Indentation tabs
+"----------------------------------------------------------------
+" Enable autoindent & smartindent
+set autoindent
+set smartindent
 
-  " Enable file type detection.
-  " Use the default filetype settings, so that mail gets 'tw' set to 72,
-  " 'cindent' is on in C files, etc.
-  " Also load indent files, to automatically do language-dependent indenting.
-  filetype plugin indent on
+" Use tabs, no spaces
+set noexpandtab
 
-  " Put these in an autocmd group, so that we can delete them easily.
-  augroup vimrcEx
-    au!
+" Be smart when using tabs
+set smarttab
 
-    " For all text files set 'textwidth' to 78 characters.
-    autocmd FileType text setlocal textwidth=78
+" Tab size (in spaces)
+set shiftwidth=2
+set tabstop=2
 
-    " When editing a file, always jump to the last known cursor position.
-    " Don't do it when the position is invalid or when inside an event handler
-    " (happens when dropping a file on gvim).
-    " Also don't do it when the mark is in the first line, that is the default
-    " position when opening a file.
-    autocmd BufReadPost *
-          \ if line("'\"") > 1 && line("'\"") <= line("$") |
-          \  exe "normal! g`\"" |
-          \ endif
+" Remap indentation
+nnoremap <TAB> >>
+nnoremap <S-TAB> <<
 
-  augroup END
-else
-endif " has("autocmd")
+vnoremap <TAB> >gv
+vnoremap <S-TAB> <gv
 
+inoremap <TAB> <C-i>
+inoremap <S-TAB> <C-d>
 
-syntax enable
-if has('gui_running')
-  set transparency=3
-  " fix js regex syntax
-  set regexpengine=1
-  syntax enable
+" Don't show tabs
+set list
+
+let g:f6msg = 'Toggle list.'
+nnoremap <F6> :set list!<CR>:echo g:f6msg<CR>
+
+" Show tabs and end-of-lines
+set listchars=tab:│\ ,trail:¬
+
+"----------------------------------------------------------------
+" 11. Moving around lines
+"----------------------------------------------------------------
+" Specify which commands wrap to another line
+set whichwrap+=<,>,h,l
+
+" Many jump commands move the cursor to the start of line
+set nostartofline
+
+" Wrap lines into the window
+set wrap
+
+" Don't break the words
+" Only works if I set nolist (F6)
+set linebreak
+set showbreak=├——»
+
+" Stop automatic wrapping
+set textwidth=0
+
+" Column at 80 width
+set colorcolumn=80
+
+" Listings don't pause
+set nomore
+
+" Color column
+let g:f10msg = 'Toggle colorcolumn.'
+nnoremap <silent> <F10> :call <SID>ToggleColorColumn()<CR>:echo g:f10msg<CR>
+
+" Show line numbers
+" set numberwidth=2
+set number
+
+let g:f3msg = 'Toggle line numbers.'
+nnoremap <silent> <F3> :set number!<CR>:echo g:f3msg<CR>
+
+" Set relative line numbers
+" set relativenumber
+
+let g:f4msg = 'Toggle relative line numbers.'
+nnoremap <silent> <F4> :set norelativenumber!<CR>:echo g:f4msg<CR>
+
+" Treat long lines as break lines (useful when moving around in them)
+nnoremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
+nnoremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+
+vnoremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
+vnoremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+
+nnoremap <Home> g^
+nnoremap <End> g$
+
+vnoremap <Home> g^
+vnoremap <End> g$
+
+" Toggle the cursor position start/end of the line
+nnoremap <silent> ñ :call <SID>ToggleCPosition('')<CR>
+vnoremap <silent> ñ <Esc>:call <SID>ToggleCPosition('normal! gv')<CR>
+
+" Join / split lines
+nnoremap <C-j> J
+nnoremap <C-k> i<CR><Esc>
+
+" Duplicate a line
+nnoremap cx yyP
+nnoremap cv yyp
+
+" Folding
+set foldmethod=marker
+
+" Return to last edit position when opening files
+autocmd BufReadPost *
+	\ if line("'\"") > 0 && line("'\"") <= line("$") |
+	\   exe "normal! g`\"" |
+	\ endif
+
+" --- Readline commands ---
+"----------------------------------------------------------------
+" Move the cursor to the line start
+inoremap <C-a> <C-O>0
+
+" Move the cursor to the line end
+inoremap <C-e> <C-O>$
+
+" Moves the cursor back one character
+inoremap <expr><C-b> deoplete#smart_close_popup()."\<Left>"
+
+" Moves the cursor forward one character
+inoremap <expr><C-f> deoplete#smart_close_popup()."\<Right>"
+
+" Remove one character
+inoremap <C-d> <DEL>
+
+" Command Mode
+cnoremap <C-b> <Left>
+cnoremap <C-f> <Right>
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-d> <DEL>
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+cnoremap <C-v> <C-r>"
+cnoremap <C-q> <S-Right><C-w>
+
+"----------------------------------------------------------------
+" 12. Paste mode
+"----------------------------------------------------------------
+" Bracketed paste mode
+" - Source: https://ttssh2.osdn.jp/manual/en/usage/tips/vim.html
+if !has("nvim")
+	if has("patch-8.0.0238")
+		if &term =~ "screen"
+			let &t_BE = "\e[?2004h"
+			let &t_BD = "\e[?2004l"
+			exec "set t_PS=\e[200~"
+			exec "set t_PE=\e[201~"
+		endif
+	endif
 endif
-set background=dark
-let g:solarized_termcolors=256
-let g:solarized_termtrans=1
-" let g:hybrid_use_Xresources = 1
-" let g:rehash256 = 1
-colorscheme solarized
-set guifont=Inconsolata:h15
-set guioptions-=L
 
-" This comes first, because we have mappings that depend on leader
-" With a map leader it's possible to do extra key combinations
-" i.e: <leader>w saves the current file
-let mapleader = ","
-let g:mapleader = ","
+"----------------------------------------------------------------
+" 13. Search, vimgrep and grep
+"----------------------------------------------------------------
+" Highlight search results
+set hlsearch
 
-" This trigger takes advantage of the fact that the quickfix window can be
-" easily distinguished by its file-type, qf. The wincmd J command is
-" equivalent to the Ctrl+W, Shift+J shortcut telling Vim to move a window to
-" the very bottom (see :help :wincmd and :help ^WJ).
-autocmd FileType qf wincmd J
+" Makes search act like search in modern browsers
+set incsearch
 
-" Dont show me any output when I build something
-" Because I am using quickfix for errors
-"nmap <leader>m :make<CR><enter>
+" Search, wrap around the end of the buffer
+set wrapscan
 
-" Some useful quickfix shortcuts
-":cc      see the current error
-":cn      next error
-":cp      previous error
-":clist   list all errors
-map <C-n> :cn<CR>
-map <C-m> :cp<CR>
+" Ignore case when searching
+set ignorecase
 
-nnoremap <silent> <leader>q :Sayonara<CR>
+" When searching try to be smart about cases
+set smartcase
 
-" Replace the current buffer with the given new file. That means a new file
-" will be open in a buffer while the old one will be deleted
-com! -nargs=1 -complete=file Breplace edit <args>| bdelete #
+" For regular expressions turn magic on
+set magic
 
-function! DeleteInactiveBufs()
-  "From tabpagebuflist() help, get a list of all buffers in all tabs
-  let tablist = []
-  for i in range(tabpagenr('$'))
-    call extend(tablist, tabpagebuflist(i + 1))
-  endfor
+" Maximum amount of memory in Kbyte used for pattern matching
+set maxmempattern=1000
 
-  "Below originally inspired by Hara Krishna Dara and Keith Roberts
-  "http://tech.groups.yahoo.com/group/vim/message/56425
-  let nWipeouts = 0
-  for i in range(1, bufnr('$'))
-    if bufexists(i) && !getbufvar(i,"&mod") && index(tablist, i) == -1
-      "bufno exists AND isn't modified AND isn't in the list of buffers open in windows and tabs
-      silent exec 'bwipeout' i
-      let nWipeouts = nWipeouts + 1
-    endif
-  endfor
-  echomsg nWipeouts . ' buffer(s) wiped out'
-endfunction
+" --- Highlight ---
+"----------------------------------------------------------------
+" Map <Space> to / (search)
+nnoremap <Space> /
+nnoremap <Leader><Space> ?
 
-command! Ball :call DeleteInactiveBufs()
+" Highlight the word under the cursor and don't jump to next
+nnoremap <silent> <Leader><CR> :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hlsearch<CR>
 
-" Close quickfix easily
-nnoremap <leader>a :cclose<CR>
+" Highlight the selected text and don't jump to next
+vnoremap <silent> <Leader><CR> :<C-U>call <SID>VSetSearch()<CR>:set hlsearch<CR>
 
-" Remove search highlight
-nnoremap <leader><space> :nohlsearch<CR>
+" Disable highlight
+nnoremap <Leader>m :noh<CR>
 
-" Buffer prev/next
-nnoremap <C-x> :bnext<CR>
-nnoremap <C-z> :bprev<CR>
+" Search into a Visual selection
+vnoremap <silent> <Space> :<C-U>call <SID>RangeSearch('/')<CR>
+	\ :if strlen(g:srchstr) > 0
+	\ \|exec '/'.g:srchstr\|endif<CR>n
+vnoremap <silent> ? :<C-U>call <SID>RangeSearch('?')<CR>
+	\ :if strlen(g:srchstr) > 0
+	\ \|exec '?'.g:srchstr\|endif<CR>N
 
-" Better split switching
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+" --- Vimgrep and grep ---
+"----------------------------------------------------------------
+" Vimgrep the highlight in the current file
+nnoremap <Leader>vg :vimgrep /<C-R>//j %<CR>
 
-" Fast saving
-nmap <leader>w :w!<cr>
+" Vimgrep the highlight in the current directory and subdirectories
+nnoremap <Leader>vf :vimgrep /<C-R>//j **/*.
 
-" Center the screen
-nnoremap <space> zz
+autocmd QuickfixCmdPre grep,grepadd,vimgrep,vimgrepadd,helpgrep copen
 
-" Move up and down on splitted lines (on small width screens)
-map <Up> gk
-map <Down> gj
-map k gk
-map j gj
+" Grep settings
+set grepprg=grep\ -nHi
 
-" Just go out in insert mode
-imap jk <ESC>l
+" Current buffer
+nnoremap <Leader>vv :call <SID>GrepWrapper('grep!', '', '%')<CR>
 
-nnoremap <F6> :setlocal spell! spell?<CR>
+" Current working directory
+nnoremap <Leader>vn :call <SID>GrepWrapper('grep!', '-R
+			\ --exclude-dir={.git,.svn,.jekyll-cache,_site}
+			\ --exclude=LICENSE', '')<CR>
 
-" Select search pattern howewever do not jump to the next one
-nnoremap <leader>c :TComment<CR>
+" Current buffer (grepadd)
+nnoremap <Leader>vm :call <SID>GrepWrapper('grepadd!', '', '%')<CR>
 
-" Search mappings: These will make it so that going to the next one in a
-" search will center on the line it's found in.
-nnoremap n nzzzv
-nnoremap N Nzzzv
+" Current arglist
+nnoremap <Leader>va :call <SID>GrepWrapper('grep!', '', '##')<CR>
 
-"nnoremap <leader>. :lcd %:p:h<CR>
-autocmd BufEnter * silent! lcd %:p:h
+" Navigate between grep and vimgrep results
+nnoremap <Leader>n :cnext<CR>zz
+nnoremap <Leader>N :cprev<CR>zz
 
-" trim all whitespaces away
-nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+" Jump to the results in buffers (first open window), not tabs
+set switchbuf=useopen
 
-" Act like D and C
+" --- Replace ---
+"----------------------------------------------------------------
+" Replace the highlight in the current file
+nnoremap <Leader>r :%s/<C-R>///g<Left><Left>
+
+" Replace the highlight in the visual selection
+" Flag \%V --> Match only inside the visual selection
+vnoremap <Leader>r :s/\%V<C-R>/\%V//g<Left><Left>
+
+" Replace the highlight to all loaded buffers and arglist
+nnoremap <Leader>R :bufdo %s/<C-R>///ge<Left><Left><Left>
+
+" Replace the highlight to each valid entry in the quickfix
+nnoremap <Leader>Q :cdo %s/<C-R>///ge<Left><Left><Left>
+
+" Populate the arglist
+nnoremap <Leader>aa :argadd<space>
+nnoremap <Leader>ad :argdelete<space>
+nnoremap <Leader>an :args **/*.
+nnoremap <Leader>al :call <SID>DisplayArglist()<CR>:argument<space>
+
+"----------------------------------------------------------------
+" 14. Text edition
+"----------------------------------------------------------------
+" Toggle case
+nnoremap <Leader>z ~
+vnoremap <Leader>z y:call setreg('', ToggleCase(@"), getregtype(''))<CR>gv""Pgv
+vnoremap ~ y:call setreg('', ToggleCase(@"), getregtype(''))<CR>gv""Pgv
+
+" Toggle and untoggle spell checking
+let g:f8msg = 'Toggle spell checking.'
+nnoremap <silent> <F8> :setlocal spell!<CR>:echo g:f8msg<CR>
+
+" Toggle spell dictionary
+nnoremap <silent> <F9> :call <SID>ToggleSpelllang()<CR>
+
+" Move to next misspelled word
+nnoremap zl ]s
+
+" Find the misspelled word before the cursor
+nnoremap zh [s
+
+" Suggest correctly spelled words
+nnoremap zp z=
+
+" Copy text into the clipboard
+vnoremap <Leader>y "+y
+
+" Paste text from the clipboard
+nnoremap <Leader>p "+p
+
+" Quickly select the text pasted from the clipboard
+nnoremap gV `[v`]
+
+" Yank everything from the cursor to the EOL
 nnoremap Y y$
 
-" Do not show stupid q: window
-map q: :q
+" Yank the last pasted text automatically
+vnoremap p pgvy
 
-" sometimes this happens and I hate it
-map :Vs :vs
-map :Sp :sp
+" Retab the selected text
+nnoremap <Leader>tf :retab!<CR>
+vnoremap <Leader>tf :retab!<CR>
 
-" dont save .netrwhist history
-let g:netrw_dirhistmax=0
+" Isolate the current line
+nnoremap <Leader>o m`o<Esc>kO<Esc>``
 
-" Allow saving of files as sudo when I forgot to start vim using sudo.
-cmap w!! w !sudo tee > /dev/null %
+" Enter a new line Down from 'Normal Mode'
+nnoremap <Leader>f mao<Esc>`a
 
-" never do this again --> :set paste <ctrl-v> :set no paste
-let &t_SI .= "\<Esc>[?2004h"
-let &t_EI .= "\<Esc>[?2004l"
+" Enter a new line Up from 'Normal Mode'
+nnoremap <Leader>F maO<Esc>`a
 
-inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
+" Insert brackets and backslash faster
+inoremap ñr []<left>
+inoremap ñb ()<left>
+inoremap ñB {}<left>
+inoremap ññ \
+autocmd FileType html,markdown,liquid inoremap ñp {%  %}<left><left><left>
 
-function! XTermPasteBegin()
-  set pastetoggle=<Esc>[201~
-  set paste
-  return ""
-endfunction
-
-" set 120 character line limit
-if exists('+colorcolumn')
-  set colorcolumn=120
-else
-  au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>120v.\+', -1)
+"----------------------------------------------------------------
+" 15. Make settings
+"----------------------------------------------------------------
+" Set makeprg
+if !filereadable(expand('%:p:h').'/Makefile')
+	autocmd FileType c setlocal makeprg=gcc\ %\ &&\ ./a.out
 endif
 
-" ----------------------------------------- "
-" File Type settings               "
-" ----------------------------------------- "
+" Go to the error line
+set errorformat=%m\ in\ %f\ on\ line\ %l
 
-au BufNewFile,BufRead *.vim setlocal noet ts=2 sw=2 sts=2
-au BufNewFile,BufRead *.txt setlocal noet ts=2 sw=2
-au BufNewFile,BufRead *.md setlocal spell noet ts=4 sw=4
-au BufNewFile,BufRead *.yml,*.yaml setlocal expandtab ts=2 sw=2
-au BufNewFile,BufRead *.cpp setlocal expandtab ts=2 sw=2
-au BufNewFile,BufRead *.hpp setlocal expandtab ts=2 sw=2
-au BufNewFile,BufRead *.json setlocal expandtab ts=2 sw=2
-au BufNewFile,BufRead *.js setlocal expandtab ts=2 sw=2 sts=2
-au BufNewFile,BufRead *.html setlocal expandtab ts=2 sw=2
-au BufNewFile,BufRead *.php setlocal expandtab ts=4 sw=4
+" Use the correct cursor shape via 'edit-command-line' (zle)
+augroup zsh
+	autocmd!
+	if !has("nvim")
+		autocmd Filetype zsh silent! exec "! echo -ne '\e[2 q'"
+	endif
+augroup end
 
-augroup filetypedetect
-  au BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
-  au BufNewFile,BufRead .nginx.conf*,nginx.conf* setf nginx
-augroup END
+" Run code in a tmux window
+augroup tmuxy
+	autocmd!
+	autocmd FileType javascript,lua,perl,php,python,ruby,sh
+				\ nnoremap <silent> <buffer> <Leader>ij
+				\ :call <SID>Tmuxy()<CR>
+augroup end
 
-au FileType nginx setlocal noet ts=4 sw=4 sts=4
+" Run code in the preview window
+augroup scripty
+	autocmd!
+	autocmd FileType javascript,lua,perl,php,python,ruby,sh
+				\ nnoremap <silent> <buffer> <Leader>ii
+				\ :call <SID>Scripty()<CR>
+augroup end
 
-" Go settings
-au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
-autocmd BufEnter *.go colorscheme nofrils-dark
+" Work with Sqlite databases
+augroup sqlite
+	autocmd!
+	autocmd FileType sql nnoremap <silent> <Leader>ia
+				\ :call <SID>SqliteDatabase()<CR>
+	autocmd FileType sql nnoremap <silent> <buffer> <Leader>ii
+				\ :call <SID>SQLExec('n')<CR>
+	autocmd FileType sql vnoremap <silent> <buffer> <Leader>ii
+				\ :<C-U>call <SID>SQLExec('v')<CR>
+augroup end
 
-" scala settings
-autocmd BufNewFile,BufReadPost *.scala setl shiftwidth=2 expandtab
+" Work with maxima (symbolic mathematics)
+augroup maxima
+	autocmd!
+	autocmd BufRead,BufNewFile *.max set filetype=maxima
+	autocmd FileType maxima nnoremap <silent> <buffer> <Leader>ii
+				\ :call <SID>MaximaExec('n')<CR>
+	autocmd FileType maxima vnoremap <silent> <buffer> <Leader>ii
+				\ :<C-U>call <SID>MaximaExec('v')<CR>
+augroup end
 
-" Markdown Settings
-autocmd BufNewFile,BufReadPost *.md setl ts=4 sw=4 sts=4 expandtab
+" Convert LaTeX to PDF
+augroup latex
+	autocmd!
+	autocmd FileType tex nnoremap <silent> <buffer> <Leader>ii
+				\ :call <SID>Generator('.pdf', &ft)<CR>
+augroup end
 
-" lua settings
-autocmd BufNewFile,BufRead *.lua setlocal noet ts=4 sw=4 sts=4
+" Convert markdown to PDF, HTML and EPUB
+augroup markdown
+	autocmd!
+	autocmd FileType markdown nnoremap <silent> <buffer> <Leader>ii
+				\ :call <SID>Generator('.pdf', &ft)<CR>
+	autocmd FileType markdown nnoremap <silent> <buffer> <Leader>ih
+				\ :call <SID>Generator('.html', &ft)<CR>
+	autocmd FileType markdown nnoremap <silent> <buffer> <Leader>ij
+				\ :call <SID>Generator('.epub', &ft)<CR>
+augroup end
 
-" Dockerfile settings
-autocmd FileType dockerfile set noexpandtab
+" Draw with PlantUML
+augroup uml
+	autocmd!
+	autocmd FileType plantuml nnoremap <silent> <buffer> <Leader>ii
+				\ :call <SID>Generator('.png', &ft)<CR>
+augroup end
 
-" shell/config/systemd settings
-autocmd FileType fstab,systemd set noexpandtab
-autocmd FileType gitconfig,sh,toml set noexpandtab
+" Draw with Graphviz
+augroup dot
+	autocmd!
+	autocmd FileType dot nnoremap <silent> <buffer> <Leader>ii
+				\ :call <SID>Generator('.png', &ft)<CR>
+augroup end
 
-" python indent
-autocmd BufNewFile,BufRead *.py setlocal tabstop=4 softtabstop=4 shiftwidth=4 textwidth=80 smarttab expandtab
+" Draw with Eukleides
+augroup eukleides
+	autocmd!
+	autocmd BufRead,BufNewFile *.euk set filetype=eukleides
+	autocmd FileType eukleides nnoremap <silent> <buffer> <Leader>ii
+				\ :call <SID>Generator('.png', &ft)<CR>
+augroup end
 
-" toml settings
-au BufRead,BufNewFile MAINTAINERS set ft=toml
+" Draw with Asymptote
+augroup asymptote
+	autocmd!
+	autocmd BufRead,BufNewFile *.asy set filetype=asy
+	autocmd FileType asy nnoremap <silent> <buffer> <Leader>ii
+				\ :call <SID>Generator('.png', &ft)<CR>
+augroup end
 
-" spell check for git commits
-autocmd FileType gitcommit setlocal spell
+" Draw with pp3
+augroup pp3
+	autocmd!
+	autocmd BufRead,BufNewFile *.pp3 set filetype=pp3
+	autocmd FileType pp3 nnoremap <silent> <buffer> <Leader>ii
+				\ :call <SID>Generator('.png', &ft)<CR>
+augroup end
 
-" Wildmenu completion {{{
-set wildmenu
-" set wildmode=list:longest
-set wildmode=list:full
+" Draw with Gnuplot
+augroup gnuplot
+	autocmd!
+	autocmd BufRead,BufNewFile *.plt set filetype=gnuplot
+	autocmd FileType gnuplot nnoremap <silent> <buffer> <Leader>ii
+				\ :call <SID>Generator('.png', &ft)<CR>
+augroup end
 
-set wildignore+=.hg,.git,.svn                    " Version control
-set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
-set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
-set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
-set wildignore+=*.spl                            " compiled spelling word lists
-set wildignore+=*.sw?                            " Vim swap files
-set wildignore+=*.DS_Store                       " OSX bullshit
-set wildignore+=*.luac                           " Lua byte code
-set wildignore+=migrations                       " Django migrations
-set wildignore+=go/pkg                       " Go static files
-set wildignore+=go/bin                       " Go bin files
-set wildignore+=go/bin-vagrant               " Go bin-vagrant files
-set wildignore+=*.pyc                            " Python byte code
-set wildignore+=*.orig                           " Merge resolution files
+" Draw with POV-Ray
+augroup povray
+	autocmd!
+	autocmd FileType pov nnoremap <silent> <buffer> <Leader>ii
+				\ :call <SID>Generator('.png', &ft)<CR>
+augroup end
 
+" Run Jekyll (liquid)
+augroup liquid
+	autocmd!
+	autocmd FileType liquid,html,yaml set wildignore+=*/.jekyll-cache/*,
+				\*/_site/*,*/images/*,*/timg/*,*/icons/*,*/logo/*,*/where/*
+	autocmd FileType liquid setlocal spell spelllang=es colorcolumn=0
+	autocmd FileType liquid,yaml nnoremap <silent> <buffer> <Leader>ii
+				\ :call <SID>ToggleJekyll()<CR>
+augroup end
 
-" ----------------------------------------- "
-" Plugin configs                 "
-" ----------------------------------------- "
-
-" ==================== CtrlP ====================
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_max_height = 10    " maxiumum height of match window
-let g:ctrlp_switch_buffer = 'et'  " jump to a file if it's open already
-let g:ctrlp_mruf_max=450     " number of recently opened files
-let g:ctrlp_max_files=0      " do not limit the number of searchable files
-let g:ctrlp_use_caching = 1
-let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
-
-let g:ctrlp_buftag_types = {'go' : '--language-force=go --golang-types=ftv'}
-
-func! MyCtrlPTag()
-  let g:ctrlp_prompt_mappings = {
-        \ 'AcceptSelection("e")': ['<cr>', '<2-LeftMouse>'],
-        \ 'AcceptSelection("t")': ['<c-t>'],
-        \ }
-  CtrlPBufTag
+"----------------------------------------------------------------
+" 16. Filetype settings
+"----------------------------------------------------------------
+" Delete trailing white spaces
+func! s:DeleteTrailing()
+	exe 'normal mz'
+	%s/\s\+$//ge
+	exe 'normal `z'
+	echo 'Trailing white spaces have been removed.'
+	noh
 endfunc
-command! MyCtrlPTag call MyCtrlPTag()
 
-nmap <C-g> :MyCtrlPTag<cr>
-imap <C-g> <esc>:MyCtrlPTag<cr>
+nnoremap <silent> <Leader>dt :call <SID>DeleteTrailing()<CR>
 
-nmap <C-b> :CtrlPCurWD<cr>
-imap <C-b> <esc>:CtrlPCurWD<cr>
+" Binary
+augroup binary
+	autocmd!
+	autocmd BufReadPre  *.bin let &bin=1
+	autocmd BufReadPost *.bin if &bin | %!xxd
+	autocmd BufReadPost *.bin set ft=xxd | endif
+	autocmd BufWritePre *.bin if &bin | %!xxd -r
+	autocmd BufWritePre *.bin endif
+	autocmd BufWritePost *.bin if &bin | %!xxd
+	autocmd BufWritePost *.bin set nomod | endif
+augroup end
 
-" ==================== Fugitive ====================
-nnoremap <leader>ga :Git add %:p<CR><CR>
-nnoremap <leader>gs :Gstatus<CR>
-nnoremap <leader>gp :Gpush<CR>
-vnoremap <leader>gb :Gblame<CR>
+" Markdown
+let g:markdown_fenced_languages = [
+	\ 'python',
+	\ 'sh',
+	\ ]
 
-" =================== Vim-cfmt ===================
-let g:cfmt_style = '-linux'
-autocmd BufWritePre *.c,*.h Cfmt
+" Mail
+augroup mail
+	autocmd!
+	autocmd FileType mail setl spell
+	autocmd FileType mail setl spelllang=ca
+augroup end
 
-" ==================== Vim-go ====================
-let g:go_fmt_fail_silently = 0
-let g:go_fmt_command = "goimports"
-let g:go_autodetect_gopath = 1
-let g:go_term_enabled = 1
-let g:go_snippet_engine = "neosnippet"
-let g:go_highlight_space_tab_error = 0
-let g:go_highlight_array_whitespace_error = 0
-let g:go_highlight_trailing_whitespace_error = 0
-let g:go_highlight_extra_types = 0
-let g:go_highlight_operators = 0
-let g:go_highlight_build_constraints = 1
+" SQL (it requires sqlparse)
+augroup sql
+	let g:omni_sql_no_default_maps = 1
+	autocmd FileType sql nnoremap <Leader>bf
+				\ :%!sqlformat --reindent --keywords upper --identifiers upper -<CR>
+	autocmd FileType sql vnoremap <Leader>bf
+				\ :%!sqlformat --reindent --keywords upper --identifiers upper -<CR>
+augroup end
 
+" XML (it requires tidy)
+augroup xml
+	autocmd FileType xml nnoremap <Leader>bf
+				\ :%!tidy -q -i -xml --show-errors 0 -wrap 0 --indent-spaces 4<CR>
+augroup end
 
-au FileType go nmap <Leader>s <Plug>(go-def-split)
-au FileType go nmap <Leader>v <Plug>(go-def-vertical)
-au FileType go nmap <Leader>i <Plug>(go-info)
-au FileType go nmap <Leader>l <Plug>(go-metalinter)
+" MD
+augroup md
+	autocmd FileType markdown,liquid,text,yaml set expandtab
+	autocmd FileType markdown,liquid,text
+				\ nnoremap <silent> <Leader>cc :call <SID>KeywordDensity()<CR>
+	autocmd FileType markdown,liquid,text nnoremap <silent> <Leader>dd g<C-g>
+	autocmd FileType markdown,liquid,text vnoremap <silent> <Leader>dd g<C-g>
+	autocmd FileType markdown,liquid,text
+				\ nnoremap <silent> gl :call search('\v\[[^]]*]\([^)]*\)', 'W')<CR>
+	autocmd FileType markdown,liquid,text
+				\ nnoremap <silent> gh :call search('\v\[[^]]*]\([^)]*\)', 'bW')<CR>
+	autocmd FileType markdown,liquid,text
+				\ nnoremap <silent> gd :call <sid>RemoveMdLink()<CR>
+	autocmd FileType markdown,liquid,text
+				\ :command! -range Enes <line1>,<line2>!trans en:es -brief
+	autocmd FileType markdown,liquid,text
+				\ :command! -range Esen <line1>,<line2>!trans es:en -brief
+augroup end
 
-au FileType go nmap <leader>r  <Plug>(go-run)
+" New file headers
+augroup headers
+	autocmd!
+	autocmd BufNewFile *.py 0put =\"#!/usr/bin/env python3\<nl>\#
+				\ -*- coding: utf-8 -*-\<nl>\"|$
+	autocmd BufNewFile *.rb 0put =\"#!/usr/bin/env ruby\<nl>\"|$
+	autocmd BufNewFile *.pl 0put =\"#!/usr/bin/env perl\<nl>\"|$
+	autocmd BufNewFile *.sh 0put =\"#!/usr/bin/env bash\<nl>\"|$
+	autocmd BufNewFile *.js 0put =\"#!/usr/bin/env node\<nl>\"|$
+augroup end
 
-au FileType go nmap <leader>b  <Plug>(go-build)
-au FileType go nmap <leader>t  <Plug>(go-test)
-au FileType go nmap <leader>dt  <Plug>(go-test-compile)
-au FileType go nmap <Leader>d <Plug>(go-doc)
-
-au FileType go nmap <Leader>e <Plug>(go-rename)
-
-" neovim specific
-if has('nvim')
-  au FileType go nmap <leader>rt <Plug>(go-run-tab)
-  au FileType go nmap <Leader>rs <Plug>(go-run-split)
-  au FileType go nmap <Leader>rv <Plug>(go-run-vertical)
-endif
-
-" I like these more!
-augroup go
-  autocmd!
-  autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
-  autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
-  autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
-augroup END
-
-" ==================== delimitMate ====================
-let g:delimitMate_expand_cr = 1
-let g:delimitMate_expand_space = 1
-let g:delimitMate_smart_quotes = 1
-let g:delimitMate_expand_inside_quotes = 0
-let g:delimitMate_smart_matchpairs = '^\%(\w\|\$\)'
-
-"==================== NerdTree ====================
-" For toggling
-nmap <C-n> :NERDTreeToggle<CR>
-noremap <Leader>n :NERDTreeToggle<cr>
-noremap <Leader>f :NERDTreeFind<cr>
-
-let NERDTreeShowHidden=1
-
-let NERDTreeIgnore=['\.vim$', '\~$', '\.git$', '.DS_Store']
-
-" Close nerdtree and vim on close file
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
-" ==================== vim-json ====================
-let g:vim_json_syntax_conceal = 0
-
-" ==================== Completion =========================
-" use deoplete for Neovim.
-if has('nvim')
-  let g:deoplete#enable_at_startup = 1
-  let g:deoplete#ignore_sources = {}
-  let g:deoplete#ignore_sources._ = ['buffer', 'member', 'tag', 'file', 'neosnippet']
-  let g:deoplete#sources#go#sort_class = ['func', 'type', 'var', 'const']
-  let g:deoplete#sources#go#align_class = 1
-
-
-  " Use partial fuzzy matches like YouCompleteMe
-  call deoplete#custom#set('_', 'matchers', ['matcher_fuzzy'])
-  call deoplete#custom#set('_', 'converters', ['converter_remove_paren'])
-  call deoplete#custom#set('_', 'disabled_syntaxes', ['Comment', 'String'])
-endif
-
-" ==================== vim-mardownfmt ====================
-"let g:markdownfmt_autosave = 1
-
-" ==================== vim-multiple-cursors ====================
-let g:multi_cursor_use_default_mapping=0
-let g:multi_cursor_next_key='<C-i>'
-let g:multi_cursor_prev_key='<C-y>'
-let g:multi_cursor_skip_key='<C-b>'
-let g:multi_cursor_quit_key='<Esc>'
-
-" Called once right before you start selecting multiple cursors
-function! Multiple_cursors_before()
-  if exists(':NeoCompleteLock')==2
-    exe 'NeoCompleteLock'
-  endif
+"----------------------------------------------------------------
+" 17. Helper functions
+"----------------------------------------------------------------
+" Toggle Terminal
+function! s:ToggleTerminal()
+	if bufexists('terminal')
+		call win_gotoid(s:winZsh)
+		norm! i
+	else
+		execute ':below 10sp term://$SHELL'
+		keepalt file terminal
+		let s:winZsh = win_getid()
+		norm! i
+	endif
 endfunction
 
-" Called once only when the multiple selection is canceled (default <Esc>)
-function! Multiple_cursors_after()
-  if exists(':NeoCompleteUnlock')==2
-    exe 'NeoCompleteUnlock'
-  endif
+" Show syntax highlighting groups
+function! s:SynStack()
+	if !exists('*synstack')
+		return
+	endif
+	echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunction
 
-" ========= vim-better-whitespace ==================
+" Rename file
+function! s:RenameFile()
+	let l:old_name = expand('%')
+	let l:new_name = input('New file name: ', expand('%'), 'file')
+	if l:new_name !=# '' && l:new_name !=# l:old_name
+		exec ':saveas ' . l:new_name
+		exec ':silent !rm ' . l:old_name
+		redraw!
+	endif
+endfunction
 
-" auto strip whitespace except for file with extention blacklisted
-let blacklist = ['markdown', 'md']
-autocmd BufWritePre * StripWhitespace
+" Don't close window when deleting a buffer
+function! s:CustomCloseBuffer()
+	let l:currentBufNum = bufnr('%')
+	let l:alternateBufNum = bufnr('#')
 
-" ================= clang-format ==================
+	if buflisted(l:alternateBufNum)
+		buffer #
+	else
+		bnext
+	endif
 
-map <C-K> :pyf /usr/share/vim/addons/syntax/clang-format-3.8.py<cr>
-imap <C-K> <c-o>:pyf /usr/share/vim/addons/syntax/clang-format-3.8.py<cr>
-autocmd BufWritePre *.cpp,*.hpp pyf /usr/share/vim/addons/syntax/clang-format-3.8.py
+	if bufnr('%') == l:currentBufNum
+		new
+	endif
 
-" =================== vim-airline ========================
+	if buflisted(l:currentBufNum)
+		exec ':bdelete! ' . l:currentBufNum
+	endif
+endfunction
 
-let g:airline_theme='solarized'
+" Close the last buffer if it's the last window
+" - For 'quickfix' and 'nofile'
+autocmd BufEnter * call <SID>CloseLastBuffer()
+function! s:CloseLastBuffer()
+	if &buftype ==# 'quickfix' || &buftype ==# 'nofile'
+		if winnr('$') < 2
+			quit!
+		endif
+	endif
+endfunction
 
-" set to use powerline fonts when not in a ssh session
-let g:remoteSession = ($STY == "")
-if !g:remoteSession
-  let g:airline_powerline_fonts=1
-endif
+" Display the arglist vertically
+function! s:DisplayArglist() abort
+	let l:argnum = 0
+	let l:lenargc = len(argc())
+	for l:arg in argv()
+		let l:argnum += 1
+		let l:filename = fnamemodify(l:arg, ':t')
+		let l:changed =
+					\ getbufinfo(bufname('^' . l:arg . '$'))[0].changed == 1
+					\ ? '+'
+					\ : ' '
+		let l:current = expand('%') ==# l:arg ? '%' : ' '
+		echo printf( '%-*d %s%s %s',
+					\ l:lenargc, l:argnum, l:current, l:changed, l:filename)
+	endfor
+endfunction
 
-" vim:ts=2:sw=2:et
+" Toggle maximize window and resize windows
+function! s:ToggleResize() abort
+	if winnr('$') > 1
+		if exists('t:zoomed') && t:zoomed
+			execute t:zoom_winrestcmd
+			let t:zoomed = 0
+			echo 'Windows resized.'
+		else
+			let t:zoom_winrestcmd = winrestcmd()
+			resize
+			vertical resize
+			let t:zoomed = 1
+			echo 'Window maximized.'
+		endif
+	endif
+endfunction
+autocmd VimEnter * autocmd WinEnter * let t:zoomed = 0
+
+" Search into a Visual selection
+function! s:RangeSearch(direction)
+	call inputsave()
+	let g:srchstr = input(a:direction)
+	call inputrestore()
+	if strlen(g:srchstr) > 0
+		let g:srchstr = g:srchstr.
+			\ '\%>'.(line("'<")-1).'l'.
+			\ '\%<'.(line("'>")+1).'l'
+	else
+		let g:srchstr = ''
+	endif
+endfunction
+
+" Highlight the selected text (visual mode)
+" Source: https://github.com/nelstrom/vim-visual-star-search
+" (You can install it as a plugin)
+function! s:VSetSearch()
+	let l:temp = @@
+	norm! gvy
+	let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
+	let @@ = l:temp
+endfunction
+
+" Count grep matches
+function! QFCounter() abort
+	let l:results = len(getqflist())
+	if l:results > 0
+		copen
+	else
+		cclose
+	endif
+	echo 'Found ' . l:results . ' matches.'
+endfunction
+
+" Grep wrapper
+function! s:GrepWrapper(cmd, dir, scope) abort
+	cclose
+	let l:pattern = substitute(@/, '\\V', '', '')
+	let l:pattern = substitute(pattern, '\\<', '', '')
+	let l:pattern = substitute(pattern, '\\>', '', '')
+	let l:pattern = escape(pattern, '"')
+	let l:pattern = escape(pattern, '%')
+	let l:pattern = escape(pattern, '#')
+	silent execute a:cmd . ' ' . a:dir . ' "' . l:pattern . '" ' . a:scope
+	redraw!
+	set hlsearch
+	call QFCounter()
+endfunction
+
+" Toggle case
+function! ToggleCase(str)
+	if a:str ==# toupper(a:str)
+		let l:result = tolower(a:str)
+	elseif a:str ==# tolower(a:str)
+		let l:result = substitute(a:str,'\(\<\w\+\>\)', '\u\1', 'g')
+	else
+		let l:result = toupper(a:str)
+	endif
+	return l:result
+endfunction
+
+" Toggle spell dictionary
+function! <SID>ToggleSpelllang()
+	if (&spelllang =~# '^en')
+		set spelllang=ca
+		echo 'Català'
+	elseif (&spelllang =~# '^ca')
+		set spelllang=es
+		echo 'Castellano'
+	elseif (&spelllang =~# '^es')
+		set spelllang=en_us,en_gb
+		echo 'English'
+	endif
+	set spelllang?
+endfunction
+
+" New :windo command to return to the last current window
+" - Default :windo cycles through all the open windows
+" - Use 'Windo' instead of 'windo' to avoid it
+command! -nargs=+ -complete=command Windo
+	\ let s:currentWindow = winnr() |
+	\ execute 'windo <args>' |
+	\ exe s:currentWindow . 'wincmd w'
+
+" Toggle colorcolumn
+function! s:ToggleColorColumn()
+	if !exists('s:color_column_old') || s:color_column_old == 0
+		let s:color_column_old = &colorcolumn
+		Windo let &colorcolumn = 0
+	else
+		Windo let &colorcolumn = s:color_column_old
+		let s:color_column_old = 0
+	endif
+endfunction
+
+" Toggle the cursor position start/end
+function! s:ToggleCPosition(mode)
+	execute a:mode
+	if !exists('s:togglecp')
+		let s:togglecp = 0
+	endif
+	if col('.') >= col('$') - 1
+		let s:togglecp = 1
+		norm! ^
+	else
+		let s:togglecp = 0
+		norm! $
+	endif
+endfunction
+
+" Toggle GitGutterPreviewHunk
+function! s:ToggleGGPrev()
+	if getwinvar(winnr('#'), '&pvw') == 1
+				\ && exists('s:curr') && line(".") == s:curr
+				\ || gitgutter#hunk#in_hunk(line(".")) == 0
+		pclose
+	else
+		GitGutterPreviewHunk
+		let s:curr = line(".")
+	endif
+endfunction
+
+" Execute GV only once
+function! s:PreventGV() abort
+	if &buftype !=# 'nofile'
+		execute ':GV'
+	endif
+endfunction
+
+" Toggle Gstatus window
+function! s:ToggleGstatus() abort
+	for l:winnr in range(1, winnr('$'))
+		if !empty(getwinvar(l:winnr, 'fugitive_status'))
+			execute l:winnr.'close'
+		else
+			Git
+		endif
+	endfor
+endfunction
+
+" Better toggle for NERDTree
+function! s:ToggleNERDTree() abort
+	if bufname('%') != ""
+		if exists("g:NERDTree") && g:NERDTree.IsOpen()
+			if &filetype ==# 'nerdtree'
+				execute ':NERDTreeClose'
+			else
+				execute ':NERDTreeFocus'
+			endif
+		else
+			execute ':NERDTreeFind'
+		endif
+	else
+			execute ':NERDTreeToggleVCS'
+	endif
+endfunction
+
+" Get Tagbar buffer name
+function! s:TagbarBufName() abort
+	if !exists('t:tagbar_buf_name')
+		let s:buffer_seqno += 1
+		let t:tagbar_buf_name = '__Tagbar__.' . s:buffer_seqno
+	endif
+	return t:tagbar_buf_name
+endfunction
+
+" Better toggle for Tagbar
+function! s:ToggleTagbar() abort
+	let tagbarwinnr = bufwinnr(s:TagbarBufName())
+	if tagbarwinnr != -1
+		if &modifiable
+			execute tagbarwinnr 'wincmd w'
+		else
+			execute ':TagbarClose'
+		endif
+	else
+		execute ':TagbarOpen'
+	endif
+endfunction
+
+" Keyword density checker
+function! s:KeywordDensity() abort
+	silent update
+
+	" Words count
+	" > Strip the front matter, comments, HTML tags and count the words
+	let s:sf = " | sed '1 { /^---/ { :a N; /\\n---/! ba; d }  }'"
+	let s:sc = " | sed 's/{% comment.*endcomment %}//g'"
+	let s:sh = " | sed 's/<[^>]*.//g'"
+	let s:wc = " | wc -w"
+	let s:get_words = system("cat " . expand('%') . s:sf. s:sc . s:sh . s:wc)
+	let s:int_words = str2nr(s:get_words)
+	let s:str_words = string(s:int_words)
+
+	" Highlight count
+	let s:match_count = ""
+	redir => s:match_count
+	silent exec '%s/' . @/ . '//gne'
+	redir END
+
+	if ! empty(s:match_count)
+		let s:str_keys = split(s:match_count)[0]
+		let s:flt_keys = str2float(s:str_keys)
+
+		" Density
+		let s:flt_dens = (s:flt_keys/s:int_words)*100
+		let s:str_dens = string(s:flt_dens)
+
+		echo '> ' . s:str_keys . ' of ' . s:str_words . ' (' . s:str_dens . '%)'
+	else
+		echo '> 0 of ' . s:str_words . ' (0%, pattern not found)'
+	endif
+endfunction
+
+" Remove markdown link
+function! s:RemoveMdLink() abort
+	let [l, c] = searchpos('\v\[[^]]*]\([^)]*\)', 'ncW')
+	if l > 0 && c > 0
+		if getline(".")[col(".")-1] ==# "["
+			norm! xf]vf)d
+		else
+			call cursor(l, c)
+		endif
+	endif
+endfunction
+
+"----------------------------------------------------------------
+" 18. External tools integration
+"----------------------------------------------------------------
+" Run code into a tmux window
+function! s:Tmuxy() abort
+	if exists('$TMUX')
+		update
+		let s:runner = <SID>Runners()
+		let s:cmdk = 'tmux kill-window -t run'
+		let s:cmdn = 'tmux new-window -n run'
+		let s:cmds = " '" . s:runner . " " . expand("%:p") . " ; read'"
+		call system(s:cmdk)
+		call system(s:cmdn . s:cmds)
+	else
+		echo 'Tmux is not running.'
+	endif
+endfunction
+
+" Run code in the preview window
+function! s:Scripty() abort
+	update
+	let s:runner = <SID>Runners()
+	let s:cmd = s:runner . " " . expand("%:p")
+	call <SID>Commander(s:cmd)
+endfunction
+
+" Define the runners
+function! s:Runners() abort
+	if &filetype =~# 'javascript'
+		let s:run = 'node'
+	elseif &filetype =~# 'lua'
+		let s:run = 'lua'
+	elseif &filetype =~# 'perl'
+		let s:run = 'perl'
+	elseif &filetype =~# 'php'
+		let s:run = 'php'
+	elseif &filetype =~# 'python'
+		let s:run = <SID>PyShebang()
+	elseif &filetype =~# 'ruby'
+		let s:run = 'ruby'
+	elseif &filetype =~# 'sh'
+		let s:run = 'bash'
+	else
+		let s:run = 'empty'
+	endif
+	return s:run
+endfunction
+
+" Check the python version used in the shebang
+function! s:PyShebang() abort
+	if getline(1) =~# '^#!.*/bin/env\s\+python3\>'
+		return "python3"
+	else
+		return "python"
+	endif
+endfunction
+
+" Generator function
+function! s:Generator(ext, ft) abort
+	update
+	let l:inp = expand('%')
+	let l:out = expand('%:r') . a:ext
+	if a:ft ==# 'tex'
+		let l:cmd = system('pdflatex ' . l:inp)
+	elseif a:ft ==# 'markdown'
+		if a:ext ==# '.html'
+			let l:opt = '--mathjax '
+		elseif a:ext ==# '.epub'
+			let l:opt = '-t epub2 --webtex '
+		elseif a:ext ==# '.pdf'
+			let l:opt = '-V fontsize=12pt
+						\ -V papersize=a4
+						\ -V geometry:margin=2.5cm '
+		endif
+		let l:cmd = system('pandoc -s ' . l:opt . l:inp . ' -o ' . l:out)
+	elseif a:ft ==# 'plantuml'
+		let l:cmd = system('plantuml ' . l:inp . ' ' . l:out)
+	elseif a:ft ==# 'dot'
+		let l:cmd = system('dot -Tpng ' . l:inp . ' -o ' . l:out)
+	elseif a:ft ==# 'eukleides'
+		let l:eps = expand('%:r') . '.eps'
+		let l:cmd = system('eukleides ' . l:inp)
+	elseif a:ft ==# 'asy'
+		let l:eps = expand('%:r') . '.eps'
+		let l:cmd = system('asy ' . l:inp)
+	elseif a:ft ==# 'pp3'
+		let l:eps = expand('%:r') . '.eps'
+		let l:cmd = system('pp3 ' . l:inp)
+	elseif a:ft ==# 'gnuplot'
+		let l:opt = ' -e "set terminal png; set output ''' . l:out . '''" '
+		let l:cmd = system('gnuplot' . l:opt . l:inp)
+	elseif a:ft ==# 'pov'
+		let l:cmd = system('povray -D ' . l:inp)
+	endif
+	if v:shell_error ==# 0
+		pclose
+		if a:ft =~# '\(eukleides\|asy\|pp3\)'
+			call <SID>EPS2PNG(l:eps, l:out)
+		endif
+		call <SID>Previewer(l:out)
+	else
+		call <SID>WinPreview()
+		exec '0put =l:cmd'
+		call <SID>ResizeWinPreview()
+	endif
+endfunction
+
+" Convert from EPS to PNG
+function! s:EPS2PNG(eps, out) abort
+		let l:opt_bef = ' -density 150 '
+		let l:opt_aft = ' -flatten -alpha off -colorspace hsl '
+		call system('convert' . l:opt_bef . a:eps . l:opt_aft . a:out)
+endfunction
+
+" Preview outputs (EPUB, PDF, HTML, PNG) with mupdf
+function! s:Previewer(out) abort
+	let l:dev = ' 2>/dev/null'
+	let l:checkps = system('ps -ef
+				\ | grep -v grep
+				\ | grep mupdf
+				\ | grep -o ' . a:out . l:dev)
+	if l:checkps ==# ''
+		call system('mupdf ' . a:out . ' &')
+	else
+		call system('pkill -HUP mupdf')
+	endif
+endfunction
+
+" Configure a sqlite database
+function! s:SqliteDatabase() abort
+	let t:path = input('Database: ')
+endfunction
+
+" Execute SQL queries
+function! s:SQLExec(opt) abort
+	if a:opt ==# 'n'
+		silent norm! yy
+	elseif a:opt ==# 'v'
+		silent norm! gvy
+	endif
+	if !exists('t:path')
+		call <SID>SqliteDatabase()
+	endif
+	if filereadable(t:path)
+		let t:sql = @
+		let t:sql = substitute(t:sql, '\n', ' ', 'g')
+		let t:format = " | column -t -s '|'"
+		if t:sql =~? '^select'
+			let t:cmd = t:path . ' "' . escape(t:sql, '"') . '"' . t:format
+		else
+			let t:cmd = t:path . ' "' . escape(t:sql, '"') . '"'
+		endif
+		let s:cmd = "sqlite3 -list -batch " . t:cmd
+		call <SID>Commander(s:cmd)
+	else
+		echo "\nThis database does not exist!"
+	endif
+endfunction
+
+" Execute Maxima instructions
+function! s:MaximaExec(opt) abort
+	if a:opt ==# 'n'
+		silent norm! yy
+	elseif a:opt ==# 'v'
+		silent norm! gvy
+	endif
+	let b:equ = @
+	let b:equ = substitute(b:equ, '\n', ' ', 'g')
+	let b:equ = substitute(b:equ, '\s$', '', 'g')
+	let b:equ = substitute(b:equ, '%', '\\%', 'g')
+	if b:equ !~# ';$'
+		let b:equ = substitute(b:equ, '$', ';', 'g')
+	endif
+	let s:cmd = 'maxima --very-quiet --batch-string "' . b:equ . '"'
+	call <SID>Commander(s:cmd)
+endfunction
+
+" Window previewer
+function! s:WinPreview() abort
+	silent! wincmd P
+	if !&previewwindow
+		exec 'new'
+		setlocal previewwindow
+		setlocal buftype=nowrite bufhidden=wipe
+		setlocal nobuflisted noswapfile nowrap
+		nnoremap <silent> <buffer> q :pclose<CR>
+	endif
+	exec '%delete'
+endfunction
+
+" Commander
+function! s:Commander(cmd) abort
+	call <SID>WinPreview()
+	exec '0read !' . a:cmd
+	call <SID>ResizeWinPreview()
+endfunction
+
+" Resize the preview window
+function! s:ResizeWinPreview() abort
+	exec '$d'
+	let s:size = line('$')
+	if s:size < 11
+		exec 'resize ' . line('$')
+	else
+		exec 'resize 10'
+	endif
+	norm! gg
+	wincmd p
+endfunction
+
+command! -nargs=1 Commander call <SID>Commander(<f-args>)
+
+" Toggle jekyll server in the background
+function! s:ToggleJekyll() abort
+	call system('lsof -i :4000 | grep -i listen')
+	if v:shell_error
+		silent exec "!(bundle exec jekyll serve &) > /dev/null"
+		call system("touch /tmp/jekyll.ps")
+		call system("notify-send -t 2 'Executing Jekyll server...'")
+	else
+		silent exec "!(pkill -f jekyll &) > /dev/null"
+		call system("rm -f /tmp/jekyll.ps")
+		call system("notify-send -t 2 'Jekyll server was stoped!'")
+	endif
+	redraw!
+endfunction

@@ -84,6 +84,8 @@ brew install libiconv
 brew install icu4c
 brew install pkg-config
 brew install cmake
+brew install fzf # fuzzy search find with superpower https://www.youtube.com/watch?v=qgG5Jhi_Els
+brew install direnv # env for each dir 12factorapp
 brew install go
 brew install openssl
 brew install imagemagick --with-webp
@@ -123,14 +125,16 @@ brew tap wallix/awless
 brew install awless
 
 # Kubernetes
-brew install kubectl
-brew install kops
-brew install helm
-brew install minikube
-brew tap azure/draft
-brew install draft # this also installs kubernetes-helm
+# Note: Replaced by Rancher Desktop and NerdCtl
+
+# brew install kubectl
+# brew install kops
+# brew install helm
+# brew install minikube
+# brew tap azure/draft
+# brew install draft # this also installs kubernetes-helm
 # Installs tools with names kctx and kns to prevent prefix collision with kubectl name
-brew install kubectx
+# brew install kubectx
 
 # Install Dart SDK Dartium and Dart VM for web
 brew tap dart-lang/dart
@@ -155,7 +159,6 @@ brew install azure-cli
 # Bitwarden
 brew install bitwarden-cli
 
-
 # Remove outdated versions from the cellar.
 brew cleanup -s
 
@@ -169,7 +172,8 @@ android-file-transfer \
 appcleaner \
 bitwarden \
 brave-browser \
-docker \
+rancher \
+# docker \ replaced by rancher
 gpg-suite \
 iterm2 \
 skype \

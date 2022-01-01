@@ -59,7 +59,7 @@ ZSH_DISABLE_COMPFIX=true
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
-for file in ~/.dotfiles/.{extra,functions,cli-packages,dockerfunctions,path,exports,aliases}; do
+for file in ~/.dotfiles/.{extra,path,exports,aliases,functions,dockerfunctions,kubefunctions,cli-packages}; do
   [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;

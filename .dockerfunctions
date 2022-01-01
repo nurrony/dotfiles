@@ -281,7 +281,7 @@ dynamodb() {
       docker run -dit \
         --volume ${DEV_ZONE}/storage/databases/dynamodb:/home/dynamodblocal/data \
         --workdir /home/dynamodblocal \
-		--publish "8000:8000" \
+        --publish "8000:8000" \
         --expose 8000 \
         --env VIRTUAL_HOST=dynamodb.nmrony.docker \
         --net ronsvpn \

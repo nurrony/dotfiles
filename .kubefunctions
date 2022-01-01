@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+kctx() {
+  kubectl-ctx $1
+}
+
+kns() {
+  kubectl-ns $1
+}
+
+dynamodb() {
+  kubectl port-forward --namespace k8s-aws service/dynamodb ${1:-8000}:80 2>&1 >/dev/null &
+}
+
+kctx k8s-ship

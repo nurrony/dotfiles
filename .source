@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+# Kubernetes Completion
+(command -v "kubectl" > /dev/null 2>&1) && source <(kubectl completion zsh)
+(command -v "nerdctl" > /dev/null 2>&1) && source <(nerdctl completion zsh)
+(command -v "minikube" > /dev/null 2>&1) && source <(minikube completion zsh)
+(command -v "flutter" > /dev/null 2>&1) && source <(flutter bash-completion)
+
+# load custom aliases
+source ~/.dotfiles/.aliases
+
+# fzf is a general-purpose command-line fuzzy finder.
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Load NVM
+export NVM_DIR="${DEV_ZONE}/storage/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+
+
+autoload -U add-zsh-hook
+load-nvmrc() {
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+      nvm use
+    fi
+  elif [ "$node_version" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
+
+# Java SDKMan
+export SDKMAN_DIR="/Users/nurrony/.sdkman"
+[[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"

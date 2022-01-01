@@ -59,7 +59,7 @@ ZSH_DISABLE_COMPFIX=true
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
-for file in ~/.dotfiles/.{extra,aliases,functions,cli-packages,dockerfunctions,path,exports}; do
+for file in ~/.dotfiles/.{extra,functions,cli-packages,dockerfunctions,path,exports,aliases}; do
   [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
@@ -87,14 +87,6 @@ vagrant \
 yarn \
 z \
 zsh-syntax-highlighting)
-
-
-source $ZSH/oh-my-zsh.sh
-(command -v "minikube" > /dev/null 2>&1) && source <(minikube completion zsh)
-(command -v "flutter" > /dev/null 2>&1) && source <(flutter bash-completion)
-
-# load custom aliases
-source ~/.dotfiles/.aliases
 
 # ssh-agent forwarding support
 zstyle :omz:plugins:ssh-agent agent-forwarding on
@@ -136,3 +128,5 @@ compinit -i
 
 eval "$(starship init zsh)"
 eval "$(direnv hook zsh)"
+
+source ~/.dotfiles/.source

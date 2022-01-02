@@ -72,6 +72,7 @@ plugins=(alias-tips \
 common-aliases \
 docker-compose \
 extract \
+git \
 git-extras \
 last-working-dir \
 macos \

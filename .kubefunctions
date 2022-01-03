@@ -9,24 +9,11 @@ kns() {
 }
 
 k8sgui() {
-  local service_account=${1:-nurrony}
-  shift
-  echo "$@"
-  kubectl proxy "$@" > /dev/null &; \
-  kubectl --n kubernetes-dashboard get secret \
-    $(kubectl --n kubernetes-dashboard get sa/$service_account -o jsonpath="{.secrets[0].name}") \
-    -o go-template="{{.data.token | base64decode}}" | pbcopy && \
-    echo '==> Token for ' $service_account 'is copid to clipboard and opened in browser...'
-  open -n -u http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+  kube-explorer --context=${1:-k3d-ship} --kubeconfig=$DEV_ZONE/storage/kube/config --http-listen-port=${2:-9080} --https-listen-port=0
+  open -u http://localhost:$2
 }
 
 
 dynamodb() {
   kubectl port-forward --namespace k8s-aws service/dynamodb ${1:-8000}:80 2>&1 >/dev/null &
 }
-
-K8S_SERVICE="Rancher Desktop"
-
-if pgrep -xq -- "${K8S_SERVICE}"; then
-  kctx k8s-ship
-fi

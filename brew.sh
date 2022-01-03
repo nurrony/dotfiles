@@ -124,8 +124,15 @@ brew install cfn-lint
 brew tap wallix/awless
 brew install awless
 
+# Docker
+# Comes with Docker Desktop
+# brew install docker-compose
+# brew install docker-machine
+# brew install docker-machine-completion
+brew install docker-machine-driver-vmware
+
 # Kubernetes
-# Note: Replaced by Rancher Desktop and NerdCtl, Kim, docker, k3d
+# Note: Replaced by autok3s
 
 # brew install kubectl
 # brew install kops
@@ -134,11 +141,7 @@ brew install awless
 # brew tap azure/draft
 # brew install draft # this also installs kubernetes-helm
 # Installs tools with names kctx and kns to prevent prefix collision with kubectl name
-brew install kubectx
-brew install docker-compose
-brew install docker-machine
-brew install docker-machine-completion
-brew install docker-machine-driver-vmware
+
 
 # Install Dart SDK Dartium and Dart VM for web
 brew tap dart-lang/dart
@@ -176,8 +179,7 @@ android-file-transfer \
 appcleaner \
 bitwarden \
 brave-browser \
-rancher \
-# docker \ replaced by rancher
+docker \
 gpg-suite \
 iterm2 \
 skype \
@@ -190,3 +192,7 @@ virtualbox \
 virtualbox-extension-pack \
 visual-studio-code
 brew cleanup -s
+
+# Install Kubernetes plugins
+bash -c ./scripts/installers/krew
+kubectl krew install tunnel ctx ns rbac-tool

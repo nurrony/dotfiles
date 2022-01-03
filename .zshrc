@@ -90,8 +90,6 @@ zstyle :omz:plugins:ssh-agent agent-forwarding on
 
 # zsh completion brew path fix
 FPATH=/usr/local/share/zsh-completions:$FPATH
-autoload -Uz compinit
-compinit
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -127,3 +125,6 @@ eval "$(direnv hook zsh)"
 eval "$(starship init zsh)"
 
 source ~/.dotfiles/.source
+
+autoload -U compinit;
+compinit

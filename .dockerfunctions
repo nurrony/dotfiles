@@ -22,6 +22,44 @@ del_stopped(){
   fi
 }
 
+dregistryup() {
+  docker rm -f registry
+  docker-compose -f $DEV_ZONE/storage/k8s-clusters/registry/docker-compose.yml up -d 2>/dev/null
+}
+
+dregistrydown() {
+  docker-compose -f $DEV_ZONE/storage/k8s-clusters/registry/docker-compose.yml down 2>/dev/null
+}
+
+dpush() {
+  if [[ $# -eq 0 ]] ; then
+      echo 'image tag is required'
+  else
+    docker stop registry 2>/dev/null
+    docker rm registry 2>/dev/null
+    docker run -dt --publish 5000:5000 \
+      --volume $DEV_ZONE/storage/k8s-clusters/registry/images:/data \
+      --env REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY=/data --name registry registry:2 2>/dev/null
+    docker push "$@"
+    docker stop registry 2>/dev/null
+    docker rm registry 2>/dev/null
+    dregistryup 2>/dev/null
+  fi
+}
+
+dregcleanup() {
+  docker stop registry 2>/dev/null
+  docker rm registry 2>/dev/null
+  docker run -dt --publish 5000:5000 \
+    --volume $DEV_ZONE/storage/k8s-clusters/registry/images:/data \
+    --env REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY=/data \
+    --env $DEV_ZONE/storage/k8s-clusters/registry/configs/config.yml:/etc/docker/registry/config.yml
+    --name registry registry:2 2>/dev/null
+  echo 'opening http://localhost:1337'
+  open -u http://localhost:1337
+  echo 'please run "dregistryup" when you are done with registry cleanup'
+}
+
 relies_on(){
   for container in "$@"; do
     local state
@@ -289,10 +327,10 @@ dynamodb() {
         amazon/dynamodb-local -jar DynamoDBLocal.jar -sharedDb -optimizeDbBeforeStartup -dbPath ./data 2>/dev/null
         if [ "$1" != "" ]; then
           docker network connect $1 dynamodb
-		fi
-    else
-      echo 'local dynamodb server is already running'
-    fi
+        fi
+        else
+          echo 'local dynamodb server is already running'
+        fi
 
 }
 

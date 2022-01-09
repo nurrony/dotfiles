@@ -184,7 +184,6 @@ docker \
 gpg-suite \
 iterm2 \
 skype \
-slack \
 the-unarchiver \
 vagrant \
 vagrant-vmware-utility \

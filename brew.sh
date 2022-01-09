@@ -142,6 +142,9 @@ brew install docker-machine-driver-vmware
 # brew tap azure/draft
 # brew install draft # this also installs kubernetes-helm
 # Installs tools with names kctx and kns to prevent prefix collision with kubectl name
+brew install helm
+brew tap boz/repo
+brew install boz/repo/kail # tail for kubernetes
 
 
 # Install Dart SDK Dartium and Dart VM for web

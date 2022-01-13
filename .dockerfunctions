@@ -36,33 +36,6 @@ dregistrydown() {
   echo 'registry is down'
 }
 
-dpush() {
-  if [[ $# -eq 0 ]] ; then
-      echo 'image tag is required'
-  else
-    docker stop registry 2>/dev/null
-    docker rm registry 2>/dev/null
-    docker run -dt --publish 5000:5000 \
-      --volume $DEV_ZONE/storage/k8s-clusters/registry/images:/var/lib/registry \
-      --name registry registry:2 2>/dev/null
-    docker push "$@"
-    docker stop registry 2>/dev/null
-    docker rm registry 2>/dev/null
-    dregistryup 2>/dev/null
-  fi
-}
-
-dregistrycleanup() {
-  docker stop registry 2>/dev/null
-  docker rm registry 2>/dev/null
-  docker run -dt --publish 5000:5000 \
-    --volume $DEV_ZONE/storage/k8s-clusters/registry/images:/var/lib/registry \
-    --volume $DEV_ZONE/storage/k8s-clusters/registry/configs/config.yml:/etc/docker/registry/config.yml \
-    --name registry registry:2 2>/dev/null
-  echo 'opening http://localhost:1337'
-  open -u http://localhost:1337
-  echo 'please run "dregistryup" when you are done with registry cleanup'
-}
 
 relies_on(){
   for container in "$@"; do

@@ -22,7 +22,7 @@ del_stopped(){
   fi
 }
 
-dregistryup() {
+ctr-registry-up() {
   local state=$(docker inspect --format "{{.State.Running}}" registry 2>/dev/null)
    if [[ "$state" == "true" ]] || [[ "$state" != "" ]]; then
         docker rm -f registry
@@ -31,7 +31,7 @@ dregistryup() {
   echo 'registry started...'
 }
 
-dregistrydown() {
+ctr-rgistry-down() {
   docker-compose -f $DEV_ZONE/storage/k8s-clusters/registry/docker-compose.yml down 2>/dev/null
   echo 'registry is down'
 }

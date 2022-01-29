@@ -79,7 +79,7 @@ macos \
 ssh-agent \
 terraform \
 urltools \
-z \
+zsh-z \
 zsh-syntax-highlighting)
 
 

@@ -45,6 +45,8 @@ brew install thefuck
 brew install bat
 brew install watch
 brew install exa
+brew install duf
+brew install dog
 
 # Install some CTF tools; see https://github.com/ctfs/write-ups.
 brew install binutils

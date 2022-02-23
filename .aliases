@@ -19,7 +19,7 @@ alias where=which
 alias brwe=brew # ;-D
 alias clearhistory="cat /dev/null > ~/.zsh_history && history -c && exit"
 alias du='dua -f binary'
-alias dig=dog
+alias dig='dog --time'
 
 
 # https://github.com/ogham/exa

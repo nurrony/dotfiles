@@ -47,7 +47,7 @@ brew install watch
 brew install exa
 brew install duf
 brew install dog
-brew install dust
+brew install dua-cli
 
 # Install some CTF tools; see https://github.com/ctfs/write-ups.
 brew install binutils

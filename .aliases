@@ -18,7 +18,7 @@ alias j="jobs"
 alias where=which
 alias brwe=brew # ;-D
 alias clearhistory="cat /dev/null > ~/.zsh_history && history -c && exit"
-alias du=dua
+alias du='dua -f binary'
 alias dig=dog
 
 

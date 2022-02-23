@@ -18,6 +18,8 @@ alias j="jobs"
 alias where=which
 alias brwe=brew # ;-D
 alias clearhistory="cat /dev/null > ~/.zsh_history && history -c && exit"
+alias du=dust
+
 
 # https://github.com/ogham/exa
 if [ "$(command -v exa)" ]; then

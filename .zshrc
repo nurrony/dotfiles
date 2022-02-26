@@ -35,7 +35,5 @@ zstyle :omz:plugins:ssh-agent agent-forwarding on
 
 # User configuration
 
+autoload -U +X compinit && compinit
 source ~/.dotfiles/.source
-
-autoload -U compinit;
-compinit

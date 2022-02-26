@@ -2,12 +2,12 @@
 # zsh plugins settings
 # zsh completion brew path fix
 FPATH=/usr/local/share/zsh-completions:$FPATH
-# zsh syntax highlight brew path fix
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-#
+source $DOTFILE_DIR/plugins/git/git.plugin.zsh
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+
 
 # Kubernetes Completion
 (command -v "autok3s" > /dev/null 2>&1) && source <(autok3s completion zsh)

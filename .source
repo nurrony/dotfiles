@@ -1,9 +1,20 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
+# zsh plugins settings
+# zsh completion brew path fix
+FPATH=/usr/local/share/zsh-completions:$FPATH
+# zsh syntax highlight brew path fix
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+#
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+
 # Kubernetes Completion
 (command -v "autok3s" > /dev/null 2>&1) && source <(autok3s completion zsh)
 (command -v "nerdctl" > /dev/null 2>&1) && source <(nerdctl completion zsh)
 (command -v "minikube" > /dev/null 2>&1) && source <(minikube completion zsh)
 (command -v "flutter" > /dev/null 2>&1) && source <(flutter bash-completion)
+
 
 # fzf is a general-purpose command-line fuzzy finder.
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

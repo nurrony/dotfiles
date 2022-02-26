@@ -19,10 +19,15 @@ brew install findutils
 # Install GNU `sed`, overwriting the built-in `sed`.
 brew install gnu-sed
 
+# install latest shell
 brew install zsh
-brew install bash-completion2
-brew install zsh-completions
 brew install starship
+brew install bash-completion2
+
+# zsh plugins
+brew install zsh-completions
+brew install zsh-autosuggestions
+brew install zsh-syntax-highlighting
 
 # Install `wget` with IRI support.
 brew install wget

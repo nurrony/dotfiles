@@ -32,6 +32,7 @@ if [ "$(command -v exa)" ]; then
     unalias -m 'lsa'
     unalias -m 'ls'
     alias ls='command exa -G --git --color auto --icons -a -s type --group-directories-first'
+    alias l='command exa -1a --color auto --icons -a -s type --group-directories-first'
     alias ll='command exa -l --git --color always --icons -a -s type --group-directories-first'
     alias lt='command exa -GT --git --color auto --icons -a -s type --group-directories-first -L'
     alias lt1='command exa -GTL 1 --git --color auto --icons -a -s type --group-directories-first'

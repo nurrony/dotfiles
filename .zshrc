@@ -9,7 +9,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+# export ZSH=$HOME/.oh-my-zsh
 ZSH_DISABLE_COMPFIX=true
 
 # ZSH_THEME="powerlevel9k/powerlevel9k"
@@ -59,7 +59,7 @@ ZSH_DISABLE_COMPFIX=true
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
-for file in ~/.dotfiles/.{extra,path,exports,aliases,functions,dockerfunctions,kubefunctions,cli-packages}; do
+for file in ~/.dotfiles/.{extra,path,exports,functions,dockerfunctions,kubefunctions,cli-packages,aliases}; do
   [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
@@ -68,22 +68,22 @@ unset file;
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(alias-tips \
-common-aliases \
-docker-compose \
-extract \
-git \
-git-extras \
-last-working-dir \
-macos \
-ssh-agent \
-terraform \
-urltools \
-zsh-z \
-zsh-syntax-highlighting)
+# plugins=(alias-tips \
+# common-aliases \
+# docker-compose \
+# extract \
+# git \
+# git-extras \
+# last-working-dir \
+# macos \
+# ssh-agent \
+# terraform \
+# urltools \
+# zsh-z \
+# zsh-syntax-highlighting)
 
 
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
 
 # ssh-agent forwarding support
 zstyle :omz:plugins:ssh-agent agent-forwarding on

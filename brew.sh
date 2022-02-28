@@ -48,6 +48,7 @@ brew install libksba
 brew install openssl
 brew install thefuck
 brew install bat
+brew install eth-p/software/bat-extras
 brew install watch
 brew install exa
 brew install duf
@@ -86,6 +87,7 @@ brew install git-lfs
 brew install git-extras
 brew install git-secrets
 brew install gitui
+brew install archey
 
 # deletes unwanted file from git faster
 brew install --ignore-dependencies bfg
@@ -94,7 +96,6 @@ brew install icu4c
 brew install pkg-config
 brew install cmake
 brew install fzf # fuzzy search find with superpower https://www.youtube.com/watch?v=qgG5Jhi_Els
-brew install direnv # env for each dir 12factorapp
 brew install go
 brew install openssl
 brew install imagemagick --with-webp
@@ -104,10 +105,11 @@ brew install rename
 brew install speedtest_cli
 brew install ssh-copy-id
 brew install testssl
-brew install tree
+# brew install tree
 brew install webkit2png
 brew install zopfli
 brew install zlib
+
 
 # See here: https://github.com/BurntSushi/ripgrep
 brew install ripgrep

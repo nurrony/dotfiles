@@ -1,4 +1,4 @@
-eval "$(direnv hook zsh)"
+
 eval "$(starship init zsh)"
 
 # Load the shell dotfiles, and then some:
@@ -9,31 +9,22 @@ for file in ~/.dotfiles/.{extra,path,exports,functions,dockerfunctions,kubefunct
 done;
 unset file;
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-# plugins=(alias-tips \
-# common-aliases \
-# docker-compose \
-# extract \
-# git \
-# git-extras \
-# last-working-dir \
-# macos \
-# ssh-agent \
-# terraform \
-# urltools \
-# zsh-z \
-# zsh-syntax-highlighting)
-
-
-# source $ZSH/oh-my-zsh.sh
-
-# ssh-agent forwarding support
-zstyle :omz:plugins:ssh-agent agent-forwarding on
-
-# User configuration
-
 autoload -U +X compinit && compinit
 source ~/.dotfiles/.source
+
+export zi_home="${HOME}/.zi"
+source "${zi_home}/bin/zi.zsh"
+# Next two lines must be below the above two
+autoload -Uz _zi
+(( ${+_comps} )) && _comps[zi]=_zi
+
+zi wait lucid light-mode for \
+  OMZP::common-aliases \
+  OMZP::nvm \
+  OMZP::git-extras \
+  OMZP::colored-man-pages \
+  djui/alias-tips \
+  z-shell/z \
+  voronkovich/gitignore.plugin.zsh \
+  as"completion" blockf zsh-users/zsh-completions \
+  atinit"zicompinit; zicdreplay" z-shell/fast-syntax-highlighting

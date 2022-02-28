@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 # make directory and cd into it
 mcd () { mkdir -p "$@" && cd "$@"; }

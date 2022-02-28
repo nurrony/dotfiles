@@ -21,10 +21,16 @@ autoload -Uz _zi
 zi wait lucid light-mode for \
   OMZP::common-aliases \
   OMZP::nvm \
+  OMZP::direnv \
   OMZP::git-extras \
   OMZP::colored-man-pages \
-  djui/alias-tips \
   z-shell/z \
+  djui/alias-tips \
   voronkovich/gitignore.plugin.zsh \
   as"completion" blockf zsh-users/zsh-completions \
   atinit"zicompinit; zicdreplay" z-shell/fast-syntax-highlighting
+
+zi from"gh-r" as"program" mv"direnv* -> direnv" \
+  atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' \
+  pick"direnv" src="zhook.zsh" for \
+    direnv/direnv

@@ -24,6 +24,7 @@ zi wait lucid light-mode for \
   OMZP::direnv \
   OMZP::git-extras \
   OMZP::colored-man-pages \
+  has'fzf' Aloxaf/fzf-tab \
   z-shell/z \
   djui/alias-tips \
   voronkovich/gitignore.plugin.zsh \

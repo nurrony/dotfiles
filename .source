@@ -7,7 +7,6 @@ source $DOTFILE_DIR/plugins/git/git.plugin.zsh
 (command -v "minikube" > /dev/null 2>&1) && source <(minikube completion zsh)
 (command -v "flutter" > /dev/null 2>&1) && source <(flutter bash-completion)
 
-
 # Java SDKMan
 export SDKMAN_DIR="/Users/nurrony/.sdkman"
 [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"

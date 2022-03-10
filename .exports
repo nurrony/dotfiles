@@ -18,9 +18,6 @@ export NODE_REPL_HISTORY=~/.node_history;
 # Use sloppy mode by default, matching web browsers.
 export NODE_REPL_MODE='sloppy';
 
-# for OMZ NVM plugins
-export NVM_AUTOLOAD=1
-
 # Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
 export PYTHONIOENCODING='UTF-8';
 

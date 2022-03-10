@@ -20,14 +20,12 @@ autoload -Uz _zi
 
 zi wait lucid light-mode for \
   OMZP::common-aliases \
-  OMZP::nvm \
+  OMZP::volta \
   OMZP::direnv \
   OMZP::git-extras \
   OMZP::colored-man-pages \
-  has'fzf' Aloxaf/fzf-tab \
   z-shell/z \
   djui/alias-tips \
-  voronkovich/gitignore.plugin.zsh \
   as"completion" blockf zsh-users/zsh-completions \
   atinit"zicompinit; zicdreplay" z-shell/fast-syntax-highlighting
 

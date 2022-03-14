@@ -1,18 +1,23 @@
 #!/usr/bin/env bash
 echo "Installing Zsh and set is as default login shell..." && \
 brew install zsh
-# Switch to using brew-installed zsh as default shell
+# Switch to using brew-installed bash as default shell
 if ! fgrep -q '/usr/local/bin/zsh' /etc/shells; then
   echo '/usr/local/bin/zsh' | sudo tee -a /etc/shells;
-  sudo chsh -s /usr/local/bin/zsh;
+  chsh -s /usr/local/bin/zsh;
   sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
 fi;
 
+#Install Volta (https://volta.sh)
+echo -ne 'Installing Volta - The JS Tool Manager... '
+sh -c "$(curl --silent https://get.volta.sh)" >/dev/null 2>&1 && \
+echo '[done]' && \
 #Install Shell plugins
 echo -ne "installing custom plugins: thefuck, hostess... "
 brew install thefuck hostess >/dev/null 2>&1
 cd $HOME && \
 # clone .dotfile
+rm -fr $HOME/.dotfiles/.git && \
 mv .zshrc .zshrc.pre-nurrony-dotfiles && \
 ln -sf $HOME/.dotfiles/.{zshrc,curlrc,gemrc,gitattribute,gitconfig,gitignore,vimrc,wgetrc} $HOME/
 echo 'All are done. Applying changes..'

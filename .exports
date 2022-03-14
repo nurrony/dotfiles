@@ -18,6 +18,11 @@ export NODE_REPL_HISTORY=~/.node_history;
 # Use sloppy mode by default, matching web browsers.
 export NODE_REPL_MODE='sloppy';
 
+# NVM Exports
+export NVM_AUTO_USE=true
+export NVM_LAZY_LOAD=true
+export NVM_COMPLETION=true
+
 # Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
 export PYTHONIOENCODING='UTF-8';
 

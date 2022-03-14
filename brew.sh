@@ -113,7 +113,7 @@ brew install zlib
 
 # See here: https://github.com/BurntSushi/ripgrep
 brew install ripgrep
-brew install --ignore-dependencies yarn
+brew install yarn --ignore-dependencies
 brew install git-flow-avh
 
 # Docker

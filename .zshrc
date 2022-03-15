@@ -23,7 +23,6 @@ zi wait lucid light-mode for \
   OMZP::direnv \
   OMZP::git-extras \
   OMZP::colored-man-pages \
-  z-shell/z \
   djui/alias-tips \
   lukechilds/zsh-nvm \
   as"completion" blockf zsh-users/zsh-completions \

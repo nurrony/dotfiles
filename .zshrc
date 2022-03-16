@@ -19,14 +19,16 @@ autoload -Uz _zi
 (( ${+_comps} )) && _comps[zi]=_zi
 
 zi wait lucid light-mode for \
-  OMZP::common-aliases \
-  OMZP::direnv \
+  z-shell/z \
   OMZP::git-extras \
-  OMZP::colored-man-pages \
+  OMZP::common-aliases \
   djui/alias-tips \
   lukechilds/zsh-nvm \
   as"completion" blockf zsh-users/zsh-completions \
   atinit"zicompinit; zicdreplay" z-shell/fast-syntax-highlighting
+
+zi ice lucid wait"2"
+zi light z-shell/history-search-multi-word
 
 zi from"gh-r" as"program" mv"direnv* -> direnv" \
   atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' \

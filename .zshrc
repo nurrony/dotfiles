@@ -22,6 +22,7 @@ zi wait lucid light-mode for \
   z-shell/z \
   OMZP::git-extras \
   OMZP::common-aliases \
+  OMZ::plugins/git/git.plugin.zsh \
   djui/alias-tips \
   lukechilds/zsh-nvm \
   as"completion" blockf zsh-users/zsh-completions \

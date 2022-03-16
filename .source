@@ -1,5 +1,6 @@
 #!/usr/bin/env zsh
-source $DOTFILE_DIR/plugins/git/git.plugin.zsh
+
+# source $DOTFILE_DIR/plugins/git/git.plugin.zsh
 
 # Kubernetes Completion
 (command -v "autok3s" > /dev/null 2>&1) && source <(autok3s completion zsh)

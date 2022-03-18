@@ -19,11 +19,11 @@ autoload -Uz _zi
 (( ${+_comps} )) && _comps[zi]=_zi
 
 zi wait lucid light-mode for \
+  djui/alias-tips \
   pick'z.sh' z-shell/z \
   OMZ::plugins/git/git.plugin.zsh \
   OMZ::plugins/git-extras/git-extras.plugin.zsh \
   OMZ::plugins/common-aliases/common-aliases.plugin.zsh \
-  pick'alias-tips.plugin.zsh' djui/alias-tips \
   pick'zsh-nvm.plugin.zsh' lukechilds/zsh-nvm \
   as'completion' blockf zsh-users/zsh-completions \
   atinit'zicompinit; zicdreplay' z-shell/fast-syntax-highlighting

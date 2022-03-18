@@ -22,6 +22,7 @@ export NODE_REPL_MODE='sloppy';
 export NVM_AUTO_USE=true
 export NVM_LAZY_LOAD=true
 export NVM_COMPLETION=true
+export NVM_LAZY_LOAD_EXTRA_COMMANDS=('yarn')
 
 # Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
 export PYTHONIOENCODING='UTF-8';

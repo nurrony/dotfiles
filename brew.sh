@@ -50,8 +50,6 @@ brew install thefuck
 brew install bat
 brew install eth-p/software/bat-extras
 brew install watch
-brew install exa
-brew install duf
 brew install dog
 brew install dua-cli
 
@@ -117,11 +115,6 @@ brew install git-flow-avh
 
 # Docker
 brew install docker-machine
-
-# brew tap devinci-code/tap
-# brew install ahoy
-brew install maven
-brew install gradle
 
 # AWS CLIs
 brew tap aws/tap
@@ -189,8 +182,6 @@ brew tap homebrew/cask
 brew tap homebrew/cask-versions
 brew install --cask alfred \
 android-file-transfer \
-appcleaner \
-bitwarden \
 brave-browser \
 docker \
 gpg-suite \

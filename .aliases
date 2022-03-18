@@ -201,7 +201,7 @@ alias gflrs='git flow release start'
 alias gflff='git flow feature finish'
 alias gflhf='git flow hotfix finish'
 alias gflrf='git flow release finish'
-alias gcz='git cz'
+alias gcz='git-cz'
 
 # Kubernetes aliases
 alias k8s='autok3s kubectl'

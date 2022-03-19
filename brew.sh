@@ -47,6 +47,7 @@ brew install readline
 brew install libksba
 brew install openssl
 brew install thefuck
+brew install fd
 brew install bat
 brew install eth-p/software/bat-extras
 brew install watch

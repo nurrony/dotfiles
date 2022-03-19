@@ -41,6 +41,10 @@ alias lsa='command exa -abghHl --git --group-directories-first'
 alias cat="command bat --theme='Visual Studio Dark+' --style=plain --pager=never"
 alias man='command batman'
 
+# cp
+alias cpv='rsync -az --progress'
+
+
 # Always enable colored `grep` output
 # Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.
 alias grep='grep --color=auto'

@@ -50,8 +50,6 @@ brew install thefuck
 brew install bat
 brew install eth-p/software/bat-extras
 brew install watch
-brew install dog
-brew install dua-cli
 
 # Install some CTF tools; see https://github.com/ctfs/write-ups.
 brew install binutils

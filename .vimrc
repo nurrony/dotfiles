@@ -9,37 +9,35 @@
 "  Version : 1.0.0
 "  License : MIT
 "  Author  : Nur Rony
-"  URL     : https://github.com/nmrony/vimrc
+"  URL     : https://github.com/nmrony/dotfiles
 "----------------------------------------------------------------
-"  Index:
-"   1. General settings
-"   2. Plugins (Plug)
-"   3. Plugins settings
-"   4. User interface
-"   5. Scheme and colors
-"   6. Files and backup
-"   7. Buffers management
-"   8. Tabs management
-"   9. Multiple windows
-"  10. Indentation tabs
-"  11. Moving around lines
-"  12. Paste mode
-"  13. Search, vimgrep and grep
-"  14. Text edition
-"  15. Make settings
-"  16. Filetype settings
-"  17. Helper functions
-"  18. External tools integration
+
 "----------------------------------------------------------------
+"" Vim-Plug: auto install itself along with configured plugins
+"----------------------------------------------------------------
+let vimplug_exists=expand('~/.vim/autoload/plug.vim')
+if has('win32')&&!has('win64')
+  let curl_exists=expand('C:\Windows\Sysnative\curl.exe')
+else
+  let curl_exists=expand('curl')
+endif
+
+if !filereadable(vimplug_exists)
+  if !executable(curl_exists)
+    echoerr "You have to install curl or first install vim-plug yourself!"
+    execute "q!"
+  endif
+  echo "Installing Vim-Plug..."
+  echo ""
+  silent exec "!"curl_exists" -fLo " . shellescape(vimplug_exists) . " --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+  let g:not_finish_vimplug = "yes"
+
+  autocmd VimEnter * PlugInstall
+endif
 
 "----------------------------------------------------------------
 " 1. General settings
 "----------------------------------------------------------------
-" Disable vi compatibility
-if !has("nvim")
-	set nocompatible
-endif
-
 " Reload .vimrc
 nnoremap <F12> :so $MYVIMRC<CR>
 
@@ -65,13 +63,6 @@ nnoremap Q <NOP>
 " Open help in a vertical window
 cnoreabbrev help vert help
 
-" Terminal (nvim)
-if has("terminal") && has("nvim")
-	nnoremap <silent> <F7> :call <SID>ToggleTerminal()<CR>
-	tnoremap <silent> <F7> <C-\><C-n><Bar>:wincmd p<CR>
-	tnoremap <Esc> <C-\><C-n>
-endif
-
 " Set inc/dec
 set nrformats-=octal
 
@@ -81,123 +72,106 @@ set nrformats-=octal
 " List of plugins installed
 call plug#begin('~/.vim/plugged')
 
-	" Statusbar
-	Plug 'vim-airline/vim-airline'
-	Plug 'vim-airline/vim-airline-themes'
+  " Statusbar
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
 
-	" Git tools
-	Plug 'airblade/vim-gitgutter'
-	Plug 'tpope/vim-fugitive'
-	Plug 'junegunn/gv.vim'
+  " Git tools
+  Plug 'airblade/vim-gitgutter'
+  Plug 'tpope/vim-fugitive'
+  Plug 'junegunn/gv.vim'
 
-	" Sessions
-	Plug 'xolox/vim-session'
-	Plug 'xolox/vim-misc'
+  " Sessions
+  Plug 'xolox/vim-session'
+  Plug 'xolox/vim-misc'
 
-	" Tools
-	Plug 'preservim/nerdcommenter', { 'commit': 'a5d1663' }
-	Plug 'preservim/nerdtree'
-	Plug 'valloric/listtoggle'
-	Plug 'majutsushi/tagbar'
-	Plug 'ctrlpvim/ctrlp.vim'
-	Plug 'mbbill/undotree'
-	Plug 'dense-analysis/ale'
-	Plug 'junegunn/fzf'
-	Plug 'junegunn/fzf.vim'
+  " Tools
+  Plug 'preservim/nerdcommenter', { 'commit': 'a5d1663' }
+  Plug 'preservim/nerdtree'
+  Plug 'valloric/listtoggle'
+  Plug 'majutsushi/tagbar'
+  Plug 'ctrlpvim/ctrlp.vim'
+  Plug 'mbbill/undotree'
+  Plug 'dense-analysis/ale'
+  Plug 'junegunn/fzf'
+  Plug 'junegunn/fzf.vim'
 
-	" Deoplete, specific for Vim8
-	if !has("nvim")
-		Plug 'roxma/nvim-yarp'
-		Plug 'roxma/vim-hug-neovim-rpc'
-	endif
+  " Autocomplete
+  Plug 'Shougo/neosnippet.vim', { 'commit': '037b7a7' }
+  Plug 'Shougo/neosnippet-snippets'
+  Plug 'Shougo/context_filetype.vim'
+  Plug 'ervandew/supertab'
 
-	" Autocomplete
-	Plug 'Shougo/deoplete.nvim', { 'commit': '17ffeb9' }
-	Plug 'Shougo/neosnippet.vim', { 'commit': '037b7a7' }
-	Plug 'Shougo/neosnippet-snippets'
-	Plug 'Shougo/context_filetype.vim'
-	Plug 'ervandew/supertab'
+  " C/C++ support
+  Plug 'deoplete-plugins/deoplete-clang', { 'commit': '30f17cb' }
 
-	" C/C++ support
-	Plug 'deoplete-plugins/deoplete-clang', { 'commit': '30f17cb' }
+  " Go support
+  Plug 'fatih/vim-go', { 'tag': 'v1.19' }
+  Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
+  Plug 'deoplete-plugins/deoplete-go', { 'commit': 'fa73f06'}
 
-	" Go support
-	Plug 'fatih/vim-go', { 'tag': 'v1.19' }
-	Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
-	Plug 'deoplete-plugins/deoplete-go', { 'commit': 'fa73f06'}
+  " Perl support
+  Plug 'c9s/perlomni.vim'
 
-	" Perl support
-	Plug 'c9s/perlomni.vim'
+  " Python support
+  Plug 'deoplete-plugins/deoplete-jedi', { 'commit': '46121d9' }
 
-	" Python support
-	Plug 'deoplete-plugins/deoplete-jedi', { 'commit': '46121d9' }
+  " Zsh support
+  Plug 'deoplete-plugins/deoplete-zsh', { 'commit': '12141ad' }
 
-	" Ruby support
-	Plug 'vim-ruby/vim-ruby'
-	Plug 'tpope/vim-rails'
-	Plug 'tpope/vim-endwise'
-	Plug 'tpope/vim-liquid'
+  " JavaScript support
+  Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
+  Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+  Plug 'othree/jspc.vim'
+  Plug 'maksimr/vim-jsbeautify'
 
-	" PHP support
-	Plug 'shawncplus/phpcomplete.vim'
 
-	" Haskell support
-	Plug 'eagletmt/neco-ghc'
+  " typescript
+  Plug 'leafgarland/typescript-vim'
+  Plug 'HerringtonDarkholme/yats.vim'
 
-	" Rust support
-	Plug 'racer-rust/vim-racer'
+  " VimL support
+  Plug 'Shougo/neco-vim', { 'commit' : '4c0203b' }
 
-	" Zsh support
-	Plug 'deoplete-plugins/deoplete-zsh', { 'commit': '12141ad' }
+  " Additional syntax files
+  Plug 'othree/html5.vim'
+  Plug 'vim-language-dept/css-syntax.vim'
+  Plug 'hail2u/vim-css3-syntax'
+  Plug 'pangloss/vim-javascript'
+  Plug 'Shougo/neco-syntax', { 'commit': '98cba4a' }
+  Plug 'mboughaba/i3config.vim'
+  Plug 'aklt/plantuml-syntax'
+  Plug 'gerardbm/asy.vim'
+  Plug 'gerardbm/eukleides.vim'
+  Plug 'zaid/vim-rec'
 
-	" JavaScript support
-	Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
-	Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-	Plug 'othree/jspc.vim'
-	Plug 'maksimr/vim-jsbeautify'
+  " Edition
+  Plug 'junegunn/vim-easy-align'
+  Plug 'godlygeek/tabular'
+  Plug 'jiangmiao/auto-pairs'
+  Plug 'alvan/vim-closetag'
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-repeat'
+  Plug 'tpope/vim-capslock'
+  Plug 'wellle/targets.vim'
+  Plug 'christoomey/vim-sort-motion'
+  Plug 'terryma/vim-expand-region'
+  Plug 'Valloric/MatchTagAlways'
+  Plug 'FooSoft/vim-argwrap'
+  Plug 'gerardbm/vim-md-headings'
+  Plug 'matze/vim-move'
 
-	" VimL support
-	Plug 'Shougo/neco-vim', { 'commit' : '4c0203b' }
+  " Misc
+  Plug 'christoomey/vim-tmux-navigator'
+  Plug 'tpope/vim-characterize'
+  Plug 'tyru/open-browser.vim'
+  Plug 'junegunn/goyo.vim'
+  Plug 'mattn/webapi-vim'
+  Plug 'mattn/emmet-vim'
+  Plug 'vimwiki/vimwiki', { 'branch': 'master' }
 
-	" Additional syntax files
-	Plug 'othree/html5.vim'
-	Plug 'vim-language-dept/css-syntax.vim'
-	Plug 'hail2u/vim-css3-syntax'
-	Plug 'pangloss/vim-javascript'
-	Plug 'Shougo/neco-syntax', { 'commit': '98cba4a' }
-	Plug 'mboughaba/i3config.vim'
-	Plug 'aklt/plantuml-syntax'
-	Plug 'gerardbm/asy.vim'
-	Plug 'gerardbm/eukleides.vim'
-	Plug 'zaid/vim-rec'
-
-	" Edition
-	Plug 'junegunn/vim-easy-align'
-	Plug 'godlygeek/tabular'
-	Plug 'jiangmiao/auto-pairs'
-	Plug 'alvan/vim-closetag'
-	Plug 'tpope/vim-surround'
-	Plug 'tpope/vim-repeat'
-	Plug 'tpope/vim-capslock'
-	Plug 'wellle/targets.vim'
-	Plug 'christoomey/vim-sort-motion'
-	Plug 'terryma/vim-expand-region'
-	Plug 'Valloric/MatchTagAlways'
-	Plug 'FooSoft/vim-argwrap'
-	Plug 'gerardbm/vim-md-headings'
-	Plug 'matze/vim-move'
-
-	" Misc
-	Plug 'christoomey/vim-tmux-navigator'
-	Plug 'tpope/vim-characterize'
-	Plug 'tyru/open-browser.vim'
-	Plug 'junegunn/goyo.vim'
-	Plug 'mattn/webapi-vim'
-	Plug 'mattn/emmet-vim'
-	Plug 'vimwiki/vimwiki', { 'branch': 'master' }
-
-	" Color schemes
-	Plug 'Rigellute/shades-of-purple.vim'
+  " Color schemes
+  Plug 'Rigellute/shades-of-purple.vim'
 
 call plug#end()
 
@@ -206,15 +180,16 @@ call plug#end()
 "----------------------------------------------------------------
 " --- Statusbar ---
 " Airline settings
-let g:airline_theme                       = 'dracula'
+let g:airline_theme                       = 'shades_of_purple'
+let g:shades_of_purple_airline            = 1
 let g:airline_powerline_fonts             = 1
 let g:airline#extensions#tabline#enabled  = 0
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_section_z                   = airline#section#create([
-			\ '%1p%% ',
-			\ 'Ξ%l%',
-			\ '\⍿%c'])
-" call airline#parts#define_accent('mode', 'black')
+      \ '%1p%% ',
+      \ 'Ξ%l%',
+      \ '\⍿%c'])
+call airline#parts#define_accent('mode', 'black')
 
 " --- Git tools ---
 " Gitgutter settings
@@ -255,14 +230,14 @@ nnoremap <C-b> :OpenSession<CR>
 
 " --- Tools ---
 " NERDCommenter settings
-let g:NERDDefaultAlign          = 'left'
+let g:NERDDefaultAlign          = 'right'
 let g:NERDSpaceDelims           = 1
 let g:NERDCompactSexyComs       = 1
 let g:NERDCommentEmptyLines     = 0
 let g:NERDCreateDefaultMappings = 0
 let g:NERDCustomDelimiters      = {
-	\ 'python': {'left': '#'},
-	\ }
+  \ 'python': {'left': '#'},
+  \ }
 
 nnoremap cc :call NERDComment(0,'toggle')<CR>
 vnoremap cc :call NERDComment(0,'toggle')<CR>
@@ -272,13 +247,13 @@ nnoremap <silent> <C-n> :call <SID>ToggleNERDTree()<CR>
 
 " ALE settings
 let g:ale_linters = {
-	\ 'c'          : ['clang'],
-	\ 'vim'        : ['vint'],
-	\ 'python'     : ['pylint'],
-	\ 'javascript' : ['jshint'],
-	\ 'css'        : ['csslint'],
-	\ 'tex'        : ['chktex'],
-	\ }
+  \ 'c'          : ['clang'],
+  \ 'vim'        : ['vint'],
+  \ 'python'     : ['pylint'],
+  \ 'javascript' : ['jshint'],
+  \ 'css'        : ['csslint'],
+  \ 'tex'        : ['chktex'],
+  \ }
 
 " FZF settings
 let $FZF_PREVIEW_COMMAND = 'cat {}'
@@ -310,25 +285,25 @@ let g:ctrlp_show_hidden         = 1
 let g:ctrlp_follow_symlinks     = 1
 let g:ctrlp_open_multiple_files = '0i'
 let g:ctrlp_prompt_mappings     = {
-	\ 'PrtHistory(1)'        : [''],
-	\ 'PrtHistory(-1)'       : [''],
-	\ 'ToggleType(1)'        : ['<C-l>', '<C-up>'],
-	\ 'ToggleType(-1)'       : ['<C-h>', '<C-down>'],
-	\ 'PrtCurLeft()'         : ['<C-b>', '<Left>'],
-	\ 'PrtCurRight()'        : ['<C-f>', '<Right>'],
-	\ 'PrtBS()'              : ['<C-s>', '<BS>'],
-	\ 'PrtDelete()'          : ['<C-d>', '<DEL>'],
-	\ 'PrtDeleteWord()'      : ['<C-w>'],
-	\ 'PrtClear()'           : ['<C-u>'],
-	\ 'ToggleByFname()'      : ['<C-g>'],
-	\ 'AcceptSelection("e")' : ['<C-m>', '<CR>'],
-	\ 'AcceptSelection("h")' : ['<C-x>'],
-	\ 'AcceptSelection("t")' : ['<C-t>'],
-	\ 'AcceptSelection("v")' : ['<C-v>'],
-	\ 'OpenMulti()'          : ['<C-o>'],
-	\ 'MarkToOpen()'         : ['<c-z>'],
-	\ 'PrtExit()'            : ['<esc>', '<c-c>', '<c-p>'],
-	\ }
+  \ 'PrtHistory(1)'        : [''],
+  \ 'PrtHistory(-1)'       : [''],
+  \ 'ToggleType(1)'        : ['<C-l>', '<C-up>'],
+  \ 'ToggleType(-1)'       : ['<C-h>', '<C-down>'],
+  \ 'PrtCurLeft()'         : ['<C-b>', '<Left>'],
+  \ 'PrtCurRight()'        : ['<C-f>', '<Right>'],
+  \ 'PrtBS()'              : ['<C-s>', '<BS>'],
+  \ 'PrtDelete()'          : ['<C-d>', '<DEL>'],
+  \ 'PrtDeleteWord()'      : ['<C-w>'],
+  \ 'PrtClear()'           : ['<C-u>'],
+  \ 'ToggleByFname()'      : ['<C-g>'],
+  \ 'AcceptSelection("e")' : ['<C-m>', '<CR>'],
+  \ 'AcceptSelection("h")' : ['<C-x>'],
+  \ 'AcceptSelection("t")' : ['<C-t>'],
+  \ 'AcceptSelection("v")' : ['<C-v>'],
+  \ 'OpenMulti()'          : ['<C-o>'],
+  \ 'MarkToOpen()'         : ['<c-z>'],
+  \ 'PrtExit()'            : ['<esc>', '<c-c>', '<c-p>'],
+  \ }
 
 " Undotree toggle
 nnoremap <Leader>u :UndotreeToggle<CR>
@@ -343,12 +318,12 @@ let g:go_highlight_operators         = 1
 let g:go_highlight_build_constraints = 1
 let g:go_bin_path                    = expand('~/.gotools')
 let g:go_list_type                   = 'quickfix'
-let g:go_version_warning             = 0 " Keep until vim v8.0.1453, nvim v3.2
+let g:go_version_warning             = 0 " Keep until vim v8.0.1453
 
 " CSS3 settings
 augroup VimCSS3Syntax
-	autocmd!
-	autocmd FileType css setlocal iskeyword+=-
+  autocmd!
+  autocmd FileType css setlocal iskeyword+=-
 augroup END
 
 " Javascript settings
@@ -374,17 +349,17 @@ let g:config_Beautifier['html'] = {}
 let g:config_Beautifier['html'].indent_style = 'space'
 
 augroup beautify
-	autocmd!
-	autocmd FileType javascript nnoremap <buffer> <Leader>bf :call JsBeautify()<cr>
-	autocmd FileType javascript vnoremap <buffer> <Leader>bf :call RangeJsBeautify()<cr>
-	autocmd FileType json nnoremap <buffer> <Leader>bf :call JsonBeautify()<cr>
-	autocmd FileType json vnoremap <buffer> <Leader>bf :call RangeJsonBeautify()<cr>
-	autocmd FileType jsx nnoremap <buffer> <Leader>bf :call JsxBeautify()<cr>
-	autocmd FileType jsx vnoremap <buffer> <Leader>bf :call RangeJsxBeautify()<cr>
-	autocmd FileType html nnoremap <buffer> <Leader>bf :call HtmlBeautify()<cr>
-	autocmd FileType html vnoremap <buffer> <Leader>bf :call RangeHtmlBeautify()<cr>
-	autocmd FileType css nnoremap <buffer> <Leader>bf :call CSSBeautify()<cr>
-	autocmd FileType css vnoremap <buffer> <Leader>bf :call RangeCSSBeautify()<cr>
+  autocmd!
+  autocmd FileType javascript nnoremap <buffer> <Leader>bf :call JsBeautify()<cr>
+  autocmd FileType javascript vnoremap <buffer> <Leader>bf :call RangeJsBeautify()<cr>
+  autocmd FileType json nnoremap <buffer> <Leader>bf :call JsonBeautify()<cr>
+  autocmd FileType json vnoremap <buffer> <Leader>bf :call RangeJsonBeautify()<cr>
+  autocmd FileType jsx nnoremap <buffer> <Leader>bf :call JsxBeautify()<cr>
+  autocmd FileType jsx vnoremap <buffer> <Leader>bf :call RangeJsxBeautify()<cr>
+  autocmd FileType html nnoremap <buffer> <Leader>bf :call HtmlBeautify()<cr>
+  autocmd FileType html vnoremap <buffer> <Leader>bf :call RangeHtmlBeautify()<cr>
+  autocmd FileType css nnoremap <buffer> <Leader>bf :call CSSBeautify()<cr>
+  autocmd FileType css vnoremap <buffer> <Leader>bf :call RangeCSSBeautify()<cr>
 augroup end
 
 " --- Autocomplete ---
@@ -400,7 +375,7 @@ autocmd CompleteDone * if pumvisible() == 0 | pclose | endif
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#omni#functions    = {}
-call deoplete#custom#option('auto_complete_delay', 250)
+
 
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
@@ -414,9 +389,9 @@ let g:deoplete#sources#go#use_cache     = 1
 
 " Javascript autocompletion
 let g:deoplete#omni#functions.javascript = [
-	\ 'tern#Complete',
-	\ 'jspc#omni',
-	\ ]
+  \ 'tern#Complete',
+  \ 'jspc#omni',
+  \ ]
 
 " Clang autocompletion
 let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-4.0/lib/libclang.so'
@@ -430,20 +405,20 @@ xmap <C-s> <Plug>(neosnippet_expand_target)
 
 " Behaviour like SuperTab
 smap <expr><TAB>
-	\ neosnippet#expandable_or_jumpable() ?
-	\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+  \ neosnippet#expandable_or_jumpable() ?
+  \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
 " For conceal markers
 if has('conceal')
-	set conceallevel=0 concealcursor=niv
-	nnoremap <silent> coi :set conceallevel=0<CR>:set concealcursor=niv<CR>
-	nnoremap <silent> coo :set conceallevel=2<CR>:set concealcursor=vc<CR>
-	nnoremap <silent> cop :set conceallevel=2<CR>:set concealcursor=niv<CR>
-	nnoremap <silent> com :set conceallevel=3<CR>:set concealcursor=niv<CR>
+  set conceallevel=0 concealcursor=niv
+  nnoremap <silent> coi :set conceallevel=0<CR>:set concealcursor=niv<CR>
+  nnoremap <silent> coo :set conceallevel=2<CR>:set concealcursor=vc<CR>
+  nnoremap <silent> cop :set conceallevel=2<CR>:set concealcursor=niv<CR>
+  nnoremap <silent> com :set conceallevel=3<CR>:set concealcursor=niv<CR>
 endif
 
 augroup all
-	autocmd InsertLeave * NeoSnippetClearMarkers
+  autocmd InsertLeave * NeoSnippetClearMarkers
 augroup end
 
 " --- Edition ---
@@ -464,10 +439,6 @@ let g:AutoPairsMultilineClose = 0
 let g:AutoPairsShortcutJump   = '<C-z>'
 let g:AutoPairsShortcutToggle = '<C-q>'
 
-" Workaround to fix an Auto-pairs bug until it gets fixed
-if has("nvim")
-	autocmd VimEnter,BufEnter,BufWinEnter * silent! iunmap <buffer> <M-">
-endif
 
 " Closetag settings
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.xml,*.html.erb,*.md'
@@ -483,9 +454,9 @@ autocmd FileType markdown,liquid let b:surround_{char2nr('o')} = "**\r**"
 autocmd FileType markdown,liquid let b:surround_{char2nr('x')} = "«\r»"
 autocmd FileType markdown,liquid let b:surround_{char2nr('h')} = "\[\r\]\(//\)"
 autocmd FileType markdown,liquid let b:surround_{char2nr('e')} = "\[\r\]
-			\\(\){:rel=\"nofollow noopener noreferrer\" target=\"_blank\"}"
+      \\(\){:rel=\"nofollow noopener noreferrer\" target=\"_blank\"}"
 autocmd FileType markdown,liquid let b:surround_{char2nr('j')} = "!\[\r\]
-			\\(/images/\){: .align-}"
+      \\(/images/\){: .align-}"
 
 " Caps Lock settings
 imap <expr><C-l> deoplete#smart_close_popup()."\<Plug>CapsLockToggle"
@@ -497,12 +468,12 @@ vmap <C-v> <Plug>(expand_region_shrink)
 
 " MatchTagAlways settings
 let g:mta_filetypes = {
-	\ 'html'  : 1,
-	\ 'xhtml' : 1,
-	\ 'xml'   : 1,
-	\ 'jinja' : 1,
-	\ 'php'   : 1,
-	\ }
+  \ 'html'  : 1,
+  \ 'xhtml' : 1,
+  \ 'xml'   : 1,
+  \ 'jinja' : 1,
+  \ 'php'   : 1,
+  \ }
 
 " ArgWrap settings
 let g:argwrap_tail_comma    = 1
@@ -519,9 +490,9 @@ let g:tmux_navigator_no_mappings = 1
 
 " Open-browser settings
 let g:openbrowser_browser_commands = [{
-	\ 'name': 'w3m',
-	\ 'args': 'tmux new-window w3m {uri}',
-	\ }]
+  \ 'name': 'w3m',
+  \ 'args': 'tmux new-window w3m {uri}',
+  \ }]
 
 nmap <Leader>gl <Plug>(openbrowser-open)
 
@@ -537,15 +508,15 @@ let g:vimwiki_url_maxsave   = 0
 let g:vimwiki_global_ext    = 0
 let g:vimwiki_syntax        = 'markdown'
 let g:vimwiki_list          = [
-	\ {'path': '~/Workspace/vimwiki'},
-	\ {'path': '~/Workspace/vimwiki/Articles'},
-	\ {'path': '~/Workspace/vimwiki/Codes'},
-	\ {'path': '~/Workspace/vimwiki/Notes'},
-	\ {'path': '~/Workspace/vimwiki/Projects'},
-	\ {'path': '~/Workspace/vimwiki/Studies'},
-	\ {'path': '~/Workspace/vimwiki/ToDos'},
-	\ {'path': '~/Workspace/vimwiki/Unix'}
-	\ ]
+  \ {'path': '~/Workspace/vimwiki'},
+  \ {'path': '~/Workspace/vimwiki/Articles'},
+  \ {'path': '~/Workspace/vimwiki/Codes'},
+  \ {'path': '~/Workspace/vimwiki/Notes'},
+  \ {'path': '~/Workspace/vimwiki/Projects'},
+  \ {'path': '~/Workspace/vimwiki/Studies'},
+  \ {'path': '~/Workspace/vimwiki/ToDos'},
+  \ {'path': '~/Workspace/vimwiki/Unix'}
+  \ ]
 
 nnoremap <Leader>we :VimwikiToggleListItem<CR>
 vnoremap <Leader>we :VimwikiToggleListItem<CR>
@@ -591,35 +562,35 @@ set noerrorbells
 set novisualbell
 
 if !has("nvim")
-	set t_vb=
+  set t_vb=
 
-	" Terminal keycodes
-	if &term =~ 'screen'
-		set <F1>=[11~
-		set <F2>=[12~
-		set <F3>=[13~
-		set <F4>=[14~
-		set <F5>=[15~
-		set <F6>=[17~
-		set <F7>=[18~
-		set <F8>=[19~
-		set <F9>=[20~
-		set <F10>=[21~
-		set <F11>=[23~
-		set <F12>=[24~
-		set <S-F1>=[11;2~
-		set <S-F2>=[12;2~
-		set <S-F3>=[13;2~
-		set <S-F4>=[14;2~
-		set <S-F5>=[15;2~
-		set <S-F6>=[17;2~
-		set <S-F7>=[18;2~
-		set <S-F8>=[19;2~
-		set <S-F9>=[20;2~
-		set <S-F10>=[21;2~
-		set <S-F11>=[23;2~
-		set <S-F12>=[24;2~
-	endif
+  " Terminal keycodes
+  if &term =~ 'screen'
+    set <F1>=[11~
+    set <F2>=[12~
+    set <F3>=[13~
+    set <F4>=[14~
+    set <F5>=[15~
+    set <F6>=[17~
+    set <F7>=[18~
+    set <F8>=[19~
+    set <F9>=[20~
+    set <F10>=[21~
+    set <F11>=[23~
+    set <F12>=[24~
+    set <S-F1>=[11;2~
+    set <S-F2>=[12;2~
+    set <S-F3>=[13;2~
+    set <S-F4>=[14;2~
+    set <S-F5>=[15;2~
+    set <S-F6>=[17;2~
+    set <S-F7>=[18;2~
+    set <S-F8>=[19;2~
+    set <S-F9>=[20;2~
+    set <S-F10>=[21;2~
+    set <S-F11>=[23;2~
+    set <S-F12>=[24;2~
+  endif
 endif
 
 " Mouse
@@ -634,27 +605,27 @@ set laststatus=2
 
 " Change the cursor shape
 if !has("nvim")
-	let &t_SI = "\<Esc>[6 q"
-	let &t_SR = "\<Esc>[4 q"
-	let &t_EI = "\<Esc>[2 q"
+  let &t_SI = "\<Esc>[6 q"
+  let &t_SR = "\<Esc>[4 q"
+  let &t_EI = "\<Esc>[2 q"
 else
-	set guicursor=n-v:block-Cursor/lCursor-blinkon0
-	set guicursor+=i-ci-c:ver100-Cursor/lCursor-blinkon0
-	set guicursor+=r-cr:hor100-Cursor/lCursor-blinkon0
+  set guicursor=n-v:block-Cursor/lCursor-blinkon0
+  set guicursor+=i-ci-c:ver100-Cursor/lCursor-blinkon0
+  set guicursor+=r-cr:hor100-Cursor/lCursor-blinkon0
 endif
 
 " Omni completion
 if has('autocmd') && exists('+omnifunc')
 autocmd Filetype *
-	\ if &omnifunc == "" |
-	\     setlocal omnifunc=syntaxcomplete#Complete |
-	\ endif
+  \ if &omnifunc == "" |
+  \     setlocal omnifunc=syntaxcomplete#Complete |
+  \ endif
 endif
 
 " Fix italics issue
 if !has("nvim")
-	let &t_ZH="\e[3m"
-	let &t_ZR="\e[23m"
+  let &t_ZH="\e[3m"
+  let &t_ZR="\e[23m"
 endif
 
 "----------------------------------------------------------------
@@ -664,7 +635,7 @@ endif
 syntax enable
 
 " Color scheme
-" colorscheme dracula
+colorscheme shades_of_purple
 
 " Show syntax highlighting groups
 nnoremap <Leader>B :call <SID>SynStack()<CR>
@@ -687,6 +658,10 @@ set nowritebackup
 
 " Use UTF-8 as default encoding
 set encoding=utf-8
+set encoding=utf-8
+set fileencoding=utf-8
+set fileencodings=utf-8
+
 
 " Use Unix as the standard file type
 set fileformats=unix,dos,mac
@@ -724,8 +699,8 @@ filetype indent on
 " Allow us to use Ctrl-s and Ctrl-q as keybinds
 " Restore default behaviour when leaving Vim.
 if !has("nvim")
-	silent !stty -ixon
-	autocmd VimLeave * silent !stty ixon
+  silent !stty -ixon
+  autocmd VimLeave * silent !stty ixon
 endif
 
 " Save the current buffer
@@ -774,8 +749,8 @@ set fileignorecase
 
 " Specify the behavior when switching between buffers
 try
-	set switchbuf=useopen,usetab,newtab
-	set showtabline=2
+  set switchbuf=useopen,usetab,newtab
+  set showtabline=2
 catch
 endtry
 
@@ -818,10 +793,10 @@ map <C-w>, <C-w>=
 
 " Resize windows
 if bufwinnr(1)
-	map + :resize +1<CR>
-	map - :resize -1<CR>
-	map < :vertical resize +1<CR>
-	map > :vertical resize -1<CR>
+  map + :resize +1<CR>
+  map - :resize -1<CR>
+  map < :vertical resize +1<CR>
+  map > :vertical resize -1<CR>
 endif
 
 " Toggle resize window
@@ -839,10 +814,10 @@ nnoremap <silent> <C-w>o :wincmd o<CR>:echo "Only one window."<CR>
 " - URL: https://github.com/gerardbm/dotfiles/blob/master/tmux/.tmux.conf
 " - Plugin required: https://github.com/christoomey/vim-tmux-navigator
 if !has("nvim")
-	set <M-h>=h
-	set <M-j>=j
-	set <M-k>=k
-	set <M-l>=l
+  set <M-h>=h
+  set <M-j>=j
+  set <M-k>=k
+  set <M-l>=l
 endif
 
 nnoremap <silent> <M-h> :TmuxNavigateLeft<CR>
@@ -858,8 +833,8 @@ nnoremap <silent> <Leader>. :pclose<CR>
 
 " Scroll the preview window
 if !has("nvim")
-	set <M-d>=d
-	set <M-u>=u
+  set <M-d>=d
+  set <M-u>=u
 endif
 
 nnoremap <silent> <M-d> :wincmd P<CR>5<C-e>:wincmd p<CR>
@@ -974,9 +949,9 @@ set foldmethod=marker
 
 " Return to last edit position when opening files
 autocmd BufReadPost *
-	\ if line("'\"") > 0 && line("'\"") <= line("$") |
-	\   exe "normal! g`\"" |
-	\ endif
+  \ if line("'\"") > 0 && line("'\"") <= line("$") |
+  \   exe "normal! g`\"" |
+  \ endif
 
 " --- Readline commands ---
 "----------------------------------------------------------------
@@ -1012,14 +987,14 @@ cnoremap <C-q> <S-Right><C-w>
 " Bracketed paste mode
 " - Source: https://ttssh2.osdn.jp/manual/en/usage/tips/vim.html
 if !has("nvim")
-	if has("patch-8.0.0238")
-		if &term =~ "screen"
-			let &t_BE = "\e[?2004h"
-			let &t_BD = "\e[?2004l"
-			exec "set t_PS=\e[200~"
-			exec "set t_PE=\e[201~"
-		endif
-	endif
+  if has("patch-8.0.0238")
+    if &term =~ "screen"
+      let &t_BE = "\e[?2004h"
+      let &t_BD = "\e[?2004l"
+      exec "set t_PS=\e[200~"
+      exec "set t_PE=\e[201~"
+    endif
+  endif
 endif
 
 "----------------------------------------------------------------
@@ -1063,11 +1038,11 @@ nnoremap <Leader>m :noh<CR>
 
 " Search into a Visual selection
 vnoremap <silent> <Space> :<C-U>call <SID>RangeSearch('/')<CR>
-	\ :if strlen(g:srchstr) > 0
-	\ \|exec '/'.g:srchstr\|endif<CR>n
+  \ :if strlen(g:srchstr) > 0
+  \ \|exec '/'.g:srchstr\|endif<CR>n
 vnoremap <silent> ? :<C-U>call <SID>RangeSearch('?')<CR>
-	\ :if strlen(g:srchstr) > 0
-	\ \|exec '?'.g:srchstr\|endif<CR>N
+  \ :if strlen(g:srchstr) > 0
+  \ \|exec '?'.g:srchstr\|endif<CR>N
 
 " --- Vimgrep and grep ---
 "----------------------------------------------------------------
@@ -1087,8 +1062,8 @@ nnoremap <Leader>vv :call <SID>GrepWrapper('grep!', '', '%')<CR>
 
 " Current working directory
 nnoremap <Leader>vn :call <SID>GrepWrapper('grep!', '-R
-			\ --exclude-dir={.git,.svn,.jekyll-cache,_site}
-			\ --exclude=LICENSE', '')<CR>
+      \ --exclude-dir={.git,.svn,.jekyll-cache,_site}
+      \ --exclude=LICENSE', '')<CR>
 
 " Current buffer (grepadd)
 nnoremap <Leader>vm :call <SID>GrepWrapper('grepadd!', '', '%')<CR>
@@ -1188,7 +1163,7 @@ autocmd FileType html,markdown,liquid inoremap ñp {%  %}<left><left><left>
 "----------------------------------------------------------------
 " Set makeprg
 if !filereadable(expand('%:p:h').'/Makefile')
-	autocmd FileType c setlocal makeprg=gcc\ %\ &&\ ./a.out
+  autocmd FileType c setlocal makeprg=gcc\ %\ &&\ ./a.out
 endif
 
 " Go to the error line
@@ -1196,128 +1171,128 @@ set errorformat=%m\ in\ %f\ on\ line\ %l
 
 " Use the correct cursor shape via 'edit-command-line' (zle)
 augroup zsh
-	autocmd!
-	if !has("nvim")
-		autocmd Filetype zsh silent! exec "! echo -ne '\e[2 q'"
-	endif
+  autocmd!
+  if !has("nvim")
+    autocmd Filetype zsh silent! exec "! echo -ne '\e[2 q'"
+  endif
 augroup end
 
 " Run code in a tmux window
 augroup tmuxy
-	autocmd!
-	autocmd FileType javascript,lua,perl,php,python,ruby,sh
-				\ nnoremap <silent> <buffer> <Leader>ij
-				\ :call <SID>Tmuxy()<CR>
+  autocmd!
+  autocmd FileType javascript,lua,perl,php,python,ruby,sh
+        \ nnoremap <silent> <buffer> <Leader>ij
+        \ :call <SID>Tmuxy()<CR>
 augroup end
 
 " Run code in the preview window
 augroup scripty
-	autocmd!
-	autocmd FileType javascript,lua,perl,php,python,ruby,sh
-				\ nnoremap <silent> <buffer> <Leader>ii
-				\ :call <SID>Scripty()<CR>
+  autocmd!
+  autocmd FileType javascript,lua,perl,php,python,ruby,sh
+        \ nnoremap <silent> <buffer> <Leader>ii
+        \ :call <SID>Scripty()<CR>
 augroup end
 
 " Work with Sqlite databases
 augroup sqlite
-	autocmd!
-	autocmd FileType sql nnoremap <silent> <Leader>ia
-				\ :call <SID>SqliteDatabase()<CR>
-	autocmd FileType sql nnoremap <silent> <buffer> <Leader>ii
-				\ :call <SID>SQLExec('n')<CR>
-	autocmd FileType sql vnoremap <silent> <buffer> <Leader>ii
-				\ :<C-U>call <SID>SQLExec('v')<CR>
+  autocmd!
+  autocmd FileType sql nnoremap <silent> <Leader>ia
+        \ :call <SID>SqliteDatabase()<CR>
+  autocmd FileType sql nnoremap <silent> <buffer> <Leader>ii
+        \ :call <SID>SQLExec('n')<CR>
+  autocmd FileType sql vnoremap <silent> <buffer> <Leader>ii
+        \ :<C-U>call <SID>SQLExec('v')<CR>
 augroup end
 
 " Work with maxima (symbolic mathematics)
 augroup maxima
-	autocmd!
-	autocmd BufRead,BufNewFile *.max set filetype=maxima
-	autocmd FileType maxima nnoremap <silent> <buffer> <Leader>ii
-				\ :call <SID>MaximaExec('n')<CR>
-	autocmd FileType maxima vnoremap <silent> <buffer> <Leader>ii
-				\ :<C-U>call <SID>MaximaExec('v')<CR>
+  autocmd!
+  autocmd BufRead,BufNewFile *.max set filetype=maxima
+  autocmd FileType maxima nnoremap <silent> <buffer> <Leader>ii
+        \ :call <SID>MaximaExec('n')<CR>
+  autocmd FileType maxima vnoremap <silent> <buffer> <Leader>ii
+        \ :<C-U>call <SID>MaximaExec('v')<CR>
 augroup end
 
 " Convert LaTeX to PDF
 augroup latex
-	autocmd!
-	autocmd FileType tex nnoremap <silent> <buffer> <Leader>ii
-				\ :call <SID>Generator('.pdf', &ft)<CR>
+  autocmd!
+  autocmd FileType tex nnoremap <silent> <buffer> <Leader>ii
+        \ :call <SID>Generator('.pdf', &ft)<CR>
 augroup end
 
 " Convert markdown to PDF, HTML and EPUB
 augroup markdown
-	autocmd!
-	autocmd FileType markdown nnoremap <silent> <buffer> <Leader>ii
-				\ :call <SID>Generator('.pdf', &ft)<CR>
-	autocmd FileType markdown nnoremap <silent> <buffer> <Leader>ih
-				\ :call <SID>Generator('.html', &ft)<CR>
-	autocmd FileType markdown nnoremap <silent> <buffer> <Leader>ij
-				\ :call <SID>Generator('.epub', &ft)<CR>
+  autocmd!
+  autocmd FileType markdown nnoremap <silent> <buffer> <Leader>ii
+        \ :call <SID>Generator('.pdf', &ft)<CR>
+  autocmd FileType markdown nnoremap <silent> <buffer> <Leader>ih
+        \ :call <SID>Generator('.html', &ft)<CR>
+  autocmd FileType markdown nnoremap <silent> <buffer> <Leader>ij
+        \ :call <SID>Generator('.epub', &ft)<CR>
 augroup end
 
 " Draw with PlantUML
 augroup uml
-	autocmd!
-	autocmd FileType plantuml nnoremap <silent> <buffer> <Leader>ii
-				\ :call <SID>Generator('.png', &ft)<CR>
+  autocmd!
+  autocmd FileType plantuml nnoremap <silent> <buffer> <Leader>ii
+        \ :call <SID>Generator('.png', &ft)<CR>
 augroup end
 
 " Draw with Graphviz
 augroup dot
-	autocmd!
-	autocmd FileType dot nnoremap <silent> <buffer> <Leader>ii
-				\ :call <SID>Generator('.png', &ft)<CR>
+  autocmd!
+  autocmd FileType dot nnoremap <silent> <buffer> <Leader>ii
+        \ :call <SID>Generator('.png', &ft)<CR>
 augroup end
 
 " Draw with Eukleides
 augroup eukleides
-	autocmd!
-	autocmd BufRead,BufNewFile *.euk set filetype=eukleides
-	autocmd FileType eukleides nnoremap <silent> <buffer> <Leader>ii
-				\ :call <SID>Generator('.png', &ft)<CR>
+  autocmd!
+  autocmd BufRead,BufNewFile *.euk set filetype=eukleides
+  autocmd FileType eukleides nnoremap <silent> <buffer> <Leader>ii
+        \ :call <SID>Generator('.png', &ft)<CR>
 augroup end
 
 " Draw with Asymptote
 augroup asymptote
-	autocmd!
-	autocmd BufRead,BufNewFile *.asy set filetype=asy
-	autocmd FileType asy nnoremap <silent> <buffer> <Leader>ii
-				\ :call <SID>Generator('.png', &ft)<CR>
+  autocmd!
+  autocmd BufRead,BufNewFile *.asy set filetype=asy
+  autocmd FileType asy nnoremap <silent> <buffer> <Leader>ii
+        \ :call <SID>Generator('.png', &ft)<CR>
 augroup end
 
 " Draw with pp3
 augroup pp3
-	autocmd!
-	autocmd BufRead,BufNewFile *.pp3 set filetype=pp3
-	autocmd FileType pp3 nnoremap <silent> <buffer> <Leader>ii
-				\ :call <SID>Generator('.png', &ft)<CR>
+  autocmd!
+  autocmd BufRead,BufNewFile *.pp3 set filetype=pp3
+  autocmd FileType pp3 nnoremap <silent> <buffer> <Leader>ii
+        \ :call <SID>Generator('.png', &ft)<CR>
 augroup end
 
 " Draw with Gnuplot
 augroup gnuplot
-	autocmd!
-	autocmd BufRead,BufNewFile *.plt set filetype=gnuplot
-	autocmd FileType gnuplot nnoremap <silent> <buffer> <Leader>ii
-				\ :call <SID>Generator('.png', &ft)<CR>
+  autocmd!
+  autocmd BufRead,BufNewFile *.plt set filetype=gnuplot
+  autocmd FileType gnuplot nnoremap <silent> <buffer> <Leader>ii
+        \ :call <SID>Generator('.png', &ft)<CR>
 augroup end
 
 " Draw with POV-Ray
 augroup povray
-	autocmd!
-	autocmd FileType pov nnoremap <silent> <buffer> <Leader>ii
-				\ :call <SID>Generator('.png', &ft)<CR>
+  autocmd!
+  autocmd FileType pov nnoremap <silent> <buffer> <Leader>ii
+        \ :call <SID>Generator('.png', &ft)<CR>
 augroup end
 
 " Run Jekyll (liquid)
 augroup liquid
-	autocmd!
-	autocmd FileType liquid,html,yaml set wildignore+=*/.jekyll-cache/*,
-				\*/_site/*,*/images/*,*/timg/*,*/icons/*,*/logo/*,*/where/*
-	autocmd FileType liquid setlocal spell spelllang=es colorcolumn=0
-	autocmd FileType liquid,yaml nnoremap <silent> <buffer> <Leader>ii
-				\ :call <SID>ToggleJekyll()<CR>
+  autocmd!
+  autocmd FileType liquid,html,yaml set wildignore+=*/.jekyll-cache/*,
+        \*/_site/*,*/images/*,*/timg/*,*/icons/*,*/logo/*,*/where/*
+  autocmd FileType liquid setlocal spell spelllang=es colorcolumn=0
+  autocmd FileType liquid,yaml nnoremap <silent> <buffer> <Leader>ii
+        \ :call <SID>ToggleJekyll()<CR>
 augroup end
 
 "----------------------------------------------------------------
@@ -1325,83 +1300,83 @@ augroup end
 "----------------------------------------------------------------
 " Delete trailing white spaces
 func! s:DeleteTrailing()
-	exe 'normal mz'
-	%s/\s\+$//ge
-	exe 'normal `z'
-	echo 'Trailing white spaces have been removed.'
-	noh
+  exe 'normal mz'
+  %s/\s\+$//ge
+  exe 'normal `z'
+  echo 'Trailing white spaces have been removed.'
+  noh
 endfunc
 
 nnoremap <silent> <Leader>dt :call <SID>DeleteTrailing()<CR>
 
 " Binary
 augroup binary
-	autocmd!
-	autocmd BufReadPre  *.bin let &bin=1
-	autocmd BufReadPost *.bin if &bin | %!xxd
-	autocmd BufReadPost *.bin set ft=xxd | endif
-	autocmd BufWritePre *.bin if &bin | %!xxd -r
-	autocmd BufWritePre *.bin endif
-	autocmd BufWritePost *.bin if &bin | %!xxd
-	autocmd BufWritePost *.bin set nomod | endif
+  autocmd!
+  autocmd BufReadPre  *.bin let &bin=1
+  autocmd BufReadPost *.bin if &bin | %!xxd
+  autocmd BufReadPost *.bin set ft=xxd | endif
+  autocmd BufWritePre *.bin if &bin | %!xxd -r
+  autocmd BufWritePre *.bin endif
+  autocmd BufWritePost *.bin if &bin | %!xxd
+  autocmd BufWritePost *.bin set nomod | endif
 augroup end
 
 " Markdown
 let g:markdown_fenced_languages = [
-	\ 'python',
-	\ 'sh',
-	\ ]
+  \ 'python',
+  \ 'sh',
+  \ ]
 
 " Mail
 augroup mail
-	autocmd!
-	autocmd FileType mail setl spell
-	autocmd FileType mail setl spelllang=ca
+  autocmd!
+  autocmd FileType mail setl spell
+  autocmd FileType mail setl spelllang=ca
 augroup end
 
 " SQL (it requires sqlparse)
 augroup sql
-	let g:omni_sql_no_default_maps = 1
-	autocmd FileType sql nnoremap <Leader>bf
-				\ :%!sqlformat --reindent --keywords upper --identifiers upper -<CR>
-	autocmd FileType sql vnoremap <Leader>bf
-				\ :%!sqlformat --reindent --keywords upper --identifiers upper -<CR>
+  let g:omni_sql_no_default_maps = 1
+  autocmd FileType sql nnoremap <Leader>bf
+        \ :%!sqlformat --reindent --keywords upper --identifiers upper -<CR>
+  autocmd FileType sql vnoremap <Leader>bf
+        \ :%!sqlformat --reindent --keywords upper --identifiers upper -<CR>
 augroup end
 
 " XML (it requires tidy)
 augroup xml
-	autocmd FileType xml nnoremap <Leader>bf
-				\ :%!tidy -q -i -xml --show-errors 0 -wrap 0 --indent-spaces 4<CR>
+  autocmd FileType xml nnoremap <Leader>bf
+        \ :%!tidy -q -i -xml --show-errors 0 -wrap 0 --indent-spaces 4<CR>
 augroup end
 
 " MD
 augroup md
-	autocmd FileType markdown,liquid,text,yaml set expandtab
-	autocmd FileType markdown,liquid,text
-				\ nnoremap <silent> <Leader>cc :call <SID>KeywordDensity()<CR>
-	autocmd FileType markdown,liquid,text nnoremap <silent> <Leader>dd g<C-g>
-	autocmd FileType markdown,liquid,text vnoremap <silent> <Leader>dd g<C-g>
-	autocmd FileType markdown,liquid,text
-				\ nnoremap <silent> gl :call search('\v\[[^]]*]\([^)]*\)', 'W')<CR>
-	autocmd FileType markdown,liquid,text
-				\ nnoremap <silent> gh :call search('\v\[[^]]*]\([^)]*\)', 'bW')<CR>
-	autocmd FileType markdown,liquid,text
-				\ nnoremap <silent> gd :call <sid>RemoveMdLink()<CR>
-	autocmd FileType markdown,liquid,text
-				\ :command! -range Enes <line1>,<line2>!trans en:es -brief
-	autocmd FileType markdown,liquid,text
-				\ :command! -range Esen <line1>,<line2>!trans es:en -brief
+  autocmd FileType markdown,liquid,text,yaml set expandtab
+  autocmd FileType markdown,liquid,text
+        \ nnoremap <silent> <Leader>cc :call <SID>KeywordDensity()<CR>
+  autocmd FileType markdown,liquid,text nnoremap <silent> <Leader>dd g<C-g>
+  autocmd FileType markdown,liquid,text vnoremap <silent> <Leader>dd g<C-g>
+  autocmd FileType markdown,liquid,text
+        \ nnoremap <silent> gl :call search('\v\[[^]]*]\([^)]*\)', 'W')<CR>
+  autocmd FileType markdown,liquid,text
+        \ nnoremap <silent> gh :call search('\v\[[^]]*]\([^)]*\)', 'bW')<CR>
+  autocmd FileType markdown,liquid,text
+        \ nnoremap <silent> gd :call <sid>RemoveMdLink()<CR>
+  autocmd FileType markdown,liquid,text
+        \ :command! -range Enes <line1>,<line2>!trans en:es -brief
+  autocmd FileType markdown,liquid,text
+        \ :command! -range Esen <line1>,<line2>!trans es:en -brief
 augroup end
 
 " New file headers
 augroup headers
-	autocmd!
-	autocmd BufNewFile *.py 0put =\"#!/usr/bin/env python3\<nl>\#
-				\ -*- coding: utf-8 -*-\<nl>\"|$
-	autocmd BufNewFile *.rb 0put =\"#!/usr/bin/env ruby\<nl>\"|$
-	autocmd BufNewFile *.pl 0put =\"#!/usr/bin/env perl\<nl>\"|$
-	autocmd BufNewFile *.sh 0put =\"#!/usr/bin/env bash\<nl>\"|$
-	autocmd BufNewFile *.js 0put =\"#!/usr/bin/env node\<nl>\"|$
+  autocmd!
+  autocmd BufNewFile *.py 0put =\"#!/usr/bin/env python3\<nl>\#
+        \ -*- coding: utf-8 -*-\<nl>\"|$
+  autocmd BufNewFile *.rb 0put =\"#!/usr/bin/env ruby\<nl>\"|$
+  autocmd BufNewFile *.pl 0put =\"#!/usr/bin/env perl\<nl>\"|$
+  autocmd BufNewFile *.sh 0put =\"#!/usr/bin/env bash\<nl>\"|$
+  autocmd BufNewFile *.js 0put =\"#!/usr/bin/env node\<nl>\"|$
 augroup end
 
 "----------------------------------------------------------------
@@ -1409,327 +1384,327 @@ augroup end
 "----------------------------------------------------------------
 " Toggle Terminal
 function! s:ToggleTerminal()
-	if bufexists('terminal')
-		call win_gotoid(s:winZsh)
-		norm! i
-	else
-		execute ':below 10sp term://$SHELL'
-		keepalt file terminal
-		let s:winZsh = win_getid()
-		norm! i
-	endif
+  if bufexists('terminal')
+    call win_gotoid(s:winZsh)
+    norm! i
+  else
+    execute ':below 10sp term://$SHELL'
+    keepalt file terminal
+    let s:winZsh = win_getid()
+    norm! i
+  endif
 endfunction
 
 " Show syntax highlighting groups
 function! s:SynStack()
-	if !exists('*synstack')
-		return
-	endif
-	echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+  if !exists('*synstack')
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunction
 
 " Rename file
 function! s:RenameFile()
-	let l:old_name = expand('%')
-	let l:new_name = input('New file name: ', expand('%'), 'file')
-	if l:new_name !=# '' && l:new_name !=# l:old_name
-		exec ':saveas ' . l:new_name
-		exec ':silent !rm ' . l:old_name
-		redraw!
-	endif
+  let l:old_name = expand('%')
+  let l:new_name = input('New file name: ', expand('%'), 'file')
+  if l:new_name !=# '' && l:new_name !=# l:old_name
+    exec ':saveas ' . l:new_name
+    exec ':silent !rm ' . l:old_name
+    redraw!
+  endif
 endfunction
 
 " Don't close window when deleting a buffer
 function! s:CustomCloseBuffer()
-	let l:currentBufNum = bufnr('%')
-	let l:alternateBufNum = bufnr('#')
+  let l:currentBufNum = bufnr('%')
+  let l:alternateBufNum = bufnr('#')
 
-	if buflisted(l:alternateBufNum)
-		buffer #
-	else
-		bnext
-	endif
+  if buflisted(l:alternateBufNum)
+    buffer #
+  else
+    bnext
+  endif
 
-	if bufnr('%') == l:currentBufNum
-		new
-	endif
+  if bufnr('%') == l:currentBufNum
+    new
+  endif
 
-	if buflisted(l:currentBufNum)
-		exec ':bdelete! ' . l:currentBufNum
-	endif
+  if buflisted(l:currentBufNum)
+    exec ':bdelete! ' . l:currentBufNum
+  endif
 endfunction
 
 " Close the last buffer if it's the last window
 " - For 'quickfix' and 'nofile'
 autocmd BufEnter * call <SID>CloseLastBuffer()
 function! s:CloseLastBuffer()
-	if &buftype ==# 'quickfix' || &buftype ==# 'nofile'
-		if winnr('$') < 2
-			quit!
-		endif
-	endif
+  if &buftype ==# 'quickfix' || &buftype ==# 'nofile'
+    if winnr('$') < 2
+      quit!
+    endif
+  endif
 endfunction
 
 " Display the arglist vertically
 function! s:DisplayArglist() abort
-	let l:argnum = 0
-	let l:lenargc = len(argc())
-	for l:arg in argv()
-		let l:argnum += 1
-		let l:filename = fnamemodify(l:arg, ':t')
-		let l:changed =
-					\ getbufinfo(bufname('^' . l:arg . '$'))[0].changed == 1
-					\ ? '+'
-					\ : ' '
-		let l:current = expand('%') ==# l:arg ? '%' : ' '
-		echo printf( '%-*d %s%s %s',
-					\ l:lenargc, l:argnum, l:current, l:changed, l:filename)
-	endfor
+  let l:argnum = 0
+  let l:lenargc = len(argc())
+  for l:arg in argv()
+    let l:argnum += 1
+    let l:filename = fnamemodify(l:arg, ':t')
+    let l:changed =
+          \ getbufinfo(bufname('^' . l:arg . '$'))[0].changed == 1
+          \ ? '+'
+          \ : ' '
+    let l:current = expand('%') ==# l:arg ? '%' : ' '
+    echo printf( '%-*d %s%s %s',
+          \ l:lenargc, l:argnum, l:current, l:changed, l:filename)
+  endfor
 endfunction
 
 " Toggle maximize window and resize windows
 function! s:ToggleResize() abort
-	if winnr('$') > 1
-		if exists('t:zoomed') && t:zoomed
-			execute t:zoom_winrestcmd
-			let t:zoomed = 0
-			echo 'Windows resized.'
-		else
-			let t:zoom_winrestcmd = winrestcmd()
-			resize
-			vertical resize
-			let t:zoomed = 1
-			echo 'Window maximized.'
-		endif
-	endif
+  if winnr('$') > 1
+    if exists('t:zoomed') && t:zoomed
+      execute t:zoom_winrestcmd
+      let t:zoomed = 0
+      echo 'Windows resized.'
+    else
+      let t:zoom_winrestcmd = winrestcmd()
+      resize
+      vertical resize
+      let t:zoomed = 1
+      echo 'Window maximized.'
+    endif
+  endif
 endfunction
 autocmd VimEnter * autocmd WinEnter * let t:zoomed = 0
 
 " Search into a Visual selection
 function! s:RangeSearch(direction)
-	call inputsave()
-	let g:srchstr = input(a:direction)
-	call inputrestore()
-	if strlen(g:srchstr) > 0
-		let g:srchstr = g:srchstr.
-			\ '\%>'.(line("'<")-1).'l'.
-			\ '\%<'.(line("'>")+1).'l'
-	else
-		let g:srchstr = ''
-	endif
+  call inputsave()
+  let g:srchstr = input(a:direction)
+  call inputrestore()
+  if strlen(g:srchstr) > 0
+    let g:srchstr = g:srchstr.
+      \ '\%>'.(line("'<")-1).'l'.
+      \ '\%<'.(line("'>")+1).'l'
+  else
+    let g:srchstr = ''
+  endif
 endfunction
 
 " Highlight the selected text (visual mode)
 " Source: https://github.com/nelstrom/vim-visual-star-search
 " (You can install it as a plugin)
 function! s:VSetSearch()
-	let l:temp = @@
-	norm! gvy
-	let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
-	let @@ = l:temp
+  let l:temp = @@
+  norm! gvy
+  let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
+  let @@ = l:temp
 endfunction
 
 " Count grep matches
 function! QFCounter() abort
-	let l:results = len(getqflist())
-	if l:results > 0
-		copen
-	else
-		cclose
-	endif
-	echo 'Found ' . l:results . ' matches.'
+  let l:results = len(getqflist())
+  if l:results > 0
+    copen
+  else
+    cclose
+  endif
+  echo 'Found ' . l:results . ' matches.'
 endfunction
 
 " Grep wrapper
 function! s:GrepWrapper(cmd, dir, scope) abort
-	cclose
-	let l:pattern = substitute(@/, '\\V', '', '')
-	let l:pattern = substitute(pattern, '\\<', '', '')
-	let l:pattern = substitute(pattern, '\\>', '', '')
-	let l:pattern = escape(pattern, '"')
-	let l:pattern = escape(pattern, '%')
-	let l:pattern = escape(pattern, '#')
-	silent execute a:cmd . ' ' . a:dir . ' "' . l:pattern . '" ' . a:scope
-	redraw!
-	set hlsearch
-	call QFCounter()
+  cclose
+  let l:pattern = substitute(@/, '\\V', '', '')
+  let l:pattern = substitute(pattern, '\\<', '', '')
+  let l:pattern = substitute(pattern, '\\>', '', '')
+  let l:pattern = escape(pattern, '"')
+  let l:pattern = escape(pattern, '%')
+  let l:pattern = escape(pattern, '#')
+  silent execute a:cmd . ' ' . a:dir . ' "' . l:pattern . '" ' . a:scope
+  redraw!
+  set hlsearch
+  call QFCounter()
 endfunction
 
 " Toggle case
 function! ToggleCase(str)
-	if a:str ==# toupper(a:str)
-		let l:result = tolower(a:str)
-	elseif a:str ==# tolower(a:str)
-		let l:result = substitute(a:str,'\(\<\w\+\>\)', '\u\1', 'g')
-	else
-		let l:result = toupper(a:str)
-	endif
-	return l:result
+  if a:str ==# toupper(a:str)
+    let l:result = tolower(a:str)
+  elseif a:str ==# tolower(a:str)
+    let l:result = substitute(a:str,'\(\<\w\+\>\)', '\u\1', 'g')
+  else
+    let l:result = toupper(a:str)
+  endif
+  return l:result
 endfunction
 
 " Toggle spell dictionary
 function! <SID>ToggleSpelllang()
-	if (&spelllang =~# '^en')
-		set spelllang=ca
-		echo 'Català'
-	elseif (&spelllang =~# '^ca')
-		set spelllang=es
-		echo 'Castellano'
-	elseif (&spelllang =~# '^es')
-		set spelllang=en_us,en_gb
-		echo 'English'
-	endif
-	set spelllang?
+  if (&spelllang =~# '^en')
+    set spelllang=ca
+    echo 'Català'
+  elseif (&spelllang =~# '^ca')
+    set spelllang=es
+    echo 'Castellano'
+  elseif (&spelllang =~# '^es')
+    set spelllang=en_us,en_gb
+    echo 'English'
+  endif
+  set spelllang?
 endfunction
 
 " New :windo command to return to the last current window
 " - Default :windo cycles through all the open windows
 " - Use 'Windo' instead of 'windo' to avoid it
 command! -nargs=+ -complete=command Windo
-	\ let s:currentWindow = winnr() |
-	\ execute 'windo <args>' |
-	\ exe s:currentWindow . 'wincmd w'
+  \ let s:currentWindow = winnr() |
+  \ execute 'windo <args>' |
+  \ exe s:currentWindow . 'wincmd w'
 
 " Toggle colorcolumn
 function! s:ToggleColorColumn()
-	if !exists('s:color_column_old') || s:color_column_old == 0
-		let s:color_column_old = &colorcolumn
-		Windo let &colorcolumn = 0
-	else
-		Windo let &colorcolumn = s:color_column_old
-		let s:color_column_old = 0
-	endif
+  if !exists('s:color_column_old') || s:color_column_old == 0
+    let s:color_column_old = &colorcolumn
+    Windo let &colorcolumn = 0
+  else
+    Windo let &colorcolumn = s:color_column_old
+    let s:color_column_old = 0
+  endif
 endfunction
 
 " Toggle the cursor position start/end
 function! s:ToggleCPosition(mode)
-	execute a:mode
-	if !exists('s:togglecp')
-		let s:togglecp = 0
-	endif
-	if col('.') >= col('$') - 1
-		let s:togglecp = 1
-		norm! ^
-	else
-		let s:togglecp = 0
-		norm! $
-	endif
+  execute a:mode
+  if !exists('s:togglecp')
+    let s:togglecp = 0
+  endif
+  if col('.') >= col('$') - 1
+    let s:togglecp = 1
+    norm! ^
+  else
+    let s:togglecp = 0
+    norm! $
+  endif
 endfunction
 
 " Toggle GitGutterPreviewHunk
 function! s:ToggleGGPrev()
-	if getwinvar(winnr('#'), '&pvw') == 1
-				\ && exists('s:curr') && line(".") == s:curr
-				\ || gitgutter#hunk#in_hunk(line(".")) == 0
-		pclose
-	else
-		GitGutterPreviewHunk
-		let s:curr = line(".")
-	endif
+  if getwinvar(winnr('#'), '&pvw') == 1
+        \ && exists('s:curr') && line(".") == s:curr
+        \ || gitgutter#hunk#in_hunk(line(".")) == 0
+    pclose
+  else
+    GitGutterPreviewHunk
+    let s:curr = line(".")
+  endif
 endfunction
 
 " Execute GV only once
 function! s:PreventGV() abort
-	if &buftype !=# 'nofile'
-		execute ':GV'
-	endif
+  if &buftype !=# 'nofile'
+    execute ':GV'
+  endif
 endfunction
 
 " Toggle Gstatus window
 function! s:ToggleGstatus() abort
-	for l:winnr in range(1, winnr('$'))
-		if !empty(getwinvar(l:winnr, 'fugitive_status'))
-			execute l:winnr.'close'
-		else
-			Git
-		endif
-	endfor
+  for l:winnr in range(1, winnr('$'))
+    if !empty(getwinvar(l:winnr, 'fugitive_status'))
+      execute l:winnr.'close'
+    else
+      Git
+    endif
+  endfor
 endfunction
 
 " Better toggle for NERDTree
 function! s:ToggleNERDTree() abort
-	if bufname('%') != ""
-		if exists("g:NERDTree") && g:NERDTree.IsOpen()
-			if &filetype ==# 'nerdtree'
-				execute ':NERDTreeClose'
-			else
-				execute ':NERDTreeFocus'
-			endif
-		else
-			execute ':NERDTreeFind'
-		endif
-	else
-			execute ':NERDTreeToggleVCS'
-	endif
+  if bufname('%') != ""
+    if exists("g:NERDTree") && g:NERDTree.IsOpen()
+      if &filetype ==# 'nerdtree'
+        execute ':NERDTreeClose'
+      else
+        execute ':NERDTreeFocus'
+      endif
+    else
+      execute ':NERDTreeFind'
+    endif
+  else
+      execute ':NERDTreeToggleVCS'
+  endif
 endfunction
 
 " Get Tagbar buffer name
 function! s:TagbarBufName() abort
-	if !exists('t:tagbar_buf_name')
-		let s:buffer_seqno += 1
-		let t:tagbar_buf_name = '__Tagbar__.' . s:buffer_seqno
-	endif
-	return t:tagbar_buf_name
+  if !exists('t:tagbar_buf_name')
+    let s:buffer_seqno += 1
+    let t:tagbar_buf_name = '__Tagbar__.' . s:buffer_seqno
+  endif
+  return t:tagbar_buf_name
 endfunction
 
 " Better toggle for Tagbar
 function! s:ToggleTagbar() abort
-	let tagbarwinnr = bufwinnr(s:TagbarBufName())
-	if tagbarwinnr != -1
-		if &modifiable
-			execute tagbarwinnr 'wincmd w'
-		else
-			execute ':TagbarClose'
-		endif
-	else
-		execute ':TagbarOpen'
-	endif
+  let tagbarwinnr = bufwinnr(s:TagbarBufName())
+  if tagbarwinnr != -1
+    if &modifiable
+      execute tagbarwinnr 'wincmd w'
+    else
+      execute ':TagbarClose'
+    endif
+  else
+    execute ':TagbarOpen'
+  endif
 endfunction
 
 " Keyword density checker
 function! s:KeywordDensity() abort
-	silent update
+  silent update
 
-	" Words count
-	" > Strip the front matter, comments, HTML tags and count the words
-	let s:sf = " | sed '1 { /^---/ { :a N; /\\n---/! ba; d }  }'"
-	let s:sc = " | sed 's/{% comment.*endcomment %}//g'"
-	let s:sh = " | sed 's/<[^>]*.//g'"
-	let s:wc = " | wc -w"
-	let s:get_words = system("cat " . expand('%') . s:sf. s:sc . s:sh . s:wc)
-	let s:int_words = str2nr(s:get_words)
-	let s:str_words = string(s:int_words)
+  " Words count
+  " > Strip the front matter, comments, HTML tags and count the words
+  let s:sf = " | sed '1 { /^---/ { :a N; /\\n---/! ba; d }  }'"
+  let s:sc = " | sed 's/{% comment.*endcomment %}//g'"
+  let s:sh = " | sed 's/<[^>]*.//g'"
+  let s:wc = " | wc -w"
+  let s:get_words = system("cat " . expand('%') . s:sf. s:sc . s:sh . s:wc)
+  let s:int_words = str2nr(s:get_words)
+  let s:str_words = string(s:int_words)
 
-	" Highlight count
-	let s:match_count = ""
-	redir => s:match_count
-	silent exec '%s/' . @/ . '//gne'
-	redir END
+  " Highlight count
+  let s:match_count = ""
+  redir => s:match_count
+  silent exec '%s/' . @/ . '//gne'
+  redir END
 
-	if ! empty(s:match_count)
-		let s:str_keys = split(s:match_count)[0]
-		let s:flt_keys = str2float(s:str_keys)
+  if ! empty(s:match_count)
+    let s:str_keys = split(s:match_count)[0]
+    let s:flt_keys = str2float(s:str_keys)
 
-		" Density
-		let s:flt_dens = (s:flt_keys/s:int_words)*100
-		let s:str_dens = string(s:flt_dens)
+    " Density
+    let s:flt_dens = (s:flt_keys/s:int_words)*100
+    let s:str_dens = string(s:flt_dens)
 
-		echo '> ' . s:str_keys . ' of ' . s:str_words . ' (' . s:str_dens . '%)'
-	else
-		echo '> 0 of ' . s:str_words . ' (0%, pattern not found)'
-	endif
+    echo '> ' . s:str_keys . ' of ' . s:str_words . ' (' . s:str_dens . '%)'
+  else
+    echo '> 0 of ' . s:str_words . ' (0%, pattern not found)'
+  endif
 endfunction
 
 " Remove markdown link
 function! s:RemoveMdLink() abort
-	let [l, c] = searchpos('\v\[[^]]*]\([^)]*\)', 'ncW')
-	if l > 0 && c > 0
-		if getline(".")[col(".")-1] ==# "["
-			norm! xf]vf)d
-		else
-			call cursor(l, c)
-		endif
-	endif
+  let [l, c] = searchpos('\v\[[^]]*]\([^)]*\)', 'ncW')
+  if l > 0 && c > 0
+    if getline(".")[col(".")-1] ==# "["
+      norm! xf]vf)d
+    else
+      call cursor(l, c)
+    endif
+  endif
 endfunction
 
 "----------------------------------------------------------------
@@ -1737,224 +1712,224 @@ endfunction
 "----------------------------------------------------------------
 " Run code into a tmux window
 function! s:Tmuxy() abort
-	if exists('$TMUX')
-		update
-		let s:runner = <SID>Runners()
-		let s:cmdk = 'tmux kill-window -t run'
-		let s:cmdn = 'tmux new-window -n run'
-		let s:cmds = " '" . s:runner . " " . expand("%:p") . " ; read'"
-		call system(s:cmdk)
-		call system(s:cmdn . s:cmds)
-	else
-		echo 'Tmux is not running.'
-	endif
+  if exists('$TMUX')
+    update
+    let s:runner = <SID>Runners()
+    let s:cmdk = 'tmux kill-window -t run'
+    let s:cmdn = 'tmux new-window -n run'
+    let s:cmds = " '" . s:runner . " " . expand("%:p") . " ; read'"
+    call system(s:cmdk)
+    call system(s:cmdn . s:cmds)
+  else
+    echo 'Tmux is not running.'
+  endif
 endfunction
 
 " Run code in the preview window
 function! s:Scripty() abort
-	update
-	let s:runner = <SID>Runners()
-	let s:cmd = s:runner . " " . expand("%:p")
-	call <SID>Commander(s:cmd)
+  update
+  let s:runner = <SID>Runners()
+  let s:cmd = s:runner . " " . expand("%:p")
+  call <SID>Commander(s:cmd)
 endfunction
 
 " Define the runners
 function! s:Runners() abort
-	if &filetype =~# 'javascript'
-		let s:run = 'node'
-	elseif &filetype =~# 'lua'
-		let s:run = 'lua'
-	elseif &filetype =~# 'perl'
-		let s:run = 'perl'
-	elseif &filetype =~# 'php'
-		let s:run = 'php'
-	elseif &filetype =~# 'python'
-		let s:run = <SID>PyShebang()
-	elseif &filetype =~# 'ruby'
-		let s:run = 'ruby'
-	elseif &filetype =~# 'sh'
-		let s:run = 'bash'
-	else
-		let s:run = 'empty'
-	endif
-	return s:run
+  if &filetype =~# 'javascript'
+    let s:run = 'node'
+  elseif &filetype =~# 'lua'
+    let s:run = 'lua'
+  elseif &filetype =~# 'perl'
+    let s:run = 'perl'
+  elseif &filetype =~# 'php'
+    let s:run = 'php'
+  elseif &filetype =~# 'python'
+    let s:run = <SID>PyShebang()
+  elseif &filetype =~# 'ruby'
+    let s:run = 'ruby'
+  elseif &filetype =~# 'sh'
+    let s:run = 'bash'
+  else
+    let s:run = 'empty'
+  endif
+  return s:run
 endfunction
 
 " Check the python version used in the shebang
 function! s:PyShebang() abort
-	if getline(1) =~# '^#!.*/bin/env\s\+python3\>'
-		return "python3"
-	else
-		return "python"
-	endif
+  if getline(1) =~# '^#!.*/bin/env\s\+python3\>'
+    return "python3"
+  else
+    return "python"
+  endif
 endfunction
 
 " Generator function
 function! s:Generator(ext, ft) abort
-	update
-	let l:inp = expand('%')
-	let l:out = expand('%:r') . a:ext
-	if a:ft ==# 'tex'
-		let l:cmd = system('pdflatex ' . l:inp)
-	elseif a:ft ==# 'markdown'
-		if a:ext ==# '.html'
-			let l:opt = '--mathjax '
-		elseif a:ext ==# '.epub'
-			let l:opt = '-t epub2 --webtex '
-		elseif a:ext ==# '.pdf'
-			let l:opt = '-V fontsize=12pt
-						\ -V papersize=a4
-						\ -V geometry:margin=2.5cm '
-		endif
-		let l:cmd = system('pandoc -s ' . l:opt . l:inp . ' -o ' . l:out)
-	elseif a:ft ==# 'plantuml'
-		let l:cmd = system('plantuml ' . l:inp . ' ' . l:out)
-	elseif a:ft ==# 'dot'
-		let l:cmd = system('dot -Tpng ' . l:inp . ' -o ' . l:out)
-	elseif a:ft ==# 'eukleides'
-		let l:eps = expand('%:r') . '.eps'
-		let l:cmd = system('eukleides ' . l:inp)
-	elseif a:ft ==# 'asy'
-		let l:eps = expand('%:r') . '.eps'
-		let l:cmd = system('asy ' . l:inp)
-	elseif a:ft ==# 'pp3'
-		let l:eps = expand('%:r') . '.eps'
-		let l:cmd = system('pp3 ' . l:inp)
-	elseif a:ft ==# 'gnuplot'
-		let l:opt = ' -e "set terminal png; set output ''' . l:out . '''" '
-		let l:cmd = system('gnuplot' . l:opt . l:inp)
-	elseif a:ft ==# 'pov'
-		let l:cmd = system('povray -D ' . l:inp)
-	endif
-	if v:shell_error ==# 0
-		pclose
-		if a:ft =~# '\(eukleides\|asy\|pp3\)'
-			call <SID>EPS2PNG(l:eps, l:out)
-		endif
-		call <SID>Previewer(l:out)
-	else
-		call <SID>WinPreview()
-		exec '0put =l:cmd'
-		call <SID>ResizeWinPreview()
-	endif
+  update
+  let l:inp = expand('%')
+  let l:out = expand('%:r') . a:ext
+  if a:ft ==# 'tex'
+    let l:cmd = system('pdflatex ' . l:inp)
+  elseif a:ft ==# 'markdown'
+    if a:ext ==# '.html'
+      let l:opt = '--mathjax '
+    elseif a:ext ==# '.epub'
+      let l:opt = '-t epub2 --webtex '
+    elseif a:ext ==# '.pdf'
+      let l:opt = '-V fontsize=12pt
+            \ -V papersize=a4
+            \ -V geometry:margin=2.5cm '
+    endif
+    let l:cmd = system('pandoc -s ' . l:opt . l:inp . ' -o ' . l:out)
+  elseif a:ft ==# 'plantuml'
+    let l:cmd = system('plantuml ' . l:inp . ' ' . l:out)
+  elseif a:ft ==# 'dot'
+    let l:cmd = system('dot -Tpng ' . l:inp . ' -o ' . l:out)
+  elseif a:ft ==# 'eukleides'
+    let l:eps = expand('%:r') . '.eps'
+    let l:cmd = system('eukleides ' . l:inp)
+  elseif a:ft ==# 'asy'
+    let l:eps = expand('%:r') . '.eps'
+    let l:cmd = system('asy ' . l:inp)
+  elseif a:ft ==# 'pp3'
+    let l:eps = expand('%:r') . '.eps'
+    let l:cmd = system('pp3 ' . l:inp)
+  elseif a:ft ==# 'gnuplot'
+    let l:opt = ' -e "set terminal png; set output ''' . l:out . '''" '
+    let l:cmd = system('gnuplot' . l:opt . l:inp)
+  elseif a:ft ==# 'pov'
+    let l:cmd = system('povray -D ' . l:inp)
+  endif
+  if v:shell_error ==# 0
+    pclose
+    if a:ft =~# '\(eukleides\|asy\|pp3\)'
+      call <SID>EPS2PNG(l:eps, l:out)
+    endif
+    call <SID>Previewer(l:out)
+  else
+    call <SID>WinPreview()
+    exec '0put =l:cmd'
+    call <SID>ResizeWinPreview()
+  endif
 endfunction
 
 " Convert from EPS to PNG
 function! s:EPS2PNG(eps, out) abort
-		let l:opt_bef = ' -density 150 '
-		let l:opt_aft = ' -flatten -alpha off -colorspace hsl '
-		call system('convert' . l:opt_bef . a:eps . l:opt_aft . a:out)
+    let l:opt_bef = ' -density 150 '
+    let l:opt_aft = ' -flatten -alpha off -colorspace hsl '
+    call system('convert' . l:opt_bef . a:eps . l:opt_aft . a:out)
 endfunction
 
 " Preview outputs (EPUB, PDF, HTML, PNG) with mupdf
 function! s:Previewer(out) abort
-	let l:dev = ' 2>/dev/null'
-	let l:checkps = system('ps -ef
-				\ | grep -v grep
-				\ | grep mupdf
-				\ | grep -o ' . a:out . l:dev)
-	if l:checkps ==# ''
-		call system('mupdf ' . a:out . ' &')
-	else
-		call system('pkill -HUP mupdf')
-	endif
+  let l:dev = ' 2>/dev/null'
+  let l:checkps = system('ps -ef
+        \ | grep -v grep
+        \ | grep mupdf
+        \ | grep -o ' . a:out . l:dev)
+  if l:checkps ==# ''
+    call system('mupdf ' . a:out . ' &')
+  else
+    call system('pkill -HUP mupdf')
+  endif
 endfunction
 
 " Configure a sqlite database
 function! s:SqliteDatabase() abort
-	let t:path = input('Database: ')
+  let t:path = input('Database: ')
 endfunction
 
 " Execute SQL queries
 function! s:SQLExec(opt) abort
-	if a:opt ==# 'n'
-		silent norm! yy
-	elseif a:opt ==# 'v'
-		silent norm! gvy
-	endif
-	if !exists('t:path')
-		call <SID>SqliteDatabase()
-	endif
-	if filereadable(t:path)
-		let t:sql = @
-		let t:sql = substitute(t:sql, '\n', ' ', 'g')
-		let t:format = " | column -t -s '|'"
-		if t:sql =~? '^select'
-			let t:cmd = t:path . ' "' . escape(t:sql, '"') . '"' . t:format
-		else
-			let t:cmd = t:path . ' "' . escape(t:sql, '"') . '"'
-		endif
-		let s:cmd = "sqlite3 -list -batch " . t:cmd
-		call <SID>Commander(s:cmd)
-	else
-		echo "\nThis database does not exist!"
-	endif
+  if a:opt ==# 'n'
+    silent norm! yy
+  elseif a:opt ==# 'v'
+    silent norm! gvy
+  endif
+  if !exists('t:path')
+    call <SID>SqliteDatabase()
+  endif
+  if filereadable(t:path)
+    let t:sql = @
+    let t:sql = substitute(t:sql, '\n', ' ', 'g')
+    let t:format = " | column -t -s '|'"
+    if t:sql =~? '^select'
+      let t:cmd = t:path . ' "' . escape(t:sql, '"') . '"' . t:format
+    else
+      let t:cmd = t:path . ' "' . escape(t:sql, '"') . '"'
+    endif
+    let s:cmd = "sqlite3 -list -batch " . t:cmd
+    call <SID>Commander(s:cmd)
+  else
+    echo "\nThis database does not exist!"
+  endif
 endfunction
 
 " Execute Maxima instructions
 function! s:MaximaExec(opt) abort
-	if a:opt ==# 'n'
-		silent norm! yy
-	elseif a:opt ==# 'v'
-		silent norm! gvy
-	endif
-	let b:equ = @
-	let b:equ = substitute(b:equ, '\n', ' ', 'g')
-	let b:equ = substitute(b:equ, '\s$', '', 'g')
-	let b:equ = substitute(b:equ, '%', '\\%', 'g')
-	if b:equ !~# ';$'
-		let b:equ = substitute(b:equ, '$', ';', 'g')
-	endif
-	let s:cmd = 'maxima --very-quiet --batch-string "' . b:equ . '"'
-	call <SID>Commander(s:cmd)
+  if a:opt ==# 'n'
+    silent norm! yy
+  elseif a:opt ==# 'v'
+    silent norm! gvy
+  endif
+  let b:equ = @
+  let b:equ = substitute(b:equ, '\n', ' ', 'g')
+  let b:equ = substitute(b:equ, '\s$', '', 'g')
+  let b:equ = substitute(b:equ, '%', '\\%', 'g')
+  if b:equ !~# ';$'
+    let b:equ = substitute(b:equ, '$', ';', 'g')
+  endif
+  let s:cmd = 'maxima --very-quiet --batch-string "' . b:equ . '"'
+  call <SID>Commander(s:cmd)
 endfunction
 
 " Window previewer
 function! s:WinPreview() abort
-	silent! wincmd P
-	if !&previewwindow
-		exec 'new'
-		setlocal previewwindow
-		setlocal buftype=nowrite bufhidden=wipe
-		setlocal nobuflisted noswapfile nowrap
-		nnoremap <silent> <buffer> q :pclose<CR>
-	endif
-	exec '%delete'
+  silent! wincmd P
+  if !&previewwindow
+    exec 'new'
+    setlocal previewwindow
+    setlocal buftype=nowrite bufhidden=wipe
+    setlocal nobuflisted noswapfile nowrap
+    nnoremap <silent> <buffer> q :pclose<CR>
+  endif
+  exec '%delete'
 endfunction
 
 " Commander
 function! s:Commander(cmd) abort
-	call <SID>WinPreview()
-	exec '0read !' . a:cmd
-	call <SID>ResizeWinPreview()
+  call <SID>WinPreview()
+  exec '0read !' . a:cmd
+  call <SID>ResizeWinPreview()
 endfunction
 
 " Resize the preview window
 function! s:ResizeWinPreview() abort
-	exec '$d'
-	let s:size = line('$')
-	if s:size < 11
-		exec 'resize ' . line('$')
-	else
-		exec 'resize 10'
-	endif
-	norm! gg
-	wincmd p
+  exec '$d'
+  let s:size = line('$')
+  if s:size < 11
+    exec 'resize ' . line('$')
+  else
+    exec 'resize 10'
+  endif
+  norm! gg
+  wincmd p
 endfunction
 
 command! -nargs=1 Commander call <SID>Commander(<f-args>)
 
 " Toggle jekyll server in the background
 function! s:ToggleJekyll() abort
-	call system('lsof -i :4000 | grep -i listen')
-	if v:shell_error
-		silent exec "!(bundle exec jekyll serve &) > /dev/null"
-		call system("touch /tmp/jekyll.ps")
-		call system("notify-send -t 2 'Executing Jekyll server...'")
-	else
-		silent exec "!(pkill -f jekyll &) > /dev/null"
-		call system("rm -f /tmp/jekyll.ps")
-		call system("notify-send -t 2 'Jekyll server was stoped!'")
-	endif
-	redraw!
+  call system('lsof -i :4000 | grep -i listen')
+  if v:shell_error
+    silent exec "!(bundle exec jekyll serve &) > /dev/null"
+    call system("touch /tmp/jekyll.ps")
+    call system("notify-send -t 2 'Executing Jekyll server...'")
+  else
+    silent exec "!(pkill -f jekyll &) > /dev/null"
+    call system("rm -f /tmp/jekyll.ps")
+    call system("notify-send -t 2 'Jekyll server was stoped!'")
+  endif
+  redraw!
 endfunction

@@ -33,9 +33,10 @@ When setting up a new Mac, you may want to install some common Homebrew formulae
 ```sh
 ./brew.sh
 ```
+
 ### Vim Editior Setup
 
-To setup Vim Editor, symlink/copy just `.vimrc` into your `HOME` directory and run `vim` command once.
+To setup Vim Editor, symlink/copy just `.vimrc` into your `HOME` directory and run `vim` command once. You can just copy and paste `.vimrc` without even copying the whole repostiotory
 
 ### Terminal theme and tweaks
 
@@ -43,11 +44,10 @@ To setup Vim Editor, symlink/copy just `.vimrc` into your `HOME` directory and r
  <img src="./cli-snap.png" alt="cli snap" />
 </p>
 
-I use **iTerm2** and **Zsh** together and **[PowerLevel10k][1]** as theme.
-You need to install these followings to get look like my terminal theme
+I use **iTerm2** and **Zsh** together with these followings, so you need to install these as well
 
-1. [Shade of Purple for iTerm2][2]
-1. [MesloLGS NF Regular][3] - Font size: 16
+- [Starship Prompt][1]
+- [Shade of Purple for ITerm Theme][2].
 
 You can import my settings from [iterm2][4] directory
 

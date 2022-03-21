@@ -33,6 +33,9 @@ When setting up a new Mac, you may want to install some common Homebrew formulae
 ```sh
 ./brew.sh
 ```
+### Vim Editior Setup
+
+To setup Vim Editor, symlink/copy just `.vimrc` into your `HOME` directory and run `vim` command once.
 
 ### Terminal theme and tweaks
 
@@ -51,11 +54,10 @@ You can import my settings from [iterm2][4] directory
 ### Special thanks to
 
 - [Mathias Bynens](https://twitter.com/mathias)
-- [Jess Frazelle](https://twitter.com/jessfraz)
 - [Paul Irish](https://twitter.com/paul_irish)
-- [Roman Perepelitsa][1] for PowerLevel10k theme
+- [Starship Theme Contributors][1] for Starship theme
 
-[1]: https://github.com/romkatv/powerlevel10k
+[1]: https://starship.rs/
 [2]: https://github.com/ahmadawais/Shades-of-Purple-iTerm2
 [3]: fonts/
 [4]: iterm2/

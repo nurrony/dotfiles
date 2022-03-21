@@ -36,7 +36,9 @@ When setting up a new Mac, you may want to install some common Homebrew formulae
 
 ### Vim Editior Setup
 
-To setup Vim Editor, symlink/copy just `.vimrc` into your `HOME` directory and run `vim` command once. You can just copy and paste `.vimrc` without even copying the whole repostiotory
+To setup Vim Editor, symlink/copy just `.vimrc` into your `HOME` directory. You can just copy and paste `.vimrc` without even copying the whole repository. Once you have `.vimrc` on your home directory please execute `vim` command to configure it automatically.
+
+> 📝 You must have latest [Vim](https://www.vim.org/download.php) and [Git](https://git-scm.com/downloads) installed on your machine
 
 ### Terminal theme and tweaks
 

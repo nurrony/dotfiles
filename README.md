@@ -34,7 +34,7 @@ When setting up a new Mac, you may want to install some common Homebrew formulae
 ./brew.sh
 ```
 
-### Vim Editior Setup
+### Configure Vim Editor
 
 To setup Vim Editor, symlink/copy just `.vimrc` into your `HOME` directory. You can just copy and paste `.vimrc` without even copying the whole repository. Once you have `.vimrc` on your home directory please execute `vim` command to configure it automatically.
 

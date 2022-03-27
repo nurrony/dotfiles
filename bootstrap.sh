@@ -8,10 +8,6 @@ if ! fgrep -q '/usr/local/bin/zsh' /etc/shells; then
   sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
 fi;
 
-#Install Volta (https://volta.sh)
-echo -ne 'Installing Volta - The JS Tool Manager... '
-sh -c "$(curl --silent https://get.volta.sh)" >/dev/null 2>&1 && \
-echo '[done]' && \
 #Install Shell plugins
 echo -ne "installing custom plugins: thefuck, hostess... "
 brew install thefuck hostess >/dev/null 2>&1

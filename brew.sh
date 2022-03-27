@@ -80,9 +80,7 @@ brew install curl-openssl
 brew install ack
 brew install git
 brew install git-lfs
-brew install git-extras
 brew install git-secrets
-brew install gitui
 brew install archey
 
 # deletes unwanted file from git faster

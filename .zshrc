@@ -18,13 +18,18 @@ zi ice lucid wait'2'
 zi light z-shell/history-search-multi-word
 
 zi wait lucid light-mode for \
+  as'program' from'gh-r' extrawurst/gitui \
   as'program' from'gh-r' mv'kube-explorer* -> kube-explorer' cnrancher/kube-explorer \
   as'program' from'gh-r' mv'yarn* -> yarn' pick"yarn/bin/yarn" bpick'*.tar.gz' yarnpkg/yarn \
   as'program' from'gh-r' bpick'*x86_64-apple-darwin.tar.gz' mv'dua-* -> dua' pick'dua/dua' Byron/dua-cli \
   as'program' from'gh-r' atclone'ln -sfv completions/exa.zsh _exa' atpull'%atclone' pick'bin/exa' ogham/exa \
   as'program' from'gh-r' atclone'ln -sfv completions/dog.zsh _dog' atpull'%atclone' pick'bin/dog' ogham/dog \
+  as'program' from'gh-r' mv'k3d* -> k3d' atclone'./k3d completion zsh > _k3d' atpull'%atclone' pick'k3d' k3d-io/k3d \
+  as'program' from'gh-r' mv'argocd* -> argocd' atclone'./argocd completion zsh > _argocd' atpull'%atclone' pick'argocd' argoproj/argo-cd \
+  as'program' from'gh-r' mv'autok3s* -> autok3s' atclone'./autok3s completion zsh > _autok3s' atpull'%atclone' pick'autok3s' cnrancher/autok3s \
+  as'program' from'gh-r' mv'hostess* -> hostess' atclone'./hostess completion zsh > _hostess' atpull'%atclone' pick'hostess' cbednarski/hostess \
   as'program' from'gh-r' mv'direnv* -> direnv' atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' pick'direnv' src='zhook.zsh' direnv/direnv \
-  as'program' from'gh-r' mv'autok3s* -> autok3s' atclone'./autok3s completion zsh > autok3s.zsh && ln -sfv autok3s.zsh _autok3s' atpull'%atclone' pick'autok3s' cnrancher/autok3s
+  as'program' atclone'ln -sfv etc/git-extras-completion.zsh _git-extras' atpull'%atclone' pick'$ZPFX/bin/git-*' make'PREFIX=$ZPFX' nocompile tj/git-extras
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.

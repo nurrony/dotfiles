@@ -8,9 +8,6 @@ if ! fgrep -q '/usr/local/bin/zsh' /etc/shells; then
   sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
 fi;
 
-#Install Shell plugins
-echo -ne "installing custom plugins: thefuck, hostess... "
-brew install thefuck hostess >/dev/null 2>&1
 cd $HOME && \
 # clone .dotfile
 rm -fr $HOME/.dotfiles/.git && \

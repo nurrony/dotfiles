@@ -18,6 +18,7 @@ zi wait'5a' lucid light-mode for \
 zi wait'5b' lucid light-mode for \
   as'program' from'gh-r' extrawurst/gitui \
   as'program' has'bat' pick'src/*' eth-p/bat-extras \
+  as'program' from'gh-r' mv'tealdeer* -> tldr' dbrgn/tealdeer \
   as'program' from'gh-r' mv'hadolint* -> hadolint' hadolint/hadolint \
   as'program' from'gh-r' mv'kube-explorer* -> kube-explorer' cnrancher/kube-explorer \
   as'program' from'gh-r' mv'yarn* -> yarn' pick"yarn/bin/yarn" bpick'*.tar.gz' yarnpkg/yarn \

@@ -7,7 +7,9 @@ export DEV_ZONE=$DEV_DIR
 export ZI_HOME=$DEV_ZONE/storage/zi
 
 # Export starship theme config location
-export STARSHIP_CONFIG=~/.starship
+export STARSHIP_CONFIG=$HOME/.starship
+
+export _ZO_DATA_DIR=$HOME/.zoxide
 
 # Make vim the default editor.
 export EDITOR='vim';

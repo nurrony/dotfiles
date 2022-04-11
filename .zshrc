@@ -11,9 +11,11 @@ zi wait lucid light-mode for \
 
 zi wait'5a' lucid light-mode for \
   OMZ::plugins/git-extras/git-extras.plugin.zsh \
+  OMZ::plugins/asdf/asdf.plugin.zsh \
   pick'alias-tips.plugin.zsh' djui/alias-tips \
-  z-shell/H-S-MW \
-  pick'zsh-nvm.plugin.zsh' lukechilds/zsh-nvm
+  z-shell/H-S-MW
+  # \
+  # pick'zsh-nvm.plugin.zsh' lukechilds/zsh-nvm
 
 zi wait'5b' lucid light-mode for \
   as'program' from'gh-r' extrawurst/gitui \

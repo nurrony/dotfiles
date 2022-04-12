@@ -1,5 +1,8 @@
 eval "$(starship init zsh)"
 
+# ASDF https://github.com/asdf-vm/asdf settings
+export ASDF_DIR=$DEV_ZONE/storage/home-config/asdf/core
+
 export zi_home="${HOME}/.zi"
 source "${zi_home}/bin/zi.zsh"
 # Next two lines must be below the above two
@@ -14,8 +17,6 @@ zi wait'5a' lucid light-mode for \
   OMZ::plugins/asdf/asdf.plugin.zsh \
   pick'alias-tips.plugin.zsh' djui/alias-tips \
   z-shell/H-S-MW
-  # \
-  # pick'zsh-nvm.plugin.zsh' lukechilds/zsh-nvm
 
 zi wait'5b' lucid light-mode for \
   as'program' from'gh-r' extrawurst/gitui \

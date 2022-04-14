@@ -1,4 +1,4 @@
 #!/usr/bin/env zsh
 # Java SDKMan
-export SDKMAN_DIR="/Users/nurrony/.sdkman"
-[[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+# export SDKMAN_DIR="/Users/nurrony/.sdkman"
+# [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"

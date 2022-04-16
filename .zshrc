@@ -1,13 +1,5 @@
 eval "$(starship init zsh)"
 
-# Load the shell dotfiles, and then some:
-# * ~/.path can be used to extend `$PATH`.
-# * ~/.extra can be used for other settings you don’t want to commit.
-for file in ~/.dotfiles/.{extra,path,exports,functions,dockerfunctions,kubefunctions,cli-packages,aliases,source}; do
-  [ -r "$file" ] && [ -f "$file" ] && source "$file";
-done;
-unset file;
-
 export zi_home="${HOME}/.zi"
 source "${zi_home}/bin/zi.zsh"
 # Next two lines must be below the above two
@@ -26,6 +18,7 @@ zi wait'2' lucid light-mode for \
 zi wait'5b' lucid light-mode for \
   as'program' from'gh-r' extrawurst/gitui \
   as'program' has'bat' pick'src/*' eth-p/bat-extras \
+  as'program' from'gh-r' bpick'*macos.zip' convco/convco \
   as'program' from'gh-r' mv'tealdeer* -> tldr' dbrgn/tealdeer \
   as'program' from'gh-r' mv'hadolint* -> hadolint' hadolint/hadolint \
   as'program' from'gh-r' mv'kube-explorer* -> kube-explorer' cnrancher/kube-explorer \
@@ -43,5 +36,13 @@ zi wait'5b' lucid light-mode for \
 
 zi ice wait'3' lucid as'program' src'asdf.sh'
 zi light asdf-vm/asdf
+
+# Load the shell dotfiles, and then some:
+# * ~/.path can be used to extend `$PATH`.
+# * ~/.extra can be used for other settings you don’t want to commit.
+for file in $HOME/.dotfiles/.{extra,path,exports,functions,dockerfunctions,kubefunctions,cli-packages,aliases,source}; do
+  [ -r "$file" ] && [ -f "$file" ] && source "$file";
+done;
+unset file;
 
 zicompinit; zicdreplay

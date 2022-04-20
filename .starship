@@ -2,12 +2,25 @@
 min_time = 500
 
 [aws]
-format = 'on [$symbol($profile )(\($region\) )(\[$duration\])]($style)'
-style = "bold green"
 symbol = " "
+style = "bold green"
+format = 'on [$symbol($profile )(\($region\) )(\[$duration\])]($style)'
+
+[azure]
+disabled = false
+format = "on [$symbol($subscription)]($style) "
+symbol = "ﴃ "
+style = "blue bold"
 
 [battery]
-disabled = true
+full_symbol = " "
+charging_symbol = " "
+discharging_symbol = " "
+unknown_symbol = " "
+
+[[battery.display]]
+threshold = 30
+style = "bold red"
 
 [dart]
 symbol = " "
@@ -17,8 +30,15 @@ format = "via [$version](bold green) "
 truncation_length = 2
 read_only = " "
 
+[directory.substitutions]
+"Documents" = "Documents "
+"Downloads" = "Downloads "
+"Music" = "Music "
+"Pictures" = "Pictures "
+
 [docker_context]
 symbol = " "
+style = "bold blue"
 only_with_files = true
 disabled = false
 
@@ -27,6 +47,11 @@ symbol = " "
 
 [git_commit]
 commit_hash_length = 8
+
+[git_status]
+ahead = "⇡${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+behind = "⇣${count}"
 
 [golang]
 symbol = " "

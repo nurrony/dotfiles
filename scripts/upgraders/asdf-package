@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -e
+INSTALLED_PLUGINS=''
+function update_asdf_packages() {
+  echo 'updating asdf...'
+  asdf update 2>&1 > /dev/null
+  echo 'updating asdf plugin repo...'
+  asdf plugin list-all 2>&1 > /dev/null
+  echo 'updating installed plugin...'
+  asdf plugin update --all 2>&1 > /dev/null
+}
+
+function grab_installed_plugins() {
+  INSTALLED_PLUGINS=( $(asdf plugin list) )
+}
+
+function update_to_latest() {
+  local plugins=( "$@" )
+  local latest=''
+  local current=''
+  local skiped=''
+  for item in "${plugins[@]}"
+  do
+    [[ "$item" != "alias" && "$item" != "java" ]] && latest=$(asdf latest "$item") || skiped='skipped'
+    echo -ne "updating $item from "
+    echo $latest
+  done
+}
+
+# update_asdf_packages
+grab_installed_plugins
+update_to_latest "${INSTALLED_PLUGINS[@]}"

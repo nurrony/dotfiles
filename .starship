@@ -15,8 +15,8 @@ style = "blue bold"
 [battery]
 full_symbol = " "
 charging_symbol = " "
-discharging_symbol = " "
-unknown_symbol = " "
+discharging_symbol = " "
+unknown_symbol = " "
 
 [[battery.display]]
 threshold = 30

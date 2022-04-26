@@ -176,12 +176,12 @@ brew cleanup -s
 brew update --verbose
 brew tap homebrew/cask
 brew tap homebrew/cask-versions
-brew install --cask alfred \
-android-file-transfer \
+brew install --cask
 brave-browser \
 docker \
 gpg-suite \
 iterm2 \
+openmtp \
 skype \
 the-unarchiver \
 vagrant \

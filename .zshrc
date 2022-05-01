@@ -10,6 +10,7 @@ zi wait lucid light-mode for \
   as'completion' blockf zsh-users/zsh-completions
 
 zi wait'2' lucid light-mode for \
+  OMZ::plugins/minikube/minikube.plugin.zsh \
   OMZ::plugins/git-extras/git-extras.plugin.zsh \
   pick'alias-tips.plugin.zsh' djui/alias-tips \
   z-shell/H-S-MW \

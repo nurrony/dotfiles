@@ -399,6 +399,7 @@ alias minikube-reg='minikube start --insecure-registry localhost:5000'
 # Docker replaced by nerdctl
 alias nerdctl='lima nerdctl'
 alias docker='lima nerdctl'
+
 # # Python alias
 # alias python=/usr/bin/python3
 # alias pip=/usr/local/bin/pip3

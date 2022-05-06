@@ -7,7 +7,7 @@ autoload -Uz _zi
 (( ${+_comps} )) && _comps[zi]=_zi
 
 zi wait lucid light-mode for \
-  as'completion' blockf zsh-users/zsh-completions
+  as'completion' zsh-users/zsh-completions
 
 zi wait'2' lucid light-mode for \
   pick'alias-tips.plugin.zsh' djui/alias-tips \
@@ -38,7 +38,7 @@ zi wait'5' lucid light-mode for \
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
-for file in $HOME/.dotfiles/.{extra,path,exports,functions,dockerfunctions,kubefunctions,cli-packages,aliases,source}; do
+for file in $HOME/.dotfiles/.{extra,path,exports,aliases,functions,dockerfunctions,kubefunctions,source,cli-packages}; do
   [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;

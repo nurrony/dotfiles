@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Bash wrappers for docker run commands
+# Bash wrappers for nerdctl container run commands
 export DOCKER_REPO_PREFIX=jess
 
 #
@@ -15,24 +15,24 @@ dcleanup(){
 del_stopped(){
   local name=$1
   local state
-  state=$(docker inspect --format "{{.State.Running}}" "$name" 2>/dev/null)
+  state=$(nerdctl container inspect --format "{{.State.Running}}" "$name" 2>/dev/null)
 
   if [[ "$state" == "false" ]]; then
-    docker rm "$name"
+    nerdctl rm "$name"
   fi
 }
 
 ctr-registry-up() {
-  local state=$(docker inspect --format "{{.State.Running}}" registry 2>/dev/null)
+  local state=$(nerdctl container inspect --format "{{.State.Running}}" registry 2>/dev/null)
    if [[ "$state" == "true" ]] || [[ "$state" != "" ]]; then
-        docker rm -f registry
+        nerdctl rm -f registry
     fi
-  docker-compose -f $DEV_ZONE/storage/k8s-clusters/registry/docker-compose.yml up -d 2>/dev/null
+  nerdctl compose -f $DEV_ZONE/storage/k8s-clusters/registry/docker-compose.yml up -d 2>/dev/null
   echo 'registry started...'
 }
 
 ctr-rgistry-down() {
-  docker-compose -f $DEV_ZONE/storage/k8s-clusters/registry/docker-compose.yml down 2>/dev/null
+  nerdctl compose -f $DEV_ZONE/storage/k8s-clusters/registry/docker-compose.yml down 2>/dev/null
   echo 'registry is down'
 }
 
@@ -40,7 +40,7 @@ ctr-rgistry-down() {
 relies_on(){
   for container in "$@"; do
     local state
-    state=$(docker inspect --format "{{.State.Running}}" "$container" 2>/dev/null)
+    state=$(nerdctl container inspect --format "{{.State.Running}}" "$container" 2>/dev/null)
 
     if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
       echo "$container is not running, starting it for you."
@@ -51,17 +51,17 @@ relies_on(){
 
 nginx_proxy() {
   del_stopped nginx_proxy
-  local state=$(docker inspect --format "{{.State.Running}}" nginx_proxy 2>/dev/null)
+  local state=$(nerdctl container inspect --format "{{.State.Running}}" nginx_proxy 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
-    docker run -it -d \
+    nerdctl container run -d \
+      --user $(id -u):$(id -g) \
       --volume /var/run/docker.sock:/tmp/docker.sock:ro \
       --volume ${DEV_ZONE}/storage/nginx/vhost.d:/etc/nginx/vhost.d:ro \
       --volume ${DEV_ZONE}/storage/nginx/certs:/etc/nginx/certs:ro \
       --volume ${DEV_ZONE}/storage/nginx/conf.d/custom_settings.conf:/etc/nginx/conf.d/custom_settings.conf:ro \
       --publish 80:80 \
       --publish 443:443 \
-      --net ronsvpn \
       --name nginx_proxy \
       nginxproxy/nginx-proxy:alpine 2>/dev/null
   else
@@ -72,16 +72,16 @@ nginx_proxy() {
 portainer() {
   relies_on nginx_proxy
   del_stopped portainer
-  local state=$(docker inspect --format "{{.State.Running}}" portainer 2>/dev/null)
+  local state=$(nerdctl container inspect --format "{{.State.Running}}" portainer 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "portainer server is not running, starting it for you."
-    docker run -it -d \
+    nerdctl container run -d \
+      --user $(id -u):$(id -g) \
       --volume /var/run/docker.sock:/var/run/docker.sock:ro \
       --volume ${DEV_ZONE}/storage/portainer:/data \
       --env VIRTUAL_HOST=portainer.nmrony.local \
       --expose 9000 \
-      --net ronsvpn \
       --name portainer \
       portainer/portainer 2>/dev/null
   else
@@ -113,7 +113,7 @@ upstream ${server} { server ${route}; }
 EOF
 
   # restart nginx
-  docker restart nginx
+  nerdctl container restart nginx
 
  # add host to /etc/hosts
   hostess add $server 127.0.0.1
@@ -123,7 +123,7 @@ EOF
 }
 
 cadvisor(){
-  docker run -d \
+  nerdctl container run --user $(id -u):$(id -g) -d \
     --restart always \
     --volume /:/rootfs:ro \
     --volume /var/run:/var/run:rw \
@@ -133,7 +133,7 @@ cadvisor(){
     --name cadvisor \
     google/cadvisor
 
-  sudo hostess add cadvisor $(docker inspect --format "{{.NetworkSettings.Networks.bridge.IPAddress}}" cadvisor)
+  sudo hostess add cadvisor $(nerdctl container inspect --format "{{.NetworkSettings.Networks.bridge.IPAddress}}" cadvisor)
   open "http://cadvisor:8080"
 }
 
@@ -142,13 +142,13 @@ consul(){
 
   # check if we passed args and if consul is running
   local args=$@
-  local state=$(docker inspect --format "{{.State.Running}}" consul 2>/dev/null)
+  local state=$(nerdctl container inspect --format "{{.State.Running}}" consul 2>/dev/null)
   if [[ "$state" == "true" ]] && [[ ! -z "$args" ]]; then
-    docker exec -it consul consul "$@"
+    nerdctl container exec consul consul "$@"
     return 0
   fi
 
-  docker run -d \
+  nerdctl container run --user $(id -u):$(id -g) -d \
     --restart always \
     --volume $HOME/.consul:/etc/consul.d \
     --volume /var/run/docker.sock:/var/run/docker.sock \
@@ -159,18 +159,18 @@ consul(){
     -bootstrap-expect 1 \
     -config-dir /etc/consul.d \
     -data-dir /data \
-    -encrypt $(docker run --rm ${DOCKER_REPO_PREFIX}/consul keygen) \
+    -encrypt $(nerdctl container run --user $(id -u):$(id -g) --rm ${DOCKER_REPO_PREFIX}/consul keygen) \
     -ui-dir /usr/src/consul \
     -server \
     -dc neverland \
     -bind 0.0.0.0
 
-  sudo hostess add consul $(docker inspect --format "{{.NetworkSettings.Networks.bridge.IPAddress}}" consul)
+  sudo hostess add consul $(nerdctl container inspect --format "{{.NetworkSettings.Networks.bridge.IPAddress}}" consul)
   open "http://consul:8500"
 }
 
 dcos(){
-  docker run -it --rm \
+  nerdctl container run --user $(id -u):$(id -g) --rm \
     --volume $HOME/.dcos:/root/.dcos \
     --volume $(pwd):/root/apps \
     -w /root/apps \
@@ -178,7 +178,7 @@ dcos(){
 }
 
 htopdocker(){
-  docker run --rm -it \
+  nerdctl container run --user $(id -u):$(id -g) --rm \
     --pid host \
     --net none \
     --name htop \
@@ -186,7 +186,7 @@ htopdocker(){
 }
 
 # http(){
-#   docker run -t --rm \
+#   nerdctl container run --user $(id -u):$(id -g) -t --rm \
 #     --volume /var/run/docker.sock:/var/run/docker.sock \
 #     --log-driver none \
 #     alpine/httpie "$@"
@@ -197,7 +197,7 @@ imagemin(){
   local extension="${image##*.}"
   local filename="${image%.*}"
 
-  docker run --rm -it \
+  nerdctl container run --user $(id -u):$(id -g) --rm \
     --volume /etc/localtime:/etc/localtime:ro \
     --volume $HOME/Documents:/root/Pictures \
     ${DOCKER_REPO_PREFIX}/imagemin sh -c "imagemin /root/Pictures/${image} > /root/Pictures/${filename}_min.${extension}"
@@ -207,7 +207,7 @@ irssi() {
   del_stopped irssi
   # relies_on notify_osd
 
-  docker run --rm -it \
+  nerdctl container run --user $(id -u):$(id -g) --rm \
     --volume /etc/localtime:/etc/localtime:ro \
     --volume $HOME/.irssi:/home/user/.irssi \
     --read-only \
@@ -217,21 +217,20 @@ irssi() {
 
 couchdb(){
   del_stopped couchdb
-  local state=$(docker inspect --format "{{.State.Running}}" couchdb 2>/dev/null)
+  local state=$(nerdctl container inspect --format "{{.State.Running}}" couchdb 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "couchdb server is not running, starting it for you."
     local COUCH_DB_ADMIN=${1:-root}
     local COUCH_DB_PASS=${2:-nmrony}
     # create new couchdb container
-    docker run -it -d \
+    nerdctl container run --user $(id -u):$(id -g) -d \
       --volume ${DEV_ZONE}/storage/couchdb:/usr/local/var/lib/couchdb \
       --publish 5984:5984 \
       --publish 2049:2049 \
       --env COUCHDB_USER=${COUCH_DB_ADMIN} \
       --env COUCHDB_PASSWORD=${COUCH_DB_PASS} \
       --env VIRTUAL_HOST=couchdb.nmrony.docker \
-      --net ronsvpn \
       --name couchdb \
       couchdb 2>/dev/null
   else
@@ -241,15 +240,14 @@ couchdb(){
 
 mysqlserver8(){
   del_stopped mysqlserver
-  local state=$(docker inspect --format "{{.State.Running}}" mysqlserver 2>/dev/null)
+  local state=$(nerdctl container inspect --format "{{.State.Running}}" mysqlserver 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "mysql 8.x server is not running, starting it for you."
-    docker run -it -d \
+    nerdctl container run --user $(id -u):$(id -g) -d \
       --volume ${DEV_ZONE}/storage/databases/mysql/8:/var/lib/mysql \
       --env MYSQL_ROOT_PASSWORD=nmrony \
       --publish 3306:3306 \
-      --net ronsvpn \
       --name mysqlserver \
       mysql:8 2>/dev/null
   else
@@ -259,15 +257,14 @@ mysqlserver8(){
 
 mysqlserver5(){
   del_stopped mysqlserver5
-  local state=$(docker inspect --format "{{.State.Running}}" mysqlserver5 2>/dev/null)
+  local state=$(nerdctl container inspect --format "{{.State.Running}}" mysqlserver5 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "mysql 5.x server is not running, starting it for you."
-    docker run -it -d \
+    nerdctl container run --user $(id -u):$(id -g) -d \
       --volume ${DEV_ZONE}/storage/databases/mysql/5:/var/lib/mysql \
       --env MYSQL_ROOT_PASSWORD=nmrony \
       --publish 3306:3306 \
-      --net ronsvpn \
       --name mysqlserver5 \
       mysql:5.7 mysqld --wait-timeout=28800 2>/dev/null
   else
@@ -277,29 +274,29 @@ mysqlserver5(){
 
 mysql8(){
   relies_on mysqlserver
-  docker exec -it mysqlserver mysql "$@"
+  nerdctl container exec mysqlserver mysql "$@"
 }
 
 mysql5(){
   relies_on mysqlserver5
-  docker exec -it mysqlserver5 mysql "$@"
+  nerdctl container exec mysqlserver5 mysql "$@"
 }
 
 dynamodb() {
   del_stopped dynamodb
   relies_on nginx_proxy
   sleep 2;
-  local state=$(docker inspect --format "{{.State.Running}}" dynamodb 2>/dev/null)
+  local state=$(nerdctl container inspect --format "{{.State.Running}}" dynamodb 2>/dev/null)
 
     if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
       echo "local dynamodb server is not running, starting it for you."
-      docker run -dit \
+      nerdctl container run --user $(id -u):$(id -g) -d \
         --volume ${DEV_ZONE}/storage/databases/dynamodb:/home/dynamodblocal/data \
         --workdir /home/dynamodblocal \
         --publish "8000:8000" \
         --expose 8000 \
         --env VIRTUAL_HOST=dynamodb.nmrony.docker \
-        --net ronsvpn \
+
         --name dynamodb \
         amazon/dynamodb-local -jar DynamoDBLocal.jar -sharedDb -optimizeDbBeforeStartup -dbPath ./data 2>/dev/null
         if [ "$1" != "" ]; then
@@ -315,14 +312,14 @@ pma() {
   del_stopped pma
   relies_on nginx_proxy
   sleep 2;
-  local state=$(docker inspect --format "{{.State.Running}}" pma 2>/dev/null)
+  local state=$(nerdctl container inspect --format "{{.State.Running}}" pma 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
       echo "phpMyAdmin is not running, starting it for you."
-      docker run -it -d \
+      nerdctl container run --user $(id -u):$(id -g) -d \
         --env VIRTUAL_HOST=pma.nmrony.docker \
         --env PMA_ARBITRARY=1 \
-        --net ronsvpn \
+
         --expose 80 \
         --name pma \
         phpmyadmin/phpmyadmin > /dev/null 2>&1
@@ -336,11 +333,11 @@ myblog(){
   relies_on mysqlserver
   sleep 5
   del_stopped personal-blog
-  local state=$(docker inspect --format "{{.State.Running}}" personal-blog 2>/dev/null)
+  local state=$(nerdctl container inspect --format "{{.State.Running}}" personal-blog 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "blog server is not running, starting it for you."
-    docker run -it -d \
+    nerdctl container run --user $(id -u):$(id -g) -d \
       --volume ${DEV_ZONE}/projects/open-sources/nmrony.info/ghost-content:/var/lib/ghost/content \
       --env VIRTUAL_HOST=blog.nmrony.docker \
       --env url=http://blog.nmrony.docker \
@@ -350,7 +347,6 @@ myblog(){
       --env database__connection__password=nmrony \
       --env database__connection__database=rons_blog \
       --env DEV_DOMAIN=http://blog.nmrony.docker \
-      --net ronsvpn \
       --name personal-blog \
       ghost:2-alpine 2>/dev/null
   else
@@ -360,14 +356,13 @@ myblog(){
 
 mongodb(){
   del_stopped mongodb
-  local state=$(docker inspect --format "{{.State.Running}}" mongodb 2>/dev/null)
+  local state=$(nerdctl container inspect --format "{{.State.Running}}" mongodb 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "mongodb server is not running, starting it for you."
-    docker run -it -d \
+    nerdctl container run --user $(id -u):$(id -g) -d \
       --volume ${DEV_ZONE}/storage/databases/mongodb:/data/db \
       --publish 27017:27017 \
-      --net ronsvpn \
       --name mongodb \
       mongo "$@" 2>/dev/null
   else
@@ -378,19 +373,18 @@ mongodb(){
 mongo() {
   relies_on mongodb
   sleep 4s;
-  docker exec -it mongodb mongo "$@"
+  nerdctl container exec mongodb mongo "$@"
 }
 
 postgresserver13() {
   del_stopped postgresserver13
-  local state=$(docker inspect --format "{{.State.Running}}" postgresserver13 2>/dev/null)
+  local state=$(nerdctl container inspect --format "{{.State.Running}}" postgresserver13 2>/dev/null)
   local VERSION=${2:-13-alpine}
   local DBNAME=${1:-experiments}
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "postgres 13.x.x server is not running, starting it for you."
-    docker run -it -d \
-      --net ronsvpn \
+    nerdctl container run --user $(id -u):$(id -g) -d \
       --ulimit memlock=-1:-1 \
       --memory-swappiness=0 \
       --volume ${DEV_ZONE}/storage/databases/postgres/13:/var/lib/postgresql/data \
@@ -407,23 +401,23 @@ postgresserver13() {
 
 psql13() {
   relies_on postgresserver13;
-  docker exec -it postgresserver13 psql "$@"
+  nerdctl container exec postgresserver13 psql "$@"
 }
 
 pga() {
   del_stopped pga
   relies_on nginx_proxy
   sleep 2;
-  local state=$(docker inspect --format "{{.State.Running}}" pga 2>/dev/null)
+  local state=$(nerdctl container inspect --format "{{.State.Running}}" pga 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
       echo "pgAdmin4 is not running, starting it for you."
-      docker run -dit \
+      nerdctl container run --user $(id -u):$(id -g) -d \
         --env VIRTUAL_HOST=pga.nmrony.docker \
         --env PGADMIN_DEFAULT_EMAIL=rony@nmrony.info \
         --env PGADMIN_DEFAULT_PASSWORD=nmrony \
         --env PGADMIN_DISABLE_POSTFIX=yes \
-        --net ronsvpn \
+
         --expose 80 \
         --name pga \
         dpage/pgadmin4 > /dev/null 2>&1
@@ -437,15 +431,14 @@ elasticsearch(){
   # --env "bootstrap.memory_lock=true"
   # --env "ES_JAVA_OPTS=-Xms512m -Xmx512m"
   del_stopped elasticsearch
-  local state=$(docker inspect --format "{{.State.Running}}" elasticsearch 2>/dev/null)
+  local state=$(nerdctl container inspect --format "{{.State.Running}}" elasticsearch 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "elasticsearch server is not running, starting it for you."
-    docker run -it -d \
+    nerdctl container run --user $(id -u):$(id -g) -d \
       --volume ${DEV_ZONE}/storage/elasticsearch/data:/usr/share/elasticsearch/data \
       --publish 9200:9200 \
       --publish 9300:9300 \
-      --net ronsvpn \
       --ulimit memlock=-1:-1 \
       --env "http.cors.enabled=true" \
       --env "ELASTIC_PASSWORD=nmrony" \
@@ -467,10 +460,10 @@ elastic-gui() {
   del_stopped elastic-gui
   relies_on elasticsearch
   sleep 2;
-  local state=$(docker inspect --format "{{.State.Running}}" elastic-gui 2>/dev/null)
+  local state=$(nerdctl container inspect --format "{{.State.Running}}" elastic-gui 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
-    docker run -dit \
+    nerdctl container run --user $(id -u):$(id -g) -d \
        --publish 9000:8080 \
        --env VIRTUAL_HOST=elasticgui.nmrony.docker \
        --name elastic-gui \
@@ -482,21 +475,20 @@ elastic-gui() {
 }
 
 containerssh() {
-  docker exec -it "$@"
+  nerdctl container exec "$@"
 }
 
 composer() {
-  docker run --rm --interactive --tty \
+  nerdctl container run --rm --interactive --tty \
     --volume $PWD:/app \
     --user $(id -u):$(id -g) \
     composer "$@"
 }
 
 apache-php() {
-  docker run --rm --interactive --tty \
+  nerdctl container run --rm --interactive --tty \
     --volume $PWD:/var/www/html \
     --user $(id -u):$(id -g) \
-    --net ronsvpn \
     nmrony/php:7-apache "$@"
 }
 
@@ -505,12 +497,12 @@ start-lamp-stack() {
 }
 
 stop-lamp-stack() {
-  docker rm -f nginx_proxy pma mysqlserver && echo 'LAMP stack stopped successfully.'
+  nerdctl rm -f nginx_proxy pma mysqlserver && echo 'LAMP stack stopped successfully.'
 }
 
 sysdig() {
   del_stopped sysdig-container
-  docker run -it \
+  nerdctl container run --user $(id -u):$(id -g) \
     --name sysdig-container \
     --privileged \
     --volume /var/run/docker.sock:/host/var/run/docker.sock \
@@ -523,8 +515,8 @@ sysdig() {
 }
 
 bees(){
-  docker run -it --rm \
-    --env NOTARY_TOKEN \
+  nerdctl container run --user $(id -u):$(id -g) --rm \
+    --env $NOTARY_TOKEN \
     --volume $HOME/.bees:/root/.bees \
     --volume $HOME/.boto:/root/.boto \
     --volume $HOME/.dev:/root/.ssh:ro \
@@ -538,18 +530,18 @@ bees(){
 ###
 command_not_found_handle () {
  # Check if there is a container image with that name
- if ! docker inspect --format '{{ .Author }}' "$1" >&/dev/null ; then
+ if ! nerdctl container inspect --format '{{ .Author }}' "$1" >&/dev/null ; then
   echo "$0: $1: command not found"
   return
  fi
 
  # Check that it's really the name of the image, not a prefix
- if docker inspect --format '{{ .Id }}' "$1" | grep -q "^$1" ; then
+ if nerdctl container inspect --format '{{ .Id }}' "$1" | grep -q "^$1" ; then
   echo "$0: $1: command not found"
   return
  fi
 
-#  docker run -ti -u $(whoami) -w "$HOME" \
+#  nerdctl container run --user $(id -u):$(id -g) -ti -u $(whoami) -w "$HOME" \
 #   $(env | cut -d= -f1 | awk '{print "-e", $1}') \
 #   --device /dev/snd \
 #   --volume /etc/passwd:/etc/passwd:ro \
@@ -562,7 +554,7 @@ command_not_found_handle () {
 
 dive() {
   del_stopped dive
-  docker run --rm -it \
+  nerdctl container run --user $(id -u):$(id -g) --rm \
     --net ronsvpn \
     --name dive \
     --volume /var/run/docker.sock:/var/run/docker.sock:ro \

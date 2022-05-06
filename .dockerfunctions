@@ -27,12 +27,12 @@ ctr-registry-up() {
    if [[ "$state" == "true" ]] || [[ "$state" != "" ]]; then
         nerdctl rm -f registry
     fi
-  nerdctl compose -f $DEV_ZONE/storage/k8s-clusters/registry/docker-compose.yml up -d 2>/dev/null
+  nerdctl compose -f $DEV_ZONE/storage/kubernetes/k8s-clusters/registry/docker-compose.yml up -d 2>/dev/null
   echo 'registry started...'
 }
 
 ctr-rgistry-down() {
-  nerdctl compose -f $DEV_ZONE/storage/k8s-clusters/registry/docker-compose.yml down 2>/dev/null
+  nerdctl compose -f $DEV_ZONE/storage/k8s-clusters/kubernetes/registry/docker-compose.yml down 2>/dev/null
   echo 'registry is down'
 }
 

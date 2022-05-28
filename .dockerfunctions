@@ -115,9 +115,6 @@ EOF
   # restart nginx
   nerdctl container restart nginx
 
- # add host to /etc/hosts
-  hostess add $server 127.0.0.1
-
   # open browser
   open "http://${server}"
 }
@@ -279,7 +276,7 @@ mysql8(){
 
 mysql5(){
   relies_on mysqlserver5
-  nerdctl container exec mysqlserver5 mysql "$@"
+  nerdctl container exec -it mysqlserver5 mysql "$@"
 }
 
 dynamodb() {
@@ -310,22 +307,32 @@ dynamodb() {
 
 pma() {
   del_stopped pma
-  relies_on nginx_proxy
-  sleep 2;
+  relies_on nginx
   local state=$(nerdctl container inspect --format "{{.State.Running}}" pma 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
       echo "phpMyAdmin is not running, starting it for you."
-      nerdctl container run --user $(id -u):$(id -g) -d \
-        --env VIRTUAL_HOST=pma.nmrony.docker \
+      nerdctl container run -d \
         --env PMA_ARBITRARY=1 \
-
-        --expose 80 \
         --name pma \
-        phpmyadmin/phpmyadmin > /dev/null 2>&1
+        phpmyadmin/phpmyadmin
+    sleep 2;
+    nerdctl container restart nginx
+    sleep 1;
+    open "http://pma.nmrony.localhost/"
     else
       echo 'phpMyAdmin is already running'
     fi
+}
+
+nginx(){
+  del_stopped nginx
+  nerdctl container run -d \
+    --publish 80:80 \
+    --publish 443:443 \
+    --volume ${DEV_ZONE}/storage/nginx/conf.d:/etc/nginx/conf.d:ro \
+    --name nginx \
+    nginx:stable-alpine
 }
 
 myblog(){
@@ -555,7 +562,7 @@ command_not_found_handle () {
 dive() {
   del_stopped dive
   nerdctl container run --user $(id -u):$(id -g) --rm \
-    --net ronsvpn \
+    --net bridge \
     --name dive \
     --volume /var/run/docker.sock:/var/run/docker.sock:ro \
     wagoodman/dive:latest "$@"

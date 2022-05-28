@@ -12,7 +12,7 @@ cd $HOME && \
 # clone .dotfile
 rm -fr $HOME/.dotfiles/.git && \
 mv .zshrc .zshrc.pre-nurrony-dotfiles && \
-ln -sf $HOME/.dotfiles/.{zshrc,curlrc,gemrc,gitattribute,gitconfig,gitignore,vimrc,wgetrc} $HOME/
+ln -sf $HOME/.dotfiles/.{zshrc,curlrc,gemrc,gitattribute,gitconfig,gitignore,vimrc,wgetrc,inputrc,starship,screenrc,hushlogin} $HOME/
 echo 'All are done. Applying changes..'
 source $HOME/.zshrc && \
 printf "\nTo prepare your pc more developer friendly you can run the following scripts\n\n"

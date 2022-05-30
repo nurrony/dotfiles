@@ -17,8 +17,8 @@ del_stopped(){
   local state
   state=$(nerdctl container inspect --format "{{.State.Running}}" "$name" 2>/dev/null)
 
-  if [[ "$state" == "false" ]]; then
-    nerdctl rm "$name"
+  if [[ "$state" == "false" ]] || [[ "$state" == "1" ]]; then
+    nerdctl rm -f "$name"
   fi
 }
 
@@ -253,7 +253,7 @@ mysqlserver8(){
 }
 
 mysqlserver5(){
-  del_stopped mysqlserver5
+  nerdctl rm -f mysqlserver5 2>/dev/null
   local state=$(nerdctl container inspect --format "{{.State.Running}}" mysqlserver5 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then

@@ -1,3 +1,4 @@
+echo -n 'removing Docker Desktop...'
 sudo rm -Rf /Applications/Docker.app
 sudo rm -f /usr/local/bin/docker
 sudo rm -f /usr/local/bin/docker-machine
@@ -24,4 +25,4 @@ sudo rm -f ~/Library/Preferences/com.docker.docker.plist
 sudo rm -Rf ~/Library/Saved\ Application\ State/com.electron.docker-frontend.savedState
 sudo rm -f ~/Library/Preferences/com.electron.docker-frontend.plist
 brew uninstall --cask docker
-
+echo ' [done]'

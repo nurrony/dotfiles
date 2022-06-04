@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -e
+echo -n 'removing Brave Browser...'
+rm -fr /Applications/Brave\ Browser.app
+rm -fr ~/Library/Application\ Support/BraveSoftware/
+rm -fr ~/Library/Application\ Support/CrashReporter/Brave*
+rm -fr ~/Library/Preferences/com.brave*
+rm -fr ~/Library/Saved\ Application\ State/com.brave.Browser.savedState
+rm -fr ~/Library/Brave*
+rm -fr ~/Library/Speech/Speakable\ Items/Application\ Speakable\ Items/Brave/
+rm -fr ~/Library/LaunchAgents/com.brave.*
+rm -fr ~/Library/Caches/com.brave*
+rm -fr ~/Library/Caches/com.brave*
+rm -fr ~/Library/Caches/com.brave*
+rm -fr ~/Library/Application\ Support/Brave*
+rm -rf ~/Applications/Brave*
+echo ' [done]'

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -e
-echo 'removing Google Chrome...'
+echo -n 'removing Google Chrome...'
 rm -fr /Applications/Google\ Chrome.app/
 rm -fr ~/Library/Application\ Support/Google/Chrome/
 rm -fr ~/Library/Application\ Support/CrashReporter/Google\ Chrome*
@@ -18,3 +18,4 @@ rm -fr ~/Library/Caches/com.google.Keystone*
 rm -fr ~/Library/Caches/com.google.SoftwareUpdate
 rm -fr ~/Library/Application Support/Google/RLZ
 rm -rf ~/Applications/Chrome\ Apps
+echo ' [done]'

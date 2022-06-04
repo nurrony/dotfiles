@@ -1,18 +1,17 @@
 #!/usr/bin/env bash
-# Usage: ./vmware
-
+set -e
 remove() {
   entry="$1"
 
-  echo -e "Removing $entry ["
+  echo -ne "Removing $entry... "
   sudo rm -rf "$entry"
 
   if [[ ! -e "$entry" ]]; then
-    echo -ne "OK"
+    echo -ne "[OK]"
   else
-    echo -ne "FAILED"
+    echo -ne "[FAILED]"
   fi
-  echo -ne "]"
+  echo
 }
 
 remove "/Applications/VMware Fusion.app"

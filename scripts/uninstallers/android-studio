@@ -1,18 +1,34 @@
-rm -Rf /Applications/Android\ Studio.app
-rm -Rf ~/Library/Preferences/AndroidStudio*
-rm -Rf ~/Library/Preferences/Google/AndroidStudio*
-rm -Rf ~/Library/Preferences/com.google.android.*
-rm -Rf ~/Library/Preferences/com.android.*
-rm -Rf ~/Library/Application\ Support/AndroidStudio*
-rm -Rf ~/Library/Application\ Support/Google/AndroidStudio*
-rm -Rf ~/Library/Logs/AndroidStudio*
-rm -Rf ~/Library/Logs/Google/AndroidStudio*
-rm -Rf ~/Library/Caches/AndroidStudio*
-rm -Rf ~/.AndroidStudio*
-rm -Rf ~/.gradle
-rm -Rf ~/AndroidStudioProjects
-rm -Rf ~/Library/Android*
-rm -Rf ~/.emulator_console_auth_token
-rm -Rf ~/Library/Preferences/Google/AndroidStudio*
-rm -Rf ~/Library/Caches/Google/AndroidStudio*
-rm -Rf ~/Library/Logs/Google/AndroidStudio*
+#!/usr/bin/env bash
+set -e
+remove() {
+  entry="$1"
+
+  echo -ne "Removing $entry... "
+  sudo rm -rf "$entry"
+
+  if [[ ! -e "$entry" ]]; then
+    echo -ne "[OK]"
+  else
+    echo -ne "[FAILED]"
+  fi
+  echo
+}
+brew uninstall --cask --quiet android-studio
+remove /Applications/Android\ Studio.app
+remove ~/Library/Preferences/AndroidStudio*
+remove ~/Library/Preferences/Google/AndroidStudio*
+remove ~/Library/Preferences/com.google.android.*
+remove ~/Library/Preferences/com.android.*
+remove ~/Library/Application\ Support/AndroidStudio*
+remove ~/Library/Application\ Support/Google/AndroidStudio*
+remove ~/Library/Logs/AndroidStudio*
+remove ~/Library/Logs/Google/AndroidStudio*
+remove ~/Library/Caches/AndroidStudio*
+remove ~/.AndroidStudio*
+remove ~/.gradle
+remove ~/AndroidStudioProjects
+remove ~/Library/Android*
+remove ~/.emulator_console_auth_token
+remove ~/Library/Preferences/Google/AndroidStudio*
+remove ~/Library/Caches/Google/AndroidStudio*
+remove ~/Library/Logs/Google/AndroidStudio*

@@ -1,18 +1,35 @@
 #!/usr/bin/env bash
 set -e
-echo -n 'removing Microsoft Edge...'
-rm -fr /Applications/Microsoft\ Edge.app/
-rm -fr ~/Library/Application\ Support/Microsoft/EdgeUpdater/
-rm -fr ~/Library/Application\ Support/CrashReporter/Microsoft*
-rm -fr ~/Library/Preferences/com.microsoft.autoupdate*
-rm -fr ~/Library/Caches/com.microsoft.Edge*
-rm -fr ~/Library/Saved\ Application\ State/com.microsoft.Edge*
-rm -fr ~/Library/Microsoft/EdgeUpdater/
-rm -fr ~/Library/Google/Microsoft\ Edge*
-rm -fr ~/Library/Speech/Speakable\ Items/Application\ Speakable\ Items/Microsoft\ Edge*
-rm -fr ~/Library/LaunchAgents/com.microsoft.Edge*
-rm -fr ~/Library/Preferences/com.google.Keystone.Agent.plist
-rm -fr ~/Library/Caches/com.google.Keystone*
-rm -fr ~/Library/Caches/com.google.SoftwareUpdate
-rm -rf ~/Applications/Edge\ Apps
-echo ' [done]'
+#!/usr/bin/env bash
+set -e
+remove() {
+  entry="$1"
+
+  echo -ne "Removing $entry... "
+  sudo rm -rf "$entry"
+
+  if [[ ! -e "$entry" ]]; then
+    echo -ne "[OK]"
+  else
+    echo -ne "[FAILED]"
+  fi
+  echo
+}
+
+brew uninstall --cask --zap --quiet microsoft-edge
+remove /Applications/Microsoft\ Edge.app/
+remove ~/Library/Caches/Microsoft\ Edge
+remove ~/Library/Preferences/com.microsoft.edge*
+remove ~/Library/Application\ Support/Microsoft/EdgeUpdater/
+remove ~/Library/Application\ Support/CrashReporter/Microsoft*
+remove ~/Library/Preferences/com.microsoft.autoupdate*
+remove ~/Library/Caches/com.microsoft.Edge*
+remove ~/Library/Saved\ Application\ State/com.microsoft.Edge*
+remove ~/Library/Microsoft/EdgeUpdater/
+remove ~/Library/Application\ Support/Microsoft\ Edge*
+remove ~/Library/Speech/Speakable\ Items/Application\ Speakable\ Items/Microsoft\ Edge*
+remove ~/Library/LaunchAgents/com.microsoft.Edge*
+remove ~/Library/Preferences/com.google.Keystone.Agent.plist
+remove ~/Library/Caches/com.google.Keystone*
+remove ~/Library/Caches/com.google.SoftwareUpdate
+remove ~/Applications/Edge\ Apps

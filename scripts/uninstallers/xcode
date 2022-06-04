@@ -1,26 +1,32 @@
 #!/usr/bin/env bash
 set -e
-echo 'removing XCode...'
+remove() {
+  entry="$1"
 
-sudo rm -fr /Applications/Xcode.app
-sudo rm -fr ~/Library/Caches/com.apple.dt.Xcode
-sudo rm -fr ~/Library/Developer
-sudo rm -fr ~/Library/MobileDevice
-sudo rm -fr ~/Library/Preferences/com.apple.dt.Xcode.plist
-sudo rm -fr /Library/Preferences/com.apple.dt.Xcode.plist
-sudo rm -fr /System/Library/Receipts/com.apple.pkg.XcodeExtensionSupport.bom
-sudo rm -fr /System/Library/Receipts/com.apple.pkg.XcodeExtensionSupport.plist
-sudo rm -fr /System/Library/Receipts/com.apple.pkg.XcodeSystemResources.bom
-sudo rm -fr /System/Library/Receipts/com.apple.pkg.XcodeSystemResources.plist
+  echo -ne "Removing $entry... "
+  sudo rm -rf "$entry"
 
-#read 'Do you want to delete customizations? [Y/N]' REPLY
-#if [[ ! $REPLY =~ ^[Yy]$ ]]
-#then
-#  exit 0;
-#fi
-sudo rm -fr ~/Library/Developer/Xcode/UserData/CodeSnippets
-sudo rm -fr ~/Library/Developer/Xcode/UserData/FontAndColorThemes
-sudo rm -fr ~/Library/Developer/Xcode/UserData/KeyBindings
-sudo rm -fr ~/Library/Developer/Xcode/Templates
-sudo rm -fr ~/Library/Preferences/com.apple.dt.Xcode.plist
-sudo rm -fr ~/Library/MobileDevice/Provisioning\ Profiles
+  if [[ ! -e "$entry" ]]; then
+    echo -ne "[OK]"
+  else
+    echo -ne "[FAILED]"
+  fi
+  echo
+}
+
+remove /Applications/Xcode.app
+remove ~/Library/Caches/com.apple.dt.Xcode
+remove ~/Library/Developer
+remove ~/Library/MobileDevice
+remove ~/Library/Preferences/com.apple.dt.Xcode.plist
+remove /Library/Preferences/com.apple.dt.Xcode.plist
+remove /System/Library/Receipts/com.apple.pkg.XcodeExtensionSupport.bom
+remove /System/Library/Receipts/com.apple.pkg.XcodeExtensionSupport.plist
+remove /System/Library/Receipts/com.apple.pkg.XcodeSystemResources.bom
+remove /System/Library/Receipts/com.apple.pkg.XcodeSystemResources.plist
+remove ~/Library/Developer/Xcode/UserData/CodeSnippets
+remove ~/Library/Developer/Xcode/UserData/FontAndColorThemes
+remove ~/Library/Developer/Xcode/UserData/KeyBindings
+remove ~/Library/Developer/Xcode/Templates
+remove ~/Library/Preferences/com.apple.dt.Xcode.plist
+remove ~/Library/MobileDevice/Provisioning\ Profiles

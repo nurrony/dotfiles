@@ -1,21 +1,56 @@
 #!/usr/bin/env bash
 set -e
-echo -n 'removing Google Chrome...'
-rm -fr /Applications/Google\ Chrome.app/
-rm -fr ~/Library/Application\ Support/Google/Chrome/
-rm -fr ~/Library/Application\ Support/CrashReporter/Google\ Chrome*
-rm -fr ~/Library/Preferences/com.google.Chrome*
-rm -fr ~/Library/Preferences/Google\ Chrome*
-rm -fr ~/Library/Caches/com.google.Chrome*
-rm -fr ~/Library/Saved\ Application\ State/com.google.Chrome.savedState/
-rm -fr ~/Library/Google/GoogleSoftwareUpdate/Actives/com.google.Chrome
-rm -fr ~/Library/Google/Google\ Chrome*
-rm -fr ~/Library/Speech/Speakable\ Items/Application\ Speakable\ Items/Google\ Chrome/
-rm -fr ~/Library/Google/Google\ Chrome\ Brand.plist
-rm -fr ~/Library/LaunchAgents/com.google.keystone.agent.plist
-rm -fr ~/Library/Preferences/com.google.Keystone.Agent.plist
-rm -fr ~/Library/Caches/com.google.Keystone*
-rm -fr ~/Library/Caches/com.google.SoftwareUpdate
-rm -fr ~/Library/Application Support/Google/RLZ
-rm -rf ~/Applications/Chrome\ Apps
-echo ' [done]'
+remove() {
+  entry="$1"
+
+  echo -ne "Removing $entry... "
+  sudo rm -rf "$entry"
+
+  if [[ ! -e "$entry" ]]; then
+    echo -ne "[OK]"
+  else
+    echo -ne "[FAILED]"
+  fi
+  echo
+}
+
+brew uninstall --cask --quiet --zap google-chrome
+remove /Applications/Google\ Chrome.app/
+remove ~/Library/Application\ Support/Google/Chrome/
+remove ~/Library/Application\ Support/CrashReporter/Google\ Chrome*
+remove ~/Library/Preferences/com.google.Chrome*
+remove ~/Library/Preferences/Google\ Chrome*
+remove ~/Library/Caches/com.google.Chrome*
+remove ~/Library/Saved\ Application\ State/com.google.Chrome.savedState/
+remove ~/Library/Google/GoogleSoftwareUpdate/Actives/com.google.Chrome
+remove ~/Library/Google/Google\ Chrome*
+remove ~/Library/Speech/Speakable\ Items/Application\ Speakable\ Items/Google\ Chrome/
+remove ~/Library/Google/Google\ Chrome\ Brand.plist
+remove ~/Library/LaunchAgents/com.google.keystone.agent.plist
+remove ~/Library/Preferences/com.google.Keystone.Agent.plist
+remove ~/Library/Caches/com.google.Keystone*
+remove ~/Library/Caches/com.google.SoftwareUpdate
+remove ~/Library/Application Support/Google/RLZ
+remove ~/Applications/Chrome\ Apps
+remove  "/Library/Caches/com.google.SoftwareUpdate.*"
+remove "/Library/Google/Google Chrome Brand.plist"
+remove "/Library/Google/GoogleSoftwareUpdate"
+remove "~/Library/Application Support/Google/Chrome"
+remove "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.google.chrome.app.*.sfl*"
+remove "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.google.chrome.sfl*"
+remove "~/Library/Caches/Google/Chrome"
+remove "~/Library/Caches/com.google.Chrome"
+remove "~/Library/Caches/com.google.Chrome.helper.*"
+remove "~/Library/Caches/com.google.Keystone"
+remove "~/Library/Caches/com.google.Keystone.Agent"
+remove "~/Library/Caches/com.google.SoftwareUpdate"
+remove "~/Library/Google/Google Chrome Brand.plist"
+remove "~/Library/Google/GoogleSoftwareUpdate"
+remove "~/Library/LaunchAgents/com.google.keystone.agent.plist"
+remove "~/Library/LaunchAgents/com.google.keystone.xpcservice.plist"
+remove "~/Library/Logs/GoogleSoftwareUpdateAgent.log"
+remove "~/Library/Preferences/com.google.Chrome.plist"
+remove "~/Library/Preferences/com.google.Keystone.Agent.plist"
+remove "~/Library/Saved Application State/com.google.Chrome.app.*.savedState"
+remove "~/Library/Saved Application State/com.google.Chrome.savedState"
+remove "~/Library/WebKit/com.google.Chrome"

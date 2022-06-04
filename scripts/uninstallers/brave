@@ -1,17 +1,30 @@
 #!/usr/bin/env bash
 set -e
-echo -n 'removing Brave Browser...'
-rm -fr /Applications/Brave\ Browser.app
-rm -fr ~/Library/Application\ Support/BraveSoftware/
-rm -fr ~/Library/Application\ Support/CrashReporter/Brave*
-rm -fr ~/Library/Preferences/com.brave*
-rm -fr ~/Library/Saved\ Application\ State/com.brave.Browser.savedState
-rm -fr ~/Library/Brave*
-rm -fr ~/Library/Speech/Speakable\ Items/Application\ Speakable\ Items/Brave/
-rm -fr ~/Library/LaunchAgents/com.brave.*
-rm -fr ~/Library/Caches/com.brave*
-rm -fr ~/Library/Caches/com.brave*
-rm -fr ~/Library/Caches/com.brave*
-rm -fr ~/Library/Application\ Support/Brave*
-rm -rf ~/Applications/Brave*
-echo ' [done]'
+remove() {
+  entry="$1"
+
+  echo -ne "Removing $entry... "
+  sudo rm -rf "$entry"
+
+  if [[ ! -e "$entry" ]]; then
+    echo -ne "[OK]"
+  else
+    echo -ne "[FAILED]"
+  fi
+  echo
+}
+
+brew uninstall --cask --quiet brave-browser
+remove "/Applications/Brave\ Browser.app"
+remove "~/Library/Application\ Support/BraveSoftware/"
+remove "~/Library/Application\ Support/CrashReporter/Brave*"
+remove "~/Library/Preferences/com.brave*"
+remove "~/Library/Saved\ Application\ State/com.brave.Browser.savedState"
+remove "~/Library/Brave*"
+remove "~/Library/Speech/Speakable\ Items/Application\ Speakable\ Items/Brave/"
+remove "~/Library/LaunchAgents/com.brave.*"
+remove "~/Library/Caches/com.brave*"
+remove "~/Library/Caches/com.brave*"
+remove "~/Library/Caches/com.brave*"
+remove "~/Library/Application\ Support/Brave*"
+remove "~/Applications/Brave*"

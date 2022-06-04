@@ -1,7 +1,29 @@
-echo -n 'removing Microsoft Teams... [wip]'
-exit 0;
-rm -fr ~/Library/Caches/com.microsoft.teams
-rm -fr ~/Library/Caches/com.microsoft.teams.shipit
-rm -fr ~/Library/Application\ Support/Microsoft/Teams
-rm -fr ~/Library/Application\ Support/Microsoft/Teams
-echo ' [done]'
+#!/usr/bin/env bash
+set -e
+remove() {
+  entry="$1"
+
+  echo -ne "Removing $entry... "
+  sudo rm -rf "$entry"
+
+  if [[ ! -e "$entry" ]]; then
+    echo -ne "[OK]"
+  else
+    echo -ne "[FAILED]"
+  fi
+  echo
+}
+
+remove ~/Library/Caches/com.microsoft.teams
+remove ~/Library/Caches/com.microsoft.teams.shipit
+remove ~/Library/Application\ Support/Microsoft/Teams
+remove ~/Library/Application\ Support/com.microsoft.teams
+remove ~/Library/Application\ Support/Microsoft/Teams
+remove ~/Library/Application\ Support/Teams
+remove ~/Library/Caches/com.microsoft.teams
+remove ~/Library/Cookies/com.microsoft.teams.binarycookies
+remove ~/Library/Logs/Microsoft\ Teams
+remove ~/Library/Preferences/com.microsoft.teams.plist
+remove ~/Library/Saved\ Application\ State/com.microsoft.teams.savedState
+remove ~/Library/WebKit/com.microsoft.teams
+brew uninstall --cask --zap --quiet microsoft-teams

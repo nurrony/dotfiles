@@ -1,10 +1,32 @@
 #!/usr/bin/env bash
 set -e
-echo -n 'removing Visual Studio Code...'
-rm -fr ~/Library/Preferences/com.microsoft.VSCode.helper.plist
-rm -fr ~/Library/Preferences/com.microsoft.VSCode.plist
-rm -fr ~/Library/Caches/com.microsoft.VSCode
-rm -fr ~/Library/Caches/com.microsoft.VSCode.ShipIt/
-rm -fr ~/Library/Application\ Support/Code/
-rm -fr ~/Library/Saved\ Application\ State/com.microsoft.VSCode.savedState/
-echo '[done]'
+remove() {
+  entry="$1"
+
+  echo -ne "Removing $entry... "
+  sudo rm -rf "$entry"
+
+  if [[ ! -e "$entry" ]]; then
+    echo -ne "[OK]"
+  else
+    echo -ne "[FAILED]"
+  fi
+  echo
+}
+
+brew uninstall --cask --zap --quiet visual-studio-code
+remove ~/Library/Preferences/com.microsoft.VSCode.helper.plist
+remove ~/Library/Preferences/com.microsoft.VSCode.plist
+remove ~/Library/Caches/com.microsoft.VSCode
+remove ~/Library/Caches/com.microsoft.VSCode.ShipIt/
+remove ~/Library/Application\ Support/Code/
+remove ~/Library/Saved\ Application\ State/com.microsoft.VSCode.savedState/
+remove ~/.vscode
+remove ~/Library/Application\ Support/Code
+remove ~/Library/Application\ Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.microsoft.vscode.sfl*
+remove ~/Library/Caches/com.microsoft.VSCode.ShipIt
+remove ~/Library/Caches/com.microsoft.VSCode
+remove ~/Library/Preferences/ByHost/com.microsoft.VSCode.ShipIt.*.plist
+remove ~/Library/Preferences/com.microsoft.VSCode.helper.plist
+remove ~/Library/Preferences/com.microsoft.VSCode.plist
+remove ~/Library/Saved\ Application\ State/com.microsoft.VSCode.savedState

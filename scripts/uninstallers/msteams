@@ -1,0 +1,7 @@
+echo -n 'removing Microsoft Teams... [wip]'
+exit 0;
+rm -fr ~/Library/Caches/com.microsoft.teams
+rm -fr ~/Library/Caches/com.microsoft.teams.shipit
+rm -fr ~/Library/Application\ Support/Microsoft/Teams
+rm -fr ~/Library/Application\ Support/Microsoft/Teams
+echo ' [done]'

@@ -14,7 +14,7 @@ remove() {
   echo
 }
 
-brew uninstall --cask --quiet brave-browser
+brew uninstall --cask --zap --quiet brave-browser
 remove "/Applications/Brave\ Browser.app"
 remove "~/Library/Application\ Support/BraveSoftware/"
 remove "~/Library/Application\ Support/CrashReporter/Brave*"

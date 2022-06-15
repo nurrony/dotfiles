@@ -29,7 +29,7 @@ remove ~/Library/Microsoft/EdgeUpdater/
 remove ~/Library/Application\ Support/Microsoft\ Edge*
 remove ~/Library/Speech/Speakable\ Items/Application\ Speakable\ Items/Microsoft\ Edge*
 remove ~/Library/LaunchAgents/com.microsoft.Edge*
-remove ~/Library/Preferences/com.google.Keystone.Agent.plist
-remove ~/Library/Caches/com.google.Keystone*
-remove ~/Library/Caches/com.google.SoftwareUpdate
+remove ~/Library/Preferences/com.microsoft.edge*
+remove ~/Library/Caches/com.microsoft.edge*
+remove ~/Library/Caches/com.microsoft.EdgeUpdater
 remove ~/Applications/Edge\ Apps

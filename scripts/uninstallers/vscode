@@ -14,7 +14,7 @@ remove() {
   echo
 }
 
-brew uninstall --cask --zap --quiet visual-studio-code
+brew uninstall --cask --zap visual-studio-code
 remove ~/Library/Preferences/com.microsoft.VSCode.helper.plist
 remove ~/Library/Preferences/com.microsoft.VSCode.plist
 remove ~/Library/Caches/com.microsoft.VSCode

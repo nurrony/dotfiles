@@ -14,6 +14,7 @@ remove() {
   echo
 }
 
+brew uninstall --cask --zap microsoft-teams
 remove ~/Library/Caches/com.microsoft.teams
 remove ~/Library/Caches/com.microsoft.teams.shipit
 remove ~/Library/Application\ Support/Microsoft/Teams
@@ -26,4 +27,3 @@ remove ~/Library/Logs/Microsoft\ Teams
 remove ~/Library/Preferences/com.microsoft.teams.plist
 remove ~/Library/Saved\ Application\ State/com.microsoft.teams.savedState
 remove ~/Library/WebKit/com.microsoft.teams
-brew uninstall --cask --zap --quiet microsoft-teams

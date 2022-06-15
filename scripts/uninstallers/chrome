@@ -14,7 +14,7 @@ remove() {
   echo
 }
 
-brew uninstall --cask --quiet --zap google-chrome
+brew uninstall --cask --zap google-chrome
 remove /Applications/Google\ Chrome.app/
 remove ~/Library/Application\ Support/Google/Chrome/
 remove ~/Library/Application\ Support/CrashReporter/Google\ Chrome*

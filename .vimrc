@@ -9,12 +9,18 @@
 "  Version : 1.0.0
 "  License : MIT
 "  Author  : Nur Rony
-"  URL     : https://github.com/nmrony/dotfiles
+"  URL     : https://github.com/nurrony/dotfiles
+"
+"----------------------------------------------------------------
+" Configured Languages:
+"   Javascript
+"   Typescript
+"   Python
+"   PHP
+"----------------------------------------------------------------
+" Vim-Plug: auto install itself along with configured plugins
 "----------------------------------------------------------------
 
-"----------------------------------------------------------------
-"" Vim-Plug: auto install itself along with configured plugins
-"----------------------------------------------------------------
 let vimplug_exists=expand('~/.vim/autoload/plug.vim')
 if has('win32')&&!has('win64')
   let curl_exists=expand('C:\Windows\Sysnative\curl.exe')
@@ -42,7 +48,7 @@ endif
 nnoremap <F12> :so $MYVIMRC<CR>
 
 " Lines of memory to remember
-set history=10000
+set history=1000
 
 " Leader key to add extra key combinations
 let mapleader = ','
@@ -53,6 +59,9 @@ set timeoutlen=3000 ttimeoutlen=100
 
 " Update time
 set updatetime=250
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
 
 " Trigger InsertLeave autocmd
 inoremap <C-c> <Esc>
@@ -65,6 +74,23 @@ cnoreabbrev help vert help
 
 " Set inc/dec
 set nrformats-=octal
+
+" Use the system clipboard the default register
+set clipboard=unnamed
+
+if has("unnamedplus")
+    set clipboard+=unnamedplus
+endif
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("nvim-0.5.0") || has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
+
 
 "----------------------------------------------------------------
 " 2. Plugins (Plug)
@@ -86,64 +112,18 @@ call plug#begin('~/.vim/plugged')
   Plug 'xolox/vim-misc'
 
   " Tools
+  " Plug 'preservim/nerdtree'
   Plug 'preservim/nerdcommenter', { 'commit': 'a5d1663' }
-  Plug 'preservim/nerdtree'
   Plug 'valloric/listtoggle'
-  Plug 'majutsushi/tagbar'
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'mbbill/undotree'
-  Plug 'dense-analysis/ale'
-  Plug 'junegunn/fzf'
-  Plug 'junegunn/fzf.vim'
 
   " Autocomplete
-  Plug 'Shougo/neosnippet.vim', { 'commit': '037b7a7' }
-  Plug 'Shougo/neosnippet-snippets'
-  Plug 'Shougo/context_filetype.vim'
   Plug 'ervandew/supertab'
-
-  " C/C++ support
-  Plug 'deoplete-plugins/deoplete-clang', { 'commit': '30f17cb' }
-
-  " Go support
-  Plug 'fatih/vim-go', { 'tag': 'v1.19' }
-  Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
-  Plug 'deoplete-plugins/deoplete-go', { 'commit': 'fa73f06'}
-
-  " Perl support
-  Plug 'c9s/perlomni.vim'
-
-  " Python support
-  Plug 'deoplete-plugins/deoplete-jedi', { 'commit': '46121d9' }
-
-  " Zsh support
-  Plug 'deoplete-plugins/deoplete-zsh', { 'commit': '12141ad' }
-
-  " JavaScript support
-  Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
-  Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-  Plug 'othree/jspc.vim'
-  Plug 'maksimr/vim-jsbeautify'
-
-
-  " typescript
-  Plug 'leafgarland/typescript-vim'
-  Plug 'HerringtonDarkholme/yats.vim'
-
-  " VimL support
-  Plug 'Shougo/neco-vim', { 'commit' : '4c0203b' }
+  Plug 'neoclide/coc.nvim', { 'branch': 'release' } " Intelisense
 
   " Additional syntax files
-  Plug 'othree/html5.vim'
-  Plug 'vim-language-dept/css-syntax.vim'
-  Plug 'hail2u/vim-css3-syntax'
-  Plug 'pangloss/vim-javascript'
-  Plug 'Shougo/neco-syntax', { 'commit': '98cba4a' }
-  Plug 'mboughaba/i3config.vim'
-  Plug 'aklt/plantuml-syntax'
-  Plug 'gerardbm/asy.vim'
-  Plug 'gerardbm/eukleides.vim'
-  Plug 'zaid/vim-rec'
+  Plug 'sheerun/vim-polyglot'
 
   " Edition
   Plug 'junegunn/vim-easy-align'
@@ -243,23 +223,7 @@ nnoremap cc :call NERDComment(0,'toggle')<CR>
 vnoremap cc :call NERDComment(0,'toggle')<CR>
 
 " NERDTree settings
-nnoremap <silent> <C-n> :call <SID>ToggleNERDTree()<CR>
-
-" ALE settings
-let g:ale_linters = {
-  \ 'c'          : ['clang'],
-  \ 'vim'        : ['vint'],
-  \ 'python'     : ['pylint'],
-  \ 'javascript' : ['jshint'],
-  \ 'css'        : ['csslint'],
-  \ 'tex'        : ['chktex'],
-  \ }
-
-" FZF settings
-let $FZF_PREVIEW_COMMAND = 'cat {}'
-nnoremap <C-f><C-f> :Files<CR>
-nnoremap <C-f><C-g> :Commits<CR>
-nnoremap <C-f><Space> :BLines<CR>
+" nnoremap <silent> <C-n> :call <SID>ToggleNERDTree()<CR>
 
 " Navigate between errors
 nnoremap <Leader>h :lprevious<CR>zz
@@ -277,7 +241,7 @@ let g:tagbar_sort             = 0
 
 " CtrlP settings
 let g:ctrlp_map                 = '<C-p>'
-let g:ctrlp_cmd                 = 'CtrlPBuffer'
+let g:ctrlp_cmd                 = 'CtrlP'
 let g:ctrlp_working_path_mode   = 'rc'
 let g:ctrlp_custom_ignore       = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_match_window        = 'bottom,order:btt,min:1,max:10,results:85'
@@ -309,118 +273,22 @@ let g:ctrlp_prompt_mappings     = {
 nnoremap <Leader>u :UndotreeToggle<CR>
 
 " --- Languages ---
-" Go settings
-let g:go_highlight_functions         = 1
-let g:go_highlight_methods           = 1
-let g:go_highlight_fields            = 1
-let g:go_highlight_types             = 1
-let g:go_highlight_operators         = 1
-let g:go_highlight_build_constraints = 1
-let g:go_bin_path                    = expand('~/.gotools')
-let g:go_list_type                   = 'quickfix'
-let g:go_version_warning             = 0 " Keep until vim v8.0.1453
 
-" CSS3 settings
-augroup VimCSS3Syntax
-  autocmd!
-  autocmd FileType css setlocal iskeyword+=-
-augroup END
-
-" Javascript settings
-let g:javascript_plugin_jsdoc = 1
-let g:javascript_plugin_ngdoc = 1
-let g:javascript_plugin_flow  = 1
-
-" Tern_for_vim settings
-let g:tern#command   = ['tern']
-let g:tern#arguments = ['--persistent']
-
-" JS-Beautify
-let g:config_Beautifier = {}
-let g:config_Beautifier['js'] = {}
-let g:config_Beautifier['js'].indent_style = 'space'
-let g:config_Beautifier['jsx'] = {}
-let g:config_Beautifier['jsx'].indent_style = 'space'
-let g:config_Beautifier['json'] = {}
-let g:config_Beautifier['json'].indent_style = 'space'
-let g:config_Beautifier['css'] = {}
-let g:config_Beautifier['css'].indent_style = 'space'
-let g:config_Beautifier['html'] = {}
-let g:config_Beautifier['html'].indent_style = 'space'
-
-augroup beautify
-  autocmd!
-  autocmd FileType javascript nnoremap <buffer> <Leader>bf :call JsBeautify()<cr>
-  autocmd FileType javascript vnoremap <buffer> <Leader>bf :call RangeJsBeautify()<cr>
-  autocmd FileType json nnoremap <buffer> <Leader>bf :call JsonBeautify()<cr>
-  autocmd FileType json vnoremap <buffer> <Leader>bf :call RangeJsonBeautify()<cr>
-  autocmd FileType jsx nnoremap <buffer> <Leader>bf :call JsxBeautify()<cr>
-  autocmd FileType jsx vnoremap <buffer> <Leader>bf :call RangeJsxBeautify()<cr>
-  autocmd FileType html nnoremap <buffer> <Leader>bf :call HtmlBeautify()<cr>
-  autocmd FileType html vnoremap <buffer> <Leader>bf :call RangeHtmlBeautify()<cr>
-  autocmd FileType css nnoremap <buffer> <Leader>bf :call CSSBeautify()<cr>
-  autocmd FileType css vnoremap <buffer> <Leader>bf :call RangeCSSBeautify()<cr>
-augroup end
 
 " --- Autocomplete ---
 " SuperTab settings
 let g:SuperTabDefaultCompletionType = '<TAB>'
 
-" Deoplete settings
-" - «Deoplete requires Neovim with Python3 enabled»
-let g:python3_host_prog       = '/usr/local/bin/python3'
-let g:python3_host_skip_check = 1
-
-autocmd CompleteDone * if pumvisible() == 0 | pclose | endif
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#omni#functions    = {}
-
-
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
-" Python autocompletion
-let g:deoplete#sources#jedi#show_docstring = 1
-
-" Go autocompletion
-let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
-let g:deoplete#sources#go#sort_class    = ['package', 'func', 'type', 'var', 'const']
-let g:deoplete#sources#go#use_cache     = 1
-
-" Javascript autocompletion
-let g:deoplete#omni#functions.javascript = [
-  \ 'tern#Complete',
-  \ 'jspc#omni',
-  \ ]
-
-" Clang autocompletion
-let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-4.0/lib/libclang.so'
-let g:deoplete#sources#clang#clang_header = '/usr/lib/clang'
-
-" --- Snippets ---
-" Neosnippet settings
-imap <C-s> <Plug>(neosnippet_expand_or_jump)
-smap <C-s> <Plug>(neosnippet_expand_or_jump)
-xmap <C-s> <Plug>(neosnippet_expand_target)
-
-" Behaviour like SuperTab
-smap <expr><TAB>
-  \ neosnippet#expandable_or_jumpable() ?
-  \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-" For conceal markers
-if has('conceal')
-  set conceallevel=0 concealcursor=niv
-  nnoremap <silent> coi :set conceallevel=0<CR>:set concealcursor=niv<CR>
-  nnoremap <silent> coo :set conceallevel=2<CR>:set concealcursor=vc<CR>
-  nnoremap <silent> cop :set conceallevel=2<CR>:set concealcursor=niv<CR>
-  nnoremap <silent> com :set conceallevel=3<CR>:set concealcursor=niv<CR>
-endif
-
-augroup all
-  autocmd InsertLeave * NeoSnippetClearMarkers
-augroup end
-
+" Coc settings
+let g:coc_global_extensions = [
+    \ 'coc-tsserver',
+    \ 'coc-json',
+    \ 'coc-html',
+    \ 'coc-css',
+    \ 'coc-phpls',
+    \ 'coc-python',
+    \ 'coc-diagnostic'
+    \]
 " --- Edition ---
 " Easy align settings
 xmap gi <Plug>(EasyAlign)
@@ -441,7 +309,7 @@ let g:AutoPairsShortcutToggle = '<C-q>'
 
 
 " Closetag settings
-let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.xml,*.html.erb,*.md'
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.xml,*.html.erb,*.md,*.tsx,*.jsx,*.vue'
 
 " Surround settings
 " Use 'yss?', 'yss%' or 'yss=' to surround a line
@@ -459,7 +327,6 @@ autocmd FileType markdown,liquid let b:surround_{char2nr('j')} = "!\[\r\]
       \\(/images/\){: .align-}"
 
 " Caps Lock settings
-imap <expr><C-l> deoplete#smart_close_popup()."\<Plug>CapsLockToggle"
 cmap <silent> <C-l> <Plug>CapsLockToggle
 
 " Expand region settings
@@ -472,7 +339,10 @@ let g:mta_filetypes = {
   \ 'xhtml' : 1,
   \ 'xml'   : 1,
   \ 'jinja' : 1,
+  \ 'jsx'   : 1,
+  \ 'tsx'   : 1,
   \ 'php'   : 1,
+  \ 'phtml'   : 1,
   \ }
 
 " ArgWrap settings
@@ -658,9 +528,7 @@ set nowritebackup
 
 " Use UTF-8 as default encoding
 set encoding=utf-8
-set encoding=utf-8
 set fileencoding=utf-8
-set fileencodings=utf-8
 
 
 " Use Unix as the standard file type
@@ -961,12 +829,6 @@ inoremap <C-a> <C-O>0
 " Move the cursor to the line end
 inoremap <C-e> <C-O>$
 
-" Moves the cursor back one character
-inoremap <expr><C-b> deoplete#smart_close_popup()."\<Left>"
-
-" Moves the cursor forward one character
-inoremap <expr><C-f> deoplete#smart_close_popup()."\<Right>"
-
 " Remove one character
 inoremap <C-d> <DEL>
 
@@ -1020,6 +882,9 @@ set magic
 
 " Maximum amount of memory in Kbyte used for pattern matching
 set maxmempattern=1000
+
+" Hide mouse pointer while typing
+set mousehide
 
 " --- Highlight ---
 "----------------------------------------------------------------
@@ -1180,7 +1045,7 @@ augroup end
 " Run code in a tmux window
 augroup tmuxy
   autocmd!
-  autocmd FileType javascript,lua,perl,php,python,ruby,sh
+  autocmd FileType javascript,lua,php,python,ruby,sh
         \ nnoremap <silent> <buffer> <Leader>ij
         \ :call <SID>Tmuxy()<CR>
 augroup end
@@ -1188,7 +1053,7 @@ augroup end
 " Run code in the preview window
 augroup scripty
   autocmd!
-  autocmd FileType javascript,lua,perl,php,python,ruby,sh
+  autocmd FileType javascript,lua,php,python,ruby,sh
         \ nnoremap <silent> <buffer> <Leader>ii
         \ :call <SID>Scripty()<CR>
 augroup end
@@ -1374,7 +1239,6 @@ augroup headers
   autocmd BufNewFile *.py 0put =\"#!/usr/bin/env python3\<nl>\#
         \ -*- coding: utf-8 -*-\<nl>\"|$
   autocmd BufNewFile *.rb 0put =\"#!/usr/bin/env ruby\<nl>\"|$
-  autocmd BufNewFile *.pl 0put =\"#!/usr/bin/env perl\<nl>\"|$
   autocmd BufNewFile *.sh 0put =\"#!/usr/bin/env bash\<nl>\"|$
   autocmd BufNewFile *.js 0put =\"#!/usr/bin/env node\<nl>\"|$
 augroup end
@@ -1622,21 +1486,21 @@ function! s:ToggleGstatus() abort
 endfunction
 
 " Better toggle for NERDTree
-function! s:ToggleNERDTree() abort
-  if bufname('%') != ""
-    if exists("g:NERDTree") && g:NERDTree.IsOpen()
-      if &filetype ==# 'nerdtree'
-        execute ':NERDTreeClose'
-      else
-        execute ':NERDTreeFocus'
-      endif
-    else
-      execute ':NERDTreeFind'
-    endif
-  else
-      execute ':NERDTreeToggleVCS'
-  endif
-endfunction
+" function! s:ToggleNERDTree() abort
+"   if bufname('%') != ""
+"     if exists("g:NERDTree") && g:NERDTree.IsOpen()
+"       if &filetype ==# 'nerdtree'
+"         execute ':NERDTreeClose'
+"       else
+"         execute ':NERDTreeFocus'
+"       endif
+"     else
+"       execute ':NERDTreeFind'
+"     endif
+"   else
+"       execute ':NERDTreeToggleVCS'
+"   endif
+" endfunction
 
 " Get Tagbar buffer name
 function! s:TagbarBufName() abort
@@ -1739,8 +1603,6 @@ function! s:Runners() abort
     let s:run = 'node'
   elseif &filetype =~# 'lua'
     let s:run = 'lua'
-  elseif &filetype =~# 'perl'
-    let s:run = 'perl'
   elseif &filetype =~# 'php'
     let s:run = 'php'
   elseif &filetype =~# 'python'

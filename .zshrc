@@ -44,3 +44,4 @@ done;
 unset file;
 
 zicompinit; zicdreplay
+

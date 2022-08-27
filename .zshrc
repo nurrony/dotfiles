@@ -10,10 +10,11 @@ zi wait lucid light-mode for \
   as'completion' zsh-users/zsh-completions
 
 zi wait'5' lucid light-mode for \
-  pick'alias-tips.plugin.zsh' djui/alias-tips \
   z-shell/H-S-MW \
-  z-shell/F-Sy-H \
-  paulirish/git-open
+  pick'alias-tips.plugin.zsh' djui/alias-tips \
+  paulirish/git-open\
+  OMZ::plugins/git/git.plugin.zsh \
+  z-shell/F-Sy-H
 
 zi ice wait'3' lucid as'program' src'asdf.sh'
 zi light asdf-vm/asdf

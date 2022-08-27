@@ -14,6 +14,7 @@ zi wait'5' lucid light-mode for \
   pick'alias-tips.plugin.zsh' djui/alias-tips \
   paulirish/git-open\
   OMZ::plugins/git/git.plugin.zsh \
+  OMZ::plugins/extract/extract.plugin.zsh \
   z-shell/F-Sy-H
 
 zi ice wait'3' lucid as'program' src'asdf.sh'

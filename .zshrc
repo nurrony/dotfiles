@@ -9,10 +9,11 @@ autoload -Uz _zi
 zi wait lucid light-mode for \
   as'completion' zsh-users/zsh-completions
 
-zi wait'2' lucid light-mode for \
+zi wait'5' lucid light-mode for \
   pick'alias-tips.plugin.zsh' djui/alias-tips \
   z-shell/H-S-MW \
-  z-shell/F-Sy-H
+  z-shell/F-Sy-H \
+  paulirish/git-open
 
 zi ice wait'3' lucid as'program' src'asdf.sh'
 zi light asdf-vm/asdf
@@ -44,4 +45,3 @@ done;
 unset file;
 
 zicompinit; zicdreplay
-

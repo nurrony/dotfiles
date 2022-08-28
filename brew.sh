@@ -181,6 +181,7 @@ brave-browser \
 docker \
 gpg-suite \
 iterm2 \
+keycastr \
 openmtp \
 skype \
 the-unarchiver \

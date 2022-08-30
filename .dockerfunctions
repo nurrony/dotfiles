@@ -169,7 +169,7 @@ consul(){
   open "http://consul:8500"
 }
 
-dcos(){
+dcos() {
   docker run -it --rm \
     --volume $HOME/.dcos:/root/.dcos \
     --volume $(pwd):/root/apps \
@@ -177,7 +177,7 @@ dcos(){
     ${DOCKER_REPO_PREFIX}/dcos-cli "$@"
 }
 
-htopdocker(){
+htopdocker() {
   docker run --rm -it \
     --pid host \
     --net none \
@@ -192,7 +192,7 @@ htopdocker(){
 #     alpine/httpie "$@"
 # }
 
-imagemin(){
+imagemin() {
   local image=$1
   local extension="${image##*.}"
   local filename="${image%.*}"
@@ -215,7 +215,7 @@ irssi() {
     ${DOCKER_REPO_PREFIX}/irssi
 }
 
-couchdb(){
+couchdb() {
   del_stopped couchdb
   local state=$(docker inspect --format "{{.State.Running}}" couchdb 2>/dev/null)
 
@@ -239,9 +239,9 @@ couchdb(){
   fi
 }
 
-mysqlserver8(){
-  del_stopped mysqlserver
-  local state=$(docker inspect --format "{{.State.Running}}" mysqlserver 2>/dev/null)
+mysqlserver8() {
+  del_stopped mysqlserver8
+  local state=$(docker inspect --format "{{.State.Running}}" mysqlserver8 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "mysql 8.x server is not running, starting it for you."
@@ -250,14 +250,14 @@ mysqlserver8(){
       --env MYSQL_ROOT_PASSWORD=nmrony \
       --publish 3306:3306 \
       --net ronsvpn \
-      --name mysqlserver \
+      --name mysqlserver8 \
       mysql:8 2>/dev/null
   else
-    echo 'mysql server is already running'
+    echo 'mysql server v8 is already running'
   fi
 }
 
-mysqlserver5(){
+mysqlserver5() {
   del_stopped mysqlserver5
   local state=$(docker inspect --format "{{.State.Running}}" mysqlserver5 2>/dev/null)
 
@@ -271,16 +271,16 @@ mysqlserver5(){
       --name mysqlserver5 \
       mysql:5.7 mysqld --wait-timeout=28800 2>/dev/null
   else
-    echo 'mysql server is already running'
+    echo 'mysql v5.7.x is already running'
   fi
 }
 
-mysql8(){
-  relies_on mysqlserver
-  docker exec -it mysqlserver mysql "$@"
+mysql8() {
+  relies_on mysqlserver8
+  docker exec -it mysqlserver8 mysql "$@"
 }
 
-mysql5(){
+mysql5() {
   relies_on mysqlserver5
   docker exec -it mysqlserver5 mysql "$@"
 }
@@ -320,8 +320,9 @@ pma() {
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
       echo "phpMyAdmin is not running, starting it for you."
       docker run -it -d \
+        --env UPLOAD_LIMIT=1024M \
         --env VIRTUAL_HOST=pma.nmrony.localhost \
-        --env PMA_ARBITRARY=1 \
+        --env PMA_HOSTS=mysqlserver5,mysqlserver8 \
         --net ronsvpn \
         --expose 80 \
         --name pma \
@@ -331,9 +332,9 @@ pma() {
     fi
 }
 
-myblog(){
+myblog() {
   relies_on nginx_proxy
-  relies_on mysqlserver
+  relies_on mysqlserver8
   sleep 5
   del_stopped personal-blog
   local state=$(docker inspect --format "{{.State.Running}}" personal-blog 2>/dev/null)
@@ -345,7 +346,7 @@ myblog(){
       --env VIRTUAL_HOST=blog.nmrony.localhost \
       --env url=http://blog.nmrony.localhost \
       --env database__client=mysql \
-      --env database__connection__host=mysqlserver \
+      --env database__connection__host=mysqlserver8 \
       --env database__connection__user=root \
       --env database__connection__password=nmrony \
       --env database__connection__database=rons_blog \
@@ -358,7 +359,7 @@ myblog(){
   fi
 }
 
-mongodb(){
+mongodb() {
   del_stopped mongodb
   local state=$(docker inspect --format "{{.State.Running}}" mongodb 2>/dev/null)
 
@@ -432,7 +433,7 @@ pga() {
     fi
 }
 
-elasticsearch(){
+elasticsearch() {
   # Add these extra environment variables if needed
   # --env "bootstrap.memory_lock=true"
   # --env "ES_JAVA_OPTS=-Xms512m -Xmx512m"
@@ -501,11 +502,11 @@ apache-php() {
 }
 
 start-lamp-stack() {
-  nginx_proxy && pma && mysqlserver && echo 'LAMP stack started successfully.'
+  nginx_proxy && pma && mysqlserver8 && echo 'LAMP stack started successfully.'
 }
 
 stop-lamp-stack() {
-  docker rm -f nginx_proxy pma mysqlserver && echo 'LAMP stack stopped successfully.'
+  docker rm -f nginx_proxy pma mysqlserver8 && echo 'LAMP stack stopped successfully.'
 }
 
 sysdig() {

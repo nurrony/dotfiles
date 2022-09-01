@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -e
+remove() {
+  entry="$1"
+
+  echo -ne "Removing $entry... "
+  sudo rm -rf "$entry"
+
+  if [[ ! -e "$entry" ]]; then
+    echo -ne "[OK]"
+  else
+    echo -ne "[FAILED]"
+  fi
+  echo
+}
+
+brew uninstall --zap neovim
+remove $HOME/.cache/nvim
+remove $HOME/.config/nvim
+remove $HOME/.local/share/nvim

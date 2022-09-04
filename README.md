@@ -36,9 +36,7 @@ When setting up a new Mac, you may want to install some common Homebrew formulae
 
 ### Configure Vim Editor
 
-To setup Vim Editor, symlink/copy just `.vimrc` into your `HOME` directory. You can just copy and paste `.vimrc` without even copying the whole repository. Once you have `.vimrc` on your home directory please execute `vim` command to configure it automatically.
-
-> 📝 You must have latest [Vim](https://www.vim.org/download.php) and [Git](https://git-scm.com/downloads) installed on your machine
+I have switched from Vim to NeoVim. To setup NeoVim Editor. Please check [`nvim directory`](nvim/) for more on Editor setup. You can just copy and paste the content of `nvim` directory without even copying the whole repository.
 
 ### Terminal theme and tweaks
 
@@ -48,18 +46,17 @@ To setup Vim Editor, symlink/copy just `.vimrc` into your `HOME` directory. You 
 
 I use **iTerm2** and **Zsh** together with these followings, so you need to install these as well
 
-- [Starship Prompt][1]
-- [Shade of Purple for ITerm Theme][2].
+- [Starship Prompt][starship-link]
+- [Shade of Purple for ITerm Theme][shades-of-purple].
 
-You can import my settings from [iterm2][4] directory
+You can import my settings from [iterm2][iterm-dir-link] directory
 
 ### Special thanks to
 
 - [Mathias Bynens](https://twitter.com/mathias)
 - [Paul Irish](https://twitter.com/paul_irish)
-- [Starship Theme Contributors][1] for Starship theme
+- [Starship Theme Contributors][starship-link] for Starship theme
 
-[1]: https://starship.rs/
-[2]: https://github.com/ahmadawais/Shades-of-Purple-iTerm2
-[3]: fonts/
-[4]: iterm2/
+[starship-link]: https://starship.rs/
+[shades-of-purple]: https://github.com/ahmadawais/Shades-of-Purple-iTerm2
+[iterm-dir-link]: iterm2/

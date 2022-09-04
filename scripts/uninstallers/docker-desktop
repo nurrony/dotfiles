@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 set -e
 remove() {
-  entry="$1"
+  sudo -v
 
+  entry="$1"
   echo -ne "Removing $entry... "
   sudo rm -rf "$entry"
 

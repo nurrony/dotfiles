@@ -9,6 +9,7 @@ M.plugins = {
     ["lukas-reineke/indent-blankline.nvim"] = override.blankline,
     ["goolord/alpha-nvim"] = override.alpha,
     ["williamboman/mason.nvim"] = override.mason,
+    ["nvim-telescope/telescope.nvim"] = override.telescope,
   },
 
   user = require "custom.plugins",

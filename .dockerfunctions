@@ -5,14 +5,14 @@ export DOCKER_REPO_PREFIX=jess
 #
 # Helper Functions
 #
-dcleanup(){
+dcleanup() {
   docker container prune --force 2>/dev/null
   docker volume prune --force 2>/dev/null
   # docker network prune --force 2>/dev/null
   docker images --all --force 2>/dev/null
 }
 
-del_stopped(){
+del_stopped() {
   local name=$1
   local state
   state=$(docker inspect --format "{{.State.Running}}" "$name" 2>/dev/null)
@@ -37,7 +37,7 @@ ctr-rgistry-down() {
 }
 
 
-relies_on(){
+relies_on() {
   for container in "$@"; do
     local state
     state=$(docker inspect --format "{{.State.Running}}" "$container" 2>/dev/null)
@@ -122,7 +122,7 @@ EOF
   open "http://${server}"
 }
 
-cadvisor(){
+cadvisor() {
   docker run -d \
     --restart always \
     --volume /:/rootfs:ro \
@@ -137,7 +137,7 @@ cadvisor(){
   open "http://cadvisor:8080"
 }
 
-consul(){
+consul() {
   del_stopped consul
 
   # check if we passed args and if consul is running
@@ -185,7 +185,7 @@ htopdocker() {
     ${DOCKER_REPO_PREFIX}/htop
 }
 
-# http(){
+# http() {
 #   docker run -t --rm \
 #     --volume /var/run/docker.sock:/var/run/docker.sock \
 #     --log-driver none \
@@ -523,7 +523,7 @@ sysdig() {
     sysdig/sysdig
 }
 
-bees(){
+bees() {
   docker run -it --rm \
     --env NOTARY_TOKEN \
     --volume $HOME/.bees:/root/.bees \

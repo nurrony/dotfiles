@@ -116,7 +116,7 @@ M.mason = {
 
 M.telescope = {
   defaults = {
-    prompt_prefix = "   ",
+    prompt_prefix = "  ",
   }
 }
 

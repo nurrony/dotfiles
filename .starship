@@ -69,6 +69,9 @@ style = "bold blue"
 format = 'on [$symbol$context( \($namespace\))]($style) in '
 disabled = false
 
+[lua]
+symbol = ' '
+
 [memory_usage]
 symbol = " "
 

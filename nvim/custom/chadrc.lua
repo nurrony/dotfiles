@@ -15,8 +15,8 @@ M.plugins = {
 }
 
 M.ui = {
-  theme = "gruvchad",
-  theme_toggle = { "gruvchad", "gruvbox_light" },
+  theme = "nightowl",
+  -- theme_toggle = { "gruvchad", "gruvbox_light" },
 }
 
 M.mappings = require "custom.mappings"

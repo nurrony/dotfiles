@@ -21,7 +21,7 @@ zi ice wait'3' lucid as'program' src'asdf.sh'
 zi light asdf-vm/asdf
 
 zi wait'5' lucid light-mode for \
-  as'program' from'gh-r' extrawurst/gitui \
+  as'program' from'gh-r' jesseduffield/lazygit \
   as'program' has'bat' pick'src/*' eth-p/bat-extras \
   as'program' from'gh-r' mv'tealdeer* -> tldr' dbrgn/tealdeer \
   as'program' from'gh-r' mv'hadolint* -> hadolint' hadolint/hadolint \

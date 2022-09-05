@@ -16,6 +16,7 @@ M.plugins = {
 
 M.ui = {
   theme = "nightowl",
+  transparency = true,
   -- theme_toggle = { "gruvchad", "gruvbox_light" },
 }
 

@@ -26,9 +26,9 @@ M.shade = {
 
     ["<leader>lz"] = {
       function()
-        require("nvterm.terminal").send("lazygit", "vertical")
+        require("nvterm.terminal").send("gitui", "vertical")
       end,
-      "nvterm lazygit",
+      "nvterm gitui",
     },
   },
 }

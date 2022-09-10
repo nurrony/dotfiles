@@ -6,7 +6,6 @@ return {
   -- Dashboard
   ["goolord/alpha-nvim"] = {
     disable = false,
-    cmd = "Alpha",
     override_options = overrides.alpha,
   },
 
@@ -16,7 +15,6 @@ return {
       require "custom.plugins.lspconfig"
     end,
   },
-
 
   -- override default configs
   ["kyazdani42/nvim-tree.lua"] = {

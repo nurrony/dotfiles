@@ -1,5 +1,15 @@
 local M = {}
 
+M.general = {
+  n = {
+    [";"] = { ":", "command mode", opts = { nowait = true } },
+  },
+
+  i = {
+    ["jk"] = { "<ESC>", "escape vim" },
+  },
+}
+
 M.truzen = {
   n = {
     ["<leader>ta"] = { "<cmd> TZAtaraxis <CR>", "   truzen ataraxis" },
@@ -31,6 +41,13 @@ M.shade = {
       "nvterm gitui",
     },
   },
+}
+
+M.navigation = {
+  n = {
+    ["H"] = { "^", "beginning of line" },
+    ["L"] = { "$", "end of line" },
+  }
 }
 
 return M

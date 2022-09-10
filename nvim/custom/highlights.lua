@@ -45,7 +45,7 @@ local M = {
 
   overriden_hlgroups = {
     AlphaHeader = {
-      fg = "blue",
+      fg = "green",
     },
   },
 }

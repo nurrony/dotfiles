@@ -23,6 +23,10 @@ M.nvimtree = {
     enable = true,
   },
 
+  view = {
+    side = "right",
+  },
+
   renderer = {
     highlight_git = true,
     icons = {

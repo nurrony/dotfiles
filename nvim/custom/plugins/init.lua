@@ -25,6 +25,10 @@ return {
     override_options = overrides.treesitter,
   },
 
+  ["nvim-telescope/telescope.nvim"] = {
+    override_options = overrides.telescope,
+  },
+
   ["lukas-reineke/indent-blankline.nvim"] = {
     override_options = overrides.blankline,
   },

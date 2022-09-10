@@ -6,6 +6,7 @@ M.ui = {
   -- theme stuff
   theme = "nightowl",
   theme_toggle = { "onedark", "one_light" },
+  transparency = true,
 
   -- highlight groups!
   hl_add = require("custom.highlights").new_hlgroups,

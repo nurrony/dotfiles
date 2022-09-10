@@ -1,8 +1,10 @@
+local M = {}
+
 M.plugins = require "custom.plugins"
 
 M.ui = {
   -- theme stuff
-  theme = "everforest",
+  theme = "nightowl",
   theme_toggle = { "onedark", "one_light" },
 
   -- highlight groups!

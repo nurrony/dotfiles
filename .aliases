@@ -200,8 +200,11 @@ alias minikube-start='minikube start --cpus 2 --disk-size "50g" --memory 4096 --
 alias minikube-reg='minikube start --insecure-registry localhost:5000'
 
 # set vim alias
-alias vim=nvim
 alias vi=nvim
+alias vim=nvim
+
+## Git alias
+alias repo='git open'
 
 # # Python alias
 # alias python=/usr/bin/python3

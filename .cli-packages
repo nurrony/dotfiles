@@ -5,22 +5,32 @@
 # }
 
 create-mvn-app() {
-  if [ -z "$1" ] || [ -z "$2" ] ; then
+  if [ "$#" -ne 2 ]; then
     cat <<-EOF
-		Usage: create-mvn-app <group-id> <artifact-id> [archetype-artifact-id]
+		Usage: create-mvn-app <group-id> <artifact-id> [archetype-artifact-id] [archetype-version]
 
 		Options:
 			group-id                   which package it should belong i.e: info.nmrony.app.example
 			artifact-id                name of the artifact
 			archetype-artifact-id      maven archetypeArtifactId (optional) (default: maven-archetype-quickstart)
+			archetype-version          maven archetypeArtifactId (optional) (default: 1.4)
 		EOF
-  else
-  ARC_TYPE_ID=${3:-maven-archetype-quickstart}
-  mvn archetype:generate -DgroupId=$1 \
-      -DartifactId=$2 \
-      -DarchetypeArtifactId=${ARC_TYPE_ID} \
-      -DinteractiveMode=false
+    return 1;
   fi
+  local group_id=${1};
+  local artifact_id=${2};
+  local archetype_id=${3:-maven-archetype-quickstart};
+  local archetype_version=${4:-1.4};
+
+  ARC_TYPE_ID=${3:-maven-archetype-quickstart}
+  ARC_TYPE_VERSION=${4:-1.4}
+  echo "Generating maven app '$artifact_id' using $archetype_id=$archetype_version..."
+  mvn archetype:generate \
+    -DgroupId="$group_id" \
+    -DinteractiveMode=false \
+    -DartifactId="$artifact_id" \
+    -DarchetypeArtifactId="$archetype_id" \
+    -DarchetypeVersion="$archetype_version"
 }
 
 npm-init() {

@@ -255,8 +255,15 @@ git-branch-rm-remote() {
 }
 
 set-gitlab() {
-  git remote set-url --add --push origin git@github.com:nmrony/${1}.git && \
-  git remote set-url --add --push origin git@gitlab.com:nmrony/${1}.git
+  local username
+
+    if [ "$#" -eq 1 ]; then
+      echo 'Usage: set-gitlab <username> <repo-name>'
+      exit 1;
+    fi
+
+  git remote set-url --add --push origin git@github.com:${1}/${2}.git && \
+  git remote set-url --add --push origin git@gitlab.com:${1}/${2}.git
 }
 
 git-track-branches() {

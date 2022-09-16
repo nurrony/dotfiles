@@ -22,19 +22,14 @@ brew install gnu-sed
 # install latest shell
 brew install zsh
 brew install starship
-brew install bash-completion2
-
-# zsh plugins
-brew install zsh-completions
-brew install zsh-autosuggestions
-brew install zsh-syntax-highlighting
+brew install bash-completion@2
 
 # Install `wget` with IRI support.
 brew install wget
 brew install httpie --HEAD
 
 # Install more recent versions of some macOS tools.
-brew install vim
+brew install neovim
 brew install grep
 brew install openssh
 brew install screen
@@ -47,8 +42,6 @@ brew install readline
 brew install libksba
 brew install openssl
 brew install fd
-brew install bat
-brew install eth-p/software/bat-extras
 brew install watch
 
 # Install some CTF tools; see https://github.com/ctfs/write-ups.
@@ -90,7 +83,6 @@ brew install icu4c
 brew install pkg-config
 brew install cmake
 brew install fzf # fuzzy search find with superpower https://www.youtube.com/watch?v=qgG5Jhi_Els
-brew install go
 brew install openssl
 brew install imagemagick --with-webp
 brew install p7zip
@@ -146,8 +138,8 @@ brew install boz/repo/kail # tail for kubernetes
 
 
 # Install Dart SDK Dartium and Dart VM for web
-brew tap dart-lang/dart
-brew install dart
+# brew tap dart-lang/dart
+# brew install dart
 
 # Flutter packages
 # Run these following after installing XCode
@@ -187,7 +179,6 @@ skype \
 the-unarchiver \
 vagrant \
 vagrant-vmware-utility \
-vlc \
 virtualbox \
 virtualbox-extension-pack \
 visual-studio-code

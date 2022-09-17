@@ -20,9 +20,8 @@ zi wait'5' lucid light-mode for \
 zi ice wait'3' lucid as'program' src'asdf.sh'
 zi light asdf-vm/asdf
 
-zi wait'5' lucid light-mode for \
+zi wait'3' lucid light-mode for \
   as'program' from'gh-r' extrawurst/gitui \
-  as'program' has'bat' pick'src/*' eth-p/bat-extras \
   as'program' from'gh-r' mv'tealdeer* -> tldr' dbrgn/tealdeer \
   as'program' from'gh-r' mv'hadolint* -> hadolint' hadolint/hadolint \
   as'program' from'gh-r' mv'hostess* -> hostess' pick'hostess' cbednarski/hostess \
@@ -36,7 +35,6 @@ zi wait'5' lucid light-mode for \
   as'program' from'gh-r' mv'direnv* -> direnv' atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' pick'direnv' src'zhook.zsh' direnv/direnv \
   as'program' atclone'ln -sfv etc/git-extras-completion.zsh _git-extras' atpull'%atclone' pick'$ZPFX/bin/git-*' make'PREFIX=$ZPFX' nocompile tj/git-extras \
   as'program' from'gh-r' bpick'*x86_64-apple-darwin.tar.gz' atclone'./zoxide init --cmd=zz zsh > init.zsh' src'init.zsh' atpull'%atclone' pick'zoxide/zoxide' ajeetdsouza/zoxide
-
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.

@@ -24,12 +24,12 @@ zi wait'3' lucid light-mode for \
   as'program' from'gh-r' extrawurst/gitui \
   as'program' from'gh-r' mv'tealdeer* -> tldr' dbrgn/tealdeer \
   as'program' from'gh-r' mv'hadolint* -> hadolint' hadolint/hadolint \
-  as'program' from'gh-r' bpick'*macOS_64-bit.tar.gz' guumaster/hostctl \
   as'program' from'gh-r' mv'kube-explorer* -> kube-explorer' cnrancher/kube-explorer \
   as'program' from'gh-r' bpick'*x86_64-apple-darwin.tar.gz' mv'dua-* -> dua' pick'dua/dua' Byron/dua-cli \
   as'program' from'gh-r' atclone'ln -sfv completions/exa.zsh _exa' atpull'%atclone' pick'bin/exa' ogham/exa \
   as'program' from'gh-r' atclone'ln -sfv completions/dog.zsh _dog' atpull'%atclone' pick'bin/dog' ogham/dog \
   as'program' from'gh-r' mv'k3d* -> k3d' atclone'./k3d completion zsh > _k3d' atpull'%atclone' pick'k3d' k3d-io/k3d \
+  as'program' from'gh-r' atclone'./hostctl completion zsh > _hostctl' atpull'%atclone' bpick'*macOS_64-bit.tar.gz' guumaster/hostctl \
   as'program' from'gh-r' mv'argocd* -> argocd' atclone'./argocd completion zsh > _argocd' atpull'%atclone' pick'argocd' argoproj/argo-cd \
   as'program' from'gh-r' mv'autok3s* -> autok3s' atclone'./autok3s completion zsh > _autok3s' atpull'%atclone' pick'autok3s' cnrancher/autok3s \
   as'program' from'gh-r' mv'direnv* -> direnv' atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' pick'direnv' src'zhook.zsh' direnv/direnv \

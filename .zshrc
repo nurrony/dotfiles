@@ -24,7 +24,7 @@ zi wait'3' lucid light-mode for \
   as'program' from'gh-r' extrawurst/gitui \
   as'program' from'gh-r' mv'tealdeer* -> tldr' dbrgn/tealdeer \
   as'program' from'gh-r' mv'hadolint* -> hadolint' hadolint/hadolint \
-  as'program' from'gh-r' mv'hostess* -> hostess' pick'hostess' cbednarski/hostess \
+  as'program' from'gh-r' bpick'*macOS_64-bit.tar.gz' guumaster/hostctl \
   as'program' from'gh-r' mv'kube-explorer* -> kube-explorer' cnrancher/kube-explorer \
   as'program' from'gh-r' bpick'*x86_64-apple-darwin.tar.gz' mv'dua-* -> dua' pick'dua/dua' Byron/dua-cli \
   as'program' from'gh-r' atclone'ln -sfv completions/exa.zsh _exa' atpull'%atclone' pick'bin/exa' ogham/exa \

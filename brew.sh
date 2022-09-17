@@ -43,6 +43,7 @@ brew install libksba
 brew install openssl
 brew install fd
 brew install watch
+brew install bat
 
 # Install some CTF tools; see https://github.com/ctfs/write-ups.
 brew install binutils

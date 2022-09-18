@@ -61,7 +61,7 @@ nginx_proxy() {
       --volume ${DEV_ZONE}/storage/nginx/conf.d/custom_settings.conf:/etc/nginx/conf.d/custom_settings.conf:ro \
       --publish 80:80 \
       --publish 443:443 \
-      --net ronsvpn \
+      --net bridge \
       --name nginx_proxy \
       nginxproxy/nginx-proxy:alpine 2>/dev/null
   else
@@ -81,7 +81,7 @@ portainer() {
       --volume ${DEV_ZONE}/storage/portainer:/data \
       --env VIRTUAL_HOST=portainer.nmrony.localhost \
       --expose 9000 \
-      --net ronsvpn \
+      --net bridge \
       --name portainer \
       portainer/portainer 2>/dev/null
   else
@@ -231,7 +231,7 @@ couchdb() {
       --env COUCHDB_USER=${COUCH_DB_ADMIN} \
       --env COUCHDB_PASSWORD=${COUCH_DB_PASS} \
       --env VIRTUAL_HOST=couchdb.nmrony.localhost \
-      --net ronsvpn \
+      --net bridge \
       --name couchdb \
       couchdb 2>/dev/null
   else
@@ -249,7 +249,7 @@ mysqlserver8() {
       --volume ${DEV_ZONE}/storage/databases/mysql/8:/var/lib/mysql \
       --env MYSQL_ROOT_PASSWORD=nmrony \
       --publish 3306:3306 \
-      --net ronsvpn \
+      --net bridge \
       --name mysqlserver8 \
       mysql:8 2>/dev/null
   else
@@ -267,7 +267,7 @@ mysqlserver5() {
       --volume ${DEV_ZONE}/storage/databases/mysql/5:/var/lib/mysql \
       --env MYSQL_ROOT_PASSWORD=nmrony \
       --publish 3306:3306 \
-      --net ronsvpn \
+      --net bridge \
       --name mysqlserver5 \
       mysql:5.7 mysqld --wait-timeout=28800 2>/dev/null
   else
@@ -299,7 +299,7 @@ dynamodb() {
         --publish "8000:8000" \
         --expose 8000 \
         --env VIRTUAL_HOST=dynamodb.nmrony.localhost \
-        --net ronsvpn \
+        --net bridge \
         --name dynamodb \
         amazon/dynamodb-local -jar DynamoDBLocal.jar -sharedDb -optimizeDbBeforeStartup -dbPath ./data 2>/dev/null
         if [ "$1" != "" ]; then
@@ -323,7 +323,7 @@ pma() {
         --env UPLOAD_LIMIT=1024M \
         --env VIRTUAL_HOST=pma.nmrony.localhost \
         --env PMA_HOSTS=mysqlserver5,mysqlserver8 \
-        --net ronsvpn \
+        --net bridge \
         --expose 80 \
         --name pma \
         phpmyadmin/phpmyadmin > /dev/null 2>&1
@@ -351,7 +351,7 @@ myblog() {
       --env database__connection__password=nmrony \
       --env database__connection__database=rons_blog \
       --env DEV_DOMAIN=http://blog.nmrony.localhost \
-      --net ronsvpn \
+      --net bridge \
       --name personal-blog \
       ghost:2-alpine 2>/dev/null
   else
@@ -368,7 +368,7 @@ mongodb() {
     docker run -it -d \
       --volume ${DEV_ZONE}/storage/databases/mongodb:/data/db \
       --publish 27017:27017 \
-      --net ronsvpn \
+      --net bridge \
       --name mongodb \
       mongo "$@" 2>/dev/null
   else
@@ -391,7 +391,7 @@ postgresserver13() {
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "postgres 13.x.x server is not running, starting it for you."
     docker run -it -d \
-      --net ronsvpn \
+      --net bridge \
       --ulimit memlock=-1:-1 \
       --memory-swappiness=0 \
       --volume ${DEV_ZONE}/storage/databases/postgres/13:/var/lib/postgresql/data \
@@ -424,7 +424,7 @@ pga() {
         --env PGADMIN_DEFAULT_EMAIL=rony@nmrony.info \
         --env PGADMIN_DEFAULT_PASSWORD=nmrony \
         --env PGADMIN_DISABLE_POSTFIX=yes \
-        --net ronsvpn \
+        --net bridge \
         --expose 80 \
         --name pga \
         dpage/pgadmin4 > /dev/null 2>&1
@@ -446,7 +446,7 @@ elasticsearch() {
       --volume ${DEV_ZONE}/storage/elasticsearch/data:/usr/share/elasticsearch/data \
       --publish 9200:9200 \
       --publish 9300:9300 \
-      --net ronsvpn \
+      --net bridge \
       --ulimit memlock=-1:-1 \
       --env "http.cors.enabled=true" \
       --env "ELASTIC_PASSWORD=nmrony" \
@@ -497,7 +497,7 @@ apache-php() {
   docker run --rm --interactive --tty \
     --volume $PWD:/var/www/html \
     --user $(id -u):$(id -g) \
-    --net ronsvpn \
+    --net bridge \
     nmrony/php:7-apache "$@"
 }
 
@@ -564,7 +564,7 @@ command_not_found_handle () {
 dive() {
   del_stopped dive
   docker run --rm -it \
-    --net ronsvpn \
+    --net bridge \
     --name dive \
     --volume /var/run/docker.sock:/var/run/docker.sock:ro \
     wagoodman/dive:latest "$@"

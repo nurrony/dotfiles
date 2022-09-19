@@ -1,10 +1,7 @@
-eval "$(starship init zsh)"
-
-export zi_home="${HOME}/.zi"
-source "${zi_home}/bin/zi.zsh"
-# Next two lines must be below the above two
-autoload -Uz _zi
-(( ${+_comps} )) && _comps[zi]=_zi
+# enable zi https://wiki.zshell.dev/
+typeset -A ZI
+ZI[BIN_DIR]="${HOME}/.zi/bin"
+source "${ZI[BIN_DIR]}/zi.zsh"
 
 zi wait lucid light-mode for \
   as'completion' zsh-users/zsh-completions
@@ -43,5 +40,12 @@ for file in $HOME/.dotfiles/.{extra,path,exports,aliases,functions,dockerfunctio
   [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
+
+# Start starship
+eval "$(starship init zsh)"
+
+# Next two lines must be below the above two for zi autocomplete
+autoload -Uz _zi
+(( ${+_comps} )) && _comps[zi]=_zi
 
 zicompinit; zicdreplay

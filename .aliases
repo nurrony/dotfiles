@@ -13,13 +13,10 @@ alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
 alias devzone="cd $DEV_DIR"
 alias h="history"
-alias j="jobs"
 alias where=which
-alias brwe=brew # ;-D
 alias clearhistory="cat /dev/null > ~/.zsh_history && history -c && exit"
 alias du='dua -f binary'
 alias dig='dog --time'
-alias man='command batman.sh'
 alias zshrc='${=EDITOR} ${ZDOTDIR:-$HOME}/.zshrc'
 alias t='tail -f'
 alias help='man'

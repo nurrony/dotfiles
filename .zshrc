@@ -47,5 +47,3 @@ eval "$(starship init zsh)"
 # Next two lines must be below the above two for zi autocomplete
 autoload -Uz _zi
 (( ${+_comps} )) && _comps[zi]=_zi
-
-zicompinit; zicdreplay

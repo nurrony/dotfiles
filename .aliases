@@ -96,7 +96,8 @@ command -v md5sum > /dev/null || alias md5sum="md5"
 command -v sha1sum > /dev/null || alias sha1sum="shasum"
 
 # Get macOS Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
-alias update='brew update --verbose && brew update --cask && brew upgrade && brew upgrade --cask --greedy && brew cleanup -s --prune=all && flutter upgrade && asdf update && asdf plugin update --all && npm-upgrade -g'
+# alias update='brew update --verbose && brew update --cask && brew upgrade && brew upgrade --cask --greedy && brew cleanup -s --prune=all && flutter upgrade && asdf update && asdf plugin update --all && npm-upgrade -g'
+alias update='brew update --verbose && brew update --cask && brew upgrade && brew upgrade --cask --greedy && brew cleanup -s --prune=all && asdf update && asdf plugin update --all && npm-upgrade -g'
 
 # Flush Directory Service cache
 alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
@@ -202,6 +203,9 @@ alias vim=nvim
 
 ## Git alias
 alias repo='git open'
+
+# docker terminal ui
+alias lzd='lazydocker'
 
 # # Python alias
 # alias python=/usr/bin/python3

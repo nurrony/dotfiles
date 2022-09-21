@@ -104,6 +104,7 @@ brew install git-flow-avh
 
 # Docker
 brew install docker-machine
+brew install lazydocker
 
 # AWS CLIs
 brew tap aws/tap

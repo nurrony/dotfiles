@@ -53,7 +53,7 @@ alias sudo='sudo '
 alias week='date +%V'
 
 # alias hosts='sudo vim /etc/hosts'
-alias hosts='sudo hostctl'
+alias hostctl='sudo hostctl'
 
 # Pipe my public key to my clipboard.
 alias pubkey="more ~/.ssh/$SSH_KEY_FILE_NAME.pub | pbcopy | echo '=> Public key copied to pasteboard.'"

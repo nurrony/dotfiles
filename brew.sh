@@ -178,12 +178,13 @@ iterm2 \
 keycastr \
 openmtp \
 skype \
+rocket-chat \
 the-unarchiver \
 vagrant \
 vagrant-vmware-utility \
-virtualbox \
-virtualbox-extension-pack \
-visual-studio-code
+visual-studio-code \
+windows-remote-desktop \
+zoom \
 brew cleanup -s
 
 # Install Kubernetes plugins

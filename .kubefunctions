@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
 kctx() {
-  kubectl-ctx $1
+  kubectl-ctx "$1"
 }
 
 kns() {
-  kubectl-ns $1
+  kubectl-ns "$1"
 }
 
 k8sgui() {
-  kube-explorer --context=${1:-k3d-ship} --kubeconfig=$DEV_ZONE/storage/kube/config --http-listen-port=${2:-9080} --https-listen-port=0
-  open -u http://localhost:$2
+  kube-explorer --context="${1:-k3d-ship}" --kubeconfig="$DEV_ZONE/storage/kube/config" --http-listen-port="${2:-9080}" --https-listen-port=0
+  open -u "http://localhost:$2"
 }
 

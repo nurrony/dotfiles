@@ -13,7 +13,3 @@ k8sgui() {
   open -u http://localhost:$2
 }
 
-
-dynamodb() {
-  kubectl port-forward --namespace k8s-aws service/dynamodb ${1:-8000}:80 2>&1 >/dev/null &
-}

@@ -207,6 +207,9 @@ alias repo='git open'
 # docker terminal ui
 alias lzd='lazydocker'
 
+# Scala Alias
+alias cs='coursier'
+
 # # Python alias
 # alias python=/usr/bin/python3
 # alias pip=/usr/local/bin/pip3

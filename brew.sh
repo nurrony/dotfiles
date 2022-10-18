@@ -162,6 +162,9 @@ brew install azure-cli
 # Bitwarden
 brew install bitwarden-cli
 
+# youtube downloader from https://github.com/yt-dlp/yt-dlp
+brew install yt-dlp
+
 # Remove outdated versions from the cellar.
 brew cleanup -s
 

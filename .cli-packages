@@ -15,12 +15,12 @@ create-mvn-app() {
 			archetype-artifact-id      maven archetypeArtifactId (optional) (default: maven-archetype-quickstart)
 			archetype-version          maven archetypeArtifactId (optional) (default: 1.4)
 		EOF
-    return 1;
+    return 1
   fi
-  local group_id=${1};
-  local artifact_id=${2};
-  local archetype_id=${3:-maven-archetype-quickstart};
-  local archetype_version=${4:-1.4};
+  local group_id=${1}
+  local artifact_id=${2}
+  local archetype_id=${3:-maven-archetype-quickstart}
+  local archetype_version=${4:-1.4}
 
   ARC_TYPE_ID=${3:-maven-archetype-quickstart}
   ARC_TYPE_VERSION=${4:-1.4}
@@ -35,7 +35,7 @@ create-mvn-app() {
 
 npm-init() {
   git init
-  npx license $(npm get init.license) -o "$(npm get init.author.name)" > LICENSE
+  npx license $(npm get init.license) -o "$(npm get init.author.name)" >LICENSE
   npx gitignore node
   npx covgen "$(npm get init.author.email)"
   npm init -y
@@ -73,25 +73,25 @@ npm-upgrade() {
 }
 
 create-scala-app() {
-  local NMR_SCALA_PROJECT_NAME;
-  local NMR_SCALA_PROJECT_ORG;
-  local NMR_SCALA_PROJECT_VERSION;
-  local NMR_SCALA_PROJECT_SCALA_VERSION;
+  local NMR_SCALA_PROJECT_NAME
+  local NMR_SCALA_PROJECT_ORG
+  local NMR_SCALA_PROJECT_VERSION
+  local NMR_SCALA_PROJECT_SCALA_VERSION
   vared -p 'Project Name?: [hello-world] ' -c NMR_SCALA_PROJECT_NAME
   vared -p 'Organization version?: [info.nmrony] ' -c NMR_SCALA_PROJECT_ORG
   vared -p 'Project version?: [v1.0.0-SNAPSHOT] ' -c NMR_SCALA_PROJECT_VERSION
-  vared -p 'Scala version?: [2.13.1] ' -c NMR_SCALA_PROJECT_SCALA_VERSION
+  vared -p 'Scala version?: [3.2.1] ' -c NMR_SCALA_PROJECT_SCALA_VERSION
   NMR_SCALA_PROJECT_NAME=${NMR_SCALA_PROJECT_NAME:-hello-world}
   NMR_SCALA_PROJECT_ORG=${NMR_SCALA_PROJECT_ORG:-info.nmrony}
   NMR_SCALA_PROJECT_VERSION=${NMR_SCALA_PROJECT_VERSION:-v1.0.0-SNAPSHOT}
-  NMR_SCALA_PROJECT_SCALA_VERSION=${NMR_SCALA_PROJECT_SCALA_VERSION:-2.13.1}
-  if [ -d "$NMR_SCALA_PROJECT_NAME" ] ; then
-    echo $NMR_SCALA_PROJECT_NAME ' directory is already exists.';
+  NMR_SCALA_PROJECT_SCALA_VERSION=${NMR_SCALA_PROJECT_SCALA_VERSION:-3.2.1}
+  if [ -d "$NMR_SCALA_PROJECT_NAME" ]; then
+    echo $NMR_SCALA_PROJECT_NAME ' directory is already exists.'
   else
     echo -n 'Creating necessary directories and files... '
     mkdir -p $NMR_SCALA_PROJECT_NAME/src/{main/{java,resources,scala},test/{java,resources,scala}}
-    cd $NMR_SCALA_PROJECT_NAME > /dev/null && \
-    cat > ./build.sbt <<-EOF
+    cd $NMR_SCALA_PROJECT_NAME >/dev/null &&
+      cat >./build.sbt <<-EOF
 name := "$NMR_SCALA_PROJECT_NAME"
 organization := "$NMR_SCALA_PROJECT_ORG"
 version := "$NMR_SCALA_PROJECT_VERSION"
@@ -125,7 +125,7 @@ scalacOptions ++= Seq(
   "-Ywarn-value-discard"               // Warn when non-Unit expression results are unused.
 )
 EOF
-cat > ./scalafmt.conf <<-EOF
+    cat >./scalafmt.conf <<-EOF
 style                           = defaultWithAlign
 danglingParentheses             = true
 indentOperator                  = spray
@@ -137,19 +137,19 @@ spaces.inImportCurlyBraces      = true
 binPack.literalArgumentLists    = false
 unindentTopLevelOperators       = true
 EOF
-mkdir -p ./project && echo 'sbt.version=1.3.7' > ./project/build.properties
-cat > ./src/main/scala/HelloWorld.scala <<-EOF
+    mkdir -p ./project && echo 'sbt.version=1.3.7' >./project/build.properties
+    cat >./src/main/scala/HelloWorld.scala <<-EOF
 object HelloWorld {
   def main(args: Array[String]): Unit = {
     println("Hello, world!")
   }
 }
 EOF
-echo '';
-echo 'To run application...' && cd ..
-echo ''
-echo 'cd ' $NMR_SCALA_PROJECT_NAME ' && sbt clean run'
-echo ''
+    echo ''
+    echo 'To run application...' && cd ..
+    echo ''
+    echo 'cd ' $NMR_SCALA_PROJECT_NAME ' && sbt clean run'
+    echo ''
 
   fi
 }

@@ -234,8 +234,5 @@
 	email = pro.nmrony@gmail.com
   signingkey = 06B3A1B73F55F441
 
-[includeIf "gitdir:/Volumes/Devzone/projects/itc/frontdoor/sources/"]
-  path = /Volumes/Devzone/projects/itc/frontdoor/sources/.gitconfig
-
 [gpg]
   program = gpg2

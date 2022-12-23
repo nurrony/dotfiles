@@ -24,9 +24,9 @@ del_stopped() {
 
 ctr-registry-up() {
   local state=$(docker inspect --format "{{.State.Running}}" registry 2>/dev/null)
-   if [[ "$state" == "true" ]] || [[ "$state" != "" ]]; then
-        docker rm -f registry
-    fi
+  if [[ "$state" == "true" ]] || [[ "$state" != "" ]]; then
+    docker rm -f registry
+  fi
   docker-compose -f $DEV_ZONE/storage/k8s-clusters/registry/docker-compose.yml up -d 2>/dev/null
   echo 'registry started...'
 }
@@ -35,7 +35,6 @@ ctr-rgistry-down() {
   docker-compose -f $DEV_ZONE/storage/k8s-clusters/registry/docker-compose.yml down 2>/dev/null
   echo 'registry is down'
 }
-
 
 relies_on() {
   for container in "$@"; do
@@ -94,7 +93,7 @@ nginx_config() {
   server=$1
   route=$2
 
-cat >${DEV_ZONE}/storage/nginx/conf.d/${server}.conf <<-EOF
+  cat >${DEV_ZONE}/storage/nginx/conf.d/${server}.conf <<-EOF
 upstream ${server} { server ${route}; }
   server {
     server_name ${server};
@@ -115,7 +114,7 @@ EOF
   # restart nginx
   docker restart nginx
 
- # add host to /etc/hosts
+  # add host to /etc/hosts
   hostess add $server 127.0.0.1
 
   # open browser
@@ -127,7 +126,7 @@ cadvisor() {
     --restart always \
     --volume /:/rootfs:ro \
     --volume /var/run:/var/run:rw \
-    --volume /sys:/sys:ro  \
+    --volume /sys:/sys:ro \
     --volume /var/lib/docker/:/var/lib/docker:ro \
     --publish 1234:8080 \
     --name cadvisor \
@@ -288,48 +287,48 @@ mysql5() {
 dynamodb() {
   del_stopped dynamodb
   relies_on nginx_proxy
-  sleep 2;
+  sleep 2
   local state=$(docker inspect --format "{{.State.Running}}" dynamodb 2>/dev/null)
 
-    if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
-      echo "local dynamodb server is not running, starting it for you."
-      docker run -dit \
-        --volume ${DEV_ZONE}/storage/databases/dynamodb:/home/dynamodblocal/data \
-        --workdir /home/dynamodblocal \
-        --publish "8000:8000" \
-        --expose 8000 \
-        --env VIRTUAL_HOST=dynamodb.nmrony.localhost \
-        --net bridge \
-        --name dynamodb \
-        amazon/dynamodb-local -jar DynamoDBLocal.jar -sharedDb -optimizeDbBeforeStartup -dbPath ./data 2>/dev/null
-        if [ "$1" != "" ]; then
-          docker network connect $1 dynamodb
-        fi
-        else
-          echo 'local dynamodb server is already running'
-        fi
+  if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
+    echo "local dynamodb server is not running, starting it for you."
+    docker run -dit \
+      --volume ${DEV_ZONE}/storage/databases/dynamodb:/home/dynamodblocal/data \
+      --workdir /home/dynamodblocal \
+      --publish "8000:8000" \
+      --expose 8000 \
+      --env VIRTUAL_HOST=dynamodb.nmrony.localhost \
+      --net bridge \
+      --name dynamodb \
+      amazon/dynamodb-local -jar DynamoDBLocal.jar -sharedDb -optimizeDbBeforeStartup -dbPath ./data 2>/dev/null
+    if [ "$1" != "" ]; then
+      docker network connect $1 dynamodb
+    fi
+  else
+    echo 'local dynamodb server is already running'
+  fi
 
 }
 
 pma() {
   del_stopped pma
   relies_on nginx_proxy
-  sleep 2;
+  sleep 2
   local state=$(docker inspect --format "{{.State.Running}}" pma 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
-      echo "phpMyAdmin is not running, starting it for you."
-      docker run -it -d \
-        --env UPLOAD_LIMIT=1024M \
-        --env VIRTUAL_HOST=pma.nmrony.localhost \
-        --env PMA_HOSTS=mysqlserver5,mysqlserver8 \
-        --net bridge \
-        --expose 80 \
-        --name pma \
-        phpmyadmin/phpmyadmin > /dev/null 2>&1
-    else
-      echo 'phpMyAdmin is already running'
-    fi
+    echo "phpMyAdmin is not running, starting it for you."
+    docker run -it -d \
+      --env UPLOAD_LIMIT=1024M \
+      --env VIRTUAL_HOST=pma.nmrony.localhost \
+      --env PMA_HOSTS=mysqlserver5,mysqlserver8 \
+      --net bridge \
+      --expose 80 \
+      --name pma \
+      phpmyadmin/phpmyadmin >/dev/null 2>&1
+  else
+    echo 'phpMyAdmin is already running'
+  fi
 }
 
 myblog() {
@@ -378,59 +377,59 @@ mongodb() {
 
 mongo() {
   relies_on mongodb
-  sleep 4s;
+  sleep 4s
   docker exec -it mongodb mongo "$@"
 }
 
-postgresserver13() {
+postgresserver() {
   del_stopped postgresserver13
-  local state=$(docker inspect --format "{{.State.Running}}" postgresserver13 2>/dev/null)
-  local VERSION=${2:-13-alpine}
+  local state=$(docker inspect --format "{{.State.Running}}" postgresserver 2>/dev/null)
+  local VERSION=${2:-15-alpine}
   local DBNAME=${1:-experiments}
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
-    echo "postgres 13.x.x server is not running, starting it for you."
+    echo "postgres server is not running, starting it for you."
     docker run -it -d \
       --net bridge \
       --ulimit memlock=-1:-1 \
       --memory-swappiness=0 \
-      --volume ${DEV_ZONE}/storage/databases/postgres/13:/var/lib/postgresql/data \
+      --volume ${DEV_ZONE}/storage/databases/postgres/15:/var/lib/postgresql/data \
       --env POSTGRES_USER=postgres \
       --env POSTGRES_DB=$DBNAME \
       --env POSTGRES_PASSWORD=nmrony \
       --publish 5432:5432 \
-      --name postgresserver13 \
+      --name postgresserver \
       postgres:$VERSION
   else
-    echo 'postgres 13.x.x is already running'
+    echo 'postgres 15.x.x is already running'
   fi
 }
 
-psql13() {
-  relies_on postgresserver13;
-  docker exec -it postgresserver13 psql "$@"
+psql() {
+  relies_on postgresserver
+  docker exec -it postgresserver psql "$@"
 }
 
 pga() {
   del_stopped pga
   relies_on nginx_proxy
-  sleep 2;
+  sleep 2
   local state=$(docker inspect --format "{{.State.Running}}" pga 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
-      echo "pgAdmin4 is not running, starting it for you."
-      docker run -dit \
-        --env VIRTUAL_HOST=pga.nmrony.localhost \
-        --env PGADMIN_DEFAULT_EMAIL=rony@nmrony.info \
-        --env PGADMIN_DEFAULT_PASSWORD=nmrony \
-        --env PGADMIN_DISABLE_POSTFIX=yes \
-        --net bridge \
-        --expose 80 \
-        --name pga \
-        dpage/pgadmin4 > /dev/null 2>&1
-    else
-      echo 'pgAdmin4 is already running'
-    fi
+    echo "pgAdmin4 is not running, starting it for you."
+    docker run -dit \
+      --env VIRTUAL_HOST=pga.nmrony.localhost \
+      --env PGADMIN_DEFAULT_EMAIL=rony@nmrony.info \
+      --env PGADMIN_DEFAULT_PASSWORD=nmrony \
+      --env PGADMIN_DISABLE_POSTFIX=yes \
+      --net bridge \
+      --expose 80 \
+      --name pga \
+      dpage/pgadmin4 >/dev/null 2>&1
+  else
+    echo 'pgAdmin4 is already running'
+  fi
 }
 
 elasticsearch() {
@@ -467,15 +466,15 @@ elasticsearch() {
 elastic-gui() {
   del_stopped elastic-gui
   relies_on elasticsearch
-  sleep 2;
+  sleep 2
   local state=$(docker inspect --format "{{.State.Running}}" elastic-gui 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     docker run -dit \
-       --publish 9000:8080 \
-       --env VIRTUAL_HOST=elasticgui.nmrony.localhost \
-       --name elastic-gui \
-       cars10/elasticvue
+      --publish 9000:8080 \
+      --env VIRTUAL_HOST=elasticgui.nmrony.localhost \
+      --name elastic-gui \
+      cars10/elasticvue
   else
     echo 'elasticsearch gui is already running'
   fi
@@ -537,28 +536,28 @@ bees() {
 ###
 ### Awesome sauce by @jpetazzo
 ###
-command_not_found_handle () {
- # Check if there is a container image with that name
- if ! docker inspect --format '{{ .Author }}' "$1" >&/dev/null ; then
-  echo "$0: $1: command not found"
-  return
- fi
+command_not_found_handle() {
+  # Check if there is a container image with that name
+  if ! docker inspect --format '{{ .Author }}' "$1" >&/dev/null; then
+    echo "$0: $1: command not found"
+    return
+  fi
 
- # Check that it's really the name of the image, not a prefix
- if docker inspect --format '{{ .Id }}' "$1" | grep -q "^$1" ; then
-  echo "$0: $1: command not found"
-  return
- fi
+  # Check that it's really the name of the image, not a prefix
+  if docker inspect --format '{{ .Id }}' "$1" | grep -q "^$1"; then
+    echo "$0: $1: command not found"
+    return
+  fi
 
-#  docker run -ti -u $(whoami) -w "$HOME" \
-#   $(env | cut -d= -f1 | awk '{print "-e", $1}') \
-#   --device /dev/snd \
-#   --volume /etc/passwd:/etc/passwd:ro \
-#   --volume /etc/group:/etc/group:ro \
-#   --volume /etc/localtime:/etc/localtime:ro \
-#   --volume /home:/home \
-#   --volume /tmp/.X11-unix:/tmp/.X11-unix \
-#   "${DOCKER_REPO_PREFIX}/$@"
+  #  docker run -ti -u $(whoami) -w "$HOME" \
+  #   $(env | cut -d= -f1 | awk '{print "-e", $1}') \
+  #   --device /dev/snd \
+  #   --volume /etc/passwd:/etc/passwd:ro \
+  #   --volume /etc/group:/etc/group:ro \
+  #   --volume /etc/localtime:/etc/localtime:ro \
+  #   --volume /home:/home \
+  #   --volume /tmp/.X11-unix:/tmp/.X11-unix \
+  #   "${DOCKER_REPO_PREFIX}/$@"
 }
 
 dive() {

@@ -12,6 +12,7 @@ zi wait'3' lucid light-mode for \
   paulirish/git-open\
   OMZ::plugins/git/git.plugin.zsh \
   OMZ::plugins/extract/extract.plugin.zsh \
+  OMZ::plugins/mvn/mvn.plugin.zsh \
   z-shell/F-Sy-H
 
 zi ice wait'3' lucid as'program' src'asdf.sh'

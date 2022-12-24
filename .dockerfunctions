@@ -381,9 +381,9 @@ mongo() {
   docker exec -it mongodb mongo "$@"
 }
 
-postgresserver() {
-  del_stopped postgresserver13
-  local state=$(docker inspect --format "{{.State.Running}}" postgresserver 2>/dev/null)
+pgserver() {
+  del_stopped pgserver
+  local state=$(docker inspect --format "{{.State.Running}}" pgserver 2>/dev/null)
   local VERSION=${2:-15-alpine}
   local DBNAME=${1:-experiments}
 
@@ -398,7 +398,7 @@ postgresserver() {
       --env POSTGRES_DB=$DBNAME \
       --env POSTGRES_PASSWORD=nmrony \
       --publish 5432:5432 \
-      --name postgresserver \
+      --name pgserver \
       postgres:$VERSION
   else
     echo 'postgres 15.x.x is already running'
@@ -406,8 +406,8 @@ postgresserver() {
 }
 
 psql() {
-  relies_on postgresserver
-  docker exec -it postgresserver psql "$@"
+  relies_on pgserver
+  docker exec -it pgserver psql "$@"
 }
 
 pga() {

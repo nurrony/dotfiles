@@ -26,6 +26,10 @@ export PATH="$DART_PUB_BIN:$FLUTTER_SDK_DIR/bin:$PATH"
 export KREW_ROOT=${KREW_ROOT:-$HOME/.krew}
 export PATH="$KREW_ROOT/bin:$PATH"
 
+# GraalVm Settings
+export GRAALVM_HOME=/Library/Java/JavaVirtualMachines/graalvm-22.3.0+java17/Contents/Home
+export PATH="$GRAALVM_HOME/bin:$PATH"
+
 # GNU Tools path
 export GNU_TOOL_PATH=/usr/local/opt/findutils/libexec/gnubin
 export PATH="$GNU_TOOL_PATH:$PATH"

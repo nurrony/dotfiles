@@ -442,7 +442,7 @@ elasticsearch() {
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "elasticsearch server is not running, starting it for you."
     docker run -it -d \
-      --volume ${DEV_ZONE}/storage/elasticsearch/data:/usr/share/elasticsearch/data \
+      --volume "${DEV_ZONE}/storage/databases/elasticsearch/data:/usr/share/elasticsearch/data" \
       --publish 9200:9200 \
       --publish 9300:9300 \
       --net bridge \

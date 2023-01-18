@@ -37,8 +37,7 @@ alias lsa='command exa -abghHl --git --group-directories-first'
 alias cat="command bat --theme='Visual Studio Dark+' --style=plain --pager=never"
 
 # cp
-alias cpv='rsync -az --progress'
-
+alias cpv='rsync -Paz --progress'
 
 # Always enable colored `grep` output
 # Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.
@@ -67,9 +66,9 @@ alias cwd='pwd | tr -d "\r\n" | pbcopy'
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
 
 # JavaScriptCore REPL
-jscbin="/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc";
-[ -e "${jscbin}" ] && alias jsc="${jscbin}";
-unset jscbin;
+jscbin="/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc"
+[ -e "${jscbin}" ] && alias jsc="${jscbin}"
+unset jscbin
 
 # Recursively delete `.DS_Store` files
 alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
@@ -79,7 +78,6 @@ alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 # Finally, clear download history from quarantine. https://mths.be/bum
 alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl; sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
 
-
 # Trim new lines and copy to clipboard
 alias c="tr -d '\n' | pbcopy"
 
@@ -87,13 +85,13 @@ alias c="tr -d '\n' | pbcopy"
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
 
 # Canonical hex dump; some systems have this symlinked
-command -v hd > /dev/null || alias hd="hexdump -C"
+command -v hd >/dev/null || alias hd="hexdump -C"
 
 # OS X has no `md5sum`, so use `md5` as a fallback
-command -v md5sum > /dev/null || alias md5sum="md5"
+command -v md5sum >/dev/null || alias md5sum="md5"
 
 # OS X has no `sha1sum`, so use `shasum` as a fallback
-command -v sha1sum > /dev/null || alias sha1sum="shasum"
+command -v sha1sum >/dev/null || alias sha1sum="shasum"
 
 # Get macOS Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
 # alias update='brew update --verbose && brew update --cask && brew upgrade && brew upgrade --cask --greedy && brew cleanup -s --prune=all && flutter upgrade && asdf update && asdf plugin update --all && npm-upgrade -g'
@@ -156,15 +154,15 @@ alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
 alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
 
 # 1. NETWORKING
-alias netCons='lsof -i'                             # netCons:      Show all open TCP/IP sockets
-alias flushDNS='dscacheutil -flushcache'            # flushDNS:     Flush out the DNS Cache
-alias lsock='sudo /usr/sbin/lsof -i -P'             # lsock:        Display open sockets
-alias lsockU='sudo /usr/sbin/lsof -nP | grep UDP'   # lsockU:       Display only open UDP sockets
-alias lsockT='sudo /usr/sbin/lsof -nP | grep TCP'   # lsockT:       Display only open TCP sockets
-alias ipInfo0='ipconfig getpacket eth0'             # ipInfo0:      Get info on connections for en0
-alias ipInfo1='ipconfig getpacket eth1'             # ipInfo1:      Get info on connections for en1
-alias openPorts='sudo lsof -i | grep LISTEN'        # openPorts:    All listening connections
-alias showBlocked='sudo ipfw list'                  # showBlocked:  All ipfw rules inc/ blocked IPs
+alias netCons='lsof -i'                           # netCons:      Show all open TCP/IP sockets
+alias flushDNS='dscacheutil -flushcache'          # flushDNS:     Flush out the DNS Cache
+alias lsock='sudo /usr/sbin/lsof -i -P'           # lsock:        Display open sockets
+alias lsockU='sudo /usr/sbin/lsof -nP | grep UDP' # lsockU:       Display only open UDP sockets
+alias lsockT='sudo /usr/sbin/lsof -nP | grep TCP' # lsockT:       Display only open TCP sockets
+alias ipInfo0='ipconfig getpacket eth0'           # ipInfo0:      Get info on connections for en0
+alias ipInfo1='ipconfig getpacket eth1'           # ipInfo1:      Get info on connections for en1
+alias openPorts='sudo lsof -i | grep LISTEN'      # openPorts:    All listening connections
+alias showBlocked='sudo ipfw list'                # showBlocked:  All ipfw rules inc/ blocked IPs
 
 # IP addresses
 alias pubip="dig +short myip.opendns.com @resolver1.opendns.com"
@@ -188,7 +186,6 @@ alias vbox-ifconfig="vboxmanage list bridgedifs"
 
 # git aliases
 alias gcz='git-cz'
-
 
 # Kubernetes aliases
 alias k8s='autok3s kubectl'

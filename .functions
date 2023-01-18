@@ -276,3 +276,12 @@ skype() {
   local account=${1:-nmrony}
   open -na /Applications/Skype.app --args --secondary --datapath="/Users/$(whoami)/Library/Application\ Support/Skype-$account"
 }
+
+rmfast() {
+  for item in "$@"
+  do
+    echo -en "deleting $item... "
+    mkdir -p /tmp/emptydir && rsync -a --delete /tmp/emptydir/ "$item" && rm -fr /tmp/emptydir
+    echo "[done]"
+  done
+}

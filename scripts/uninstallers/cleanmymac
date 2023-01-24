@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -e
+remove() {
+  sudo -v
+
+  entry="$1"
+  echo -ne "Removing $entry... "
+  sudo rm -rf "$entry"
+
+  if [[ ! -e "$entry" ]]; then
+    echo -ne "[OK]"
+  else
+    echo -ne "[FAILED]"
+  fi
+  echo
+}
+
+remove "/Applications/CleanMy*.app"
+remove "$HOME/Library/Preferences/com.macpaw.*"
+remove "$HOME/Library/Application Support/CleanMyMac*"
+remove "$HOME/Library/Preferences/com.macpaw*"
+remove "$HOME/Library/Caches/com.macpaw*"
+remove "$HOME/Library/Logs/CleanMyMac X Menu"
+remove "$HOME/Library/Logs/com.macpaw.CleanMyMac4*"
+remove "$HOME/Library/LaunchAgents/com.macpaw*"

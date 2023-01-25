@@ -32,6 +32,7 @@ zi wait'10' lucid light-mode for \
   as'program' from'gh-r' mv'hadolint* -> hadolint' hadolint/hadolint \
   as'program' from'gh-r' bpick'*darwin_amd64.tar.gz' mv'kail* -> kail' boz/kail \
   as'program' from'gh-r' mv'kube-explorer* -> kube-explorer' cnrancher/kube-explorer \
+  as'program' from'gh-r' atclone'./procs --completion-out zsh > _procs' bpick'procs-*-mac.zip' dalance/procs \
   as'program' from'gh-r' mv'k3d* -> k3d' atclone'./k3d completion zsh > _k3d' atpull'%atclone' pick'k3d' k3d-io/k3d \
   as'program' from'gh-r' atclone'./hostctl completion zsh > _hostctl' atpull'%atclone' bpick'*macOS_64-bit.tar.gz' guumaster/hostctl \
   as'program' from'gh-r' mv'argocd* -> argocd' atclone'./argocd completion zsh > _argocd' atpull'%atclone' pick'argocd' argoproj/argo-cd \

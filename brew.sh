@@ -97,7 +97,6 @@ brew install webkit2png
 brew install zopfli
 brew install zlib
 
-
 # See here: https://github.com/BurntSushi/ripgrep
 brew install ripgrep
 brew install git-flow-avh
@@ -138,7 +137,6 @@ brew install helm
 brew tap boz/repo
 brew install boz/repo/kail # tail for kubernetes
 
-
 # Install Dart SDK Dartium and Dart VM for web
 # brew tap dart-lang/dart
 # brew install dart
@@ -155,7 +153,6 @@ brew install ios-deploy
 brew install cocoapods
 pod setup
 
-
 # Azure CLI
 brew install azure-cli
 
@@ -165,31 +162,30 @@ brew install bitwarden-cli
 # youtube downloader from https://github.com/yt-dlp/yt-dlp
 brew install yt-dlp
 
-# Remove outdated versions from the cellar.
-brew cleanup -s
-
-
 # CASK Install
 brew update --verbose
 brew tap homebrew/cask
 brew tap homebrew/cask-versions
 brew install --cask
 brave-browser \
-docker \
-gpg-suite \
-iterm2 \
-keycastr \
-openmtp \
-skype \
-rocket-chat \
-the-unarchiver \
-vagrant \
-vagrant-vmware-utility \
-visual-studio-code \
-windows-remote-desktop \
-zoom \
-brew cleanup -s
+  docker \
+  gpg-suite \
+  iterm2 \
+  keycastr \
+  openmtp \
+  skype \
+  rocket-chat \
+  the-unarchiver \
+  vagrant \
+  vagrant-vmware-utility \
+  visual-studio-code \
+  windows-remote-desktop \
+  zoom \
+  brew cleanup -s
 
 # Install Kubernetes plugins
 bash -c ./scripts/installers/krew
 kubectl krew install tunnel ctx ns rbac-tool
+
+# Remove outdated versions from the cellar.
+brew autoremove && brew cleanup -s --prune=all

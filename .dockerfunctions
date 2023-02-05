@@ -48,9 +48,9 @@ relies_on() {
   done
 }
 
-nginx_proxy() {
-  del_stopped nginx_proxy
-  local state=$(docker inspect --format "{{.State.Running}}" nginx_proxy 2>/dev/null)
+nginx-proxy() {
+  del_stopped nginx-proxy
+  local state=$(docker inspect --format "{{.State.Running}}" nginx-proxy 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     docker run -it -d \
@@ -61,7 +61,7 @@ nginx_proxy() {
       --publish 80:80 \
       --publish 443:443 \
       --net ronsvpn \
-      --name nginx_proxy \
+      --name nginx-proxy \
       nginxproxy/nginx-proxy:alpine 2>/dev/null
   else
     echo 'proxy is already running'
@@ -69,7 +69,7 @@ nginx_proxy() {
 }
 
 portainer() {
-  relies_on nginx_proxy
+  relies_on nginx-proxy
   del_stopped portainer
   local state=$(docker inspect --format "{{.State.Running}}" portainer 2>/dev/null)
 
@@ -286,7 +286,7 @@ mysql5() {
 
 dynamodb() {
   del_stopped dynamodb
-  relies_on nginx_proxy
+  relies_on nginx-proxy
   sleep 2
   local state=$(docker inspect --format "{{.State.Running}}" dynamodb 2>/dev/null)
 
@@ -312,7 +312,7 @@ dynamodb() {
 
 pma() {
   del_stopped pma
-  relies_on nginx_proxy
+  relies_on nginx-proxy
   sleep 2
   local state=$(docker inspect --format "{{.State.Running}}" pma 2>/dev/null)
 
@@ -332,7 +332,7 @@ pma() {
 }
 
 myblog() {
-  relies_on nginx_proxy
+  relies_on nginx-proxy
   relies_on mysqlserver8
   sleep 5
   del_stopped personal-blog
@@ -412,7 +412,7 @@ psql() {
 
 pga() {
   del_stopped pga
-  relies_on nginx_proxy
+  relies_on nginx-proxy
   sleep 2
   local state=$(docker inspect --format "{{.State.Running}}" pga 2>/dev/null)
 
@@ -501,11 +501,11 @@ apache-php() {
 }
 
 start-lamp-stack() {
-  nginx_proxy && pma && mysqlserver8 && echo 'LAMP stack started successfully.'
+  nginx-proxy && pma && mysqlserver8 && echo 'LAMP stack started successfully.'
 }
 
 stop-lamp-stack() {
-  docker rm -f nginx_proxy pma mysqlserver8 && echo 'LAMP stack stopped successfully.'
+  docker rm -f nginx-proxy pma mysqlserver8 && echo 'LAMP stack stopped successfully.'
 }
 
 sysdig() {

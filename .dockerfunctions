@@ -27,12 +27,12 @@ ctr-registry-up() {
   if [[ "$state" == "true" ]] || [[ "$state" != "" ]]; then
     docker rm -f registry
   fi
-  docker-compose -f $DEV_ZONE/storage/k8s-clusters/registry/docker-compose.yml up -d 2>/dev/null
+  docker-compose -f $DEV_ZONE/storage/k8s-clusters/registry/docker-compose.yml up -d
   echo 'registry started...'
 }
 
 ctr-rgistry-down() {
-  docker-compose -f $DEV_ZONE/storage/k8s-clusters/registry/docker-compose.yml down 2>/dev/null
+  docker-compose -f $DEV_ZONE/storage/k8s-clusters/registry/docker-compose.yml down
   echo 'registry is down'
 }
 
@@ -62,8 +62,7 @@ nginx-proxy() {
       --publish 443:443 \
       --net ronsvpn \
       --name nginx-proxy \
-      nginxproxy/nginx-proxy:alpine 2>/dev/null
-  else
+      nginxproxy/nginx-proxy:alpine
     echo 'proxy is already running'
   fi
 }
@@ -82,7 +81,7 @@ portainer() {
       --expose 9000 \
       --net ronsvpn \
       --name portainer \
-      portainer/portainer 2>/dev/null
+      portainer/portainer
   else
     echo 'portainer is already running'
   fi
@@ -232,7 +231,7 @@ couchdb() {
       --env VIRTUAL_HOST=couchdb.nmrony.localhost \
       --net ronsvpn \
       --name couchdb \
-      couchdb 2>/dev/null
+      couchdb
   else
     echo 'couchdb is already running'
   fi
@@ -250,7 +249,7 @@ mysqlserver8() {
       --publish 3306:3306 \
       --net ronsvpn \
       --name mysqlserver8 \
-      mysql:8 2>/dev/null
+      mysql:8
   else
     echo 'mysql server v8 is already running'
   fi
@@ -268,7 +267,7 @@ mysqlserver5() {
       --publish 3306:3306 \
       --net ronsvpn \
       --name mysqlserver5 \
-      mysql:5.7 mysqld --wait-timeout=28800 2>/dev/null
+      mysql:5.7 mysqld --wait-timeout=28800
   else
     echo 'mysql v5.7.x is already running'
   fi
@@ -300,7 +299,7 @@ dynamodb() {
       --env VIRTUAL_HOST=dynamodb.nmrony.localhost \
       --net ronsvpn \
       --name dynamodb \
-      amazon/dynamodb-local -jar DynamoDBLocal.jar -sharedDb -optimizeDbBeforeStartup -dbPath ./data 2>/dev/null
+      amazon/dynamodb-local -jar DynamoDBLocal.jar -sharedDb -optimizeDbBeforeStartup -dbPath ./data
     if [ "$1" != "" ]; then
       docker network connect $1 dynamodb
     fi
@@ -334,7 +333,7 @@ pma() {
       --net ronsvpn \
       --expose 80 \
       --name pma \
-      phpmyadmin/phpmyadmin >/dev/null 2>&1
+      phpmyadmin/phpmyadmin
   else
     echo 'phpMyAdmin is already running'
   fi
@@ -361,7 +360,7 @@ myblog() {
       --env DEV_DOMAIN=http://blog.nmrony.localhost \
       --net ronsvpn \
       --name personal-blog \
-      ghost:2-alpine 2>/dev/null
+      ghost:2-alpine
   else
     echo 'blog is already running'
   fi
@@ -378,7 +377,7 @@ mongodb() {
       --publish 27017:27017 \
       --net ronsvpn \
       --name mongodb \
-      mongo "$@" 2>/dev/null
+      mongo "$@"
   else
     echo 'mongodb is already running'
   fi
@@ -435,7 +434,7 @@ pga() {
       --net ronsvpn \
       --expose 80 \
       --name pga \
-      dpage/pgadmin4 >/dev/null 2>&1
+      dpage/pgadmin4
   else
     echo 'pgAdmin4 is already running'
   fi
@@ -466,7 +465,7 @@ elasticsearch() {
       --env "cluster.name=nmr-elasticsearch-cluser" \
       --env "http.cors.allow-headers: X-Requested-With,Content-Type,Content-Length,Authorization" \
       --name elasticsearch \
-      docker.elastic.co/elasticsearch/elasticsearch:7 "$@" 2>/dev/null
+      docker.elastic.co/elasticsearch/elasticsearch:7 "$@"
   else
     echo 'elasticsearch is already running'
   fi

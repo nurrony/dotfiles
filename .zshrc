@@ -7,13 +7,13 @@ zi wait lucid light-mode for \
   as'completion' zsh-users/zsh-completions
 
 zi wait'3' lucid light-mode for \
-  z-shell/H-S-MW \
   pick'alias-tips.plugin.zsh' djui/alias-tips \
   paulirish/git-open\
   OMZ::plugins/git/git.plugin.zsh \
   OMZ::plugins/extract/extract.plugin.zsh \
   OMZ::plugins/mvn/mvn.plugin.zsh \
   OMZ::plugins/gradle/gradle.plugin.zsh \
+  z-shell/H-S-MW \
   z-shell/F-Sy-H
 
 zi ice wait'3' lucid as'program' src'asdf.sh'
@@ -53,7 +53,11 @@ unset file;
 eval "$(starship init zsh)"
 
 # Next two lines must be below the above two for zi autocomplete
-autoload -Uz _zi
-(( ${+_comps} )) && _comps[zi]=_zi
+# autoload -Uz _zi
+# (( ${+_comps} )) && _comps[zi]=_zi
 
-zicompinit; zicdreplay
+# zicompinit_fast; zicdreplay -q
+autoload -Uz compinit
+compinit
+
+zi cdreplay -q

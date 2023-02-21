@@ -13,6 +13,7 @@ zi wait'3' lucid light-mode for \
   OMZ::plugins/git/git.plugin.zsh \
   OMZ::plugins/extract/extract.plugin.zsh \
   OMZ::plugins/mvn/mvn.plugin.zsh \
+  OMZ::plugins/gradle/gradle.plugin.zsh \
   z-shell/F-Sy-H
 
 zi ice wait'3' lucid as'program' src'asdf.sh'
@@ -31,6 +32,7 @@ zi wait'10' lucid light-mode for \
   as'program' from'gh-r' mv'tealdeer* -> tldr' dbrgn/tealdeer \
   as'program' from'gh-r' mv'hadolint* -> hadolint' hadolint/hadolint \
   as'program' from'gh-r' bpick'*darwin_amd64.tar.gz' mv'kail* -> kail' boz/kail \
+  as'program' from'gh-r' mv'yt-dlp* -> yt-dlp' bpick'yt-dlp_macos' yt-dlp/yt-dlp \
   as'program' from'gh-r' mv'kube-explorer* -> kube-explorer' cnrancher/kube-explorer \
   as'program' from'gh-r' atclone'./procs --completion-out zsh > _procs' bpick'procs-*-mac.zip' dalance/procs \
   as'program' from'gh-r' mv'k3d* -> k3d' atclone'./k3d completion zsh > _k3d' atpull'%atclone' pick'k3d' k3d-io/k3d \

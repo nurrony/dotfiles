@@ -1,0 +1,29 @@
+# history options
+setopt hist_ignore_all_dups   # Remove older duplicate entries from history.
+setopt hist_ignore_dups       # Do not record an event that was just recorded again.
+setopt hist_ignore_space      # Do not record an Event Starting With A Space.
+setopt hist_reduce_blanks     # Remove superfluous blanks from history items.
+setopt hist_save_no_dups      # Do not write a duplicate event to the history file.
+
+# list options
+setopt auto_cd              # Use cd by typing directory name if it's not a command.
+setopt auto_list            # Automatically list choices on ambiguous completion.
+
+zstyle ':completion:*:matches' group 'yes'
+zstyle ':completion:*:options' description 'yes'
+zstyle ':completion:*:options' auto-description '%d'
+zstyle ':completion:*:corrections' format ' %F{green}-- %d (errors: %e) --%f'
+zstyle ':completion:*:descriptions' format ' %F{yellow}-- %d --%f'
+zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
+zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
+zstyle ':completion:*:default' list-prompt '%S%M matches%s'
+zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' verbose yes
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
+zstyle ':completion:*' use-cache true
+zstyle ':completion:*' rehash true
+zstyle ':completion:*' menu select
+
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}

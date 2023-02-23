@@ -1,10 +1,4 @@
 # enable zi https://wiki.zshell.dev/
-setopt hist_ignore_all_dups   # Remove older duplicate entries from history.
-setopt hist_ignore_dups       # Do not record an event that was just recorded again.
-setopt hist_ignore_space      # Do not record an Event Starting With A Space.
-setopt hist_reduce_blanks     # Remove superfluous blanks from history items.
-setopt hist_save_no_dups      # Do not write a duplicate event to the history file.
-
 
 typeset -A ZI
 ZI[BIN_DIR]="${HOME}/.zi/bin"
@@ -52,7 +46,7 @@ zi wait'10' lucid light-mode for \
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
-for file in $HOME/.dotfiles/.{extra,path,exports,aliases,functions,dockerfunctions,kubefunctions,source,cli-packages}; do
+for file in $HOME/.dotfiles/.{extra,path,exports,aliases,functions,dockerfunctions,kubefunctions,source,cli-packages,zsh_options}; do
   [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;

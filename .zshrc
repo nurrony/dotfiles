@@ -4,15 +4,17 @@ ZI[BIN_DIR]="${HOME}/.zi/bin"
 source "${ZI[BIN_DIR]}/zi.zsh"
 
 zi wait lucid light-mode for \
-  as'completion' zsh-users/zsh-completions
+  as'completion' zsh-users/zsh-completions \
+  as'completion' pick'gradle-completion.plugin.zsh' gradle/gradle-completion
 
 zi wait'3' lucid light-mode for \
   pick'alias-tips.plugin.zsh' djui/alias-tips \
-  pick'git-open.plugin.zsh' paulirish/git-open\
-  as'completion' pick'gradle-completion.plugin.zsh' gradle/gradle-completion \
-  OMZ::plugins/git/git.plugin.zsh \
+  OMZ::plugins/extract/extract.plugin.zsh \
   OMZ::plugins/mvn/mvn.plugin.zsh \
-  OMZ::plugins/extract/extract.plugin.zsh
+  pick'git-open.plugin.zsh' paulirish/git-open\
+  OMZ::plugins/git/git.plugin.zsh \
+  z-shell/H-S-MW \
+  z-shell/F-Sy-H
 
 zi ice wait'3' lucid as'program' src'asdf.sh'
 zi light asdf-vm/asdf

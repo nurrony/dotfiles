@@ -10,9 +10,9 @@ zi wait'3' lucid light-mode for \
   pick'alias-tips.plugin.zsh' djui/alias-tips \
   paulirish/git-open\
   OMZ::plugins/git/git.plugin.zsh \
-  OMZ::plugins/extract/extract.plugin.zsh \
   OMZ::plugins/mvn/mvn.plugin.zsh \
   OMZ::plugins/gradle/gradle.plugin.zsh \
+  OMZ::plugins/extract/extract.plugin.zsh \
   z-shell/H-S-MW \
   z-shell/F-Sy-H
 
@@ -53,10 +53,6 @@ unset file;
 eval "$(starship init zsh)"
 
 # Next two lines must be below the above two for zi autocomplete
-# autoload -Uz _zi
-# (( ${+_comps} )) && _comps[zi]=_zi
-
-# zicompinit_fast; zicdreplay -q
 autoload -Uz compinit
 compinit
 

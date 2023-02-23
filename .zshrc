@@ -1,4 +1,11 @@
 # enable zi https://wiki.zshell.dev/
+setopt hist_ignore_all_dups   # Remove older duplicate entries from history.
+setopt hist_ignore_dups       # Do not record an event that was just recorded again.
+setopt hist_ignore_space      # Do not record an Event Starting With A Space.
+setopt hist_reduce_blanks     # Remove superfluous blanks from history items.
+setopt hist_save_no_dups      # Do not write a duplicate event to the history file.
+
+
 typeset -A ZI
 ZI[BIN_DIR]="${HOME}/.zi/bin"
 source "${ZI[BIN_DIR]}/zi.zsh"
@@ -11,10 +18,7 @@ zi wait'3' lucid light-mode for \
   pick'alias-tips.plugin.zsh' djui/alias-tips \
   OMZ::plugins/extract/extract.plugin.zsh \
   OMZ::plugins/mvn/mvn.plugin.zsh \
-  pick'git-open.plugin.zsh' paulirish/git-open\
-  OMZ::plugins/git/git.plugin.zsh \
-  z-shell/H-S-MW \
-  z-shell/F-Sy-H
+  pick'git-open.plugin.zsh' paulirish/git-open
 
 zi ice wait'3' lucid as'program' src'asdf.sh'
 zi light asdf-vm/asdf
@@ -25,7 +29,10 @@ zi wait'5' lucid light-mode for \
   as'program' from'gh-r' atclone'ln -sfv completions/exa.zsh _exa' atpull'%atclone' pick'bin/exa' ogham/exa \
   as'program' from'gh-r' mv'direnv* -> direnv' atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' pick'direnv' src'zhook.zsh' direnv/direnv \
   as'program' atclone'ln -sfv etc/git-extras-completion.zsh _git-extras' atpull'%atclone' pick'$ZPFX/bin/git-*' make'PREFIX=$ZPFX' nocompile tj/git-extras \
-  as'program' from'gh-r' bpick'*x86_64-apple-darwin.tar.gz' atclone'./zoxide init --cmd=j zsh > init.zsh' src'init.zsh' atpull'%atclone' pick'zoxide/zoxide' ajeetdsouza/zoxide
+  as'program' from'gh-r' bpick'*x86_64-apple-darwin.tar.gz' atclone'./zoxide init --cmd=j zsh > init.zsh' src'init.zsh' atpull'%atclone' pick'zoxide/zoxide' ajeetdsouza/zoxide \
+  OMZ::plugins/git/git.plugin.zsh \
+  z-shell/H-S-MW \
+  z-shell/F-Sy-H
 
 zi wait'10' lucid light-mode for \
   as'program' from'gh-r' extrawurst/gitui \
@@ -56,5 +63,4 @@ eval "$(starship init zsh)"
 # Next two lines must be below the above two for zi autocomplete
 autoload -Uz compinit
 compinit
-
 zi cdreplay -q

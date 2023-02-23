@@ -8,13 +8,11 @@ zi wait lucid light-mode for \
 
 zi wait'3' lucid light-mode for \
   pick'alias-tips.plugin.zsh' djui/alias-tips \
-  paulirish/git-open\
+  pick'git-open.plugin.zsh' paulirish/git-open\
+  as'completion' pick'gradle-completion.plugin.zsh' gradle/gradle-completion \
   OMZ::plugins/git/git.plugin.zsh \
   OMZ::plugins/mvn/mvn.plugin.zsh \
-  OMZ::plugins/gradle/gradle.plugin.zsh \
-  OMZ::plugins/extract/extract.plugin.zsh \
-  z-shell/H-S-MW \
-  z-shell/F-Sy-H
+  OMZ::plugins/extract/extract.plugin.zsh
 
 zi ice wait'3' lucid as'program' src'asdf.sh'
 zi light asdf-vm/asdf

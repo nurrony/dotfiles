@@ -2,10 +2,14 @@ local overrides = require "custom.plugins.overrides"
 
 return {
 
+  ["folke/which-key.nvim"] = {
+    disable = false,
+  },
   ----------------------------------------- default plugins ------------------------------------------
   -- Dashboard
   ["goolord/alpha-nvim"] = {
     disable = false,
+    cmd = "Alpha",
     override_options = overrides.alpha,
   },
 

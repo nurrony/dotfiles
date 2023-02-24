@@ -9,6 +9,7 @@ setopt hist_save_no_dups      # Do not write a duplicate event to the history fi
 setopt auto_cd              # Use cd by typing directory name if it's not a command.
 setopt auto_list            # Automatically list choices on ambiguous completion.
 
+# completion style
 zstyle ':completion:*:matches' group 'yes'
 zstyle ':completion:*:options' description 'yes'
 zstyle ':completion:*:options' auto-description '%d'

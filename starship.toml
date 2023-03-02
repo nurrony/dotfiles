@@ -68,6 +68,11 @@ format = 'via [$symbol]($style)'
 symbol = " "
 style = "bold green"
 
+[jobs]
+disabled = false
+number_threshold = 1
+symbol = ""
+
 [kubernetes]
 symbol = 'ﴱ '
 style = "bold blue"

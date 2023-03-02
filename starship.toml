@@ -54,19 +54,16 @@ symbol = " "
 commit_hash_length = 8
 
 [git_status]
-ahead = "⇡${count}"
-diverged = "⇕⇡${ahead_count}⇣${behind_count}"
-behind = "⇣${count}"
+ahead = "${count}"
+diverged = "${ahead_count}⇣${behind_count}"
+behind = "${count}"
 
 [golang]
 symbol = " "
 
-[helm]
-format = 'via [$symbol]($style)'
-
 [java]
 symbol = " "
-style = "bold green"
+style = "bold blue"
 
 [jobs]
 symbol = "🏃‍♂️ "

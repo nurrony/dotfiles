@@ -1,6 +1,8 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 command_timeout = 1500
 
+scan_timeout = 10
+
 [cmd_duration]
 min_time = 500
 
@@ -80,6 +82,9 @@ symbol = " "
 
 [package]
 display_private = true
+
+[php]
+symbol = " "
 
 [scala]
 style = "bold red"

@@ -3,6 +3,9 @@ command_timeout = 1500
 
 scan_timeout = 10
 
+# Inserts a blank line between shell prompts
+add_newline = true
+
 [cmd_duration]
 min_time = 500
 

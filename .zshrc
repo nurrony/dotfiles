@@ -1,8 +1,12 @@
 # enable zi https://wiki.zshell.dev/
-
 typeset -A ZI
 ZI[BIN_DIR]="${HOME}/.zi/bin"
 source "${ZI[BIN_DIR]}/zi.zsh"
+
+zi ice as"command" from"gh-r" \
+  atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
+  atpull"%atclone" src"init.zsh"
+zi light starship/starship
 
 zi wait lucid light-mode for \
   as'completion' zsh-users/zsh-completions \
@@ -50,8 +54,6 @@ for file in $HOME/.dotfiles/.{extra,path,exports,aliases,functions,dockerfunctio
 done;
 unset file;
 
-# Start starship
-eval "$(starship init zsh)"
 
 # Next two lines must be below the above two for zi autocomplete
 autoload -Uz compinit

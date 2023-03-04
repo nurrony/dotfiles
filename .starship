@@ -1,0 +1,115 @@
+command_timeout = 1500
+
+scan_timeout = 10
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+[cmd_duration]
+min_time = 500
+
+[aws]
+disabled = true
+symbol = " "
+style = "bold green"
+format = 'on [$symbol($profile )(\($region\) )(\[$duration\])]($style)'
+
+[azure]
+disabled = false
+format = "on [$symbol($subscription)]($style) "
+symbol = "ﴃ "
+style = "blue bold"
+
+[battery]
+full_symbol = " "
+charging_symbol = " "
+discharging_symbol = " "
+unknown_symbol = " "
+
+[[battery.display]]
+threshold = 30
+style = "bold red"
+
+[dart]
+symbol = " "
+format = "via [$version](bold green) "
+
+[directory]
+truncation_length = 2
+read_only = " "
+
+[directory.substitutions]
+"Documents" = "Documents "
+"Downloads" = "Downloads "
+"Music" = "Music "
+"Pictures" = "Pictures "
+
+[docker_context]
+symbol = " "
+style = "bold blue"
+only_with_files = true
+disabled = false
+
+[git_branch]
+symbol = " "
+
+[git_commit]
+commit_hash_length = 8
+
+[git_status]
+ahead = "⇡${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+behind = "⇣${count}"
+
+[golang]
+symbol = " "
+
+[helm]
+format = 'via [$symbol]($style)'
+
+[java]
+symbol = " "
+style = "bold green"
+
+[jobs]
+disabled = false
+number_threshold = 1
+symbol = ""
+
+[kubernetes]
+symbol = 'ﴱ '
+style = "bold blue"
+disabled = false
+
+[lua]
+symbol = ' '
+
+[memory_usage]
+symbol = " "
+
+[package]
+display_private = true
+
+[php]
+symbol = " "
+
+[scala]
+style = "bold red"
+symbol = " "
+
+[python]
+style = "bold yellow"
+symbol = " "
+
+[ruby]
+symbol = " "
+
+[rust]
+symbol = " "
+
+[username]
+style_user = "white bold"
+style_root = "black bold"
+format = " [$user]($style) "
+disabled = false
+show_always = true

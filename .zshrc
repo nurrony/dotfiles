@@ -30,7 +30,7 @@ zi wait'5' lucid light-mode for \
   OMZ::plugins/extract/extract.plugin.zsh
 
 zi wait'10' lucid light-mode for \
-  as'program' from'gh-r' extrawurst/gitui \
+  as'program' from'gh-r' jesseduffield/lazygit \
   as'program' from'gh-r' mv'tealdeer* -> tldr' dbrgn/tealdeer \
   as'program' from'gh-r' mv'hadolint* -> hadolint' hadolint/hadolint \
   as'program' from'gh-r' bpick'*darwin_amd64.tar.gz' mv'kail* -> kail' boz/kail \

@@ -15,7 +15,7 @@ remove() {
   echo
 }
 
-brew uninstall --zap --cask docker
+brew uninstall --zap --cask --force docker
 remove /Applications/Docker.app
 remove /usr/local/bin/docker
 remove /usr/local/bin/docker-machine

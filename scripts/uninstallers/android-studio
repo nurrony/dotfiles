@@ -14,7 +14,7 @@ remove() {
   fi
   echo
 }
-brew uninstall --cask --zap --force android-studio
+brew uninstall --cask --zap --force --quiet android-studio
 remove /Applications/Android\ Studio.app
 remove ~/Library/Preferences/AndroidStudio*
 remove ~/Library/Preferences/Google/AndroidStudio*

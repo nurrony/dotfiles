@@ -16,7 +16,7 @@ remove() {
   echo
 }
 
-brew uninstall --cask --quiet microsoft-edge
+brew uninstall --cask --quiet --zap microsoft-edge
 remove /Applications/Microsoft\ Edge.app/
 remove ~/Library/Caches/Microsoft\ Edge
 remove ~/Library/Preferences/com.microsoft.edge*

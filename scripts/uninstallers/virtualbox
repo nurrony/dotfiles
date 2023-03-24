@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+set -e
+remove() {
+  sudo -v
+
+  entry="$1"
+  echo -ne "Removing $entry... "
+  sudo rm -rf "$entry"
+
+  if [[ ! -e "$entry" ]]; then
+    echo -ne "[OK]"
+  else
+    echo -ne "[FAILED]"
+  fi
+  echo
+}
+
+VBoxManage extpack uninstall --force 'Oracle VM VirtualBox Extension Pack'
+brew uninstall --cask --zap --force --quiet virtualbox
+remove '~/Library/VirtualBox'
+remove '~/Library/Preferences/org.VirtualBox.app.VirtualBox.plist'
+remove '~/Library/Saved Application State/org.VirtualBox.app.VirtualBox.SavedState'
+remove '~/Library/LaunchAgents/org.virtualbox.vboxwebsrv.plist'
+remove '/Users/nurrony/Library/LaunchAgents/org.virtualbox.vboxwebsrv.plist'
+remove '/Library/Application Support/VirtualBox'
+remove '~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/org.virtualbox.app.virtualbox*'
+remove '~/Library/Preferences/org.virtualbox.app.VirtualBox*'
+remove '~/Library/Saved Application State/org.virtualbox.app.VirtualBox*'
+remove '~/Library/VirtualBox'
+remove '/usr/local/bin/VirtualBox'
+remove '/usr/local/bin/VirtualBoxVM'
+remove '/usr/local/bin/VBoxManage'
+remove '/usr/local/bin/VBoxVRDP'
+remove '/usr/local/bin/VBoxHeadless'
+remove '/usr/local/bin/vboxwebsrv'
+remove '/usr/local/bin/VBoxBugReport'
+remove '/usr/local/bin/VBoxBalloonCtrl'
+remove '/usr/local/bin/VBoxAutostart'
+remove '/usr/local/bin/VBoxDTrace'
+remove '/usr/local/bin/VBoxAudioTest'
+remove '/usr/local/bin/vbox-img'
+remove '/Applications/VirtualBox.app/'

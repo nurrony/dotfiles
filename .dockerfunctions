@@ -63,6 +63,7 @@ nginx-proxy() {
       --net ronsvpn \
       --name nginx-proxy \
       nginxproxy/nginx-proxy:alpine
+  else
     echo 'proxy is already running'
   fi
 }

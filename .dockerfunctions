@@ -9,7 +9,7 @@ dcleanup() {
   docker container prune --force 2>/dev/null
   docker volume prune --force 2>/dev/null
   # docker network prune --force 2>/dev/null
-  docker images --all --force 2>/dev/null
+  docker image prune --all 2>/dev/null
 }
 
 del_stopped() {

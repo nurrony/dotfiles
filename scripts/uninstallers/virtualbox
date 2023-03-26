@@ -15,7 +15,7 @@ remove() {
   echo
 }
 
-VBoxManage extpack uninstall --force 'Oracle VM VirtualBox Extension Pack' || true
+VBoxManage extpack uninstall --force 'Oracle VM VirtualBox Extension Pack' > /dev/null || true
 brew uninstall --cask --zap --force --quiet virtualbox
 remove '~/Library/VirtualBox'
 remove '~/Library/Preferences/org.VirtualBox.app.VirtualBox.plist'

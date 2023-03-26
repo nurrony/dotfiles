@@ -5,6 +5,9 @@ export DOCKER_REPO_PREFIX=jess
 #
 # Helper Functions
 #
+ddown() {
+  docker rm --force "$@"
+}
 dcleanup() {
   docker container prune --force 2>/dev/null
   docker volume prune --force 2>/dev/null
@@ -28,12 +31,12 @@ ctr-registry-up() {
     docker rm -f registry
   fi
   docker-compose -f $DEV_ZONE/storage/k8s-clusters/registry/docker-compose.yml up -d
-  echo 'registry started...'
+  echo 'registry started successfully...'
 }
 
 ctr-rgistry-down() {
   docker-compose -f $DEV_ZONE/storage/k8s-clusters/registry/docker-compose.yml down
-  echo 'registry is down'
+  echo 'registry is down successfully'
 }
 
 relies_on() {

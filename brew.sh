@@ -133,7 +133,7 @@ brew install docker-machine-driver-vmware
 
 # brew install kubectl
 # brew install kops
-# brew install helm
+brew install helm
 # brew install minikube
 # brew tap azure/draft
 # brew install draft # this also installs kubernetes-helm

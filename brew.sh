@@ -115,6 +115,7 @@ brew install cfn-lint
 # AWS EKS CLI
 brew tap weaveworks/tap
 brew install weaveworks/tap/eksctl
+brew uninstall --ignore-dependencies kubernetes-cli # fallback to kubectl.docker
 
 # AWLESS CLI
 brew tap wallix/awless

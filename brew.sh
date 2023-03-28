@@ -112,6 +112,10 @@ brew install aws-elasticbeanstalk
 brew install aws-sam-cli
 brew install cfn-lint
 
+# AWS EKS CLI
+brew tap weaveworks/tap
+brew install weaveworks/tap/eksctl
+
 # AWLESS CLI
 brew tap wallix/awless
 brew install awless

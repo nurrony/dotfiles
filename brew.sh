@@ -128,6 +128,9 @@ brew install awless
 # brew install docker-machine-completion
 brew install docker-machine-driver-vmware
 
+# GitOps Flux CLI
+brew install fluxcd/tap/flux
+
 # Kubernetes
 # Note: Replaced by autok3s
 

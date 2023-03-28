@@ -1,4 +1,3 @@
-"$schema" = 'https://starship.rs/config-schema.json'
 command_timeout = 1500
 
 scan_timeout = 10
@@ -10,6 +9,7 @@ add_newline = true
 min_time = 500
 
 [aws]
+disabled = true
 symbol = " "
 style = "bold green"
 format = 'on [$symbol($profile )(\($region\) )(\[$duration\])]($style)'
@@ -49,6 +49,9 @@ symbol = " "
 style = "bold blue"
 only_with_files = true
 disabled = false
+
+[gcloud]
+disabled = true
 
 [git_branch]
 symbol = " "

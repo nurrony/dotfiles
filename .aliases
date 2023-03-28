@@ -207,6 +207,9 @@ alias repo='git open'
 # docker terminal ui
 alias lzd='lazydocker'
 
+# git terminal ui
+alias lzg='lazygit'
+
 # Scala Alias
 alias cs='coursier'
 

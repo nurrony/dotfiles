@@ -38,7 +38,6 @@ zi wait'10' lucid light-mode for \
   as'program' from'gh-r' mv'yt-dlp* -> yt-dlp' bpick'yt-dlp_macos' yt-dlp/yt-dlp \
   as'program' from'gh-r' mv'kube-explorer* -> kube-explorer' cnrancher/kube-explorer \
   as'program' from'gh-r' mv'cs* -> coursier' bpick'cs-*-apple-darwin.gz' coursier/coursier \
-  as'program' from'gh-r' atclone'./flux completion zsh > _flux' atpull'%atclone' fluxcd/flux2 \
   as'program' from'gh-r' mv'hostess* -> hostess' bpick'hostess_macos_amd64' cbednarski/hostess \
   as'program' from'gh-r' mv'k3d* -> k3d' atclone'./k3d completion zsh > _k3d' atpull'%atclone' pick'k3d' k3d-io/k3d \
   as'program' from'gh-r' mv'argocd* -> argocd' atclone'./argocd completion zsh > _argocd' atpull'%atclone' pick'argocd' argoproj/argo-cd \

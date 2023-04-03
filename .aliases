@@ -193,6 +193,9 @@ alias vbox-nets="vboxmanage list bridgedifs"
 # git commitzen aliases
 alias gcz='git-cz'
 
+# kubernetes kubectl alias
+alias k8s="kubectl"
+
 # Minikube alias
 alias minikube-start='minikube start --cpus 2 --disk-size "50g" --memory 4096 --extra-config=apiserver.authorization-mode=RBAC --extra-config=apiserver.runtime-config=settings.k8s.io/v1alpha1=true'
 alias minikube-reg='minikube start --insecure-registry localhost:5000'

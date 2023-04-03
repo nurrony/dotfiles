@@ -195,6 +195,7 @@ alias gcz='git-cz'
 
 # kubernetes kubectl alias
 alias k8s="kubectl"
+alias nukedevship='k3d cluster stop devship && k3d cluser delete devship'
 
 # Minikube alias
 alias minikube-start='minikube start --cpus 2 --disk-size "50g" --memory 4096 --extra-config=apiserver.authorization-mode=RBAC --extra-config=apiserver.runtime-config=settings.k8s.io/v1alpha1=true'

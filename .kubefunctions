@@ -9,6 +9,6 @@ kns() {
 }
 
 k8s-gui() {
-  kube-explorer --context="${1:-k3d-devship}" --kubeconfig="$DEV_ZONE/kubernetes/storage/kube/config" --http-listen-port="${2:-9080}" --https-listen-port=0
+  kube-explorer --context="${1:-k3d-devship}" --kubeconfig="$DEV_ZONE/kubernetes/storage/kube/config" --http-listen-port="${2:-9080}" --https-listen-port=0 --debug
   open -u "http://dashboard.devship.localhost:$2"
 }

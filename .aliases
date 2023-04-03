@@ -190,7 +190,7 @@ done
 #Vagrant network list
 alias vbox-nets="vboxmanage list bridgedifs"
 
-# git aliases
+# git commitzen aliases
 alias gcz='git-cz'
 
 # Minikube alias

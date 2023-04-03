@@ -188,7 +188,7 @@ for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
 done
 
 #Vagrant network list
-alias vbox-ifconfig="vboxmanage list bridgedifs"
+alias vbox-nets="vboxmanage list bridgedifs"
 
 # git aliases
 alias gcz='git-cz'

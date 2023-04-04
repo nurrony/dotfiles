@@ -9,8 +9,9 @@ function kns() {
 }
 
 function k8sgui() {
-  kubectl --namespace kubernetes-dashboard create token "${1:-rony}" | pbcopy | echo '=> K8s dashboard token copied to pasteboard.'
-  echo " go to http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/"
+  local kdashuser=${1:-rony}
+  kubectl --namespace kubernetes-dashboard create token "$kdashuser" | pbcopy | echo "=> K8s dashboard token copied to pasteboard for user $kdashuser."
+  echo "=> http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/"
   kubectl proxy
 }
 

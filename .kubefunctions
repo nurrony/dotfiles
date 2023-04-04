@@ -8,9 +8,10 @@ function kns() {
   kubectl-ns "$1"
 }
 
-function k8s-gui() {
-  kube-explorer --context="${1:-k3d-devship}" --kubeconfig="$DEV_ZONE/storage/kubernetes/kube/config" --http-listen-port="${2:-9080}" --https-listen-port=0 --debug
-  open -u "http://dashboard.devship.localhost:$2"
+function k8sgui() {
+  kubectl --namespace kubernetes-dashboard create token "${1:-rony}" | pbcopy | echo '=> K8s dashboard token copied to pasteboard.'
+  echo " go to http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/"
+  kubectl proxy
 }
 
 function builddevship() {

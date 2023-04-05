@@ -53,8 +53,8 @@ export MANPAGER='less -X';
 export CGO_ENABLED="0"
 export GOMOD111=on
 export GO111MODULE=on
-export GOPRIVATE=go.ftdr.com*,golang.frontdoorhome.com*
-export MY_POD_NAMESPACE=localhost
+# export GOPRIVATE=go.ftdr.com*,golang.frontdoorhome.com*
+# export MY_POD_NAMESPACE=localhost
 
 
 # Docker content trust check

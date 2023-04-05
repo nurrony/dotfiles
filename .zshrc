@@ -29,6 +29,7 @@ zi wait'5' lucid light-mode for \
 zi wait'10' lucid light-mode for \
   as'program' from'gh-r' jesseduffield/lazygit \
   as'program' from'gh-r' mv'tealdeer* -> tldr' dbrgn/tealdeer \
+  as'program' from'gh-r' mv'mkcert* -> mkcert' FiloSottile/mkcert \
   as'program' from'gh-r' mv'hadolint* -> hadolint' hadolint/hadolint \
   as'program' from'gh-r' bpick'*darwin_amd64.tar.gz' mv'kail* -> kail' boz/kail \
   as'program' from'gh-r' mv'yt-dlp* -> yt-dlp' bpick'yt-dlp_macos' yt-dlp/yt-dlp \

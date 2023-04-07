@@ -384,7 +384,7 @@ mongodb4() {
       --publish 27017:27017 \
       --net ronsvpn \
       --name mongodb4 \
-      mongodb/mongodb-community-server:4.4.19-ubi8 "$@"
+      mongodb/mongodb-community-server:4.4-ubi8 "$@"
   else
     echo 'mongodb4 is already running'
   fi

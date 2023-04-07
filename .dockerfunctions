@@ -372,29 +372,28 @@ myblog() {
   fi
 }
 
-mongodb() {
+mongodb4() {
   del_stopped mongodb
-  local state=$(docker inspect --format "{{.State.Running}}" mongodb 2>/dev/null)
-
+  local state=$(docker inspect --format "{{.State.Running}}" mongodb4 2>/dev/null)
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
-    echo "mongodb server is not running, starting it for you."
+    echo "mongodb4 server is not running, starting it for you."
     docker run -it -d \
-      --volume ${DEV_ZONE}/storage/databases/mongodb:/data/db \
+      --volume ${DEV_ZONE}/storage/databases/mongodb/4:/data/db \
       --env MONGO_INITDB_ROOT_USERNAME=root \
       --env MONGO_INITDB_ROOT_PASSWORD=nurrony \
       --publish 27017:27017 \
       --net ronsvpn \
-      --name mongodb \
-      mongo:4.4.19 "$@"
+      --name mongodb4 \
+      mongodb/mongodb-community-server:4.4.19-ubi8 "$@"
   else
-    echo 'mongodb is already running'
+    echo 'mongodb4 is already running'
   fi
 }
 
-mongo() {
-  relies_on mongodb
+mongo4() {
+  relies_on mongodb4
   sleep 4s
-  docker exec -it mongodb mongo "$@"
+  docker exec -it mongodb4 mongo "$@"
 }
 
 pgserver() {

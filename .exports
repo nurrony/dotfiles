@@ -64,7 +64,7 @@ export DOCKER_CONTENT_TRUST=0
 export SAM_CLI_TELEMETRY=0
 
 # mkcert
-# export NODE_EXTRA_CA_CERTS="$(mkcert -CAROOT)/rootCA.pem"
+export NODE_EXTRA_CA_CERTS="/Users/nurrony/Library/Application Support/mkcert/rootCA.pem"
 
 # Flutter Exports
 # Uncomment 2 commented line if you get any warning like DDoS attack

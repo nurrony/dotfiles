@@ -392,7 +392,6 @@ mongodb4() {
 
 mongo4() {
   relies_on mongodb4
-  sleep 4s
   docker exec -it mongodb4 mongo "$@"
 }
 

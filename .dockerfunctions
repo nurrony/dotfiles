@@ -380,10 +380,12 @@ mongodb() {
     echo "mongodb server is not running, starting it for you."
     docker run -it -d \
       --volume ${DEV_ZONE}/storage/databases/mongodb:/data/db \
+      --env MONGO_INITDB_ROOT_USERNAME=root \
+      --env MONGO_INITDB_ROOT_PASSWORD=nurrony \
       --publish 27017:27017 \
       --net ronsvpn \
       --name mongodb \
-      mongo "$@"
+      mongo:4.4.19 "$@"
   else
     echo 'mongodb is already running'
   fi

@@ -26,6 +26,10 @@ export PATH="$DART_PUB_BIN:$FLUTTER_SDK_DIR/bin:$PATH"
 export KREW_ROOT=${KREW_ROOT:-$HOME/.krew}
 export PATH="$KREW_ROOT/bin:$PATH"
 
+# Docker CLI user path
+export DOCKER_CLI_BIN_PATH=$HOME/.docker/bin
+export PATH="$DOCKER_CLI_BIN_PATH:$PATH"
+
 # GraalVm Settings
 # export GRAALVM_HOME=/Library/Java/JavaVirtualMachines/graalvm-22.3.0+java17/Contents/Home
 # export PATH="$GRAALVM_HOME/bin:$PATH"

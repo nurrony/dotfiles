@@ -59,6 +59,7 @@ export GO111MODULE=on
 
 # Docker content trust check
 export DOCKER_CONTENT_TRUST=0
+export DOCKER_SOCKET_PATH=$HOME/.docker/run/docker.sock
 
 # AWS
 export SAM_CLI_TELEMETRY=0

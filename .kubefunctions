@@ -16,6 +16,6 @@ function k8sgui() {
 }
 
 function builddevship() {
-  k3d cluster create --config $DEV_ZONE/storage/kubernetes/k8s-clusters/k3d-cluster.yml && \
+  k3d cluster create --config $DEV_ZONE/storage/kubernetes/k8s-clusters/cluster/k3d-cluster.yml && \
   echo "\ndevship build is completed. Happy sailing!!"
 }

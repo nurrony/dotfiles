@@ -36,6 +36,7 @@ zi wait'10' lucid light-mode for \
   as'program' from'gh-r' mv'kube-explorer* -> kube-explorer' cnrancher/kube-explorer \
   as'program' from'gh-r' mv'cs* -> coursier' bpick'cs-*-apple-darwin.gz' coursier/coursier \
   as'program' from'gh-r' mv'subctl-v*/subctl* -> subctl' pick'subctl' submariner-io/releases \
+  as'program' from'gh-r' mv'clusteradm* -> clusteradm' pick'clusteradm' open-cluster-management-io/clusteradm \
   as'program' from'gh-r' mv'hostess* -> hostess' bpick'hostess_macos_amd64' cbednarski/hostess \
   as'program' from'gh-r' bpick'*x86_64-apple-darwin.tar.gz' mv'dua-* -> dua' pick'dua/dua' Byron/dua-cli \
   as'program' from'gh-r' atclone'ln -sfv completions/dog.zsh _dog' atpull'%atclone' pick'bin/dog' ogham/dog \

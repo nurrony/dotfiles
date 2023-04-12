@@ -15,7 +15,7 @@ function k8sgui() {
   kubectl proxy
 }
 
-function builddevship() {
+function saildevship() {
   k3d cluster create --config $DEV_ZONE/storage/kubernetes/clusters/k3d/k3d-cluster.yml && \
   echo "\ndevship build is completed. Happy sailing!!"
 }

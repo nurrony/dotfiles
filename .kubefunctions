@@ -17,7 +17,7 @@ function k8sdashboard() {
 
 function k8sgui() {
   local context=${1:-k3d-devship}
-  kube-explorer --https-listen-port=0 --http-listen-port=9898 --debug-level=0 --context="$context"
+  kube-explorer --https-listen-port=0 --http-listen-port=9999 --debug-level=0 --context="$context"
 }
 
 function saildevship() {

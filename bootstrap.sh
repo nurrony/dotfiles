@@ -22,4 +22,6 @@ printf "To customise your macOS installation according to most developer\'s pref
 
 printf 'chmod +x ./.macos && ./.macos\n\n'
 
+printf 'INFORMATION: Please create .extra in you HOME directory to override or for customizing configurations'
+
 echo 'Happy Hacking 🛠🛠'

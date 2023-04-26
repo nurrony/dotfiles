@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 
+function install_zi() {
+  typeset -Ag ZI
+  typeset -gx ZI[HOME_DIR]="${HOME}/.zi" ZI[BIN_DIR]="${ZI[HOME_DIR]}/bin"
+  command mkdir -p "$ZI[BIN_DIR]"
+  compaudit | xargs chown -R "$(whoami)" "$ZI[HOME_DIR]"
+  compaudit | xargs chmod -R go-w "$ZI[HOME_DIR]"
+  command git clone https://github.com/z-shell/zi.git "$ZI[BIN_DIR]"
+}
+
 function setup_nmr_dotfiles() {
   cd $HOME && \
   echo -e "\nPreparing your new Mac for awesomeness!!\n\n"
@@ -24,13 +33,16 @@ function setup_nmr_dotfiles() {
   fi
   cd $HOME/.dotfiles && \
   echo '✨✨✨ Making your Terminal WOWsome ✨✨✨' && \
+  install_zi && \
   sh $HOME/.dotfiles/bootstrap.sh && \
   # Intentionally mixing tab and space here for pretty output
 	cat <<-EOF
     There is a brew.sh and .macos script which makes your Mac
     more friendly for development. I highly recommend to take
-    a look into those files. Please do CHECK andADD/EDIT those
+    a look into those files. Please do CHECK and ADD/EDIT those
     files before running.
+
+    INFORMATION: Please create .extra in you HOME directory to override or for customizing configurations
 	EOF
 }
 

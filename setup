@@ -10,7 +10,7 @@ function setup_nmr_dotfiles() {
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   else
     echo 'Updating Homebrew...'
-    brew update >/dev/null 2>&1
+    brew update --verbose >/dev/null 2>&1
   fi
 
   which -s git

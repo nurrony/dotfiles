@@ -23,7 +23,7 @@ function setup_nmr_dotfiles() {
     git clone https://github.com/nmrony/dotfiles $HOME/.dotfiles
   fi
   cd $HOME/.dotfiles && \
-  echo 'Making your Terminal WOWsome!!!' && \
+  echo '✨✨✨ Making your Terminal WOWsome ✨✨✨' && \
   sh $HOME/.dotfiles/bootstrap.sh && \
   # Intentionally mixing tab and space here for pretty output
 	cat <<-EOF

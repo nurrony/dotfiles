@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-echo "Installing Zsh and set is as default login shell..." && \
+echo "==> Installing Zsh and set is as default login shell..." && \
 brew install zsh
 # Switch to using brew-installed bash as default shell
 if ! fgrep -q '/usr/local/bin/zsh' /etc/shells; then
@@ -12,8 +12,8 @@ cd $HOME && \
 # clone .dotfile
 rm -fr $HOME/.dotfiles/.git && \
 mv .zshrc .zshrc.pre-nurrony-dotfiles && \
-ln -sf $HOME/.dotfiles/.{zshrc,curlrc,gemrc,gitattribute,gitconfig,gitignore,vimrc,wgetrc,inputrc,starship,screenrc,hushlogin} $HOME/
-echo 'All are done. Applying changes..'
+ln -sf $HOME/.dotfiles/.{zshrc,curlrc,gemrc,gitattribute,gitconfig,gitignore,vimrc,wgetrc,inputrc,screenrc,hushlogin} $HOME/
+echo '==> All are done. Applying changes...'
 source $HOME/.zshrc && \
 printf "\nTo prepare your pc more developer friendly you can run the following scripts\n\n"
 printf 'chmod +x ./brew.sh && ./brew.sh\n\n'
@@ -22,4 +22,4 @@ printf "To customise your macOS installation according to most developer\'s pref
 
 printf 'chmod +x ./.macos && ./.macos\n\n'
 
-echo 'Happy Hacking!!!'
+echo 'Happy Hacking 🛠🛠'

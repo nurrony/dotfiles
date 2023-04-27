@@ -17,15 +17,14 @@ function k8sdashboard() {
 
 function k8sgui() {
   local context=${1:-k3d-devship}
-  kube-explorer --https-listen-port=0 --http-listen-port=9999 --debug-level=0 --context="$context"
+  local http_port=${2:-9999}
+  echo -e "==> Go to http://localhost:${http_port} \n\n"
+  kube-explorer --https-listen-port=0 --http-listen-port="$http_port" --debug --context="$context"
 }
 
 function saildevship() {
-  local current_dir=$PWD
   # Kubernetes Devship Repo https://github.com/nurrony/devship
-  cd $DEV_ZONE/projects/open-sources/devship
   CLUSTER_VOLUME_HOST_PATH=$DEV_ZONE/storage/kubernetes/clusters/volumes/devship \
   LOCAL_REGISTRY_VOL_HOSTPATH=$DEV_ZONE/storage/kubernetes/clusters/volumes/registry \
-  ./kubecluster
-  cd $current_dir
+  $DEV_ZONE/projects/open-sources/devship/kubecluster
 }

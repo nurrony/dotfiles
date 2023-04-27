@@ -21,6 +21,11 @@ function k8sgui() {
 }
 
 function saildevship() {
-  k3d cluster create --config $DEV_ZONE/storage/kubernetes/clusters/k3d/k3d-cluster.yml && \
-  echo "\ndevship build is completed. Happy sailing!!"
+  local current_dir=$PWD
+  # Kubernetes Devship Repo https://github.com/nurrony/devship
+  cd $DEV_ZONE/projects/open-sources/devship
+  CLUSTER_VOLUME_HOST_PATH=$DEV_ZONE/storage/kubernetes/clusters/volumes/devship \
+  LOCAL_REGISTRY_VOL_HOSTPATH=$DEV_ZONE/storage/kubernetes/clusters/volumes/registry \
+  ./kubecluster
+  cd $current_dir
 }

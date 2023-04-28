@@ -1,8 +1,5 @@
 #!/usr/bin/env zsh
 
-# make directory and cd into it
-mcd () { mkdir -p "$@" && cd "$@"; }
-
 # http://www.zsh.org/mla/users//2014/msg00715.html
 zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 }
 

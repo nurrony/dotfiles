@@ -212,11 +212,11 @@ caniuse() {
   local query
 
   if [ $# -eq 0 ]; then
-      open ${domain}
+      open -u ${domain}
   else
       for term in "$@"; do
           query=$(node -p "encodeURIComponent('${term}')")
-          open "${domain}#search=${query}"
+          open -u "${domain}#search=${query}"
       done
   fi
 }

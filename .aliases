@@ -69,11 +69,6 @@ alias cwd='pwd | tr -d "\r\n" | pbcopy'
 
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
 
-# JavaScriptCore REPL
-jscbin="/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc"
-[ -e "${jscbin}" ] && alias jsc="${jscbin}"
-unset jscbin
-
 # Recursively delete `.DS_Store` files
 alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 

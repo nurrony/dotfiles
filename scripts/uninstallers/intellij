@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -e
+remove() {
+  sudo -v
+
+  entry="$1"
+  echo -ne "Removing $entry... "
+  sudo rm -rf "$entry"
+
+  if [[ ! -e "$entry" ]]; then
+    echo -ne "[OK]"
+  else
+    echo -ne "[FAILED]"
+  fi
+  echo
+}
+
+remove /Applications/IntelliJ\ IDEA.app
+remove ~/Library/Application\ Support/JetBrains
+remove ~/Library/Caches/JetBrains
+remove ~/Library/Preferences/JetBrains
+remove ~/Library/Preferences/com.jetbrains.*
+remove ~/Library/Saved\ Application\ State/com.jetbrains.*

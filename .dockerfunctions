@@ -373,7 +373,7 @@ myblog() {
 }
 
 mongodb4() {
-  del_stopped mongodb
+  del_stopped mongodb4
   local state=$(docker inspect --format "{{.State.Running}}" mongodb4 2>/dev/null)
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "mongodb4 server is not running, starting it for you."
@@ -387,6 +387,25 @@ mongodb4() {
       mongodb/mongodb-community-server:4.4-ubi8 "$@"
   else
     echo 'mongodb4 is already running'
+  fi
+}
+
+
+mongodb() {
+  del_stopped mongodb
+  local state=$(docker inspect --format "{{.State.Running}}" mongodb 2>/dev/null)
+  if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
+    echo "mongodb server is not running, starting it for you."
+    docker run -it -d \
+      --volume ${DEV_ZONE}/storage/databases/mongodb/latest:/data/db \
+      --env MONGO_INITDB_ROOT_USERNAME=root \
+      --env MONGO_INITDB_ROOT_PASSWORD=nurrony \
+      --publish 27017:27017 \
+      --net ronsvpn \
+      --name mongodb \
+      mongodb/mongodb-community-server:6.0.4-ubi8 "$@"
+  else
+    echo 'mongodb is already running'
   fi
 }
 

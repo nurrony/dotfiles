@@ -414,6 +414,17 @@ mongo4() {
   docker exec -it mongodb4 mongo "$@"
 }
 
+
+mongo4export() {
+  relies_on mongodb4
+  docker exec -it mongodb4 mongoexport "$@"
+}
+
+mongo4import() {
+  relies_on mongodb4
+  docker exec -it mongodb4 mongoimport "$@"
+}
+
 pgserver() {
   del_stopped pgserver
   local state=$(docker inspect --format "{{.State.Running}}" pgserver 2>/dev/null)

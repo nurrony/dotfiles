@@ -10,7 +10,8 @@ zi light starship/starship
 
 zi wait lucid light-mode for \
   as'completion' zsh-users/zsh-completions \
-  as'completion' pick'gradle-completion.plugin.zsh' gradle/gradle-completion
+  as'completion' pick'gradle-completion.plugin.zsh' gradle/gradle-completion \
+  as'program' from'gh-r' bpick'*x86_64-apple-darwin.tar.gz' atclone'./zoxide init --cmd=j zsh > init.zsh' src'init.zsh' atpull'%atclone' pick'zoxide/zoxide' ajeetdsouza/zoxide
 
 zi wait'3' lucid light-mode for \
   pick'alias-tips.plugin.zsh' djui/alias-tips \
@@ -23,8 +24,7 @@ zi light asdf-vm/asdf
 
 zi wait'5' lucid light-mode for \
   as'program' from'gh-r' atclone'ln -sfv completions/exa.zsh _exa' atpull'%atclone' pick'bin/exa' ogham/exa \
-  as'program' atclone'ln -sfv etc/git-extras-completion.zsh _git-extras' atpull'%atclone' pick'$ZPFX/bin/git-*' make'PREFIX=$ZPFX' nocompile tj/git-extras \
-  as'program' from'gh-r' bpick'*x86_64-apple-darwin.tar.gz' atclone'./zoxide init --cmd=j zsh > init.zsh' src'init.zsh' atpull'%atclone' pick'zoxide/zoxide' ajeetdsouza/zoxide
+  as'program' atclone'ln -sfv etc/git-extras-completion.zsh _git-extras' atpull'%atclone' pick'$ZPFX/bin/git-*' make'PREFIX=$ZPFX' nocompile tj/git-extras
 
 zi wait'10' lucid light-mode for \
   as'program' from'gh-r' jesseduffield/lazygit \

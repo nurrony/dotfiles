@@ -67,3 +67,6 @@ export SAM_CLI_TELEMETRY=0
 # Flutter Exports
 # Uncomment 2 commented line if you get any warning like DDoS attack
 export CHROME_EXECUTABLE="/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
+
+# asdf golang settings
+export ASDF_GOLANG_MOD_VERSION_ENABLED=true

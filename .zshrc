@@ -15,8 +15,8 @@ zi wait lucid light-mode for \
 
 zi wait'3' lucid light-mode for \
   pick'alias-tips.plugin.zsh' djui/alias-tips \
-  OMZ::plugins/mvn/mvn.plugin.zsh \
-  OMZ::plugins/git/git.plugin.zsh \
+  OMZP::mvn \
+  OMZP::git \
   as'program' from'gh-r' mv'direnv* -> direnv' atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' pick'direnv' src'zhook.zsh' direnv/direnv
 
 zi ice wait'3' lucid as'program' src'asdf.sh'
@@ -44,7 +44,7 @@ zi wait'10' lucid light-mode for \
   as'program' from'gh-r' mv'argocd* -> argocd' atclone'./argocd completion zsh > _argocd' atpull'%atclone' pick'argocd' argoproj/argo-cd \
   as'program' from'gh-r' mv'skaffold* -> skaffold' atclone'./skaffold completion zsh > _skaffold' atpull'%atclone' GoogleContainerTools/skaffold \
   pick'git-open.plugin.zsh' paulirish/git-open \
-  OMZ::plugins/extract/extract.plugin.zsh \
+  OMZP::extract \
   z-shell/H-S-MW \
   z-shell/F-Sy-H
 

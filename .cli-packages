@@ -155,5 +155,6 @@ EOF
 }
 
 add-maven-wrapper() {
-  mvn -N io.takari:maven:wrapper
+  mvn -N wrapper:wrapper
 }
+

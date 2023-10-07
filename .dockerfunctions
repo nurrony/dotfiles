@@ -428,7 +428,7 @@ mongo4import() {
 pgserver() {
   del_stopped pgserver
   local state=$(docker inspect --format "{{.State.Running}}" pgserver 2>/dev/null)
-  local VERSION=${2:-15-alpine}
+  local VERSION=${2:-16-alpine}
   local DBNAME=${1:-experiments}
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
@@ -437,7 +437,7 @@ pgserver() {
       --net ronsvpn \
       --ulimit memlock=-1:-1 \
       --memory-swappiness=0 \
-      --volume ${DEV_ZONE}/storage/databases/postgres/15:/var/lib/postgresql/data \
+      --volume ${DEV_ZONE}/storage/databases/postgres/16:/var/lib/postgresql/data \
       --env POSTGRES_USER=postgres \
       --env POSTGRES_DB=$DBNAME \
       --env POSTGRES_PASSWORD=nmrony \
@@ -445,7 +445,7 @@ pgserver() {
       --name pgserver \
       postgres:$VERSION
   else
-    echo 'postgres 15.x.x is already running'
+    echo 'postgres 16.x.x is already running'
   fi
 }
 

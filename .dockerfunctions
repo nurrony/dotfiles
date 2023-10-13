@@ -392,7 +392,7 @@ mongodb4() {
 
 
 mongoserver() {
-  del_stopped mongodb
+  del_stopped mongoserver
   local VERSION=${1:-7.0.1-ubi8}
   local DBNAME=${2:-experiments}
   local state=$(docker inspect --format "{{.State.Running}}" mongoserver 2>/dev/null)
@@ -408,7 +408,7 @@ mongoserver() {
       --name mongoserver \
       mongo:7.0.2-jammy "$@"
   else
-    echo 'mongodb is already running'
+    echo 'mongoserver 7.0.x is already running'
   fi
 }
 

@@ -391,19 +391,22 @@ mongodb4() {
 }
 
 
-mongodb() {
+mongoserver() {
   del_stopped mongodb
-  local state=$(docker inspect --format "{{.State.Running}}" mongodb 2>/dev/null)
+  local VERSION=${1:-7.0.1-ubi8}
+  local DBNAME=${2:-experiments}
+  local state=$(docker inspect --format "{{.State.Running}}" mongoserver 2>/dev/null)
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "mongodb server is not running, starting it for you."
-    docker run -it -d \
+    docker run -dit \
+      --user $(id -u):$(id -g) \
       --volume ${DEV_ZONE}/storage/databases/mongodb/latest:/data/db \
-      --env MONGO_INITDB_ROOT_USERNAME=root \
-      --env MONGO_INITDB_ROOT_PASSWORD=nurrony \
+      --env MONGODB_INITDB_ROOT_USERNAME=root \
+      --env MONGODB_INITDB_ROOT_PASSWORD=nurrony \
       --publish 27017:27017 \
       --net ronsvpn \
-      --name mongodb \
-      mongodb/mongodb-community-server:6.0.4-ubi8 "$@"
+      --name mongoserver \
+      mongo:7.0.2-jammy "$@"
   else
     echo 'mongodb is already running'
   fi

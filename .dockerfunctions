@@ -393,11 +393,11 @@ mongodb4() {
 
 mongoserver() {
   del_stopped mongoserver
-  local VERSION=${1:-7.0.1-ubi8}
+  local VERSION=${1:-7.0.2-jammy}
   local DBNAME=${2:-experiments}
   local state=$(docker inspect --format "{{.State.Running}}" mongoserver 2>/dev/null)
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
-    echo "mongodb server is not running, starting it for you."
+    echo "mongoserver server is not running, starting it for you."
     docker run -dit \
       --user $(id -u):$(id -g) \
       --volume ${DEV_ZONE}/storage/databases/mongodb/latest:/data/db \
@@ -406,7 +406,7 @@ mongoserver() {
       --publish 27017:27017 \
       --net ronsvpn \
       --name mongoserver \
-      mongo:7.0.2-jammy "$@"
+      mongo:${VERSION} "$@"
   else
     echo 'mongoserver 7.0.x is already running'
   fi

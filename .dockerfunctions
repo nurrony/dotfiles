@@ -414,13 +414,13 @@ mongo4import() {
 
 pgserver() {
   del_stopped pgserver
+  local VERSION=${1:-16}
+  local PORT=${2:-5432}
+  local DBNAME=${3:-experiments}
   local state=$(docker inspect --format "{{.State.Running}}" pgserver 2>/dev/null)
-  local VERSION=${2:-16-alpine}
-  local DBNAME=${1:-experiments}
-
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     mkdir -p ${DEV_ZONE}/storage/databases/postgres/${VERSION}
-    echo "postgres server is not running, starting it for you."
+    echo "postgres $VERSION.x.x server is not running, starting it for you."
     docker run -it -d \
       --net ronsvpn \
       --ulimit memlock=-1:-1 \
@@ -429,17 +429,17 @@ pgserver() {
       --env POSTGRES_USER=postgres \
       --env POSTGRES_DB=$DBNAME \
       --env POSTGRES_PASSWORD=nurrony \
-      --publish 5432:5432 \
-      --name pgserver \
-      postgres:$VERSION
+      --publish $PORT:5432 \
+      --name pgserver$VERSION \
+      postgres:$VERSION-alpine
   else
-    echo 'postgres 16.x.x is already running'
+    echo "postgres $VERSION.x.x is already running"
   fi
 }
 
-psql() {
+psql16() {
   relies_on pgserver
-  docker exec -it pgserver psql "$@"
+  docker exec -it pgserver16 psql "$@"
 }
 
 pga() {

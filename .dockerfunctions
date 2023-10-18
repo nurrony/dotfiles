@@ -251,7 +251,7 @@ mysqlserver() {
     echo "mysql 8.x server is not running, starting it for you."
     docker run -it -d \
       --volume ${DEV_ZONE}/storage/databases/mysql/8:/var/lib/mysql \
-      --env MYSQL_ROOT_PASSWORD=nmrony \
+      --env MYSQL_ROOT_PASSWORD=nurrony \
       --publish 3306:3306 \
       --net ronsvpn \
       --name mysqlserver \
@@ -266,10 +266,10 @@ mysqlserver5() {
   local state=$(docker inspect --format "{{.State.Running}}" mysqlserver5 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
-    echo "mysql 5.x server is not running, starting it for you."
+    echo "mysql 5.7.x server is not running, starting it for you."
     docker run -it -d \
       --volume ${DEV_ZONE}/storage/databases/mysql/5:/var/lib/mysql \
-      --env MYSQL_ROOT_PASSWORD=nmrony \
+      --env MYSQL_ROOT_PASSWORD=nurrony \
       --publish 3306:3306 \
       --net ronsvpn \
       --name mysqlserver5 \
@@ -361,7 +361,7 @@ myblog() {
       --env database__client=mysql \
       --env database__connection__host=mysqlserver \
       --env database__connection__user=root \
-      --env database__connection__password=nmrony \
+      --env database__connection__password=nurrony \
       --env database__connection__database=rons_blog \
       --env DEV_DOMAIN=http://blog.nmrony.localhost \
       --net ronsvpn \
@@ -435,15 +435,16 @@ pgserver() {
   local DBNAME=${1:-experiments}
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
+    mkdir -p ${DEV_ZONE}/storage/databases/postgres/${VERSION}
     echo "postgres server is not running, starting it for you."
     docker run -it -d \
       --net ronsvpn \
       --ulimit memlock=-1:-1 \
       --memory-swappiness=0 \
-      --volume ${DEV_ZONE}/storage/databases/postgres/16:/var/lib/postgresql/data \
+      --volume ${DEV_ZONE}/storage/databases/postgres/${VERSION}:/var/lib/postgresql/data \
       --env POSTGRES_USER=postgres \
       --env POSTGRES_DB=$DBNAME \
-      --env POSTGRES_PASSWORD=nmrony \
+      --env POSTGRES_PASSWORD=nurrony \
       --publish 5432:5432 \
       --name pgserver \
       postgres:$VERSION
@@ -468,7 +469,7 @@ pga() {
     docker run -dit \
       --env VIRTUAL_HOST=pga.nmrony.localhost \
       --env PGADMIN_DEFAULT_EMAIL=rony@nmrony.info \
-      --env PGADMIN_DEFAULT_PASSWORD=nmrony \
+      --env PGADMIN_DEFAULT_PASSWORD=nurrony \
       --env PGADMIN_DISABLE_POSTFIX=yes \
       --net ronsvpn \
       --expose 80 \
@@ -495,7 +496,7 @@ elasticsearch() {
       --net ronsvpn \
       --ulimit memlock=-1:-1 \
       --env "http.cors.enabled=true" \
-      --env "ELASTIC_PASSWORD=nmrony" \
+      --env "ELASTIC_PASSWORD=nurrony" \
       --env "discovery.type=single-node" \
       --env "xpack.security.enabled=true" \
       --env "http.cors.allow-origin=/.*/" \

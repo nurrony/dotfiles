@@ -244,20 +244,23 @@ couchdb() {
 }
 
 mysqlserver() {
-  del_stopped mysqlserver
+  local VERSION=${1:-8}
+  local PORT=${2:-3306}
   local state=$(docker inspect --format "{{.State.Running}}" mysqlserver 2>/dev/null)
+  del_stopped mysqlserver${VERSION}
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
-    echo "mysql 8.x server is not running, starting it for you."
+    echo "mysql $VERSION server is not running, starting it for you."
+    mkdir -p ${DEV_ZONE}/storage/databases/mysql/${VERSION} && \
     docker run -it -d \
-      --volume ${DEV_ZONE}/storage/databases/mysql/8:/var/lib/mysql \
+      --volume ${DEV_ZONE}/storage/databases/mysql/${VERSION}:/var/lib/mysql \
       --env MYSQL_ROOT_PASSWORD=nurrony \
-      --publish 3306:3306 \
+      --publish $PORT:3306 \
       --net ronsvpn \
-      --name mysqlserver \
-      mysql:8
+      --name mysqlserver${VERSION} \
+      mysql:${VERSION}
   else
-    echo 'mysql server v8 is already running'
+    echo "mysql server $VERSION is already running"
   fi
 }
 

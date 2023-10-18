@@ -356,60 +356,26 @@ myblog() {
   fi
 }
 
-mongoserver4() {
-  del_stopped mongoserver4
-  local state=$(docker inspect --format "{{.State.Running}}" mongoserver4 2>/dev/null)
-  if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
-    echo "mongoserver4 server is not running, starting it for you."
-    docker run -it -d \
-      --volume ${DEV_ZONE}/storage/databases/mongodb/4:/data/db \
-      --env MONGO_INITDB_ROOT_USERNAME=root \
-      --env MONGO_INITDB_ROOT_PASSWORD=nurrony \
-      --publish 27017:27017 \
-      --net ronsvpn \
-      --name mongoserver4 \
-      mongodb/mongodb-community-server:4.4-ubi8 "$@"
-  else
-    echo 'mongoserver4 is already running'
-  fi
-}
-
-
 mongoserver() {
   del_stopped mongoserver
-  local VERSION=${1:-7.0.2-jammy}
-  local DBNAME=${2:-experiments}
-  local state=$(docker inspect --format "{{.State.Running}}" mongoserver 2>/dev/null)
+  local VERSION=${1:-7}
+  local PORT=${2:-27017}
+  local DBNAME=${3:-experiments}
+  local state=$(docker inspect --format "{{.State.Running}}" mongoserver$VERSION 2>/dev/null)
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
-    echo "mongoserver server is not running, starting it for you."
+    echo "mongoserver $VERSION.x.x is not running, starting it for you."
     docker run -dit \
       --user $(id -u):$(id -g) \
-      --volume ${DEV_ZONE}/storage/databases/mongodb/latest:/data/db \
+      --volume ${DEV_ZONE}/storage/databases/mongodb/$VERSION:/data/db \
       --env MONGODB_INITDB_ROOT_USERNAME=root \
       --env MONGODB_INITDB_ROOT_PASSWORD=nurrony \
-      --publish 27017:27017 \
+      --publish $PORT:27017 \
       --net ronsvpn \
-      --name mongoserver \
-      mongo:${VERSION} "$@"
+      --name mongoserver$VERSION \
+      mongo:${VERSION}-jammy "$@"
   else
-    echo 'mongoserver 7.0.x is already running'
+    echo "mongoserver $VERSION.x.x is already running"
   fi
-}
-
-mongo4() {
-  relies_on mongoserver4
-  docker exec -it mongoserver4 mongo "$@"
-}
-
-
-mongo4export() {
-  relies_on mongoserver4
-  docker exec -it mongoserver4 mongoexport "$@"
-}
-
-mongo4import() {
-  relies_on mongoserver4
-  docker exec -it mongoserver4 mongoimport "$@"
 }
 
 pgserver() {
@@ -417,7 +383,8 @@ pgserver() {
   local VERSION=${1:-16}
   local PORT=${2:-5432}
   local DBNAME=${3:-experiments}
-  local state=$(docker inspect --format "{{.State.Running}}" pgserver 2>/dev/null)
+  local state=$(docker inspect --format "{{.State.Running}}" pgserver$VERSION 2>/dev/null)
+
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     mkdir -p ${DEV_ZONE}/storage/databases/postgres/${VERSION}
     echo "postgres $VERSION.x.x server is not running, starting it for you."

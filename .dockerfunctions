@@ -338,7 +338,7 @@ pma() {
     docker run -it -d \
       --env UPLOAD_LIMIT=1024M \
       --env VIRTUAL_HOST=pma.nmrony.localhost \
-      --env PMA_HOSTS=mysqlserver5,mysqlserver \
+      --env PMA_ARBITRARY=1 \
       --net ronsvpn \
       --expose 80 \
       --name pma \

@@ -5,9 +5,8 @@ export DOCKER_REPO_PREFIX=jess
 #
 # Helper Functions
 #
-ddown() {
-  docker rm --force "$@"
-}
+alias dpsa="docker ps --all"
+alias ddown='docker rm --force'
 
 dcleanup() {
   docker container prune --force 2>/dev/null

@@ -266,7 +266,11 @@ mysqlserver() {
 
 mysql() {
   relies_on mysqlserver
-  docker exec -it mysqlserver mysql "$@"
+  docker exec -it mysqlserver8 mysql "$@"
+}
+
+mysql5() {
+  docker exec -it mysqlserver5 mysql "$@"
 }
 
 dynamodb() {

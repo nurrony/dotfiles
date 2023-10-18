@@ -243,9 +243,9 @@ couchdb() {
   fi
 }
 
-mysqlserver8() {
-  del_stopped mysqlserver8
-  local state=$(docker inspect --format "{{.State.Running}}" mysqlserver8 2>/dev/null)
+mysqlserver() {
+  del_stopped mysqlserver
+  local state=$(docker inspect --format "{{.State.Running}}" mysqlserver 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "mysql 8.x server is not running, starting it for you."
@@ -254,7 +254,7 @@ mysqlserver8() {
       --env MYSQL_ROOT_PASSWORD=nmrony \
       --publish 3306:3306 \
       --net ronsvpn \
-      --name mysqlserver8 \
+      --name mysqlserver \
       mysql:8
   else
     echo 'mysql server v8 is already running'
@@ -279,9 +279,9 @@ mysqlserver5() {
   fi
 }
 
-mysql8() {
-  relies_on mysqlserver8
-  docker exec -it mysqlserver8 mysql "$@"
+mysql() {
+  relies_on mysqlserver
+  docker exec -it mysqlserver mysql "$@"
 }
 
 mysql5() {
@@ -335,7 +335,7 @@ pma() {
     docker run -it -d \
       --env UPLOAD_LIMIT=1024M \
       --env VIRTUAL_HOST=pma.nmrony.localhost \
-      --env PMA_HOSTS=mysqlserver5,mysqlserver8 \
+      --env PMA_HOSTS=mysqlserver5,mysqlserver \
       --net ronsvpn \
       --expose 80 \
       --name pma \
@@ -347,7 +347,7 @@ pma() {
 
 myblog() {
   relies_on nginx-proxy
-  relies_on mysqlserver8
+  relies_on mysqlserver
   sleep 5
   del_stopped personal-blog
   local state=$(docker inspect --format "{{.State.Running}}" personal-blog 2>/dev/null)
@@ -359,7 +359,7 @@ myblog() {
       --env VIRTUAL_HOST=blog.nmrony.localhost \
       --env url=http://blog.nmrony.localhost \
       --env database__client=mysql \
-      --env database__connection__host=mysqlserver8 \
+      --env database__connection__host=mysqlserver \
       --env database__connection__user=root \
       --env database__connection__password=nmrony \
       --env database__connection__database=rons_blog \
@@ -548,11 +548,11 @@ apache-php() {
 }
 
 start-lamp-stack() {
-  nginx-proxy && pma && mysqlserver8 && echo 'LAMP stack started successfully.'
+  nginx-proxy && pma && mysqlserver && echo 'LAMP stack started successfully.'
 }
 
 stop-lamp-stack() {
-  docker rm -f nginx-proxy pma mysqlserver8 && echo 'LAMP stack stopped successfully.'
+  docker rm -f nginx-proxy pma mysqlserver && echo 'LAMP stack stopped successfully.'
 }
 
 sysdig() {

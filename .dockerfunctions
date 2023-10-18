@@ -372,7 +372,7 @@ mongoserver() {
       --publish $PORT:27017 \
       --net ronsvpn \
       --name mongoserver$VERSION \
-      mongo:${VERSION}-jammy "$@"
+      mongo:${VERSION}
   else
     echo "mongoserver $VERSION.x.x is already running"
   fi

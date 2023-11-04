@@ -82,7 +82,7 @@ portainer() {
     docker run -it -d \
       --volume /var/run/docker.sock:/var/run/docker.sock:ro \
       --volume ${DEV_ZONE}/storage/portainer:/data \
-      --env VIRTUAL_HOST=portainer.nmrony.localhost \
+      --env VIRTUAL_HOST=portainer.nurrony.localhost \
       --expose 9000 \
       --net ronsvpn \
       --name portainer \
@@ -233,7 +233,7 @@ couchdb() {
       --publish 2049:2049 \
       --env COUCHDB_USER=${COUCH_DB_ADMIN} \
       --env COUCHDB_PASSWORD=${COUCH_DB_PASS} \
-      --env VIRTUAL_HOST=couchdb.nmrony.localhost \
+      --env VIRTUAL_HOST=couchdb.nurrony.localhost \
       --net ronsvpn \
       --name couchdb \
       couchdb
@@ -285,7 +285,7 @@ dynamodb() {
       --workdir /home/dynamodblocal \
       --publish "8000:8000" \
       --expose 8000 \
-      --env VIRTUAL_HOST=dynamodb.nmrony.localhost \
+      --env VIRTUAL_HOST=dynamodb.nurrony.localhost \
       --net ronsvpn \
       --name dynamodb \
       amazon/dynamodb-local -jar DynamoDBLocal.jar -sharedDb -optimizeDbBeforeStartup -dbPath ./data
@@ -317,7 +317,7 @@ pma() {
     echo "phpMyAdmin is not running, starting it for you."
     docker run -it -d \
       --env UPLOAD_LIMIT=1024M \
-      --env VIRTUAL_HOST=pma.nmrony.localhost \
+      --env VIRTUAL_HOST=pma.nurrony.localhost \
       --env PMA_ARBITRARY=1 \
       --net ronsvpn \
       --expose 80 \
@@ -338,15 +338,15 @@ myblog() {
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "blog server is not running, starting it for you."
     docker run -it -d \
-      --volume ${DEV_ZONE}/projects/open-sources/nmrony.info/ghost-content:/var/lib/ghost/content \
-      --env VIRTUAL_HOST=blog.nmrony.localhost \
-      --env url=http://blog.nmrony.localhost \
+      --volume ${DEV_ZONE}/projects/open-sources/nurrony.info/ghost-content:/var/lib/ghost/content \
+      --env VIRTUAL_HOST=blog.nurrony.localhost \
+      --env url=http://blog.nurrony.localhost \
       --env database__client=mysql \
       --env database__connection__host=mysqlserver \
       --env database__connection__user=root \
       --env database__connection__password=nurrony \
       --env database__connection__database=rons_blog \
-      --env DEV_DOMAIN=http://blog.nmrony.localhost \
+      --env DEV_DOMAIN=http://blog.nurrony.localhost \
       --net ronsvpn \
       --name personal-blog \
       ghost:2-alpine
@@ -397,7 +397,7 @@ pgserver() {
       --env POSTGRES_PASSWORD=nurrony \
       --publish $PORT:5432 \
       --name pgserver$VERSION \
-      postgres:$VERSION-alpine
+      postgres:$VERSION
   else
     echo "postgres $VERSION.x.x is already running"
   fi
@@ -417,8 +417,8 @@ pga() {
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "pgAdmin4 is not running, starting it for you."
     docker run -dit \
-      --env VIRTUAL_HOST=pga.nmrony.localhost \
-      --env PGADMIN_DEFAULT_EMAIL=rony@nmrony.info \
+      --env VIRTUAL_HOST=pga.nurrony.localhost \
+      --env PGADMIN_DEFAULT_EMAIL=rony@nurrony.info \
       --env PGADMIN_DEFAULT_PASSWORD=nurrony \
       --env PGADMIN_DISABLE_POSTFIX=yes \
       --net ronsvpn \
@@ -470,7 +470,7 @@ elastic-gui() {
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     docker run -dit \
       --publish 9000:8080 \
-      --env VIRTUAL_HOST=elasticgui.nmrony.localhost \
+      --env VIRTUAL_HOST=elasticgui.nurrony.localhost \
       --name elastic-gui \
       cars10/elasticvue
   else

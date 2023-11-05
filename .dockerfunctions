@@ -378,11 +378,11 @@ mongoserver() {
 }
 
 pgserver() {
-  del_stopped pgserver
   local VERSION=${1:-16}
   local PORT=${2:-5432}
   local DBNAME=${3:-experiments}
   local state=$(docker inspect --format "{{.State.Running}}" pgserver$VERSION 2>/dev/null)
+  del_stopped pgserver${VERSION}
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     mkdir -p ${DEV_ZONE}/storage/databases/postgres/${VERSION}

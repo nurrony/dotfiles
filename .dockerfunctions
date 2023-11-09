@@ -298,14 +298,14 @@ dynamodb() {
 
 }
 
-php() {
-  del_stopped php
-  docker run --interactive --rm \
-    --volume $PWD:/var/www/html \
-    --user $(id -u):$(id -g) \
-    --net ronsvpn \
-    --name php nmrony/php:8-apache php "$@"
-}
+# php() {
+#   del_stopped php
+#   docker run --interactive --rm \
+#     --volume $PWD:/var/www/html \
+#     --user $(id -u):$(id -g) \
+#     --net ronsvpn \
+#     --name php nmrony/php:8-apache php "$@"
+# }
 
 pma() {
   del_stopped pma

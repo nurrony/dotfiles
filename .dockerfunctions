@@ -356,13 +356,13 @@ myblog() {
 }
 
 mongoserver() {
-  del_stopped mongoserver
   local VERSION=${1:-7}
   local PORT=${2:-27017}
   local DBNAME=${3:-experiments}
   local state=$(docker inspect --format "{{.State.Running}}" mongoserver$VERSION 2>/dev/null)
+  del_stopped mongoserver${VERSION}
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
-    echo "mongoserver $VERSION.x.x is not running, starting it for you."
+    echo "mongoserver ${VERSION}.x.x is not running, starting it for you."
     docker run -dit \
       --user $(id -u):$(id -g) \
       --volume ${DEV_ZONE}/storage/databases/mongodb/$VERSION:/data/db \

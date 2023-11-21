@@ -36,7 +36,7 @@ alias tree='command exa -GT --git --color auto --icons -a -s type --group-direct
 alias lt1='command exa -GTL 1 --git --color auto --icons -a -s type --group-directories-first'
 alias lt2='command exa -GTL 2 --git --color auto --icons -a -s type --group-directories-first'
 alias lsa='command exa -abghHl --git --group-directories-first'
-alias cat="command bat --theme='Visual Studio Dark+' --pager=never"
+alias cat="command bat --theme=DarkNeon --pager=never"
 
 # cask alias
 alias cask='function _nmrcask(){ brew "$@" --cask};_nmrcask;'

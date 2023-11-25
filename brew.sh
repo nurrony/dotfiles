@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# check if Homebrew is install or not
+command -v brew >/dev/null 2>&1 || { echo "Homebrew is required. To install it, please check https://brew.sh. Aborting." >&2; exit 1; }
+
+# Install brew dependencies
+brew bundle --file=$HOME/.dotfiles/Brewfile
+
 # AWLESS CLI
 brew tap wallix/awless
 brew install awless

@@ -111,7 +111,7 @@ symbol = " "
 symbol = " "
 
 [terraform]
-symbol = "󱁢 "
+symbol = " "
 
 [username]
 style_user = "white bold"

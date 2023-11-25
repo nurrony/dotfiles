@@ -1,139 +1,13 @@
 #!/usr/bin/env bash
 
-# Install command-line tools using Homebrew.
-
-# Make sure we’re using the latest Homebrew.
-brew update
-
-# Upgrade any already-installed formulae.
-brew upgrade
-
-# Install GNU core utilities (those that come with macOS are outdated).
-# Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
-brew install coreutils
-
-# Install some other useful utilities like `sponge`.
-brew install moreutils
-# Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed.
-brew install findutils
-# Install GNU `sed`, overwriting the built-in `sed`.
-brew install gnu-sed
-
-# install latest shell
-brew install zsh
-brew install starship
-brew install bash-completion@2
-
-# Install `wget` with IRI support.
-brew install wget
-brew install httpie --HEAD
-
-# Install more recent versions of some macOS tools.
-brew install neovim
-brew install grep
-brew install openssh
-brew install screen
-brew install autoconf
-brew install automake
-brew install libtool
-brew install pkg-config
-brew install libyaml
-brew install readline
-brew install libksba
-brew install openssl
-brew install fd
-brew install watch
-brew install bat
-
-# Install some CTF tools; see https://github.com/ctfs/write-ups.
-brew install binutils
-brew install binwalk
-brew install cifer
-brew install dex2jar
-brew install dns2tcp
-brew install dnsmasq
-brew install fcrackzip
-brew install foremost
-brew install hashpump
-# brew install hydra # brute force tool
-brew install john
-brew install knock
-brew install netpbm
-brew install nmap
-brew install pngcheck
-brew install socat
-brew install sqlmap
-brew install tcpflow
-brew install tcpreplay
-brew install tcptrace
-brew install ucspi-tcp # `tcpserver` etc.
-brew install xz
-brew install curl-openssl
-
-# Install other useful binaries.
-brew install ack
-brew install git
-brew install git-lfs
-brew install git-secrets
-brew install archey
-
-# deletes unwanted file from git faster
-brew install --ignore-dependencies bfg
-brew install libiconv
-brew install icu4c
-brew install pkg-config
-brew install cmake
-brew install fzf # fuzzy search find with superpower https://www.youtube.com/watch?v=qgG5Jhi_Els
-brew install openssl
-brew install imagemagick --with-webp
-brew install p7zip
-brew install pigz
-brew install rename
-brew install speedtest_cli
-brew install ssh-copy-id
-brew install testssl
-# brew install tree
-brew install webkit2png
-brew install zopfli
-brew install zlib
-
-# See here: https://github.com/BurntSushi/ripgrep
-brew install ripgrep
-brew install git-flow-avh
-
-# Docker
-brew install docker-machine
-brew install lazydocker
-
-# AWS CLIs
-brew tap aws/tap
-brew install awscli
-brew install aws-elasticbeanstalk
-brew install aws-sam-cli
-brew install cfn-lint
-
-# AWS EKS CLI
-brew tap weaveworks/tap
-brew install weaveworks/tap/eksctl
-brew uninstall --ignore-dependencies kubernetes-cli # fallback to kubectl.docker
-
 # AWLESS CLI
 brew tap wallix/awless
 brew install awless
 
-# Docker
-# Comes with Docker Desktop
-# brew install docker-compose
-# brew install docker-machine
-# brew install docker-machine-completion
-brew install docker-machine-driver-vmware
 
 # Kubernetes
 # Note: Replaced by autok3s
 
-# brew install kubectl
-# brew install kops
-brew install helm
 # brew install minikube
 # brew tap azure/draft
 # brew install draft # this also installs kubernetes-helm
@@ -150,27 +24,6 @@ brew install ideviceinstaller
 brew install ios-deploy
 brew install cocoapods
 pod setup
-
-# CASK Install
-brew update --verbose
-brew tap homebrew/cask
-brew tap homebrew/cask-versions
-brew install --cask
-brave-browser \
-  docker \
-  gpg-suite \
-  iterm2 \
-  keycastr \
-  openmtp \
-  skype \
-  rocket-chat \
-  the-unarchiver \
-  vagrant \
-  vagrant-vmware-utility \
-  visual-studio-code \
-  windows-remote-desktop \
-  zoom \
-  brew cleanup -s
 
 # Install Kubernetes plugins
 bash -c ./scripts/installers/krew

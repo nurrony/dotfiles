@@ -1,4 +1,4 @@
-## Add `Git Information` option on Context menu
+## Add `Git Information` option in Context menu
 
 1. **Name:** Git Information
 1. **Description:** Show Last commit information.

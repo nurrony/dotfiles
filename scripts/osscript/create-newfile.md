@@ -5,3 +5,4 @@
 
 1. **Shell:** `/bin/bash`
 1. **Script:** `touch Untitled.txt`
+1. **Filters:** Use on directories

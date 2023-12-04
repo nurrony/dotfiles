@@ -77,7 +77,7 @@ style = "bold green"
 [jobs]
 disabled = false
 number_threshold = 1
-symbol = "󰰈 #"
+symbol = ' '
 
 [kubernetes]
 symbol = '󱃾 '

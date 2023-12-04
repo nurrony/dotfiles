@@ -1,4 +1,4 @@
-## Add `Generate Iconset` option on Context menu
+## Add `Generate Iconset` option in Context menu
 
 1. **Name:** Open iTerm Window
 1. **Description:** Converts an PNG image to OSX ready icons (16x16, 32x32, 128x128, 256x256, and 512x512). If the image isn't big enough to be downscaled, the converted image will be upscaled (this should be avoided).

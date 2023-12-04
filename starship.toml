@@ -10,21 +10,21 @@ min_time = 500
 
 [aws]
 disabled = true
-symbol = " "
+symbol = "󰸏 "
 style = "bold green"
 format = 'on [$symbol($profile )(\($region\) )(\[$duration\])]($style)'
 
 [azure]
 disabled = false
 format = "on [$symbol($subscription)]($style) "
-symbol = "ﴃ "
+symbol = "󰠅 "
 style = "blue bold"
 
 [battery]
-full_symbol = " "
-charging_symbol = " "
-discharging_symbol = " "
-unknown_symbol = " "
+full_symbol = "󰁹 "
+charging_symbol = "󰂄 "
+discharging_symbol = "󱟤 "
+unknown_symbol = "󰂑 "
 
 [[battery.display]]
 threshold = 30
@@ -36,7 +36,7 @@ format = "via [$version](bold green) "
 
 [directory]
 truncation_length = 2
-read_only = " "
+read_only = " 󰌾"
 
 [directory.substitutions]
 "Documents" = "Documents "
@@ -77,10 +77,10 @@ style = "bold green"
 [jobs]
 disabled = false
 number_threshold = 1
-symbol = ""
+symbol = "󰰈 #"
 
 [kubernetes]
-symbol = 'ﴱ '
+symbol = '󱃾 '
 style = "bold blue"
 disabled = false
 
@@ -88,7 +88,7 @@ disabled = false
 symbol = ' '
 
 [memory_usage]
-symbol = " "
+symbol = "󰍛 "
 
 [package]
 display_private = true

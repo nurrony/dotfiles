@@ -1,4 +1,4 @@
-## Add Copy as Path option on Context menu
+## Add `Copy as Path` option on Context menu
 
 1. **Name:** Copy as Path
 1. **Description:** Copies the path of either the current directory or the selected file/directory.

@@ -8,8 +8,8 @@
 1. **Script:**
 
 ```bash
-set someCondition to do shell script "git rev-parse --is-inside-work-tree"
-if someCondition = "true" then
+set isGitDir to do shell script "git rev-parse --is-inside-work-tree"
+if isGitDir = "true" then
   set currentBranch to do shell script "git branch --show-current"
   set lastSHA1 to do shell script "git log -1 --pretty=format:'%h'"
   set author to do shell script "git log -1 --pretty=format:'%an <%ae>'"

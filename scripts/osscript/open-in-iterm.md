@@ -7,7 +7,7 @@
 1. **Accepted File Types:** `*`
 1. **Script:**
 
-```osscript
+```bash
 if application "iTerm" is running then
   tell application "iTerm"
     create window with default profile

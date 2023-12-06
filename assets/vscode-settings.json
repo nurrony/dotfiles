@@ -1,4 +1,3 @@
-
 {
     "[dart]": {
         "editor.defaultFormatter": "Dart-Code.dart-code",
@@ -54,7 +53,7 @@
     "console-ninja.featureSet": "Community",
     "dart.debugSdkLibraries": true,
     "dart.flutterSdkPath": "/Volumes/Devzone/storage/dartlang/flutter",
-    "debug.toolBarLocation": "floating",
+    "debug.toolBarLocation": "docked",
     "dotenv.enableAutocloaking": true,
     "editor.acceptSuggestionOnEnter": "on",
     "editor.bracketPairColorization.enabled": true,
@@ -284,6 +283,7 @@
         ]
     },
     "yaml.validate": true,
-    "workbench.activityBar.location": "top"
+    "workbench.activityBar.location": "top",
+    "workbench.productIconTheme": "material-product-icons"
 }
 

@@ -1,0 +1,287 @@
+{
+  "[dart]": {
+    "editor.defaultFormatter": "Dart-Code.dart-code",
+    "editor.formatOnType": true,
+    "editor.rulers": [80],
+    "editor.selectionHighlight": false,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.suggestSelection": "first",
+    "editor.tabCompletion": "onlySnippets",
+    "editor.wordBasedSuggestions": "off"
+  },
+  "[go]": {
+    "diffEditor.renderIndicators": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    },
+    "editor.defaultFormatter": "golang.go",
+    "editor.insertSpaces": false,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.tabSize": 8
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[java]": {
+    "editor.defaultFormatter": "redhat.java",
+    "editor.tabSize": 4
+  },
+  "[markdown]": {
+    "files.trimTrailingWhitespace": false
+  },
+  "[php]": {
+    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+  },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.python"
+  },
+  "[scala]": {
+    "editor.defaultFormatter": "scalameta.metals",
+    "editor.semanticHighlighting.enabled": true
+  },
+  "[xml]": {
+    "editor.defaultFormatter": "redhat.vscode-xml"
+  },
+  "aws.samcli.lambdaTimeout": 91234,
+  "aws.telemetry": false,
+  "boot-java.rewrite.reconcile": true,
+  "camelk.integrations.runtimeVersion": "1.11.0",
+  "camelk.tools": {
+    "camelk.tools.kamel-path": "/Users/nurrony/Library/Application Support/Code/User/globalStorage/redhat.vscode-camelk/camelk/tools/kamel/kamel"
+  },
+  "cfnLint.path": "/usr/local/bin/cfn-lint",
+  "console-ninja.featureSet": "Community",
+  "dart.debugSdkLibraries": true,
+  "dart.flutterSdkPath": "/Volumes/Devzone/storage/dartlang/flutter",
+  "debug.toolBarLocation": "docked",
+  "dotenv.enableAutocloaking": true,
+  "editor.acceptSuggestionOnEnter": "on",
+  "editor.bracketPairColorization.enabled": true,
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+  "editor.codeActionsOnSave": {
+    "addMissingImport": "explicit",
+    "source.fixAll": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "editor.cursorBlinking": "solid",
+  "editor.cursorStyle": "line",
+  "editor.cursorWidth": 2,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.emptySelectionClipboard": false,
+  "editor.fontFamily": "'JetBrainsMono NF', Monaco, monospace",
+  "editor.fontLigatures": true,
+  "editor.fontSize": 16,
+  "editor.formatOnSave": true,
+  "editor.guides.bracketPairs": true,
+  "editor.guides.bracketPairsHorizontal": "active",
+  "editor.guides.highlightActiveIndentation": true,
+  "editor.inlayHints.enabled": "on",
+  "editor.inlineSuggest.enabled": true,
+  "editor.insertSpaces": true,
+  "editor.largeFileOptimizations": false,
+  "editor.lineNumbers": "on",
+  "editor.linkedEditing": true,
+  "editor.minimap.enabled": false,
+  "editor.quickSuggestions": {
+    "comments": "on",
+    "other": "on",
+    "strings": "on"
+  },
+  "editor.renderWhitespace": "boundary",
+  "editor.rulers": [120],
+  "editor.snippetSuggestions": "top",
+  "editor.suggest.matchOnWordStartOnly": false,
+  "editor.suggest.preview": true,
+  "editor.suggest.showMethods": true,
+  "editor.suggest.showStatusBar": true,
+  "editor.tabSize": 2,
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": "keyword.other.dotenv",
+        "settings": {
+          "foreground": "#FF000000"
+        }
+      }
+    ]
+  },
+  "emmet.excludeLanguages": [],
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+    "markdown": "html",
+    "php": "html",
+    "vue": "html",
+    "vue-html": "html"
+  },
+  "emmet.triggerExpansionOnTab": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "explorer.autoRevealExclude": {
+    "**/.mvn": true,
+    "**/node_modules": true,
+    "**/vendor": true
+  },
+  "explorer.fileNesting.enabled": true,
+  "explorer.openEditors.visible": 1,
+  "files.associations": {
+    ".env*": "dotenv"
+  },
+  "files.autoSave": "off",
+  "files.eol": "\n",
+  "files.exclude": {
+    "**/.classpath": true,
+    "**/.factorypath": true,
+    "**/.project": true,
+    "**/.settings": true
+  },
+  "files.hotExit": "off",
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "files.watcherExclude": {
+    "**/.ammonite": true,
+    "**/.bloop": true,
+    "**/.metals": true,
+    "**/node_modules": true
+  },
+  "git.enableSmartCommit": true,
+  "git.mergeEditor": true,
+  "git.smartCommitChanges": "all",
+  "git.suggestSmartCommit": true,
+  "git.untrackedChanges": "separate",
+  "github.copilot.advanced": {
+    "slashCommands": {
+      "createNotebook": true,
+      "createWorkspace": true,
+      "search": true
+    }
+  },
+  "gitignore.cacheExpirationInterval": 3600,
+  "html.autoClosingTags": true,
+  "importCost.largePackageColor": "#EC3A37F5",
+  "importCost.mediumPackageColor": "#B362FF",
+  "importCost.smallPackageColor": "#B362FF",
+  "java.configuration.runtimes": [
+    {
+      "default": true,
+      "name": "JavaSE-21",
+      "path": "/Users/nurrony/.asdf/installs/java/graalvm-community-21.0.1"
+    },
+    {
+      "default": false,
+      "name": "JavaSE-17",
+      "path": "/Users/nurrony/.asdf/installs/java/17"
+    },
+    {
+      "default": false,
+      "name": "JavaSE-11",
+      "path": "/Users/nurrony/.asdf/installs/java/11"
+    }
+  ],
+  "java.jdt.ls.java.home": "/Users/nurrony/.asdf/installs/java/17",
+  "java.project.importOnFirstTimeStartup": "automatic",
+  "java.saveActions.organizeImports": true,
+  "javascript.autoClosingTags": true,
+  "javascript.suggest.autoImports": true,
+  "javascript.updateImportsOnFileMove.enabled": "never",
+  "js/ts.implicitProjectConfig.checkJs": true,
+  "json.schemas": [],
+  "markdown.validate.enabled": true,
+  "maven.executable.path": "/Users/nurrony/.asdf/shims/mvn",
+  "maven.terminal.useJavaHome": true,
+  "mergeEditor.diffAlgorithm": "advanced",
+  "microprofile.alwaysShowOverview": false,
+  "prettier.arrowParens": "avoid",
+  "prettier.endOfLine": "lf",
+  "prettier.printWidth": 120,
+  "prettier.requireConfig": true,
+  "prettier.semi": true,
+  "prettier.singleQuote": true,
+  "prettier.tabWidth": 2,
+  "prettier.vueIndentScriptAndStyle": true,
+  "quarkus.tools.debug.terminateProcessOnExit": "Always terminate",
+  "redhat.telemetry.enabled": false,
+  "remote.SSH.configFile": "/Volumes/Devzone/storage/vscode/custom-ssh-servers",
+  "rsp-ui.enableStartServerOnActivation": [
+    {
+      "id": "redhat.vscode-community-server-connector",
+      "name": "Community Server Connector",
+      "startOnActivation": true
+    }
+  ],
+  "scm.defaultViewMode": "tree",
+  "search.useIgnoreFiles": true,
+  "security.workspace.trust.untrustedFiles": "open",
+  "shfmt.executablePath": "",
+  "spring-boot.ls.java.home": "/Users/nurrony/.asdf/installs/java/17",
+  "telemetry.telemetryLevel": "off",
+  "terminal.external.osxExec": "iTerm.app",
+  "terminal.integrated.copyOnSelection": true,
+  "terminal.integrated.env.osx": {},
+  "terminal.integrated.fontFamily": "'JetBrainsMono NF', Monaco, monospace",
+  "terminal.integrated.fontSize": 16,
+  "terminal.integrated.persistentSessionReviveProcess": "never",
+  "terminal.integrated.tabs.enableAnimation": false,
+  "terminal.integrated.tabs.showActiveTerminal": "singleTerminal",
+  "typescript.autoClosingTags": true,
+  "typescript.suggest.autoImports": true,
+  "typescript.updateImportsOnFileMove.enabled": "prompt",
+  "vscode-kubernetes.kubectl-path": "/usr/local/bin/kubectl",
+  "window.commandCenter": false,
+  "window.restoreWindows": "none",
+  "workbench.activityBar.location": "top",
+  "workbench.colorTheme": "Shades of Purple (Super Dark)",
+  "workbench.editor.enablePreview": false,
+  "workbench.editor.preferHistoryBasedLanguageDetection": true,
+  "workbench.editor.restoreViewState": false,
+  "workbench.editor.showTabs": "single",
+  "workbench.editor.wrapTabs": true,
+  "workbench.fontAliasing": "auto",
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.layoutControl.enabled": false,
+  "workbench.productIconTheme": "material-product-icons",
+  "workbench.sideBar.location": "right",
+  "workbench.startupEditor": "none",
+  "workbench.statusBar.visible": true,
+  "workbench.tree.enableStickyScroll": true,
+  "workbench.tree.expandMode": "doubleClick",
+  "yaml.customTags": [
+    "!And",
+    "!And sequence",
+    "!If",
+    "!If sequence",
+    "!Not",
+    "!Not sequence",
+    "!Equals",
+    "!Equals sequence",
+    "!Or",
+    "!Or sequence",
+    "!FindInMap",
+    "!FindInMap sequence",
+    "!Base64",
+    "!Join",
+    "!Join sequence",
+    "!Cidr",
+    "!Ref",
+    "!Sub",
+    "!Sub sequence",
+    "!GetAtt",
+    "!GetAZs",
+    "!ImportValue",
+    "!ImportValue sequence",
+    "!Select",
+    "!Select sequence",
+    "!Split",
+    "!Split sequence"
+  ],
+  "yaml.schemas": {
+    "file:///Users/nurrony/Library/Application%20Support/Code/User/globalStorage/amazonwebservices.aws-toolkit-vscode/sam.schema.json": [
+      "template.yaml"
+    ]
+  },
+  "yaml.validate": true
+}

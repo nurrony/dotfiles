@@ -27,6 +27,7 @@ zi wait'5' lucid light-mode for \
   as'program' atclone'ln -sfv etc/git-extras-completion.zsh _git-extras' atpull'%atclone' pick'$ZPFX/bin/git-*' make'PREFIX=$ZPFX' nocompile tj/git-extras
 
 zi wait'10' lucid light-mode for \
+  as'program' from'gh-r' nektos/act \
   as'program' from'gh-r' jesseduffield/lazygit \
   as'program' from'gh-r' mv'tealdeer* -> tldr' dbrgn/tealdeer \
   as'program' from'gh-r' mv'mkcert* -> mkcert' FiloSottile/mkcert \

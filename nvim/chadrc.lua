@@ -9,6 +9,7 @@ M.ui = {
 
   hl_override = highlights.override,
   hl_add = highlights.add,
+  nvdash = highlights.nvdash,
 }
 
 M.plugins = "custom.plugins"

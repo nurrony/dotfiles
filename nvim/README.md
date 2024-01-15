@@ -1,6 +1,6 @@
 # Nur Rony's NeoVim Setup and Customization
 
-I now use Neovim and rather configuring it from scratch I opted into an awesome config provider called [NvChad][nvchad-link]. It is blazing fast and easily customizable.
+I now use NeoVim with Lazy Plugin Manager with bare minimal plugins and customization. It is blazing fast and easily customizable.
 
 ## Prerequisites
 
@@ -10,8 +10,8 @@ I now use Neovim and rather configuring it from scratch I opted into an awesome 
 
 To have my configuration please do these followings
 
-1. Copy `custom` folder inside `$HOME/.config/nvim/lua`
-2. Open `nvim` and run `:PackerSync`
+1. Copy `nvim` folder inside `$HOME/.config/nvim`
+2. Open `nvim` and run `:Lazy` and follow the instructions
 
 ## Supported Languages and Tools
 

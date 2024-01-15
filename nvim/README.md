@@ -1,0 +1,51 @@
+# Nur Rony's NeoVim Setup and Customization
+
+I now use Neovim and rather configuring it from scratch I opted into an awesome config provider called [NvChad][nvchad-link]. It is blazing fast and easily customizable.
+
+## Prerequisites
+
+1. [NeoVim][neovim-link]
+
+## Customization
+
+To have my configuration please do these followings
+
+1. Copy `custom` folder inside `$HOME/.config/nvim/lua`
+2. Open `nvim` and run `:PackerSync`
+
+## Supported Languages and Tools
+
+My customization comes with NvChad buit-ins + these following plugins and setup out of the box.
+
+1. Plugins
+
+   - ToogleTerm
+   - AutoCloseTag
+   - TrueZen
+
+1. Languages
+
+   - HTML
+   - CSS
+   - Lua
+   - Javascript
+   - Typescript
+   - JSON
+   - Yaml
+
+1. Linters and Formatters
+   - Prettier
+   - ESlint
+   - Shell-Format
+   - Shell Checker
+   - CloudFormation Linter
+1. DevOps
+   - Docker
+   - Terraform
+   - Kubernetes
+
+## ToDo
+
+<!-- Links -->
+
+[neovim-link]: https://neovim.io/

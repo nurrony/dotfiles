@@ -18,11 +18,18 @@ To have my configuration please do these followings
 My customization comes with NvChad buit-ins + these following plugins and setup out of the box.
 
 1. Plugins
-
+   - Alpha
    - ToogleTerm
    - AutoCloseTag
-   - TrueZen
-
+   - BufferLine
+   - Dressing
+   - Lazy.vim - Package Manager
+   - Shade of Purple
+   - WhichKey
+   - NvimTree
+   - Telescope
+   - Comment
+   - Treesitter
 1. Languages
 
    - HTML

@@ -13,7 +13,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({ { import = "nurrony.plugins" }, { import = "nurrony.plugins.lsp" } }, {
   install = {
-    colorscheme = { "shades_of_purple" },
+    colorscheme = { "catppuccin" },
   },
 
   checker = {

@@ -8,8 +8,6 @@ local mapkey = require("nurrony.utils.keymapper").mapvimkey
 -- Buffer Navigation
 mapkey("<leader>bn", "bnext", "n", { desc = 'Next buffer'}) -- Next buffer
 mapkey("<leader>bp", "bprevious", "n", { desc = 'Previous buffer'}) -- Prev buffer
-mapkey("<leader>bb", "e #", "n",  { desc = 'Switch to Other Buffer'}) -- Switch to Other Buffer
-mapkey("<leader>`", "e #", "n", { desc = 'Switch to Other Buffer'}) -- Switch to Other Buffer
 
 -- clear search highlights
 -- keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights" })
@@ -27,7 +25,3 @@ mapkey("<C-l>", "wincmd l", "t", { desc = '[tmux]: Navigate right' }) -- Navigat
 -- Window Management
 mapkey("<leader>sv", "vsplit", "n", { desc = 'Split vertically' }) -- Split Vertically
 mapkey("<leader>sh", "split", "n", { desc = 'Split horizontally' }) -- Split Horizontally
-mapkey("<C-Up>", "resize +2", "n", { desc = 'Resize pane upward' })
-mapkey("<C-Down>", "resize -2", "n", { desc = 'Resize pane downward' })
-mapkey("<C-Left>", "vertical resize +2", "n", { desc = 'Resize pane left' })
-mapkey("<C-Right>", "vertical resize -2", "n", { desc = 'Resize pane right' })

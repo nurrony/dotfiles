@@ -25,3 +25,7 @@ mapkey("<C-l>", "wincmd l", "t", { desc = '[tmux]: Navigate right' }) -- Navigat
 -- Window Management
 mapkey("<leader>sv", "vsplit", "n", { desc = 'Split vertically' }) -- Split Vertically
 mapkey("<leader>sh", "split", "n", { desc = 'Split horizontally' }) -- Split Horizontally
+
+-- Indenting
+vim.keymap.set("v", "<", "<gv", { silent = true, noremap = true, desc = 'Indent left' }) -- Indenting code
+vim.keymap.set("v", ">", ">gv", { silent = true, noremap = true, desc = 'Indent right' }) -- indenting right

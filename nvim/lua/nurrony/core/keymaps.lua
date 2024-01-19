@@ -1,21 +1,33 @@
 -- set leader key to space
 vim.g.mapleader = " "
 
-local keymap = vim.keymap -- for conciseness
+local mapkey = require("nurrony.utils.keymapper").mapvimkey
 
 -- General Keymaps -------------------
 
+-- Buffer Navigation
+mapkey("<leader>bn", "bnext", "n", { desc = 'Next buffer'}) -- Next buffer
+mapkey("<leader>bp", "bprevious", "n", { desc = 'Previous buffer'}) -- Prev buffer
+mapkey("<leader>bb", "e #", "n",  { desc = 'Switch to Other Buffer'}) -- Switch to Other Buffer
+mapkey("<leader>`", "e #", "n", { desc = 'Switch to Other Buffer'}) -- Switch to Other Buffer
+
 -- clear search highlights
-keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights" })
+-- keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights" })
 
--- window management
-keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" }) -- split window vertically
-keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" }) -- split window horizontally
-keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" }) -- make split windows equal width & height
-keymap.set("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current split" }) -- close current split window
+-- Pane and Window Navigation
+mapkey("<C-h>", "<C-w>h", "n", { desc = 'Navigate left' }) -- Navigate Left
+mapkey("<C-j>", "<C-w>j", "n", { desc = 'Navigate down' }) -- Navigate Down
+mapkey("<C-k>", "<C-w>k", "n", { desc = 'Navigate up' }) -- Navigate Up
+mapkey("<C-l>", "<C-w>l", "n", { desc = 'Navigate right' }) -- Navigate Right
+mapkey("<C-h>", "wincmd h", "t", { desc = '[tmux]: Navigate left' }) -- Navigate Left
+mapkey("<C-j>", "wincmd j", "t", { desc = '[tmux]: Navigate down' }) -- Navigate Down
+mapkey("<C-k>", "wincmd k", "t", { desc = '[tmux]: Navigate up' }) -- Navigate Up
+mapkey("<C-l>", "wincmd l", "t", { desc = '[tmux]: Navigate right' }) -- Navigate Right
 
-keymap.set("n", "<leader>to", "<cmd>tabnew<CR>", { desc = "Open new tab" }) -- open new tab
-keymap.set("n", "<leader>tx", "<cmd>tabclose<CR>", { desc = "Close current tab" }) -- close current tab
-keymap.set("n", "<leader>tn", "<cmd>tabn<CR>", { desc = "Go to next tab" }) --  go to next tab
-keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Go to previous tab" }) --  go to previous tab
-keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer in new tab" }) --  move current buffer to new tab
+-- Window Management
+mapkey("<leader>sv", "vsplit", "n", { desc = 'Split vertically' }) -- Split Vertically
+mapkey("<leader>sh", "split", "n", { desc = 'Split horizontally' }) -- Split Horizontally
+mapkey("<C-Up>", "resize +2", "n", { desc = 'Resize pane upward' })
+mapkey("<C-Down>", "resize -2", "n", { desc = 'Resize pane downward' })
+mapkey("<C-Left>", "vertical resize +2", "n", { desc = 'Resize pane left' })
+mapkey("<C-Right>", "vertical resize -2", "n", { desc = 'Resize pane right' })

@@ -1,12 +1,15 @@
 return {
   "akinsho/toggleterm.nvim",
   version = "*",
+  keys = {
+    {'<C-`>', '<CMD>Toggleterm<CR>', desc = 'Toggle Terminal'},
+  },
   config = function()
     local toggleterm = require("toggleterm")
     toggleterm.setup({
       size = 20,
       open_mapping = [[<c-`>]],
-      direction = 'float',
+      direction = "float",
       hide_numbers = true, -- hide the number column in toggleterm buffers
       shade_filetypes = {},
       autochdir = true,
@@ -16,14 +19,13 @@ return {
       shell = vim.o.shell,
       insert_mappings = true,
       float_opts = {
-        border = 'double',
+        border = "double",
         winblend = 0,
         highlights = {
-          border = 'Normal',
-          background = 'Normal',
+          border = "Normal",
+          background = "Normal",
         },
       },
-
     })
-  end
- }
+  end,
+}

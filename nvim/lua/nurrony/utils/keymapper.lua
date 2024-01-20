@@ -1,17 +1,14 @@
--- vim modes
 local vim_modes = {
-  n = 'n', -- normal
-  i = 'i', -- insert
-  v = 'v', -- visual
+  n = "n",
+  i = "i",
+  v = "v",
 }
 
--- default options for keymaps
 local default_opts = {
   noremap = true,
   silent = true,
 }
 
---- get all options
 --- @param opts (table|nil)
 --- @return table
 local get_opts = function(opts)
@@ -24,8 +21,6 @@ local get_opts = function(opts)
   end
   return all_opts
 end
-
-
 
 --- @param vimmode (string|nil)
 --- @return string

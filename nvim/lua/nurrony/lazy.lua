@@ -11,9 +11,22 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({ { import = "nurrony.plugins" }, { import = "nurrony.plugins.lsp" } }, {
+local plugins = { { import = "nurrony.plugins" }, { import = 'nurrony.plugins.lsp' } }
+local opts = {
+  rtp = {
+    disabled_plugins = {
+      'gzip',
+      'tutor',
+      'tohtml',
+      'matchit',
+      'tarPlugin',
+      'zipPlugin',
+      'matchparen',
+      'netrwPlugin',
+    },
+  },
   install = {
-    colorscheme = { "catppuccin" },
+    colorscheme = { "tokyonight" },
   },
 
   checker = {
@@ -24,4 +37,6 @@ require("lazy").setup({ { import = "nurrony.plugins" }, { import = "nurrony.plug
   change_detection = {
     notify = false,
   },
-})
+}
+
+require("lazy").setup(plugins, opts)

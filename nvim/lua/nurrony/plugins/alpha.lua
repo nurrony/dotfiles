@@ -48,11 +48,10 @@ return {
 
     dashboard.section.buttons.val = {
       dashboard.button("e", "  New file", ":ene<CR>"),
-      dashboard.button("f", "  Find file", ":Telescope find_files<CR>"),
-      dashboard.button("r", "  Find recent file", ":Telescope oldfiles<CR>"),
-      dashboard.button("g", "  Find word", ":Telescope live_grep<CR>"),
-      dashboard.button("s", "  Settings", ":Telescope find_files cwd=~/.configs/nvim/<CR>"),
-      dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
+      dashboard.button("󱁐 ff", "  Find file", ":Telescope find_files<CR>"),
+      dashboard.button("󱁐 fr", "  Find recent file", ":Telescope oldfiles<CR>"),
+      dashboard.button("󱁐 fs", " Find word", ":Telescope live_grep<CR>"),
+      dashboard.button("q", "󰍃 Quit Neovim", ":qa<CR>"),
     }
 
     -- Everyone could use a good fortune cookie from time to time, right?

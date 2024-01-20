@@ -1,2 +1,2 @@
-require("nurrony.core.keymaps")
-require("nurrony.core.options")
+require 'nurrony.core.keymaps'
+require 'nurrony.core.options'

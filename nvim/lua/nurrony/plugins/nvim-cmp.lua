@@ -6,7 +6,6 @@ return {
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-cmdline',
-    'TechnicalDC/cmp-abl',
     'saadparwaiz1/cmp_luasnip',
     "rafamadriz/friendly-snippets",
     'L3MON4D3/LuaSnip',
@@ -85,11 +84,11 @@ return {
       window = {
         completion = {
           winhighlight = "FloatBorder:None,CursorLine:PmenuSel,Normal:None,Search:None,ScrollbarHandle:None",
-          border = border(None),
+          border = border(),
           scrollbar = true,
         },
         documentation = {
-          border = border(None),
+          border = border(),
           winhighlight = "FloatBorder:None,CursorLine:PmenuSel,Normal:None,Search:None",
           max_height = 15,
           scrollbar = false,

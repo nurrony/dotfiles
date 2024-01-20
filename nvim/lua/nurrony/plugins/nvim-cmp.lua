@@ -150,7 +150,7 @@ return {
           }
         },
         { name = 'path' },
-        { name = 'orgmode' },
+        -- { name = 'orgmode' },
       }),
       experimental = {
         ghost_text = true

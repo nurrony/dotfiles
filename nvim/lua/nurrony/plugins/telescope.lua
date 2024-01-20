@@ -4,33 +4,6 @@ local config = function()
   local telescope = require("telescope")
   local actions = require("telescope.actions")
 
-  -- telescope.setup({
-  --   defaults = {
-  --     path_display = { "truncate " },
-  --     pickers = {
-  --       find_files = {
-  --         hidden = true,
-  --         previewer = false,
-  --         theme = 'dropdown',
-  --       },
-  --       live_grep = {
-  --         previewer = false,
-  --         theme = 'dropdown',
-  --       },
-  --       find_buffer = {
-  --         previewer = false,
-  --         theme = 'dropdown',
-  --       },
-  --     },
-  --     mappings = {
-  --       i = {
-  --         ["<C-k>"] = actions.move_selection_previous, -- move to prev result
-  --         ["<C-j>"] = actions.move_selection_next, -- move to next result
-  --         ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
-  --       },
-  --     },
-  --   },
-  -- })
   telescope.setup({
     defaults = {
       mappings = {
@@ -42,6 +15,11 @@ local config = function()
     },
     pickers = {
       find_files = {
+        theme = "dropdown",
+        previewer = false,
+        hidden = true,
+      },
+      oldfiles = {
         theme = "dropdown",
         previewer = false,
         hidden = true,

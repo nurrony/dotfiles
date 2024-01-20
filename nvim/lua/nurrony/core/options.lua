@@ -1,5 +1,7 @@
 local opt = vim.opt -- for conciseness
 
+opt.encoding = 'UTF-8'
+
 -- line numbers
 opt.relativenumber = true -- show relative line numbers
 opt.number = true -- shows absolute line number on cursor line (when relative number is on)
@@ -27,9 +29,14 @@ opt.cursorline = true -- highlight the current cursor line
 opt.termguicolors = true
 opt.background = "dark" -- colorschemes that can be light or dark will be made dark
 opt.signcolumn = "yes" -- show sign column so that text doesn't shift
+opt.cmdheight = 1 -- commonad bar height in nvim
+opt.completeopt = 'menuone,noinsert,noselect' -- how the completion menu behave
 
 -- backspace
 opt.backspace = "indent,eol,start" -- allow backspace on indent, end of line or insert mode start position
+
+opt.scrolloff = 10 -- scrolloff limit
+
 
 -- clipboard
 opt.clipboard:append("unnamedplus") -- use system clipboard as default register
@@ -38,8 +45,13 @@ opt.clipboard:append("unnamedplus") -- use system clipboard as default register
 opt.splitright = true -- split vertical window to the right
 opt.splitbelow = true -- split horizontal window to the bottom
 
--- turn off swapfile
-opt.swapfile = false
+opt.swapfile = false -- turn off swapfile
+opt.backup = false -- disable backup
+opt.hidden = true -- change buffer without saving
+opt.errorbells = false -- turn of the error bells
+
+opt.autochdir = false -- do not auto change the directory
+opt.iskeyword:append('-') -- treat hyphen as keyword
 
 -- mouse
 opt.mouse = "a"

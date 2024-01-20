@@ -57,6 +57,7 @@ return {
         'tflint', -- terraform linter
         'yamllint', -- yaml lister
         "cfn-lint", -- cloudformation linter
+        "editorconfig-checker", -- editorconfig config checker
       },
     })
   end,

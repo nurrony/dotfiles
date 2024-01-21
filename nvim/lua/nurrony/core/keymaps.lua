@@ -23,5 +23,11 @@ mapkey("<leader>sv", "vsplit", "n", { desc = "Split vertically" }) -- Split Vert
 mapkey("<leader>sh", "split", "n", { desc = "Split horizontally" }) -- Split Horizontally
 
 -- Indenting
-vim.keymap.set("v", "<", "<gv", { silent = true, noremap = true, desc = "Indent left" }) -- Indenting code
-vim.keymap.set("v", ">", ">gv", { silent = true, noremap = true, desc = "Indent right" }) -- indenting right
+mapkey("<", "<gv", "v", { desc = "Indent left" })
+mapkey(">", ">gv", "v", { desc = "Indent right" })
+
+-- vim.keymap.set("v", "<", "<gv", { silent = true, noremap = true, desc = "Indent left" }) -- Indenting code
+-- vim.keymap.set("v", ">", ">gv", { silent = true, noremap = true, desc = "Indent right" }) -- indenting right
+
+-- Select All
+mapkey("<C-a>", "gg<S-v>G", "n", { desc = "Select All" })

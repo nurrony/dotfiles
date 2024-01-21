@@ -37,15 +37,13 @@ local config = function()
   -- keymaps
   local keymap = vim.keymap -- for conciseness
 
-  keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<cr>", { desc = "Find git status" })
-  keymap.set("n", "<leader>gc", "<cmd>Telescope git_commits<cr>", { desc = "Find git commits" })
   keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "Find string in cwd" })
   keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Fuzzy find recent files" })
   keymap.set("n", "<leader>fk", "<cmd>Telescope keymaps<cr>", { desc = "List keymaps" })
   keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Show help" })
   keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })
   keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Fuzzy find the buffers" })
-  keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor in cwd" })
+  keymap.set("n", "<leader>fg", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor in cwd" })
 end
 
 return {
@@ -58,13 +56,12 @@ return {
     "nvim-tree/nvim-web-devicons",
   },
   keys = {
-    {"<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Show help" },
-    {"<leader>fk", "<cmd>Telescope keymaps<cr>", desc = "List keymaps" },
-    {"<leader>gs", "<cmd>Telescope git_status<cr>", desc = "Find git status" },
-    {"<leader>gc", "<cmd>Telescope git_commits<cr>", desc = "Find git commits" },
-    {"<leader>fs", "<cmd>Telescope live_grep<cr>", desc = "Find string in cwd" },
-    {"<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Fuzzy find the buffers"},
-    {"<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Fuzzy find recent files" },
-    {"<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Fuzzy find files in cwd" },
+    { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Show help" },
+    { "<leader>fg", "<cmd>Telescope help_tags<cr>", desc = "Show help" },
+    { "<leader>fk", "<cmd>Telescope keymaps<cr>", desc = "List keymaps" },
+    { "<leader>fs", "<cmd>Telescope live_grep<cr>", desc = "Find string in cwd" },
+    { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Fuzzy find the buffers" },
+    { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Fuzzy find recent files" },
+    { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Fuzzy find files in cwd" },
   },
 }

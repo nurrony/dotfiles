@@ -27,10 +27,13 @@ My customization comes with NvChad buit-ins + these following plugins and setup 
    - WhichKey
    - Dressing
    - NvimTree
+   - NvimSurround
    - Blankline
    - Telescope
    - BufferLine
    - ToogleTerm
+   - Confom
+   - NvimLint
    - Treesitter
    - Tokyonight
    - AutoCloseTag
@@ -38,6 +41,7 @@ My customization comes with NvChad buit-ins + these following plugins and setup 
    - Nvim Language Server Config
 1. Languages Servers
 
+   - BASH
    - HTML
    - CSS
    - Lua

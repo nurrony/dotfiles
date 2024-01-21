@@ -1,8 +1,7 @@
-
 return {
-  'goolord/alpha-nvim',
+  "goolord/alpha-nvim",
   dependencies = {
-    "nvim-tree/nvim-web-devicons"
+    "nvim-tree/nvim-web-devicons",
   },
   enabled = true,
   config = function()
@@ -47,8 +46,8 @@ return {
     end
 
     dashboard.section.buttons.val = {
-      dashboard.button("e", "  New file", ":ene<CR>"),
-      dashboard.button("󱁐 ff", "  Find file", ":Telescope find_files<CR>"),
+      dashboard.button("e", "󰝒  New file", ":ene<CR>"),
+      dashboard.button("󱁐 ff", "󰱼  Find file", ":Telescope find_files<CR>"),
       dashboard.button("󱁐 fr", "  Find recent file", ":Telescope oldfiles<CR>"),
       dashboard.button("󱁐 fs", " Find word", ":Telescope live_grep<CR>"),
       dashboard.button("q", "󰍃 Quit Neovim", ":qa<CR>"),
@@ -93,5 +92,5 @@ return {
       },
       opts = { margin = 5 },
     })
-  end
+  end,
 }

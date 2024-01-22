@@ -21,7 +21,3 @@ mapkey("<C-l>", "wincmd l", "t", { desc = "[tmux]: Navigate right" }) -- Navigat
 -- Window Management
 mapkey("<leader>sv", "vsplit", "n", { desc = "Split vertically" }) -- Split Vertically
 mapkey("<leader>sh", "split", "n", { desc = "Split horizontally" }) -- Split Horizontally
-
--- Indenting
-mapkey("<", "<gv", "v", { desc = "Indent left" })
-mapkey(">", ">gv", "v", { desc = "Indent right" })

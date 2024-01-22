@@ -14,7 +14,7 @@ curl -s https://raw.githubusercontent.com/nmrony/dotfiles/master/setup | bash
 
 ### Customization
 
-Do not forget to edit git username and email in `.extra` and `.gitconfig` with yours.
+Do not forget to add or edit git username and email in `.extra` and `.gitconfig` with yours.
 
 **Happy Hacking!!**
 

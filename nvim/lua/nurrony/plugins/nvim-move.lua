@@ -11,11 +11,11 @@ return {
     opts.desc = "Move line to up"
     vim.keymap.set("n", "˚", ":MoveLine(-1)<CR>", opts)
 
-    -- Alt + l
+    -- Alt + h
     opts.desc = "Move char left"
     vim.keymap.set("n", "˙", ":MoveHChar(-1)<CR>", opts)
 
-    -- Alt + h
+    -- Alt + l
     opts.desc = "Move char right"
     vim.keymap.set("n", "¬", ":MoveHChar(1)<CR>", opts)
 

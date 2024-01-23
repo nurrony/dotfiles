@@ -19,3 +19,5 @@ brew uninstall --zap --force --quiet neovim
 remove $HOME/.cache/nvim
 remove $HOME/.config/nvim
 remove $HOME/.local/share/nvim
+remove $HOME/.local/state/nvim
+

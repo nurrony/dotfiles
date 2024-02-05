@@ -1,31 +1,35 @@
-# See https://zdharma-continuum.github.io/zinit/wiki/
-declare -A ZINIT
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/framework"
-[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
-[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-source "${ZINIT_HOME}/zinit.zsh"
+# enable zi https://wiki.zshell.dev/
+typeset -Ag ZI
+ZI[HOME_DIR]="${HOME}/.zi"
+ZI[BIN_DIR]="${ZI[HOME_DIR]}/bin"
+[ ! -d $ZI[BIN_DIR] ] && command mkdir -p "$ZI[BIN_DIR]" && chown -R "$(whoami)" "$ZI[HOME_DIR]" && chmod -R go-w "$ZI[HOME_DIR]"
+[ ! -d $ZI[BIN_DIR]/.git ] && command git clone https://github.com/z-shell/zi.git "$ZI[BIN_DIR]"
+
+ZI[BIN_DIR]="${HOME}/.zi/bin"
+source "${ZI[BIN_DIR]}/zi.zsh"
 
 zi ice as"command" from"gh-r" \
   atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
   atpull"%atclone" src"init.zsh"
 zi light starship/starship
 
-zi wait'3' lucid light-mode for \
+zi wait lucid light-mode for \
   as'completion' zsh-users/zsh-completions \
   as'completion' pick'gradle-completion.plugin.zsh' gradle/gradle-completion \
+  as'program' from'gh-r' bpick'*x86_64-apple-darwin.tar.gz' atclone'./zoxide init --cmd=j zsh > init.zsh' src'init.zsh' atpull'%atclone' pick'zoxide/zoxide' ajeetdsouza/zoxide
+
+zi wait'3' lucid light-mode for \
   pick'alias-tips.plugin.zsh' djui/alias-tips \
-  as'program' from'gh-r' mv'direnv* -> direnv' atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' pick'direnv' src'zhook.zsh' direnv/direnv \
-  as'program' from'gh-r' bpick'*x86_64-apple-darwin.tar.gz' atclone'./zoxide init --cmd=j zsh > init.zsh' src'init.zsh' atpull'%atclone' pick'zoxide/zoxide' ajeetdsouza/zoxide \
   OMZP::mvn \
   OMZP::git \
-  OMZP::extract
+  as'program' from'gh-r' mv'direnv* -> direnv' atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' pick'direnv' src'zhook.zsh' direnv/direnv
 
-zi ice wait'3' lucid light-mode as'program' src'asdf.sh'
+zi ice wait'3' lucid as'program' src'asdf.sh'
 zi light asdf-vm/asdf
 
 zi wait'5' lucid light-mode for \
   as'program' from'gh-r' atclone'ln -sfv completions/exa.zsh _exa' atpull'%atclone' pick'bin/exa' ogham/exa \
-  as'program' atclone'ln -sfv etc/git-extras-completion.zsh _git-extras' atpull'%atclone' pick'$ZPFX/bin/git-*' tj/git-extras
+  as'program' atclone'ln -sfv etc/git-extras-completion.zsh _git-extras' atpull'%atclone' pick'$ZPFX/bin/git-*' make'PREFIX=$ZPFX' nocompile tj/git-extras
 
 zi wait'10' lucid light-mode for \
   as'program' from'gh-r' nektos/act \
@@ -46,11 +50,9 @@ zi wait'10' lucid light-mode for \
   as'program' from'gh-r' mv'argocd* -> argocd' atclone'./argocd completion zsh > _argocd' atpull'%atclone' pick'argocd' argoproj/argo-cd \
   as'program' from'gh-r' mv'skaffold* -> skaffold' atclone'./skaffold completion zsh > _skaffold' atpull'%atclone' GoogleContainerTools/skaffold \
   pick'git-open.plugin.zsh' paulirish/git-open \
-  zdharma-continuum/fast-syntax-highlighting \
-  zdharma-continuum/history-search-multi-word
-
-#   z-shell/H-S-MW \
-#   z-shell/F-Sy-H
+  OMZP::extract \
+  z-shell/H-S-MW \
+  z-shell/F-Sy-H
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
@@ -59,7 +61,6 @@ for file in $HOME/.dotfiles/.{extra,path,exports,aliases,functions,dockerfunctio
   [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
-
 
 # Next two lines must be below the above two for zi autocomplete
 autoload -Uz _zinit

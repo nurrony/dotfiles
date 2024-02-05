@@ -19,7 +19,8 @@ zi wait'3' lucid light-mode for \
   OMZP::mvn \
   OMZP::git
 
-
+zinit ice wait'5' lucid atload'_zsh_autosuggest_start'
+zinit light zsh-users/zsh-autosuggestions
 
 zi ice wait'3' lucid light-mode as'program' src'asdf.sh'
 zi light asdf-vm/asdf

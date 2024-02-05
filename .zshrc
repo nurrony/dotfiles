@@ -10,16 +10,16 @@ zi ice as"command" from"gh-r" \
   atpull"%atclone" src"init.zsh"
 zi light starship/starship
 
-# zi wait lucid light-mode for \
-#   as'completion' zsh-users/zsh-completions \
-#   as'completion' pick'gradle-completion.plugin.zsh' gradle/gradle-completion \
-#   as'program' from'gh-r' bpick'*x86_64-apple-darwin.tar.gz' atclone'./zoxide init --cmd=j zsh > init.zsh' src'init.zsh' atpull'%atclone' pick'zoxide/zoxide' ajeetdsouza/zoxide
+zi wait lucid light-mode for \
+  as'completion' zsh-users/zsh-completions \
+  as'completion' pick'gradle-completion.plugin.zsh' gradle/gradle-completion \
+  as'program' from'gh-r' bpick'*x86_64-apple-darwin.tar.gz' atclone'./zoxide init --cmd=j zsh > init.zsh' src'init.zsh' atpull'%atclone' pick'zoxide/zoxide' ajeetdsouza/zoxide
 
-# zi wait'3' lucid light-mode for \
-#   pick'alias-tips.plugin.zsh' djui/alias-tips \
-#   OMZP::mvn \
-#   OMZP::git \
-#   as'program' from'gh-r' mv'direnv* -> direnv' atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' pick'direnv' src'zhook.zsh' direnv/direnv
+zi wait'3' lucid light-mode for \
+  pick'alias-tips.plugin.zsh' djui/alias-tips \
+  OMZP::mvn \
+  OMZP::git \
+  as'program' from'gh-r' mv'direnv* -> direnv' atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' pick'direnv' src'zhook.zsh' direnv/direnv
 
 # zi ice wait'3' lucid as'program' src'asdf.sh'
 # zi light asdf-vm/asdf

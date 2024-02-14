@@ -83,7 +83,7 @@ format = "via [$version](bold green) "
 [directory.substitutions]
 "Documents" = "Documents "
 "Downloads" = "Downloads "
-"Music" = "Music "
+"Music" = "Music 󰠃"
 "Pictures" = "Pictures "
 
 [docker_context]

@@ -9,7 +9,7 @@ function install_zi() {
   command git clone https://github.com/z-shell/zi.git "$ZI[BIN_DIR]"
 }
 
-function setup_nmr_dotfiles() {
+function setup_dotfiles() {
   cd $HOME && \
   echo -e "\nPreparing your new Mac for awesomeness!!\n\n"
   which -s brew
@@ -47,4 +47,4 @@ function setup_nmr_dotfiles() {
 	EOF
 }
 
-setup_nmr_dotfiles
+setup_dotfiles

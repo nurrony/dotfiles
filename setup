@@ -34,6 +34,7 @@ function setup_nmr_dotfiles() {
   cd $HOME/.dotfiles && \
   echo '✨✨✨ Making your Terminal WOWsome ✨✨✨' && \
   install_zi && \
+  ln -sf ./.tool-versions $HOME/ && \
   sh $HOME/.dotfiles/bootstrap.sh && \
   # Intentionally mixing tab and space here for pretty output
 	cat <<-EOF

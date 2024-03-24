@@ -1,4 +1,4 @@
-
+# for more please check https://zdharma-continuum.github.io/
 ZINIT_HOME="$HOME/zinit.git"
 [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"

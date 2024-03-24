@@ -1,12 +1,3 @@
-# enable zi https://wiki.zshell.dev/
-# typeset -Ag ZI
-# ZI[HOME_DIR]="${HOME}/.zi"
-# ZI[BIN_DIR]="${ZI[HOME_DIR]}/bin"
-# [ ! -d $ZI[BIN_DIR] ] && command mkdir -p "$ZI[BIN_DIR]" && chown -R "$(whoami)" "$ZI[HOME_DIR]" && chmod -R go-w "$ZI[HOME_DIR]"
-# [ ! -d $ZI[BIN_DIR]/.git ] && command git clone https://github.com/z-shell/zi.git "$ZI[BIN_DIR]"
-
-# ZI[BIN_DIR]="${HOME}/.zi/bin"
-# source "${ZI[BIN_DIR]}/zi.zsh"
 
 ZINIT_HOME="$HOME/zinit.git"
 [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"

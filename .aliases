@@ -29,12 +29,12 @@ alias mv='mv -i'
 alias ff='find . -type f -name'
 
 # https://github.com/ogham/exa
-alias ls='command eza -T -G --git-repos --git --color auto --icons -a -s type --group-directories-first'
-alias l='command eza -1a -G --git-repos --git --color auto --icons -a -s type --group-directories-first'
+alias ls='command eza -T -G --git-repos --git --color always --icons -a -s type --group-directories-first'
+alias l='command eza -1a -G --git-repos --git --color always --icons -a -s type --group-directories-first'
 alias ll='command eza -l --git-repos --git --color always --icons -a -s type --group-directories-first'
-alias tree='command eza -GT --git-repos --git --color auto --icons -a -s type --group-directories-first -L' "$@"
-alias lt1='command eza -GTL 1 --git --git-repos --color auto --icons -a -s type --group-directories-first'
-alias lt2='command eza -GTL 2 --git --git-repos --color auto --icons -a -s type --group-directories-first'
+alias tree='command eza -GT --git-repos --git --color always --icons -a -s type --group-directories-first -L' "$@"
+alias lt1='command eza -GTL 1 --git --git-repos --color always --icons -a -s type --group-directories-first'
+alias lt2='command eza -GTL 2 --git --git-repos --color always --icons -a -s type --group-directories-first'
 alias lsa='command eza -abghHl --git --git-repos --group-directories-first'
 alias cat="command bat --theme=DarkNeon --style=header-filename --pager=never"
 

@@ -25,7 +25,7 @@ zinit wait'3' lucid light-mode for \
 zi ice wait'3' lucid as'program' src'asdf.sh'
 zi light asdf-vm/asdf
 
-# zinit ice wait"10" lucid as"program" pick"$ZPFX/bin/git-alias" make"PREFIX=$ZPFX" nocompile
+# zinit ice wait"10" lucid as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX" nocompile
 # zinit light tj/git-extras
 
 zinit wait'10' lucid light-mode for \

@@ -35,8 +35,12 @@ export PATH="$DOCKER_CLI_BIN_PATH:$PATH"
 # export PATH="$GRAALVM_HOME/bin:$PATH"
 
 # GNU Find Utils path
-export GNU_TOOL_PATH=/usr/local/opt/findutils/libexec/gnubin
-export PATH="$GNU_TOOL_PATH:$PATH"
+export GNU_FIND_UTIL_PATH=/usr/local/opt/findutils/libexec/gnubin
+export PATH="$GNU_FIND_UTIL_PATH:$PATH"
+
+# GNU Core Utils path
+export GNU_CORE_UTIL_PATH=/usr/local/opt/coreutils/libexec/gnubin
+export PATH="$GNU_CORE_UTIL_PATH:$PATH"
 
 export PATH="/usr/local/opt/python/libexec/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 

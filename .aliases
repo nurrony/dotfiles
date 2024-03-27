@@ -201,9 +201,6 @@ alias minikube-reg='minikube start --insecure-registry localhost:5000'
 alias vi=nvim
 alias vim=nvim
 
-## Git alias
-alias repo='git open'
-
 # docker terminal ui
 alias lzd='lazydocker'
 

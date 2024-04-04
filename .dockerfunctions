@@ -172,7 +172,7 @@ consul() {
   open "http://consul:8500"
 }
 
-htopdocker() {
+dhtop() {
   docker run --rm -it \
     --pid host \
     --net none \

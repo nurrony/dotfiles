@@ -191,18 +191,6 @@ imagemin() {
     ${DOCKER_REPO_PREFIX}/imagemin sh -c "imagemin /root/Pictures/${image} > /root/Pictures/${filename}_min.${extension}"
 }
 
-irssi() {
-  del_stopped irssi
-  # relies_on notify_osd
-
-  docker run --rm -it \
-    --volume /etc/localtime:/etc/localtime:ro \
-    --volume $HOME/.irssi:/home/user/.irssi \
-    --read-only \
-    --name irssi \
-    ${DOCKER_REPO_PREFIX}/irssi
-}
-
 couchdb() {
   del_stopped couchdb
   local state=$(docker inspect --format "{{.State.Running}}" couchdb 2>/dev/null)

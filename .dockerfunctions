@@ -180,13 +180,6 @@ htopdocker() {
     ${DOCKER_REPO_PREFIX}/htop
 }
 
-# http() {
-#   docker run -t --rm \
-#     --volume /var/run/docker.sock:/var/run/docker.sock \
-#     --log-driver none \
-#     alpine/httpie "$@"
-# }
-
 imagemin() {
   local image=$1
   local extension="${image##*.}"

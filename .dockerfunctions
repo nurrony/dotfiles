@@ -125,53 +125,6 @@ EOF
   open "http://${server}"
 }
 
-cadvisor() {
-  docker run -d \
-    --restart always \
-    --volume /:/rootfs:ro \
-    --volume /var/run:/var/run:rw \
-    --volume /sys:/sys:ro \
-    --volume /var/lib/docker/:/var/lib/docker:ro \
-    --publish 1234:8080 \
-    --name cadvisor \
-    google/cadvisor
-
-  sudo hostess add cadvisor $(docker inspect --format "{{.NetworkSettings.Networks.ronsvpn.IPAddress}}" cadvisor)
-  open "http://cadvisor:8080"
-}
-
-consul() {
-  del_stopped consul
-
-  # check if we passed args and if consul is running
-  local args=$@
-  local state=$(docker inspect --format "{{.State.Running}}" consul 2>/dev/null)
-  if [[ "$state" == "true" ]] && [[ ! -z "$args" ]]; then
-    docker exec -it consul consul "$@"
-    return 0
-  fi
-
-  docker run -d \
-    --restart always \
-    --volume $HOME/.consul:/etc/consul.d \
-    --volume /var/run/docker.sock:/var/run/docker.sock \
-    --net host \
-    --env GOMAXPROCS=2 \
-    --name consul \
-    ${DOCKER_REPO_PREFIX}/consul agent \
-    -bootstrap-expect 1 \
-    -config-dir /etc/consul.d \
-    -data-dir /data \
-    -encrypt $(docker run --rm ${DOCKER_REPO_PREFIX}/consul keygen) \
-    -ui-dir /usr/src/consul \
-    -server \
-    -dc neverland \
-    -bind 0.0.0.0
-
-  sudo hostess add consul $(docker inspect --format "{{.NetworkSettings.Networks.ronsvpn.IPAddress}}" consul)
-  open "http://consul:8500"
-}
-
 dhtop() {
   docker run --rm -it \
     --pid host \
@@ -495,7 +448,6 @@ dive() {
     --volume /var/run/docker.sock:/var/run/docker.sock:ro \
     wagoodman/dive:latest "$@"
 }
-
 
 function lazyvim() {
   docker run --interactive --tty --rm \

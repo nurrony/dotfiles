@@ -180,30 +180,6 @@ htopdocker() {
     ${DOCKER_REPO_PREFIX}/htop
 }
 
-couchdb() {
-  del_stopped couchdb
-  local state=$(docker inspect --format "{{.State.Running}}" couchdb 2>/dev/null)
-
-  if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
-    echo "couchdb server is not running, starting it for you."
-    local COUCH_DB_ADMIN=${1:-root}
-    local COUCH_DB_PASS=${2:-nmrony}
-    # create new couchdb container
-    docker run -it -d \
-      --volume ${DEV_ZONE}/storage/couchdb:/usr/local/var/lib/couchdb \
-      --publish 5984:5984 \
-      --publish 2049:2049 \
-      --env COUCHDB_USER=${COUCH_DB_ADMIN} \
-      --env COUCHDB_PASSWORD=${COUCH_DB_PASS} \
-      --env VIRTUAL_HOST=couchdb.nurrony.localhost \
-      --net ronsvpn \
-      --name couchdb \
-      couchdb
-  else
-    echo 'couchdb is already running'
-  fi
-}
-
 mysqlserver() {
   local VERSION=${1:-8}
   local PORT=${2:-3306}

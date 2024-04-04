@@ -172,14 +172,6 @@ consul() {
   open "http://consul:8500"
 }
 
-dcos() {
-  docker run -it --rm \
-    --volume $HOME/.dcos:/root/.dcos \
-    --volume $(pwd):/root/apps \
-    -w /root/apps \
-    ${DOCKER_REPO_PREFIX}/dcos-cli "$@"
-}
-
 htopdocker() {
   docker run --rm -it \
     --pid host \

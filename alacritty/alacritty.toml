@@ -22,11 +22,12 @@ style = "Medium"
 
 
 [window]
-opacity = 0.90
-decorations = "none"
+blur = true
+opacity = 0.50
 dynamic_padding = false
 startup_mode = "Maximized"
+decorations = "Transparent"
 
 [window.padding]
 x = 20
-y = 0
+y = 20

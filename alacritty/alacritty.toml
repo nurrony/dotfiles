@@ -20,11 +20,15 @@ style = "Medium Italic"
 family = "JetBrainsMono Nerd Font Mono"
 style = "Medium"
 
+[scrolling]
+history = 5000
+multiplier = 5
 
 [window]
 blur = true
 opacity = 0.50
 dynamic_padding = false
+option_as_alt = "OnlyLeft"
 startup_mode = "Maximized"
 decorations = "Transparent"
 

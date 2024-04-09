@@ -19,3 +19,14 @@ style = "Medium Italic"
 [font.normal]
 family = "JetBrainsMono Nerd Font Mono"
 style = "Medium"
+
+
+[window]
+opacity = 0.95
+decorations = "none"
+dynamic_padding = false
+startup_mode = "Maximized"
+
+[window.padding]
+x = 20
+y = 0

@@ -33,6 +33,9 @@ style = "Bold Italic"
 history = 5000
 multiplier = 5
 
+[selection]
+save_to_clipboard = true
+
 [window]
 blur = true
 opacity = 0.50

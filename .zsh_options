@@ -1,3 +1,9 @@
+# beeping is annoying
+unsetopt BEEP
+
+# paste behavior
+zle_highlight=('paste:none')
+
 # history options
 setopt hist_ignore_all_dups   # Remove older duplicate entries from history.
 setopt hist_ignore_dups       # Do not record an event that was just recorded again.
@@ -8,6 +14,9 @@ setopt hist_save_no_dups      # Do not write a duplicate event to the history fi
 # list options
 setopt auto_cd              # Use cd by typing directory name if it's not a command.
 setopt auto_list            # Automatically list choices on ambiguous completion.
+setopt extendedglob         #
+setopt nomatch              # nomatch behaviour
+setopt menucomplete         #
 
 # completion style
 zstyle ':completion:*:matches' group 'yes'

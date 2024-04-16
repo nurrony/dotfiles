@@ -38,12 +38,12 @@ save_to_clipboard = true
 
 [window]
 blur = true
-opacity = 0.50
+opacity = 0.70
 dynamic_padding = false
 option_as_alt = "OnlyLeft"
 startup_mode = "Maximized"
-decorations = "Transparent"
+decorations = "buttonless"
 
 [window.padding]
-x = 20
-y = 25
+x = 10
+y = 3

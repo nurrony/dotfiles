@@ -14,7 +14,7 @@ error_symbol = "[❯](red)"
 vimcmd_symbol = "[❮](green)"
 
 [directory]
-truncation_length = 4
+truncation_length = 3
 # Catppuccin 'lavender'
 style = "bold lavender"
 read_only = " 󰌾"

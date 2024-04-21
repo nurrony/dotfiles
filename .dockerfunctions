@@ -259,6 +259,7 @@ mongoserver() {
   fi
 }
 
+# spawn up postgres server. takes version as params. defaults to 16.x.x
 pgserver() {
   local VERSION=${1:-16}
   local PORT=${2:-5432}

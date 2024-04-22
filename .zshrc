@@ -1,22 +1,25 @@
-# for more please check https://zdharma-continuum.github.io/
-ZINIT_HOME="$HOME/.zinit/zinit.git"
-[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
-[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-source "${ZINIT_HOME}/zinit.zsh"
+# check https://wiki.zshell.dev/
+typeset -Ag ZI
+typeset -gx ZI[HOME_DIR]="${HOME}/.zi"
+typeset -gx ZI[BIN_DIR]="${ZI[HOME_DIR]}/bin"
+command mkdir -p "$ZI[BIN_DIR]"
+[ ! -d $ZI[BIN_DIR]/.git ] &&  command git clone https://github.com/z-shell/zi.git "$ZI[BIN_DIR]"
+source "${ZI[BIN_DIR]}/zi.zsh"
 
-zinit wait lucid light-mode for \
+
+zi wait lucid light-mode for \
   pick'alias-tips.plugin.zsh' djui/alias-tips \
   as'completion' zsh-users/zsh-completions \
   as'completion' pick'gradle-completion.plugin.zsh' gradle/gradle-completion \
   as'program' from'gh-r' bpick'*x86_64-apple-darwin.tar.gz' atclone'./zoxide init --cmd=j zsh > init.zsh' src'init.zsh' atpull'%atclone' pick'zoxide/zoxide' ajeetdsouza/zoxide
 
 # install and load starship theme
-zinit ice as"command" from"gh-r" \
+zi ice as"command" from"gh-r" \
   atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
   atpull"%atclone" src"init.zsh"
-zinit light starship/starship
+zi light starship/starship
 
-zinit wait'3' lucid light-mode for \
+zi wait'3' lucid light-mode for \
   OMZP::mvn \
   OMZP::extract \
   OMZP::git \
@@ -25,10 +28,10 @@ zinit wait'3' lucid light-mode for \
 zi ice wait'3' lucid as'program' src'asdf.sh'
 zi light asdf-vm/asdf
 
-# zinit ice wait"10" lucid as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX" nocompile
-# zinit light tj/git-extras
+# zi ice wait"10" lucid as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX" nocompile
+# zi light tj/git-extras
 
-zinit wait'10' lucid light-mode for \
+zi wait'10' lucid light-mode for \
   as'program' from'gh-r' nektos/act \
   as'program' from'gh-r' jesseduffield/lazygit \
   as'program' from'gh-r' mv'tealdeer* -> tldr' dbrgn/tealdeer \
@@ -46,9 +49,9 @@ zinit wait'10' lucid light-mode for \
   as'program' from'gh-r' mv'kind* -> kind' atclone'./kind completion zsh > _kind' atpull'%atclone' pick'kind' kubernetes-sigs/kind \
   as'program' from'gh-r' mv'argocd* -> argocd' atclone'./argocd completion zsh > _argocd' atpull'%atclone' pick'argocd' argoproj/argo-cd \
   as'program' from'gh-r' mv'skaffold* -> skaffold' atclone'./skaffold completion zsh > _skaffold' atpull'%atclone' GoogleContainerTools/skaffold \
-  pick'git-open.plugin.zsh' paulirish/git-open \
-  zdharma-continuum/history-search-multi-word \
-  zdharma-continuum/fast-syntax-highlighting
+  pick'git-open.plugin.zsh' paulirish/git-open
+  # zdharma-continuum/history-search-multi-word \
+  # zdharma-continuum/fast-syntax-highlighting
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
@@ -58,11 +61,9 @@ for file in $HOME/.dotfiles/.{extra,path,exports,aliases,functions,dockerfunctio
 done;
 unset file;
 
-# Next two lines must be below the above two for zi autocomplete
-# autoload -Uz _zinit
-# (( ${+_comps} )) && _comps[zinit]=_zinit
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
+
+autoload -Uz _zi
+(( ${+_comps} )) && _comps[zi]=_zi
 
 autoload -Uz compinit
 compinit

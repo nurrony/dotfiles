@@ -50,7 +50,9 @@ zi wait'10' lucid light-mode for \
   as'program' from'gh-r' mv'kind* -> kind' atclone'./kind completion zsh > _kind' atpull'%atclone' pick'kind' kubernetes-sigs/kind \
   as'program' from'gh-r' mv'argocd* -> argocd' atclone'./argocd completion zsh > _argocd' atpull'%atclone' pick'argocd' argoproj/argo-cd \
   as'program' from'gh-r' mv'skaffold* -> skaffold' atclone'./skaffold completion zsh > _skaffold' atpull'%atclone' GoogleContainerTools/skaffold \
-  pick'git-open.plugin.zsh' paulirish/git-open
+  pick'git-open.plugin.zsh' paulirish/git-open \
+  z-shell/H-S-MW \
+  z-shell/F-Sy-H
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.

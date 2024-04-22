@@ -42,8 +42,8 @@ opacity = 0.85
 dynamic_padding = false
 option_as_alt = "OnlyLeft"
 startup_mode = "Maximized"
-decorations = "buttonless"
+decorations = "Buttonless"
 
 [window.padding]
 x = 10
-y = 3
+y = 0

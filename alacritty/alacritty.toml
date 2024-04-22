@@ -14,20 +14,20 @@ TERM = "xterm-256color"
 size = 16.0
 
 [font.bold]
-family = "JetBrainsMono Nerd Font Mono"
 style = "Bold"
+family = "JetBrainsMono Nerd Font Mono"
 
 [font.italic]
-family = "JetBrainsMono Nerd Font Mono"
 style = "Medium Italic"
+family = "JetBrainsMono Nerd Font Mono"
 
 [font.normal]
-family = "JetBrainsMono Nerd Font Mono"
 style = "Medium"
+family = "JetBrainsMono Nerd Font Mono"
 
 [font.bold_italic]
-family = "JetBrainsMono Nerd Font Mono"
 style = "Bold Italic"
+family = "JetBrainsMono Nerd Font Mono"
 
 [scrolling]
 history = 5000

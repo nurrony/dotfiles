@@ -37,6 +37,7 @@ zi wait'10' lucid light-mode for \
   as'program' from'gh-r' mv'tealdeer* -> tldr' dbrgn/tealdeer \
   as'program' from'gh-r' mv'mkcert* -> mkcert' FiloSottile/mkcert \
   as'program' from'gh-r' mv'hadolint* -> hadolint' hadolint/hadolint \
+  as'program' pick'$ZPFX/bin/git-*' make'PREFIX=$ZPFX' nocompile tj/git-extras \
   as'program' from'gh-r' mv'yt-dlp* -> yt-dlp' bpick'yt-dlp_macos' yt-dlp/yt-dlp \
   as'program' from'gh-r' mv'kube-explorer* -> kube-explorer' cnrancher/kube-explorer \
   as'program' from'gh-r' mv'cs* -> coursier' bpick'cs-*-apple-darwin.gz' coursier/coursier \
@@ -50,8 +51,6 @@ zi wait'10' lucid light-mode for \
   as'program' from'gh-r' mv'argocd* -> argocd' atclone'./argocd completion zsh > _argocd' atpull'%atclone' pick'argocd' argoproj/argo-cd \
   as'program' from'gh-r' mv'skaffold* -> skaffold' atclone'./skaffold completion zsh > _skaffold' atpull'%atclone' GoogleContainerTools/skaffold \
   pick'git-open.plugin.zsh' paulirish/git-open
-  # zdharma-continuum/history-search-multi-word \
-  # zdharma-continuum/fast-syntax-highlighting
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.

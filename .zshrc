@@ -33,7 +33,6 @@ zi light asdf-vm/asdf
 
 zi wait'10' lucid light-mode for \
   as'program' from'gh-r' nektos/act \
-  as'program' from'gh-r' zellij-org/zellij \
   as'program' from'gh-r' jesseduffield/lazygit \
   as'program' from'gh-r' mv'tealdeer* -> tldr' dbrgn/tealdeer \
   as'program' from'gh-r' mv'mkcert* -> mkcert' FiloSottile/mkcert \

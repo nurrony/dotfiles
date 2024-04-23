@@ -46,4 +46,4 @@ decorations = "Buttonless"
 
 [window.padding]
 x = 10
-y = 0
+y = 15

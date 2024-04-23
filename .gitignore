@@ -347,4 +347,4 @@ local.properties
 # Spring Boot Tooling
 .sts4-cache/
 
-plugins/
+plugins

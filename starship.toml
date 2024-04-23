@@ -1,34 +1,51 @@
-# Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
+
 
 command_timeout = 3000
 
 scan_timeout = 10
 
-# Inserts a blank line between shell prompts
-add_newline = true
+format = """
+[](surface0)\
+$os\
+$username\
+[](bg:peach fg:surface0)\
+$directory\
+[](fg:peach bg:orange)\
+$git_branch\
+$git_status\
+[](fg:orange bg:teal)\
+$c\
+$rust\
+$golang\
+$nodejs\
+$scala\
+$php\
+$java\
+$kotlin\
+$lua\
+$haskell\
+$python\
+$terraform\
+[](fg:teal bg:blue)\
+$aws\
+$package\
+$kubernetes\
+$docker_context\
+[](fg:blue bg:purple)\
+$time\
+$cmd_duration\
+$jobs\
+[ ](fg:purple)\
+$line_break$character"""
 
-# Sets user-defined palette
-palette = "catppuccin_mocha"
+palette = 'catppuccin_mocha'
 
-[character]
-# Note the use of Catppuccin color 'maroon'
-error_symbol = "[❯](red)"
-vimcmd_symbol = "[❮](green)"
-
-[directory]
-truncation_length = 3
-# Catppuccin 'lavender'
-style = "bold lavender"
-read_only = " 󰌾"
-
-
-# palette tables should be last in the config ⚓️
 [palettes.catppuccin_mocha]
 rosewater = "#f5e0dc"
 flamingo = "#f2cdcd"
 pink = "#f5c2e7"
-mauve = "#cba6f7"
+orange = "#cba6f7"
 red = "#f38ba8"
 maroon = "#eba0ac"
 peach = "#fab387"
@@ -52,115 +69,165 @@ base = "#1e1e2e"
 mantle = "#181825"
 crust = "#11111b"
 
-
-[cmd_duration]
-min_time = 500
-
-[aws]
-disabled = true
-symbol = "󰸏 "
-style = "bold green"
-format = 'on [$symbol($profile )(\($region\) )(\[$duration\])]($style)'
-
-[azure]
+[os]
 disabled = false
-format = "on [$symbol($subscription)]($style) "
-symbol = "󰠅 "
-style = "blue bold"
+style = "bg:surface0 fg:text"
 
-[battery]
-full_symbol = "󰁹 "
-charging_symbol = "󰂄 "
-discharging_symbol = "󱟤 "
-unknown_symbol = "󰂑 "
+[os.symbols]
+Windows = "󰍲"
+Ubuntu = "󰕈"
+SUSE = ""
+Raspbian = "󰐿"
+Mint = "󰣭"
+Macos = ""
+Manjaro = ""
+Linux = "󰌽"
+Gentoo = "󰣨"
+Fedora = "󰣛"
+Alpine = ""
+Amazon = ""
+Android = ""
+Arch = "󰣇"
+Artix = "󰣇"
+CentOS = ""
+Debian = "󰣚"
+Redhat = "󱄛"
+RedHatEnterprise = "󱄛"
 
-[[battery.display]]
-threshold = 30
-style = "bold red"
+[username]
+show_always = true
+style_user = "bg:surface0 fg:text"
+style_root = "bg:surface0 fg:text"
+format = '[ $user ]($style)'
 
-[dart]
-symbol = " "
-format = "via [$version](bold green) "
-
+[directory]
+style = "fg:mantle bg:peach"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
 
 [directory.substitutions]
-"Documents" = "Documents "
-"Downloads" = "Downloads "
-"Music" = "Music 󰠃"
-"Pictures" = "Pictures "
-
-[docker_context]
-symbol = " "
-style = "bold blue"
-only_with_files = true
-disabled = false
-
-[gcloud]
-disabled = true
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = "󰝚 "
+"Pictures" = " "
+"Developer" = "󰲋 "
 
 [git_branch]
-symbol = " "
-
-[git_commit]
-commit_hash_length = 8
+symbol = ""
+style = "bg:black"
+format = '[[ $symbol $branch ](fg:base bg:orange)]($style)'
 
 [git_status]
-ahead = "⇡${count}"
-diverged = "⇕⇡${ahead_count}⇣${behind_count}"
-behind = "⇣${count}"
+style = "bg:black"
+format = '[[($all_status$ahead_behind )](fg:base bg:orange)]($style)'
 
-[golang]
-symbol = " "
+[nodejs]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol($version) ](fg:base bg:teal)]($style)'
 
-[helm]
-format = 'via [$symbol]($style)'
-
-[java]
-symbol = " "
-style = "bold green"
-
-[jobs]
-disabled = false
-number_threshold = 1
-symbol = ' '
-
-[kubernetes]
-symbol = '󱃾 '
-style = "bold blue"
-disabled = false
-
-[lua]
-symbol = ' '
-
-[memory_usage]
-symbol = "󰍛 "
-
-[package]
-display_private = true
-
-[php]
-symbol = " "
-
-[scala]
-style = "bold red"
-symbol = " "
-
-[python]
-style = "bold yellow"
-symbol = " "
-
-[ruby]
-symbol = " "
+[c]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol($version) ](fg:base bg:teal)]($style)'
 
 [rust]
 symbol = " "
+style = "bg:teal"
+format = '[[ $symbol($version) ](fg:base bg:teal)]($style)'
+
+[golang]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol($version) ](fg:base bg:teal)]($style)'
+
+[php]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol($version) ](fg:base bg:teal)]($style)'
+
+[java]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol($version) ](fg:base bg:teal)]($style)'
+
+[kotlin]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol($version) ](fg:base bg:teal)]($style)'
+
+[haskell]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol($version) ](fg:base bg:teal)]($style)'
+
+[python]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol($version) ](fg:base bg:teal)]($style)'
+
+[lua]
+symbol = ' '
+style = "bg:teal"
+format = '[[ $symbol($version) ](fg:base bg:teal)]($style)'
 
 [terraform]
 symbol = "󱁢 "
+style = "bg:teal"
+format = '[[ $symbol($version) ](fg:base bg:teal)]($style)'
 
-[username]
-style_user = "white bold"
-style_root = "black bold"
-format = " [$user]($style) "
+[docker_context]
+symbol = " "
+style = "bg:mantle"
+format = '[[ $symbol($context) ](fg:black bg:blue)]($style)'
+
+[time]
 disabled = false
-show_always = true
+time_format = "%R"
+style = "bg:peach"
+format = '[[  $time ](fg:mantle bg:purple)]($style)'
+
+[package]
+display_private = true
+symbol = "📦 "
+style = "bg:mantle"
+format = '[[ $symbol($version) ](fg:black bg:blue)]($style)'
+
+[aws]
+disabled = false
+symbol = "󰸏 "
+style = "bg:mantle"
+format = '[[ $symbol($profile)(\($region\) )](fg:black bg:blue)]($style)'
+
+[jobs]
+symbol = ' '
+disabled = false
+style = "bg:peach"
+number_threshold = 1
+format = '[[ $symbol$number ](fg:mantle bg:purple)]($style)'
+
+[kubernetes]
+symbol = '󱃾 '
+disabled = false
+style = "bg:mantle"
+format = '[[ $symbol$context( \($namespace\)) ](fg:black bg:blue)]($style)'
+
+[cmd_duration]
+min_time = 1000
+style = "bg:peach"
+show_milliseconds = false
+format = '[[  took $duration ](fg:mantle bg:purple)]($style)'
+
+
+[line_break]
+disabled = false
+
+[character]
+disabled = false
+success_symbol = '[❯](bold fg:green)'
+error_symbol = '[❯](bold fg:red)'
+vimcmd_symbol = '[❮](bold fg:creen)'
+vimcmd_replace_one_symbol = '[❮](bold fg:purple)'
+vimcmd_replace_symbol = '[❮](bold fg:purple)'
+vimcmd_visual_symbol = '[❮](bold fg:lavender)'

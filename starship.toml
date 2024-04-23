@@ -217,7 +217,7 @@ format = '[[ $symbol$context( \($namespace\)) ](fg:black bg:blue)]($style)'
 min_time = 1000
 style = "bg:peach"
 show_milliseconds = false
-format = '[[  took $duration ](fg:mantle bg:purple)]($style)'
+format = '[[  $duration ](fg:mantle bg:purple)]($style)'
 
 
 [line_break]

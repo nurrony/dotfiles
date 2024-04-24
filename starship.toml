@@ -1,8 +1,6 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
-
 command_timeout = 3000
-
 scan_timeout = 10
 
 format = """
@@ -26,10 +24,10 @@ $kotlin\
 $lua\
 $haskell\
 $python\
-$terraform\
 [](fg:teal bg:blue)\
 $aws\
 $package\
+$terraform\
 $kubernetes\
 $docker_context\
 [](fg:blue bg:purple)\

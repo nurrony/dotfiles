@@ -28,9 +28,6 @@ zi wait'3' lucid light-mode for \
 zi ice wait'3' lucid as'program' src'asdf.sh'
 zi light asdf-vm/asdf
 
-# zi ice wait"10" lucid as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX" nocompile
-# zi light tj/git-extras
-
 zi wait'10' lucid light-mode for \
   as'program' from'gh-r' nektos/act \
   as'program' from'gh-r' jesseduffield/lazygit \

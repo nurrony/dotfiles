@@ -49,7 +49,7 @@ I use **iTerm2** and **Zsh** together with these followings, so you need to inst
 - [Starship Prompt][starship-link]
 - [Shade of Purple for ITerm Theme][shades-of-purple].
 
-You can import my settings by importing [iTerm Profile][./assets/Rony-iTerm.json] file
+You can import my settings by importing [iTerm Profile][iterm-profile-file] file
 
 ### Special thanks to
 
@@ -59,4 +59,4 @@ You can import my settings by importing [iTerm Profile][./assets/Rony-iTerm.json
 
 [starship-link]: https://starship.rs/
 [shades-of-purple]: https://github.com/ahmadawais/Shades-of-Purple-iTerm2
-[iterm-dir-link]: iterm2/
+[iterm-profile-file]: ./assets/Rony-iTerm.json

@@ -47,7 +47,7 @@ I have switched from Vim to NeoVim. To setup NeoVim Editor, Please check [`NVIM`
 I use **iTerm2** and **Zsh** together with these followings, so you need to install these as well
 
 - [Starship Prompt][starship-link]
-- [Shade of Purple for ITerm Theme][shades-of-purple].
+- [Catppuccin for ITerm Theme][catppuccin-iterm].
 
 You can import my settings by importing [iTerm Profile][iterm-profile-file] file
 
@@ -58,5 +58,5 @@ You can import my settings by importing [iTerm Profile][iterm-profile-file] file
 - [Starship Theme Contributors][starship-link] for Starship theme
 
 [starship-link]: https://starship.rs/
-[shades-of-purple]: https://github.com/ahmadawais/Shades-of-Purple-iTerm2
+[catppuccin-iterm]: https://github.com/catppuccin/iterm
 [iterm-profile-file]: ./assets/Rony-iTerm.json

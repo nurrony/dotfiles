@@ -49,7 +49,7 @@ I use **iTerm2** and **Zsh** together with these followings, so you need to inst
 - [Starship Prompt][starship-link]
 - [Catppuccin for ITerm Theme][catppuccin-iterm].
 - Any Nerd Font of your choice. I like [JetBrains Mono](https://www.programmingfonts.org/#jetbrainsmono)
-  You can import my settings by importing [iTerm Profile][iterm-profile-file] file
+- You can import my settings by importing [iTerm Profile][iterm-profile-file] file
 
 ### Special thanks to
 

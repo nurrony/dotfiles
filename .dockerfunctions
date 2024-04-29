@@ -8,7 +8,7 @@ export DOCKER_REPO_PREFIX=jess
 alias dpsa="docker ps --all"
 alias ddown='docker rm --force'
 
-# cleans all docker resources. run it cautiously 
+# cleans all docker resources. run it cautiously
 dcleanup() {
   docker container prune --force 2>/dev/null
   docker volume prune --force 2>/dev/null
@@ -17,6 +17,7 @@ dcleanup() {
   docker builder prune --force 2>/dev/null
 }
 
+# deletes stopped containers
 del_stopped() {
   local name=$1
   local state
@@ -27,6 +28,7 @@ del_stopped() {
   fi
 }
 
+# bring up local container registry
 ctr-registry-up() {
   local state=$(docker inspect --format "{{.State.Running}}" registry 2>/dev/null)
   if [[ "$state" == "true" ]] || [[ "$state" != "" ]]; then
@@ -36,11 +38,14 @@ ctr-registry-up() {
   echo 'registry started successfully...'
 }
 
+# down local container registry
 ctr-rgistry-down() {
   docker-compose -f $DEV_ZONE/storage/k8s-clusters/registry/docker-compose.yml down
   echo 'registry is down successfully'
 }
 
+# checks if target container relies on other and ensure to run dependent
+# containers before running the target container
 relies_on() {
   for container in "$@"; do
     local state

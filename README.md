@@ -36,7 +36,7 @@ When setting up a new Mac, you may want to install some common Homebrew formulae
 
 ### Configure Vim Editor
 
-I have switched from Vim to NeoVim. To setup NeoVim Editor, Please check [`NVIM`](https://github.com/nurrony/nvim) repository for more on editor.
+I have switched from Vim to NeoVim. To setup NeoVim Editor, Please check [`My NeoVim PDE`](https://github.com/nurrony/nvim) repository for more on NeoVim configuration.
 
 ### Terminal theme and tweaks
 

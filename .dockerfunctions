@@ -57,7 +57,7 @@ relies_on() {
     fi
   done
 }
-
+# bring up nginx-reverse proxy
 nginx-proxy() {
   del_stopped nginx-proxy
   local state=$(docker inspect --format "{{.State.Running}}" nginx-proxy 2>/dev/null)

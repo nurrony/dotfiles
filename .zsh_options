@@ -16,7 +16,6 @@ setopt auto_cd              # Use cd by typing directory name if it's not a comm
 setopt auto_list            # Automatically list choices on ambiguous completion.
 setopt extendedglob         #
 setopt nomatch              # nomatch behaviour
-setopt menucomplete         #
 
 # completion style
 zstyle ':completion:*:matches' group 'yes'

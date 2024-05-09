@@ -1,3 +1,8 @@
+
+# key bindings
+bindkey "^[[A" history-search-backward
+bindkey "^[[B" history-search-forward
+
 # check https://wiki.zshell.dev/
 typeset -Ag ZI
 typeset -gx ZI[HOME_DIR]="${HOME}/.zi"

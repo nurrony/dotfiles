@@ -13,8 +13,8 @@ source "${ZI[BIN_DIR]}/zi.zsh"
 
 
 zi wait lucid light-mode for \
-  pick'alias-tips.plugin.zsh' djui/alias-tips \
   as'completion' zsh-users/zsh-completions \
+  pick'alias-tips.plugin.zsh' djui/alias-tips \
   as'completion' pick'gradle-completion.plugin.zsh' gradle/gradle-completion \
   as'program' from'gh-r' bpick'*x86_64-apple-darwin.tar.gz' atclone'./zoxide init --cmd=j zsh > init.zsh' src'init.zsh' atpull'%atclone' pick'zoxide/zoxide' ajeetdsouza/zoxide
 
@@ -73,3 +73,6 @@ autoload -Uz _zi
 autoload -Uz compinit
 compinit
 zi cdreplay -q
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/terraform terraform

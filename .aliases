@@ -219,5 +219,3 @@ alias setjhome='source $HOME/.asdf/plugins/java/set-java-home.zsh'
 # # Python alias
 # alias python=/usr/bin/python3
 # alias pip=/usr/local/bin/pip3
-
-export STARSHIP_CONFIG=$HOME/.dotfiles/starship.toml

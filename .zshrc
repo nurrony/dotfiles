@@ -28,7 +28,6 @@ zi wait'3' lucid light-mode for \
   OMZP::git \
   OMZP::mvn \
   OMZP::extract \
-  OMZP::terraform \
   as'program' from'gh-r' mv'direnv* -> direnv' atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' pick'direnv' src'zhook.zsh' direnv/direnv
 
 zi ice wait'3' lucid as'program' src'asdf.sh'

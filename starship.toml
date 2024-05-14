@@ -173,7 +173,7 @@ format = '[[ $symbol($version) ](fg:base bg:teal)]($style)'
 [terraform]
 symbol = "󱁢 "
 style = "bg:teal"
-format = '[[ $symbol($version) ](fg:base bg:teal)]($style)'
+format = '[[ $symbol($version) ](fg:base bg:blue)]($style)'
 
 [docker_context]
 symbol = " "

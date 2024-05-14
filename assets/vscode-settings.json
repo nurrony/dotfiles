@@ -230,7 +230,7 @@
   "shfmt.executablePath": "",
   "spring-boot.ls.java.home": "/Users/nurrony/.asdf/installs/java/graalvm",
   "telemetry.telemetryLevel": "off",
-  "terminal.external.osxExec": "Alacritty.app",
+  "terminal.external.osxExec": "iTerm.app",
   "terminal.integrated.copyOnSelection": true,
   "terminal.integrated.env.osx": {},
   "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font Mono', Monaco, monospace",

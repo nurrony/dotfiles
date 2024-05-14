@@ -72,7 +72,6 @@ autoload -Uz _zi
 
 autoload -Uz compinit
 compinit
-zi cdreplay -q
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform

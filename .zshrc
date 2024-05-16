@@ -68,8 +68,8 @@ done;
 unset file;
 
 
-autoload -Uz _zi
-(( ${+_comps} )) && _comps[zi]=_zi
+# autoload -Uz _zi
+# (( ${+_comps} )) && _comps[zi]=_zi
 
-autoload -Uz compinit
-compinit
+autoload -Uz compinit && compinit
+zi cdreplay -q

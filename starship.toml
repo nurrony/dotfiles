@@ -7,12 +7,12 @@ format = """
 [](surface0)\
 $os\
 $username\
-[](bg:peach fg:surface0)\
+[](bg:peach fg:surface0)\
 $directory\
-[](fg:peach bg:orange)\
+[](fg:peach bg:orange)\
 $git_branch\
 $git_status\
-[](fg:orange bg:teal)\
+[](fg:orange bg:teal)\
 $c\
 $rust\
 $golang\
@@ -24,13 +24,13 @@ $kotlin\
 $lua\
 $haskell\
 $python\
-[](fg:teal bg:blue)\
+[](fg:teal bg:blue)\
 $aws\
 $package\
 $terraform\
 $kubernetes\
 $docker_context\
-[](fg:blue bg:purple)\
+[](fg:blue bg:purple)\
 $time\
 $cmd_duration\
 $jobs\

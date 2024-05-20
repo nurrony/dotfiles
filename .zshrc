@@ -18,7 +18,7 @@ zi wait lucid light-mode for \
   as'completion' pick'gradle-completion.plugin.zsh' gradle/gradle-completion \
   as'program' from'gh-r' bpick'*x86_64-apple-darwin.tar.gz' atclone'./zoxide init --cmd=j zsh > init.zsh' src'init.zsh' atpull'%atclone' pick'zoxide/zoxide' ajeetdsouza/zoxide
 
-# install and load starship theme
+# install and load starship theme÷
 zi ice as"command" from"gh-r" \
   atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
   atpull"%atclone" src"init.zsh"

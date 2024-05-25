@@ -45,5 +45,5 @@ startup_mode = "Maximized"
 decorations = "Transparent"
 
 [window.padding]
-x = 10
+x = 5
 y = 30

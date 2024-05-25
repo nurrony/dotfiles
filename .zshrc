@@ -64,8 +64,6 @@ zi wait'10' lucid light-mode for \
   z-shell/H-S-MW \
   z-shell/F-Sy-H
 
-zi ice as"completion"
-zi snippet https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/terraform/_terraform
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.

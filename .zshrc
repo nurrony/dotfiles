@@ -7,8 +7,8 @@ bindkey "^[[B" history-search-forward
 typeset -Ag ZI
 typeset -gx ZI[HOME_DIR]="${HOME}/.zi"
 typeset -gx ZI[BIN_DIR]="${ZI[HOME_DIR]}/bin"
-command mkdir -p "$ZI[BIN_DIR]"
-[ ! -d $ZI[BIN_DIR]/.git ] &&  command git clone https://github.com/z-shell/zi.git "$ZI[BIN_DIR]"
+[ ! -d $ZI[BIN_DIR] ] && command mkdir -p "$ZI[BIN_DIR]"
+[ ! -d $ZI[BIN_DIR]/.git ] && command git clone https://github.com/z-shell/zi.git "$ZI[BIN_DIR]"
 source "${ZI[BIN_DIR]}/zi.zsh"
 
 

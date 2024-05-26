@@ -13,7 +13,7 @@ cd $HOME && \
 rm -fr $HOME/.dotfiles/.git && \
 mv .zshrc .zshrc.pre-nurrony-dotfiles && \
 ln -sf $HOME/.dotfiles/.{p10k.zsh,zshrc,curlrc,gemrc,gitattribute,gitconfig,gitignore,vimrc,wgetrc,inputrc,screenrc,hushlogin} $HOME/
-ln -sf $HOME/.dotfiles/{tmux,alacritty} $HOME/.config
+ln -sf $HOME/.dotfiles/{tmux,alacritty} $HOME/.config/
 echo '==> All are done. Applying changes...'
 source $HOME/.zshrc && \
 printf "\nTo prepare your pc more developer friendly you can run the following scripts\n\n"

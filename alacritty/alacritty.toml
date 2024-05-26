@@ -42,7 +42,7 @@ opacity = 0.85
 dynamic_padding = false
 option_as_alt = "Both"
 startup_mode = "Windowed"
-decorations = "Transparent"
+decorations = "None"
 
 [window.padding]
 x = 5

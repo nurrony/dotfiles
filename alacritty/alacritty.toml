@@ -45,5 +45,5 @@ startup_mode = "Windowed"
 decorations = "None"
 
 [window.padding]
-x = 5
-y = 30
+x = 0
+y = 5

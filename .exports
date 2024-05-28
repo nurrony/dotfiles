@@ -1,5 +1,8 @@
 #!/usr/bin/env zsh
 
+# Disable padding
+export ZLE_RPROMPT_INDENT=0
+
 # Set Development zone
 export DEV_ZONE=$DEV_DIR
 

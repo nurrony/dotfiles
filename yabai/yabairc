@@ -5,11 +5,11 @@ yabai -m config layout bsp
 yabai -m config window_placement second_child
 
 # padding set to 2px
-yabai -m config window_gap 2
-yabai -m config top_padding 2
-yabai -m config left_padding 2
-yabai -m config right_padding 2
-yabai -m config bottom_padding 2
+yabai -m config window_gap 1
+yabai -m config top_padding 1
+yabai -m config left_padding 1
+yabai -m config right_padding 1
+yabai -m config bottom_padding 1
 
 # center mouse on window with focus
 yabai -m config mouse_follows_focus on
@@ -28,6 +28,7 @@ yabai -m mouse_drop_action swap
 
 # Disable specific apps from being managed with yabai.
 yabai -m rule --add app="^Skype$" manage=off
+yabai -m rule --add app="^Infuse$" manage=off
 yabai -m rule --add app="^Finder$" manage=off
 yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^Rocket.Chat$" manage=off

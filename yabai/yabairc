@@ -27,6 +27,7 @@ yabai -m config mouse_action2 resize
 yabai -m mouse_drop_action swap
 
 # Disable specific apps from being managed with yabai.
+yabai -m rule --add app="^Folx$" manage=off
 yabai -m rule --add app="^Skype$" manage=off
 yabai -m rule --add app="^Infuse$" manage=off
 yabai -m rule --add app="^Finder$" manage=off

@@ -30,9 +30,12 @@ yabai -m mouse_drop_action swap
 
 # Disable specific apps from being managed with yabai.
 yabai -m rule --add app="^Folx$" manage=off
+yabai -m rule --add app="^Music$" manage=off
 yabai -m rule --add app="^Finder$" manage=off
 yabai -m rule --add app="^Docker$" manage=off
 yabai -m rule --add app="^Infuse$" manage=off
 yabai -m rule --add app="^Calculator$" manage=off
+yabai -m rule --add app="^Activity Monitor$" manage=off
+yabai -m rule --add app="^Alfred Preferences$" manage=off
 yabai -m rule --add app="^System Preferences$" manage=off
 yabai -m rule --add app="^Karabiner-Elements$" manage=off

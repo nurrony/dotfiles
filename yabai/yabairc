@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 # default layout (can be bsp, stack or float)
 yabai -m config layout bsp
 

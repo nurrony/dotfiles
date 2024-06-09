@@ -31,10 +31,13 @@ zi wait lucid light-mode for \
 # zi ice depth'1' atload"[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh" nocd
 # zi light romkatv/powerlevel10k
 
-# # install and load ohmyposh theme÷
-zi ice as"command" from"gh-r" mv'posh-* -> oh-my-posh' \
+# # install and load ohmyposh theme
+if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
+  zi ice as"command" from"gh-r" mv'posh-* -> oh-my-posh' \
   atclone"./oh-my-posh completion zsh > _oh_my_posh" atpull"%atclone" atload'eval "$(oh-my-posh init zsh)"'
-zi light JanDeDobbeleer/oh-my-posh
+  zi light JanDeDobbeleer/oh-my-posh
+fi
+
 
 zi wait'3' lucid light-mode for \
   OMZP::git \

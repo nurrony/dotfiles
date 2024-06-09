@@ -2,9 +2,9 @@
 bindkey "^[[A" history-search-backward
 bindkey "^[[B" history-search-forward
 
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
 
 # check https://wiki.zshell.dev/
 typeset -Ag ZI
@@ -28,8 +28,13 @@ zi wait lucid light-mode for \
 # zi light starship/starship
 
 # install powerline10k
-zi ice depth'1' atload"[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh" nocd
-zi light romkatv/powerlevel10k
+# zi ice depth'1' atload"[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh" nocd
+# zi light romkatv/powerlevel10k
+
+# # install and load ohmyposh theme÷
+zi ice as"command" from"gh-r" mv'posh-* -> oh-my-posh' \
+  atclone"./oh-my-posh completion zsh > _oh_my_posh" atpull"%atclone" atload'eval "$(oh-my-posh init zsh)"'
+zi light JanDeDobbeleer/oh-my-posh
 
 zi wait'3' lucid light-mode for \
   OMZP::git \

@@ -269,6 +269,10 @@ mongoserver() {
   fi
 }
 
+mongo() {
+  docker exec -t mongoserver5 mongo "$@"
+}
+
 # spawn up postgres server. takes version as params. defaults to 16.x.x
 pgserver() {
   local VERSION=${1:-16}

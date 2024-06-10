@@ -34,7 +34,7 @@ zi wait lucid light-mode for \
 # # install and load ohmyposh theme
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
   zi ice as"command" from"gh-r" mv'posh-* -> oh-my-posh' \
-  atclone"./oh-my-posh completion zsh > _oh_my_posh" atpull"%atclone" atload'eval "$(oh-my-posh init zsh)"'
+  atclone"./oh-my-posh completion zsh > _oh_my_posh" atpull"%atclone" atload'eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/zen.toml)"'
   zi light JanDeDobbeleer/oh-my-posh
 fi
 

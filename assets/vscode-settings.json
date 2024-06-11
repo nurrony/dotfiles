@@ -2,7 +2,9 @@
   "[dart]": {
     "editor.defaultFormatter": "Dart-Code.dart-code",
     "editor.formatOnType": true,
-    "editor.rulers": [80],
+    "editor.rulers": [
+      80
+    ],
     "editor.selectionHighlight": false,
     "editor.suggest.snippetsPreventQuickSuggestions": false,
     "editor.suggestSelection": "first",
@@ -96,7 +98,9 @@
     "strings": "on"
   },
   "editor.renderWhitespace": "boundary",
-  "editor.rulers": [120],
+  "editor.rulers": [
+    120
+  ],
   "editor.semanticHighlighting.enabled": true,
   "editor.snippetSuggestions": "top",
   "editor.suggest.matchOnWordStartOnly": false,
@@ -198,7 +202,11 @@
   "javascript.updateImportsOnFileMove.enabled": "never",
   "js/ts.implicitProjectConfig.checkJs": true,
   "json.schemas": [],
-  "Lua.diagnostics.globals": ["vim", "nvim_bufferline", "sign"],
+  "Lua.diagnostics.globals": [
+    "vim",
+    "nvim_bufferline",
+    "sign"
+  ],
   "markdown.validate.enabled": true,
   "maven.executable.path": "/Users/nurrony/.asdf/shims/mvn",
   "maven.terminal.useJavaHome": true,

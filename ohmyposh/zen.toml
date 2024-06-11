@@ -34,14 +34,14 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
       max_depth = 2
 
   [[blocks.segments]]
-    background = "#FFE873"
+    background = "#f4ae35"
     background_templates = [
-      "{{ if or (.Working.Changed) (.Staging.Changed) }}#FFE873{{ end }}",
-      "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#FFE873{{ end }}",
-      "{{ if gt .Ahead 0 }}#FFE873{{ end }}",
-      "{{ if gt .Behind 0 }}#FFE873{{ end }}"
+      "{{ if or (.Working.Changed) (.Staging.Changed) }}#f4ae35{{ end }}",
+      "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#f4ae35{{ end }}",
+      "{{ if gt .Ahead 0 }}#f4ae35{{ end }}",
+      "{{ if gt .Behind 0 }}#f4ae35{{ end }}"
     ]
-    foreground = "#000000"
+    foreground = "#212121"
     powerline_symbol = "\ue0b4"
     style = "powerline"
     template = " {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }} "
@@ -76,8 +76,8 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     style = "diamond"
     leading_diamond = ""
     trailing_diamond = ""
-    foreground = "#000"
-    background = "#c386f2 "
+    foreground = "#36454F"
+    background = "#FFE873"
     template = "  {{ .Full }}"
 
   [[blocks.segments]]
@@ -85,8 +85,8 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     style = "diamond"
     leading_diamond = ""
     trailing_diamond = ""
-    foreground = "#000"
-    background = "#c386f2 "
+    foreground = "#36454F"
+    background = "#FFE873"
     template = "  {{ .Full }}"
 
   [[blocks.segments]]
@@ -94,7 +94,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     style = "diamond"
     leading_diamond = ""
     trailing_diamond = ""
-    foreground = "#000"
+    foreground = "#36454F"
     background = "#3C82F6"
     template = "🥟 {{ .Full }}"
 
@@ -103,8 +103,8 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     style = "diamond"
     leading_diamond = ""
     trailing_diamond = ""
-    foreground = "#000"
-    background = "#c386f2 "
+    foreground = "#36454F"
+    background = "#FFE873"
     template = " 󰬷 {{ .Full }}"
 
   [[blocks.segments]]
@@ -112,8 +112,8 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     style = "diamond"
     leading_diamond = ""
     trailing_diamond = ""
-    foreground = "#000"
-    background = "#c386f2 "
+    foreground = "#36454F"
+    background = "#FFE873"
     template = "  {{ .Full }}"
 
   [[blocks.segments]]
@@ -121,8 +121,8 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     style = "diamond"
     leading_diamond = ""
     trailing_diamond = ""
-    foreground = "#000"
-    background = "#c386f2 "
+    foreground = "#36454F"
+    background = "#FFE873"
     template = "  {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}"
 
   [[blocks.segments]]
@@ -130,8 +130,8 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     style = "diamond"
     leading_diamond = ""
     trailing_diamond = ""
-    foreground = "#000"
-    background = "#c386f2 "
+    foreground = "#36454F"
+    background = "#FFE873"
     template = "  {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
 
   [[blocks.segments]]
@@ -139,8 +139,8 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     style = "diamond"
     leading_diamond = ""
     trailing_diamond = ""
-    foreground = "#000"
-    background = "#c386f2 "
+    foreground = "#36454F"
+    background = "#FFE873"
     template = " 󰢱 {{ .Full }}"
 
   [[blocks.segments]]
@@ -148,8 +148,8 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     style = "diamond"
     leading_diamond = ""
     trailing_diamond = ""
-    foreground = "#000"
-    background = "#c386f2 "
+    foreground = "#36454F"
+    background = "#FFE873"
     template = " {{ .Full }}"
 
   [[blocks.segments]]
@@ -157,8 +157,8 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     style = "diamond"
     leading_diamond = ""
     trailing_diamond = ""
-    foreground = "#000"
-    background = "#c386f2"
+    foreground = "#36454F"
+    background = "#FFE873"
     template = " {{ .Full }}"
 
   [[blocks.segments]]

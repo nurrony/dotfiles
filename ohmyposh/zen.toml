@@ -22,13 +22,16 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     foreground = "#e4e4e4"
     powerline_symbol = "\ue0b4"
     style = "powerline"
-    template = "{{ .Path }}"
+    template = "{{ .Path }} "
     type = "path"
 
     [blocks.segments.properties]
-      folder_icon = ' '
+      folder_icon = "  .."
       home_icon = ' 󱂵 ~'
-      style = "folder"
+      style = "agnoster_short"
+      folder_separator_icon = "/"
+      hide_root_location = true
+      max_depth = 2
 
   [[blocks.segments]]
     background = "#95ffa5"

@@ -4,7 +4,9 @@ version = 2
 final_space = true
 console_title_template = '{{ .Shell }} in {{ .Folder }}'
 
-# Blocks: Left Side Segments
+# -----------------------------
+# Blocks: Left segments
+# -----------------------------
 [[blocks]]
   alignment = "left"
   type = "prompt"
@@ -34,12 +36,12 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
       max_depth = 2
 
   [[blocks.segments]]
-    background = "#f4ae35"
+    background = "#fcbc05"
     background_templates = [
-      "{{ if or (.Working.Changed) (.Staging.Changed) }}#f4ae35{{ end }}",
-      "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#f4ae35{{ end }}",
-      "{{ if gt .Ahead 0 }}#f4ae35{{ end }}",
-      "{{ if gt .Behind 0 }}#f4ae35{{ end }}"
+      "{{ if or (.Working.Changed) (.Staging.Changed) }}#fcbc05{{ end }}",
+      "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#fcbc05{{ end }}",
+      "{{ if gt .Ahead 0 }}#fcbc05{{ end }}",
+      "{{ if gt .Behind 0 }}#fcbc05{{ end }}"
     ]
     foreground = "#212121"
     powerline_symbol = "\ue0b4"
@@ -53,7 +55,22 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     fetch_status = true
     fetch_upstream_icon = true
 
-# blocks: Right Segments
+# -----------------------------
+# Blocks: Right segments
+# - status
+# - node
+# - angular
+# - bun
+# - java
+# - php
+# - python
+# - ruby
+# - lua
+# - golang
+# - rust
+# - project
+# - executiontime
+# -----------------------------
 [[blocks]]
   alignment = "right"
   type = "prompt"
@@ -77,7 +94,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     leading_diamond = ""
     trailing_diamond = ""
     foreground = "#36454F"
-    background = "#b389ff"
+    background = "#95ffa5"
     template = "  {{ .Full }}"
 
   [[blocks.segments]]
@@ -86,7 +103,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     leading_diamond = ""
     trailing_diamond = ""
     foreground = "#36454F"
-    background = "#b389ff"
+    background = "#95ffa5"
     template = "  {{ .Full }}"
 
   [[blocks.segments]]
@@ -104,7 +121,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     leading_diamond = ""
     trailing_diamond = ""
     foreground = "#36454F"
-    background = "#b389ff"
+    background = "#95ffa5"
     template = " 󰬷 {{ .Full }}"
 
   [[blocks.segments]]
@@ -113,7 +130,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     leading_diamond = ""
     trailing_diamond = ""
     foreground = "#36454F"
-    background = "#b389ff"
+    background = "#95ffa5"
     template = "  {{ .Full }}"
 
   [[blocks.segments]]
@@ -122,7 +139,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     leading_diamond = ""
     trailing_diamond = ""
     foreground = "#36454F"
-    background = "#b389ff"
+    background = "#95ffa5"
     template = "  {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}"
 
   [[blocks.segments]]
@@ -131,7 +148,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     leading_diamond = ""
     trailing_diamond = ""
     foreground = "#36454F"
-    background = "#b389ff"
+    background = "#95ffa5"
     template = "  {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
 
   [[blocks.segments]]
@@ -140,7 +157,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     leading_diamond = ""
     trailing_diamond = ""
     foreground = "#36454F"
-    background = "#b389ff"
+    background = "#95ffa5"
     template = " 󰢱 {{ .Full }}"
 
   [[blocks.segments]]
@@ -149,7 +166,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     leading_diamond = ""
     trailing_diamond = ""
     foreground = "#36454F"
-    background = "#b389ff"
+    background = "#95ffa5"
     template = " {{ .Full }}"
 
   [[blocks.segments]]
@@ -158,7 +175,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     leading_diamond = ""
     trailing_diamond = ""
     foreground = "#36454F"
-    background = "#b389ff"
+    background = "#95ffa5"
     template = " {{ .Full }}"
 
   [[blocks.segments]]
@@ -166,8 +183,8 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     style = "diamond"
     leading_diamond = ""
     trailing_diamond = ""
-    foreground = "#38474f"
-    background = "#4db6ac"
+    foreground = "#232f3e"
+    background = "#b389ff"
     template = " {{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }} {{.Version}}{{ end }}{{ end }}"
 
   [[blocks.segments]]
@@ -179,7 +196,14 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     trailing_diamond = ""
     type = "executiontime"
 
-# blocks: Left prompt sign
+
+# -----------------------------
+# Blocks: Terminal Input
+# - prompt: magenta when ok and red when error
+# - transient_prompt
+# - secondary_prompt
+# - debug_prompt
+# -----------------------------
 [[blocks]]
   type = 'prompt'
   alignment = 'left'
@@ -214,12 +238,21 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
   template = 'Debugging ❯❯ '
 
 
-
+# -----------------------------
+# Tootips section
+# - terraform
+# - aws
+# - docker
+# - azure
+# - gcp
+# - kubectl
+# -----------------------------
 [[tooltips]]
   type = "terraform"
   tips = [ "terraform", "tf", "tfa", "tfc", "tfd", "tff", "tfi", "tfo", "tfp", "tfs", "tfsh", "tft", "tfv" ]
   style = "plain"
   template = "󱁢 {{.Version}}"
+  foreground = "#b18bdd"
   [tooltips.properties]
     fetch_version = true
 
@@ -227,29 +260,41 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
   type = "aws"
   tips = [ "aws", "eb", "ecs", "eksctl"]
   style = "plain"
+  foreground = "#ff9a01"
   template = " 󰸏 {{.Profile}}{{if .Region}}@{{.Region}}{{end}}"
 
 [[tooltips]]
   type = "docker"
   tips = [ "docker", "docker-compose", "dc", "dcleanup"]
   style = "plain"
+  foreground = "#cda4f6"
 
 [[tooltips]]
   type = "az"
   tips = [ "az"]
   style = "plain"
+  foreground = "#33b0e5"
   template = "  {{ .EnvironmentName }}"
 
 [[tooltips]]
   type = "gcp"
   tips = [ "gcp", "gcloud"]
   style = "plain"
+  foreground = "#34a853"
+  template = "  {{.Project}} :: {{.Account}} "
+
+[[tooltips]]
+  type = "helm"
+  tips = [ "gcp", "gcloud"]
+  style = "plain"
+  foreground = "#004daa"
   template = "  {{.Project}} :: {{.Account}} "
 
 [[tooltips]]
   type = "kubectl"
   tips = [ "kubectl", "k8s", "k9s", "krew"]
   style = "plain"
+  foreground = "#326ce5"
   template = " 󱃾 {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}} "
   # [tooltips.properties.context_aliases]
   #   "arn:aws:eks:eu-west-1:1234567890:cluster/posh" = "posh"

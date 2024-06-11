@@ -88,6 +88,16 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     [blocks.segments.properties]
       always_enabled = true
 
+
+  [[blocks.segments]]
+    type = "cmake"
+    style = "diamond"
+    leading_diamond = ""
+    trailing_diamond = ""
+    foreground = "#36454F"
+    background = "#95ffa5"
+    template = "  {{ if .Error }}{{ .Error }}{{ else }}{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}{{ end }}"
+
   [[blocks.segments]]
     type = "node"
     style = "diamond"
@@ -95,7 +105,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     trailing_diamond = ""
     foreground = "#36454F"
     background = "#95ffa5"
-    template = "  {{ .Full }}"
+    template = "  {{ if .Error }}{{ .Error }}{{ else }}{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}{{ end }}"
 
   [[blocks.segments]]
     type = "angular"
@@ -104,7 +114,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     trailing_diamond = ""
     foreground = "#36454F"
     background = "#95ffa5"
-    template = "  {{ .Full }}"
+    template = "  {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
 
   [[blocks.segments]]
     type = "bun"
@@ -113,7 +123,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     trailing_diamond = ""
     foreground = "#36454F"
     background = "#3C82F6"
-    template = "🥟 {{ .Full }}"
+    template = "🥟 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
 
   [[blocks.segments]]
     type = "java"
@@ -122,7 +132,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     trailing_diamond = ""
     foreground = "#36454F"
     background = "#95ffa5"
-    template = " 󰬷 {{ .Full }}"
+    template = " 󰬷 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
 
   [[blocks.segments]]
     type = "php"
@@ -131,7 +141,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     trailing_diamond = ""
     foreground = "#36454F"
     background = "#95ffa5"
-    template = "  {{ .Full }}"
+    template = "  {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
 
   [[blocks.segments]]
     type = "python"
@@ -140,7 +150,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     trailing_diamond = ""
     foreground = "#36454F"
     background = "#95ffa5"
-    template = "  {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}"
+    template = "  {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}{{ end }}"
 
   [[blocks.segments]]
     type = "ruby"
@@ -149,7 +159,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     trailing_diamond = ""
     foreground = "#36454F"
     background = "#95ffa5"
-    template = "  {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
+    template = "  {{ if .Error }}{{ .Error }}{{ else }}{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}{{ end }}"
 
   [[blocks.segments]]
     type = "lua"
@@ -158,7 +168,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     trailing_diamond = ""
     foreground = "#36454F"
     background = "#95ffa5"
-    template = " 󰢱 {{ .Full }}"
+    template = " 󰢱 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
 
   [[blocks.segments]]
     type = "go"
@@ -167,7 +177,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     trailing_diamond = ""
     foreground = "#36454F"
     background = "#95ffa5"
-    template = " {{ .Full }}"
+    template = " {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
 
   [[blocks.segments]]
     type = "rust"
@@ -176,7 +186,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     trailing_diamond = ""
     foreground = "#36454F"
     background = "#95ffa5"
-    template = " {{ .Full }}"
+    template = " {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
 
   [[blocks.segments]]
     type = "project"

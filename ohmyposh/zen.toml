@@ -67,6 +67,8 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
 # - ruby
 # - lua
 # - golang
+# - dart
+# - flutter
 # - rust
 # - project
 # - executiontime
@@ -169,6 +171,24 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     foreground = "#36454F"
     background = "#95ffa5"
     template = " 󰢱 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
+
+  [[blocks.segments]]
+    type = "dart"
+    style = "diamond"
+    leading_diamond = ""
+    trailing_diamond = ""
+    foreground = "#36454F"
+    background = "#95ffa5"
+    template = " {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
+
+  [[blocks.segments]]
+    type = "flutter"
+    style = "diamond"
+    leading_diamond = ""
+    trailing_diamond = ""
+    foreground = "#36454F"
+    background = "#95ffa5"
+    template = " {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
 
   [[blocks.segments]]
     type = "go"

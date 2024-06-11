@@ -16,7 +16,6 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     foreground = "white"
     leading_diamond = "\ue0b6"
     style = "diamond"
-    template = " {{ if .WSL }}WSL at {{ end }}{{.Icon}} "
     type = "os"
 
   [[blocks.segments]]
@@ -24,9 +23,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     foreground = "#e4e4e4"
     powerline_symbol = "\ue0b4"
     style = "powerline"
-    template = "{{ .Path }} "
     type = "path"
-
     [blocks.segments.properties]
       folder_icon = "  .."
       home_icon = ' 󱂵 ~'
@@ -34,6 +31,13 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
       folder_separator_icon = "/"
       hide_root_location = true
       max_depth = 2
+        [blocks.segments.properties.mapped_locations]
+          "~/Music" = "󰝚 Music"
+          "~/Movies" = " Movies"
+          "~/Pictures"  = " Pictures"
+          "~/Downloads" = " Downloads"
+          "~/Documents" = "󰈙 Documents"
+          "~/Developer" = "󰲋 Developer"
 
   [[blocks.segments]]
     background = "#fcbc05"
@@ -46,7 +50,6 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     foreground = "#212121"
     powerline_symbol = "\ue0b4"
     style = "powerline"
-    template = " {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }} "
     type = "git"
 
     [blocks.segments.properties]
@@ -76,7 +79,6 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
 [[blocks]]
   alignment = "right"
   type = "prompt"
-
 
   [[blocks.segments]]
     background = "#444"

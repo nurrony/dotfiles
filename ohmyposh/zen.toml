@@ -26,7 +26,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     type = "path"
 
     [blocks.segments.properties]
-    home_icon = "~"
+    home_icon = "󱂵 ~"
     style = "folder"
 
   [[blocks.segments]]

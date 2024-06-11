@@ -19,12 +19,12 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     type = "os"
 
   [[blocks.segments]]
-    background = "#313244"
-    foreground = "#e4e4e4"
+    background = "#b389ff" #"#313244"
+    foreground = "#232f3e"
     powerline_symbol = "\ue0b4"
     style = "powerline"
     type = "path"
-    template = "{{ if not .Writable }} 󰌾{{end}} {{ .Path }} "
+    template = "{{ if not .Writable }} 󰌾 {{end}}{{ .Path }}"
     [blocks.segments.properties]
       folder_icon = "  .."
       home_icon = ' 󱂵 ~'
@@ -33,12 +33,12 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
       hide_root_location = true
       max_depth = 2
         [blocks.segments.properties.mapped_locations]
-          "~/Music" = "󰝚 Music"
-          "~/Movies" = " Movies"
-          "~/Pictures"  = " Pictures"
-          "~/Downloads" = " Downloads"
-          "~/Documents" = "󰈙 Documents"
-          "~/Developer" = "󰲋 Developer"
+          "~/Music" = " 󰝚 Music"
+          "~/Movies" = "  Movies"
+          "~/Pictures"  = "  Pictures"
+          "~/Downloads" = "  Downloads"
+          "~/Documents" = " 󰈙 Documents"
+          "~/Devzone" = " 󰲋 Devzone"
 
   [[blocks.segments]]
     background = "#fcbc05"
@@ -216,8 +216,8 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     style = "diamond"
     leading_diamond = ""
     trailing_diamond = ""
-    foreground = "#232f3e"
-    background = "#b389ff"
+    foreground = "#212121"
+    background = "#cfd8dc"
     template = " {{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }} {{.Version}}{{ end }}{{ end }}"
 
   [[blocks.segments]]

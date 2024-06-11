@@ -10,7 +10,7 @@ setopt hist_ignore_dups       # Do not record an event that was just recorded ag
 setopt hist_ignore_space      # Do not record an Event Starting With A Space.
 setopt hist_reduce_blanks     # Remove superfluous blanks from history items.
 setopt hist_save_no_dups      # Do not write a duplicate event to the history file.
-
+setopt hist_verify            # Allow editing the command before executing again
 # list options
 setopt auto_cd              # Use cd by typing directory name if it's not a command.
 setopt auto_list            # Automatically list choices on ambiguous completion.

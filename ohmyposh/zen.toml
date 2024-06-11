@@ -24,6 +24,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     powerline_symbol = "\ue0b4"
     style = "powerline"
     type = "path"
+    template = "{{ if not .Writable }} 󰌾{{end}} {{ .Path }} "
     [blocks.segments.properties]
       folder_icon = "  .."
       home_icon = ' 󱂵 ~'

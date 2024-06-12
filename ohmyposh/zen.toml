@@ -12,8 +12,8 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
   type = "prompt"
 
   [[blocks.segments]]
-    background = "black"
-    foreground = "white"
+    background = "#717378"
+    foreground = "#000"
     leading_diamond = "\ue0b6"
     style = "diamond"
     type = "os"
@@ -221,7 +221,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     template = " {{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }} {{.Version}}{{ end }}{{ end }}"
 
   [[blocks.segments]]
-    background = "#203348"
+    background = "#D21F3C"
     foreground = "#ccc"
     style = "diamond"
     template = " 󱦟 {{ .FormattedMs }}"

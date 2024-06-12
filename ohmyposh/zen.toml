@@ -221,7 +221,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     template = " {{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }} {{.Version}}{{ end }}{{ end }}"
 
   [[blocks.segments]]
-    background = "#D21F3C"
+    background = "#FF5A5F"
     foreground = "#ccc"
     style = "diamond"
     template = " 󱦟 {{ .FormattedMs }}"
@@ -247,7 +247,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     style = 'plain'
     foreground_templates = [
       "{{if gt .Code 0}}red{{end}}",
-      "{{if eq .Code 0}}magenta{{end}}",
+      "{{if eq .Code 0}}green{{end}}",
     ]
     background = 'transparent'
     template = '❯'
@@ -255,7 +255,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
 [transient_prompt]
   foreground_templates = [
     "{{if gt .Code 0}}red{{end}}",
-    "{{if eq .Code 0}}magenta{{end}}",
+    "{{if eq .Code 0}}green{{end}}",
   ]
   background = 'transparent'
   template = '❯ '

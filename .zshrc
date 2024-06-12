@@ -2,9 +2,9 @@
 bindkey "^[[A" history-search-backward
 bindkey "^[[B" history-search-forward
 
-# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-# fi
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
 # check https://wiki.zshell.dev/
 typeset -Ag ZI
@@ -21,6 +21,13 @@ zi wait lucid light-mode for \
   as'completion' pick'gradle-completion.plugin.zsh' gradle/gradle-completion \
   as'program' from'gh-r' bpick'*x86_64-apple-darwin.tar.gz' atclone'./zoxide init --cmd=j zsh > init.zsh' src'init.zsh' atpull'%atclone' pick'zoxide/zoxide' ajeetdsouza/zoxide
 
+# install and load ohmyposh theme
+# if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
+#   zi ice as"command" from"gh-r" mv'posh-* -> oh-my-posh' \
+#   atclone"./oh-my-posh completion zsh > _oh_my_posh" atpull"%atclone" atload'eval "$(oh-my-posh init zsh --config $HOME/.zen.omp.toml)"'
+#   zi light JanDeDobbeleer/oh-my-posh
+# fi
+
 # # install and load starship theme÷
 # zi ice as"command" from"gh-r" \
 #   atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
@@ -28,16 +35,8 @@ zi wait lucid light-mode for \
 # zi light starship/starship
 
 # install powerline10k
-# zi ice depth'1' atload"[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh" nocd
-# zi light romkatv/powerlevel10k
-
-# # install and load ohmyposh theme
-if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
-  zi ice as"command" from"gh-r" mv'posh-* -> oh-my-posh' \
-  atclone"./oh-my-posh completion zsh > _oh_my_posh" atpull"%atclone" atload'eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/zen.toml)"'
-  zi light JanDeDobbeleer/oh-my-posh
-fi
-
+zi ice depth'1' atload"[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh" nocd
+zi light romkatv/powerlevel10k
 
 zi wait'3' lucid light-mode for \
   OMZP::git \

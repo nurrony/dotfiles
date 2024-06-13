@@ -7,26 +7,36 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
 # -----------------------------
 # Blocks: Left segments
 # -----------------------------
+[palette]
+  blue = "#b389ff"
+  green = "#95ffa5"
+  crayola = "#313244"
+  charcoal = "#43302E"
+  pale_navy = "#cdd6f4"
+  ink_black = "#212122"
+  space_grey = "#717378"
+  airbnb_red = "#FF5A5F"
+
 [[blocks]]
   alignment = "left"
   type = "prompt"
 
   [[blocks.segments]]
-    background = "#717378"
+    background = "p:space_grey"
     foreground = "#000"
     leading_diamond = "\ue0b6"
     style = "diamond"
     type = "os"
 
   [[blocks.segments]]
-    background = "#b389ff" #"#313244"
-    foreground = "#232f3e"
+    background = "p:crayola"
+    foreground = "p:pale_navy"
     powerline_symbol = "\ue0b4"
     style = "powerline"
     type = "path"
     template = "{{ if not .Writable }} 󰌾 {{end}}{{ .Path }}"
     [blocks.segments.properties]
-      folder_icon = "  .."
+      folder_icon = " \uf07c .."
       home_icon = ' 󱂵 ~'
       style = "agnoster_short"
       folder_separator_icon = "/"
@@ -37,7 +47,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
           "~/Movies" = "  Movies"
           "~/Pictures"  = "  Pictures"
           "~/Downloads" = "  Downloads"
-          "~/Documents" = " 󰈙 Documents"
+          "~/Documents" = " 󱔗 Documents"
           "~/Devzone" = " 󰲋 Devzone"
 
   [[blocks.segments]]
@@ -48,7 +58,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
       "{{ if gt .Ahead 0 }}#fcbc05{{ end }}",
       "{{ if gt .Behind 0 }}#fcbc05{{ end }}"
     ]
-    foreground = "#212121"
+    foreground = "p:ink_black"
     powerline_symbol = "\ue0b4"
     style = "powerline"
     type = "git"
@@ -84,7 +94,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
   [[blocks.segments]]
     background = "#444"
     background_templates = [ "{{ if gt .Code 0 }}#cc2222{{ end }}" ]
-    foreground = "#d3d7cf"
+    foreground = "p:green"
     leading_diamond = ""
     trailing_diamond = ""
     style = "diamond"
@@ -99,8 +109,8 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     style = "diamond"
     leading_diamond = ""
     trailing_diamond = ""
-    foreground = "#36454F"
-    background = "#95ffa5"
+    foreground = "p:charcoal"
+    background = "p:green"
     template = "  {{ if .Error }}{{ .Error }}{{ else }}{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}{{ end }}"
 
   [[blocks.segments]]
@@ -108,8 +118,8 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     style = "diamond"
     leading_diamond = ""
     trailing_diamond = ""
-    foreground = "#36454F"
-    background = "#95ffa5"
+    foreground = "p:charcoal"
+    background = "p:green"
     template = "  {{ if .Error }}{{ .Error }}{{ else }}{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}{{ end }}"
 
   [[blocks.segments]]
@@ -117,8 +127,8 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     style = "diamond"
     leading_diamond = ""
     trailing_diamond = ""
-    foreground = "#36454F"
-    background = "#95ffa5"
+    foreground = "p:charcoal"
+    background = "p:green"
     template = "  {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
 
   [[blocks.segments]]
@@ -126,7 +136,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     style = "diamond"
     leading_diamond = ""
     trailing_diamond = ""
-    foreground = "#36454F"
+    foreground = "p:charcoal"
     background = "#3C82F6"
     template = "🥟 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
 
@@ -135,8 +145,8 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     style = "diamond"
     leading_diamond = ""
     trailing_diamond = ""
-    foreground = "#36454F"
-    background = "#95ffa5"
+    foreground = "p:charcoal"
+    background = "p:green"
     template = " 󰬷 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
 
   [[blocks.segments]]
@@ -144,8 +154,8 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     style = "diamond"
     leading_diamond = ""
     trailing_diamond = ""
-    foreground = "#36454F"
-    background = "#95ffa5"
+    foreground = "p:charcoal"
+    background = "p:green"
     template = "  {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
 
   [[blocks.segments]]
@@ -153,8 +163,8 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     style = "diamond"
     leading_diamond = ""
     trailing_diamond = ""
-    foreground = "#36454F"
-    background = "#95ffa5"
+    foreground = "p:charcoal"
+    background = "p:green"
     template = "  {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}{{ end }}"
 
   [[blocks.segments]]
@@ -162,8 +172,8 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     style = "diamond"
     leading_diamond = ""
     trailing_diamond = ""
-    foreground = "#36454F"
-    background = "#95ffa5"
+    foreground = "p:charcoal"
+    background = "p:green"
     template = "  {{ if .Error }}{{ .Error }}{{ else }}{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}{{ end }}"
 
   [[blocks.segments]]
@@ -171,8 +181,8 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     style = "diamond"
     leading_diamond = ""
     trailing_diamond = ""
-    foreground = "#36454F"
-    background = "#95ffa5"
+    foreground = "p:charcoal"
+    background = "p:green"
     template = " 󰢱 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
 
   [[blocks.segments]]
@@ -180,8 +190,8 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     style = "diamond"
     leading_diamond = ""
     trailing_diamond = ""
-    foreground = "#36454F"
-    background = "#95ffa5"
+    foreground = "p:charcoal"
+    background = "p:green"
     template = " {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
 
   [[blocks.segments]]
@@ -189,8 +199,8 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     style = "diamond"
     leading_diamond = ""
     trailing_diamond = ""
-    foreground = "#36454F"
-    background = "#95ffa5"
+    foreground = "p:charcoal"
+    background = "p:green"
     template = " {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
 
   [[blocks.segments]]
@@ -198,8 +208,8 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     style = "diamond"
     leading_diamond = ""
     trailing_diamond = ""
-    foreground = "#36454F"
-    background = "#95ffa5"
+    foreground = "p:charcoal"
+    background = "p:green"
     template = " {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
 
   [[blocks.segments]]
@@ -207,8 +217,8 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     style = "diamond"
     leading_diamond = ""
     trailing_diamond = ""
-    foreground = "#36454F"
-    background = "#95ffa5"
+    foreground = "p:charcoal"
+    background = "p:green"
     template = " {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
 
   [[blocks.segments]]
@@ -216,13 +226,13 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     style = "diamond"
     leading_diamond = ""
     trailing_diamond = ""
-    foreground = "#212121"
-    background = "#cfd8dc"
+    foreground = "p:ink_black"
+    background = "p:blue"
     template = " {{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }} {{.Version}}{{ end }}{{ end }}"
 
   [[blocks.segments]]
-    background = "#FF5A5F"
-    foreground = "#ccc"
+    background = "p:airbnb_red"
+    foreground = "p:pale_navy"
     style = "diamond"
     template = " 󱦟 {{ .FormattedMs }}"
     leading_diamond = ""

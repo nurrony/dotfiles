@@ -6,14 +6,6 @@ bindkey "^[[B" history-search-forward
 #   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 # fi
 
-# check https://wiki.zshell.dev/
-# typeset -Ag ZI
-# typeset -gx ZI[HOME_DIR]="${HOME}/.zi"
-# typeset -gx ZI[BIN_DIR]="${ZI[HOME_DIR]}/bin"
-# [ ! -d $ZI[BIN_DIR] ] && command mkdir -p "$ZI[BIN_DIR]"
-# [ ! -d $ZI[BIN_DIR]/.git ] && command git clone https://github.com/z-shell/zi.git "$ZI[BIN_DIR]"
-# source "${ZI[BIN_DIR]}/zi.zsh"
-
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
@@ -33,7 +25,7 @@ if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
   zi light JanDeDobbeleer/oh-my-posh
 fi
 
-# # # install and load starship theme÷
+# install and load starship theme
 # zi ice as"command" from"gh-r" \
 #   atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
 #   atpull"%atclone" src"init.zsh"
@@ -65,11 +57,12 @@ zinit wait'10' lucid light-mode for \
   as'program' from'gh-r' mv'hostess* -> hostess' bpick'hostess_macos_amd64' cbednarski/hostess \
   as'program' from'gh-r' atclone'./kondo --completions zsh > _kondo' atpull'%atclone' tbillington/kondo \
   as'program' from'gh-r' bpick'*x86_64-apple-darwin.tar.gz' mv'dua-* -> dua' pick'dua/dua' Byron/dua-cli \
+  as'program' from'gh-r' atclone'./hostctl completion zsh > _hostsctl' atpull'%atclone' guumaster/hostctl \
   as'program' from'gh-r' atclone'ln -sfv completions/dog.zsh _dog' atpull'%atclone' pick'bin/dog' ogham/dog \
-  as"program" atclone'cp ./bin/git-* $ZPFX/bin' atpull'%atclone' pick"$ZPFX/bin/git-*" nocompile tj/git-extras \
   as'program' from'gh-r' mv'k3d* -> k3d' atclone'./k3d completion zsh > _k3d' atpull'%atclone' pick'k3d' k3d-io/k3d \
   as'program' from'gh-r' mv'kind* -> kind' atclone'./kind completion zsh > _kind' atpull'%atclone' pick'kind' kubernetes-sigs/kind \
   as'program' from'gh-r' mv'argocd* -> argocd' atclone'./argocd completion zsh > _argocd' atpull'%atclone' pick'argocd' argoproj/argo-cd \
+  as"program" atclone"make install PREFIX=$ZPFX" src'etc/git-extras-completion.zsh' atpull"%atclone" pick"$ZPFX/bin/git-*" tj/git-extras \
   as'program' from'gh-r' mv'skaffold* -> skaffold' atclone'./skaffold completion zsh > _skaffold' atpull'%atclone' GoogleContainerTools/skaffold \
   pick'git-open.plugin.zsh' paulirish/git-open \
   zdharma-continuum/history-search-multi-word \

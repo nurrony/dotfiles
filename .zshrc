@@ -36,7 +36,6 @@ zinit wait'10' lucid light-mode for \
   as'program' from'gh-r' mv'yt-dlp* -> yt-dlp' bpick'yt-dlp_macos' yt-dlp/yt-dlp \
   as'program' from'gh-r' mv'kube-explorer* -> kube-explorer' cnrancher/kube-explorer \
   as'program' from'gh-r' mv'cs* -> coursier' bpick'cs-*-apple-darwin.gz' coursier/coursier \
-  as'program' from'gh-r' mv'hostess* -> hostess' bpick'hostess_macos_amd64' cbednarski/hostess \
   as'program' from'gh-r' atclone'./kondo --completions zsh > _kondo' atpull'%atclone' tbillington/kondo \
   as'program' from'gh-r' bpick'*x86_64-apple-darwin.tar.gz' mv'dua-* -> dua' pick'dua/dua' Byron/dua-cli \
   as'program' from'gh-r' atclone'./hostctl completion zsh > _hostsctl' atpull'%atclone' guumaster/hostctl \
@@ -58,6 +57,9 @@ for file in $HOME/.dotfiles/.{extra,path,exports,aliases,functions,dockerfunctio
 done;
 unset file;
 
+#------------
+#  THEMES
+#------------
 
 # install and load starship theme
 # zi ice as"command" from"gh-r" \

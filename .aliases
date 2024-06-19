@@ -171,16 +171,16 @@ alias ips="sudo ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\
 # Clean up LaunchServices to remove duplicates in the “Open With” menu
 alias lscleanup="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
 
-# View HTTP traffic
+# view HTTP traffic
 alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
 alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
 
-# One of @janmoesen’s ProTip™s
+# one of @janmoesen’s ProTip™s
 for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
   alias "$method"="lwp-request -m '$method'"
 done
 
-#Vagrant network list
+# vagrant network list
 alias vbox-nets="vboxmanage list bridgedifs"
 
 # git commitzen aliases
@@ -190,7 +190,7 @@ alias gcz='git-cz'
 alias k8s="kubectl"
 alias nukedevship='k3d cluster stop devship && k3d cluster delete devship && echo "\ndevship k8s cluster has been nuked"'
 
-# Minikube alias
+# minikube alias
 alias minikube-start='minikube start --cpus 2 --disk-size "50g" --memory 4096 --extra-config=apiserver.authorization-mode=RBAC --extra-config=apiserver.runtime-config=settings.k8s.io/v1alpha1=true'
 alias minikube-reg='minikube start --insecure-registry localhost:5000'
 

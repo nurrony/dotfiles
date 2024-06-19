@@ -198,6 +198,9 @@ alias minikube-reg='minikube start --insecure-registry localhost:5000'
 alias vi=nvim
 alias vim=nvim
 
+# hostctl alias
+hostctl="sudo hostctl"
+
 # docker terminal ui
 alias lzd='lazydocker'
 

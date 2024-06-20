@@ -23,7 +23,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
 
   [[blocks.segments]]
     background = "p:space_grey"
-    foreground = "#000"
+    foreground = "#080808"
     leading_diamond = "\ue0b6"
     style = "diamond"
     type = "os"

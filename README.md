@@ -46,8 +46,12 @@ I have switched from Vim to NeoVim. To setup NeoVim Editor, Please check [`My Ne
 
 I use **iTerm2** and **Zsh** together with these followings, so you need to install these as well
 
-- [Starship Prompt][starship-link]
-- [Catppuccin for ITerm Theme][catppuccin-iterm].
+- Themes
+  - There are configuration for most popular ZSH prompt themes. Copy your favourite theme configuration file in your HOME directory. Uncomment the lines in [`zshrc`](./.zshrc) to load the theme.
+    - [Powerlevel10k][p10k-link]
+    - [Starship][starship-link]
+    - [Oh My Posh][omp-link]
+  - ITerm: [Catppuccin for ITerm Theme][catppuccin-iterm].
 - Any Nerd Font of your choice. I like [JetBrains Mono](https://www.programmingfonts.org/#jetbrainsmono)
 - You can import my settings by importing [iTerm Profile][iterm-profile-file] file
 
@@ -55,8 +59,12 @@ I use **iTerm2** and **Zsh** together with these followings, so you need to inst
 
 - [Mathias Bynens](https://twitter.com/mathias)
 - [Paul Irish](https://twitter.com/paul_irish)
-- [Starship Theme Contributors][starship-link] for Starship theme
+- [Oh My Posh Contributors][omp-link] for Oh My Posh theme
+- [Starship Contributors][starship-link] for Starship theme
+- [Powerlevel10k Contributors][p10k-link] for Powerlevel10k theme
 
+[omp-link]: https://ohmyposh.dev/
 [starship-link]: https://starship.rs/
-[catppuccin-iterm]: https://github.com/catppuccin/iterm
 [iterm-profile-file]: ./assets/Rony-iTerm.json
+[p10k-link]: https://github.com/romkatv/powerlevel10k
+[catppuccin-iterm]: https://github.com/catppuccin/iterm

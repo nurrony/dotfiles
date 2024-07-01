@@ -4,6 +4,10 @@ import = [
   # "~/.config/alacritty/themes/catppuccin-macchiato.toml"
 ]
 
+[shell]
+program = "/bin/zsh"
+args = ["--login", "-c", "zellij", "attach", "--create", "rony"]
+
 [bell]
 animation = "EaseOutExpo"
 

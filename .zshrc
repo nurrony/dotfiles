@@ -15,7 +15,6 @@ zinit wait lucid light-mode for \
   as'completion' zsh-users/zsh-completions \
   pick'alias-tips.plugin.zsh' djui/alias-tips \
   as'completion' pick'gradle-completion.plugin.zsh' gradle/gradle-completion \
-  as'program' from'gh-r' atclone'./zellij setup --generate-completion zsh > _zellij' atpull'%atclone' zellij-org/zellij \
   as'program' from'gh-r' bpick'*x86_64-apple-darwin.tar.gz' atclone'./zoxide init --cmd=j zsh > init.zsh' src'init.zsh' atpull'%atclone' pick'zoxide/zoxide' ajeetdsouza/zoxide
 
 zinit wait'3' lucid light-mode for \

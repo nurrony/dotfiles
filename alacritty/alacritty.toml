@@ -6,7 +6,7 @@ import = [
 
 [shell]
 program = "/bin/zsh"
-args = ["--login", "-c", "zellij", "attach", "--create", "rony"]
+args = ["--login", "-c", "zellij attach --create $USER"]
 
 [bell]
 animation = "EaseOutExpo"
@@ -45,7 +45,7 @@ blur = true
 opacity = 0.85
 dynamic_padding = false
 option_as_alt = "Both"
-startup_mode = "Windowed"
+startup_mode = "Maximized"
 decorations = "Buttonless"
 
 [window.padding]

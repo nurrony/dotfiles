@@ -10,6 +10,10 @@ draw_bold_text_with_bright_colors = true
 program = "/bin/zsh"
 args = ["--login", "-c", "zellij attach --create $USER"]
 
+[cursor.vi_mode_style]
+blinking = "Off"
+shape = "Block"
+
 [bell]
 animation = "EaseOutExpo"
 

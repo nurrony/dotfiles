@@ -55,5 +55,5 @@ startup_mode = "Maximized"
 decorations = "Buttonless"
 
 [window.padding]
-x = 0
+x = 5
 y = 0

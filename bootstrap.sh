@@ -9,20 +9,21 @@ if ! fgrep -q '/usr/local/bin/zsh' /etc/shells; then
 fi;
 
 cd $HOME && \
-# clone .dotfile
 rm -fr $HOME/.dotfiles/.git && \
 mv .zshrc .zshrc.pre-nurrony-dotfiles && \
-ln -sf $HOME/.dotfiles/.{p10k.zsh,zshrc,curlrc,gemrc,gitattribute,gitconfig,gitignore,vimrc,wgetrc,inputrc,screenrc,hushlogin} $HOME/
-ln -sf $HOME/.dotfiles/{tmux,alacritty,zellij} $HOME/.config/
-echo '==> All are done. Applying changes...'
-source $HOME/.zshrc && \
-printf "\nTo prepare your pc more developer friendly you can run the following scripts\n\n"
-printf 'chmod +x ./brew.sh && ./brew.sh\n\n'
+ln -sf $HOME/.dotfiles/.{zshrc,curlrc,gemrc,gitattribute,gitconfig,gitignore,wgetrc,inputrc,screenrc,hushlogin} $HOME/
 
+ln -sf $HOME/.dotfiles/{tmux,alacritty,zellij,skhd,yabai} $HOME/.config/
+echo "Creating '~/.dotfiles/.extra' file to write custom configurations that you might not want to share"
+touch $HOME/.dotfiles/.extra
+echo "Installing Homebrew formulas and VSCode extensions..."
+brew bundle install --verbose --file=$HOME/.dotfiles/Brewfile
+echo "==> All setup done."
+echo
 printf "To customise your macOS installation according to most developer\'s preferences run the following command\n"
 
 printf 'chmod +x ./.macos && ./.macos\n\n'
 
 printf 'INFORMATION: Please create .extra in you HOME directory to override or for customizing configurations'
 
-echo 'Happy Hacking 🛠🛠'
+echo 'Please restart your terminal and Happy Hacking 🛠🛠'

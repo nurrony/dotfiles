@@ -73,3 +73,5 @@ export CHROME_EXECUTABLE="/Applications/Brave Browser.app/Contents/MacOS/Brave B
 
 # asdf golang settings
 export ASDF_GOLANG_MOD_VERSION_ENABLED=true
+
+export POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true

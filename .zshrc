@@ -68,11 +68,9 @@ unset file;
 # zi light starship/starship
 
 # install powerline10k
-if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
-  set termguicolors
   zinit ice depth'1' atload"[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh" nocd
   zinit light romkatv/powerlevel10k
-fi
+
 # install and load ohmyposh theme
 # if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
 #   set termguicolors

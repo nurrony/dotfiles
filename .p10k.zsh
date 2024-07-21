@@ -553,7 +553,7 @@
   ###################[ command_execution_time: duration of the last command ]###################
   # Execution time color.
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND=#cdd6f4
-  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND=#cc2222
+  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND=#FF5A5F
   # Show duration of the last command if takes at least this many seconds.
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=1
   # Show this many fractional digits. Zero means round to seconds.

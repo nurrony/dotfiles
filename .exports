@@ -6,9 +6,6 @@ export ZLE_RPROMPT_INDENT=0
 # Set Development zone
 export DEV_ZONE=$DEV_ZONE
 
-# ZPlug Dir
-export ZI_HOME=$DEV_ZONE_CONFIG_PATH/zi
-
 # Export starship theme config location
 export STARSHIP_CONFIG=$HOME/.starship
 

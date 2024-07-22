@@ -47,7 +47,7 @@ I have switched from Vim to NeoVim. To setup NeoVim Editor, Please check [`My Ne
 I use **iTerm2** and **Zsh** together with these followings, so you need to install these as well
 
 - Themes
-  - There are configuration for most popular ZSH prompt themes. Copy your favourite theme configuration file in your HOME directory. Uncomment the lines in [`zshrc`](./.zshrc) to load the theme.
+  - There are configuration for most popular ZSH prompt themes. Uncomment the lines in [`zshrc`](./.zshrc) to load the theme.
     - [Powerlevel10k][p10k-link]
     - [Starship][starship-link]
     - [Oh My Posh][omp-link]

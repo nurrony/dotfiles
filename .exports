@@ -4,7 +4,10 @@
 export ZLE_RPROMPT_INDENT=0
 
 # Set Development zone
-export DEV_ZONE=$DEV_ZONE
+export DEV_ZONE=${DEV_ZONE:-$HOME}
+
+# set development config path
+export DEV_ZONE_CONFIG_PATH=${DEV_ZONE_CONFIG_PATH:-$DEV_ZONE/.configs}
 
 # Export starship config location
 export STARSHIP_CONFIG=$HOME/.dotfiles/starship.toml

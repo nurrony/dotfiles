@@ -55,7 +55,7 @@ zinit wait'10' lucid light-mode for \
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
-for file in $HOME/.dotfiles/.{extra,path,exports,aliases,functions,dockerfunctions,kubefunctions,source,cli-packages,zsh_options}; do
+for file in $HOME/.dotfiles/.{extra,exports,path,aliases,functions,dockerfunctions,kubefunctions,source,cli-packages,zsh_options}; do
   [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;

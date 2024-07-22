@@ -26,7 +26,7 @@ function saildevship() {
   # Kubernetes Devship Repo https://github.com/nurrony/devship
   CLUSTER_VOLUME_HOST_PATH=$DEV_ZONE/storage/kubernetes/clusters/volumes/devship \
   LOCAL_REGISTRY_VOL_HOSTPATH=$DEV_ZONE/storage/kubernetes/clusters/volumes/registry \
-  $DEV_ZONE/projects/open-sources/devship/kubecluster
+  $DEV_ZONE/projects/open-sources/devship/devship
 }
 
 # aliases

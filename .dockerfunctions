@@ -38,13 +38,13 @@ ctr-registry-up() {
   if [[ "$state" == "true" ]] || [[ "$state" != "" ]]; then
     docker rm -f registry
   fi
-  docker-compose -f $DEV_ZONE/storage/k8s-clusters/registry/docker-compose.yml up -d
+  docker-compose -f $DEV_ZONE_CONFIG_PATH/k8s-clusters/registry/docker-compose.yml up -d
   echo 'registry started successfully...'
 }
 
 # down local container registry
 ctr-rgistry-down() {
-  docker-compose -f $DEV_ZONE/storage/k8s-clusters/registry/docker-compose.yml down
+  docker-compose -f $DEV_ZONE_CONFIG_PATH/k8s-clusters/registry/docker-compose.yml down
   echo 'registry is down successfully'
 }
 
@@ -69,9 +69,9 @@ nginx-proxy() {
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     docker run -it -d \
       --volume /var/run/docker.sock:/tmp/docker.sock:ro \
-      --volume ${DEV_ZONE}/storage/nginx/vhost.d:/etc/nginx/vhost.d:ro \
-      --volume ${DEV_ZONE}/storage/nginx/certs:/etc/nginx/certs:ro \
-      --volume ${DEV_ZONE}/storage/nginx/conf.d/custom_settings.conf:/etc/nginx/conf.d/custom_settings.conf:ro \
+      --volume $DEV_ZONE_CONFIG_PATH/nginx/vhost.d:/etc/nginx/vhost.d:ro \
+      --volume $DEV_ZONE_CONFIG_PATH/nginx/certs:/etc/nginx/certs:ro \
+      --volume $DEV_ZONE_CONFIG_PATH/nginx/conf.d/custom_settings.conf:/etc/nginx/conf.d/custom_settings.conf:ro \
       --publish 80:80 \
       --publish 443:443 \
       --net ronsvpn \
@@ -91,7 +91,7 @@ portainer() {
     echo "portainer server is not running, starting it for you."
     docker run -it -d \
       --volume /var/run/docker.sock:/var/run/docker.sock:ro \
-      --volume ${DEV_ZONE}/storage/portainer:/data \
+      --volume $DEV_ZONE_CONFIG_PATH/portainer:/data \
       --env VIRTUAL_HOST=portainer.nurrony.localhost \
       --expose 9000 \
       --net ronsvpn \
@@ -107,7 +107,7 @@ nginx_config() {
   server=$1
   route=$2
 
-  cat >${DEV_ZONE}/storage/nginx/conf.d/${server}.conf <<-EOF
+  cat >$DEV_ZONE_CONFIG_PATH/nginx/conf.d/${server}.conf <<-EOF
 upstream ${server} { server ${route}; }
   server {
     server_name ${server};
@@ -151,9 +151,9 @@ mysqlserver() {
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "mysql $VERSION server is not running, starting it for you."
-    mkdir -p ${DEV_ZONE}/storage/databases/mysql/${VERSION} && \
+    mkdir -p $DEV_ZONE_CONFIG_PATH/databases/mysql/${VERSION} && \
     docker run -it -d \
-      --volume ${DEV_ZONE}/storage/databases/mysql/${VERSION}:/var/lib/mysql \
+      --volume $DEV_ZONE_CONFIG_PATH/databases/mysql/${VERSION}:/var/lib/mysql \
       --env MYSQL_ROOT_PASSWORD=nurrony \
       --publish $PORT:3306 \
       --net ronsvpn \
@@ -182,7 +182,7 @@ dynamodb() {
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "local dynamodb server is not running, starting it for you."
     docker run -dit \
-      --volume ${DEV_ZONE}/storage/databases/dynamodb:/home/dynamodblocal/data \
+      --volume $DEV_ZONE_CONFIG_PATH/databases/dynamodb:/home/dynamodblocal/data \
       --workdir /home/dynamodblocal \
       --publish "8000:8000" \
       --expose 8000 \
@@ -257,7 +257,7 @@ mongoserver() {
     echo "mongoserver ${VERSION}.x.x is not running, starting it for you."
     docker run -dit \
       --user $(id -u):$(id -g) \
-      --volume ${DEV_ZONE}/storage/databases/mongodb/$VERSION:/data/db \
+      --volume $DEV_ZONE_CONFIG_PATH/databases/mongodb/$VERSION:/data/db \
       --env MONGODB_INITDB_ROOT_USERNAME=root \
       --env MONGODB_INITDB_ROOT_PASSWORD=nurrony \
       --publish $PORT:27017 \
@@ -282,13 +282,13 @@ pgserver() {
   del_stopped pgserver${VERSION}
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
-    mkdir -p ${DEV_ZONE}/storage/databases/postgres/${VERSION}
+    mkdir -p $DEV_ZONE_CONFIG_PATH/databases/postgres/${VERSION}
     echo "postgres $VERSION.x.x server is not running, starting it for you."
     docker run -it -d \
       --net ronsvpn \
       --ulimit memlock=-1:-1 \
       --memory-swappiness=0 \
-      --volume ${DEV_ZONE}/storage/databases/postgres/${VERSION}:/var/lib/postgresql/data \
+      --volume $DEV_ZONE_CONFIG_PATH/databases/postgres/${VERSION}:/var/lib/postgresql/data \
       --env POSTGRES_USER=postgres \
       --env POSTGRES_DB=$DBNAME \
       --env POSTGRES_PASSWORD=nurrony \
@@ -337,7 +337,7 @@ elasticsearch() {
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "elasticsearch server is not running, starting it for you."
     docker run -it -d \
-      --volume "${DEV_ZONE}/storage/databases/elasticsearch/data:/usr/share/elasticsearch/data" \
+      --volume "$DEV_ZONE_CONFIG_PATH/databases/elasticsearch/data:/usr/share/elasticsearch/data" \
       --publish 9200:9200 \
       --publish 9300:9300 \
       --net ronsvpn \

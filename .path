@@ -3,8 +3,8 @@ export CURL_PATH=/usr/local/opt/curl-openssl/bin
 export PATH="$CURL_PATH:$PATH"
 
 # Android Variables
-export ANDROID_HOME=$DEV_ZONE/storage/android/sdk
-export ANDROID_SDK_ROOT=$DEV_ZONE/storage/android/sdk
+export ANDROID_HOME=$DEV_ZONE_CONFIG_PATH/android/sdk
+export ANDROID_SDK_ROOT=$DEV_ZONE_CONFIG_PATH/android/sdk
 export ANDROID_PLATFORM_TOOLS=$ANDROID_HOME/platform-tools
 export ANDROID_TOOLS=$ANDROID_HOME/tools
 export PATH="$ANDROID_HOME:$ANDROID_PLATFORM_TOOLS:$ANDROID_TOOLS:$PATH"
@@ -19,7 +19,7 @@ export PATH=$GOPATH/bin:$PATH
 
 # Dart Pub global bin path
 export DART_PUB_BIN=$HOME/.pub-cache/bin
-export FLUTTER_SDK_DIR=$DEV_ZONE/storage/dartlang/flutter
+export FLUTTER_SDK_DIR=$DEV_ZONE_CONFIG_PATH/dartlang/flutter
 export PATH="$DART_PUB_BIN:$FLUTTER_SDK_DIR/bin:$PATH"
 
 # Krew path

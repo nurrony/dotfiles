@@ -83,8 +83,8 @@ zinit light romkatv/powerlevel10k
 # fi
 
 
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
+# autoload -Uz _zinit
+# (( ${+_comps} )) && _comps[zinit]=_zinit
 
 autoload -Uz compinit && compinit
 zi cdreplay -q

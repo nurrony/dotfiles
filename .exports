@@ -6,8 +6,8 @@ export ZLE_RPROMPT_INDENT=0
 # Set Development zone
 export DEV_ZONE=$DEV_ZONE
 
-# Export starship theme config location
-export STARSHIP_CONFIG=$HOME/.starship
+# Export starship config location
+export STARSHIP_CONFIG=$HOME/.dotfiles/starship.toml
 
 export _ZO_DATA_DIR=$HOME/.zoxide
 

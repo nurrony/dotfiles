@@ -24,7 +24,7 @@ ZINIT_HOME="${${XDG_DATA_HOME:-$DEV_ZONE_CONFIG_PATH}:-${HOME}/.local/share}/zin
 source "${ZINIT_HOME}/zinit.zsh"
 
 # loading essential completion
-zinit wait lucid light-mode for \
+zinit lucid light-mode for \
   as'completion' zsh-users/zsh-completions \
   pick'alias-tips.plugin.zsh' djui/alias-tips \
   as'completion' pick'gradle-completion.plugin.zsh' gradle/gradle-completion \
@@ -63,8 +63,8 @@ zinit wait'10' lucid light-mode for \
   as"program" atclone'make install PREFIX=$ZPFX' src'etc/git-extras-completion.zsh' atpull"%atclone" pick"$ZPFX/bin/git-*" tj/git-extras \
   as'program' from'gh-r' mv'skaffold* -> skaffold' atclone'./skaffold completion zsh > _skaffold' atpull'%atclone' GoogleContainerTools/skaffold \
   pick'git-open.plugin.zsh' paulirish/git-open \
-  zdharma-continuum/history-search-multi-word \
-  zdharma-continuum/fast-syntax-highlighting
+  zdharma-continuum/history-search-multi-word
+  # zdharma-continuum/fast-syntax-highlighting
 
 #------------
 #  THEMES

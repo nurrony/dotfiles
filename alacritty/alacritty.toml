@@ -48,7 +48,7 @@ save_to_clipboard = true
 
 [window]
 blur = true
-opacity = 0.85
+opacity = 0.80
 dynamic_padding = false
 option_as_alt = "Both"
 startup_mode = "Maximized"

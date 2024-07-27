@@ -31,9 +31,9 @@ alias ff='find . -type f -name'
 
 # https://eza.rocks/
 alias tree='ll --tree'
-alias ll='ls --long --all'
-alias lsa="ll --extended --git --total-size"
-alias ls='command eza --color=always --icons=always --header --grid --group-directories-first --group --sort=type'
+alias ls='command eza --color=always --octal-permissions --icons=always --header --grid --group-directories-first --group --sort=type'
+alias ll='command eza --color=always --octal-permissions --icons=always --header --group-directories-first --group --sort=type --oneline --long --all'
+alias lsa='command eza --oneline --color=always --octal-permissions --icons=always --header --group-directories-first --group --sort=type --oneline --long --all --extended --git --git-repos --total-size'
 alias cat="command bat --theme=DarkNeon --style=header-filename --pager=never"
 
 # cask alias

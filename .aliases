@@ -29,14 +29,11 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias ff='find . -type f -name'
 
-# https://github.com/ogham/exa
-alias ls='command eza -T -G --git-repos --git --color always --icons -s type --group-directories-first'
-alias l='command eza -1a -G --git-repos --git --color always --icons -a -s type --group-directories-first'
-alias ll='command eza -l --git-repos --git --color always --icons -a -s type --group-directories-first'
-alias tree='command eza -T'
-alias lt1='command eza -GTL 1 --git --git-repos --color always --icons -a -s type --group-directories-first'
-alias lt2='command eza -GTL 2 --git --git-repos --color always --icons -a -s type --group-directories-first'
-alias lsa='command eza -abghHl --git --git-repos --group-directories-first'
+# https://eza.rocks/
+alias tree='ll --tree'
+alias ll='ls --long --all'
+alias lsa="ll --extended --git --total-size"
+alias ls='command eza --color=always --icons=always --header --grid --group-directories-first --group --sort=type'
 alias cat="command bat --theme=DarkNeon --style=header-filename --pager=never"
 
 # cask alias

@@ -223,3 +223,6 @@ alias tfv='terraform validate'
 alias tfs='terraform state'
 alias tft='terraform test'
 alias tfsh='terraform show'
+
+# zellij alias
+alias zjclear='zellij delete-all-sessions --force --yes'

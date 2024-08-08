@@ -80,9 +80,6 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
 # - python
 # - ruby
 # - lua
-# - golang
-# - dart
-# - flutter
 # - rust
 # - project
 # - executiontime
@@ -150,6 +147,15 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     template = " 󰬷 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
 
   [[blocks.segments]]
+    type = "mvn"
+    style = "diamond"
+    leading_diamond = ""
+    trailing_diamond = ""
+    foreground = "p:charcoal"
+    background = "p:green"
+    template = "  {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
+
+  [[blocks.segments]]
     type = "php"
     style = "diamond"
     leading_diamond = ""
@@ -168,15 +174,6 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     template = "  {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}{{ end }}"
 
   [[blocks.segments]]
-    type = "ruby"
-    style = "diamond"
-    leading_diamond = ""
-    trailing_diamond = ""
-    foreground = "p:charcoal"
-    background = "p:green"
-    template = "  {{ if .Error }}{{ .Error }}{{ else }}{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}{{ end }}"
-
-  [[blocks.segments]]
     type = "lua"
     style = "diamond"
     leading_diamond = ""
@@ -185,32 +182,41 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     background = "p:green"
     template = " 󰢱 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
 
-  [[blocks.segments]]
-    type = "dart"
-    style = "diamond"
-    leading_diamond = ""
-    trailing_diamond = ""
-    foreground = "p:charcoal"
-    background = "p:green"
-    template = " {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
+  # [[blocks.segments]]
+  #   type = "ruby"
+  #   style = "diamond"
+  #   leading_diamond = ""
+  #   trailing_diamond = ""
+  #   foreground = "p:charcoal"
+  #   background = "p:green"
+  #   template = "  {{ if .Error }}{{ .Error }}{{ else }}{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}{{ end }}"
 
-  [[blocks.segments]]
-    type = "flutter"
-    style = "diamond"
-    leading_diamond = ""
-    trailing_diamond = ""
-    foreground = "p:charcoal"
-    background = "p:green"
-    template = " {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
+  # [[blocks.segments]]
+  #   type = "dart"
+  #   style = "diamond"
+  #   leading_diamond = ""
+  #   trailing_diamond = ""
+  #   foreground = "p:charcoal"
+  #   background = "p:green"
+  #   template = " {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
 
-  [[blocks.segments]]
-    type = "go"
-    style = "diamond"
-    leading_diamond = ""
-    trailing_diamond = ""
-    foreground = "p:charcoal"
-    background = "p:green"
-    template = " {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
+  # [[blocks.segments]]
+  #   type = "flutter"
+  #   style = "diamond"
+  #   leading_diamond = ""
+  #   trailing_diamond = ""
+  #   foreground = "p:charcoal"
+  #   background = "p:green"
+  #   template = " {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
+
+  # [[blocks.segments]]
+  #   type = "go"
+  #   style = "diamond"
+  #   leading_diamond = ""
+  #   trailing_diamond = ""
+  #   foreground = "p:charcoal"
+  #   background = "p:green"
+  #   template = " {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
 
   [[blocks.segments]]
     type = "rust"

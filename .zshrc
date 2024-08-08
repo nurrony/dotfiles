@@ -14,9 +14,9 @@ done;
 unset file;
 
 # uncomment these lines if you are using powerlevel10k
-# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-# fi
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
 # load zinit plugin manager. See https://github.com/zdharma-continuum/zinit.git
 ZINIT_HOME="${${XDG_DATA_HOME:-$DEV_ZONE_CONFIG_PATH}:-${HOME}/.local/share}/zinit/zinit.git"
@@ -78,16 +78,16 @@ zinit wait'10' lucid light-mode for \
 # zi light starship/starship
 
 # install and load ohmyposh theme
-if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
-  zi ice as"command" from"gh-r" mv'posh-* -> oh-my-posh' \
-    atclone"./oh-my-posh completion zsh > _oh_my_posh" \
-    atpull"%atclone" atload'eval "$(oh-my-posh init zsh --config $HOME/.dotfiles/ohmyposh/zen.toml)"'
-  zi light JanDeDobbeleer/oh-my-posh
-fi
+# if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
+#   zi ice as"command" from"gh-r" mv'posh-* -> oh-my-posh' \
+#     atclone"./oh-my-posh completion zsh > _oh_my_posh" \
+#     atpull"%atclone" atload'eval "$(oh-my-posh init zsh --config $HOME/.dotfiles/ohmyposh/zen.toml)"'
+#   zi light JanDeDobbeleer/oh-my-posh
+# fi
 
 # install powerline10k
-# zinit ice depth'1' atload"[[ ! -f ~/.dotfiles/.p10k.zsh ]] || source ~/.dotfiles/.p10k.zsh" nocd
-# zinit light romkatv/powerlevel10k
+zinit ice depth'1' atload"[[ ! -f ~/.dotfiles/.p10k.zsh ]] || source ~/.dotfiles/.p10k.zsh" nocd
+zinit light romkatv/powerlevel10k
 
 # autoload -Uz _zinit
 # (( ${+_comps} )) && _comps[zinit]=_zinit

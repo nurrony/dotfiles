@@ -65,7 +65,7 @@ zinit wait'10' lucid light-mode for \
   as'program' from'gh-r' mv'skaffold* -> skaffold' atclone'./skaffold completion zsh > _skaffold' atpull'%atclone' GoogleContainerTools/skaffold \
   pick'git-open.plugin.zsh' paulirish/git-open \
   zdharma-continuum/history-search-multi-word \
-  zsh-users/zsh-syntax-highlighting
+  zdharma/fast-syntax-highlighting
 
 #------------
 #  THEMES

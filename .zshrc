@@ -67,9 +67,14 @@ zinit wait'10' lucid light-mode for \
   zdharma-continuum/history-search-multi-word \
   zdharma/fast-syntax-highlighting
 
-#------------
-#  THEMES
-#------------
+#----------------------------------------------------------------
+# THEMES
+# - starship: https://starship.rs/
+# - OhMyPosh: https://ohmyposh.dev/
+# - powerlevel10k: https://github.com/romkatv/powerlevel10k
+#
+# Note: Uncomment only the theme that you want to use.
+#-----------------------------------------------------------------
 
 # install and load starship theme.
 # zi ice as"command" from"gh-r" \

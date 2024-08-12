@@ -228,4 +228,4 @@ alias tfsh='terraform show'
 alias zjclear='zellij delete-all-sessions --force --yes'
 
 # sshs: https://github.com/quantumsheep/sshs
-alias sshs='sshs -e'
+alias sshs='sshs -e --sort'

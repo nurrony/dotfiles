@@ -34,6 +34,10 @@ export PATH="$DOCKER_CLI_BIN_PATH:$PATH"
 # export GRAALVM_HOME=/Library/Java/JavaVirtualMachines/graalvm-22.3.0+java17/Contents/Home
 # export PATH="$GRAALVM_HOME/bin:$PATH"
 
+# GNU Bin Utils path
+export GNU_BIN_UTIL_PATH=/usr/local/opt/binutils/bin
+export PATH="$GNU_BIN_UTIL_PATH:$PATH"
+
 # GNU Find Utils path
 export GNU_FIND_UTIL_PATH=/usr/local/opt/findutils/libexec/gnubin
 export PATH="$GNU_FIND_UTIL_PATH:$PATH"

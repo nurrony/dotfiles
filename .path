@@ -15,7 +15,7 @@ export PATH="$RVM_PATH:$PATH" # Add RVM to PATH for scripting
 
 # Golang variables
 export GOPATH="$HOME/go"
-export PATH=$GOPATH/bin:$PATH
+export PATH="$GOPATH/bin:$PATH"
 
 # Dart Pub global bin path
 export DART_PUB_BIN=$HOME/.pub-cache/bin
@@ -29,10 +29,6 @@ export PATH="$KREW_ROOT/bin:$PATH"
 # Docker CLI user path
 export DOCKER_CLI_BIN_PATH=$HOME/.docker/bin
 export PATH="$DOCKER_CLI_BIN_PATH:$PATH"
-
-# GraalVm Settings
-# export GRAALVM_HOME=/Library/Java/JavaVirtualMachines/graalvm-22.3.0+java17/Contents/Home
-# export PATH="$GRAALVM_HOME/bin:$PATH"
 
 # GNU Bin Utils path
 export GNU_BIN_UTIL_PATH=/usr/local/opt/binutils/bin
@@ -50,4 +46,5 @@ export PATH="$GNU_CORE_UTIL_PATH:$PATH"
 export NEOVIM_MASON_BIN_PATH=$HOME/.local/share/nvim/mason/bin
 export PATH="$NEOVIM_MASON_BIN_PATH:$PATH"
 
+# Finally apped to main PATH variable
 export PATH="/usr/local/opt/python/libexec/bin:/usr/local/bin:/usr/local/sbin:$PATH"

@@ -54,6 +54,7 @@ zinit wait'10' lucid light-mode for \
   as'program' from'gh-r' mv'hadolint* -> hadolint' hadolint/hadolint \
   as'program' from'gh-r' mv'yt-dlp* -> yt-dlp' bpick'yt-dlp_macos' yt-dlp/yt-dlp \
   as'program' from'gh-r' mv'kube-explorer* -> kube-explorer' cnrancher/kube-explorer \
+  as'program' from'gh-r' mv'yazi* -> yazi' atpull'%atclone' pick'yazi/yazi' sxyazi/yazi \
   as'program' from'gh-r' atclone'./txeh completion zsh > _txeh' atpull'%atclone' txn2/txeh \
   as'program' from'gh-r' mv'cs* -> coursier' bpick'cs-*-apple-darwin.gz' coursier/coursier \
   as'program' from'gh-r' atclone'./kondo --completions zsh > _kondo' atpull'%atclone' tbillington/kondo \

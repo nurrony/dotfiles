@@ -38,6 +38,13 @@ brew bundle install --file=./Brewfile
 
 I have switched from Vim to NeoVim. To setup NeoVim Editor, Please check [`My NeoVim PDE`](https://github.com/nurrony/nvim) repository for more on NeoVim configuration.
 
+### Terminal configurations
+The dotfiles comes with these popular terminal emulators.
+
+- [Kitty](./kitty/): Copy `kitty` directory in `~/.config/`
+- [Alacritty](./alacritty/): Copy `alacritty` directory in `~/.config`
+- [Iterm2](./assets/Rony-iTerm.json): Import this file and make it default
+
 ### Terminal theme and tweaks
 
 <p align="center">

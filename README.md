@@ -44,9 +44,9 @@ I have switched from Vim to NeoVim. To setup NeoVim Editor, Please check [`My Ne
  <img src="./cli-snap.png" alt="cli snap" />
 </p>
 
-I use **iTerm2** and **Zsh** together with these followings, so you need to install these as well
+I use **Kitty** and **Zsh** together with these followings, so you need to install these as well
 
-- Themes
+- Zsh Themes
   - There are configuration for most popular ZSH prompt themes. Uncomment the lines in [`zshrc`](./.zshrc) to load the theme.
     - [Powerlevel10k][p10k-link]
     - [Starship][starship-link]

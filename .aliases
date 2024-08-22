@@ -198,7 +198,7 @@ alias lzg='lazygit'
 alias cs='coursier'
 
 # Scala Alias
-alias hosts='sudo txeh'
+alias hostses='sudo txeh'
 
 # Weather
 alias weather='function _weather() { http --body https://wttr.in/${1:-Dhaka}; }; _weather'

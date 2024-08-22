@@ -51,7 +51,7 @@ I use **Kitty** and **Zsh** together with these followings, so you need to insta
     - [Powerlevel10k][p10k-link]
     - [Starship][starship-link]
     - [Oh My Posh][omp-link]
-  - ITerm: [Catppuccin for ITerm Theme][catppuccin-iterm].
+  - Terminal Theme: [Catppuccin Theme][catppuccin].
 - Any Nerd Font of your choice. I like [JetBrains Mono](https://www.programmingfonts.org/#jetbrainsmono)
 - You can import my settings by importing [iTerm Profile][iterm-profile-file] file
 
@@ -67,4 +67,4 @@ I use **Kitty** and **Zsh** together with these followings, so you need to insta
 [starship-link]: https://starship.rs/
 [iterm-profile-file]: ./assets/Rony-iTerm.json
 [p10k-link]: https://github.com/romkatv/powerlevel10k
-[catppuccin-iterm]: https://github.com/catppuccin/iterm
+[catppuccin]: https://github.com/catppuccin

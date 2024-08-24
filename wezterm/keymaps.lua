@@ -1,12 +1,13 @@
 local wezterm = require("wezterm")
-local keymap = require("utils/keys")
+local key_util = require("utils/keys")
 
 return {
   -- pane splitting
-  keymap.cmd_key("d", wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" })),
-  keymap.key_table("CMD | SHIFT", 'd', wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" })),
+  key_util.cmd_key("d", wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" })),
+  key_util.key_table("CMD | SHIFT", 'd', wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" })),
+
   -- close the window
-  keymap.cmd_key("w", wezterm.action.CloseCurrentPane({ confirm = false })),
+  key_util.cmd_key("w", wezterm.action.CloseCurrentPane({ confirm = false })),
 
   -- Make Page up/down work
   { key = "PageUp",   action = wezterm.action.ScrollByPage(-1) },

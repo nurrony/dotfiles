@@ -32,8 +32,8 @@ config = {
   window_padding = {
     left = 10,
     right = 10,
-    top = 10,
-    bottom = 10,
+    top = 15,
+    bottom = 15,
   },
 
   -- macos related settings
@@ -41,6 +41,7 @@ config = {
   send_composed_key_when_left_alt_is_pressed = true,
   send_composed_key_when_right_alt_is_pressed = true,
 
+  notification_handling = 'SuppressFromFocusedWindow',
   -- hyperlink_rules
   hyperlink_rules = {
     -- Matches: a URL in parens: (URL)

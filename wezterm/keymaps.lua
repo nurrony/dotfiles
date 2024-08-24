@@ -8,10 +8,10 @@ return {
   key_util.key_table('CMD | SHIFT', 'd', action.SplitVertical({ domain = 'CurrentPaneDomain' })),
 
   -- panes: selection
-  key_util.cmd_key('k', action.ActivatePaneDirection('Up')),
-  key_util.cmd_key('j', action.ActivatePaneDirection('Down')),
-  key_util.cmd_key('h', action.ActivatePaneDirection('Left')),
-  key_util.cmd_key('l', action.ActivatePaneDirection('Right')),
+  key_util.ctrl_key('k', action.ActivatePaneDirection('Up')),
+  key_util.ctrl_key('j', action.ActivatePaneDirection('Down')),
+  key_util.ctrl_key('h', action.ActivatePaneDirection('Left')),
+  key_util.ctrl_key('l', action.ActivatePaneDirection('Right')),
 
   -- window: close the window
   key_util.cmd_key('w', action.CloseCurrentPane({ confirm = false })),

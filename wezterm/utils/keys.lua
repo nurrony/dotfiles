@@ -22,6 +22,10 @@ M.cmd_key = function(key, action)
     return M.key_table("CMD", key, action)
 end
 
+M.alt_key = function(key, action)
+    return M.key_table("ALT", key, action)
+end
+
 M.cmd_ctrl_key = function(key, action)
     return M.key_table("CTRL | CMD", key, action)
 end

@@ -1,5 +1,6 @@
 local wezterm = require 'wezterm'
 local keymaps = require 'keymaps'
+local tabbar = require('tabbar')
 local config = {}
 
 if wezterm.config_builder then
@@ -18,12 +19,10 @@ config = {
 
   -- tab bar
   enable_tab_bar = true,
-  tab_max_width = 20,
-  tab_bar_at_bottom = false,
   use_fancy_tab_bar = false,
   show_tab_index_in_tab_bar = false,
   hide_tab_bar_if_only_one_tab = true,
-  show_new_tab_button_in_tab_bar = false,
+  show_new_tab_button_in_tab_bar = true,
 
   -- window configuration
   window_decorations = 'RESIZE',
@@ -31,17 +30,10 @@ config = {
   macos_window_background_blur = 10,
   window_close_confirmation = 'NeverPrompt',
   window_padding = {
-    left = 5,
-    right = 5,
+    left = 10,
+    right = 10,
     top = 10,
     bottom = 10,
-  },
-  window_frame = {
-    font = wezterm.font({ family = 'JetBrainsMono Nerd Font Mono', weight = 'Bold' }),
-    font_size = 13,
-    -- Fancy tab bar
-    active_titlebar_bg = '#222222',
-    inactive_titlebar_bg = '#352a21',
   },
 
   -- macos related settings

@@ -31,8 +31,8 @@ config = {
   macos_window_background_blur = 10,
   window_close_confirmation = 'NeverPrompt',
   window_padding = {
-    left = 10,
-    right = 10,
+    left = 5,
+    right = 5,
     top = 10,
     bottom = 10,
   },

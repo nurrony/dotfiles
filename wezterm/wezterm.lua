@@ -8,7 +8,7 @@
 -- A GPU-accelerated cross-platform terminal emulator
 -- https://wezfurlong.org/wezterm/
 
-require("utils/events")
-local config = require 'utils/config'
+require 'utils/events'
+local config = require 'config'
 
 return config;

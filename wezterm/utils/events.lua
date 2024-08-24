@@ -1,5 +1,6 @@
 local wezterm = require("wezterm")
 local mux = wezterm.mux
+local M = {}
 
 wezterm.on("gui-startup", function()
   local _, _, window = mux.spawn_window({})
@@ -11,7 +12,8 @@ end)
 -- end)
 
 -- Readjust font size on window resize to get rid of the padding at the bottom
-function readjust_font_size(window, pane)
+
+M.readjust_font_size = function(window, pane)
   local window_dims = window:get_dimensions()
   local pane_dims = pane:get_dimensions()
 
@@ -68,3 +70,5 @@ function readjust_font_size(window, pane)
     window:set_config_overrides(config_overrides)
   end
 end
+
+return M;

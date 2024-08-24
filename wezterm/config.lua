@@ -1,5 +1,5 @@
-local wezterm = require("wezterm")
-local keymap = require("utils/keys")
+local wezterm = require 'wezterm'
+local keymaps = require 'keymaps'
 local config = {}
 
 if wezterm.config_builder then
@@ -92,17 +92,7 @@ config = {
   },
 
   -- keys
-  keys = {
-    -- pane splitting
-    keymap.cmd_key("d", wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" })),
-    keymap.cmd_key("D", wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" })),
-    -- close the window
-    keymap.cmd_key("w", wezterm.action.CloseCurrentPane({ confirm = false })),
-
-    -- Make Page up/down work
-    { key = "PageUp",   action = wezterm.action.ScrollByPage(-1) },
-    { key = "PageDown", action = wezterm.action.ScrollByPage(1) },
-  },
+  keys = keymaps,
 }
 
 return config

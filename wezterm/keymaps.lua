@@ -3,14 +3,20 @@ local key_util = require("utils/keys")
 local action = wezterm.action;
 
 return {
-  -- pane splitting
+  -- panes: splitting
   key_util.cmd_key("d", action.SplitHorizontal({ domain = "CurrentPaneDomain" })),
   key_util.key_table("CMD | SHIFT", 'd', action.SplitVertical({ domain = "CurrentPaneDomain" })),
 
-  -- close the window
+  -- panes: selection
+  key_util.ctrl_key("UpArrow", action.ActivatePaneDirection("Up")),
+  key_util.ctrl_key("DownArrow", action.ActivatePaneDirection("Down")),
+  key_util.ctrl_key("LeftArrow", action.ActivatePaneDirection("Left")),
+  key_util.ctrl_key("RightArrow", action.ActivatePaneDirection("Right")),
+
+  -- window: close the window
   key_util.cmd_key("w", action.CloseCurrentPane({ confirm = false })),
 
   -- Make Page up/down work
-  { key = "PageUp",   action = action.ScrollByPage(-1) },
-  { key = "PageDown", action = action.ScrollByPage(1) },
+  key_util.key_table(nil, "PageUp", action.ScrollByPage(-1)),
+  key_util.key_table(nil, "PageDown", action.ScrollByPage(1)),
 }

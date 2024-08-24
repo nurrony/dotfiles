@@ -6,11 +6,17 @@ if wezterm.config_builder then
   config = wezterm.config_builder()
 end
 
+-- The filled in variant of the < symbol
+local SOLID_LEFT_ARROW = wezterm.nerdfonts.pl_right_hard_divider
+
+-- The filled in variant of the > symbol
+local SOLID_RIGHT_ARROW = wezterm.nerdfonts.pl_left_hard_divider
+
 config = {
   -- font
-  font = wezterm.font("JetBrainsMono Nerd Font Mono"),
   font_size = 16,
   adjust_window_size_when_changing_font_size = false,
+  font = wezterm.font { family = "JetBrainsMono Nerd Font Mono", weight = 'Bold' },
 
   -- theme
   color_scheme = "Catppuccin Macchiato",

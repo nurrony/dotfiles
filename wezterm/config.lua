@@ -24,12 +24,6 @@ config = {
   hide_tab_bar_if_only_one_tab = true,
   show_new_tab_button_in_tab_bar = false,
 
-  -- panes
-  inactive_pane_hsb = {
-    saturation = 0.24,
-    brightness = 0.6
-  },
-
   -- window configuration
   window_decorations = "RESIZE",
   window_background_opacity = 0.90,

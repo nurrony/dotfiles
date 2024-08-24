@@ -26,6 +26,10 @@ M.cmd_ctrl_key = function(key, action)
     return M.key_table("CTRL | CMD", key, action)
 end
 
+M.ctrl_key = function(key, action)
+    return M.key_table("CTRL", key, action)
+end
+
 M.cmd_to_tmux_prefix = function(key, tmux_key)
     return M.cmd_key(
         key,

@@ -5,6 +5,11 @@ set termguicolors
 bindkey "^[[A" history-search-backward
 bindkey "^[[B" history-search-forward
 
+# uncomment these lines if you are using powerlevel10k
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
@@ -12,11 +17,6 @@ for file in $HOME/.dotfiles/.{zsh_options,extra,exports,path,aliases,functions,d
   [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
-
-# uncomment these lines if you are using powerlevel10k
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
 
 # load zinit plugin manager. See https://github.com/zdharma-continuum/zinit.git
 ZINIT_HOME="${${XDG_DATA_HOME:-$DEV_ZONE_CONFIG_PATH}:-${HOME}/.local/share}/zinit/zinit.git"

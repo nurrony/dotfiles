@@ -42,6 +42,7 @@ I have switched from Vim to NeoVim. To setup NeoVim Editor, Please check [`My Ne
 The dotfiles comes with these popular terminal emulators.
 
 - [Kitty](./kitty/): Copy `kitty` directory in `~/.config/`
+- [WezTerm](./wezterm/): Copy `wezterm` directory in `~/.config`
 - [Alacritty](./alacritty/): Copy `alacritty` directory in `~/.config`
 - [Iterm2](./assets/Rony-iTerm.json): Import this file and make it default
 
@@ -51,7 +52,7 @@ The dotfiles comes with these popular terminal emulators.
  <img src="./cli-snap.png" alt="cli snap" />
 </p>
 
-I use **Kitty** and **Zsh** together with these followings, so you need to install these as well
+I use **WezTerm** and **Zsh** with **PowerLevel10k** together with these followings, so you need to install these as well
 
 - Zsh Themes
   - There are configuration for most popular ZSH prompt themes. Uncomment the lines in [`zshrc`](./.zshrc) to load the theme.

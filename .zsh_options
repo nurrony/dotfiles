@@ -5,12 +5,20 @@ unsetopt BEEP
 zle_highlight=('paste:none')
 
 # history options
-setopt hist_ignore_all_dups   # Remove older duplicate entries from history.
+HISTSIZE=5000
+HISTFILE=$HOME/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt hist_verify            # Allow editing the command before executing again
+setopt sharehistory           # Share History
+setopt appendhistory          # Append History
 setopt hist_ignore_dups       # Do not record an event that was just recorded again.
+setopt hist_find_no_dups      # Do not find an event that was just recorded again.
 setopt hist_ignore_space      # Do not record an Event Starting With A Space.
 setopt hist_reduce_blanks     # Remove superfluous blanks from history items.
 setopt hist_save_no_dups      # Do not write a duplicate event to the history file.
-setopt hist_verify            # Allow editing the command before executing again
+setopt hist_ignore_all_dups   # Remove older duplicate entries from history.
+
 # list options
 setopt auto_cd              # Use cd by typing directory name if it's not a command.
 setopt auto_list            # Automatically list choices on ambiguous completion.

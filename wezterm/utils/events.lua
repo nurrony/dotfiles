@@ -19,6 +19,7 @@ wezterm.on("gui-startup", function(cmd)
   window:gui_window():set_inner_size(active.width, active.height)
 end)
 
+-- Uncomment this if you want to update font-size upon window resizing
 -- wezterm.on("window-resized", function(window, pane)
 --   M.readjust_font_size(window, pane)
 -- end)

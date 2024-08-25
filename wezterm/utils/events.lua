@@ -2,13 +2,25 @@ local wezterm = require("wezterm")
 local mux = wezterm.mux
 local M = {}
 
-wezterm.on("gui-startup", function()
-  local _, _, window = mux.spawn_window({})
-  window:gui_window():maximize()
+wezterm.on("gui-startup", function(cmd)
+  -- Pick the active screen to maximize into, there are also other options, see the docs.
+  local active = wezterm.gui.screens().active
+
+  -- Set the window coords on spawn.
+  local tab, pane, window = mux.spawn_window(cmd or {
+    x = active.x,
+    y = active.y,
+    width = active.width,
+    height = active.height,
+  })
+
+  -- You probably don't need both, but you can also set the positions after spawn.
+  window:gui_window():set_position(active.x, active.y)
+  window:gui_window():set_inner_size(active.width, active.height)
 end)
 
 -- wezterm.on("window-resized", function(window, pane)
--- 	readjust_font_size(window, pane)
+--   M.readjust_font_size(window, pane)
 -- end)
 
 -- Readjust font size on window resize to get rid of the padding at the bottom

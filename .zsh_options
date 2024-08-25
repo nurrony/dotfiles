@@ -1,14 +1,12 @@
-# beeping is annoying
-unsetopt BEEP
-
+# type: ignore
 # paste behavior
 zle_highlight=('paste:none')
 
 # history options
 HISTSIZE=5000
+HISTDUP=erase
 HISTFILE=$HOME/.zsh_history
 SAVEHIST=$HISTSIZE
-HISTDUP=erase
 setopt hist_verify            # Allow editing the command before executing again
 setopt sharehistory           # Share History
 setopt appendhistory          # Append History

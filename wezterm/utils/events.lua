@@ -1,37 +1,13 @@
-local wezterm = require("wezterm")
+local wezterm = require 'wezterm'
 local mux = wezterm.mux
-local M = {}
-
-wezterm.on("gui-startup", function(cmd)
-  -- Pick the active screen to maximize into, there are also other options, see the docs.
-  local active = wezterm.gui.screens().active
-
-  -- Set the window coords on spawn.
-  local tab, pane, window = mux.spawn_window(cmd or {
-    x = active.x,
-    y = active.y,
-    width = active.width,
-    height = active.height,
-  })
-
-  -- You probably don't need both, but you can also set the positions after spawn.
-  window:gui_window():set_position(active.x, active.y)
-  window:gui_window():set_inner_size(active.width, active.height)
-end)
-
--- Uncomment this if you want to update font-size upon window resizing
--- wezterm.on("window-resized", function(window, pane)
---   M.readjust_font_size(window, pane)
--- end)
 
 -- Readjust font size on window resize to get rid of the padding at the bottom
-
-M.readjust_font_size = function(window, pane)
+local readjust_font_size = function(window, pane)
   local window_dims = window:get_dimensions()
   local pane_dims = pane:get_dimensions()
 
   local config_overrides = {}
-  local initial_font_size = 13 -- Set to your desired font size
+  local initial_font_size = 14 -- Set to your desired font size
   config_overrides.font_size = initial_font_size
 
   local max_iterations = 5
@@ -84,4 +60,24 @@ M.readjust_font_size = function(window, pane)
   end
 end
 
-return M;
+wezterm.on("gui-startup", function(cmd)
+  -- Pick the active screen to maximize into, there are also other options, see the docs.
+  local active = wezterm.gui.screens().active
+
+  -- Set the window coords on spawn.
+  local tab, pane, window = mux.spawn_window(cmd or {
+    x = active.x,
+    y = active.y,
+    width = active.width,
+    height = active.height,
+  })
+
+  -- You probably don't need both, but you can also set the positions after spawn.
+  window:gui_window():set_position(active.x, active.y)
+  window:gui_window():set_inner_size(active.width, active.height)
+end)
+
+-- Uncomment this if you want to update font-size upon window resizing
+wezterm.on("window-resized", function(window, pane)
+  readjust_font_size(window, pane)
+end)

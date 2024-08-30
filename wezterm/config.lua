@@ -25,7 +25,7 @@ config = {
   show_new_tab_button_in_tab_bar = true,
 
   -- window configuration
-  window_decorations = 'RESIZE',
+  window_decorations = 'INTEGRATED_BUTTONS | RESIZE',
   window_background_opacity = 0.90,
   macos_window_background_blur = 10,
   window_close_confirmation = 'NeverPrompt',
@@ -43,47 +43,7 @@ config = {
 
   notification_handling = 'SuppressFromFocusedWindow',
   -- hyperlink_rules
-  hyperlink_rules = {
-    -- Matches: a URL in parens: (URL)
-    {
-      regex = '\\((\\w+://\\S+)\\)',
-      format = '$1',
-      highlight = 1,
-    },
-    -- Matches: a URL in brackets: [URL]
-    {
-      regex = '\\[(\\w+://\\S+)\\]',
-      format = '$1',
-      highlight = 1,
-    },
-    -- Matches: a URL in curly braces: {URL}
-    {
-      regex = '\\{(\\w+://\\S+)\\}',
-      format = '$1',
-      highlight = 1,
-    },
-    -- Matches: a URL in angle brackets: <URL>
-    {
-      regex = '<(\\w+://\\S+)>',
-      format = '$1',
-      highlight = 1,
-    },
-    -- Then handle URLs not wrapped in brackets
-    {
-      -- Before
-      --regex = '\\b\\w+://\\S+[)/a-zA-Z0-9-]+',
-      --format = '$0',
-      -- After
-      regex = '[^(]\\b(\\w+://\\S+[)/a-zA-Z0-9-]+)',
-      format = '$1',
-      highlight = 1,
-    },
-    -- implicit mailto link
-    {
-      regex = '\\b\\w+@[\\w-]+(\\.[\\w-]+)+\\b',
-      format = 'mailto:$0',
-    },
-  },
+  hyperlink_rules = wezterm.default_hyperlink_rules(),
 
   -- keys
   keys = keymaps,

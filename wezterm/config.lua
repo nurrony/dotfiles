@@ -25,15 +25,15 @@ config = {
   show_new_tab_button_in_tab_bar = true,
 
   -- window configuration
-  window_decorations = 'INTEGRATED_BUTTONS | RESIZE',
+  window_decorations = 'RESIZE',
   window_background_opacity = 0.90,
   macos_window_background_blur = 10,
   window_close_confirmation = 'NeverPrompt',
   window_padding = {
     left = 10,
     right = 10,
-    top = 15,
-    bottom = 15,
+    top = '0.5cell',
+    bottom = '0',
   },
 
   -- macos related settings

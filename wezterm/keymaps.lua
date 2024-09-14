@@ -7,13 +7,13 @@ return {
   key_util.cmd_key('d', action.SplitHorizontal({ domain = 'CurrentPaneDomain' })),
   key_util.key_table('CMD | SHIFT', 'd', action.SplitVertical({ domain = 'CurrentPaneDomain' })),
 
-  --- panes: selection
+  -- panes: selection
   key_util.alt_key('k', action.ActivatePaneDirection('Up')),
   key_util.alt_key('j', action.ActivatePaneDirection('Down')),
   key_util.alt_key('h', action.ActivatePaneDirection('Left')),
   key_util.alt_key('l', action.ActivatePaneDirection('Right')),
 
-  --- panes: rotate
+  -- panes: rotate
   key_util.alt_key('r', action.RotatePanes("Clockwise")),
 
   -- window: close the window

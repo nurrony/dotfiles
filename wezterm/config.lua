@@ -3,6 +3,10 @@ local keymaps = require 'keymaps'
 local tabbar = require('tabbar')
 local config = {}
 
+local font = 'JetBrainsMono Nerd Font Mono'
+local font_alt = 'Arial'
+
+
 if wezterm.config_builder then
   config = wezterm.config_builder()
 end
@@ -12,8 +16,20 @@ config = {
   -- font
   font_size = 16,
   adjust_window_size_when_changing_font_size = false,
-  font = wezterm.font { family = 'JetBrainsMono Nerd Font Mono', weight = 'Bold' },
+  font = wezterm.font_with_fallback {
+    { family = font,     weight = 'Bold', italic = false },
+    { family = font_alt, italic = false,  scale = 1 },
+  },
 
+  font_rules = {
+    {
+      intensity = 'Bold',
+      font = wezterm.font_with_fallback({
+        { family = font,     italic = false, weight = 'Bold' },
+        { family = font_alt, italic = false, scale = 1 },
+      }),
+    }
+  },
   -- theme
   color_scheme = 'Catppuccin Macchiato',
 

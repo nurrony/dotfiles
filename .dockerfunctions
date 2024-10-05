@@ -306,6 +306,29 @@ kafka() {
     fi
 }
 
+mailserver() {
+  del_stopped mailserver
+  relies_on nginx-proxy
+  sleep 2
+  local state=$(docker inspect --format "{{.State.Running}}" mailserver 2>/dev/null)
+  if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
+    echo "mailserver is not running. starting is for you"
+    docker run -d \
+      --net ronsvpn \
+      --expose 8025 \
+      --name mailserver \
+      --publish 1025:1025 \
+      --env TZ=Asia/Dhaka \
+      --env VIRTUAL_PORT=8025 \
+      --env MP_DATABASE=/data/mailpit.db \
+      --env VIRTUAL_HOST=mail.nurrony.localhost \
+      --volume $DEV_ZONE_CONFIG_PATH/mailserver:/data \
+      axllent/mailpit:latest
+    else
+      echo "mailserver is already running"
+    fi
+}
+
 zipkin() {
   del_stopped zipkin
   relies_on nginx-proxy

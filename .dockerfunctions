@@ -273,12 +273,45 @@ mongo() {
   docker exec -t mongoserver5 mongo "$@"
 }
 
+kafka() {
+  local CONFLUENT_PLATFORM_VERSION=${1:-7.7.1}
+  del_stopped kafka
+  local state=$(docker inspect --format "{{.State.Running}}" kafka 2>/dev/null)
+  if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
+    echo "kafka broker ${VERSION} is not running, starting it for you."
+    docker run --detach -it \
+      --name kafka \
+      --net ronsvpn \
+      --publish 9091:9091 \
+      --publish 9101:9101 \
+      --env KAFKA_NODE_ID=1 \
+      --env KAFKA_JMX_PORT=9101 \
+      --env KAFKA_JMX_HOSTNAME=localhost \
+      --env CLUSTER_ID=MkU3OEVBNTcwNTJENDM3Qk \
+      --env KAFKA_TRANSACTION_STATE_LOG_MIN_ISR=1 \
+      --env KAFKA_PROCESS_ROLES=broker,controller \
+      --env KAFKA_LOG_DIRS=/tmp/kraft-combined-logs \
+      --env KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS=0 \
+      --env KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1 \
+      --env KAFKA_INTER_BROKER_LISTENER_NAME=PLAINTEXT \
+      --env KAFKA_CONTROLLER_LISTENER_NAMES=CONTROLLER \
+      --env KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR=1 \
+      --env KAFKA_CONTROLLER_QUORUM_VOTERS=1@kafka:29094 \
+      --env KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:29091,PLAINTEXT_HOST://localhost:9091 \
+      --env KAFKA_LISTENERS=PLAINTEXT://kafka:29091,CONTROLLER://kafka:29094,PLAINTEXT_HOST://0.0.0.0:9091 \
+      --env KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT \
+      confluentinc/cp-kafka:${CONFLUENT_PLATFORM_VERSION:-latest}
+    else
+      echo "kafka broker $VERSION is already running"
+    fi
+}
+
 zipkin() {
   del_stopped zipkin
   relies_on nginx-proxy
   sleep 2
-   local state=$(docker inspect --format "{{.State.Running}}" zipkin 2>/dev/null)
-   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
+  local state=$(docker inspect --format "{{.State.Running}}" zipkin 2>/dev/null)
+  if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "zipkin 3.x.x server is not running, starting it for you."
     docker run --detach -it \
     --name zipkin \
@@ -287,9 +320,9 @@ zipkin() {
     --env VIRTUAL_PORT=9411 \
     --env VIRTUAL_HOST=zipkin.nurrony.localhost \
     openzipkin/zipkin:3
-   else
+  else
     echo "zipkin 3.x.x is already running"
-   fi
+  fi
 }
 
 # spawn up postgres server. takes version as params. defaults to 16.x.x

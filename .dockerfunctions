@@ -273,6 +273,25 @@ mongo() {
   docker exec -t mongoserver5 mongo "$@"
 }
 
+zipkin() {
+  del_stopped zipkin
+  relies_on nginx-proxy
+  sleep 2
+   local state=$(docker inspect --format "{{.State.Running}}" zipkin 2>/dev/null)
+   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
+    echo "zipkin 3.x.x server is not running, starting it for you."
+    docker run --detach -it \
+    --name zipkin \
+    --net ronsvpn \
+    --publish 9411:9411 \
+    --env VIRTUAL_PORT=9411 \
+    --env VIRTUAL_HOST=zipkin.nurrony.localhost \
+    openzipkin/zipkin:3
+   else
+    echo "zipkin 3.x.x is already running"
+   fi
+}
+
 # spawn up postgres server. takes version as params. defaults to 16.x.x
 pgserver() {
   local VERSION=${1:-17}

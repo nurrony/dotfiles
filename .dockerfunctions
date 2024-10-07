@@ -320,7 +320,9 @@ mailserver() {
       --publish 1025:1025 \
       --env TZ=Asia/Dhaka \
       --env VIRTUAL_PORT=8025 \
+      --env MP_SMTP_AUTH="root:nurrony" \
       --env MP_DATABASE=/data/mailpit.db \
+      --env MP_SMTP_AUTH_ALLOW_INSECURE=true \
       --env VIRTUAL_HOST=mail.nurrony.localhost \
       --volume $DEV_ZONE_CONFIG_PATH/mailserver:/data \
       axllent/mailpit:latest

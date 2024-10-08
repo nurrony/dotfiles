@@ -38,7 +38,7 @@ ctr-registry-up() {
   if [[ "$state" == "true" ]] || [[ "$state" != "" ]]; then
     docker rm -f registry
   fi
-  docker-compose -f $DEV_ZONE_CONFIG_PATH/k8s-clusters/registry/docker-compose.yml up -d
+  docker-compose -f $DEV_ZONE_CONFIG_PATH/kubernetes/clusters/docker-compose.yml up -d
   echo 'registry started successfully...'
 }
 

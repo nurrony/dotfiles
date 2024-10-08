@@ -279,13 +279,13 @@ kafka() {
   local state=$(docker inspect --format "{{.State.Running}}" kafka 2>/dev/null)
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "kafka broker ${VERSION} is not running, starting it for you."
-    docker run --detach -it \
+docker run --detach -it \
       --name kafka \
       --net ronsvpn \
-      --publish 9091:9091 \
-      --publish 9101:9101 \
+      --publish 9092:9092 \
+      --publish 9102:9102 \
       --env KAFKA_NODE_ID=1 \
-      --env KAFKA_JMX_PORT=9101 \
+      --env KAFKA_JMX_PORT=9102 \
       --env KAFKA_JMX_HOSTNAME=localhost \
       --env CLUSTER_ID=MkU3OEVBNTcwNTJENDM3Qk \
       --env KAFKA_TRANSACTION_STATE_LOG_MIN_ISR=1 \
@@ -295,14 +295,14 @@ kafka() {
       --env KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1 \
       --env KAFKA_INTER_BROKER_LISTENER_NAME=PLAINTEXT \
       --env KAFKA_CONTROLLER_LISTENER_NAMES=CONTROLLER \
-      --env KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR=1 \
       --env KAFKA_CONTROLLER_QUORUM_VOTERS=1@kafka:29094 \
-      --env KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:29091,PLAINTEXT_HOST://localhost:9091 \
-      --env KAFKA_LISTENERS=PLAINTEXT://kafka:29091,CONTROLLER://kafka:29094,PLAINTEXT_HOST://0.0.0.0:9091 \
+      --env KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR=1 \
+      --env KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092 \
+      --env KAFKA_LISTENERS=PLAINTEXT://kafka:29092,CONTROLLER://kafka:29094,PLAINTEXT_HOST://0.0.0.0:9092 \
       --env KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT \
       confluentinc/cp-kafka:${CONFLUENT_PLATFORM_VERSION:-latest}
     else
-      echo "kafka broker $VERSION is already running"
+      echo "kafka broker $CONFLUENT_PLATFORM_VERSION is already running"
     fi
 }
 
@@ -318,10 +318,11 @@ mailserver() {
       --expose 8025 \
       --name mailserver \
       --publish 1025:1025 \
+      --publish 1110:1110 \
       --env TZ=Asia/Dhaka \
       --env VIRTUAL_PORT=8025 \
-      --env MP_SMTP_AUTH="root:nurrony" \
       --env MP_DATABASE=/data/mailpit.db \
+      --env MP_SMTP_AUTH_ACCEPT_ANY=true \
       --env MP_SMTP_AUTH_ALLOW_INSECURE=true \
       --env VIRTUAL_HOST=mail.nurrony.localhost \
       --volume $DEV_ZONE_CONFIG_PATH/mailserver:/data \

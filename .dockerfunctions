@@ -44,7 +44,7 @@ ctr-registry-up() {
 
 # down local container registry
 ctr-rgistry-down() {
-  docker-compose -f $DEV_ZONE_CONFIG_PATH/k8s-clusters/registry/docker-compose.yml down
+  docker-compose -f $DEV_ZONE_CONFIG_PATH/kubernetes/clusters/docker-compose.yml down
   echo 'registry is down successfully'
 }
 

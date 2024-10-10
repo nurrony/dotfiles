@@ -73,3 +73,6 @@ export CHROME_EXECUTABLE="/Applications/Brave Browser.app/Contents/MacOS/Brave B
 
 # asdf golang settings
 export ASDF_GOLANG_MOD_VERSION_ENABLED=true
+
+# swift issue
+ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES=YES

@@ -428,8 +428,8 @@ elasticsearch() {
       --env "xpack.security.enabled=true" \
       --env "http.cors.allow-origin=/.*/" \
       --env "http.max_content_length=200mb" \
-      --env "node.name=elasticserver.nurrony.localhost" \
-      --env "cluster.name=local-elasticserver" \
+      --env "node.name=local-elasticsearch" \
+      --env "cluster.name=local-elasticsearch" \
       --env VIRTUAL_HOST=elasticserver.nurrony.localhost \
       --env "http.cors.allow-headers: X-Requested-With,Content-Type,Content-Length,Authorization" \
       docker.elastic.co/elasticsearch/elasticsearch:7.17.24 "$@"

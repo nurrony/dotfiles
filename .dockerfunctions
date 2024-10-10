@@ -452,6 +452,7 @@ elasticview() {
       --name elasticview \
       --env VIRTUAL_PORT=8080 \
       --env VIRTUAL_HOST=elasticsearch.nurrony.localhost \
+      --volume "$DEV_ZONE_CONFIG_PATH/databases/elasticsearch/default_clusters.json:/usr/share/nginx/html/api/default_clusters.json:ro" \
       cars10/elasticvue
   else
     echo 'elasticsearch gui is already running'

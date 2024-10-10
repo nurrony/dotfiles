@@ -419,35 +419,35 @@ elasticsearch() {
       --publish 9200:9200 \
       --publish 9300:9300 \
       --net ronsvpn \
+      --name elasticsearch \
       --ulimit memlock=-1:-1 \
       --env "http.cors.enabled=true" \
       --env "ELASTIC_PASSWORD=nurrony" \
       --env "discovery.type=single-node" \
       --env "xpack.security.enabled=true" \
-      --env "http.cors.allow-origin=/.*/" \
+      --env "http.cors.allow-origin=*" \
       --env "http.max_content_length=200mb" \
       --env "node.name=nmr-elasticsearch-node" \
       --env "cluster.name=nmr-elasticsearch-cluser" \
       --env "http.cors.allow-headers: X-Requested-With,Content-Type,Content-Length,Authorization" \
-      --name elasticsearch \
       docker.elastic.co/elasticsearch/elasticsearch:7.17.24 "$@"
   else
     echo 'elasticsearch is already running'
   fi
 }
 
-elasticvue() {
+elasticview() {
   del_stopped elasticvue
   relies_on elasticsearch
   relies_on nginx-proxy
   sleep 2
-  local state=$(docker inspect --format "{{.State.Running}}" elasticvue 2>/dev/null)
+  local state=$(docker inspect --format "{{.State.Running}}" elasticview 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     docker run -dit \
       --expose 8080 \
       --net ronsvpn \
-      --name elasticvue \
+      --name elasticview \
       --publish 8888:8080 \
       --env VIRTUAL_PORT=8080 \
       --env VIRTUAL_HOST=elasticsearch.nurrony.localhost \

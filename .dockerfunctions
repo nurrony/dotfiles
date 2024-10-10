@@ -430,7 +430,7 @@ elasticsearch() {
       --env "cluster.name=nmr-elasticsearch-cluser" \
       --env "http.cors.allow-headers: X-Requested-With,Content-Type,Content-Length,Authorization" \
       --name elasticsearch \
-      docker.elastic.co/elasticsearch/elasticsearch:7 "$@"
+      docker.elastic.co/elasticsearch/elasticsearch:7.17.24 "$@"
   else
     echo 'elasticsearch is already running'
   fi
@@ -439,14 +439,18 @@ elasticsearch() {
 elastic-gui() {
   del_stopped elastic-gui
   relies_on elasticsearch
+  relies_on nginx-proxy
   sleep 2
   local state=$(docker inspect --format "{{.State.Running}}" elastic-gui 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     docker run -dit \
-      --publish 9000:8080 \
-      --env VIRTUAL_HOST=elasticgui.nurrony.localhost \
+      --expose 8080 \
+      --net ronsvpn \
       --name elastic-gui \
+      --publish 8888:8080 \
+      --env VIRTUAL_PORT=8080 \
+      --env VIRTUAL_HOST=elasticsearch.nurrony.localhost \
       cars10/elasticvue
   else
     echo 'elasticsearch gui is already running'

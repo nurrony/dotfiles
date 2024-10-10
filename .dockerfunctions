@@ -421,18 +421,20 @@ elasticsearch() {
       --net ronsvpn \
       --name elasticsearch \
       --ulimit memlock=-1:-1 \
+      --env VIRTUAL_PORT=9200 \
       --env "http.cors.enabled=true" \
       --env "ELASTIC_PASSWORD=nurrony" \
       --env "discovery.type=single-node" \
       --env "xpack.security.enabled=true" \
-      --env "http.cors.allow-origin=*" \
+      --env "http.cors.allow-origin=/.*/" \
       --env "http.max_content_length=200mb" \
-      --env "node.name=nmr-elasticsearch-node" \
-      --env "cluster.name=nmr-elasticsearch-cluser" \
+      --env "node.name=elasticserver.nurrony.localhost" \
+      --env "cluster.name=local-elasticserver" \
+      --env VIRTUAL_HOST=elasticserver.nurrony.localhost \
       --env "http.cors.allow-headers: X-Requested-With,Content-Type,Content-Length,Authorization" \
       docker.elastic.co/elasticsearch/elasticsearch:7.17.24 "$@"
   else
-    echo 'elasticsearch is already running'
+    echo 'elasticsearch server is already running'
   fi
 }
 
@@ -448,7 +450,6 @@ elasticview() {
       --expose 8080 \
       --net ronsvpn \
       --name elasticview \
-      --publish 8888:8080 \
       --env VIRTUAL_PORT=8080 \
       --env VIRTUAL_HOST=elasticsearch.nurrony.localhost \
       cars10/elasticvue

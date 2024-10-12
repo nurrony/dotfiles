@@ -40,8 +40,8 @@ zinit wait'3' lucid light-mode for \
   as'program' from'gh-r' mv'direnv* -> direnv' atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' pick'direnv' src'zhook.zsh' direnv/direnv
 
 # load asdf: https://github.com/asdf-vm/asdf
-zinit ice wait'3' lucid as'program' src'asdf.sh'
-zinit light asdf-vm/asdf
+# zinit ice wait'3' lucid as'program' src'asdf.sh'
+# zinit light asdf-vm/asdf
 
 # install and load necessary programs
 zinit wait'10' lucid light-mode for \

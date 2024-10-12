@@ -2,5 +2,5 @@
 # setup fzf for zsh
 eval "$(fzf --zsh)"
 
-# starship config file
-export STARSHIP_CONFIG=$HOME/.dotfiles/starship.toml
+# setup deno
+[ -f "$DENO_INSTALL_ROOT/env" ] && source "$DENO_INSTALL_ROOT/env"

@@ -47,7 +47,6 @@ zinit wait'3' lucid light-mode for \
 zinit wait'10' lucid light-mode for \
   as'program' from'gh-r' nektos/act \
   as'program' from'gh-r' jesseduffield/lazygit \
-  as'program' from'gh-r' mv'tealdeer* -> tldr' dbrgn/tealdeer \
   as'program' from'gh-r' mv'sshs-* -> sshs' quantumsheep/sshs \
   as'program' from'gh-r' mv'krew* -> krew' kubernetes-sigs/krew \
   as'program' from'gh-r' mv'mkcert* -> mkcert' FiloSottile/mkcert \

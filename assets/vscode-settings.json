@@ -1,4 +1,9 @@
 {
+  "Lua.diagnostics.globals": [
+    "vim",
+    "nvim_bufferline",
+    "sign"
+  ],
   "[dart]": {
     "editor.defaultFormatter": "Dart-Code.dart-code",
     "editor.formatOnType": true,
@@ -177,24 +182,25 @@
   "importCost.largePackageColor": "#EC3A37F5",
   "importCost.mediumPackageColor": "#B362FF",
   "importCost.smallPackageColor": "#B362FF",
+  "intelephense.telemetry.enabled": false,
   "java.configuration.runtimes": [
     {
       "default": true,
       "name": "JavaSE-21",
-      "path": "/Users/nurrony/.asdf/installs/java/graalvm"
+      "path": "/Volumes/Devzone/storage/mise/data/installs/java/graalvm-21"
     },
     {
       "default": false,
       "name": "JavaSE-17",
-      "path": "/Users/nurrony/.asdf/installs/java/17"
+      "path": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-17"
     },
     {
       "default": false,
       "name": "JavaSE-11",
-      "path": "/Users/nurrony/.asdf/installs/java/11"
+      "path": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-11"
     }
   ],
-  "java.jdt.ls.java.home": "/Users/nurrony/.asdf/installs/java/graalvm",
+  "java.jdt.ls.java.home": "/Volumes/Devzone/storage/mise/data/installs/java/graalvm-21",
   "java.project.importOnFirstTimeStartup": "automatic",
   "java.saveActions.organizeImports": true,
   "javascript.autoClosingTags": true,
@@ -202,13 +208,8 @@
   "javascript.updateImportsOnFileMove.enabled": "never",
   "js/ts.implicitProjectConfig.checkJs": true,
   "json.schemas": [],
-  "Lua.diagnostics.globals": [
-    "vim",
-    "nvim_bufferline",
-    "sign"
-  ],
   "markdown.validate.enabled": true,
-  "maven.executable.path": "/Users/nurrony/.asdf/shims/mvn",
+  "maven.executable.path": "/Volumes/Devzone/storage/mise/data/shims/mvn",
   "maven.terminal.useJavaHome": true,
   "mergeEditor.diffAlgorithm": "advanced",
   "microprofile.alwaysShowOverview": false,
@@ -220,7 +221,7 @@
   "prettier.singleQuote": true,
   "prettier.tabWidth": 2,
   "prettier.vueIndentScriptAndStyle": true,
-  "quarkus.tools.alwaysShowWelcomePage": true,
+  "quarkus.tools.alwaysShowWelcomePage": false,
   "quarkus.tools.debug.terminateProcessOnExit": "Always terminate",
   "redhat.telemetry.enabled": false,
   "remote.SSH.configFile": "/Volumes/Devzone/storage/vscode/custom-ssh-servers",
@@ -235,10 +236,11 @@
   "scm.workingSets.enabled": true,
   "search.useIgnoreFiles": true,
   "security.workspace.trust.untrustedFiles": "open",
+  "serverlessIDE.telemetry.enableTelemetry": false,
   "shfmt.executablePath": "",
-  "spring-boot.ls.java.home": "/Users/nurrony/.asdf/installs/java/graalvm",
-  "telemetry.telemetryLevel": "off",
-  "terminal.external.osxExec": "iTerm.app",
+  "spring-boot.ls.java.home": "/Volumes/Devzone/storage/mise/data/installs/java/graalvm-21",
+  "telemetry.telemetryLevel": "all",
+  "terminal.external.osxExec": "wezterm.app",
   "terminal.integrated.copyOnSelection": true,
   "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font Mono', Monaco, monospace",
   "terminal.integrated.fontSize": 16,
@@ -265,7 +267,6 @@
   "workbench.fontAliasing": "auto",
   "workbench.iconTheme": "catppuccin-perfect-mocha",
   "workbench.layoutControl.enabled": false,
-  "workbench.productIconTheme": "material-product-icons",
   "workbench.sideBar.location": "right",
   "workbench.startupEditor": "none",
   "workbench.statusBar.visible": true,
@@ -305,6 +306,10 @@
       "template.yaml"
     ]
   },
-  "yaml.validate": true
+  "yaml.validate": true,
+  "codeium.aggressiveShutdown": true,
+  "codeium.indexStoragePath": "/Volumes/Devzone/storage/codeium",
+  "codeium.enableConfig": {
+    "*": true
+  }
 }
-

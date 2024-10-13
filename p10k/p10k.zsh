@@ -1214,7 +1214,7 @@
   ###[ package: name@version from package.json (https://docs.npmjs.com/files/package.json) ]####
   # Package color.
   typeset -g POWERLEVEL9K_PACKAGE_FOREGROUND=#43302E
-  typeset -g POWERLEVEL9K_PACKAGE_BACKGROUND=252
+  typeset -g POWERLEVEL9K_PACKAGE_BACKGROUND=180
 
   # Package format. The following parameters are available within the expansion.
   #

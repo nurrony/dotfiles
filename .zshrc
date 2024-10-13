@@ -74,10 +74,10 @@ zinit wait'10' lucid light-mode for \
 #-----------------------------------------------------------------
 
 # install and load starship theme.
-zi ice as"command" from"gh-r" \
-  atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship;" \
-  atpull"%atclone" src"init.zsh"
-zi light starship/starship
+# zi ice as"command" from"gh-r" \
+#   atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship;" \
+#   atpull"%atclone" src"init.zsh"
+# zi light starship/starship
 
 # install and load ohmyposh theme
 # if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
@@ -88,8 +88,8 @@ zi light starship/starship
 # fi
 
 # install powerline10k
-# zinit ice depth'1' atload"[[ ! -f $HOME/.dotfiles/.p10k.zsh ]] || source $HOME/.dotfiles/.p10k.zsh" nocd
-# zinit light romkatv/powerlevel10k
+zinit ice depth'1' atload"[[ ! -f $HOME/.dotfiles/p10k/p10k.zsh ]] || source $HOME/.dotfiles/p10k/p10k.zsh;[[ ! -f $HOME/.dotfiles/p10k/p10k.mise.zsh ]] || source $HOME/.dotfiles/p10k/p10k.mise.zsh" nocd
+zinit light romkatv/powerlevel10k
 
 # autoload -Uz _zinit
 # (( ${+_comps} )) && _comps[zinit]=_zinit

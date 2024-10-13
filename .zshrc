@@ -37,8 +37,7 @@ zinit lucid light-mode for \
 zinit wait'3' lucid light-mode for \
   OMZP::git \
   OMZP::mvn \
-  OMZP::extract \
-  as'program' from'gh-r' mv'direnv* -> direnv' atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' pick'direnv' src'zhook.zsh' direnv/direnv
+  OMZP::extract
 
 # install and load necessary programs
 zinit wait'10' lucid light-mode for \

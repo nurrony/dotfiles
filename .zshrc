@@ -6,9 +6,9 @@ bindkey "^[[A" history-search-backward
 bindkey "^[[B" history-search-forward
 
 # uncomment these lines if you are using powerlevel10k
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
@@ -29,8 +29,9 @@ zinit lucid light-mode for \
   as'completion' zsh-users/zsh-completions \
   pick'alias-tips.plugin.zsh' djui/alias-tips \
   as'completion' pick'gradle-completion.plugin.zsh' gradle/gradle-completion \
-  as'program' from'gh-r' bpick'*x86_64-apple-darwin.tar.gz' atclone'./zoxide init --cmd=j zsh > init.zsh' src'init.zsh' \
-  atpull'%atclone' pick'zoxide/zoxide' ajeetdsouza/zoxide
+  as'program' from'gh-r' jdx/usage \
+  as'program' from'gh-r' bpick'mise-*-x64'  mv'mise* -> mise' atclone'./mise completion zsh > _mise && ./mise activate zsh > init.zsh' src'init.zsh' atpull'%atclone' jdx/mise \
+  as'program' from'gh-r' bpick'*x86_64-apple-darwin.tar.gz' atclone'./zoxide init --cmd=j zsh > init.zsh' src'init.zsh' atpull'%atclone' pick'zoxide/zoxide' ajeetdsouza/zoxide
 
 # load ohmyzsh and other plugins
 zinit wait'3' lucid light-mode for \
@@ -38,10 +39,6 @@ zinit wait'3' lucid light-mode for \
   OMZP::mvn \
   OMZP::extract \
   as'program' from'gh-r' mv'direnv* -> direnv' atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' pick'direnv' src'zhook.zsh' direnv/direnv
-
-# load asdf: https://github.com/asdf-vm/asdf
-# zinit ice wait'3' lucid as'program' src'asdf.sh'
-# zinit light asdf-vm/asdf
 
 # install and load necessary programs
 zinit wait'10' lucid light-mode for \
@@ -78,10 +75,10 @@ zinit wait'10' lucid light-mode for \
 #-----------------------------------------------------------------
 
 # install and load starship theme.
-# zi ice as"command" from"gh-r" \
-#   atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship;" \
-#   atpull"%atclone" src"init.zsh"
-# zi light starship/starship
+zi ice as"command" from"gh-r" \
+  atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship;" \
+  atpull"%atclone" src"init.zsh"
+zi light starship/starship
 
 # install and load ohmyposh theme
 # if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
@@ -92,8 +89,8 @@ zinit wait'10' lucid light-mode for \
 # fi
 
 # install powerline10k
-zinit ice depth'1' atload"[[ ! -f ~/.dotfiles/.p10k.zsh ]] || source ~/.dotfiles/.p10k.zsh" nocd
-zinit light romkatv/powerlevel10k
+# zinit ice depth'1' atload"[[ ! -f $HOME/.dotfiles/.p10k.zsh ]] || source $HOME/.dotfiles/.p10k.zsh" nocd
+# zinit light romkatv/powerlevel10k
 
 # autoload -Uz _zinit
 # (( ${+_comps} )) && _comps[zinit]=_zinit

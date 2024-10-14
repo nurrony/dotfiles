@@ -21,9 +21,6 @@ brew bundle install --file=$HOME/.dotfiles/Brewfile
 echo "==> All setup done."
 echo
 printf "To customise your macOS installation according to most developer\'s preferences run the following command\n"
-
 printf 'chmod +x ./.macos && ./.macos\n\n'
-
 printf 'INFORMATION: Please create .extra in you HOME directory to override or for customizing configurations'
-
 echo '🚀🚀 Please restart your terminal and Happy Hacking 🚀🚀'

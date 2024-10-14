@@ -1,0 +1,18 @@
+[settings]
+asdf                                                      = true
+experimental                                              = true
+cache_prune_age                                           = "3d"
+legacy_version_file                                       = true
+plugin_autoupdate_last_check_duration                     = "3d"
+
+[tools]
+node                                                      = ["lts"]
+maven                                                     = ["latest"]
+java                                                      = ["graalvm-community-21.0.2", "zulu-javafx-17.52.17", "zulu-javafx-11.74.15"]
+
+
+[alias.java]
+11                                                        = "zulu-javafx-11.74.15"
+17                                                        = "zulu-javafx-17.52.17"
+21                                                        = "graalvm-community-21.0.2"
+graalvm                                                   = "graalvm-community-21.0.2"

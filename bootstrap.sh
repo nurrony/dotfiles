@@ -17,7 +17,7 @@ ln -sf $HOME/.dotfiles/{tmux,alacritty,zellij,skhd,yabai} $HOME/.config/
 echo "Creating '~/.dotfiles/.extra' file to write custom configurations that you might not want to share"
 touch $HOME/.dotfiles/.extra
 echo "Installing Homebrew formulas and VSCode extensions..."
-brew bundle install --verbose --file=$HOME/.dotfiles/Brewfile
+brew bundle install --file=$HOME/.dotfiles/Brewfile
 echo "==> All setup done."
 echo
 printf "To customise your macOS installation according to most developer\'s preferences run the following command\n"
@@ -26,4 +26,4 @@ printf 'chmod +x ./.macos && ./.macos\n\n'
 
 printf 'INFORMATION: Please create .extra in you HOME directory to override or for customizing configurations'
 
-echo 'Please restart your terminal and Happy Hacking 🛠🛠'
+echo '🚀🚀 Please restart your terminal and Happy Hacking 🚀🚀'

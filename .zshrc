@@ -6,9 +6,9 @@ bindkey "^[[A" history-search-backward
 bindkey "^[[B" history-search-forward
 
 # uncomment these lines if you are using powerlevel10k
-# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-# fi
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
@@ -88,7 +88,7 @@ zinit wait'10' lucid light-mode for \
 # fi
 
 # install powerline10k
-zinit ice depth'1' atload"[[ ! -f $HOME/.dotfiles/p10k/p10k.zsh ]] || source $HOME/.dotfiles/p10k/p10k.zsh;[[ ! -f $HOME/.dotfiles/p10k/p10k.mise.zsh ]] || source $HOME/.dotfiles/p10k/p10k.mise.zsh" nocd
+zinit ice depth'1' atload"[[ ! -f $HOME/.dotfiles/p10k/p10k.zsh ]] || source $HOME/.dotfiles/p10k/p10k.zsh" nocd
 zinit light romkatv/powerlevel10k
 
 # autoload -Uz _zinit

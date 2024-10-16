@@ -1816,8 +1816,9 @@
   typeset -g POWERLEVEL9K_EXAMPLE_BACKGROUND=1
   # typeset -g POWERLEVEL9K_EXAMPLE_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
- # MISE
-function prompt_mise() {
+
+  ################################[ mise: version manager ]#################################
+  function prompt_mise() {
     local plugins=("${(@f)$(mise ls --current 2>/dev/null | awk '!/\(symlink\)/ && $3!="~/.tool-versions" && $3!="~/.config/mise/config.toml" {print $1, $2}')}")
     local plugin
     for plugin in ${(k)plugins}; do
@@ -1853,7 +1854,6 @@ function prompt_mise() {
 # Colors
   typeset -g POWERLEVEL9K_MISE_FOREGROUND=#43302E
   typeset -g POWERLEVEL9K_MISE_BACKGROUND=#95ffa5
-  typeset -g POWERLEVEL9K_MISE_GRADLE_FOREGROUND=#212121
 
   ## background
   typeset -g POWERLEVEL9K_MISE_LUA_BACKGROUND=4
@@ -1875,10 +1875,9 @@ function prompt_mise() {
   typeset -g POWERLEVEL9K_MISE_PYTHON_BACKGROUND=#FFD43B
 
   # foreground
-  typeset -g POWERLEVEL9K_MISE_DENO_FOREGROUND=#212121
-  typeset -g POWERLEVEL9K_MISE_JAVA_FOREGROUND=#212121
-  typeset -g POWERLEVEL9K_MISE_MAVEN_FOREGROUND=#CCCCCC
   typeset -g POWERLEVEL9K_MISE_PYTHON_FOREGROUND=23
+  typeset -g POWERLEVEL9K_MISE_MAVEN_FOREGROUND=#CCCCCC
+  typeset -g POWERLEVEL9K_MISE_GRADLE_FOREGROUND=#212121
 
 
   typeset -g POWERLEVEL9K_MISE_GRADLE_SHOW_ON_UPGLOB='*.gradle'
@@ -1886,6 +1885,7 @@ function prompt_mise() {
   typeset -g POWERLEVEL9K_MISE_MAVEN_SHOW_ON_UPGLOB='pom.xml|mvnw|mvnw.cmd'
   typeset -g POWERLEVEL9K_MISE_NODE_SHOW_ON_UPGLOB='*.js|*.ts|package.json|.nvmrc|pnpm-workspace.yaml|.pnpmfile.cjs|.vue|yarn.lock'
   typeset -g POWERLEVEL9K_MISE_JAVA_SHOW_ON_UPGLOB='*.java|*.class|*.gradle|*.jar|*.clj|*.cljr|pom.xml|build.gradle.kts|build.sbt|.java-version|*.deps.edn|project.clj|build.boot'
+
 
   # Transient prompt works similarly to the builtin transient_rprompt option. It trims down prompt
   # when accepting a command line. Supported values:

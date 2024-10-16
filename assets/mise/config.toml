@@ -6,10 +6,10 @@ legacy_version_file                                       = true
 plugin_autoupdate_last_check_duration                     = "3d"
 
 [tools]
-node                                                      = ["lts"]
-deno                                                      = ["latest"]
-maven                                                     = ["latest"]
-java                                                      = ["graalvm-community-21.0.2", "zulu-javafx-17.52.17", "zulu-javafx-11.74.15"]
+node                                                      = "lts"
+deno                                                      = "latest"
+maven                                                     = "latest"
+java                                                      = "graalvm-community-21.0.2"
 
 [alias.java]
 11                                                        = "zulu-javafx-11.74.15"

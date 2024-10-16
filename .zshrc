@@ -26,10 +26,10 @@ source "${ZINIT_HOME}/zinit.zsh"
 
 # load essential completion
 zinit lucid light-mode for \
+  as'program' from'gh-r' jdx/usage \
   as'completion' zsh-users/zsh-completions \
   pick'alias-tips.plugin.zsh' djui/alias-tips \
   as'completion' pick'gradle-completion.plugin.zsh' gradle/gradle-completion \
-  as'program' from'gh-r' jdx/usage \
   as'program' from'gh-r' bpick'mise-*-x64'  mv'mise* -> mise' atclone'./mise completion zsh > _mise && ./mise activate zsh > init.zsh' src'init.zsh' atpull'%atclone' jdx/mise \
   as'program' from'gh-r' bpick'*x86_64-apple-darwin.tar.gz' atclone'./zoxide init --cmd=j zsh > init.zsh' src'init.zsh' atpull'%atclone' pick'zoxide/zoxide' ajeetdsouza/zoxide
 

@@ -180,6 +180,7 @@ alias vbox-nets="vboxmanage list bridgedifs"
 
 # git commitzen aliases
 alias gcz='git-cz'
+alias gld='git pull origin develop'
 
 # set vim alias
 alias vi=nvim

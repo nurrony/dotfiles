@@ -60,7 +60,6 @@ zinit wait'10' lucid light-mode for \
   as'program' from'gh-r' mv'argocd* -> argocd' atclone'./argocd completion zsh > _argocd' atpull'%atclone' pick'argocd' argoproj/argo-cd \
   as"program" atclone'make install PREFIX=$ZPFX' src'etc/git-extras-completion.zsh' atpull"%atclone" pick"$ZPFX/bin/git-*" tj/git-extras \
   as'program' from'gh-r' mv'skaffold* -> skaffold' atclone'./skaffold completion zsh > _skaffold' atpull'%atclone' GoogleContainerTools/skaffold \
-  pick'git-open.plugin.zsh' paulirish/git-open \
   zdharma-continuum/history-search-multi-word \
   zdharma/fast-syntax-highlighting
 

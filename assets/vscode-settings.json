@@ -52,6 +52,12 @@
   "[terraform]": {
     "editor.defaultFormatter": "hashicorp.terraform"
   },
+  "[typescript]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  },
   "[xml]": {
     "editor.defaultFormatter": "redhat.vscode-xml"
   },
@@ -63,6 +69,11 @@
     "camelk.tools.kamel-path": "/Users/nurrony/Library/Application Support/Code/User/globalStorage/redhat.vscode-camelk/camelk/tools/kamel/kamel"
   },
   "cfnLint.path": "/usr/local/bin/cfn-lint",
+  "codeium.aggressiveShutdown": true,
+  "codeium.enableConfig": {
+    "*": true
+  },
+  "codeium.indexStoragePath": "/Volumes/Devzone/storage/codeium",
   "console-ninja.featureSet": "Community",
   "dart.debugSdkLibraries": true,
   "dart.flutterSdkPath": "/Volumes/Devzone/storage/dartlang/flutter",
@@ -306,10 +317,5 @@
       "template.yaml"
     ]
   },
-  "yaml.validate": true,
-  "codeium.aggressiveShutdown": true,
-  "codeium.indexStoragePath": "/Volumes/Devzone/storage/codeium",
-  "codeium.enableConfig": {
-    "*": true
-  }
+  "yaml.validate": true
 }

@@ -6,13 +6,18 @@ legacy_version_file                                       = true
 plugin_autoupdate_last_check_duration                     = "3d"
 
 [tools]
-node                                                      = "lts"
 deno                                                      = "latest"
 maven                                                     = "latest"
-java                                                      = "graalvm-community-21.0.2"
+java                                                      = ["graalvm-community-21.0.2", "zulu-javafx-17.54.21", "zulu-javafx-11.76.21"]
+nodejs                                                     = ["lts", "lts-iron", "lts-hydrogen", "lts-gallium",]
 
 [alias.java]
-11                                                        = "zulu-javafx-11.74.15"
-17                                                        = "zulu-javafx-17.52.17"
+11                                                        = "zulu-javafx-11.76.21"
+17                                                        = "zulu-javafx-17.54.21"
 21                                                        = "graalvm-community-21.0.2"
 graalvm                                                   = "graalvm-community-21.0.2"
+
+[alias.nodejs]
+20                                                        = "lts-iron"
+18                                                        = "lts-hydrogen"
+16                                                        = "lts-gallium"

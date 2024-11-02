@@ -30,8 +30,8 @@ zinit lucid light-mode for \
   as'completion' zsh-users/zsh-completions \
   pick'alias-tips.plugin.zsh' djui/alias-tips \
   as'completion' pick'gradle-completion.plugin.zsh' gradle/gradle-completion \
-  as'program' from'gh-r' bpick'mise-*-x64'  mv'mise* -> mise' atclone'./mise completion zsh > _mise && ./mise activate zsh > init.zsh' src'init.zsh' atpull'%atclone' jdx/mise \
-  as'program' from'gh-r' bpick'*x86_64-apple-darwin.tar.gz' atclone'./zoxide init --cmd=j zsh > init.zsh' src'init.zsh' atpull'%atclone' pick'zoxide/zoxide' ajeetdsouza/zoxide
+  as'program' from'gh-r' mv'mise* -> mise' atclone'./mise completion zsh > _mise && ./mise activate zsh > init.zsh' src'init.zsh' atpull'%atclone' jdx/mise \
+  as'program' from'gh-r' atclone'./zoxide init --cmd=j zsh > init.zsh' src'init.zsh' atpull'%atclone' pick'zoxide/zoxide' ajeetdsouza/zoxide
 
 # load ohmyzsh and other plugins
 zinit wait'3' lucid light-mode for \
@@ -49,10 +49,10 @@ zinit wait'10' lucid light-mode for \
   as'program' from'gh-r' mv'mkcert* -> mkcert' FiloSottile/mkcert \
   as'program' from'gh-r' mv'hostess* -> hostess' cbednarski/hostess \
   as'program' from'gh-r' mv'hadolint* -> hadolint' hadolint/hadolint \
+  as'program' from'gh-r' mv'dua-* -> dua' pick'dua/dua' Byron/dua-cli \
   as'program' from'gh-r' mv'kube-explorer* -> kube-explorer' cnrancher/kube-explorer \
   as'program' from'gh-r' mv'yazi* -> yazi' atpull'%atclone' pick'yazi/yazi' sxyazi/yazi \
   as'program' from'gh-r' atclone'./kondo --completions zsh > _kondo' atpull'%atclone' tbillington/kondo \
-  as'program' from'gh-r' mv'dua-* -> dua' pick'dua/dua' Byron/dua-cli \
   as'program' from'gh-r' atclone'ln -sfv completions/dog.zsh _dog' atpull'%atclone' pick'bin/dog' ogham/dog \
   as'program' from'gh-r' mv'k3d* -> k3d' atclone'./k3d completion zsh > _k3d' atpull'%atclone' pick'k3d' k3d-io/k3d \
   as'program' from'gh-r' mv'kind* -> kind' atclone'./kind completion zsh > _kind' atpull'%atclone' pick'kind' kubernetes-sigs/kind \

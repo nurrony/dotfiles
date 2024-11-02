@@ -51,7 +51,6 @@ zinit wait'10' lucid light-mode for \
   as'program' from'gh-r' mv'hadolint* -> hadolint' hadolint/hadolint \
   as'program' from'gh-r' mv'kube-explorer* -> kube-explorer' cnrancher/kube-explorer \
   as'program' from'gh-r' mv'yazi* -> yazi' atpull'%atclone' pick'yazi/yazi' sxyazi/yazi \
-  as'program' from'gh-r' atclone'./txeh completion zsh > _txeh' atpull'%atclone' txn2/txeh \
   as'program' from'gh-r' atclone'./kondo --completions zsh > _kondo' atpull'%atclone' tbillington/kondo \
   as'program' from'gh-r' bpick'*x86_64-apple-darwin.tar.gz' mv'dua-* -> dua' pick'dua/dua' Byron/dua-cli \
   as'program' from'gh-r' atclone'ln -sfv completions/dog.zsh _dog' atpull'%atclone' pick'bin/dog' ogham/dog \

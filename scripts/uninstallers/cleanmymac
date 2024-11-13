@@ -19,7 +19,7 @@ remove() {
 remove /Applications/CleanMyMac\ X.app
 remove $HOME/Library/Preferences/com.macpaw.*
 remove "$HOME/Library/Application\ Support/CleanMyMac*"
-remove "$HOME/Library/Preferences/com.macpaw*"
+remove "$HOME/Library/Preferences/*.com.macpaw*"
 remove "$HOME/Library/Caches/com.macpaw*"
 remove "$HOME/Library/Logs/CleanMyMac\ X\ Menu"
 remove "$HOME/Library/Logs/com.macpaw.CleanMyMac4*"

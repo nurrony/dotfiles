@@ -16,7 +16,7 @@ remove() {
   echo
 }
 
-remove /Applications/CleanMyMac\ X.app
+remove /Applications/CleanMyMac*.app
 remove $HOME/Library/Preferences/com.macpaw.*
 remove "$HOME/Library/Application\ Support/CleanMyMac*"
 remove "$HOME/Library/Preferences/*.com.macpaw*"

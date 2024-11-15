@@ -11,13 +11,13 @@ maven                                                     = "latest"
 java                                                      = ["graalvm-community-21.0.2", "zulu-javafx-17.54.21", "zulu-javafx-11.76.21"]
 nodejs                                                     = ["lts", "lts-iron", "lts-hydrogen", "lts-gallium",]
 
-[alias.java]
+[alias.java.versions]
 11                                                        = "zulu-javafx-11.76.21"
 17                                                        = "zulu-javafx-17.54.21"
 21                                                        = "graalvm-community-21.0.2"
 graalvm                                                   = "graalvm-community-21.0.2"
 
-[alias.nodejs]
+[alias.nodejs.versions]
 20                                                        = "lts-iron"
 18                                                        = "lts-hydrogen"
 16                                                        = "lts-gallium"

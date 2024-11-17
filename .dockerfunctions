@@ -147,8 +147,8 @@ dhtop() {
 mysqlserver() {
   local VERSION=${1:-8}
   local PORT=${2:-3306}
-  local state=$(docker inspect --format "{{.State.Running}}" mysqlserver 2>/dev/null)
   del_stopped mysqlserver${VERSION}
+  local state=$(docker inspect --format "{{.State.Running}}" mysqlserver$VERSION 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "mysql $VERSION server is not running, starting it for you."

@@ -9,7 +9,7 @@ alias dpsa="docker ps --all"
 alias ddown='docker rm --force'
 
 dlog() {
-  docker logs -f --tail 100 $1
+  docker logs -f --tail 100 $0
 }
 
 # cleans all docker resources. run it cautiously

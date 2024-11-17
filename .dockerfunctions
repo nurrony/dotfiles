@@ -9,7 +9,7 @@ alias dpsa="docker ps --all"
 alias ddown='docker rm --force'
 
 dlog() {
-  docker logs -f --tail 100 $0
+  docker logs -f --tail 100 "$@"
 }
 
 # cleans all docker resources. run it cautiously
@@ -357,8 +357,8 @@ pgserver() {
   local VERSION=${1:-17}
   local PORT=${2:-5432}
   local DBNAME=${3:-experiments}
-  local state=$(docker inspect --format "{{.State.Running}}" pgserver$VERSION 2>/dev/null)
   del_stopped pgserver${VERSION}
+  local state=$(docker inspect --format "{{.State.Running}}" pgserver$VERSION 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     mkdir -p $DEV_ZONE_CONFIG_PATH/databases/postgres/${VERSION}
@@ -379,9 +379,10 @@ pgserver() {
   fi
 }
 
-psql16() {
+psql() {
   relies_on pgserver
-  docker exec -it pgserver16 psql "$@"
+  local RUNNING_PGSERVER_NAME=$(docker ps --filter "name=pgserver" --format "{{.Names}}")
+  docker exec -it $RUNNING_PGSERVER_NAME psql "$@"
 }
 
 pga() {

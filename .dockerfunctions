@@ -167,7 +167,8 @@ mysqlserver() {
 
 mysql() {
   relies_on mysqlserver
-  docker exec -it mysqlserver8 mysql "$@"
+  local RUNNING_DBSERVER_NAME=$(docker ps --filter "name=mysqlserver" --format "{{.Names}}")
+  docker exec -it $RUNNING_DBSERVER_NAME mysql "$@"
 }
 
 mysql5() {

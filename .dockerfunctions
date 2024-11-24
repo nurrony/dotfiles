@@ -171,10 +171,6 @@ mysql() {
   docker exec -it $RUNNING_DBSERVER_NAME mysql "$@"
 }
 
-mysql5() {
-  docker exec -it mysqlserver5 mysql "$@"
-}
-
 dynamodb() {
   del_stopped dynamodb
   relies_on nginx-proxy

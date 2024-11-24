@@ -381,8 +381,8 @@ pgserver() {
 }
 
 psql() {
-  relies_on pgserver
   local RUNNING_PGSERVER_NAME=$(docker ps --filter "name=pgserver" --format "{{.Names}}")
+  relies_on $RUNNING_DBSERVER_NAME
   docker exec -it $RUNNING_PGSERVER_NAME psql "$@"
 }
 

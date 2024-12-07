@@ -271,6 +271,28 @@ mongo() {
   docker exec -t mongoserver5 mongo "$@"
 }
 
+# check https://github.com/GoogleCloudPlatform/rabbitmq-docker/blob/master/README.md
+rabbitmq() {
+  del_stopped rabbitmq
+  local state=$(docker inspect --format "{{.State.Running}}" rabbitmq 2>/dev/null)
+  if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
+    echo "rabbitmq broker is not running, starting it for you."
+    docker run --detach -it \
+      --net ronsvpn \
+      --name rabbitmq \
+      --publish 5672:5672 \
+      --publish 15672:15672 \
+      --env VIRTUAL_PORT=15672 \
+      --env RABBITMQ_DEFAULT_USER=admin \
+      --env RABBITMQ_DEFAULT_PASS=nurrony \
+      --env VIRTUAL_HOST=rabbitmq.nurrony.localhost \
+      --volume $DEV_ZONE_CONFIG_PATH/rabbitmq:/var/lib/rabbitmq \
+      rabbitmq:4-management-alpine
+  else
+    echo "rabbitmq broker is already running"
+  fi
+}
+
 kafka() {
   local CONFLUENT_PLATFORM_VERSION=${1:-7.7.1}
   del_stopped kafka

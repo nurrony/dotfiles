@@ -75,3 +75,6 @@ export CHROME_EXECUTABLE="/Applications/Brave Browser.app/Contents/MacOS/Brave B
 # brew uninstall --zap --force libtool && brew unlink libtool && brew link libtool
 
 export ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES=YES
+
+# Set groovy home
+export GROOVY_HOME=/usr/local/opt/groovy/libexec

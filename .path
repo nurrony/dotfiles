@@ -46,5 +46,9 @@ export PATH="$GNU_CORE_UTIL_PATH:$PATH"
 export NEOVIM_MASON_BIN_PATH=$HOME/.local/share/nvim/mason/bin
 export PATH="$NEOVIM_MASON_BIN_PATH:$PATH"
 
+# Python v3.x.x path
+export PYTHON_BIN_PATH=$(brew --prefix python)/libexec/bin
+export PATH="$PYTHON_BIN_PATH:$PATH"
+
 # Finally apped to main PATH variable
-export PATH="/usr/local/opt/python/libexec/bin:/usr/local/bin:/usr/local/sbin:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH"

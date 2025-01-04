@@ -1,26 +1,27 @@
 [settings]
-asdf                                                       = true
-experimental                                               = true
-cache_prune_age                                            = "3d"
-legacy_version_file                                        = true
-plugin_autoupdate_last_check_duration                      = "3d"
+asdf                                                      = true
+experimental                                              = true
+cache_prune_age                                           = "3d"
+legacy_version_file                                       = true
+plugin_autoupdate_last_check_duration                     = "1d"
 
 [tools]
-deno                                                       = "latest"
-maven                                                      = "latest"
-java                                                       = ["graalvm-community-21.0.2", "zulu-javafx-17.54.21", "zulu-javafx-11.76.21"]
-nodejs                                                      = ["lts", "lts-iron", "lts-hydrogen", "lts-gallium",]
+deno                                                      = "latest"
+maven                                                     = "latest"
+java                                                      = ["graalvm-community-21.0.2", "zulu-javafx-17.54.21", "zulu-javafx-11.76.21"]
+nodejs                                                     = ["lts", "lts-iron", "lts-hydrogen", "lts-gallium",]
 
 [alias.java.versions]
-11                                                         = "zulu-javafx-11.76.21"
-17                                                         = "zulu-javafx-17.54.21"
-21                                                         = "graalvm-community-21.0.2"
-graalvm                                                    = "graalvm-community-21.0.2"
+11                                                        = "zulu-javafx-11.76.21"
+17                                                        = "zulu-javafx-17.54.21"
+21                                                        = "graalvm-community-21.0.2"
+graalvm                                                   = "graalvm-community-21.0.2"
 
 [alias.nodejs.versions]
-20                                                         = "lts-iron"
-18                                                         = "lts-hydrogen"
-16                                                         = "lts-gallium"
+22                                                        = "lts-jod"
+20                                                        = "lts-iron"
+18                                                        = "lts-hydrogen"
+16                                                        = "lts-gallium"
 
 [env]
 _.python.venv                                              = ".venv"

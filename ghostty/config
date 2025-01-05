@@ -1,0 +1,41 @@
+# fonts
+font-size = 16
+font-style = medium
+bold-is-bright = true
+theme = catppuccin-mocha
+font-family = "JetBrainsMono Nerd Font Mono"
+
+# cursor
+cursor-style = block
+cursor-style-blink = false
+
+
+# clipboard
+copy-on-select = clipboard
+clipboard-trim-trailing-spaces = true
+
+# mouse
+mouse-scroll-multiplier = 2
+mouse-hide-while-typing = true
+
+# window
+initial-window = true
+resize-overlay = never
+background-opacity = 0.85
+window-save-state = always
+window-step-resize = false
+background-blur-radius = 15
+window-padding-balance = true
+confirm-close-surface = false
+
+# behavior
+auto-update = check
+auto-update-channel = stable
+quit-after-last-window-closed = true
+shell-integration-features = true
+
+# macos
+macos-option-as-alt = true
+macos-titlebar-style = transparent
+
+# others

@@ -9,7 +9,6 @@ font-family = "JetBrainsMono Nerd Font Mono"
 cursor-style = block
 cursor-style-blink = false
 
-
 # clipboard
 copy-on-select = clipboard
 clipboard-trim-trailing-spaces = true

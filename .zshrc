@@ -37,6 +37,7 @@ zinit lucid light-mode for \
 zinit wait'3' lucid light-mode for \
   OMZP::git \
   OMZP::mvn \
+  OMZP::ansible \
   OMZP::extract
 
 # install and load necessary programs

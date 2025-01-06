@@ -31,7 +31,7 @@ confirm-close-surface = false
 auto-update = check
 auto-update-channel = stable
 quit-after-last-window-closed = true
-shell-integration-features = true
+shell-integration-features = sudo
 
 # macos
 macos-option-as-alt = true

@@ -29,9 +29,10 @@ confirm-close-surface = false
 
 # behavior
 auto-update = check
+shell-integration = zsh
 auto-update-channel = stable
-quit-after-last-window-closed = true
 shell-integration-features = sudo
+quit-after-last-window-closed = true
 
 # macos
 macos-option-as-alt = true

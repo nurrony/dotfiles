@@ -74,6 +74,6 @@ I use **WezTerm** and **Zsh** with **PowerLevel10k** together with these followi
 
 [omp-link]: https://ohmyposh.dev/
 [starship-link]: https://starship.rs/
-[iterm-profile-file]: ./assets/Rony-iTerm.json
+[iterm-profile-file]: assets/iterm2/Rony-iTerm.json
 [p10k-link]: https://github.com/romkatv/powerlevel10k
 [catppuccin]: https://github.com/catppuccin

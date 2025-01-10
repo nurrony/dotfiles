@@ -45,7 +45,7 @@ The dotfiles comes with these popular terminal emulators.
 - [ghostty](./ghostty/): Copy `ghostty` directory in `~/.config/`
 - [WezTerm](./wezterm/): Copy `wezterm` directory in `~/.config`
 - [Alacritty](./alacritty/): Copy `alacritty` directory in `~/.config`
-- [Iterm2](./assets/Rony-iTerm.json): Import this file and make it default
+- [Iterm2](./assets/iterm2/Rony-iTerm.json): Import this file and make it default
 
 ### Terminal theme and tweaks
 

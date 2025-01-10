@@ -19,8 +19,8 @@ function setup_dotfiles() {
     echo "Git is not installed. Installing it for you.."
     brew install git
   else
-    echo 'Cloning nmrony/dotfiles repository in ~/.dotfiles'
-    git clone https://github.com/nmrony/dotfiles $HOME/.dotfiles
+    echo 'Cloning nurrony/dotfiles repository in ~/.dotfiles'
+    git clone https://github.com/nurrony/dotfiles $HOME/.dotfiles
   fi
   cd $HOME/.dotfiles && \
   echo '✨✨✨ Making your Terminal WOWsome ✨✨✨' && \

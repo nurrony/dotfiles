@@ -73,25 +73,25 @@ npm-upgrade() {
 }
 
 create-scala-app() {
-        local NMR_SCALA_PROJECT_NAME
-        local NMR_SCALA_PROJECT_ORG
-        local NMR_SCALA_PROJECT_VERSION
-        local NMR_SCALA_PROJECT_SCALA_VERSION
-        vared -p 'Project Name?: [hello-world] ' -c NMR_SCALA_PROJECT_NAME
-        vared -p 'Organization version?: [info.nmrony] ' -c NMR_SCALA_PROJECT_ORG
-        vared -p 'Project version?: [v1.0.0-SNAPSHOT] ' -c NMR_SCALA_PROJECT_VERSION
-        vared -p 'Scala version?: [3.2.1] ' -c NMR_SCALA_PROJECT_SCALA_VERSION
-        NMR_SCALA_PROJECT_NAME=${NMR_SCALA_PROJECT_NAME:-hello-world}
-        NMR_SCALA_PROJECT_ORG=${NMR_SCALA_PROJECT_ORG:-info.nmrony}
-        NMR_SCALA_PROJECT_VERSION=${NMR_SCALA_PROJECT_VERSION:-v1.0.0-SNAPSHOT}
-        NMR_SCALA_PROJECT_SCALA_VERSION=${NMR_SCALA_PROJECT_SCALA_VERSION:-3.2.1}
-        if [ -d "$NMR_SCALA_PROJECT_NAME" ]; then
-                echo $NMR_SCALA_PROJECT_NAME ' directory is already exists.'
-        else
-                echo -n 'Creating necessary directories and files... '
-                mkdir -p $NMR_SCALA_PROJECT_NAME/src/{main/{java,resources,scala},test/{java,resources,scala}}
-                cd $NMR_SCALA_PROJECT_NAME >/dev/null &&
-                        cat >./build.sbt <<-EOF
+  local NMR_SCALA_PROJECT_NAME
+  local NMR_SCALA_PROJECT_ORG
+  local NMR_SCALA_PROJECT_VERSION
+  local NMR_SCALA_PROJECT_SCALA_VERSION
+  vared -p 'Project Name?: [hello-world] ' -c NMR_SCALA_PROJECT_NAME
+  vared -p 'Organization version?: [info.nmrony] ' -c NMR_SCALA_PROJECT_ORG
+  vared -p 'Project version?: [v1.0.0-SNAPSHOT] ' -c NMR_SCALA_PROJECT_VERSION
+  vared -p 'Scala version?: [3.2.1] ' -c NMR_SCALA_PROJECT_SCALA_VERSION
+  NMR_SCALA_PROJECT_NAME=${NMR_SCALA_PROJECT_NAME:-hello-world}
+  NMR_SCALA_PROJECT_ORG=${NMR_SCALA_PROJECT_ORG:-info.nmrony}
+  NMR_SCALA_PROJECT_VERSION=${NMR_SCALA_PROJECT_VERSION:-v1.0.0-SNAPSHOT}
+  NMR_SCALA_PROJECT_SCALA_VERSION=${NMR_SCALA_PROJECT_SCALA_VERSION:-3.2.1}
+  if [ -d "$NMR_SCALA_PROJECT_NAME" ]; then
+    echo $NMR_SCALA_PROJECT_NAME ' directory is already exists.'
+  else
+    echo -n 'Creating necessary directories and files... '
+    mkdir -p $NMR_SCALA_PROJECT_NAME/src/{main/{java,resources,scala},test/{java,resources,scala}}
+    cd $NMR_SCALA_PROJECT_NAME >/dev/null &&
+                  cat >./build.sbt <<-EOF
 name := "$NMR_SCALA_PROJECT_NAME"
 organization := "$NMR_SCALA_PROJECT_ORG"
 version := "$NMR_SCALA_PROJECT_VERSION"
@@ -125,7 +125,7 @@ scalacOptions ++= Seq(
   "-Ywarn-value-discard"               // Warn when non-Unit expression results are unused.
 )
 EOF
-                cat >./scalafmt.conf <<-EOF
+  cat >./scalafmt.conf <<-EOF
 style                           = defaultWithAlign
 danglingParentheses             = true
 indentOperator                  = spray
@@ -145,15 +145,15 @@ object HelloWorld {
   }
 }
 EOF
-                echo ''
-                echo 'To run application...' && cd ..
-                echo ''
-                echo 'cd ' $NMR_SCALA_PROJECT_NAME ' && sbt clean run'
-                echo ''
+    echo ''
+    echo 'To run application...' && cd ..
+    echo ''
+    echo 'cd ' $NMR_SCALA_PROJECT_NAME ' && sbt clean run'
+    echo ''
 
-        fi
+  fi
 }
 
 add-maven-wrapper() {
-        mvn -N wrapper:wrapper
+  mvn -N wrapper:wrapper
 }

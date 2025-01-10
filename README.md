@@ -6,10 +6,10 @@ My most favourite parts are `.functions` and `.dockerfunctions`
 
 ### Installation
 
-To get all done in a minutes you can use the [setup script](https://github.com/nmrony/dotfiles/blob/master/setup) script
+To get all done in a minutes you can use the [setup script](https://github.com/nurrony/dotfiles/blob/master/setup) script
 
 ```sh
-curl -s https://raw.githubusercontent.com/nmrony/dotfiles/master/setup | bash
+curl -s https://raw.githubusercontent.com/nurrony/dotfiles/master/setup | bash
 ```
 
 ### Customization

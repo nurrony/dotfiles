@@ -580,8 +580,6 @@ function lazyvim() {
   '
 }
 
-
-
 function keycloak() {
   del_stopped keycloak
   relies_on nginx-proxy

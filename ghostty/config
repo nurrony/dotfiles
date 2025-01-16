@@ -23,7 +23,7 @@ resize-overlay = never
 background-opacity = 0.85
 window-save-state = default
 window-step-resize = false
-background-blur-radius = 15
+background-blur-radius = 20
 window-padding-balance = true
 confirm-close-surface = false
 

@@ -20,7 +20,7 @@ mouse-hide-while-typing = true
 # window
 initial-window = true
 resize-overlay = never
-background-opacity = 0.85
+background-opacity = 0.80
 window-save-state = default
 window-step-resize = false
 background-blur-radius = 20

@@ -207,7 +207,7 @@ pma() {
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "phpMyAdmin is not running, starting it for you."
     docker run -it -d \
-      --env UPLOAD_LIMIT=1024M \
+      --env UPLOAD_LIMIT=100M \
       --env VIRTUAL_HOST=pma.nurrony.localhost \
       --env PMA_ARBITRARY=1 \
       --net ronsvpn \

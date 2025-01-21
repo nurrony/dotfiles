@@ -5,7 +5,7 @@
 
 () {
   function prompt_mise() {
-    local plugins=("${(@f)$(mise ls --current 2>/dev/null | awk '!/\(symlink\)/ && $3!="~/.tool-versions" && $3!="~/.config/mise/config.toml" {print $1, $2}')}")
+    local plugins=("${(@f)$(mise ls --current --offline 2>/dev/null | awk '!/\(symlink\)/ && $3!="~/.tool-versions" && $3!="~/.config/mise/config.toml" && $3!="$MISE_CONFIG_DIR/config.toml" && $3!="(missing)" {if ($1) print $1, $2}')}")
     local plugin
     for plugin in ${(k)plugins}; do
       local parts=("${(@s/ /)plugin}")
@@ -14,7 +14,6 @@
       p10k segment -r -i "${tool}_ICON" -s $tool -t "$version"
     done
   }
-
   # icons
   typeset -g POWERLEVEL9K_YARN_ICON=''
   typeset -g POWERLEVEL9K_PYTHON_ICON=''

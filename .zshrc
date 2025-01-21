@@ -34,16 +34,16 @@ zinit lucid light-mode for \
   OMZP::ansible \
   OMZP::extract \
   as'program' from'gh-r' jdx/usage \
-  as'program' from'gh-r' mv'mise* -> mise' atclone'./mise completion zsh > _mise && ./mise activate zsh > init.zsh' src'init.zsh' atpull'%atclone' jdx/mise \
-  as'program' from'gh-r' atclone'./zoxide init --cmd=j zsh > init.zsh' src'init.zsh' atpull'%atclone' pick'zoxide/zoxide' ajeetdsouza/zoxide
-
-# install and load necessary programs
-zinit wait'5' lucid light-mode for \
   as'program' from'gh-r' mv'krew* -> krew' kubernetes-sigs/krew \
   as'program' from'gh-r' mv'hostess* -> hostess' cbednarski/hostess \
   as'program' from'gh-r' mv'hadolint* -> hadolint' hadolint/hadolint \
   as'program' from'gh-r' mv'kube-explorer* -> kube-explorer' cnrancher/kube-explorer \
   as'program' from'gh-r' atclone'ln -sfv completions/dog.zsh _dog' atpull'%atclone' pick'bin/dog' ogham/dog \
+  as'program' from'gh-r' atclone'./zoxide init --cmd=j zsh > init.zsh' src'init.zsh' atpull'%atclone' pick'zoxide/zoxide' ajeetdsouza/zoxide
+
+# install and load necessary programs
+zinit wait'3' lucid light-mode for \
+  as'program' from'gh-r' mv'mise* -> mise' atclone'./mise completion zsh > _mise && ./mise activate zsh > init.zsh' src'init.zsh' atpull'%atclone' jdx/mise \
   zdharma-continuum/history-search-multi-word \
   zdharma/fast-syntax-highlighting
 

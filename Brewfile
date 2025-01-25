@@ -54,7 +54,6 @@ brew "gnu-sed"
 brew "netpbm"
 brew "graphviz"
 brew "grep"
-brew "groovy"
 brew "helm"
 brew "httpie", args: ["HEAD"]
 brew "john"

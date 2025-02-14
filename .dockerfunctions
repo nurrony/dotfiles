@@ -148,8 +148,8 @@ dhtop() {
 mysqlserver() {
   local VERSION=${1:-8}
   local PORT=${2:-3306}
-  del_stopped mysqlserver${VERSION}
-  local state=$(docker inspect --format "{{.State.Running}}" mysqlserver$VERSION 2>/dev/null)
+  del_stopped mysqlserver-${VERSION//./-}
+  local state=$(docker inspect --format "{{.State.Running}}" mysqlserver-${VERSION//./-} 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "mysql $VERSION server is not running, starting it for you."
@@ -159,7 +159,7 @@ mysqlserver() {
       --env MYSQL_ROOT_PASSWORD=nurrony \
       --publish $PORT:3306 \
       --net ronsvpn \
-      --name mysqlserver${VERSION} \
+      --name mysqlserver-${VERSION//./-} \
       mysql:${VERSION}
   else
     echo "mysql server $VERSION is already running"

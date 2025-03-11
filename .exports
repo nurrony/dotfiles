@@ -78,3 +78,6 @@ export ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES=YES
 
 # Set groovy home
 export GROOVY_HOME=/usr/local/opt/groovy/libexec
+
+# docker related variables
+export BUILDX_NO_DEFAULT_ATTESTATIONS=1

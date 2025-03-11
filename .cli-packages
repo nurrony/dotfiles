@@ -157,3 +157,9 @@ EOF
 add-maven-wrapper() {
   mvn -N wrapper:wrapper
 }
+
+create-laravel-app() {
+  local NAME=${1:-laravel}
+  local VERSION=${2:-''}
+  composer create-project --prefer-dist laravel/laravel $NAME "$VERSION"
+}

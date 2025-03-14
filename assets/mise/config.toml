@@ -8,12 +8,12 @@ plugin_autoupdate_last_check_duration                     = "1d"
 [tools]
 deno                                                      = "latest"
 maven                                                     = "latest"
-java                                                      = ["graalvm-community-21.0.2", "zulu-javafx-17.54.21", "zulu-javafx-11.76.21"]
+java                                                      = ["graalvm-community-21.0.2", "zulu-javafx-17.56.15", "zulu-javafx-11.78.15"]
 nodejs                                                     = ["lts", "lts-iron", "lts-hydrogen", "lts-gallium",]
 
 [alias.java.versions]
-11                                                        = "zulu-javafx-11.76.21"
-17                                                        = "zulu-javafx-17.54.21"
+11                                                        = "zulu-javafx-11.78.15"
+17                                                        = "zulu-javafx-17.56.15"
 21                                                        = "graalvm-community-21.0.2"
 graalvm                                                   = "graalvm-community-21.0.2"
 

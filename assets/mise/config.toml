@@ -24,4 +24,4 @@ graalvm                                                   = "graalvm-community-2
 16                                                        = "lts-gallium"
 
 [env]
-_.python.venv                                              = "{{env.PWD}}/.venv"
+_.python.venv                                              = "{{env.HOME}}/.venv"

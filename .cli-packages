@@ -26,11 +26,11 @@ create-mvn-app() {
         ARC_TYPE_VERSION=${4:-1.4}
         echo "Generating maven app '$artifact_id' using $archetype_id=$archetype_version..."
         mvn archetype:generate \
-                -DgroupId="$group_id" \
-                -DinteractiveMode=false \
-                -DartifactId="$artifact_id" \
-                -DarchetypeArtifactId="$archetype_id" \
-                -DarchetypeVersion="$archetype_version"
+          -DgroupId="$group_id" \
+          -DinteractiveMode=false \
+          -DartifactId="$artifact_id" \
+          -DarchetypeArtifactId="$archetype_id" \
+          -DarchetypeVersion="$archetype_version"
 }
 
 npm-init() {

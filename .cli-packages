@@ -6,15 +6,15 @@
 
 create-mvn-app() {
         if [ "$#" -ne 2 ]; then
-          cat <<-EOF
-		Usage: create-mvn-app <group-id> <artifact-id> [archetype-artifact-id] [archetype-version]
+          cat <<EOF
+Usage: create-mvn-app <group-id> <artifact-id> [archetype-artifact-id] [archetype-version]
 
-		Options:
-			group-id                   which package it should belong i.e: info.nurrony.app.example
-			artifact-id                name of the artifact
-			archetype-artifact-id      maven archetypeArtifactId (optional) (default: maven-archetype-quickstart)
-			archetype-version          maven archetypeArtifactId (optional) (default: 1.5)
-		EOF
+Options:
+  group-id                   which package it should belong i.e: info.nurrony.app.example
+  artifact-id                name of the artifact
+  archetype-artifact-id      maven archetypeArtifactId (optional) (default: maven-archetype-quickstart)
+  archetype-version          maven archetypeArtifactId (optional) (default: 1.5)
+EOF
       return 1
         fi
         local group_id=${1}

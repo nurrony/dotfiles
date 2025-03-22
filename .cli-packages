@@ -6,7 +6,7 @@
 
 create-mvn-app() {
         if [ "$#" -ne 2 ]; then
-                cat <<-EOF
+          cat <<-EOF
 		Usage: create-mvn-app <group-id> <artifact-id> [archetype-artifact-id] [archetype-version]
 
 		Options:
@@ -15,7 +15,7 @@ create-mvn-app() {
 			archetype-artifact-id      maven archetypeArtifactId (optional) (default: maven-archetype-quickstart)
 			archetype-version          maven archetypeArtifactId (optional) (default: 1.5)
 		EOF
-                return 1
+      return 1
         fi
         local group_id=${1}
         local artifact_id=${2}

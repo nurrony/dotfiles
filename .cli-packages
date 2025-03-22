@@ -5,71 +5,71 @@
 # }
 
 create-mvn-app() {
-        if [ "$#" -ne 2 ]; then
-          cat <<EOF
+  if [ "$#" -ne 2 ]; then
+    cat <<EOF
 Usage: create-mvn-app <group-id> <artifact-id> [archetype-artifact-id] [archetype-version]
 
 Options:
-  group-id                   which package it should belong i.e: info.nurrony.app.example
-  artifact-id                name of the artifact
+  group-id       which package it should belong i.e: info.nurrony.app.example
+  artifact-id    name of the artifact
   archetype-artifact-id      maven archetypeArtifactId (optional) (default: maven-archetype-quickstart)
-  archetype-version          maven archetypeArtifactId (optional) (default: 1.5)
+  archetype-version    maven archetypeArtifactId (optional) (default: 1.5)
 EOF
       return 1
-        fi
-        local group_id=${1}
-        local artifact_id=${2}
-        local archetype_id=${3:-maven-archetype-quickstart}
-        local archetype_version=${4:-1.5}
+  fi
+  local group_id=${1}
+  local artifact_id=${2}
+  local archetype_id=${3:-maven-archetype-quickstart}
+  local archetype_version=${4:-1.5}
 
-        ARC_TYPE_ID=${3:-maven-archetype-quickstart}
-        ARC_TYPE_VERSION=${4:-1.4}
-        echo "Generating maven app '$artifact_id' using $archetype_id=$archetype_version..."
-        mvn archetype:generate \
-          -DgroupId="$group_id" \
-          -DinteractiveMode=false \
-          -DartifactId="$artifact_id" \
-          -DarchetypeArtifactId="$archetype_id" \
-          -DarchetypeVersion="$archetype_version"
+  ARC_TYPE_ID=${3:-maven-archetype-quickstart}
+  ARC_TYPE_VERSION=${4:-1.4}
+  echo "Generating maven app '$artifact_id' using $archetype_id=$archetype_version..."
+  mvn archetype:generate \
+    -DgroupId="$group_id" \
+    -DinteractiveMode=false \
+    -DartifactId="$artifact_id" \
+    -DarchetypeArtifactId="$archetype_id" \
+    -DarchetypeVersion="$archetype_version"
 }
 
 npm-init() {
-        git init
-        npx license $(npm get init.license) -o "$(npm get init.author.name)" >LICENSE
-        npx gitignore node
-        npx covgen "$(npm get init.author.email)"
-        npm init -y
-        git add -A
-        git commit -m "Initial commit"
+  git init
+  npx license $(npm get init.license) -o "$(npm get init.author.name)" >LICENSE
+  npx gitignore node
+  npx covgen "$(npm get init.author.email)"
+  npm init -y
+  git add -A
+  git commit -m "Initial commit"
 
 }
 
 create-react-app() {
-        npx create-react-app "$@" --use-npm
+  npx create-react-app "$@" --use-npm
 }
 
 ng() {
-        npx -p @angular/cli ng "$@"
+  npx -p @angular/cli ng "$@"
 }
 
 cordova() {
-        npx cordova "$@"
+  npx cordova "$@"
 }
 
-# sls() {
-#   npx serverless "$@"
-# }
+sls() {
+  npx serverless "$@"
+}
 
 ionic() {
-        npx ionic "$@"
+  npx ionic "$@"
 }
 
 nest() {
-        npx @nestjs/cli "$@"
+  npx @nestjs/cli "$@"
 }
 
 npm-upgrade() {
-        npx npm-upgrade "$@"
+  npx npm-upgrade "$@"
 }
 
 create-scala-app() {
@@ -91,7 +91,7 @@ create-scala-app() {
     echo -n 'Creating necessary directories and files... '
     mkdir -p $NMR_SCALA_PROJECT_NAME/src/{main/{java,resources,scala},test/{java,resources,scala}}
     cd $NMR_SCALA_PROJECT_NAME >/dev/null &&
-                  cat >./build.sbt <<-EOF
+      cat >./build.sbt <<-EOF
 name := "$NMR_SCALA_PROJECT_NAME"
 organization := "$NMR_SCALA_PROJECT_ORG"
 version := "$NMR_SCALA_PROJECT_VERSION"
@@ -107,38 +107,38 @@ libraryDependencies ++= Seq(
 
 // Scala Compiler Options
 scalacOptions ++= Seq(
-  "-deprecation",                      // Emit warning and location for usages of deprecated APIs.
-  "-encoding", "utf-8",                // Specify character encoding used by source files.
-  "-explaintypes",                     // Explain type errors in more detail.
-  "-feature",                          // Emit warning and location for usages of features that should be imported explicitly.
-  "-unchecked",                        // Enable additional warnings where generated code depends on assumptions.
+  "-deprecation",          // Emit warning and location for usages of deprecated APIs.
+  "-encoding", "utf-8",    // Specify character encoding used by source files.
+  "-explaintypes",         // Explain type errors in more detail.
+  "-feature",        // Emit warning and location for usages of features that should be imported explicitly.
+  "-unchecked",      // Enable additional warnings where generated code depends on assumptions.
   "-language:implicitConversions",     // Allow definition of implicit functions called views
-  "-language:higherKinds",             // Allow higher-kinded types
-  "-language:existentials",            // Existential types (besides wildcard types) can be written and inferred
-  "-Xfatal-warnings",                  // Fail the compilation if there are any warnings.
-  "-Ywarn-unused:implicits",           // Warn if an implicit parameter is unused.
-  "-Ywarn-unused:imports",             // Warn if an import selector is not referenced.
-  "-Ywarn-unused:locals",              // Warn if a local definition is unused.
-  "-Ywarn-unused:params",              // Warn if a value parameter is unused.
-  "-Ywarn-unused:patvars",             // Warn if a variable bound in a pattern is unused.
-  "-Ywarn-unused:privates",            // Warn if a private member is unused.
-  "-Ywarn-value-discard"               // Warn when non-Unit expression results are unused.
+  "-language:higherKinds",       // Allow higher-kinded types
+  "-language:existentials",      // Existential types (besides wildcard types) can be written and inferred
+  "-Xfatal-warnings",      // Fail the compilation if there are any warnings.
+  "-Ywarn-unused:implicits",     // Warn if an implicit parameter is unused.
+  "-Ywarn-unused:imports",       // Warn if an import selector is not referenced.
+  "-Ywarn-unused:locals",        // Warn if a local definition is unused.
+  "-Ywarn-unused:params",        // Warn if a value parameter is unused.
+  "-Ywarn-unused:patvars",       // Warn if a variable bound in a pattern is unused.
+  "-Ywarn-unused:privates",      // Warn if a private member is unused.
+  "-Ywarn-value-discard"         // Warn when non-Unit expression results are unused.
 )
 EOF
   cat >./scalafmt.conf <<-EOF
-style                           = defaultWithAlign
-danglingParentheses             = true
-indentOperator                  = spray
+style         = defaultWithAlign
+danglingParentheses       = true
+indentOperator      = spray
 includeCurlyBraceInSelectChains = true
-maxColumn                       = 120
-project.excludeFilters          = [sample]
-rewrite.rules                   = [RedundantParens, SortImports, PreferCurlyFors]
+maxColumn           = 120
+project.excludeFilters    = [sample]
+rewrite.rules       = [RedundantParens, SortImports, PreferCurlyFors]
 spaces.inImportCurlyBraces      = true
 binPack.literalArgumentLists    = false
 unindentTopLevelOperators       = true
 EOF
-                mkdir -p ./project && echo 'sbt.version=1.8.0' >./project/build.properties
-                cat >./src/main/scala/HelloWorld.scala <<-EOF
+  mkdir -p ./project && echo 'sbt.version=1.8.0' >./project/build.properties
+  cat >./src/main/scala/HelloWorld.scala <<-EOF
 object HelloWorld {
   def main(args: Array[String]): Unit = {
     println("Hello, world!")
@@ -150,7 +150,6 @@ EOF
     echo ''
     echo 'cd ' $NMR_SCALA_PROJECT_NAME ' && sbt clean run'
     echo ''
-
   fi
 }
 

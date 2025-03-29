@@ -34,10 +34,14 @@ EOF
 }
 
 npm-init() {
-  git init
-  npx license $(npm get init.license) -o "$(npm get init.author.name)" >LICENSE
-  npx gitignore node
-  npx covgen "$(npm get init.author.email)"
+  echo -n 'initializing git...'
+  git init 2>&1 >/dev/null
+  echo '[√]'
+  echo -n 'added license information...'
+  npx license $(npm get init-license) -o "$(npm get init-author-name)"
+  echo '[√]'
+  git ignore-io gitignore node linux jetbrains+all webstorm+all visualstudiocode windows macos > .gitignore
+  npx covgen "$(npm get init-author-email)"
   npm init -y
   git add -A
   git commit -m "Initial commit"

@@ -33,6 +33,7 @@ zinit lucid light-mode for \
   OMZP::mvn \
   OMZP::ansible \
   OMZP::extract \
+  OMZP::docker \
   as'program' from'gh-r' jdx/usage \
   as'program' from'gh-r' mv'krew* -> krew' kubernetes-sigs/krew \
   as'program' from'gh-r' mv'hostess* -> hostess' cbednarski/hostess \

@@ -31,7 +31,6 @@ zinit lucid light-mode for \
   as'completion' pick'gradle-completion.plugin.zsh' gradle/gradle-completion \
   OMZP::git \
   OMZP::mvn \
-  OMZP::docker \
   OMZP::ansible \
   OMZP::extract \
   OMZP::docker-compose \

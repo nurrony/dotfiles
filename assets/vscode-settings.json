@@ -208,7 +208,7 @@
     {
       "default": false,
       "name": "JavaSE-11",
-      "path": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-11"
+      "path": "/V[48;37;143;1628;2860tolumes/Devzone/storage/mise/data/installs/java/zulu-11"
     }
   ],
   "java.jdt.ls.java.home": "/Volumes/Devzone/storage/mise/data/installs/java/graalvm-21",
@@ -319,3 +319,4 @@
   },
   "yaml.validate": true
 }
+

@@ -606,3 +606,25 @@ function keycloak() {
   fi
 
 }
+
+function grafana() {
+  del_stopped grafana
+  relies_on nginx-proxy
+  sleep 2
+  local GRAFANA_PORT=${1:-3000}
+  local GRAFANA_IMG=${2:-latest}
+  local state=$(docker inspect --format "{{.State.Running}}" grafana 2>/dev/null)
+  if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
+    echo "grafana is not running. starting grafana server for you"
+    docker run -dit --name grafana \
+      --network ronsvpn \
+      --expose 3000 \
+      --publish ${GRAFANA_PORT}:3000 \
+      --env VIRTUAL_HOST="grafana.nurrony.localhost" \
+      --env GF_FEATURE_TOGGLES_ENABLE="traceqlEditor metricsSummary" \
+      --env GF_FEATURE_TOGGLES_ENABLE="accessControlOnCall" \
+      --env GF_INSTALL_PLUGINS="https://storage.googleapis.com/integration-artifacts/grafana-lokiexplore-app/grafana-lokiexplore-app-latest.zip;grafana-lokiexplore-app" \
+      --volume "$DEV_ZONE_CONFIG_PATH/monitoring/grafana/data:/var/lib/grafana" \
+      grafana/grafana:${GRAFANA_IMG}
+  fi
+}

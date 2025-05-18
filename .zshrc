@@ -35,6 +35,7 @@ zinit lucid light-mode for \
   OMZP::extract \
   OMZP::docker-compose \
   as'program' from'gh-r' jdx/usage \
+  as'program' from'gh-r' medialab/xan \
   as'program' from'gh-r' mv'krew* -> krew' kubernetes-sigs/krew \
   as'program' from'gh-r' mv'hostess* -> hostess' cbednarski/hostess \
   as'program' from'gh-r' mv'hadolint* -> hadolint' hadolint/hadolint \

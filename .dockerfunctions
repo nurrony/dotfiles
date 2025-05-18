@@ -70,7 +70,7 @@ nginx-proxy() {
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     docker run -it -d \
-      --net ${DOCKER_NETWORK_NAME} \
+      --net ${DEV_DOCKER_NETWORK_NAME} \
       --publish 80:80 \
       --publish 443:443 \
       --name nginx-proxy \
@@ -96,7 +96,7 @@ portainer() {
       --volume $DEV_ZONE_CONFIG_PATH/portainer:/data \
       --env VIRTUAL_HOST=portainer.nurrony.localhost \
       --expose 9000 \
-      --net ${DOCKER_NETWORK_NAME} \
+      --net ${DEV_DOCKER_NETWORK_NAME} \
       --name portainer \
       portainer/portainer
   else
@@ -158,7 +158,7 @@ mysqlserver() {
       --volume $DEV_ZONE_CONFIG_PATH/databases/mysql/${VERSION}:/var/lib/mysql \
       --env MYSQL_ROOT_PASSWORD=nurrony \
       --publish $PORT:3306 \
-      --net ${DOCKER_NETWORK_NAME} \
+      --net ${DEV_DOCKER_NETWORK_NAME} \
       --name mysqlserver-${VERSION//./-} \
       mysql:${VERSION}
   else
@@ -186,7 +186,7 @@ dynamodb() {
       --publish "8000:8000" \
       --expose 8000 \
       --env VIRTUAL_HOST=dynamodb.nurrony.localhost \
-      --net ${DOCKER_NETWORK_NAME} \
+      --net ${DEV_DOCKER_NETWORK_NAME} \
       --name dynamodb \
       amazon/dynamodb-local -jar DynamoDBLocal.jar -sharedDb -optimizeDbBeforeStartup -dbPath ./data
     if [ "$1" != "" ]; then
@@ -210,7 +210,7 @@ pma() {
       --env UPLOAD_LIMIT=100M \
       --env VIRTUAL_HOST=pma.nurrony.localhost \
       --env PMA_ARBITRARY=1 \
-      --net ${DOCKER_NETWORK_NAME} \
+      --net ${DEV_DOCKER_NETWORK_NAME} \
       --expose 80 \
       --name pma \
       phpmyadmin/phpmyadmin
@@ -238,7 +238,7 @@ myblog() {
       --env database__connection__password=nurrony \
       --env database__connection__database=rons_blog \
       --env DEV_DOMAIN=http://blog.nurrony.localhost \
-      --net ${DOCKER_NETWORK_NAME} \
+      --net ${DEV_DOCKER_NETWORK_NAME} \
       --name personal-blog \
       ghost:2-alpine
   else
@@ -260,7 +260,7 @@ mongoserver() {
       --env MONGODB_INITDB_ROOT_USERNAME=root \
       --env MONGODB_INITDB_ROOT_PASSWORD=nurrony \
       --publish $PORT:27017 \
-      --net ${DOCKER_NETWORK_NAME} \
+      --net ${DEV_DOCKER_NETWORK_NAME} \
       --name mongoserver$VERSION \
       mongo:${VERSION}
   else
@@ -279,7 +279,7 @@ rabbitmq() {
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "rabbitmq broker is not running, starting it for you."
     docker run --detach -it \
-      --net ${DOCKER_NETWORK_NAME} \
+      --net ${DEV_DOCKER_NETWORK_NAME} \
       --name rabbitmq \
       --publish 5672:5672 \
       --publish 15672:15672 \
@@ -302,7 +302,7 @@ kafka() {
     echo "kafka broker ${VERSION} is not running, starting it for you."
 docker run --detach -it \
       --name kafka \
-      --net ${DOCKER_NETWORK_NAME} \
+      --net ${DEV_DOCKER_NETWORK_NAME} \
       --publish 9092:9092 \
       --publish 9102:9102 \
       --env KAFKA_NODE_ID=1 \
@@ -335,7 +335,7 @@ mailserver() {
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "mailserver is not running. starting is for you"
     docker run -d \
-      --net ${DOCKER_NETWORK_NAME} \
+      --net ${DEV_DOCKER_NETWORK_NAME} \
       --expose 8025 \
       --name mailserver \
       --publish 1025:1025 \
@@ -362,7 +362,7 @@ zipkin() {
     echo "zipkin 3.x.x server is not running, starting it for you."
     docker run --detach -it \
     --name zipkin \
-    --net ${DOCKER_NETWORK_NAME} \
+    --net ${DEV_DOCKER_NETWORK_NAME} \
     --publish 9411:9411 \
     --env VIRTUAL_PORT=9411 \
     --env VIRTUAL_HOST=zipkin.nurrony.localhost \
@@ -384,7 +384,7 @@ pgserver() {
     mkdir -p $DEV_ZONE_CONFIG_PATH/databases/postgres/${VERSION}
     echo "postgres $VERSION.x.x server is not running, starting it for you."
     docker run -it -d \
-      --net ${DOCKER_NETWORK_NAME} \
+      --net ${DEV_DOCKER_NETWORK_NAME} \
       --ulimit memlock=-1:-1 \
       --memory-swappiness=0 \
       --volume $DEV_ZONE_CONFIG_PATH/databases/postgres/${VERSION}:/var/lib/postgresql/data \
@@ -418,7 +418,7 @@ pga() {
       --env PGADMIN_DEFAULT_EMAIL=rony@nurrony.info \
       --env PGADMIN_DEFAULT_PASSWORD=nurrony \
       --env PGADMIN_DISABLE_POSTFIX=yes \
-      --net ${DOCKER_NETWORK_NAME} \
+      --net ${DEV_DOCKER_NETWORK_NAME} \
       --expose 80 \
       --name pga \
       dpage/pgadmin4
@@ -440,7 +440,7 @@ elasticsearch() {
       --volume "$DEV_ZONE_CONFIG_PATH/databases/elasticsearch/data:/usr/share/elasticsearch/data" \
       --publish 9200:9200 \
       --publish 9300:9300 \
-      --net ${DOCKER_NETWORK_NAME} \
+      --net ${DEV_DOCKER_NETWORK_NAME} \
       --name elasticsearch \
       --ulimit memlock=-1:-1 \
       --env VIRTUAL_PORT=9200 \
@@ -470,7 +470,7 @@ elasticview() {
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     docker run -dit \
       --expose 8080 \
-      --net ${DOCKER_NETWORK_NAME} \
+      --net ${DEV_DOCKER_NETWORK_NAME} \
       --name elasticview \
       --env VIRTUAL_PORT=8080 \
       --env VIRTUAL_HOST=elasticsearch.nurrony.localhost \
@@ -497,7 +497,7 @@ apache-php7() {
   docker run --rm --interactive --tty \
     --volume $PWD:/var/www/html \
     --user $(id -u):$(id -g) \
-    --net ${DOCKER_NETWORK_NAME} \
+    --net ${DEV_DOCKER_NETWORK_NAME} \
     nmrony/php:7-apache "$@"
 }
 
@@ -564,7 +564,7 @@ command_not_found_handle() {
 dive() {
   del_stopped dive
   docker run --rm -it \
-    --net ${DOCKER_NETWORK_NAME} \
+    --net ${DEV_DOCKER_NETWORK_NAME} \
     --name dive \
     --volume /var/run/docker.sock:/var/run/docker.sock:ro \
     wagoodman/dive:latest "$@"
@@ -617,7 +617,7 @@ function grafana() {
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "grafana is not running. starting grafana server for you"
     docker run -dit --name grafana \
-      --network ${DOCKER_NETWORK_NAME} \
+      --network ${DEV_DOCKER_NETWORK_NAME} \
       --expose 3000 \
       --publish ${GRAFANA_PORT}:3000 \
       --env VIRTUAL_HOST="grafana.nurrony.localhost" \

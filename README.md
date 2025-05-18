@@ -14,7 +14,7 @@ curl -s https://raw.githubusercontent.com/nurrony/dotfiles/master/setup | bash
 
 ### Customization
 
-Do not forget to add or edit git username and email in `.extra` and `.gitconfig` with yours.
+Do not forget to add or edit git username and email in `.extra` and `.gitconfig` with yours. Also other path (i.e: `DOCKER_NETWORK_NAME`, `SSH_KEY_FILE_NAME`, `DEV_ZONE`, `DEV_ZONE_CONFIG_PATH`)
 
 **Happy Hacking!!**
 

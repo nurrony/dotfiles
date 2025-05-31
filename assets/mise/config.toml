@@ -4,18 +4,19 @@ experimental                                              = true
 cache_prune_age                                           = "3d"
 legacy_version_file                                       = true
 plugin_autoupdate_last_check_duration                     = "1d"
+idiomatic_version_file_enable_tools                       = ["node"]
 
 [tools]
 deno                                                      = "latest"
 maven                                                     = "latest"
-java                                                      = ["graalvm-community-21.0.2", "zulu-javafx-17.56.15", "zulu-javafx-11.78.15"]
+java                                                      = ["zulu-crac-24.30.15.0","zulu-crac-21.42.21.0", "zulu-crac-17.58.25.0", "zulu-javafx-11.80.21.0"]
 nodejs                                                     = ["lts", "lts-iron", "lts-hydrogen", "lts-gallium",]
 
 [alias.java.versions]
-11                                                        = "zulu-javafx-11.78.15"
-17                                                        = "zulu-javafx-17.56.15"
-21                                                        = "graalvm-community-21.0.2"
-graalvm                                                   = "graalvm-community-21.0.2"
+11                                                        = "zulu-javafx-11.80.21.0"
+17                                                        = "zulu-crac-17.58.25.0"
+21                                                        = "zulu-crac-21.42.21.0"
+24                                                        = "zulu-crac-24.30.15.0"
 
 [alias.nodejs.versions]
 22                                                        = "lts-jod"

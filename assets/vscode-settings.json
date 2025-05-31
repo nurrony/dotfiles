@@ -1,9 +1,4 @@
 {
-  "Lua.diagnostics.globals": [
-    "vim",
-    "nvim_bufferline",
-    "sign"
-  ],
   "[dart]": {
     "editor.defaultFormatter": "Dart-Code.dart-code",
     "editor.formatOnType": true,
@@ -27,7 +22,7 @@
     "editor.tabSize": 8
   },
   "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.html-language-features"
   },
   "[java]": {
     "editor.defaultFormatter": "redhat.java"
@@ -39,10 +34,11 @@
     "files.trimTrailingWhitespace": false
   },
   "[php]": {
-    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+    "editor.defaultFormatter": "laravel.vscode-laravel",
+    "editor.formatOnSave": true
   },
   "[python]": {
-    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.defaultFormatter": "ms-python.vscode-pylance",
     "editor.formatOnSave": true
   },
   "[scala]": {
@@ -61,26 +57,23 @@
   "[xml]": {
     "editor.defaultFormatter": "redhat.vscode-xml"
   },
+  "application.shellEnvironmentResolutionTimeout": 20,
   "aws.telemetry": false,
   "boot-java.rewrite.reconcile": true,
-  "breadcrumbs.filePath": "off",
   "camelk.integrations.runtimeVersion": "1.11.0",
   "camelk.tools": {
-    "camelk.tools.kamel-path": "/Users/nurrony/Library/Application Support/Code/User/globalStorage/redhat.vscode-camelk/camelk/tools/kamel/kamel"
+    "camelk.tools.kamel-path": "/Volumes/Library/Application Support/Code/User/globalStorage/redhat.vscode-camelk/camelk/tools/kamel/kamel"
   },
   "cfnLint.path": "/usr/local/bin/cfn-lint",
-  "codeium.aggressiveShutdown": true,
-  "codeium.enableConfig": {
-    "*": true
-  },
-  "codeium.indexStoragePath": "/Volumes/Devzone/storage/codeium",
-  "console-ninja.featureSet": "Community",
   "dart.debugSdkLibraries": true,
   "dart.flutterSdkPath": "/Volumes/Devzone/storage/dartlang/flutter",
+  "debug.console.acceptSuggestionOnEnter": "on",
+  "debug.inlineValues": "on",
   "debug.toolBarLocation": "floating",
   "diffEditor.hideUnchangedRegions.enabled": true,
+  "diffEditor.ignoreTrimWhitespace": false,
   "dotenv.enableAutocloaking": true,
-  "editor.acceptSuggestionOnEnter": "on",
+  "editor.acceptSuggestionOnEnter": "smart",
   "editor.accessibilitySupport": "off",
   "editor.bracketPairColorization.enabled": true,
   "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
@@ -91,7 +84,7 @@
   },
   "editor.cursorBlinking": "solid",
   "editor.cursorStyle": "line",
-  "editor.cursorWidth": 2,
+  "editor.cursorWidth": 3,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.emptySelectionClipboard": false,
   "editor.fontFamily": "'JetBrainsMono Nerd Font Mono', Monaco, monospace",
@@ -105,7 +98,7 @@
   "editor.inlineSuggest.enabled": true,
   "editor.insertSpaces": true,
   "editor.largeFileOptimizations": false,
-  "editor.lineNumbers": "off",
+  "editor.lineNumbers": "on",
   "editor.linkedEditing": true,
   "editor.minimap.enabled": false,
   "editor.quickSuggestions": {
@@ -125,14 +118,7 @@
   "editor.suggest.showStatusBar": true,
   "editor.tabSize": 2,
   "editor.tokenColorCustomizations": {
-    "textMateRules": [
-      {
-        "scope": "keyword.other.dotenv",
-        "settings": {
-          "foreground": "#FF000000"
-        }
-      }
-    ]
+    "textMateRules": []
   },
   "emmet.includeLanguages": {
     "javascript": "javascriptreact",
@@ -161,10 +147,26 @@
   "files.autoSave": "off",
   "files.eol": "\n",
   "files.exclude": {
+    "**/__pycache__": true,
+    "**/.cache": true,
     "**/.classpath": true,
+    "**/.DS_Store": true,
+    "**/.eggs": true,
     "**/.factorypath": true,
+    "**/.git": true,
+    "**/.hg": true,
+    "**/.ipynb_checkpoints": true,
+    "**/.mypy_cache": true,
     "**/.project": true,
-    "**/.settings": true
+    "**/.pytest_cache": true,
+    "**/.ropeproject": true,
+    "**/.settings": true,
+    "**/.svn": true,
+    "**/.tox": true,
+    "**/.venv": true,
+    "**/*.bak": true,
+    "**/*.egg-info": true,
+    "**/*.pyc": true
   },
   "files.hotExit": "off",
   "files.insertFinalNewline": true,
@@ -176,18 +178,14 @@
     "**/.metals": true,
     "**/node_modules": true
   },
+  "git.blame.editorDecoration.enabled": true,
+  "git.blame.statusBarItem.enabled": true,
+  "git.diagnosticsCommitHook.Enabled": true,
   "git.enableSmartCommit": true,
   "git.mergeEditor": true,
   "git.smartCommitChanges": "all",
   "git.suggestSmartCommit": true,
   "git.untrackedChanges": "separate",
-  "github.copilot.advanced": {
-    "slashCommands": {
-      "createNotebook": true,
-      "createWorkspace": true,
-      "search": true
-    }
-  },
   "gitignore.cacheExpirationInterval": 3600,
   "html.autoClosingTags": true,
   "importCost.largePackageColor": "#EC3A37F5",
@@ -197,8 +195,13 @@
   "java.configuration.runtimes": [
     {
       "default": true,
+      "name": "JavaSE-24",
+      "path": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-24"
+    },
+    {
+      "default": false,
       "name": "JavaSE-21",
-      "path": "/Volumes/Devzone/storage/mise/data/installs/java/graalvm-21"
+      "path": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-21"
     },
     {
       "default": false,
@@ -208,10 +211,11 @@
     {
       "default": false,
       "name": "JavaSE-11",
-      "path": "/V[48;37;143;1628;2860tolumes/Devzone/storage/mise/data/installs/java/zulu-11"
+      "path": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-11"
     }
   ],
-  "java.jdt.ls.java.home": "/Volumes/Devzone/storage/mise/data/installs/java/graalvm-21",
+  "java.implementationCodeLens": "all",
+  "java.jdt.ls.java.home": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-24",
   "java.project.importOnFirstTimeStartup": "automatic",
   "java.saveActions.organizeImports": true,
   "javascript.autoClosingTags": true,
@@ -219,6 +223,12 @@
   "javascript.updateImportsOnFileMove.enabled": "never",
   "js/ts.implicitProjectConfig.checkJs": true,
   "json.schemas": [],
+  "laravel-pint.enable": false,
+  "Lua.diagnostics.globals": [
+    "vim",
+    "nvim_bufferline",
+    "sign"
+  ],
   "markdown.validate.enabled": true,
   "maven.executable.path": "/Volumes/Devzone/storage/mise/data/shims/mvn",
   "maven.terminal.useJavaHome": true,
@@ -232,6 +242,7 @@
   "prettier.singleQuote": true,
   "prettier.tabWidth": 2,
   "prettier.vueIndentScriptAndStyle": true,
+  "python.terminal.shellIntegration.enabled": true,
   "quarkus.tools.alwaysShowWelcomePage": false,
   "quarkus.tools.debug.terminateProcessOnExit": "Always terminate",
   "redhat.telemetry.enabled": false,
@@ -241,6 +252,11 @@
       "id": "redhat.vscode-community-server-connector",
       "name": "Community Server Connector",
       "startOnActivation": true
+    },
+    {
+      "id": "redhat.vscode-server-connector",
+      "name": "JBoss Toolkit",
+      "startOnActivation": true
     }
   ],
   "scm.defaultViewMode": "tree",
@@ -249,9 +265,9 @@
   "security.workspace.trust.untrustedFiles": "open",
   "serverlessIDE.telemetry.enableTelemetry": false,
   "shfmt.executablePath": "",
-  "spring-boot.ls.java.home": "/Volumes/Devzone/storage/mise/data/installs/java/graalvm-21",
-  "telemetry.telemetryLevel": "all",
-  "terminal.external.osxExec": "wezterm.app",
+  "spring-boot.ls.java.home": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-24",
+  "telemetry.telemetryLevel": "off",
+  "terminal.external.osxExec": "iTerm.app",
   "terminal.integrated.copyOnSelection": true,
   "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font Mono', Monaco, monospace",
   "terminal.integrated.fontSize": 16,
@@ -262,13 +278,13 @@
   "typescript.autoClosingTags": true,
   "typescript.suggest.autoImports": true,
   "typescript.updateImportsOnFileMove.enabled": "prompt",
+  "update.showReleaseNotes": false,
   "vscode-kubernetes.kubectl-path": "/usr/local/bin/kubectl",
   "window.commandCenter": false,
   "window.restoreWindows": "none",
   "window.titleBarStyle": "custom",
-  "workbench.action.quickTextSearch": true,
   "workbench.activityBar.location": "bottom",
-  "workbench.colorTheme": "Catppuccin Mocha",
+  "workbench.colorTheme": "Catppuccin Macchiato",
   "workbench.editor.empty.hint": "hidden",
   "workbench.editor.enablePreview": false,
   "workbench.editor.preferHistoryBasedLanguageDetection": true,
@@ -319,4 +335,3 @@
   },
   "yaml.validate": true
 }
-

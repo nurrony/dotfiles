@@ -1,349 +1,298 @@
-#:schema https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
-
-version = 2
-final_space = true
 console_title_template = '{{ .Shell }} in {{ .Folder }}'
+version = 3
+final_space = true
 
-# -----------------------------
-# Blocks: Left segments
-# -----------------------------
 [palette]
-  blue = "#b389ff"
-  green = "#95ffa5"
-  crayola = "#313244"
-  charcoal = "#43302E"
-  pale_navy = "#cdd6f4"
-  ink_black = "#212122"
-  space_grey = "#717378"
-  airbnb_red = "#FF5A5F"
+  airbnb_red = '#FF5A5F'
+  blue = '#b389ff'
+  charcoal = '#43302E'
+  crayola = '#313244'
+  green = '#95ffa5'
+  ink_black = '#212122'
+  pale_navy = '#cdd6f4'
+  space_grey = '#717378'
+
+[debug_prompt]
+  template = 'Debugging ❯❯ '
+  foreground = 'magenta'
+  background = 'transparent'
+
+[secondary_prompt]
+  template = '❯❯ '
+  foreground = 'magenta'
+  background = 'transparent'
+
+[transient_prompt]
+  template = '❯ '
+  background = 'transparent'
+  foreground_templates = ['{{if gt .Code 0}}red{{end}}', '{{if eq .Code 0}}green{{end}}']
+
+[[tooltips]]
+  template = '󱁢 {{.Version}}'
+  foreground = '#b18bdd'
+  type = 'terraform'
+  style = 'plain'
+  tips = ['terraform', 'tf', 'tfa', 'tfc', 'tfd', 'tff', 'tfi', 'tfo', 'tfp', 'tfs', 'tfsh', 'tft', 'tfv']
+
+  [tooltips.properties]
+    fetch_version = true
+
+[[tooltips]]
+  template = ' 󰸏 {{.Profile}}{{if .Region}}@{{.Region}}{{end}}'
+  foreground = '#ff9a01'
+  type = 'aws'
+  style = 'plain'
+  tips = ['aws', 'eb', 'ecs', 'eksctl']
+
+[[tooltips]]
+  foreground = '#cda4f6'
+  type = 'docker'
+  style = 'plain'
+  tips = ['docker', 'docker-compose', 'dc', 'dcleanup']
+
+[[tooltips]]
+  template = '  {{ .EnvironmentName }}'
+  foreground = '#33b0e5'
+  type = 'az'
+  style = 'plain'
+  tips = ['az']
+
+[[tooltips]]
+  template = '  {{.Project}} :: {{.Account}} '
+  foreground = '#34a853'
+  type = 'gcp'
+  style = 'plain'
+  tips = ['gcp', 'gcloud']
+
+[[tooltips]]
+  template = '  {{.Project}} :: {{.Account}} '
+  foreground = '#004daa'
+  type = 'helm'
+  style = 'plain'
+  tips = ['gcp', 'gcloud']
+
+[[tooltips]]
+  template = ' 󱃾 {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}} '
+  foreground = '#326ce5'
+  type = 'kubectl'
+  style = 'plain'
+  tips = ['kubectl', 'k8s', 'k9s', 'krew']
 
 [[blocks]]
-  alignment = "left"
-  type = "prompt"
+  type = 'prompt'
+  alignment = 'left'
 
   [[blocks.segments]]
-    background = "p:space_grey"
-    foreground = "#080808"
-    leading_diamond = "\ue0b6"
-    style = "diamond"
-    type = "os"
+    leading_diamond = ''
+    foreground = '#080808'
+    background = 'p:space_grey'
+    type = 'os'
+    style = 'diamond'
 
-  [[blocks.segments]]
-    background = "p:crayola"
-    foreground = "p:pale_navy"
-    powerline_symbol = "\ue0b4"
-    style = "powerline"
-    type = "path"
-    template = "{{ if not .Writable }} 󰌾 {{end}}{{ .Path }}"
     [blocks.segments.properties]
-      folder_icon = " \uf07c .."
-      home_icon = ' 󱂵 ~'
-      style = "agnoster_short"
-      folder_separator_icon = "/"
+      cache_duration = 'none'
+
+  [[blocks.segments]]
+    template = '{{ if not .Writable }} 󰌾 {{end}}{{ .Path }}'
+    foreground = 'p:pale_navy'
+    powerline_symbol = ''
+    background = 'p:crayola'
+    type = 'path'
+    style = 'powerline'
+
+    [blocks.segments.properties]
+      cache_duration = 'none'
+      folder_icon = '  ..'
+      folder_separator_icon = '/'
       hide_root_location = true
+      home_icon = ' 󱂵 ~'
       max_depth = 2
-        [blocks.segments.properties.mapped_locations]
-          "~/Music" = " 󰝚 Music"
-          "~/Movies" = "  Movies"
-          "~/Pictures"  = "  Pictures"
-          "~/Downloads" = "  Downloads"
-          "~/Documents" = " 󱔗 Documents"
-          "~/Devzone" = " 󰲋 Devzone"
+      style = 'agnoster_short'
+
+      [blocks.segments.properties.mapped_locations]
+        '~/Devzone' = ' 󰲋 Devzone'
+        '~/Documents' = ' 󱔗 Documents'
+        '~/Downloads' = '  Downloads'
+        '~/Movies' = '  Movies'
+        '~/Music' = ' 󰝚 Music'
+        '~/Pictures' = '  Pictures'
 
   [[blocks.segments]]
-    background = "#fcbc05"
-    background_templates = [
-      "{{ if or (.Working.Changed) (.Staging.Changed) }}#fcbc05{{ end }}",
-      "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#fcbc05{{ end }}",
-      "{{ if gt .Ahead 0 }}#fcbc05{{ end }}",
-      "{{ if gt .Behind 0 }}#fcbc05{{ end }}"
-    ]
-    foreground = "p:ink_black"
-    powerline_symbol = "\ue0b4"
-    style = "powerline"
-    type = "git"
+    foreground = 'p:ink_black'
+    powerline_symbol = ''
+    background = '#fcbc05'
+    type = 'git'
+    style = 'powerline'
+    background_templates = ['{{ if or (.Working.Changed) (.Staging.Changed) }}#fcbc05{{ end }}', '{{ if and (gt .Ahead 0) (gt .Behind 0) }}#fcbc05{{ end }}', '{{ if gt .Ahead 0 }}#fcbc05{{ end }}', '{{ if gt .Behind 0 }}#fcbc05{{ end }}']
 
     [blocks.segments.properties]
-    branch_icon = " "
-    fetch_stash_count = true
-    fetch_status = true
-    fetch_upstream_icon = true
+      branch_icon = ' '
+      cache_duration = 'none'
+      fetch_stash_count = true
+      fetch_status = true
+      fetch_upstream_icon = true
 
-# -----------------------------
-# Blocks: Right segments
-# - status
-# - node
-# - angular
-# - bun
-# - java
-# - php
-# - python
-# - ruby
-# - lua
-# - rust
-# - project
-# - executiontime
-# -----------------------------
 [[blocks]]
-  alignment = "right"
-  type = "prompt"
+  type = 'prompt'
+  alignment = 'right'
 
   [[blocks.segments]]
-    background = "#444"
-    background_templates = [ "{{ if gt .Code 0 }}#cc2222{{ end }}" ]
-    foreground = "p:green"
-    leading_diamond = ""
-    trailing_diamond = ""
-    style = "diamond"
-    template = " {{ if gt .Code 0 }}{{ reason .Code }}{{ else }}{{ end }} "
-    type = "status"
+    leading_diamond = ''
+    trailing_diamond = ''
+    template = ' {{ if gt .Code 0 }}{{ reason .Code }}{{ else }}{{ end }} '
+    foreground = 'p:green'
+    background = '#444'
+    type = 'status'
+    style = 'diamond'
+    background_templates = ['{{ if gt .Code 0 }}#cc2222{{ end }}']
+
     [blocks.segments.properties]
       always_enabled = true
-
-
-  [[blocks.segments]]
-    type = "cmake"
-    style = "diamond"
-    leading_diamond = ""
-    trailing_diamond = ""
-    foreground = "p:charcoal"
-    background = "p:green"
-    template = "  {{ if .Error }}{{ .Error }}{{ else }}{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}{{ end }}"
+      cache_duration = 'none'
 
   [[blocks.segments]]
-    type = "node"
-    style = "diamond"
-    leading_diamond = ""
-    trailing_diamond = ""
-    foreground = "p:charcoal"
-    background = "p:green"
-    template = "  {{ if .Error }}{{ .Error }}{{ else }}{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}{{ end }}"
+    trailing_diamond = ''
+    template = '  {{ if .Error }}{{ .Error }}{{ else }}{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}{{ end }}'
+    foreground = 'p:charcoal'
+    background = 'p:green'
+    type = 'cmake'
+    style = 'diamond'
+
+    [blocks.segments.properties]
+      cache_duration = 'none'
 
   [[blocks.segments]]
-    type = "angular"
-    style = "diamond"
-    leading_diamond = ""
-    trailing_diamond = ""
-    foreground = "p:charcoal"
-    background = "p:green"
-    template = "  {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
+    trailing_diamond = ''
+    template = '  {{ if .Error }}{{ .Error }}{{ else }}{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}{{ end }}'
+    foreground = 'p:charcoal'
+    background = 'p:green'
+    type = 'node'
+    style = 'diamond'
+
+    [blocks.segments.properties]
+      cache_duration = 'none'
 
   [[blocks.segments]]
-    type = "bun"
-    style = "diamond"
-    leading_diamond = ""
-    trailing_diamond = ""
-    foreground = "p:charcoal"
-    background = "#3C82F6"
-    template = "🥟 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
+    trailing_diamond = ''
+    template = '  {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}'
+    foreground = 'p:charcoal'
+    background = 'p:green'
+    type = 'angular'
+    style = 'diamond'
+
+    [blocks.segments.properties]
+      cache_duration = 'none'
 
   [[blocks.segments]]
-    type = "java"
-    style = "diamond"
-    leading_diamond = ""
-    trailing_diamond = ""
-    foreground = "p:charcoal"
-    background = "p:green"
-    template = " 󰬷 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
+    trailing_diamond = ''
+    template = '🥟 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}'
+    foreground = 'p:charcoal'
+    background = '#3C82F6'
+    type = 'bun'
+    style = 'diamond'
+
+    [blocks.segments.properties]
+      cache_duration = 'none'
 
   [[blocks.segments]]
-    type = "mvn"
-    style = "diamond"
-    leading_diamond = ""
-    trailing_diamond = ""
-    foreground = "p:charcoal"
-    background = "p:green"
-    template = "  {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
+    trailing_diamond = ''
+    template = ' 󰬷 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}'
+    foreground = 'p:charcoal'
+    background = 'p:green'
+    type = 'java'
+    style = 'diamond'
+
+    [blocks.segments.properties]
+      cache_duration = 'none'
 
   [[blocks.segments]]
-    type = "php"
-    style = "diamond"
-    leading_diamond = ""
-    trailing_diamond = ""
-    foreground = "p:charcoal"
-    background = "p:green"
-    template = "  {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
+    trailing_diamond = ''
+    template = '  {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}'
+    foreground = 'p:charcoal'
+    background = 'p:green'
+    type = 'mvn'
+    style = 'diamond'
+
+    [blocks.segments.properties]
+      cache_duration = 'none'
 
   [[blocks.segments]]
-    type = "python"
-    style = "diamond"
-    leading_diamond = ""
-    trailing_diamond = ""
-    foreground = "p:charcoal"
-    background = "p:green"
-    template = "  {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}{{ end }}"
+    trailing_diamond = ''
+    template = '  {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}'
+    foreground = 'p:charcoal'
+    background = 'p:green'
+    type = 'php'
+    style = 'diamond'
+
+    [blocks.segments.properties]
+      cache_duration = 'none'
 
   [[blocks.segments]]
-    type = "lua"
-    style = "diamond"
-    leading_diamond = ""
-    trailing_diamond = ""
-    foreground = "p:charcoal"
-    background = "p:green"
-    template = " 󰢱 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
+    trailing_diamond = ''
+    template = '  {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}{{ end }}'
+    foreground = 'p:charcoal'
+    background = 'p:green'
+    type = 'python'
+    style = 'diamond'
 
-  # [[blocks.segments]]
-  #   type = "ruby"
-  #   style = "diamond"
-  #   leading_diamond = ""
-  #   trailing_diamond = ""
-  #   foreground = "p:charcoal"
-  #   background = "p:green"
-  #   template = "  {{ if .Error }}{{ .Error }}{{ else }}{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}{{ end }}"
-
-  # [[blocks.segments]]
-  #   type = "dart"
-  #   style = "diamond"
-  #   leading_diamond = ""
-  #   trailing_diamond = ""
-  #   foreground = "p:charcoal"
-  #   background = "p:green"
-  #   template = " {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
-
-  # [[blocks.segments]]
-  #   type = "flutter"
-  #   style = "diamond"
-  #   leading_diamond = ""
-  #   trailing_diamond = ""
-  #   foreground = "p:charcoal"
-  #   background = "p:green"
-  #   template = " {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
-
-  # [[blocks.segments]]
-  #   type = "go"
-  #   style = "diamond"
-  #   leading_diamond = ""
-  #   trailing_diamond = ""
-  #   foreground = "p:charcoal"
-  #   background = "p:green"
-  #   template = " {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
+    [blocks.segments.properties]
+      cache_duration = 'none'
 
   [[blocks.segments]]
-    type = "rust"
-    style = "diamond"
-    leading_diamond = ""
-    trailing_diamond = ""
-    foreground = "p:charcoal"
-    background = "p:green"
-    template = " {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
+    trailing_diamond = ''
+    template = ' 󰢱 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}'
+    foreground = 'p:charcoal'
+    background = 'p:green'
+    type = 'lua'
+    style = 'diamond'
+
+    [blocks.segments.properties]
+      cache_duration = 'none'
 
   [[blocks.segments]]
-    type = "project"
-    style = "diamond"
-    leading_diamond = ""
-    trailing_diamond = ""
-    foreground = "p:ink_black"
-    background = "p:blue"
-    template = " {{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }} {{.Version}}{{ end }}{{ end }}"
+    trailing_diamond = ''
+    template = ' {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}'
+    foreground = 'p:charcoal'
+    background = 'p:green'
+    type = 'rust'
+    style = 'diamond'
+
+    [blocks.segments.properties]
+      cache_duration = 'none'
 
   [[blocks.segments]]
-    background = "p:airbnb_red"
-    foreground = "p:pale_navy"
-    style = "diamond"
-    template = " 󱦟 {{ .FormattedMs }}"
-    leading_diamond = ""
-    trailing_diamond = ""
-    type = "executiontime"
+    trailing_diamond = ''
+    template = ' {{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }} {{.Version}}{{ end }}{{ end }}'
+    foreground = 'p:ink_black'
+    background = 'p:blue'
+    type = 'project'
+    style = 'diamond'
 
+    [blocks.segments.properties]
+      cache_duration = 'none'
 
-# -----------------------------
-# Blocks: Terminal Input
-# - prompt: magenta when ok and red when error
-# - transient_prompt
-# - secondary_prompt
-# - debug_prompt
-# -----------------------------
+  [[blocks.segments]]
+    trailing_diamond = ''
+    template = ' 󱦟 {{ .FormattedMs }}'
+    foreground = 'p:pale_navy'
+    background = 'p:airbnb_red'
+    type = 'executiontime'
+    style = 'diamond'
+
+    [blocks.segments.properties]
+      cache_duration = 'none'
+
 [[blocks]]
   type = 'prompt'
   alignment = 'left'
   newline = true
 
   [[blocks.segments]]
+    template = '❯'
+    background = 'transparent'
     type = 'text'
     style = 'plain'
-    foreground_templates = [
-      "{{if gt .Code 0}}red{{end}}",
-      "{{if eq .Code 0}}green{{end}}",
-    ]
-    background = 'transparent'
-    template = '❯'
+    foreground_templates = ['{{if gt .Code 0}}red{{end}}', '{{if eq .Code 0}}green{{end}}']
 
-[transient_prompt]
-  foreground_templates = [
-    "{{if gt .Code 0}}red{{end}}",
-    "{{if eq .Code 0}}green{{end}}",
-  ]
-  background = 'transparent'
-  template = '❯ '
-
-[secondary_prompt]
-  foreground = 'magenta'
-  background = 'transparent'
-  template = '❯❯ '
-
-[debug_prompt]
-  foreground = 'magenta'
-  background = 'transparent'
-  template = 'Debugging ❯❯ '
-
-
-# -----------------------------
-# Tootips section
-# - terraform
-# - aws
-# - docker
-# - azure
-# - gcp
-# - kubectl
-# -----------------------------
-[[tooltips]]
-  type = "terraform"
-  tips = [ "terraform", "tf", "tfa", "tfc", "tfd", "tff", "tfi", "tfo", "tfp", "tfs", "tfsh", "tft", "tfv" ]
-  style = "plain"
-  template = "󱁢 {{.Version}}"
-  foreground = "#b18bdd"
-  [tooltips.properties]
-    fetch_version = true
-
-[[tooltips]]
-  type = "aws"
-  tips = [ "aws", "eb", "ecs", "eksctl"]
-  style = "plain"
-  foreground = "#ff9a01"
-  template = " 󰸏 {{.Profile}}{{if .Region}}@{{.Region}}{{end}}"
-
-[[tooltips]]
-  type = "docker"
-  tips = [ "docker", "docker-compose", "dc", "dcleanup"]
-  style = "plain"
-  foreground = "#cda4f6"
-
-[[tooltips]]
-  type = "az"
-  tips = [ "az"]
-  style = "plain"
-  foreground = "#33b0e5"
-  template = "  {{ .EnvironmentName }}"
-
-[[tooltips]]
-  type = "gcp"
-  tips = [ "gcp", "gcloud"]
-  style = "plain"
-  foreground = "#34a853"
-  template = "  {{.Project}} :: {{.Account}} "
-
-[[tooltips]]
-  type = "helm"
-  tips = [ "gcp", "gcloud"]
-  style = "plain"
-  foreground = "#004daa"
-  template = "  {{.Project}} :: {{.Account}} "
-
-[[tooltips]]
-  type = "kubectl"
-  tips = [ "kubectl", "k8s", "k9s", "krew"]
-  style = "plain"
-  foreground = "#326ce5"
-  template = " 󱃾 {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}} "
-  # [tooltips.properties.context_aliases]
-  #   "arn:aws:eks:eu-west-1:1234567890:cluster/posh" = "posh"
+    [blocks.segments.properties]
+      cache_duration = 'none'

@@ -286,7 +286,7 @@ rabbitmq() {
       --net ${DEV_DOCKER_NETWORK_NAME} \
       --env RABBITMQ_DEFAULT_USER=admin \
       --env RABBITMQ_DEFAULT_PASS=nurrony \
-      --volume $DEV_ZONE_CONFIG_PATH/rabbitmq/certs:/etc/ssl/rabbitmq \
+      --volume $DEV_ZONE_CONFIG_PATH/rabbitmq/certs:/etc/rabbitmq/ssl \
       --volume $DEV_ZONE_CONFIG_PATH/rabbitmq/data:/var/lib/rabbitmq \
       --volume $DEV_ZONE_CONFIG_PATH/rabbitmq/rabbitmq.conf:/etc/rabbitmq/conf.d/10-defaults.conf:ro \
       rabbitmq:4-management-alpine

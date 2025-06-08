@@ -279,15 +279,16 @@ rabbitmq() {
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "rabbitmq broker is not running, starting it for you."
     docker run --detach -it \
-      --net ${DEV_DOCKER_NETWORK_NAME} \
       --name rabbitmq \
+      --hostname rabbitmq \
       --publish 5672:5672 \
       --publish 15672:15672 \
-      --env VIRTUAL_PORT=15672 \
+      --net ${DEV_DOCKER_NETWORK_NAME} \
       --env RABBITMQ_DEFAULT_USER=admin \
       --env RABBITMQ_DEFAULT_PASS=nurrony \
-      --env VIRTUAL_HOST=rabbitmq.nurrony.localhost \
-      --volume $DEV_ZONE_CONFIG_PATH/rabbitmq:/var/lib/rabbitmq \
+      --volume $DEV_ZONE_CONFIG_PATH/rabbitmq/certs:/etc/ssl/rabbitmq \
+      --volume $DEV_ZONE_CONFIG_PATH/rabbitmq/data:/var/lib/rabbitmq \
+      --volume $DEV_ZONE_CONFIG_PATH/rabbitmq/rabbitmq.conf:/etc/rabbitmq/conf.d/10-defaults.conf:ro \
       rabbitmq:4-management-alpine
   else
     echo "rabbitmq broker is already running"

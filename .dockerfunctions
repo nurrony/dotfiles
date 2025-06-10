@@ -281,8 +281,8 @@ rabbitmq() {
     docker run --detach -it \
       --name rabbitmq \
       --hostname rabbitmq \
-      --publish 5672:5672 \
-      --publish 15672:15672 \
+      --publish 5671:5671 \
+      --publish 15671:15671 \
       --net ${DEV_DOCKER_NETWORK_NAME} \
       --env RABBITMQ_DEFAULT_USER=admin \
       --env RABBITMQ_DEFAULT_PASS=nurrony \

@@ -272,7 +272,7 @@ mongo() {
   docker exec -t mongoserver5 mongo "$@"
 }
 
-# check https://github.com/GoogleCloudPlatform/rabbitmq-docker/blob/master/README.md
+# check https://github.com/GoogleCloudPlatform/click-to-deploy/blob/master/docker/rabbitmq/README.md
 rabbitmq() {
   del_stopped rabbitmq
   local state=$(docker inspect --format "{{.State.Running}}" rabbitmq 2>/dev/null)

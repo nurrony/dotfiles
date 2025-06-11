@@ -221,3 +221,6 @@ alias tfsh='terraform show'
 
 # zellij alias
 alias zjclear='zellij delete-all-sessions --force --yes'
+
+# hostses
+alias hostses='sudo hostess'

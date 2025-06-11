@@ -201,9 +201,6 @@ alias hostses='sudo txeh'
 # Weather
 alias weather='function _weather() { http --body https://wttr.in/${1:-Dhaka}; }; _weather'
 
-# Set JAVA_HOME
-alias setjhome='source $HOME/.asdf/plugins/java/set-java-home.zsh'
-
 # # Python alias
 # alias python=/usr/bin/python3
 # alias pip=/usr/local/bin/pip3

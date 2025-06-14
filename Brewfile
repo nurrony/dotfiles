@@ -56,6 +56,7 @@ brew "graphviz"
 brew "grep"
 brew "helm"
 brew "httpie", args: ["HEAD"]
+brew "ipcalc"
 brew "john"
 brew "jq"
 brew "jsoncpp"

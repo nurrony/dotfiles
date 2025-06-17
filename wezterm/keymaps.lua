@@ -13,6 +13,9 @@ return {
   key_util.alt_key('h', action.ActivatePaneDirection('Left')),
   key_util.alt_key('l', action.ActivatePaneDirection('Right')),
 
+  key_util.cmd_key('RightArrow', action.ActivatePaneDirection("Next")),
+  key_util.cmd_key('LeftArrow', action.ActivatePaneDirection("Prev")),
+
   -- panes: rotate
   key_util.alt_key('r', action.RotatePanes("Clockwise")),
 

@@ -40,6 +40,7 @@ zinit lucid light-mode for \
 zinit wait'3' lucid light-mode for \
   zdharma-continuum/history-search-multi-word \
   zdharma/fast-syntax-highlighting \
+  as'program' atpull'%atclone' src'fzf-git.sh' junegunn/fzf-git.sh \
   as'program' from'gh-r' mv'mise* -> mise' atclone'./mise completion zsh > _mise && ./mise activate zsh > init.zsh' src'init.zsh' atpull'%atclone' jdx/mise
 
 zinit wait'10' lucid light-mode for \

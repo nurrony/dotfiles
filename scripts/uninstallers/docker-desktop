@@ -29,15 +29,16 @@ remove /usr/local/bin/hub-tool
 remove /usr/local/bin/hyperkit
 remove /usr/local/bin/kubectl.docker
 remove /usr/local/bin/vpnkit
-remove ~/.docker
-remove ~/Library/Containers/com.docker.docker
-remove ~/Library/Application\ Support/Docker\ Desktop
-remove ~/Library/Group\ Containers/group.com.docker
-remove ~/Library/HTTPStorages/com.docker.docker.binarycookies
 remove /Library/PrivilegedHelperTools/com.docker.vmnetd
+remove $HOME/.docker
+remove $HOME/Library/Containers/com.docker.docker
+remove $HOME/Library/Application\ Support/Docker\ Desktop
+remove $HOME/Library/Group\ Containers/group.com.docker
+remove $HOME/Library/HTTPStorages/com.docker.docker.binarycookies
 remove /Library/LaunchDaemons/com.docker.vmnetd.plist
-remove ~/Library/Logs/Docker\ Desktop
+remove $HOME/Library/Logs/Docker\ Desktop
 remove /usr/local/lib/docker
-remove ~/Library/Preferences/com.docker.docker.plist
-remove ~/Library/Saved\ Application\ State/com.electron.docker-frontend.savedState
-remove ~/Library/Preferences/com.electron.docker-frontend.plist
+remove $HOME/Library/Preferences/com.docker.docker.plist
+remove $HOME/Library/Saved\ Application\ State/com.electron.docker-frontend.savedState
+remove $HOME/Library/Preferences/com.electron.docker-frontend.plist
+remove $HOME/Library/Preferences/com.electron.dockerdesktop.plist

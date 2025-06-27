@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+set -e
+
+# See https://podman-desktop.io/docs/uninstall
+
+remove() {
+  sudo -v
+
+  entry="$1"
+  echo -ne "Removing $entry... "
+  sudo rm -rf "$entry"
+
+  if [[ ! -e "$entry" ]]; then
+    echo -ne "[OK]"
+  else
+    echo -ne "[FAILED]"
+  fi
+  echo
+}
+
+podman machine reset -f
+brew uninstall --zap --cask --quiet podman
+sudo /opt/podman/bin/podman-mac-helper uninstall
+remove /etc/paths.d/podman-pkg
+remove /opt/podman
+remove $HOME/.local/share/containers/podman
+remove $HOME/.config/containers/podman
+remove $HOME/.local/share/containers/storage
+brew uninstall --zap podman-desktop
+remove $HOME/.local/share/containers/podman-desktop

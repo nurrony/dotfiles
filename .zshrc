@@ -23,28 +23,31 @@ source "${ZINIT_HOME}/zinit.zsh"
 # load essential completion
 zinit lucid light-mode for \
   OMZP::git \
-  OMZP::mvn \
-  OMZP::ansible \
-  OMZP::extract \
+  Aloxaf/fzf-tab \
+  zsh-users/zsh-autosuggestions \
   as'completion' zsh-users/zsh-completions \
   pick'alias-tips.plugin.zsh' djui/alias-tips \
   as'program' from'gh-r' atclone'./zoxide init --cmd=j zsh > init.zsh' src'init.zsh' atpull'%atclone' pick'zoxide/zoxide' ajeetdsouza/zoxide
 
 # install and load necessary programs
 zinit wait'3' lucid light-mode for \
-  Aloxaf/fzf-tab \
-  zsh-users/zsh-autosuggestions \
   zdharma-continuum/history-search-multi-word \
   zdharma/fast-syntax-highlighting \
   as'program' atpull'%atclone' src'fzf-git.sh' junegunn/fzf-git.sh \
   as'program' from'gh-r' mv'mise* -> mise' atclone'./mise completion zsh > _mise && ./mise activate zsh > init.zsh' src'init.zsh' atpull'%atclone' jdx/mise
+
+# install snippets
+zinit lucid light-mode for \
+  OMZP::macos \
+  OMZP::mvn \
+  OMZP::ansible \
+  OMZP::extract
 
 zinit wait'10' lucid light-mode for \
   as'program' from'gh-r' jdx/usage \
   as'program' from'gh-r' medialab/xan \
   as'program' from'gh-r' mv'krew* -> krew' kubernetes-sigs/krew \
   as'program' from'gh-r' mv'hostess* -> hostess' cbednarski/hostess \
-  as'program' from'gh-r' mv'hadolint* -> hadolint' hadolint/hadolint \
   as'program' from'gh-r' mv'kube-explorer* -> kube-explorer' cnrancher/kube-explorer \
   as'program' from'gh-r' atclone'ln -sfv completions/dog.zsh _dog' atpull'%atclone' pick'bin/dog' ogham/dog \
   as'program' from'gh-r' atpull'%atclone' pick'phpactor.phar' mv'phpactor.phar* -> phpactor' phpactor/phpactor

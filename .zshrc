@@ -29,19 +29,21 @@ zinit lucid light-mode for \
   pick'alias-tips.plugin.zsh' djui/alias-tips \
   as'program' from'gh-r' atclone'./zoxide init --cmd=j zsh > init.zsh' src'init.zsh' atpull'%atclone' pick'zoxide/zoxide' ajeetdsouza/zoxide
 
+# install oh my zsh plugins as snippets
+zinit lucid light-mode for \
+  OMZP::mvn \
+  OMZP::sudo \
+  OMZP::macos \
+  OMZP::ansible \
+  OMZP::extract \
+  OMZP::command-not-found
+
 # install and load necessary programs
 zinit wait'3' lucid light-mode for \
   zdharma-continuum/history-search-multi-word \
   zdharma/fast-syntax-highlighting \
   as'program' atpull'%atclone' src'fzf-git.sh' junegunn/fzf-git.sh \
   as'program' from'gh-r' mv'mise* -> mise' atclone'./mise completion zsh > _mise && ./mise activate zsh > init.zsh' src'init.zsh' atpull'%atclone' jdx/mise
-
-# install snippets
-zinit lucid light-mode for \
-  OMZP::macos \
-  OMZP::mvn \
-  OMZP::ansible \
-  OMZP::extract
 
 zinit wait'10' lucid light-mode for \
   as'program' from'gh-r' jdx/usage \

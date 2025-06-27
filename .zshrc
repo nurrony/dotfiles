@@ -22,19 +22,19 @@ source "${ZINIT_HOME}/zinit.zsh"
 
 # load essential completion
 zinit lucid light-mode for \
-  OMZP::git \
   Aloxaf/fzf-tab \
-  zsh-users/zsh-autosuggestions \
   as'completion' zsh-users/zsh-completions \
   pick'alias-tips.plugin.zsh' djui/alias-tips \
   as'program' from'gh-r' atclone'./zoxide init --cmd=j zsh > init.zsh' src'init.zsh' atpull'%atclone' pick'zoxide/zoxide' ajeetdsouza/zoxide
 
 # install oh my zsh plugins as snippets
-zinit lucid light-mode for \
+zinit wait'3' lucid light-mode for \
+  OMZP::git \
   OMZP::mvn \
   OMZP::sudo \
   OMZP::ansible \
   OMZP::extract \
+  zsh-users/zsh-autosuggestions \
   OMZP::command-not-found
 
 # install and load necessary programs

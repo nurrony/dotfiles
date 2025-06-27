@@ -1,4 +1,8 @@
 # type: ignore
+# key bindings
+bindkey "^[[A" history-search-backward
+bindkey "^[[B" history-search-forward
+
 # paste behavior
 zle_highlight=('paste:none')
 

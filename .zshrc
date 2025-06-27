@@ -1,10 +1,6 @@
 # terminal color settings
 set termguicolors
 
-# key bindings
-bindkey "^[[A" history-search-backward
-bindkey "^[[B" history-search-forward
-
 # uncomment these lines if you are using powerlevel10k
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"

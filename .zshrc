@@ -26,7 +26,6 @@ zinit lucid light-mode for \
   OMZP::mvn \
   OMZP::ansible \
   OMZP::extract \
-  OMZP::docker-compose \
   as'completion' zsh-users/zsh-completions \
   pick'alias-tips.plugin.zsh' djui/alias-tips \
   as'completion' pick'gradle-completion.plugin.zsh' gradle/gradle-completion \
@@ -35,6 +34,7 @@ zinit lucid light-mode for \
 # install and load necessary programs
 zinit wait'3' lucid light-mode for \
   Aloxaf/fzf-tab \
+  zsh-users/zsh-autosuggestions \
   zdharma-continuum/history-search-multi-word \
   zdharma/fast-syntax-highlighting \
   as'program' atpull'%atclone' src'fzf-git.sh' junegunn/fzf-git.sh \

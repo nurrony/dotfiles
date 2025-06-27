@@ -33,7 +33,6 @@ zinit lucid light-mode for \
 zinit lucid light-mode for \
   OMZP::mvn \
   OMZP::sudo \
-  OMZP::macos \
   OMZP::ansible \
   OMZP::extract \
   OMZP::command-not-found

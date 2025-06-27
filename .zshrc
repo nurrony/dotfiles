@@ -34,6 +34,7 @@ zinit lucid light-mode for \
 
 # install and load necessary programs
 zinit wait'3' lucid light-mode for \
+  Aloxaf/fzf-tab \
   zdharma-continuum/history-search-multi-word \
   zdharma/fast-syntax-highlighting \
   as'program' atpull'%atclone' src'fzf-git.sh' junegunn/fzf-git.sh \

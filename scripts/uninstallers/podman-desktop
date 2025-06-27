@@ -19,12 +19,10 @@ remove() {
 }
 
 podman machine reset -f
-brew uninstall --zap --cask --quiet podman
+brew uninstall --zap --force --quiet podman
 sudo /opt/podman/bin/podman-mac-helper uninstall
 remove /etc/paths.d/podman-pkg
 remove /opt/podman
-remove $HOME/.local/share/containers/podman
 remove $HOME/.config/containers/podman
-remove $HOME/.local/share/containers/storage
-brew uninstall --zap podman-desktop
-remove $HOME/.local/share/containers/podman-desktop
+remove $HOME/.local/share/containers
+brew uninstall --zap --quiet --force podman-desktop

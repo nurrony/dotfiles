@@ -22,7 +22,6 @@ source "${ZINIT_HOME}/zinit.zsh"
 
 # load essential completion
 zinit lucid light-mode for \
-  Aloxaf/fzf-tab \
   as'completion' zsh-users/zsh-completions \
   pick'alias-tips.plugin.zsh' djui/alias-tips \
   as'program' from'gh-r' atclone'./zoxide init --cmd=j zsh > init.zsh' src'init.zsh' atpull'%atclone' pick'zoxide/zoxide' ajeetdsouza/zoxide

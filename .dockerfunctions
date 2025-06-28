@@ -154,16 +154,16 @@ mysqlserver() {
   local VERSION=${1:-8}
   local PORT=${2:-3306}
   del_stopped mysqlserver-${VERSION//./-}
-  local state=$(docker inspect --format "{{.State.Running}}" mysqlserver-${VERSION//./-} 2>/dev/null)
+  local state=$(podman inspect --format "{{.State.Running}}" mysqlserver-${VERSION//./-} 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "mysql $VERSION server is not running, starting it for you."
     mkdir -p $DEV_ZONE_CONFIG_PATH/databases/mysql/${VERSION} && \
-    docker run -it -d \
+    podman run -it -d \
       --volume $DEV_ZONE_CONFIG_PATH/databases/mysql/${VERSION}:/var/lib/mysql \
       --env MYSQL_ROOT_PASSWORD=nurrony \
       --publish $PORT:3306 \
-      --net ${DEV_DOCKER_NETWORK_NAME} \
+      --network ${DEV_DOCKER_NETWORK_NAME} \
       --name mysqlserver-${VERSION//./-} \
       mysql:${VERSION}
   else

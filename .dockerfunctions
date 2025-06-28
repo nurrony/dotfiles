@@ -5,9 +5,41 @@ export DOCKER_REPO_PREFIX=jess
 #
 # Helper Functions
 #
-alias dpsa="docker ps --all"
-alias ddown='docker rm --force'
-alias docker-compose='docker compose'
+
+alias pbl='podman build'
+alias pcin='podman container inspect'
+alias pcls='podman container ls'
+alias pclsa='podman container ls --all'
+alias pib='podman image build'
+alias pii='podman image inspect'
+alias pils='podman image ls'
+alias pipu='podman image push'
+alias pirm='podman image rm'
+alias pit='podman image tag'
+alias plo='podman container logs'
+alias pnc='podman network create'
+alias pncn='podman network connect'
+alias pndcn='podman network disconnect'
+alias pni='podman network inspect'
+alias pnls='podman network ls'
+alias pnrm='podman network rm'
+alias ppo='podman container port'
+alias ppu='podman pull'
+alias pr='podman container run'
+alias prit='podman container run --interactive --tty'
+alias prm='podman container rm'
+alias 'prm!'='podman container rm --force'
+alias pst='podman container start'
+alias prs='podman container restart'
+alias psta='podman stop $(podman ps --quiet)'
+alias pstp='podman container stop'
+alias ptop='podman top'
+alias pvi='podman volume inspect'
+alias pvls='podman volume ls'
+alias pvprune='podman volume prune'
+alias pxc='podman container exec'
+alias pxcit='podman container exec --interactive --tty'
+
 # run the following commands sshing into the podman machine
 # sudo ln -s /Users/nurrony/.config/containers/registries.conf \
 #  /etc/containers/registries.conf.d/999-podman-desktop-registries-from-host.conf

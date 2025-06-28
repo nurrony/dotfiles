@@ -32,10 +32,10 @@ dcleanup() {
 del_stopped() {
   local name=$1
   local state
-  state=$(docker inspect --format "{{.State.Running}}" "$name" 2>/dev/null)
+  state=$(podman inspect --format "{{.State.Running}}" "$name" 2>/dev/null)
 
   if [[ "$state" == "false" ]]; then
-    docker rm "$name"
+    podman rm "$name"
   fi
 }
 

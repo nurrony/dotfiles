@@ -19,10 +19,10 @@ dlog() {
 }
 
 # cleans all podman resources. run it cautiously
-dcleanup() {
-  docker container prune --force 2>/dev/null
-  docker volume prune --force 2>/dev/null
-  docker image prune --build-cache --all 2>/dev/null
+podcleanup() {
+  podman container prune --force 2>/dev/null
+  podman volume prune --force 2>/dev/null
+  podman image prune --force --build-cache --all 2>/dev/null
 }
 
 # deletes stopped containers

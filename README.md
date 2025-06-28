@@ -2,7 +2,7 @@
 
 My dotfiles :smile: for Zsh on **MacOS**. Clone the repository and Run `setup.sh` to setup some initial requirements
 
-My most favourite parts are `.functions` and `.dockerfunctions`
+My most favourite parts are `.functions` and `.containerfunctions`
 
 ### Installation
 

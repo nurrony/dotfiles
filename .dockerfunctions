@@ -15,17 +15,14 @@ alias mypodmachine="podman machine init rons-podman-machine --cpus 4 --disk-size
 
 
 dlog() {
-  docker logs -f --tail 100 "$@"
+  podman logs -f --tail 100 "$@"
 }
 
-# cleans all docker resources. run it cautiously
+# cleans all podman resources. run it cautiously
 dcleanup() {
   docker container prune --force 2>/dev/null
   docker volume prune --force 2>/dev/null
-  docker image prune --all 2>/dev/null
-  # docker network prune --force 2>/dev/null
-  docker builder prune --force 2>/dev/null
-  docker buildx prune --force 2>/dev/null
+  docker image prune --build-cache --all 2>/dev/null
 }
 
 # deletes stopped containers

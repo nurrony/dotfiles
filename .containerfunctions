@@ -71,13 +71,13 @@ ctr-registry-up() {
   if [[ "$state" == "true" ]] || [[ "$state" != "" ]]; then
     podman rm -f registry
   fi
-  docker-compose -f $DEV_ZONE_CONFIG_PATH/kubernetes/clusters/docker-compose.yml up -d
+  podman compose -f $DEV_ZONE_CONFIG_PATH/kubernetes/clusters/docker-compose.yml up -d
   echo 'registry started successfully...'
 }
 
 # down local container registry
 ctr-rgistry-down() {
-  docker-compose -f $DEV_ZONE_CONFIG_PATH/kubernetes/clusters/docker-compose.yml down
+  podman compose -f $DEV_ZONE_CONFIG_PATH/kubernetes/clusters/docker-compose.yml down
   echo 'registry is down successfully'
 }
 

@@ -101,6 +101,7 @@ nginx-proxy() {
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     podman container run -it -d \
+      --privileged \
       --network ${DEV_DOCKER_NETWORK_NAME} \
       --publish 80:80 \
       --publish 443:443 \
@@ -122,8 +123,8 @@ portainer() {
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "portainer server is not running, starting it for you."
-    podman container run -it -d \
-      --volume /var/run/podman/podman.sock:/var/run/podman/podman.sock:ro \
+    podman container run -it -d --privileged \
+      --volume /var/run/podman/podman.sock:/var/run/docker.sock:ro \
       --volume $DEV_ZONE_CONFIG_PATH/portainer:/data \
       --env VIRTUAL_HOST=portainer.nurrony.localhost \
       --expose 9000 \
@@ -544,9 +545,10 @@ stop-lamp-stack() {
 sysdig() {
   del_stopped sysdig-container
   podman container run -it \
+    --privileged \
     --name sysdig-container \
     --privileged \
-    --volume /var/run/podman/podman.sock:/host/var/run/podman/podman.sock \
+    --volume /var/run/podman/podman.sock:/var/run/podman/podman.sock \
     --volume /dev:/host/dev \
     --volume /proc:/host/proc:ro \
     --volume /boot:/host/boot:ro \
@@ -595,7 +597,7 @@ command_not_found_handle() {
 
 dive() {
   del_stopped dive
-  podman container run --rm -it \
+  podman container run --rm -it --privileged \
     --network ${DEV_DOCKER_NETWORK_NAME} \
     --name dive \
     --volume /var/run/podman/podman.sock:/var/run/podman/podman.sock:ro \

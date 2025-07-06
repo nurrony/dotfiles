@@ -14,7 +14,34 @@ curl -s https://raw.githubusercontent.com/nurrony/dotfiles/master/setup | bash
 
 ### Customization
 
-Do not forget to add or edit git username and email in `.extra` and `.gitconfig` with yours. Also other path (i.e: `DOCKER_NETWORK_NAME`, `SSH_KEY_FILE_NAME`, `DEV_ZONE`, `DEV_ZONE_CONFIG_PATH`)
+Do not forget to add or edit git username and email in `.extra` and `.gitconfig` with yours. Also other path (i.e: `DEV_CONTAINER_NETWORK_NAME`, `SSH_KEY_FILE_NAME`, `DEV_ZONE`, `DEV_ZONE_CONFIG_PATH`).
+
+Example `.extra` file
+
+```bash
+# Development directory path
+export DEV_ZONE=/Volumes/Devzone
+export DEV_ZONE_CONFIG_PATH=$DEV_ZONE/storage
+export DEV_CONTAINER_NETWORK_NAME=ronsvpn
+
+# Set ssh key file name
+export SSH_KEY_FILE_NAME='nur-macbookpro'
+
+# Git credentials
+# Not in the repository, to prevent people from accidentally committing under my name
+export GIT_COMMIT_GPG_SIGN=false
+export GIT_COMMIT_GPG_KEY="06B3A1B73F55F441"
+export GIT_AUTHOR_NAME="Nur Rony"
+export GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
+export GIT_AUTHOR_EMAIL="pro.nmrony@gmail.com"
+export GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
+
+git config --global user.name "$GIT_AUTHOR_NAME"
+git config --global user.email "$GIT_AUTHOR_EMAIL"
+git config --global commit.gpgsign $GIT_COMMIT_GPG_SIGN
+git config --global user.signingkey $GIT_COMMIT_GPG_KEY
+
+```
 
 **Happy Hacking!!**
 

@@ -116,6 +116,21 @@ nginx-proxy() {
   fi
 }
 
+proxy-manager() {
+
+  podman run -it --detach \
+    --privileged \
+    --name proxy-manager \
+    --publish 80:80 \
+    --publish 443:443 \
+    --publish 8888:81 \
+    --network ${DEV_DOCKER_NETWORK_NAME} \
+    --volume $DEV_ZONE_CONFIG_PATH/nginx/manager/data:/data:Z \
+    --volume $DEV_ZONE_CONFIG_PATH/nginx/manager/letsencrypt:/etc/letsencrypt:Z \
+    --env DB_SQLITE_FILE="/data/database.sqlite" \
+    jc21/nginx-proxy-manager:latest
+}
+
 portainer() {
   relies_on nginx-proxy
   del_stopped portainer

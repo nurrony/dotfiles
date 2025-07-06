@@ -228,5 +228,6 @@
 
 [gpg]
   program = gpg2
+
 [http]
 	sslVerify = false

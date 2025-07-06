@@ -102,7 +102,7 @@ nginx-proxy() {
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     podman container run -it -d \
       --privileged \
-      --network ${DEV_DOCKER_NETWORK_NAME} \
+      --network ${DEV_CONTAINER_NETWORK_NAME} \
       --publish 80:80 \
       --publish 443:443 \
       --name nginx-proxy \
@@ -127,7 +127,7 @@ proxy-manager() {
       --publish 80:80 \
       --publish 443:443 \
       --publish 8888:81 \
-      --network ${DEV_DOCKER_NETWORK_NAME} \
+      --network ${DEV_CONTAINER_NETWORK_NAME} \
       --volume $DEV_ZONE_CONFIG_PATH/nginx/manager/data:/data:Z \
       --volume $DEV_ZONE_CONFIG_PATH/nginx/manager/letsencrypt:/etc/letsencrypt:Z \
       --env DB_SQLITE_FILE="/data/database.sqlite" \
@@ -149,7 +149,7 @@ portainer() {
       --volume $DEV_ZONE_CONFIG_PATH/portainer:/data \
       --env VIRTUAL_HOST=portainer.nurrony.localhost \
       --expose 9000 \
-      --network ${DEV_DOCKER_NETWORK_NAME} \
+      --network ${DEV_CONTAINER_NETWORK_NAME} \
       --name portainer \
       portainer/portainer
   else
@@ -211,7 +211,7 @@ mysqlserver() {
       --volume $DEV_ZONE_CONFIG_PATH/databases/mysql/${VERSION}:/var/lib/mysql \
       --env MYSQL_ROOT_PASSWORD=nurrony \
       --publish $PORT:3306 \
-      --network ${DEV_DOCKER_NETWORK_NAME} \
+      --network ${DEV_CONTAINER_NETWORK_NAME} \
       --name mysqlserver-${VERSION//./-} \
       mysql:${VERSION}
   else
@@ -239,7 +239,7 @@ dynamodb() {
       --publish "8000:8000" \
       --expose 8000 \
       --env VIRTUAL_HOST=dynamodb.nurrony.localhost \
-      --network ${DEV_DOCKER_NETWORK_NAME} \
+      --network ${DEV_CONTAINER_NETWORK_NAME} \
       --name dynamodb \
       amazon/dynamodb-local -jar DynamoDBLocal.jar -sharedDb -optimizeDbBeforeStartup -dbPath ./data
     if [ "$1" != "" ]; then
@@ -263,7 +263,7 @@ pma() {
       --env UPLOAD_LIMIT=100M \
       --env VIRTUAL_HOST=pma.nurrony.localhost \
       --env PMA_ARBITRARY=1 \
-      --network ${DEV_DOCKER_NETWORK_NAME} \
+      --network ${DEV_CONTAINER_NETWORK_NAME} \
       --expose 80 \
       --name pma \
       phpmyadmin/phpmyadmin
@@ -291,7 +291,7 @@ myblog() {
       --env database__connection__password=nurrony \
       --env database__connection__database=rons_blog \
       --env DEV_DOMAIN=http://blog.nurrony.localhost \
-      --network ${DEV_DOCKER_NETWORK_NAME} \
+      --network ${DEV_CONTAINER_NETWORK_NAME} \
       --name personal-blog \
       ghost:2-alpine
   else
@@ -313,7 +313,7 @@ mongoserver() {
       --env MONGODB_INITDB_ROOT_USERNAME=root \
       --env MONGODB_INITDB_ROOT_PASSWORD=nurrony \
       --publish $PORT:27017 \
-      --network ${DEV_DOCKER_NETWORK_NAME} \
+      --network ${DEV_CONTAINER_NETWORK_NAME} \
       --name mongoserver$VERSION \
       mongo:${VERSION}
   else
@@ -336,7 +336,7 @@ rabbitmq() {
       --hostname rabbitmq \
       --publish 5671:5671 \
       --publish 15671:15671 \
-      --network ${DEV_DOCKER_NETWORK_NAME} \
+      --network ${DEV_CONTAINER_NETWORK_NAME} \
       --env RABBITMQ_DEFAULT_USER=admin \
       --env RABBITMQ_DEFAULT_PASS=nurrony \
       --volume $DEV_ZONE_CONFIG_PATH/rabbitmq/certs:/etc/rabbitmq/ssl \
@@ -356,7 +356,7 @@ kafka() {
     echo "kafka broker ${VERSION} is not running, starting it for you."
 podman container run --detach -it \
       --name kafka \
-      --network ${DEV_DOCKER_NETWORK_NAME} \
+      --network ${DEV_CONTAINER_NETWORK_NAME} \
       --publish 9092:9092 \
       --publish 9102:9102 \
       --env KAFKA_NODE_ID=1 \
@@ -389,7 +389,7 @@ mailserver() {
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "mailserver is not running. starting is for you"
     podman container run -d \
-      --network ${DEV_DOCKER_NETWORK_NAME} \
+      --network ${DEV_CONTAINER_NETWORK_NAME} \
       --expose 8025 \
       --name mailserver \
       --publish 1025:1025 \
@@ -416,7 +416,7 @@ zipkin() {
     echo "zipkin 3.x.x server is not running, starting it for you."
     podman container run --detach -it \
     --name zipkin \
-    --network ${DEV_DOCKER_NETWORK_NAME} \
+    --network ${DEV_CONTAINER_NETWORK_NAME} \
     --publish 9411:9411 \
     --env VIRTUAL_PORT=9411 \
     --env VIRTUAL_HOST=zipkin.nurrony.localhost \
@@ -438,7 +438,7 @@ pgserver() {
     mkdir -p $DEV_ZONE_CONFIG_PATH/databases/postgres/${VERSION}
     echo "postgres $VERSION.x.x server is not running, starting it for you."
     podman container run -it -d \
-      --network ${DEV_DOCKER_NETWORK_NAME} \
+      --network ${DEV_CONTAINER_NETWORK_NAME} \
       --ulimit memlock=-1:-1 \
       --memory-swappiness=0 \
       --volume $DEV_ZONE_CONFIG_PATH/databases/postgres/${VERSION}:/var/lib/postgresql/data \
@@ -472,7 +472,7 @@ pga() {
       --env PGADMIN_DEFAULT_EMAIL=rony@nurrony.info \
       --env PGADMIN_DEFAULT_PASSWORD=nurrony \
       --env PGADMIN_DISABLE_POSTFIX=yes \
-      --network ${DEV_DOCKER_NETWORK_NAME} \
+      --network ${DEV_CONTAINER_NETWORK_NAME} \
       --expose 80 \
       --name pga \
       dpage/pgadmin4
@@ -494,7 +494,7 @@ elasticsearch() {
       --volume "$DEV_ZONE_CONFIG_PATH/databases/elasticsearch/data:/usr/share/elasticsearch/data" \
       --publish 9200:9200 \
       --publish 9300:9300 \
-      --network ${DEV_DOCKER_NETWORK_NAME} \
+      --network ${DEV_CONTAINER_NETWORK_NAME} \
       --name elasticsearch \
       --ulimit memlock=-1:-1 \
       --env VIRTUAL_PORT=9200 \
@@ -524,7 +524,7 @@ elasticview() {
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     podman container run -dit \
       --expose 8080 \
-      --network ${DEV_DOCKER_NETWORK_NAME} \
+      --network ${DEV_CONTAINER_NETWORK_NAME} \
       --name elasticview \
       --env VIRTUAL_PORT=8080 \
       --env VIRTUAL_HOST=elasticsearch.nurrony.localhost \
@@ -551,7 +551,7 @@ apache-php7() {
   podman container run --rm --interactive --tty \
     --volume $PWD:/var/www/html \
     --user $(id -u):$(id -g) \
-    --network ${DEV_DOCKER_NETWORK_NAME} \
+    --network ${DEV_CONTAINER_NETWORK_NAME} \
     nmrony/php:7-apache "$@"
 }
 
@@ -619,7 +619,7 @@ command_not_found_handle() {
 dive() {
   del_stopped dive
   podman container run --rm -it --privileged \
-    --network ${DEV_DOCKER_NETWORK_NAME} \
+    --network ${DEV_CONTAINER_NETWORK_NAME} \
     --name dive \
     --volume /var/run/podman/podman.sock:/var/run/podman/podman.sock:ro \
     wagoodman/dive:latest "$@"
@@ -672,7 +672,7 @@ function grafana() {
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "grafana is not running. starting grafana server for you"
     podman container run -dit --name grafana \
-      --network ${DEV_DOCKER_NETWORK_NAME} \
+      --network ${DEV_CONTAINER_NETWORK_NAME} \
       --expose 3000 \
       --publish ${GRAFANA_PORT}:3000 \
       --env VIRTUAL_HOST="grafana.nurrony.localhost" \

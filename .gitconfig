@@ -160,22 +160,20 @@
   untracked = cyan
 
 [commit]
-
   # https://help.github.com/articles/signing-commits-using-gpg/
   gpgsign = true
 
 [diff]
-
   # Detect copies as well as renames
   renames = copies
   tool = kdiff3
 
 [difftool "kdiff3"]
-    path = /Applications/kdiff3.app/Contents/MacOS/kdiff3
-    trustExitCode = false
+  path = /Applications/kdiff3.app/Contents/MacOS/kdiff3
+  trustExitCode = false
 
 [difftool]
-    prompt = false
+  prompt = false
 
 [diff "bin"]
   # Use `hexdump` to diff binary files
@@ -198,7 +196,6 @@
   trustExitCode = false
 
 [push]
-
   # Use the Git 1.x.x default to avoid errors on machines with old Git
   # installations. To use `simple` instead, add this to your `~/.extra` file:
   # `git config --global push.default simple`. See http://git.io/mMah-w.
@@ -209,23 +206,19 @@
 # URL shorthands
 
 [url "git@github.com:"]
-
   insteadOf = "gh:"
   pushInsteadOf = "github:"
   pushInsteadOf = "git://github.com/"
 
 [url "git://github.com/"]
-
   insteadOf = "github:"
 
 [url "git@gist.github.com:"]
-
   insteadOf = "gst:"
   pushInsteadOf = "gist:"
   pushInsteadOf = "git://gist.github.com/"
 
 [url "git://gist.github.com/"]
-
   insteadOf = "gist:"
 
 [user]

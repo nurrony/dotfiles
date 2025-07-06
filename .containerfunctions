@@ -117,18 +117,24 @@ nginx-proxy() {
 }
 
 proxy-manager() {
+  del_stopped proxy-manager
+  local state=$(podman inspect --format "{{.State.Running}}" proxy-manager 2>/dev/null);
 
-  podman run -it --detach \
-    --privileged \
-    --name proxy-manager \
-    --publish 80:80 \
-    --publish 443:443 \
-    --publish 8888:81 \
-    --network ${DEV_DOCKER_NETWORK_NAME} \
-    --volume $DEV_ZONE_CONFIG_PATH/nginx/manager/data:/data:Z \
-    --volume $DEV_ZONE_CONFIG_PATH/nginx/manager/letsencrypt:/etc/letsencrypt:Z \
-    --env DB_SQLITE_FILE="/data/database.sqlite" \
-    jc21/nginx-proxy-manager:latest
+  if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
+    podman run -it --detach \
+      --privileged \
+      --name proxy-manager \
+      --publish 80:80 \
+      --publish 443:443 \
+      --publish 8888:81 \
+      --network ${DEV_DOCKER_NETWORK_NAME} \
+      --volume $DEV_ZONE_CONFIG_PATH/nginx/manager/data:/data:Z \
+      --volume $DEV_ZONE_CONFIG_PATH/nginx/manager/letsencrypt:/etc/letsencrypt:Z \
+      --env DB_SQLITE_FILE="/data/database.sqlite" \
+      jc21/nginx-proxy-manager:latest
+  else
+    echo 'proxy is already running'
+  fi
 }
 
 portainer() {

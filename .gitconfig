@@ -161,7 +161,7 @@
 
 [commit]
   # https://help.github.com/articles/signing-commits-using-gpg/
-  gpgsign = true
+	gpgsign = false
 
 [diff]
   # Detect copies as well as renames
@@ -224,7 +224,7 @@
 [user]
 	name = Nur Rony
 	email = pro.nmrony@gmail.com
-  signingkey = 06B3A1B73F55F441
+	signingkey = 06B3A1B73F55F441
 
 [gpg]
   program = gpg2

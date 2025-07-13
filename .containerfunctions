@@ -199,7 +199,7 @@ dhtop() {
 }
 
 mysqlserver() {
-  local VERSION=${1:-8}
+  local VERSION=${1:-8.0}
   local PORT=${2:-3306}
   del_stopped mysqlserver-${VERSION//./-}
   local state=$(podman inspect --format "{{.State.Running}}" mysqlserver-${VERSION//./-} 2>/dev/null)

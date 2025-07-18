@@ -51,4 +51,4 @@ export PYTHON_BIN_PATH=$(brew --prefix python)/libexec/bin
 export PATH="$PYTHON_BIN_PATH:$PATH"
 
 # Finally apped to main PATH variable
-export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:$HOME/.local/bin:$PATH"

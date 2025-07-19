@@ -37,3 +37,6 @@ quit-after-last-window-closed = true
 # macos
 macos-option-as-alt = true
 macos-titlebar-style = transparent
+
+# quick terminal
+keybind = global:cmd+grave_accent=toggle_quick_terminal

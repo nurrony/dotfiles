@@ -39,4 +39,4 @@ macos-option-as-alt = true
 macos-titlebar-style = transparent
 
 # quick terminal
-keybind = global:cmd+grave_accent=toggle_quick_terminal
+keybind = global:cmd+escape=toggle_quick_terminal

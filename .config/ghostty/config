@@ -21,11 +21,12 @@ mouse-hide-while-typing = true
 initial-window = true
 resize-overlay = never
 background-opacity = 0.80
-window-save-state = default
+window-save-state = always
 window-step-resize = false
 background-blur-radius = 20
 window-padding-balance = true
 confirm-close-surface = false
+quit-after-last-window-closed = true
 
 # behavior
 auto-update = check

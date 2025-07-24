@@ -2,40 +2,6 @@
 # Bash wrappers for containers run commands
 export CONTAINER_REPO_PREFIX=jess
 
-# aliases: courtesy: https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/podman/podman.plugin.zsh
-alias pbl='podman build'
-alias pcin='podman container inspect'
-alias pcls='podman container ls'
-alias pclsa='podman container ls --all'
-alias pib='podman image build'
-alias pii='podman image inspect'
-alias pils='podman image ls'
-alias pipu='podman image push'
-alias pirm='podman image rm'
-alias pit='podman image tag'
-alias plo='podman container logs'
-alias pnc='podman network create'
-alias pncn='podman network connect'
-alias pndcn='podman network disconnect'
-alias pni='podman network inspect'
-alias pnls='podman network ls'
-alias pnrm='podman network rm'
-alias ppo='podman container port'
-alias ppu='podman pull'
-alias pr='podman container run'
-alias prit='podman container run --interactive --tty'
-alias prm='podman container rm'
-alias 'prm!'='podman container rm --force'
-alias pst='podman container start'
-alias prs='podman container restart'
-alias psta='podman stop $(podman ps --quiet)'
-alias pstp='podman container stop'
-alias ptop='podman top'
-alias pvi='podman volume inspect'
-alias pvls='podman volume ls'
-alias pvprune='podman volume prune'
-alias pxc='podman container exec'
-alias pxcit='podman container exec --interactive --tty'
 
 # run the following commands sshing into the podman machine
 # sudo ln -s /Users/nurrony/.config/containers/registries.conf \
@@ -43,40 +9,40 @@ alias pxcit='podman container exec --interactive --tty'
 alias mypodmachine="podman machine init rons-podman-machine --now --cpus 4 --disk-size 100 --memory 8192 --volume /Users:/Users --volume /private:/private --volume /var/folders:/var/folders --volume $DEV_ZONE:$DEV_ZONE --rootful"
 
 dlog() {
-  podman logs -f --tail 100 "$@"
+  docker logs -f --tail 100 "$@"
 }
 
-# cleans all podman resources. run it cautiously
+# cleans all docker resources. run it cautiously
 podcleanup() {
-  podman container prune --force 2>/dev/null
-  podman volume prune --force 2>/dev/null
-  podman image prune --force --build-cache --all 2>/dev/null
+  docker container prune --force 2>/dev/null
+  docker volume prune --force 2>/dev/null
+  docker image prune --force --build-cache --all 2>/dev/null
 }
 
 # deletes stopped containers
 del_stopped() {
   local name=$1
   local state
-  state=$(podman inspect --format "{{.State.Running}}" "$name" 2>/dev/null)
+  state=$(docker inspect --format "{{.State.Running}}" "$name" 2>/dev/null)
 
   if [[ "$state" == "false" ]]; then
-    podman rm "$name"
+    docker rm "$name"
   fi
 }
 
 # bring up local container registry
 ctr-registry-up() {
-  local state=$(podman inspect --format "{{.State.Running}}" registry 2>/dev/null)
+  local state=$(docker inspect --format "{{.State.Running}}" registry 2>/dev/null)
   if [[ "$state" == "true" ]] || [[ "$state" != "" ]]; then
-    podman rm -f registry
+    docker rm -f registry
   fi
-  podman compose -f $DEV_ZONE_CONFIG_PATH/kubernetes/clusters/docker-compose.yml up -d
+  docker compose -f $DEV_ZONE_CONFIG_PATH/kubernetes/clusters/docker-compose.yml up -d
   echo 'registry started successfully...'
 }
 
 # down local container registry
 ctr-rgistry-down() {
-  podman compose -f $DEV_ZONE_CONFIG_PATH/kubernetes/clusters/docker-compose.yml down
+  docker compose -f $DEV_ZONE_CONFIG_PATH/kubernetes/clusters/docker-compose.yml down
   echo 'registry is down successfully'
 }
 
@@ -85,7 +51,7 @@ ctr-rgistry-down() {
 relies_on() {
   for container in "$@"; do
     local state
-    state=$(podman inspect --format "{{.State.Running}}" "$container" 2>/dev/null)
+    state=$(docker inspect --format "{{.State.Running}}" "$container" 2>/dev/null)
 
     if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
       echo "$container is not running, starting it for you."
@@ -96,10 +62,10 @@ relies_on() {
 
 nginx-proxy() {
   del_stopped nginx-proxy
-  local state=$(podman inspect --format "{{.State.Running}}" nginx-proxy 2>/dev/null)
+  local state=$(docker inspect --format "{{.State.Running}}" nginx-proxy 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
-    podman container run -it -d \
+    docker container run -it -d \
       --privileged \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
       --publish 80:80 \
@@ -117,10 +83,10 @@ nginx-proxy() {
 
 proxy-manager() {
   del_stopped proxy-manager
-  local state=$(podman inspect --format "{{.State.Running}}" proxy-manager 2>/dev/null)
+  local state=$(docker inspect --format "{{.State.Running}}" proxy-manager 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
-    podman run -it --detach \
+    docker run -it --detach \
       --privileged \
       --name proxy-manager \
       --publish 80:80 \
@@ -139,11 +105,11 @@ proxy-manager() {
 portainer() {
   relies_on nginx-proxy
   del_stopped portainer
-  local state=$(podman inspect --format "{{.State.Running}}" portainer 2>/dev/null)
+  local state=$(docker inspect --format "{{.State.Running}}" portainer 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "portainer server is not running, starting it for you."
-    podman container run -it -d --privileged \
+    docker container run -it -d --privileged \
       --volume /var/run/podman/podman.sock:/var/run/docker.sock:ro \
       --volume $DEV_ZONE_CONFIG_PATH/portainer:/data \
       --env VIRTUAL_HOST=portainer.nurrony.localhost \
@@ -180,7 +146,7 @@ upstream ${server} { server ${route}; }
 EOF
 
   # restart nginx
-  podman restart nginx
+  docker restart nginx
 
   # add host to /etc/hosts
   hostess add $server 127.0.0.1
@@ -190,7 +156,7 @@ EOF
 }
 
 dhtop() {
-  podman container run --rm -it \
+  docker container run --rm -it \
     --pid host \
     --network none \
     --name htop \
@@ -201,12 +167,12 @@ mysqlserver() {
   local VERSION=${1:-8.0}
   local PORT=${2:-3306}
   del_stopped mysqlserver-${VERSION//./-}
-  local state=$(podman inspect --format "{{.State.Running}}" mysqlserver-${VERSION//./-} 2>/dev/null)
+  local state=$(docker inspect --format "{{.State.Running}}" mysqlserver-${VERSION//./-} 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "mysql $VERSION server is not running, starting it for you."
     mkdir -p $DEV_ZONE_CONFIG_PATH/databases/mysql/${VERSION} &&
-      podman run -it -d \
+      docker run -it -d \
         --volume $DEV_ZONE_CONFIG_PATH/databases/mysql/${VERSION}:/var/lib/mysql \
         --env MYSQL_ROOT_PASSWORD=nurrony \
         --publish $PORT:3306 \
@@ -219,20 +185,20 @@ mysqlserver() {
 }
 
 mysql() {
-  local RUNNING_DBSERVER_NAME=$(podman ps --filter "name=mysqlserver" --format "{{.Names}}")
+  local RUNNING_DBSERVER_NAME=$(docker ps --filter "name=mysqlserver" --format "{{.Names}}")
   relies_on $RUNNING_DBSERVER_NAME
-  podman exec -it $RUNNING_DBSERVER_NAME mysql "$@"
+  docker exec -it $RUNNING_DBSERVER_NAME mysql "$@"
 }
 
 dynamodb() {
   del_stopped dynamodb
   relies_on nginx-proxy
   sleep 2
-  local state=$(podman inspect --format "{{.State.Running}}" dynamodb 2>/dev/null)
+  local state=$(docker inspect --format "{{.State.Running}}" dynamodb 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "local dynamodb server is not running, starting it for you."
-    podman container run -dit \
+    docker container run -dit \
       --volume $DEV_ZONE_CONFIG_PATH/databases/dynamodb:/home/dynamodblocal/data \
       --workdir /home/dynamodblocal \
       --publish "8000:8000" \
@@ -242,7 +208,7 @@ dynamodb() {
       --name dynamodb \
       amazon/dynamodb-local -jar DynamoDBLocal.jar -sharedDb -optimizeDbBeforeStartup -dbPath ./data
     if [ "$1" != "" ]; then
-      podman network connect $1 dynamodb
+      docker network connect $1 dynamodb
     fi
   else
     echo 'local dynamodb server is already running'
@@ -254,11 +220,11 @@ pma() {
   del_stopped pma
   relies_on nginx-proxy
   sleep 2
-  local state=$(podman inspect --format "{{.State.Running}}" pma 2>/dev/null)
+  local state=$(docker inspect --format "{{.State.Running}}" pma 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "phpMyAdmin is not running, starting it for you."
-    podman container run -it -d \
+    docker container run -it -d \
       --env UPLOAD_LIMIT=100M \
       --env VIRTUAL_HOST=pma.nurrony.localhost \
       --env PMA_ARBITRARY=1 \
@@ -276,11 +242,11 @@ myblog() {
   relies_on mysqlserver
   sleep 5
   del_stopped personal-blog
-  local state=$(podman inspect --format "{{.State.Running}}" personal-blog 2>/dev/null)
+  local state=$(docker inspect --format "{{.State.Running}}" personal-blog 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "blog server is not running, starting it for you."
-    podman container run -it -d \
+    docker container run -it -d \
       --volume ${DEV_ZONE}/projects/open-sources/nurrony.info/ghost-content:/var/lib/ghost/content \
       --env VIRTUAL_HOST=blog.nurrony.localhost \
       --env url=http://blog.nurrony.localhost \
@@ -302,11 +268,11 @@ mongoserver() {
   local VERSION=${1:-7}
   local PORT=${2:-27017}
   local DBNAME=${3:-experiments}
-  local state=$(podman inspect --format "{{.State.Running}}" mongoserver$VERSION 2>/dev/null)
+  local state=$(docker inspect --format "{{.State.Running}}" mongoserver$VERSION 2>/dev/null)
   del_stopped mongoserver${VERSION}
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "mongoserver ${VERSION}.x.x is not running, starting it for you."
-    podman container run -dit \
+    docker container run -dit \
       --user $(id -u):$(id -g) \
       --volume $DEV_ZONE_CONFIG_PATH/databases/mongodb/$VERSION:/data/db \
       --env MONGODB_INITDB_ROOT_USERNAME=root \
@@ -321,16 +287,16 @@ mongoserver() {
 }
 
 mongo() {
-  podman exec -t mongoserver5 mongo "$@"
+  docker exec -t mongoserver5 mongo "$@"
 }
 
 # check https://github.com/GoogleCloudPlatform/click-to-deploy/blob/master/docker/rabbitmq/README.md
 rabbitmq() {
   del_stopped rabbitmq
-  local state=$(podman inspect --format "{{.State.Running}}" rabbitmq 2>/dev/null)
+  local state=$(docker inspect --format "{{.State.Running}}" rabbitmq 2>/dev/null)
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "rabbitmq broker is not running, starting it for you."
-    podman container run --detach -it \
+    docker container run --detach -it \
       --name rabbitmq \
       --hostname rabbitmq \
       --publish 5671:5671 \
@@ -350,10 +316,10 @@ rabbitmq() {
 kafka() {
   local CONFLUENT_PLATFORM_VERSION=${1:-7.7.1}
   del_stopped kafka
-  local state=$(podman inspect --format "{{.State.Running}}" kafka 2>/dev/null)
+  local state=$(docker inspect --format "{{.State.Running}}" kafka 2>/dev/null)
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "kafka broker ${VERSION} is not running, starting it for you."
-    podman container run --detach -it \
+    docker container run --detach -it \
       --name kafka \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
       --publish 9092:9092 \
@@ -384,10 +350,10 @@ mailserver() {
   del_stopped mailserver
   relies_on nginx-proxy
   sleep 2
-  local state=$(podman inspect --format "{{.State.Running}}" mailserver 2>/dev/null)
+  local state=$(docker inspect --format "{{.State.Running}}" mailserver 2>/dev/null)
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "mailserver is not running. starting is for you"
-    podman container run -d \
+    docker container run -d \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
       --expose 8025 \
       --name mailserver \
@@ -410,10 +376,10 @@ zipkin() {
   del_stopped zipkin
   relies_on nginx-proxy
   sleep 2
-  local state=$(podman inspect --format "{{.State.Running}}" zipkin 2>/dev/null)
+  local state=$(docker inspect --format "{{.State.Running}}" zipkin 2>/dev/null)
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "zipkin 3.x.x server is not running, starting it for you."
-    podman container run --detach -it \
+    docker container run --detach -it \
       --name zipkin \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
       --publish 9411:9411 \
@@ -431,12 +397,12 @@ pgserver() {
   local PORT=${2:-5432}
   local DBNAME=${3:-experiments}
   del_stopped pgserver${VERSION}
-  local state=$(podman inspect --format "{{.State.Running}}" pgserver$VERSION 2>/dev/null)
+  local state=$(docker inspect --format "{{.State.Running}}" pgserver$VERSION 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     mkdir -p $DEV_ZONE_CONFIG_PATH/databases/postgres/${VERSION}
     echo "postgres $VERSION.x.x server is not running, starting it for you."
-    podman container run -it -d \
+    docker container run -it -d \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
       --ulimit memlock=-1:-1 \
       --memory-swappiness=0 \
@@ -453,20 +419,20 @@ pgserver() {
 }
 
 psql() {
-  local RUNNING_PGSERVER_NAME=$(podman ps --filter "name=pgserver" --format "{{.Names}}")
+  local RUNNING_PGSERVER_NAME=$(docker ps --filter "name=pgserver" --format "{{.Names}}")
   relies_on $RUNNING_DBSERVER_NAME
-  podman exec -it $RUNNING_PGSERVER_NAME psql "$@"
+  docker exec -it $RUNNING_PGSERVER_NAME psql "$@"
 }
 
 pga() {
   del_stopped pga
   relies_on nginx-proxy
   sleep 2
-  local state=$(podman inspect --format "{{.State.Running}}" pga 2>/dev/null)
+  local state=$(docker inspect --format "{{.State.Running}}" pga 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "pgAdmin4 is not running, starting it for you."
-    podman container run -dit \
+    docker container run -dit \
       --env VIRTUAL_HOST=pga.nurrony.localhost \
       --env PGADMIN_DEFAULT_EMAIL=rony@nurrony.info \
       --env PGADMIN_DEFAULT_PASSWORD=nurrony \
@@ -485,11 +451,11 @@ elasticsearch() {
   # --env "bootstrap.memory_lock=true"
   # --env "ES_JAVA_OPTS=-Xms512m -Xmx512m"
   del_stopped elasticsearch
-  local state=$(podman inspect --format "{{.State.Running}}" elasticsearch 2>/dev/null)
+  local state=$(docker inspect --format "{{.State.Running}}" elasticsearch 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "elasticsearch server is not running, starting it for you."
-    podman container run -it -d \
+    docker container run -it -d \
       --volume "$DEV_ZONE_CONFIG_PATH/databases/elasticsearch/data:/usr/share/elasticsearch/data" \
       --publish 9200:9200 \
       --publish 9300:9300 \
@@ -518,10 +484,10 @@ elasticview() {
   relies_on elasticsearch
   relies_on nginx-proxy
   sleep 2
-  local state=$(podman inspect --format "{{.State.Running}}" elasticview 2>/dev/null)
+  local state=$(docker inspect --format "{{.State.Running}}" elasticview 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
-    podman container run -dit \
+    docker container run -dit \
       --expose 8080 \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
       --name elasticview \
@@ -536,18 +502,18 @@ elasticview() {
 }
 
 containerssh() {
-  podman exec -it "$@"
+  docker exec -it "$@"
 }
 
 composer() {
-  podman container run --rm --interactive --tty \
+  docker container run --rm --interactive --tty \
     --volume $PWD:/app \
     --user $(id -u):$(id -g) \
     composer:lts "$@"
 }
 
 apache-php7() {
-  podman container run --rm --interactive --tty \
+  docker container run --rm --interactive --tty \
     --volume $PWD:/var/www/html \
     --user $(id -u):$(id -g) \
     --network ${DEV_CONTAINER_NETWORK_NAME} \
@@ -559,12 +525,12 @@ start-lamp-stack() {
 }
 
 stop-lamp-stack() {
-  podman rm -f nginx-proxy pma mysqlserver && echo 'LAMP stack stopped successfully.'
+  docker rm -f nginx-proxy pma mysqlserver && echo 'LAMP stack stopped successfully.'
 }
 
 sysdig() {
   del_stopped sysdig-container
-  podman container run -it \
+  docker container run -it \
     --privileged \
     --name sysdig-container \
     --privileged \
@@ -578,7 +544,7 @@ sysdig() {
 }
 
 bees() {
-  podman container run -it --rm \
+  docker container run -it --rm \
     --env NOTARY_TOKEN \
     --volume $HOME/.bees:/root/.bees \
     --volume $HOME/.boto:/root/.boto \
@@ -593,18 +559,18 @@ bees() {
 ###
 command_not_found_handle() {
   # Check if there is a container image with that name
-  if ! podman inspect --format '{{ .Author }}' "$1" >&/dev/null; then
+  if ! docker inspect --format '{{ .Author }}' "$1" >&/dev/null; then
     echo "$0: $1: command not found"
     return
   fi
 
   # Check that it's really the name of the image, not a prefix
-  if podman inspect --format '{{ .Id }}' "$1" | grep -q "^$1"; then
+  if docker inspect --format '{{ .Id }}' "$1" | grep -q "^$1"; then
     echo "$0: $1: command not found"
     return
   fi
 
-  #  podman container run -ti -u $(whoami) -w "$HOME" \
+  #  docker container run -ti -u $(whoami) -w "$HOME" \
   #   $(env | cut -d= -f1 | awk '{print "-e", $1}') \
   #   --device /dev/snd \
   #   --volume /etc/passwd:/etc/passwd:ro \
@@ -617,7 +583,7 @@ command_not_found_handle() {
 
 dive() {
   del_stopped dive
-  podman container run --rm -it --privileged \
+  docker container run --rm -it --privileged \
     --network ${DEV_CONTAINER_NETWORK_NAME} \
     --name dive \
     --volume /var/run/podman/podman.sock:/var/run/podman/podman.sock:ro \
@@ -625,7 +591,7 @@ dive() {
 }
 
 function lazyvim() {
-  podman container run --interactive --tty --rm \
+  docker container run --interactive --tty --rm \
     --workdir /root alpine:edge sh -uelic '
     apk add git lazygit neovim ripgrep alpine-sdk --update
     git clone https://github.com/LazyVim/starter ~/.config/nvim
@@ -638,11 +604,11 @@ function keycloak() {
   del_stopped keycloak
   relies_on nginx-proxy
   sleep 2
-  local state=$(podman inspect --format "{{.State.Running}}" pga 2>/dev/null)
+  local state=$(docker inspect --format "{{.State.Running}}" pga 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "starting keycloak server for you"
-    podman container run -dit --expose 8080 \
+    docker container run -dit --expose 8080 \
       --expose 9000 \
       --expose 8443 \
       --name keycloak \
@@ -666,10 +632,10 @@ function grafana() {
   sleep 2
   local GRAFANA_PORT=${1:-3000}
   local GRAFANA_IMG=${2:-latest}
-  local state=$(podman inspect --format "{{.State.Running}}" grafana 2>/dev/null)
+  local state=$(docker inspect --format "{{.State.Running}}" grafana 2>/dev/null)
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "grafana is not running. starting grafana server for you"
-    podman container run -dit --name grafana \
+    docker container run -dit --name grafana \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
       --expose 3000 \
       --publish ${GRAFANA_PORT}:3000 \

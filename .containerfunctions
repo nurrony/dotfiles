@@ -71,7 +71,7 @@ nginx-proxy() {
       --publish 80:80 \
       --publish 443:443 \
       --name nginx-proxy \
-      --volume /var/run/podman/podman.sock:/tmp/docker.sock:ro \
+      --volume /var/run/docker.sock:/tmp/docker.sock:ro \
       --volume $DEV_ZONE_CONFIG_PATH/nginx/certs:/etc/nginx/certs:ro \
       --volume $DEV_ZONE_CONFIG_PATH/nginx/vhost.d:/etc/nginx/vhost.d:ro \
       --volume $DEV_ZONE_CONFIG_PATH/nginx/conf.d/custom_settings.conf:/etc/nginx/conf.d/custom_settings.conf:ro \
@@ -110,7 +110,7 @@ portainer() {
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "portainer server is not running, starting it for you."
     docker container run -it -d --privileged \
-      --volume /var/run/podman/podman.sock:/var/run/docker.sock:ro \
+      --volume /var/run/docker.sock:/var/run/docker.sock:ro \
       --volume $DEV_ZONE_CONFIG_PATH/portainer:/data \
       --env VIRTUAL_HOST=portainer.nurrony.localhost \
       --expose 9000 \
@@ -534,7 +534,7 @@ sysdig() {
     --privileged \
     --name sysdig-container \
     --privileged \
-    --volume /var/run/podman/podman.sock:/var/run/podman/podman.sock \
+    --volume /var/run/docker.sock:/var/run/docker.sock \
     --volume /dev:/host/dev \
     --volume /proc:/host/proc:ro \
     --volume /boot:/host/boot:ro \
@@ -586,7 +586,7 @@ dive() {
   docker container run --rm -it --privileged \
     --network ${DEV_CONTAINER_NETWORK_NAME} \
     --name dive \
-    --volume /var/run/podman/podman.sock:/var/run/podman/podman.sock:ro \
+    --volume /var/run/docker.sock:/var/run/docker.sock:ro \
     wagoodman/dive:latest "$@"
 }
 

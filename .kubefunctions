@@ -11,8 +11,8 @@ function kns() {
 function k8sdashboard() {
   local kdashuser=${1:-nurrony}
   kubectl --namespace kubernetes-dashboard create token "$kdashuser" | pbcopy | echo "=> K8s dashboard token copied to pasteboard for user $kdashuser."
-  echo "=> http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard-kong-proxy:443/proxy/#/login"
-  kubectl proxy --port=8001
+  open https://localhost:8443/
+  kubectl -n kubernetes-dashboard port-forward svc/kubernetes-dashboard-kong-proxy 8443:443
 }
 
 function k8sgui() {

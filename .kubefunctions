@@ -22,9 +22,53 @@ function k8sgui() {
   kube-explorer --https-listen-port=0 --http-listen-port="$http_port" --debug --context="$context"
 }
 
+# Kubernetes Devship Repo https://github.com/nurrony/devship
 function saildevship() {
-  # Kubernetes Devship Repo https://github.com/nurrony/devship
-  $DEV_ZONE/projects/open-sources/devship/devship
+  # Check if jq is installed
+  if ! command -v jq &>/dev/null; then
+    echo "Error: 'jq' is required but not installed. Please install jq to continue."
+    return
+  fi
+  if ! command -v k3d &>/dev/null; then
+    echo "Error: 'k3d' is required but not installed. Please install k3d to continue."
+    return
+  fi
+
+  # Get the list of clusters and skip header
+  local clusters=$(k3d cluster list -o json)
+  # Get running cluster list
+  local running_cluster=$(echo "$clusters" | jq -r '.[] | select(.serversRunning > 0 or .agentsRunning > 0) | .name')
+
+  if [[ -n "$running_cluster" ]]; then
+    echo "A k3d cluster is already running: $running_cluster"
+    return
+  fi
+  # Get list of stopped clusters
+  local stopped_clusters=($(echo "$clusters" | jq -r '.[] | select(.serversRunning == 0 and .agentsRunning == 0) | .name'))
+
+  if [[ ${#stopped_clusters[@]} -eq 0 ]]; then
+    echo "No stopped clusters found either."
+    read -p "Do you want to create a new k3d cluster? (y/n): " create_new
+    if [[ "$create_new" == "y" ]]; then
+      $DEV_ZONE/projects/open-sources/devship/devship
+    fi
+  else
+    echo "Found stopped clusters:"
+    select choice in "${stopped_clusters[@]}" "Create new cluster"; do
+      if [[ "$choice" == "Create new cluster" ]]; then
+        $DEV_ZONE/projects/open-sources/devship/devship
+        break
+      elif [[ -n "$choice" ]]; then
+        echo "Starting cluster: $choice"
+        k3d cluster start "$choice"
+        break
+      else
+        echo "Invalid choice. Try again."
+      fi
+    done
+  fi
+
+  # $DEV_ZONE/projects/open-sources/devship/devship
 }
 
 # aliases

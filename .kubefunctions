@@ -67,8 +67,6 @@ function saildevship() {
       fi
     done
   fi
-
-  # $DEV_ZONE/projects/open-sources/devship/devship
 }
 
 # aliases

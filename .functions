@@ -326,6 +326,6 @@ function toggle_proxy() {
     networksetup -setautoproxystate "$SERVICE" off
     echo "Auto Proxy disabled."
   else
-    echo "Usage: $0 <service> <proxy-url> <on|off> (defaut: service: Wi-Fi, proxy-url: $${AUTO_PROXY_URL})
+    echo "Usage: $0 <service> <proxy-url> <on|off> (defaut: service: Wi-Fi, proxy-url: $${AUTO_PROXY_URL})"
   fi
 }

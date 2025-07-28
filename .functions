@@ -303,6 +303,7 @@ function take() {
   fi
 }
 
+# install and update MinC (Microshift in Container for Kubernetes cluster)
 update_minc() {
   if [[ $(uname -m) == "arm64" ]]; then
    curl -L -o ~/.local/bin/minc https://github.com/minc-org/minc/releases/latest/download/minc_darwin_arm64

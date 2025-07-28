@@ -321,7 +321,7 @@ function toggle_proxy() {
   local SERVICE=${3:-"Wi-Fi"}
 
   if [[ $1 == "on" ]]; then
-    networksetup -setautoproxyurl "$SERVICE" ${PROXY_URL}
+    networksetup -setautoproxyurl "$SERVICE" "${PROXY_URL}"
     networksetup -setautoproxystate "$SERVICE" on
     echo "Auto Proxy enabled."
   elif [[ $1 == "off" ]]; then

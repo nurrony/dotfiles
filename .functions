@@ -304,12 +304,28 @@ function take() {
 }
 
 # install and update MinC (Microshift in Container for Kubernetes cluster)
-update_minc() {
+function update_minc() {
   if [[ $(uname -m) == "arm64" ]]; then
    curl -L -o ~/.local/bin/minc https://github.com/minc-org/minc/releases/latest/download/minc_darwin_arm64
    chmod +x ~/.local/bin/minc && ~/.local/bin/minc completion zsh > $DEV_ZONE_CONFIG_PATH/zinit/_minc
   else
     curl -L -o ~/.local/bin/minc https://github.com/minc-org/minc/releases/latest/download/minc_darwin_amd64
     chmod +x ~/.local/bin/minc && ~/.local/bin/minc completion zsh > $DEV_ZONE_CONFIG_PATH/zinit/_minc
+  fi
+}
+
+# toggle proxy settings for macos
+function toggle_proxy() {
+  local SERVICE=${1:-"Wi-Fi"}
+  local PROXY_URL=${2:-AUTO_PROXY_URL}
+  if [[ $3 == "on" ]]; then
+    networksetup -setautoproxyurl "$SERVICE"
+    networksetup -setautoproxystate "$SERVICE" on
+    echo "Auto Proxy enabled."
+  elif [[ $3 == "off" ]]; then
+    networksetup -setautoproxystate "$SERVICE" off
+    echo "Auto Proxy disabled."
+  else
+    echo "Usage: $0 <service> <proxy-url> <on|off> (defaut: service: Wi-Fi, proxy-url: $${AUTO_PROXY_URL})
   fi
 }

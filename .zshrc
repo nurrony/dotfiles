@@ -36,8 +36,6 @@ zinit wait'3' lucid light-mode for \
   zsh-users/zsh-autosuggestions \
   OMZP::command-not-found
 
-zinit snippet $DEV_ZONE_CONFIG_PATH/zinit/_minc
-
 # install and load necessary programs
 zinit wait'3' lucid light-mode for \
   zdharma-continuum/history-search-multi-word \

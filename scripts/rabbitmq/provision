@@ -1,0 +1,669 @@
+#!/bin/bash
+
+# Enhanced RabbitMQ Export/Import Script with Full Metadata
+# Usage: ./rabbitmq_script.sh [export|import] [config_file]
+
+set -euo pipefail
+
+# Configuration
+RABBITMQ_HOST="${RABBITMQ_HOST:-localhost}"
+RABBITMQ_PORT="${RABBITMQ_PORT:-15672}"
+RABBITMQ_USER="${RABBITMQ_USER:-guest}"
+RABBITMQ_PASSWORD="${RABBITMQ_PASSWORD:-guest}"
+RABBITMQ_URL="http://${RABBITMQ_HOST}:${RABBITMQ_PORT}/api"
+DRY_RUN="${DRY_RUN:-false}"
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+
+# Logging functions
+log_info() { echo -e "${GREEN}[INFO]${NC} $1"; }
+log_warn() { echo -e "${YELLOW}[WARN]${NC} $1"; }
+log_error() { echo -e "${RED}[ERROR]${NC} $1" >&2; }
+log_debug() { echo -e "${BLUE}[DEBUG]${NC} $1"; }
+
+# Check dependencies
+check_dependencies() {
+    local deps=("curl" "jq")
+    for dep in "${deps[@]}"; do
+        if ! command -v "$dep" &> /dev/null; then
+            log_error "$dep is required but not installed"
+            exit 1
+        fi
+    done
+
+    # Check jq version for advanced features
+    local jq_version
+    if command -v bc &> /dev/null; then
+        jq_version=$(jq --version 2>/dev/null | grep -oE '[0-9]+\.[0-9]+' | head -1 || echo "1.6")
+        if [[ $(echo "$jq_version < 1.6" | bc -l 2>/dev/null || echo "0") == "1" ]]; then
+            log_warn "jq version $jq_version detected. Some features may not work optimally."
+        fi
+    fi
+}
+
+# Test RabbitMQ connection and get version
+test_connection() {
+    log_info "Testing RabbitMQ connection..."
+    local overview
+    if ! overview=$(curl -sf -u "$RABBITMQ_USER:$RABBITMQ_PASSWORD" "$RABBITMQ_URL/overview"); then
+        log_error "Cannot connect to RabbitMQ at $RABBITMQ_URL"
+        log_error "Check host, port, credentials, and management plugin status"
+        exit 1
+    fi
+
+    local version
+    version=$(echo "$overview" | jq -r '.rabbitmq_version // "unknown"')
+    local management_version
+    management_version=$(echo "$overview" | jq -r '.management_version // "unknown"')
+
+    log_info "Connection successful - RabbitMQ: $version, Management: $management_version"
+}
+
+# Get comprehensive exchange data
+get_exchanges_data() {
+    echo "working..."
+    local exchanges_data
+    exchanges_data=$(curl -sf -u "$RABBITMQ_USER:$RABBITMQ_PASSWORD" "$RABBITMQ_URL/exchanges")
+    echo "$exchanges_data" | jq -c '.[] | select(.name != "") | {
+        name: .name,
+        vhost: .vhost,
+        type: .type,
+        durable: .durable,
+        auto_delete: .auto_delete,
+        internal: (.internal // false),
+        arguments: (.arguments // {}),
+        policy: (.policy // null),
+        effective_policy_definition: (.effective_policy_definition // null)
+    }'
+}
+
+# Get comprehensive queue data
+get_queues_data() {
+    local queues_data
+    queues_data=$(curl -sf -u "$RABBITMQ_USER:$RABBITMQ_PASSWORD" "$RABBITMQ_URL/queues")
+
+    echo "$queues_data" | jq -c '.[] | {
+        name: .name,
+        vhost: .vhost,
+        durable: .durable,
+        auto_delete: .auto_delete,
+        exclusive: (.exclusive // false),
+        arguments: (.arguments // {}),
+        policy: (.policy // null),
+        effective_policy_definition: (.effective_policy_definition // null),
+        type: (.type // "classic"),
+        state: .state,
+        consumers: (.consumers // 0),
+        messages: (.messages // 0)
+    }'
+}
+
+# Get bindings data
+get_bindings_data() {
+    curl -sf -u "$RABBITMQ_USER:$RABBITMQ_PASSWORD" "$RABBITMQ_URL/bindings" | jq -c '.[] | {
+        source: .source,
+        vhost: .vhost,
+        destination: .destination,
+        destination_type: .destination_type,
+        routing_key: .routing_key,
+        arguments: (.arguments // {})
+    }'
+}
+
+# Extract TTL and other special arguments
+extract_special_arguments() {
+    local args="${1:-{}}"
+
+    # Validate JSON input
+    if ! echo "$args" | jq empty 2>/dev/null; then
+        log_warn "Invalid JSON arguments, using empty object"
+        args="{}"
+    fi
+
+    # Extract common RabbitMQ arguments
+    echo "$args" | jq '{
+        message_ttl: (."x-message-ttl" // null),
+        expires: (."x-expires" // null),
+        max_length: (."x-max-length" // null),
+        max_length_bytes: (."x-max-length-bytes" // null),
+        overflow: (."x-overflow" // null),
+        dead_letter_exchange: (."x-dead-letter-exchange" // null),
+        dead_letter_routing_key: (."x-dead-letter-routing-key" // null),
+        max_priority: (."x-max-priority" // null),
+        queue_mode: (."x-queue-mode" // null),
+        queue_type: (."x-queue-type" // null),
+        quorum_initial_group_size: (."x-quorum-initial-group-size" // null),
+        single_active_consumer: (."x-single-active-consumer" // null),
+        queue_master_locator: (."x-queue-master-locator" // null),
+        ha_policy: (."x-ha-policy" // null),
+        ha_params: (."x-ha-params" // null),
+        ha_sync_mode: (."x-ha-sync-mode" // null),
+        other_arguments: (. | with_entries(select(.key | startswith("x-") | not)))
+    }' 2>/dev/null || echo '{}'
+}
+
+# Export RabbitMQ configuration with full metadata
+export_config() {
+    local output_file="${1:-rabbitmq_config.json}"
+
+    log_info "Exporting comprehensive RabbitMQ configuration to $output_file"
+
+    # Get all data
+    log_debug "Fetching exchanges..."
+    local exchanges_data
+    exchanges_data=$(get_exchanges_data)
+
+    log_debug "Fetching queues..."
+    local queues_data
+    queues_data=$(get_queues_data)
+
+    log_debug "Fetching bindings..."
+    local bindings_data
+    bindings_data=$(get_bindings_data)
+
+    # Process exchanges with full metadata
+    local exchanges_array="[]"
+    if [[ -n "$exchanges_data" ]]; then
+        while IFS= read -r exchange; do
+            if [[ -n "$exchange" ]]; then
+                local exchange_args
+                exchange_args=$(echo "$exchange" | jq '.arguments // {}')
+                local special_args
+                special_args=$(extract_special_arguments "$exchange_args")
+
+                local enhanced_exchange
+                enhanced_exchange=$(echo "$exchange" | jq --argjson special "$special_args" '
+                    . + {
+                        special_arguments: $special,
+                        import_order: (if .type == "topic" then 1 elif .type == "direct" then 2 elif .type == "fanout" then 3 else 4 end)
+                    }
+                ')
+                exchanges_array=$(echo "$exchanges_array" | jq --argjson exchange "$enhanced_exchange" '. + [$exchange]')
+            fi
+        done < <(echo "$exchanges_data")
+    fi
+
+    # Process queues with bindings and full metadata
+    local queues_array="[]"
+    if [[ -n "$queues_data" ]]; then
+        while IFS= read -r queue; do
+            if [[ -n "$queue" ]]; then
+                local vhost queue_name
+                vhost=$(echo "$queue" | jq -r '.vhost // "/"')
+                queue_name=$(echo "$queue" | jq -r '.name // ""')
+
+                if [[ -n "$queue_name" ]]; then
+                    # Find all bindings for this queue
+                    local queue_bindings
+                    queue_bindings=$(echo "$bindings_data" | jq -s --arg vhost "$vhost" --arg queue "$queue_name" '
+                        map(select(.vhost == $vhost and .destination == $queue and .destination_type == "queue"))
+                    ')
+
+                    # Enhance queue with special arguments
+                    local queue_args
+                    queue_args=$(echo "$queue" | jq '.arguments // {}')
+                    local special_args
+                    special_args=$(extract_special_arguments "$queue_args")
+
+                    local enhanced_queue
+                    enhanced_queue=$(echo "$queue" | jq --argjson special "$special_args" '
+                        . + {
+                            special_arguments: $special,
+                            bindings: []
+                        }
+                    ')
+
+                    # Add bindings to queue
+                    if [[ $(echo "$queue_bindings" | jq 'length') -gt 0 ]]; then
+                        while IFS= read -r binding; do
+                            if [[ -n "$binding" ]]; then
+                                local exchange_name routing_key binding_args
+                                exchange_name=$(echo "$binding" | jq -r '.source // ""')
+                                routing_key=$(echo "$binding" | jq -r '.routing_key // ""')
+                                binding_args=$(echo "$binding" | jq '.arguments // {}')
+
+                                # Skip default exchange bindings if desired (empty source)
+                                if [[ -n "$exchange_name" ]]; then
+                                    local binding_entry
+                                    binding_entry=$(jq -n \
+                                        --arg exchange "$exchange_name" \
+                                        --arg routing_key "$routing_key" \
+                                        --argjson arguments "$binding_args" \
+                                        '{
+                                            exchange_name: $exchange,
+                                            routing_key: $routing_key,
+                                            arguments: $arguments
+                                        }'
+                                    )
+                                    enhanced_queue=$(echo "$enhanced_queue" | jq --argjson binding "$binding_entry" '.bindings += [$binding]')
+                                fi
+                            fi
+                        done < <(echo "$queue_bindings" | jq -c '.[]')
+                    fi
+
+                    queues_array=$(echo "$queues_array" | jq --argjson queue "$enhanced_queue" '. + [$queue]')
+                fi
+            fi
+        done < <(echo "$queues_data")
+    fi
+
+    # Get policies if available
+    local policies_data="[]"
+    if policies_response=$(curl -sf -u "$RABBITMQ_USER:$RABBITMQ_PASSWORD" "$RABBITMQ_URL/policies" 2>/dev/null); then
+        policies_data=$(echo "$policies_response" | jq 'map({
+            vhost: .vhost,
+            name: .name,
+            pattern: .pattern,
+            definition: .definition,
+            priority: .priority,
+            apply_to: (."apply-to" // "all")
+        })')
+    fi
+
+    # Get vhosts
+    local vhosts_data
+    vhosts_data=$(curl -sf -u "$RABBITMQ_USER:$RABBITMQ_PASSWORD" "$RABBITMQ_URL/vhosts" | jq 'map({
+        name: .name,
+        tracing: (.tracing // false),
+        tags: (.tags // [])
+    })')
+
+    # Create comprehensive configuration
+    local final_config
+    final_config=$(jq -n \
+        --argjson exchanges "$exchanges_array" \
+        --argjson queues "$queues_array" \
+        --argjson policies "$policies_data" \
+        --argjson vhosts "$vhosts_data" \
+        '{
+            version: "2.0",
+            exported_at: now | strftime("%Y-%m-%d %H:%M:%S UTC"),
+            source: {
+                host: env.RABBITMQ_HOST,
+                port: env.RABBITMQ_PORT,
+                user: env.RABBITMQ_USER
+            },
+            statistics: {
+                total_exchanges: ($exchanges | length),
+                total_queues: ($queues | length),
+                total_bindings: ($queues | map(.bindings | length) | add // 0),
+                queue_types: ($queues | group_by(.type) | map({type: .[0].type, count: length}) | from_entries),
+                exchange_types: ($exchanges | group_by(.type) | map({type: .[0].type, count: length}) | from_entries)
+            },
+            vhosts: $vhosts,
+            exchanges: ($exchanges | sort_by(.import_order, .name)),
+            queues: ($queues | sort_by(.vhost, .name)),
+            policies: $policies
+        }'
+    )
+
+    echo "$final_config" | jq '.' > "$output_file"
+
+    local exchange_count queue_count
+    exchange_count=$(echo "$exchanges_array" | jq 'length')
+    queue_count=$(echo "$queues_array" | jq 'length')
+
+    log_info "Export completed:"
+    log_info "  - $exchange_count exchanges"
+    log_info "  - $queue_count queues"
+    log_info "  - Configuration saved to $output_file"
+}
+
+# Create exchange with full properties
+create_exchange() {
+    local exchange="$1"
+    local name vhost type durable auto_delete internal arguments
+
+    name=$(echo "$exchange" | jq -r '.name // ""')
+    vhost=$(echo "$exchange" | jq -r '.vhost // "/"')
+    type=$(echo "$exchange" | jq -r '.type // "direct"')
+    durable=$(echo "$exchange" | jq -r '.durable // true')
+    auto_delete=$(echo "$exchange" | jq -r '.auto_delete // false')
+    internal=$(echo "$exchange" | jq -r '.internal // false')
+    arguments=$(echo "$exchange" | jq -c '.arguments // {}')
+
+    if [[ -z "$name" ]]; then
+        log_error "Exchange name is empty, skipping"
+        return 1
+    fi
+
+    log_info "Creating exchange '$name' (type: $type, durable: $durable) in vhost '$vhost'"
+
+    local exchange_config
+    exchange_config=$(jq -n \
+        --arg type "$type" \
+        --argjson durable "$durable" \
+        --argjson auto_delete "$auto_delete" \
+        --argjson internal "$internal" \
+        --argjson arguments "$arguments" \
+        '{
+            type: $type,
+            durable: $durable,
+            auto_delete: $auto_delete,
+            internal: $internal,
+            arguments: $arguments
+        }'
+    )
+
+    if [[ "$DRY_RUN" == "true" ]]; then
+        log_debug "[DRY RUN] Would create exchange: $exchange_config"
+        return 0
+    fi
+
+    if ! curl -sf -u "$RABBITMQ_USER:$RABBITMQ_PASSWORD" \
+        -X PUT \
+        -H "Content-Type: application/json" \
+        -d "$exchange_config" \
+        "$RABBITMQ_URL/exchanges/$(printf '%s' "$vhost" | jq -sRr @uri)/$(printf '%s' "$name" | jq -sRr @uri)"; then
+        log_error "Failed to create exchange '$name'"
+        return 1
+    fi
+
+    return 0
+}
+
+# Create queue with full properties
+create_queue() {
+    local queue="$1"
+    local name vhost durable auto_delete exclusive arguments
+
+    name=$(echo "$queue" | jq -r '.name // ""')
+    vhost=$(echo "$queue" | jq -r '.vhost // "/"')
+    durable=$(echo "$queue" | jq -r '.durable // true')
+    auto_delete=$(echo "$queue" | jq -r '.auto_delete // false')
+    exclusive=$(echo "$queue" | jq -r '.exclusive // false')
+    arguments=$(echo "$queue" | jq -c '.arguments // {}')
+
+    if [[ -z "$name" ]]; then
+        log_error "Queue name is empty, skipping"
+        return 1
+    fi
+
+    # Log special properties if present
+    local special_args
+    special_args=$(echo "$queue" | jq -r '.special_arguments // {}')
+    local ttl_info=""
+    local ttl_value
+    ttl_value=$(echo "$special_args" | jq -r '.message_ttl // null')
+    if [[ "$ttl_value" != "null" && -n "$ttl_value" ]]; then
+        ttl_info=" TTL: ${ttl_value}ms"
+    fi
+
+    log_info "Creating queue '$name' (durable: $durable, auto_delete: $auto_delete$ttl_info) in vhost '$vhost'"
+
+    local queue_config
+    queue_config=$(jq -n \
+        --argjson durable "$durable" \
+        --argjson auto_delete "$auto_delete" \
+        --argjson exclusive "$exclusive" \
+        --argjson arguments "$arguments" \
+        '{
+            durable: $durable,
+            auto_delete: $auto_delete,
+            exclusive: $exclusive,
+            arguments: $arguments
+        }'
+    )
+
+    if [[ "$DRY_RUN" == "true" ]]; then
+        log_debug "[DRY RUN] Would create queue: $queue_config"
+        return 0
+    fi
+
+    if ! curl -sf -u "$RABBITMQ_USER:$RABBITMQ_PASSWORD" \
+        -X PUT \
+        -H "Content-Type: application/json" \
+        -d "$queue_config" \
+        "$RABBITMQ_URL/queues/$(printf '%s' "$vhost" | jq -sRr @uri)/$(printf '%s' "$name" | jq -sRr @uri)"; then
+        log_error "Failed to create queue '$name'"
+        return 1
+    fi
+
+    return 0
+}
+
+# Create binding
+create_binding() {
+    local vhost="$1"
+    local queue_name="$2"
+    local binding="$3"
+
+    local exchange_name routing_key arguments
+    exchange_name=$(echo "$binding" | jq -r '.exchange_name // ""')
+    routing_key=$(echo "$binding" | jq -r '.routing_key // ""')
+    arguments=$(echo "$binding" | jq -c '.arguments // {}')
+
+    if [[ -z "$exchange_name" ]]; then
+        log_warn "Exchange name is empty for binding, skipping"
+        return 1
+    fi
+
+    log_info "Creating binding: $exchange_name -> $queue_name (key: '$routing_key')"
+
+    local binding_config
+    binding_config=$(jq -n \
+        --arg routing_key "$routing_key" \
+        --argjson arguments "$arguments" \
+        '{
+            routing_key: $routing_key,
+            arguments: $arguments
+        }'
+    )
+
+    if [[ "$DRY_RUN" == "true" ]]; then
+        log_debug "[DRY RUN] Would create binding: $binding_config"
+        return 0
+    fi
+
+    if ! curl -sf -u "$RABBITMQ_USER:$RABBITMQ_PASSWORD" \
+        -X POST \
+        -H "Content-Type: application/json" \
+        -d "$binding_config" \
+        "$RABBITMQ_URL/bindings/$(printf '%s' "$vhost" | jq -sRr @uri)/e/$(printf '%s' "$exchange_name" | jq -sRr @uri)/q/$(printf '%s' "$queue_name" | jq -sRr @uri)"; then
+        log_error "Failed to create binding $exchange_name -> $queue_name"
+        return 1
+    fi
+
+    return 0
+}
+
+# Import RabbitMQ configuration with full metadata
+import_config() {
+    local config_file="${1:-rabbitmq_config.json}"
+
+    if [[ ! -f "$config_file" ]]; then
+        log_error "Configuration file '$config_file' not found"
+        exit 1
+    fi
+
+    log_info "Importing comprehensive RabbitMQ configuration from $config_file"
+
+    if [[ "$DRY_RUN" == "true" ]]; then
+        log_warn "DRY RUN MODE - No actual changes will be made"
+    fi
+
+    local config
+    config=$(cat "$config_file")
+
+    # Validate config format
+    local version
+    version=$(echo "$config" | jq -r '.version // "1.0"')
+    log_info "Configuration version: $version"
+
+    # Show statistics
+    echo "$config" | jq -r '.statistics | to_entries[] | "  - \(.key): \(.value)"' 2>/dev/null || true
+
+    # Create vhosts first
+    if echo "$config" | jq -e '.vhosts' > /dev/null; then
+        log_info "Creating vhosts..."
+        echo "$config" | jq -r '.vhosts[]? | @base64' | while IFS= read -r vhost_b64; do
+            local vhost
+            vhost=$(echo "$vhost_b64" | base64 -d)
+            local name
+            name=$(echo "$vhost" | jq -r '.name')
+
+            if [[ "$name" != "/" ]]; then  # Skip default vhost
+                log_info "Creating vhost '$name'"
+                if [[ "$DRY_RUN" != "true" ]]; then
+                    curl -sf -u "$RABBITMQ_USER:$RABBITMQ_PASSWORD" \
+                        -X PUT \
+                        "$RABBITMQ_URL/vhosts/$(printf '%s' "$name" | jq -sRr @uri)" || log_warn "Failed to create vhost '$name'"
+                fi
+            fi
+        done
+    fi
+
+    # Create exchanges in order (dependencies matter)
+    log_info "Creating exchanges..."
+    local exchange_success=0
+    local exchange_total=0
+    echo "$config" | jq -r '.exchanges[]? | @base64' | while IFS= read -r exchange_b64; do
+        local exchange
+        exchange=$(echo "$exchange_b64" | base64 -d)
+        ((exchange_total++))
+        if create_exchange "$exchange"; then
+            ((exchange_success++))
+        fi
+    done
+
+    # Create queues and their bindings
+    log_info "Creating queues and bindings..."
+    local queue_success=0
+    local queue_total=0
+    local binding_success=0
+    local binding_total=0
+
+    echo "$config" | jq -r '.queues[]? | @base64' | while IFS= read -r queue_b64; do
+        local queue
+        queue=$(echo "$queue_b64" | base64 -d)
+        local vhost queue_name
+        vhost=$(echo "$queue" | jq -r '.vhost')
+        queue_name=$(echo "$queue" | jq -r '.name')
+
+        ((queue_total++))
+        if create_queue "$queue"; then
+            ((queue_success++))
+
+            # Create bindings for this queue
+            echo "$queue" | jq -r '.bindings[]? | @base64' | while IFS= read -r binding_b64; do
+                local binding
+                binding=$(echo "$binding_b64" | base64 -d)
+                ((binding_total++))
+                if create_binding "$vhost" "$queue_name" "$binding"; then
+                    ((binding_success++))
+                fi
+            done
+        fi
+    done
+
+    # Create policies if available
+    if echo "$config" | jq -e '.policies' > /dev/null && [[ $(echo "$config" | jq '.policies | length') -gt 0 ]]; then
+        log_info "Creating policies..."
+        echo "$config" | jq -r '.policies[]? | @base64' | while IFS= read -r policy_b64; do
+            local policy
+            policy=$(echo "$policy_b64" | base64 -d)
+            local vhost name pattern definition priority apply_to
+
+            vhost=$(echo "$policy" | jq -r '.vhost')
+            name=$(echo "$policy" | jq -r '.name')
+            pattern=$(echo "$policy" | jq -r '.pattern')
+            definition=$(echo "$policy" | jq -c '.definition')
+            priority=$(echo "$policy" | jq -r '.priority')
+            apply_to=$(echo "$policy" | jq -r '.apply_to')
+
+            log_info "Creating policy '$name' in vhost '$vhost'"
+
+            if [[ "$DRY_RUN" != "true" ]]; then
+                local policy_config
+                policy_config=$(jq -n \
+                    --arg pattern "$pattern" \
+                    --argjson definition "$definition" \
+                    --argjson priority "$priority" \
+                    --arg apply_to "$apply_to" \
+                    '{
+                        pattern: $pattern,
+                        definition: $definition,
+                        priority: $priority,
+                        "apply-to": $apply_to
+                    }'
+                )
+
+                curl -sf -u "$RABBITMQ_USER:$RABBITMQ_PASSWORD" \
+                    -X PUT \
+                    -H "Content-Type: application/json" \
+                    -d "$policy_config" \
+                    "$RABBITMQ_URL/policies/$(printf '%s' "$vhost" | jq -sRr @uri)/$(printf '%s' "$name" | jq -sRr @uri)" || log_warn "Failed to create policy '$name'"
+            fi
+        done
+    fi
+
+    log_info "Import completed successfully"
+}
+
+# Show usage
+usage() {
+    cat << EOF
+Enhanced RabbitMQ Export/Import Script v2.0
+
+Usage: $0 [COMMAND] [OPTIONS]
+
+Commands:
+    export [output_file]    Export comprehensive RabbitMQ configuration
+    import [config_file]    Import comprehensive RabbitMQ configuration
+
+Environment Variables:
+    RABBITMQ_HOST          RabbitMQ host (default: localhost)
+    RABBITMQ_PORT          RabbitMQ management port (default: 15672)
+    RABBITMQ_USER          RabbitMQ username (default: guest)
+    RABBITMQ_PASSWORD      RabbitMQ password (default: guest)
+    DRY_RUN               Set to 'true' for dry run mode (default: false)
+
+Features:
+    ✓ Full exchange metadata (type, durability, auto-delete, internal)
+    ✓ Complete queue properties (TTL, max-length, dead-letter, etc.)
+    ✓ All binding arguments and routing keys
+    ✓ Policy definitions and vhost settings
+    ✓ Queue types (classic, quorum, stream)
+    ✓ High availability settings
+    ✓ Dry run mode for testing
+    ✓ Comprehensive error handling
+
+Examples:
+    $0 export production_full.json
+    DRY_RUN=true $0 import production_full.json
+    RABBITMQ_HOST=prod-rabbit RABBITMQ_USER=admin $0 export
+EOF
+}
+
+# Main script logic
+main() {
+    if [[ $# -eq 0 ]]; then
+        usage
+        exit 1
+    fi
+
+    check_dependencies
+    test_connection
+
+    case "$1" in
+        export)
+            export_config "${2:-rabbitmq_config.json}"
+            ;;
+        import)
+            import_config "${2:-rabbitmq_config.json}"
+            ;;
+        *)
+            log_error "Unknown command: $1"
+            usage
+            exit 1
+            ;;
+    esac
+}
+
+# Run main function with all arguments
+main "$@"

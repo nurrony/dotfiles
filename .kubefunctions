@@ -36,6 +36,7 @@ function saildevship() {
 
   # Get the list of clusters and skip header
   local clusters=$(k3d cluster list -o json)
+
   # Get running cluster list
   local running_cluster=$(echo "$clusters" | jq -r '.[] | select(.serversRunning > 0 or .agentsRunning > 0) | .name')
 
@@ -43,12 +44,15 @@ function saildevship() {
     echo "A k3d cluster is already running: $running_cluster"
     return
   fi
+
   # Get list of stopped clusters
   local stopped_clusters=($(echo "$clusters" | jq -r '.[] | select(.serversRunning == 0 and .agentsRunning == 0) | .name'))
 
   if [[ ${#stopped_clusters[@]} -eq 0 ]]; then
     echo "No stopped clusters found either."
-    read -p "Do you want to create a new k3d cluster? (y/n): " create_new
+
+    echo -n "Do you want to create a new k3d cluster? (y/n): "
+    read create_new
     if [[ "$create_new" == "y" ]]; then
       $DEV_ZONE/projects/open-sources/devship/devship
     fi

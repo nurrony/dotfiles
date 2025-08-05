@@ -317,17 +317,27 @@ function update_minc() {
 
 # toggle proxy settings for macos
 function toggle_proxy() {
-  local PROXY_URL=${2:-$AUTO_PROXY_URL}
-  local SERVICE=${3:-"Wi-Fi"}
+  local PROXY_URL=${1:-$AUTO_PROXY_URL}
+  local SERVICE=${2:-"Wi-Fi"}
 
-  if [[ $1 == "on" ]]; then
-    networksetup -setautoproxyurl "$SERVICE" "${PROXY_URL}"
-    networksetup -setautoproxystate "$SERVICE" on
-    echo "Auto Proxy enabled."
-  elif [[ $1 == "off" ]]; then
-    networksetup -setautoproxystate "$SERVICE" off
-    echo "Auto Proxy disabled."
+  if [[ $1 == "--help" ]] || [[ $1 == "-h" ]] || [[ $1 == "help" ]]; then
+    echo "Usage: $0 <proxy-url> <service> (defaut: service: Wi-Fi, proxy-url: AUTO_PROXY_URL)"
+    return
+  fi
+
+  # Get current status
+  local AUTO_PROXY_STATUS=$(networksetup -getautoproxyurl "$SERVICE" | grep Enabled | awk '{print $2}')
+
+  echo "Current Auto Proxy status for $SERVICE: $AUTO_PROXY_STATUS"
+
+  if [ "$AUTO_PROXY_STATUS" == "Yes" ]; then
+      echo "Disabling Auto Proxy..."
+      networksetup -setautoproxystate "$SERVICE" off
+      echo "Auto Proxy disabled."
   else
-    echo "Usage: $0 <on|off> <service> <proxy-url> (defaut: service: Wi-Fi, proxy-url: AUTO_PROXY_URL)"
+      echo "Enabling Auto Proxy with PAC URL: ${PROXY_URL}"
+      networksetup -setautoproxyurl "${SERVICE}" "${PROXY_URL}"
+      networksetup -setautoproxystate "${SERVICE}" on
+      echo "Auto Proxy enabled."
   fi
 }

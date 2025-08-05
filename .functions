@@ -330,14 +330,15 @@ function toggle_proxy() {
 
   echo "Current Auto Proxy status for $SERVICE: $AUTO_PROXY_STATUS"
 
-  if [ "$AUTO_PROXY_STATUS" == "Yes" ]; then
-      echo "Disabling Auto Proxy..."
-      networksetup -setautoproxystate "$SERVICE" off
-      echo "Auto Proxy disabled."
+  if [[ $AUTO_PROXY_STATUS == "Yes" ]]; then
+    echo "Disabling Auto Proxy..."
+    networksetup -setautoproxystate "$SERVICE" off
+    echo "Auto Proxy disabled."
   else
-      echo "Enabling Auto Proxy with PAC URL: ${PROXY_URL}"
-      networksetup -setautoproxyurl "${SERVICE}" "${PROXY_URL}"
-      networksetup -setautoproxystate "${SERVICE}" on
-      echo "Auto Proxy enabled."
+    echo "Enabling Auto Proxy with PAC URL: ${PROXY_URL}"
+    networksetup -setautoproxyurl "${SERVICE}" "${PROXY_URL}"
+    networksetup -setautoproxystate "${SERVICE}" on
+    echo "Auto Proxy enabled."
   fi
+  echo "\nFor help pass --help"
 }

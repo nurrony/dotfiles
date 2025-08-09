@@ -533,7 +533,6 @@ sysdig() {
   docker container run -it \
     --privileged \
     --name sysdig-container \
-    --privileged \
     --volume /var/run/docker.sock:/var/run/docker.sock \
     --volume /dev:/host/dev \
     --volume /proc:/host/proc:ro \

@@ -59,18 +59,21 @@
   typeset -g POWERLEVEL9K_MISE_MAVEN_BACKGROUND=#88307b
   typeset -g POWERLEVEL9K_MISE_DOTNET_CORE_BACKGROUND=5
   typeset -g POWERLEVEL9K_MISE_YARN_BACKGROUND=#C1BDEB
+  typeset -g POWERLEVEL9K_MISE_PHP_BACKGROUND=#4f5c93
   typeset -g POWERLEVEL9K_MISE_PYTHON_BACKGROUND=#FFD43B
 
   # foreground
   typeset -g POWERLEVEL9K_MISE_PYTHON_FOREGROUND=23
+  typeset -g POWERLEVEL9K_MISE_PHP_FOREGROUND=#212121
   typeset -g POWERLEVEL9K_MISE_YARN_FOREGROUND=#2e2867
   typeset -g POWERLEVEL9K_MISE_MAVEN_FOREGROUND=#CCCCCC
   typeset -g POWERLEVEL9K_MISE_GRADLE_FOREGROUND=#212121
 
 
   typeset -g POWERLEVEL9K_MISE_GRADLE_SHOW_ON_UPGLOB='*.gradle'
-  typeset -g POWERLEVEL9K_MISE_DENO_SHOW_ON_UPGLOB='deno.json|deno.jsonc'
+  typeset -g POWERLEVEL9K_MISE_PHP_SHOW_ON_UPGLOB='*.php|composer.json'
   typeset -g POWERLEVEL9K_MISE_MAVEN_SHOW_ON_UPGLOB='pom.xml|mvnw|mvnw.cmd'
+  typeset -g POWERLEVEL9K_MISE_DENO_SHOW_ON_UPGLOB='deno.json|deno.jsonc|package.json'
   typeset -g POWERLEVEL9K_MISE_NODE_SHOW_ON_UPGLOB='*.js|*.ts|package.json|.nvmrc|pnpm-workspace.yaml|.pnpmfile.cjs|.vue|yarn.lock'
   typeset -g POWERLEVEL9K_MISE_JAVA_SHOW_ON_UPGLOB='*.java|*.class|*.gradle|*.jar|*.clj|*.cljr|pom.xml|build.gradle.kts|build.sbt|.java-version|*.deps.edn|project.clj|build.boot'
 }

@@ -1012,8 +1012,8 @@
 
   ###[ virtualenv: python virtual environment (https://docs.python.org/3/library/venv.html) ]###
   # Python virtual environment color.
-  typeset -g POWERLEVEL9K_VIRTUALENV_FOREGROUND=#43302E
-  typeset -g POWERLEVEL9K_VIRTUALENV_BACKGROUND=4
+  typeset -g POWERLEVEL9K_VIRTUALENV_FOREGROUND=#29567d
+  typeset -g POWERLEVEL9K_VIRTUALENV_BACKGROUND=#FFD43B
   # Don't show Python version next to the virtual environment name.
   typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=false
   # If set to "false", won't show virtualenv if pyenv is already shown.
@@ -1876,11 +1876,11 @@
   typeset -g POWERLEVEL9K_MISE_MAVEN_BACKGROUND=#88307b
   typeset -g POWERLEVEL9K_MISE_DOTNET_CORE_BACKGROUND=5
   typeset -g POWERLEVEL9K_MISE_YARN_BACKGROUND=#C1BDEB
-  typeset -g POWERLEVEL9K_MISE_PHP_BACKGROUND=#4f5c93
-  typeset -g POWERLEVEL9K_MISE_PYTHON_BACKGROUND=#FFD43B
+  typeset -g POWERLEVEL9K_MISE_PHP_BACKGROUND=#4F5C93
+  typeset -g POWERLEVEL9K_MISE_PYTHON_BACKGROUND=#FFD54A
 
   # foreground
-  typeset -g POWERLEVEL9K_MISE_PYTHON_FOREGROUND=23
+  typeset -g POWERLEVEL9K_MISE_PYTHON_FOREGROUND=#4F5C93
   typeset -g POWERLEVEL9K_MISE_PHP_FOREGROUND=#212121
   typeset -g POWERLEVEL9K_MISE_YARN_FOREGROUND=#2e2867
   typeset -g POWERLEVEL9K_MISE_MAVEN_FOREGROUND=#CCCCCC

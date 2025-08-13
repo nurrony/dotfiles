@@ -184,6 +184,30 @@ mysqlserver() {
   fi
 }
 
+nifiserver() {
+  local VERSION=${1:-latest}
+  local PORT=${2:-8443}
+  del_stopped nifiserver-${VERSION//./-}
+  local state=$(docker inspect --format "{{.State.Running}}" nifiserver-${VERSION//./-} 2>/dev/null)
+
+  if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
+    echo "nifiserver $VERSION server is not running, starting it for you."
+    mkdir -p $DEV_ZONE_CONFIG_PATH/nifiserver/${VERSION//./-} &&
+      docker run -it -d \
+        --publish $PORT:8443 \
+        --name nifiserver-${VERSION//./-} \
+        --hostname nifiserver-${VERSION//./-} \
+        --network ${DEV_CONTAINER_NETWORK_NAME} \
+        --env SINGLE_USER_CREDENTIALS_USERNAME=admin \
+        --env SINGLE_USER_CREDENTIALS_PASSWORD=NifiAdmin@121 \
+        --env NIFI_WEB_HTTPS_HOST=nifiserver-${VERSION//./-} \
+        --mount type=bind,source="$(realpath "${DEV_ZONE_CONFIG_PATH}/nifiserver/${VERSION//./-}")",target=/opt/nifi/nifi-current \
+        apache/nifi:${VERSION}
+  else
+    echo "nifi server $VERSION is already running"
+  fi
+}
+
 mysql() {
   local RUNNING_DBSERVER_NAME=$(docker ps --filter "name=mysqlserver" --format "{{.Names}}")
   relies_on $RUNNING_DBSERVER_NAME

@@ -670,3 +670,27 @@ function grafana() {
       grafana/grafana:${GRAFANA_IMG}
   fi
 }
+
+gitlab() {
+  del_stopped gitlab
+  local state=$(docker inspect --format "{{.State.Running}}" gitlab 2>/dev/null)
+  if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
+    relies_on nginx-proxy
+    echo "gitlab server is not running, starting it for you."
+    docker run -dit --name gitlab \
+      --expose 80 \
+      --shm-size=256m \
+      --publish 22022:22 \
+      --network ${DEV_CONTAINER_NETWORK_NAME} \
+      --volume $DEV_ZONE_CONFIG_PATH/gitlab/gitlab.rb:/gitlab.rb \
+      --volume $DEV_ZONE_CONFIG_PATH/gitlab/storage/gitlab/configs:/etc/gitlab \
+      --volume $DEV_ZONE_CONFIG_PATH/gitlab/storage/gitlab/data:/var/opt/gitlab \
+      --volume $DEV_ZONE_CONFIG_PATH/gitlab/storage/gitlab/logs:/var/log/gitlab \
+      --env VIRTUAL_PORT=80 \
+      --env GITLAB_OMNIBUS_CONFIG="from_file('/gitlab.rb')" \
+      --env VIRTUAL_HOST=git.nurrony.localhost,registry-git.nurrony.localhost \
+      gitlab/gitlab-ce:latest
+  else
+    echo "gitlab server is already running"
+  fi
+}

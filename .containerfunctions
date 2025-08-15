@@ -65,6 +65,7 @@ nginx-proxy() {
   local state=$(docker inspect --format "{{.State.Running}}" nginx-proxy 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
+    mkdir -p $DEV_ZONE_CONFIG_PATH/nginx;
     docker container run -it -d \
       --privileged \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
@@ -86,6 +87,7 @@ proxy-manager() {
   local state=$(docker inspect --format "{{.State.Running}}" proxy-manager 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
+    mkdir -p $DEV_ZONE_CONFIG_PATH/nginx/manager;
     docker run -it --detach \
       --privileged \
       --name proxy-manager \
@@ -714,7 +716,7 @@ sonarqube() {
       --volume $DEV_ZONE_CONFIG_PATH/sonarqube/storage/extensions:/opt/sonarqube/extensions \
       --volume $DEV_ZONE_CONFIG_PATH/sonarqube/configs/99-sonarqube.conf:/etc/sysctl.d/99-sonarqube.conf:ro \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
-      sonarqube:lts-community
+      sonarqube:community
   else
     echo "sonarqube server is already running"
   fi

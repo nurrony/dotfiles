@@ -420,8 +420,8 @@ pgserver() {
   local VERSION=${1:-17}
   local PORT=${2:-5432}
   local DBNAME=${3:-experiments}
-  del_stopped pgserver${VERSION}
-  local state=$(docker inspect --format "{{.State.Running}}" pgserver$VERSION 2>/dev/null)
+  del_stopped pgserver${VERSION//./-}
+  local state=$(docker inspect --format "{{.State.Running}}" pgserver${VERSION//./-} 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     mkdir -p $DEV_ZONE_CONFIG_PATH/databases/postgres/${VERSION}
@@ -435,7 +435,7 @@ pgserver() {
       --env POSTGRES_DB=$DBNAME \
       --env POSTGRES_PASSWORD=nurrony \
       --publish $PORT:5432 \
-      --name pgserver$VERSION \
+      --name pgserver${VERSION//./-} \
       postgres:$VERSION
   else
     echo "postgres $VERSION.x.x is already running"
@@ -693,4 +693,30 @@ gitlab() {
   else
     echo "gitlab server is already running"
   fi
+}
+
+sonarqube() {
+  del_stopped sonarqube
+  local state=$(docker inspect --format "{{.State.Running}}" sonarqube 2>/dev/null)
+  if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
+    relies_on nginx-proxy
+    relies_on pgserver
+    local RUNNING_PGSERVER_NAME=$(docker ps --filter "name=pgserver" --format "{{.Names}}")
+    echo "sonarqube server is not running, starting it for you."
+    docker run -dit --name sonarqube \
+      --env VIRTUAL_PORT=9000 \
+      --env SONAR_JDBC_PASSWORD=nurrony \
+      --env SONAR_JDBC_USERNAME=postgres \
+      --env VIRTUAL_HOST=sonarqube.nurrony.localhost \
+      --env SONAR_JDBC_URL=jdbc:postgresql://${RUNNING_PGSERVER_NAME}:5432/sonarqube \
+      --volume $DEV_ZONE_CONFIG_PATH/sonarqube/storage/data:/opt/sonarqube/data \
+      --volume $DEV_ZONE_CONFIG_PATH/sonarqube/storage/logs:/opt/sonarqube/logs \
+      --volume $DEV_ZONE_CONFIG_PATH/sonarqube/storage/extensions:/opt/sonarqube/extensions \
+      --volume $DEV_ZONE_CONFIG_PATH/sonarqube/configs/99-sonarqube.conf:/etc/sysctl.d/99-sonarqube.conf:ro \
+      --network ${DEV_CONTAINER_NETWORK_NAME} \
+      sonarqube:lts-community
+  else
+    echo "sonarqube server is already running"
+  fi
+
 }

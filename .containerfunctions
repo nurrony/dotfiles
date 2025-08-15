@@ -65,7 +65,7 @@ nginx-proxy() {
   local state=$(docker inspect --format "{{.State.Running}}" nginx-proxy 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
-    mkdir -p $DEV_ZONE_CONFIG_PATH/nginx;
+    mkdir -p $DEV_ZONE_CONFIG_PATH/nginx/{certs,vhost.d,conf.d};
     docker container run -it -d \
       --privileged \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
@@ -87,7 +87,7 @@ proxy-manager() {
   local state=$(docker inspect --format "{{.State.Running}}" proxy-manager 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
-    mkdir -p $DEV_ZONE_CONFIG_PATH/nginx/manager;
+    mkdir -p $DEV_ZONE_CONFIG_PATH/nginx/manager/{data,letsencrypt};
     docker run -it --detach \
       --privileged \
       --name proxy-manager \
@@ -111,6 +111,7 @@ portainer() {
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "portainer server is not running, starting it for you."
+    mkdir -p $DEV_ZONE_CONFIG_PATH/portainer;
     docker container run -it -d --privileged \
       --volume /var/run/docker.sock:/var/run/docker.sock:ro \
       --volume $DEV_ZONE_CONFIG_PATH/portainer:/data \
@@ -224,6 +225,7 @@ dynamodb() {
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "local dynamodb server is not running, starting it for you."
+    mkdir -p $DEV_ZONE_CONFIG_PATH/databases/dynamodb;
     docker container run -dit \
       --volume $DEV_ZONE_CONFIG_PATH/databases/dynamodb:/home/dynamodblocal/data \
       --workdir /home/dynamodblocal \
@@ -298,6 +300,7 @@ mongoserver() {
   del_stopped mongoserver${VERSION}
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "mongoserver ${VERSION}.x.x is not running, starting it for you."
+    mkdir -p $DEV_ZONE_CONFIG_PATH/databases/mongodb/$VERSION;
     docker container run -dit \
       --user $(id -u):$(id -g) \
       --volume $DEV_ZONE_CONFIG_PATH/databases/mongodb/$VERSION:/data/db \
@@ -322,6 +325,7 @@ rabbitmq() {
   local state=$(docker inspect --format "{{.State.Running}}" rabbitmq 2>/dev/null)
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "rabbitmq broker is not running, starting it for you."
+    mkdir -p $DEV_ZONE_CONFIG_PATH/rabbitmq/{certs,data};
     docker container run --detach -it \
       --name rabbitmq \
       --hostname rabbitmq \
@@ -339,12 +343,14 @@ rabbitmq() {
   fi
 }
 
+# TODO: finish this
 kafka() {
-  local CONFLUENT_PLATFORM_VERSION=${1:-7.7.1}
+  local CONFLUENT_PLATFORM_VERSION=${1:-latest}
   del_stopped kafka
   local state=$(docker inspect --format "{{.State.Running}}" kafka 2>/dev/null)
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "kafka broker ${VERSION} is not running, starting it for you."
+    mkdir -p $DEV_ZONE_CONFIG_PATH/kafka;
     docker container run --detach -it \
       --name kafka \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
@@ -379,6 +385,7 @@ mailserver() {
   local state=$(docker inspect --format "{{.State.Running}}" mailserver 2>/dev/null)
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "mailserver is not running. starting is for you"
+    mkdir -p $DEV_ZONE_CONFIG_PATH/mailserver;
     docker container run -d \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
       --expose 8025 \
@@ -402,16 +409,17 @@ zipkin() {
   del_stopped zipkin
   relies_on nginx-proxy
   sleep 2
+  local VERSION=${1:-3}
   local state=$(docker inspect --format "{{.State.Running}}" zipkin 2>/dev/null)
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "zipkin 3.x.x server is not running, starting it for you."
     docker container run --detach -it \
-      --name zipkin \
+      --name zipkin${VERSION} \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
       --publish 9411:9411 \
       --env VIRTUAL_PORT=9411 \
       --env VIRTUAL_HOST=zipkin.nurrony.localhost \
-      openzipkin/zipkin:3
+      openzipkin/zipkin:latest
   else
     echo "zipkin 3.x.x is already running"
   fi
@@ -481,6 +489,7 @@ elasticsearch() {
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "elasticsearch server is not running, starting it for you."
+    mkdir -p $DEV_ZONE_CONFIG_PATH/databases/elasticsearch/data;
     docker container run -it -d \
       --volume "$DEV_ZONE_CONFIG_PATH/databases/elasticsearch/data:/usr/share/elasticsearch/data" \
       --publish 9200:9200 \
@@ -660,6 +669,7 @@ function grafana() {
   local state=$(docker inspect --format "{{.State.Running}}" grafana 2>/dev/null)
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "grafana is not running. starting grafana server for you"
+    mkdir -p $DEV_ZONE_CONFIG_PATH/monitoring/grafana/data;
     docker container run -dit --name grafana \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
       --expose 3000 \
@@ -679,6 +689,7 @@ gitlab() {
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     relies_on nginx-proxy
     echo "gitlab server is not running, starting it for you."
+    mkdir -p $DEV_ZONE_CONFIG_PATH/gitlab/storage/{runner,gitlab/{configs,data,logs}};
     docker run -dit --name gitlab \
       --expose 80 \
       --shm-size=256m \
@@ -705,6 +716,7 @@ sonarqube() {
     relies_on pgserver
     local RUNNING_PGSERVER_NAME=$(docker ps --filter "name=pgserver" --format "{{.Names}}")
     echo "sonarqube server is not running, starting it for you."
+    mkdir -p $DEV_ZONE_CONFIG_PATH/sonarqube/{configs,storage/{extensions,data,logs}};
     docker run -dit --name sonarqube \
       --env VIRTUAL_PORT=9000 \
       --env SONAR_JDBC_PASSWORD=nurrony \

@@ -1,6 +1,6 @@
 # cURL Paths
-export CURL_PATH=/usr/local/opt/curl-openssl/bin
-export PATH="$CURL_PATH:$PATH"
+# export CURL_PATH=/usr/local/opt/curl-openssl/bin
+# export PATH="$CURL_PATH:$PATH"
 
 # Android Variables
 export ANDROID_HOME=$DEV_ZONE_CONFIG_PATH/android/sdk
@@ -31,15 +31,15 @@ export DOCKER_CLI_BIN_PATH=$HOME/.docker/bin
 export PATH="$DOCKER_CLI_BIN_PATH:$PATH"
 
 # GNU Bin Utils path
-export GNU_BIN_UTIL_PATH=/usr/local/opt/binutils/bin
+export GNU_BIN_UTIL_PATH=$(brew --prefix binutils)/bin
 export PATH="$GNU_BIN_UTIL_PATH:$PATH"
 
 # GNU Find Utils path
-export GNU_FIND_UTIL_PATH=/usr/local/opt/findutils/libexec/gnubin
+export GNU_FIND_UTIL_PATH=$(brew --prefix findutils)/libexec/gnubin
 export PATH="$GNU_FIND_UTIL_PATH:$PATH"
 
 # GNU Core Utils path
-export GNU_CORE_UTIL_PATH=/usr/local/opt/coreutils/libexec/gnubin
+export GNU_CORE_UTIL_PATH=$(brew --prefix coreutils)/libexec/gnubin
 export PATH="$GNU_CORE_UTIL_PATH:$PATH"
 
 # NeoVim Path

@@ -693,6 +693,7 @@ gitlab() {
     docker run -dit --name gitlab \
       --expose 80 \
       --shm-size=256m \
+      --publish 8888:80 \
       --publish 22022:22 \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
       --volume $DEV_ZONE_CONFIG_PATH/gitlab/gitlab.rb:/gitlab.rb \
@@ -718,6 +719,7 @@ sonarqube() {
     echo "sonarqube server is not running, starting it for you."
     mkdir -p $DEV_ZONE_CONFIG_PATH/sonarqube/{configs,storage/{extensions,data,logs}};
     docker run -dit --name sonarqube \
+      --publish 9000:9000 \
       --env VIRTUAL_PORT=9000 \
       --env SONAR_JDBC_PASSWORD=nurrony \
       --env SONAR_JDBC_USERNAME=postgres \
@@ -735,4 +737,70 @@ sonarqube() {
 
 }
 
-jenkins() {}
+jenkins() {
+  del_stopped jenkins
+  local state=$(docker inspect --format "{{.State.Running}}" jenkins 2>/dev/null)
+  local dind_state=$(docker inspect --format "{{.State.Running}}" jenkins-dind 2>/dev/null)
+  mkdir -p ${DEV_ZONE_CONFIG_PATH}/jenkins/{certs,data};
+  if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
+    local IMAGE_NAME="nmrony/jenkins:lts-jdk21-docker"
+    relies_on nginx-proxy
+    # Check if the image exists locally
+    if ! docker image inspect "$IMAGE_NAME" > /dev/null 2>&1; then
+      echo "${IMAGE_NAME} not found locally. Building it..."
+      docker build -t "$IMAGE_NAME" - <<EOF
+      FROM jenkins/jenkins:lts-jdk21
+
+      USER root
+      RUN apt-get -qq --yes update && apt-get install --yes lsb-release && curl -fsSLo /usr/share/keyrings/docker-archive-keyring.asc https://download.docker.com/linux/debian/gpg
+      RUN echo "deb [arch=\$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.asc] https://download.docker.com/linux/debian \$(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
+      RUN apt-get update -qq --yes && apt-get install --yes docker-ce-cli && apt clean --yes && apt autoremove --yes && rm -rf /var/cache/apt/archives /var/lib/apt/lists/* && rm -rf /var/lib/{apt,dpkg,cache,log}/
+
+      USER jenkins
+      HEALTHCHECK --interval=30s --timeout=5s CMD curl -f http://localhost:8080/login || exit 1
+EOF
+    fi
+
+  if [[ "$dind_state" == "false" ]] || [[ "$dind_state" == "" ]]; then
+    docker run -dit --name jenkins-dind --privileged \
+      --expose 2376 \
+      --health-retries=5 \
+      --health-timeout=5s \
+      --health-interval=5s \
+      --health-cmd="docker info" \
+      --network-alias jenkins-docker \
+      --env DOCKER_TLS_CERTDIR=/certs \
+      --network ${DEV_CONTAINER_NETWORK_NAME} \
+      --volume "${DEV_ZONE_CONFIG_PATH}/jenkins/certs:/certs/client" \
+      --volume "${DEV_ZONE_CONFIG_PATH}/jenkins/data:/var/jenkins_home" \
+      docker:dind --storage-driver overlay2
+      sleep 2s
+    fi
+    echo "jenkins server is not running. starting it for you"
+    docker run -dit \
+      --name jenkins \
+      --publish 9443:8443 \
+      --publish 8080:8080 \
+      --publish 50000:50000 \
+      --env VIRTUAL_PORT=8080 \
+      --env DOCKER_TLS_VERIFY=1 \
+      --env DOCKER_CERT_PATH=/certs/client \
+      --network ${DEV_CONTAINER_NETWORK_NAME} \
+      --env DOCKER_HOST=tcp://jenkins-docker:2376 \
+      --env VIRTUAL_HOST=jenkins.nurrony.localhost \
+      --volume "${DEV_ZONE_CONFIG_PATH}/jenkins/certs:/certs/client:ro" \
+      --volume "${DEV_ZONE_CONFIG_PATH}/jenkins/data:/var/jenkins_home" \
+      ${IMAGE_NAME}
+
+  else
+    echo "jenkins server is already running"
+  fi
+}
+
+dind() {
+  del_stopped dind
+  local state=$(docker inspect --format "{{.State.Running}}" dind 2>/dev/null)
+  if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
+  else
+  fi
+}

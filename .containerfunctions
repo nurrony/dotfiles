@@ -768,7 +768,7 @@ EOF
       --health-timeout=5s \
       --health-interval=5s \
       --health-cmd="docker info" \
-      --network-alias jenkins-docker \
+      --network-alias docker \
       --env DOCKER_TLS_CERTDIR=/certs \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
       --volume "${DEV_ZONE_CONFIG_PATH}/jenkins/certs:/certs/client" \
@@ -786,7 +786,7 @@ EOF
       --env DOCKER_TLS_VERIFY=1 \
       --env DOCKER_CERT_PATH=/certs/client \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
-      --env DOCKER_HOST=tcp://jenkins-docker:2376 \
+      --env DOCKER_HOST=tcp://docker:2376 \
       --env VIRTUAL_HOST=jenkins.nurrony.localhost \
       --volume "${DEV_ZONE_CONFIG_PATH}/jenkins/certs:/certs/client:ro" \
       --volume "${DEV_ZONE_CONFIG_PATH}/jenkins/data:/var/jenkins_home" \

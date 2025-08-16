@@ -739,6 +739,7 @@ sonarqube() {
 
 jenkins() {
   del_stopped jenkins
+  del_stopped jenkins-dind
   local state=$(docker inspect --format "{{.State.Running}}" jenkins 2>/dev/null)
   local dind_state=$(docker inspect --format "{{.State.Running}}" jenkins-dind 2>/dev/null)
   mkdir -p ${DEV_ZONE_CONFIG_PATH}/jenkins/{certs,data};
@@ -762,6 +763,7 @@ EOF
     fi
 
   if [[ "$dind_state" == "false" ]] || [[ "$dind_state" == "" ]]; then
+    echo "starting DinD container for jenkins..."
     docker run -dit --name jenkins-dind --privileged \
       --expose 2376 \
       --health-retries=5 \

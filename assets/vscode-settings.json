@@ -196,26 +196,26 @@
     {
       "default": true,
       "name": "JavaSE-24",
-      "path": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-24"
+      "path": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-crac-24"
     },
     {
       "default": false,
       "name": "JavaSE-21",
-      "path": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-21"
+      "path": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-crac-21"
     },
     {
       "default": false,
       "name": "JavaSE-17",
-      "path": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-17"
+      "path": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-crac-17"
     },
     {
       "default": false,
       "name": "JavaSE-11",
-      "path": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-11"
+      "path": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-javafx-11"
     }
   ],
   "java.implementationCodeLens": "all",
-  "java.jdt.ls.java.home": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-24",
+  "java.jdt.ls.java.home": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-crac-24",
   "java.project.importOnFirstTimeStartup": "automatic",
   "java.saveActions.organizeImports": true,
   "javascript.autoClosingTags": true,
@@ -277,7 +277,7 @@
   "security.workspace.trust.untrustedFiles": "open",
   "serverlessIDE.telemetry.enableTelemetry": false,
   "shfmt.executablePath": "",
-  "spring-boot.ls.java.home": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-24",
+  "spring-boot.ls.java.home": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-crac-24",
   "telemetry.telemetryLevel": "off",
   "terminal.external.osxExec": "iTerm.app",
   "terminal.integrated.copyOnSelection": true,
@@ -290,13 +290,12 @@
   "typescript.autoClosingTags": true,
   "typescript.suggest.autoImports": true,
   "typescript.updateImportsOnFileMove.enabled": "prompt",
-  "update.showReleaseNotes": false,
   "vscode-kubernetes.kubectl-path": "/usr/local/bin/kubectl",
   "window.commandCenter": false,
   "window.restoreWindows": "none",
   "window.titleBarStyle": "custom",
   "workbench.activityBar.location": "bottom",
-  "workbench.colorTheme": "Catppuccin Macchiato",
+  "workbench.colorTheme": "Catppuccin Mocha",
   "workbench.editor.empty.hint": "hidden",
   "workbench.editor.enablePreview": false,
   "workbench.editor.preferHistoryBasedLanguageDetection": true,
@@ -345,5 +344,8 @@
       "template.yaml"
     ]
   },
-  "yaml.validate": true
+  "yaml.validate": true,
+  "docker.extension.enableComposeLanguageServer": false,
+  "refactai.addressURL": "Refact",
+  "refactai.pauseCompletion": true
 }

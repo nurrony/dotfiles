@@ -547,12 +547,13 @@ composer() {
     composer:lts "$@"
 }
 
-apache-php7() {
+
+php7() {
   docker container run --rm --interactive --tty \
-    --volume $PWD:/var/www/html \
     --user $(id -u):$(id -g) \
+    --volume $PWD:/var/www/html \
     --network ${DEV_CONTAINER_NETWORK_NAME} \
-    nmrony/php:7-apache "$@"
+    nmrony/php:7-apache-dev
 }
 
 start-lamp-stack() {
@@ -711,6 +712,8 @@ gitlab() {
   fi
 }
 
+
+# SonarQube
 sonarqube() {
   del_stopped sonarqube
   local state=$(docker inspect --format "{{.State.Running}}" sonarqube 2>/dev/null)
@@ -727,6 +730,7 @@ sonarqube() {
       --env SONAR_JDBC_USERNAME=postgres \
       --name sonarqube.nurrony.localhost \
       --hostname sonarqube.nurrony.localhost \
+      --env SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true \
       --env VIRTUAL_HOST=sonarqube.nurrony.localhost \
       --env SONAR_JDBC_URL=jdbc:postgresql://${RUNNING_PGSERVER_NAME}:5432/sonarqube \
       --volume $DEV_ZONE_CONFIG_PATH/sonarqube/storage/data:/opt/sonarqube/data \

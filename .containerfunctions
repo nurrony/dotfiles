@@ -36,13 +36,13 @@ ctr-registry-up() {
   if [[ "$state" == "true" ]] || [[ "$state" != "" ]]; then
     docker rm -f registry
   fi
-  docker compose -f $DEV_ZONE_CONFIG_PATH/kubernetes/clusters/docker-compose.yml up -d
+  docker compose -f ${DEV_ZONE_CONFIG_PATH}/kubernetes/clusters/docker-compose.yml up -d
   echo 'registry started successfully...'
 }
 
 # down local container registry
 ctr-rgistry-down() {
-  docker compose -f $DEV_ZONE_CONFIG_PATH/kubernetes/clusters/docker-compose.yml down
+  docker compose -f ${DEV_ZONE_CONFIG_PATH}/kubernetes/clusters/docker-compose.yml down
   echo 'registry is down successfully'
 }
 
@@ -65,7 +65,7 @@ nginx-proxy() {
   local state=$(docker inspect --format "{{.State.Running}}" nginx-proxy 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
-    mkdir -p $DEV_ZONE_CONFIG_PATH/nginx/{certs,vhost.d,conf.d};
+    mkdir -p ${DEV_ZONE_CONFIG_PATH}/nginx/{certs,vhost.d,conf.d};
     docker container run -it -d \
       --privileged \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
@@ -73,9 +73,9 @@ nginx-proxy() {
       --publish 443:443 \
       --name nginx-proxy \
       --volume /var/run/docker.sock:/tmp/docker.sock:ro \
-      --volume $DEV_ZONE_CONFIG_PATH/nginx/certs:/etc/nginx/certs:ro \
-      --volume $DEV_ZONE_CONFIG_PATH/nginx/vhost.d:/etc/nginx/vhost.d:ro \
-      --volume $DEV_ZONE_CONFIG_PATH/nginx/conf.d/custom_settings.conf:/etc/nginx/conf.d/custom_settings.conf:ro \
+      --volume ${DEV_ZONE_CONFIG_PATH}/nginx/certs:/etc/nginx/certs:ro \
+      --volume ${DEV_ZONE_CONFIG_PATH}/nginx/vhost.d:/etc/nginx/vhost.d:ro \
+      --volume ${DEV_ZONE_CONFIG_PATH}/nginx/conf.d/custom_settings.conf:/etc/nginx/conf.d/custom_settings.conf:ro \
       nginxproxy/nginx-proxy:alpine
   else
     echo 'proxy is already running'
@@ -87,7 +87,7 @@ proxy-manager() {
   local state=$(docker inspect --format "{{.State.Running}}" proxy-manager 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
-    mkdir -p $DEV_ZONE_CONFIG_PATH/nginx/manager/{data,letsencrypt};
+    mkdir -p ${DEV_ZONE_CONFIG_PATH}/nginx/manager/{data,letsencrypt};
     docker run -it --detach \
       --privileged \
       --name proxy-manager \
@@ -95,8 +95,8 @@ proxy-manager() {
       --publish 443:443 \
       --publish 8888:81 \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
-      --volume $DEV_ZONE_CONFIG_PATH/nginx/manager/data:/data:Z \
-      --volume $DEV_ZONE_CONFIG_PATH/nginx/manager/letsencrypt:/etc/letsencrypt:Z \
+      --volume ${DEV_ZONE_CONFIG_PATH}/nginx/manager/data:/data:Z \
+      --volume ${DEV_ZONE_CONFIG_PATH}/nginx/manager/letsencrypt:/etc/letsencrypt:Z \
       --env DB_SQLITE_FILE="/data/database.sqlite" \
       jc21/nginx-proxy-manager:latest
   else
@@ -111,10 +111,10 @@ portainer() {
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "portainer server is not running, starting it for you."
-    mkdir -p $DEV_ZONE_CONFIG_PATH/portainer;
+    mkdir -p ${DEV_ZONE_CONFIG_PATH}/portainer;
     docker container run -it -d --privileged \
       --volume /var/run/docker.sock:/var/run/docker.sock:ro \
-      --volume $DEV_ZONE_CONFIG_PATH/portainer:/data \
+      --volume ${DEV_ZONE_CONFIG_PATH}/portainer:/data \
       --env VIRTUAL_HOST=portainer.nurrony.localhost \
       --expose 9000 \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
@@ -130,7 +130,7 @@ nginx_config() {
   server=$1
   route=$2
 
-  cat >$DEV_ZONE_CONFIG_PATH/nginx/conf.d/${server}.conf <<-EOF
+  cat >${DEV_ZONE_CONFIG_PATH}/nginx/conf.d/${server}.conf <<-EOF
 upstream ${server} { server ${route}; }
   server {
     server_name ${server};
@@ -174,9 +174,9 @@ mysqlserver() {
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "mysql $VERSION server is not running, starting it for you."
-    mkdir -p $DEV_ZONE_CONFIG_PATH/databases/mysql/${VERSION} &&
+    mkdir -p ${DEV_ZONE_CONFIG_PATH}/databases/mysql/${VERSION} &&
       docker run -it -d \
-        --volume $DEV_ZONE_CONFIG_PATH/databases/mysql/${VERSION}:/var/lib/mysql \
+        --volume ${DEV_ZONE_CONFIG_PATH}/databases/mysql/${VERSION}:/var/lib/mysql \
         --env MYSQL_ROOT_PASSWORD=nurrony \
         --publish $PORT:3306 \
         --network ${DEV_CONTAINER_NETWORK_NAME} \
@@ -195,7 +195,7 @@ nifiserver() {
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "nifiserver $VERSION server is not running, starting it for you."
-    mkdir -p $DEV_ZONE_CONFIG_PATH/nifiserver/${VERSION//./-} &&
+    mkdir -p ${DEV_ZONE_CONFIG_PATH}/nifiserver/${VERSION//./-} &&
       docker run -it -d \
         --publish $PORT:8443 \
         --name nifiserver-${VERSION//./-} \
@@ -225,9 +225,9 @@ dynamodb() {
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "local dynamodb server is not running, starting it for you."
-    mkdir -p $DEV_ZONE_CONFIG_PATH/databases/dynamodb;
+    mkdir -p ${DEV_ZONE_CONFIG_PATH}/databases/dynamodb;
     docker container run -dit \
-      --volume $DEV_ZONE_CONFIG_PATH/databases/dynamodb:/home/dynamodblocal/data \
+      --volume ${DEV_ZONE_CONFIG_PATH}/databases/dynamodb:/home/dynamodblocal/data \
       --workdir /home/dynamodblocal \
       --publish "8000:8000" \
       --expose 8000 \
@@ -300,10 +300,10 @@ mongoserver() {
   del_stopped mongoserver${VERSION}
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "mongoserver ${VERSION}.x.x is not running, starting it for you."
-    mkdir -p $DEV_ZONE_CONFIG_PATH/databases/mongodb/$VERSION;
+    mkdir -p ${DEV_ZONE_CONFIG_PATH}/databases/mongodb/$VERSION;
     docker container run -dit \
       --user $(id -u):$(id -g) \
-      --volume $DEV_ZONE_CONFIG_PATH/databases/mongodb/$VERSION:/data/db \
+      --volume ${DEV_ZONE_CONFIG_PATH}/databases/mongodb/$VERSION:/data/db \
       --env MONGODB_INITDB_ROOT_USERNAME=root \
       --env MONGODB_INITDB_ROOT_PASSWORD=nurrony \
       --publish $PORT:27017 \
@@ -325,7 +325,7 @@ rabbitmq() {
   local state=$(docker inspect --format "{{.State.Running}}" rabbitmq 2>/dev/null)
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "rabbitmq broker is not running, starting it for you."
-    mkdir -p $DEV_ZONE_CONFIG_PATH/rabbitmq/{certs,data};
+    mkdir -p ${DEV_ZONE_CONFIG_PATH}/rabbitmq/{certs,data};
     docker container run --detach -it \
       --name rabbitmq \
       --hostname rabbitmq \
@@ -334,9 +334,9 @@ rabbitmq() {
       --network ${DEV_CONTAINER_NETWORK_NAME} \
       --env RABBITMQ_DEFAULT_USER=admin \
       --env RABBITMQ_DEFAULT_PASS=nurrony \
-      --volume $DEV_ZONE_CONFIG_PATH/rabbitmq/certs:/etc/rabbitmq/ssl \
-      --volume $DEV_ZONE_CONFIG_PATH/rabbitmq/data:/var/lib/rabbitmq \
-      --volume $DEV_ZONE_CONFIG_PATH/rabbitmq/rabbitmq.conf:/etc/rabbitmq/conf.d/10-defaults.conf:ro \
+      --volume ${DEV_ZONE_CONFIG_PATH}/rabbitmq/certs:/etc/rabbitmq/ssl \
+      --volume ${DEV_ZONE_CONFIG_PATH}/rabbitmq/data:/var/lib/rabbitmq \
+      --volume ${DEV_ZONE_CONFIG_PATH}/rabbitmq/rabbitmq.conf:/etc/rabbitmq/conf.d/10-defaults.conf:ro \
       rabbitmq:4-management-alpine
   else
     echo "rabbitmq broker is already running"
@@ -350,7 +350,7 @@ kafka() {
   local state=$(docker inspect --format "{{.State.Running}}" kafka 2>/dev/null)
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "kafka broker ${VERSION} is not running, starting it for you."
-    mkdir -p $DEV_ZONE_CONFIG_PATH/kafka;
+    mkdir -p ${DEV_ZONE_CONFIG_PATH}/kafka;
     docker container run --detach -it \
       --name kafka \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
@@ -385,7 +385,7 @@ mailserver() {
   local state=$(docker inspect --format "{{.State.Running}}" mailserver 2>/dev/null)
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "mailserver is not running. starting is for you"
-    mkdir -p $DEV_ZONE_CONFIG_PATH/mailserver;
+    mkdir -p ${DEV_ZONE_CONFIG_PATH}/mailserver;
     docker container run -d \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
       --expose 8025 \
@@ -398,7 +398,7 @@ mailserver() {
       --env MP_DATABASE=/data/mailpit.db \
       --env MP_SMTP_AUTH_ALLOW_INSECURE=true \
       --env VIRTUAL_HOST=mail.nurrony.localhost \
-      --volume $DEV_ZONE_CONFIG_PATH/mailserver:/data \
+      --volume ${DEV_ZONE_CONFIG_PATH}/mailserver:/data \
       axllent/mailpit:latest
   else
     echo "mailserver is already running"
@@ -434,13 +434,13 @@ pgserver() {
   local state=$(docker inspect --format "{{.State.Running}}" pgserver${VERSION//./-} 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
-    mkdir -p $DEV_ZONE_CONFIG_PATH/databases/postgres/${VERSION}
+    mkdir -p ${DEV_ZONE_CONFIG_PATH}/databases/postgres/${VERSION}
     echo "postgres $VERSION.x.x server is not running, starting it for you."
     docker container run -it -d \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
       --ulimit memlock=-1:-1 \
       --memory-swappiness=0 \
-      --volume $DEV_ZONE_CONFIG_PATH/databases/postgres/${VERSION}:/var/lib/postgresql/data \
+      --volume ${DEV_ZONE_CONFIG_PATH}/databases/postgres/${VERSION}:/var/lib/postgresql/data \
       --env POSTGRES_USER=postgres \
       --env POSTGRES_DB=$DBNAME \
       --env POSTGRES_PASSWORD=nurrony \
@@ -489,9 +489,9 @@ elasticsearch() {
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "elasticsearch server is not running, starting it for you."
-    mkdir -p $DEV_ZONE_CONFIG_PATH/databases/elasticsearch/data;
+    mkdir -p ${DEV_ZONE_CONFIG_PATH}/databases/elasticsearch/data;
     docker container run -it -d \
-      --volume "$DEV_ZONE_CONFIG_PATH/databases/elasticsearch/data:/usr/share/elasticsearch/data" \
+      --volume "${DEV_ZONE_CONFIG_PATH}/databases/elasticsearch/data:/usr/share/elasticsearch/data" \
       --publish 9200:9200 \
       --publish 9300:9300 \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
@@ -528,7 +528,7 @@ elasticview() {
       --name elasticview \
       --env VIRTUAL_PORT=8080 \
       --env VIRTUAL_HOST=elasticsearch.nurrony.localhost \
-      --volume "$DEV_ZONE_CONFIG_PATH/databases/elasticsearch/default_clusters.json:/usr/share/nginx/html/api/default_clusters.json:ro" \
+      --volume "${DEV_ZONE_CONFIG_PATH}/databases/elasticsearch/default_clusters.json:/usr/share/nginx/html/api/default_clusters.json:ro" \
       cars10/elasticvue
   else
     echo 'elasticsearch gui is already running'
@@ -670,7 +670,7 @@ grafana() {
   local state=$(docker inspect --format "{{.State.Running}}" grafana 2>/dev/null)
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "grafana is not running. starting grafana server for you"
-    mkdir -p $DEV_ZONE_CONFIG_PATH/monitoring/grafana/data;
+    mkdir -p ${DEV_ZONE_CONFIG_PATH}/monitoring/grafana/data;
     docker container run -dit --name grafana \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
       --expose 3000 \
@@ -679,7 +679,7 @@ grafana() {
       --env GF_FEATURE_TOGGLES_ENABLE="traceqlEditor metricsSummary" \
       --env GF_FEATURE_TOGGLES_ENABLE="accessControlOnCall" \
       --env GF_INSTALL_PLUGINS="https://storage.googleapis.com/integration-artifacts/grafana-lokiexplore-app/grafana-lokiexplore-app-latest.zip;grafana-lokiexplore-app" \
-      --volume "$DEV_ZONE_CONFIG_PATH/monitoring/grafana/data:/var/lib/grafana" \
+      --volume "${DEV_ZONE_CONFIG_PATH}/monitoring/grafana/data:/var/lib/grafana" \
       grafana/grafana:${GRAFANA_IMG}
   fi
 }
@@ -690,7 +690,7 @@ gitlab() {
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     relies_on nginx-proxy
     echo "gitlab server is not running, starting it for you."
-    mkdir -p $DEV_ZONE_CONFIG_PATH/gitlab/storage/{runner,gitlab/{configs,data,logs}};
+    mkdir -p ${DEV_ZONE_CONFIG_PATH}/gitlab/storage/{runner,gitlab/{configs,data,logs}};
     docker run -dit \
       --expose 80 \
       --shm-size=256m \
@@ -699,10 +699,10 @@ gitlab() {
       --name git.nurrony.localhost \
       --hostname git.nurrony.localhost \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
-      --volume $DEV_ZONE_CONFIG_PATH/gitlab/gitlab.rb:/gitlab.rb \
-      --volume $DEV_ZONE_CONFIG_PATH/gitlab/storage/gitlab/configs:/etc/gitlab \
-      --volume $DEV_ZONE_CONFIG_PATH/gitlab/storage/gitlab/data:/var/opt/gitlab \
-      --volume $DEV_ZONE_CONFIG_PATH/gitlab/storage/gitlab/logs:/var/log/gitlab \
+      --volume ${DEV_ZONE_CONFIG_PATH}/gitlab/gitlab.rb:/gitlab.rb \
+      --volume ${DEV_ZONE_CONFIG_PATH}/gitlab/storage/gitlab/configs:/etc/gitlab \
+      --volume ${DEV_ZONE_CONFIG_PATH}/gitlab/storage/gitlab/data:/var/opt/gitlab \
+      --volume ${DEV_ZONE_CONFIG_PATH}/gitlab/storage/gitlab/logs:/var/log/gitlab \
       --env VIRTUAL_PORT=80 \
       --env GITLAB_OMNIBUS_CONFIG="from_file('/gitlab.rb')" \
       --env VIRTUAL_HOST=git.nurrony.localhost,registry-git.nurrony.localhost \
@@ -713,7 +713,7 @@ gitlab() {
 }
 
 
-# SonarQube
+# SonarQube NurRony@123456
 sonarqube() {
   del_stopped sonarqube
   local state=$(docker inspect --format "{{.State.Running}}" sonarqube 2>/dev/null)
@@ -722,7 +722,7 @@ sonarqube() {
     relies_on pgserver
     local RUNNING_PGSERVER_NAME=$(docker ps --filter "name=pgserver" --format "{{.Names}}")
     echo "sonarqube server is not running, starting it for you."
-    mkdir -p $DEV_ZONE_CONFIG_PATH/sonarqube/{configs,storage/{extensions,data,logs}};
+    mkdir -p ${DEV_ZONE_CONFIG_PATH}/sonarqube/{configs,storage/{extensions,data,logs}};
     docker run -dit \
       --publish 9000:9000 \
       --env VIRTUAL_PORT=9000 \
@@ -733,10 +733,10 @@ sonarqube() {
       --env SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true \
       --env VIRTUAL_HOST=sonarqube.nurrony.localhost \
       --env SONAR_JDBC_URL=jdbc:postgresql://${RUNNING_PGSERVER_NAME}:5432/sonarqube \
-      --volume $DEV_ZONE_CONFIG_PATH/sonarqube/storage/data:/opt/sonarqube/data \
-      --volume $DEV_ZONE_CONFIG_PATH/sonarqube/storage/logs:/opt/sonarqube/logs \
-      --volume $DEV_ZONE_CONFIG_PATH/sonarqube/storage/extensions:/opt/sonarqube/extensions \
-      --volume $DEV_ZONE_CONFIG_PATH/sonarqube/configs/99-sonarqube.conf:/etc/sysctl.d/99-sonarqube.conf:ro \
+      --volume ${DEV_ZONE_CONFIG_PATH}/sonarqube/storage/data:/opt/sonarqube/data \
+      --volume ${DEV_ZONE_CONFIG_PATH}/sonarqube/storage/logs:/opt/sonarqube/logs \
+      --volume ${DEV_ZONE_CONFIG_PATH}/sonarqube/storage/extensions:/opt/sonarqube/extensions \
+      --volume ${DEV_ZONE_CONFIG_PATH}/sonarqube/configs/99-sonarqube.conf:/etc/sysctl.d/99-sonarqube.conf:ro \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
       sonarqube:community
   else

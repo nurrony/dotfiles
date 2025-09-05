@@ -190,25 +190,39 @@ mysqlserver() {
 nifiserver() {
   local VERSION=${1:-latest}
   local PORT=${2:-8443}
+  local VOLUME_NAME=nifi-volume-${VERSION//./-}
+  local NIFI_SHARED_DIR=${DEV_ZONE_CONFIG_PATH}/nifiserver/extensions
   del_stopped nifiserver-${VERSION//./-}
   local state=$(docker inspect --format "{{.State.Running}}" nifiserver-${VERSION//./-} 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
-    echo "nifiserver $VERSION server is not running, starting it for you."
-    mkdir -p ${DEV_ZONE_CONFIG_PATH}/nifiserver/${VERSION//./-} &&
+      echo "nifiserver $VERSION server is not running, starting it for you."
+
+      if ! docker volume ls --format '{{.Name}}' | grep -q "^${VOLUME_NAME}$"; then
+        mkdir -p ${DEV_ZONE_CONFIG_PATH}/nifiserver/${VERSION//./-} &&
+        docker volume create --opt o=bind --driver local --opt type=none \
+          --opt device=${DEV_ZONE_CONFIG_PATH}/nifiserver/${VERSION//./-} \
+          ${VOLUME_NAME}
+      fi
+      mkdir -p ${NIFI_SHARED_DIR} && \
       docker run -it -d \
         --publish $PORT:8443 \
         --name nifiserver-${VERSION//./-} \
         --hostname nifiserver-${VERSION//./-} \
         --network ${DEV_CONTAINER_NETWORK_NAME} \
         --env SINGLE_USER_CREDENTIALS_USERNAME=admin \
+        --volume ${VOLUME_NAME}:/opt/nifi/nifi-current \
+        --volume ${NIFI_SHARED_DIR}:/opt/nifi/nifi-current/extensions \
         --env SINGLE_USER_CREDENTIALS_PASSWORD=NifiAdmin@121 \
-        --env NIFI_WEB_HTTPS_HOST=nifiserver-${VERSION//./-} \
-        --mount type=bind,source="$(realpath "${DEV_ZONE_CONFIG_PATH}/nifiserver/${VERSION//./-}")",target=/opt/nifi/nifi-current \
+        --env VIRTUAL_PORT=8443 \
+        --env VIRTUAL_HOST=nifi-${VERSION//./-}.nurrony.localhost \
         apache/nifi:${VERSION}
   else
     echo "nifi server $VERSION is already running"
   fi
+  echo "URL: https://nifi-${VERSION//./-}.nurrony.localhost/nifi"
+  echo "Username: admin"
+  echo "Password: NifiAdmin@121"
 }
 
 mysql() {

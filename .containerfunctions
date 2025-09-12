@@ -198,7 +198,8 @@ nifiserver() {
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
       echo "nifiserver $VERSION server is not running, starting it for you."
 
-      if ! docker volume ls --format '{{.Name}}' | grep -q "^${VOLUME_NAME}$"; then
+      if ! docker volume inspect "${VOLUME_NAME}" >/dev/null 2>&1; then
+        echo "inside volume block"
         mkdir -p ${DEV_ZONE_CONFIG_PATH}/nifiserver/${VERSION//./-} &&
         docker volume create --opt o=bind --driver local --opt type=none \
           --opt device=${DEV_ZONE_CONFIG_PATH}/nifiserver/${VERSION//./-} \

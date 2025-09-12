@@ -347,5 +347,7 @@
   "yaml.validate": true,
   "docker.extension.enableComposeLanguageServer": false,
   "refactai.addressURL": "Refact",
-  "refactai.pauseCompletion": true
+  "refactai.apiKey": "",
+  "refactai.pauseCompletion": true,
+  "editor.codeActions.triggerOnFocusChange": true
 }

@@ -34,10 +34,7 @@ zinit wait'3' lucid light-mode for \
   OMZP::ansible \
   OMZP::extract \
   zsh-users/zsh-autosuggestions \
-  OMZP::command-not-found
-
-# install and load necessary programs
-zinit wait'3' lucid light-mode for \
+  OMZP::command-not-found \
   zdharma-continuum/history-search-multi-word \
   zdharma/fast-syntax-highlighting \
   as'program' atpull'%atclone' src'fzf-git.sh' junegunn/fzf-git.sh \

@@ -555,12 +555,12 @@ containerssh() {
   docker exec -it "$@"
 }
 
-composer() {
-  docker container run --rm --interactive --tty \
-    --volume $PWD:/app \
-    --user $(id -u):$(id -g) \
-    composer:lts "$@"
-}
+# composer() {
+#   docker container run --rm --interactive --tty \
+#     --volume $PWD:/app \
+#     --user $(id -u):$(id -g) \
+#     composer:lts "$@"
+# }
 
 
 php7() {

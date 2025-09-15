@@ -75,7 +75,7 @@ zinit wait'10' lucid light-mode for \
 # fi
 
 # install powerline10k
-zinit ice depth'1' atload"[[ ! -f $HOME/.dotfiles/p10k/p10k.zsh ]] || source $HOME/.dotfiles/p10k/p10k.zsh" nocd
+zinit ice depth'1' atload"[[ ! -f $HOME/.dotfiles/.config/p10k/p10k.zsh ]] || source $HOME/.dotfiles/.config/p10k/p10k.zsh" nocd
 zinit light romkatv/powerlevel10k
 
 # autoload -Uz _zinit

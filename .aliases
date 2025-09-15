@@ -89,7 +89,7 @@ command -v md5sum >/dev/null || alias md5sum="md5"
 command -v sha1sum >/dev/null || alias sha1sum="shasum"
 
 # update Homebrew, npm, mise, zi-sheel, and their installed packages
-alias updatecask="brew outdated --cask --greedy | awk '{print $1}' | xargs -I{} sh -c 'echo \"🔁 Reinstalling {}\"; brew uninstall --cask {}; brew install --cask {}'"
+alias updatecask="rm -rf $(brew --prefix)/var/homebrew/locks && brew update --auto-update --verbose && brew outdated --cask --greedy | awk '{print $1}' | xargs -I{} sh -c 'echo \"🔁 Reinstalling {}\"; brew uninstall --cask {}; brew install --cask {}'"
 alias rmbrewlock="rm -rf $(brew --prefix)/var/homebrew/locks"
 alias update='rm -rf $(brew --prefix)/var/homebrew/locks && brew update --auto-update --verbose && brew upgrade --force --greedy-auto-updates --greedy --greedy-latest && brew upgrade --force --cask --greedy --greedy-auto-updates --greedy --greedy-latest && brew autoremove && brew cleanup -s --prune=all && zi self-update && zi update && mise plugins upgrade && mise upgrade --interactive && npm-upgrade -g'
 

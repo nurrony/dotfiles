@@ -70,7 +70,7 @@ zinit wait'10' lucid light-mode for \
 # if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
 #   zi ice as"command" from"gh-r" mv'posh-* -> oh-my-posh' \
 #     atclone"./oh-my-posh completion zsh > _oh_my_posh" \
-#     atpull"%atclone" atload'eval "$(oh-my-posh init zsh --config $HOME/.dotfiles/ohmyposh/zen.toml)"'
+#     atpull"%atclone" atload'eval "$(oh-my-posh init zsh --config $HOME/.dotfiles/.config/ohmyposh/zen.toml)"'
 #   zi light JanDeDobbeleer/oh-my-posh
 # fi
 

@@ -11,6 +11,7 @@ cursor-style-blink = false
 
 # clipboard
 copy-on-select = clipboard
+clipboard-paste-protection = true
 clipboard-trim-trailing-spaces = true
 
 # mouse
@@ -31,7 +32,9 @@ quit-after-last-window-closed = true
 
 # behavior
 auto-update = check
+link-previews = true
 shell-integration = zsh
+working-directory = inherit
 auto-update-channel = stable
 shell-integration-features = sudo
 quit-after-last-window-closed = true
@@ -39,6 +42,9 @@ quit-after-last-window-closed = true
 # macos
 macos-option-as-alt = true
 macos-titlebar-style = transparent
+
+# panes
+split-divider-color=#FFD93D
 
 # quick terminal
 keybind = global:cmd+escape=toggle_quick_terminal

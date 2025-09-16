@@ -37,6 +37,7 @@ shell-integration = zsh
 auto-update-channel = stable
 shell-integration-features = sudo
 quit-after-last-window-closed = true
+window-inherit-working-directory = true
 
 # macos
 macos-option-as-alt = true

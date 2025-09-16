@@ -34,7 +34,6 @@ quit-after-last-window-closed = true
 auto-update = check
 link-previews = true
 shell-integration = zsh
-working-directory = inherit
 auto-update-channel = stable
 shell-integration-features = sudo
 quit-after-last-window-closed = true

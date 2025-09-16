@@ -41,6 +41,7 @@ window-inherit-working-directory = true
 
 # macos
 macos-option-as-alt = true
+macos-auto-secure-input = true
 macos-titlebar-style = transparent
 
 # panes

@@ -18,6 +18,7 @@ mouse-scroll-multiplier = 2
 mouse-hide-while-typing = true
 
 # window
+window-theme = system
 initial-window = true
 resize-overlay = never
 background-opacity = 0.80

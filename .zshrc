@@ -30,16 +30,18 @@ zinit lucid light-mode for \
 zinit wait'3' lucid light-mode for \
   OMZP::git \
   OMZP::mvn \
-  OMZP::sudo \
-  OMZP::ansible \
-  OMZP::extract \
-  zsh-users/zsh-autosuggestions \
   OMZP::command-not-found \
-  zdharma-continuum/history-search-multi-word \
   zdharma/fast-syntax-highlighting \
   as'program' atpull'%atclone' src'fzf-git.sh' junegunn/fzf-git.sh \
   as'program' from'gh-r' mv'composer* -> composer' atpull'%atclone' composer/composer \
   as'program' from'gh-r' mv'mise* -> mise' atclone'./mise completion zsh > _mise && ./mise activate zsh > init.zsh' src'init.zsh' atpull'%atclone' jdx/mise
+
+zinit wait'5' lucid light-mode for \
+  OMZP::sudo \
+  OMZP::ansible \
+  OMZP::extract \
+  zsh-users/zsh-autosuggestions \
+  zdharma-continuum/history-search-multi-word
 
 zinit wait'10' lucid light-mode for \
   as'program' from'gh-r' jdx/usage \
@@ -47,8 +49,7 @@ zinit wait'10' lucid light-mode for \
   as'program' from'gh-r' mv'hostess* -> hostess' cbednarski/hostess \
   as'program' from'gh-r' mv'fabric-darwin-* -> fabric' danielmiessler/Fabric \
   as'program' from'gh-r' mv'kube-explorer* -> kube-explorer' cnrancher/kube-explorer \
-  as'program' from'gh-r' atclone'ln -sfv completions/dog.zsh _dog' atpull'%atclone' pick'bin/dog' ogham/dog \
-  as'program' from'gh-r' atpull'%atclone' pick'phpactor.phar' mv'phpactor.phar* -> phpactor' phpactor/phpactor
+  as'program' from'gh-r' atclone'ln -sfv completions/dog.zsh _dog' atpull'%atclone' pick'bin/dog' ogham/dog
 
 
 #----------------------------------------------------------------

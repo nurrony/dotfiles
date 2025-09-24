@@ -46,7 +46,7 @@ macos-secure-input-indication = false
 macos-titlebar-style = transparent
 
 # panes
-split-divider-color=#FFD93D
+split-divider-color=#52566d
 
 # quick terminal
 keybind = global:cmd+escape=toggle_quick_terminal

@@ -42,8 +42,8 @@ window-inherit-working-directory = true
 # macos
 macos-option-as-alt = true
 macos-auto-secure-input = true
-macos-secure-input-indication = false
 macos-titlebar-style = transparent
+macos-secure-input-indication = false
 
 # panes
 split-divider-color=#52566d

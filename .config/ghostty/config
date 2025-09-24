@@ -3,7 +3,7 @@ font-size = 16
 font-style = medium
 bold-is-bright = true
 font-family = JetBrainsMono Nerd Font Mono
-theme = dark:Cobalt2 Mocha,light:Cobalt2
+theme = dark:Cobalt2,light:Cobalt2
 
 # cursor
 cursor-style = block

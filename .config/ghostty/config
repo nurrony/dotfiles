@@ -2,8 +2,8 @@
 font-size = 16
 font-style = medium
 bold-is-bright = true
-theme = dark:Catppuccin Mocha,light:Catppuccin Latte
 font-family = JetBrainsMono Nerd Font Mono
+theme = dark:Catppuccin Mocha,light:Catppuccin Latte
 
 # cursor
 cursor-style = block
@@ -46,7 +46,7 @@ macos-titlebar-style = transparent
 macos-secure-input-indication = false
 
 # panes
-split-divider-color=#52566d
+split-divider-color= #52566d
 
 # quick terminal
 keybind = global:cmd+escape=toggle_quick_terminal

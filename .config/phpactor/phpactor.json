@@ -1,0 +1,7 @@
+{
+  "indexer.enabled_watchers": [
+    "watchman"
+  ],
+  "language_server_highlight.enabled": false,
+  "language_server.diagnostics_on_update": false
+}

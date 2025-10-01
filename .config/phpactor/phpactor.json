@@ -2,6 +2,14 @@
   "indexer.enabled_watchers": [
     "watchman"
   ],
+  "indexer.exclude_patterns": [
+    "/storage/**",
+    "/bootstrap/cache/**",
+    "/vendor/**/Tests/**/*",
+    "/vendor/**/tests/**/*",
+    "/var/cache/**/*",
+    "/vendor/composer/**/*"
+  ],
   "language_server_highlight.enabled": false,
   "language_server.diagnostics_on_update": false
 }

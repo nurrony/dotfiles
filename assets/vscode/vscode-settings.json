@@ -3,56 +3,22 @@
     "editor.autoClosingBrackets": "always",
     "editor.defaultFormatter": "open-southeners.laravel-pint"
   },
-  "[java]": {
-    "boot-java.rewrite.reconcile": true,
-    "camelk.integrations.runtimeVersion": "1.11.0",
-    "camelk.tools": {
-      "camelk.tools.kamel-path": "/Volumes/Library/Application Support/Code/User/globalStorage/redhat.vscode-camelk/camelk/tools/kamel/kamel"
+  "[dockercompose]": {
+    "editor.autoIndent": "advanced",
+    "editor.defaultFormatter": "redhat.vscode-yaml",
+    "editor.insertSpaces": true,
+    "editor.quickSuggestions": {
+      "comments": false,
+      "other": true,
+      "strings": true
     },
-    "editor.defaultFormatter": "redhat.java",
-    "java.configuration.runtimes": [
-      {
-        "default": true,
-        "name": "JavaSE-24",
-        "path": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-crac-24"
-      },
-      {
-        "default": false,
-        "name": "JavaSE-21",
-        "path": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-crac-21"
-      },
-      {
-        "default": false,
-        "name": "JavaSE-17",
-        "path": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-crac-17"
-      },
-      {
-        "default": false,
-        "name": "JavaSE-11",
-        "path": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-javafx-11"
-      }
-    ],
-    "java.implementationCodeLens": "all",
-    "java.jdt.ls.java.home": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-crac-24",
-    "java.project.importOnFirstTimeStartup": "automatic",
-    "java.saveActions.organizeImports": true,
-    "maven.executable.path": "/Volumes/Devzone/storage/mise/data/shims/mvn",
-    "maven.terminal.useJavaHome": true,
-    "quarkus.tools.alwaysShowWelcomePage": false,
-    "quarkus.tools.debug.terminateProcessOnExit": "Always terminate",
-    "rsp-ui.enableStartServerOnActivation": [
-      {
-        "id": "redhat.vscode-community-server-connector",
-        "name": "Community Server Connector",
-        "startOnActivation": true
-      },
-      {
-        "id": "redhat.vscode-server-connector",
-        "name": "JBoss Toolkit",
-        "startOnActivation": true
-      }
-    ],
-    "spring-boot.ls.java.home": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-crac-24"
+    "editor.tabSize": 2
+  },
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "[java]": {
+    "editor.defaultFormatter": "redhat.java"
   },
   "[jsonc]": {
     "editor.codeActionsOnSave": {
@@ -60,14 +26,10 @@
     }
   },
   "[lua]": {
-    "editor.defaultFormatter": "sumneko.lua",
-    "Lua.diagnostics.globals": [
-      "vim",
-      "nvim_bufferline",
-      "sign"
-    ]
+    "editor.defaultFormatter": "sumneko.lua"
   },
   "[markdown]": {
+    "diffEditor.ignoreTrimWhitespace": false,
     "files.trimTrailingWhitespace": false
   },
   "[php]": {
@@ -96,12 +58,21 @@
   },
   "application.shellEnvironmentResolutionTimeout": 20,
   "aws.telemetry": false,
+  "boot-java.rewrite.reconcile": true,
+  "camelk.integrations.runtimeVersion": "1.11.0",
+  "camelk.tools": {
+    "camelk.tools.kamel-path": "/Volumes/Library/Application Support/Code/User/globalStorage/redhat.vscode-camelk/camelk/tools/kamel/kamel"
+  },
   "cfnLint.path": "/usr/local/bin/cfn-lint",
   "debug.console.acceptSuggestionOnEnter": "on",
   "debug.inlineValues": "on",
   "debug.toolBarLocation": "floating",
+  "deno.codeLens.implementations": true,
+  "deno.codeLens.references": true,
+  "deno.codeLens.referencesAllFunctions": true,
   "diffEditor.hideUnchangedRegions.enabled": true,
   "diffEditor.ignoreTrimWhitespace": false,
+  "dotenv.enableAutocloaking": false,
   "editor.acceptSuggestionOnEnter": "smart",
   "editor.accessibilitySupport": "off",
   "editor.autoClosingBrackets": "always",
@@ -110,11 +81,11 @@
   "editor.codeActions.triggerOnFocusChange": true,
   "editor.codeActionsOnSave": {
     "addMissingImport": "always",
-    "source.fixAll": "explicit",
-    "source.organizeImports": "explicit",
-    "source.sort.json": "explicit",
-    "source.sort.yaml": "explicit",
-    "source.sortImports": "explicit"
+    "source.fixAll": "always",
+    "source.organizeImports": "always",
+    "source.sort.json": "always",
+    "source.sort.yaml": "always",
+    "source.sortImports": "always"
   },
   "editor.cursorBlinking": "solid",
   "editor.cursorStyle": "line",
@@ -123,18 +94,24 @@
   "editor.emptySelectionClipboard": false,
   "editor.fontFamily": "'JetBrainsMono Nerd Font Mono', Monaco, monospace",
   "editor.fontLigatures": true,
-  "editor.fontSize": 16,
+  "editor.fontSize": 17,
+  "editor.fontWeight": "400",
   "editor.formatOnSave": true,
   "editor.guides.bracketPairs": true,
   "editor.guides.bracketPairsHorizontal": "active",
   "editor.guides.highlightActiveIndentation": true,
+  "editor.guides.indentation": false,
   "editor.inlayHints.enabled": "on",
   "editor.inlineSuggest.enabled": true,
   "editor.insertSpaces": true,
   "editor.largeFileOptimizations": false,
+  "editor.letterSpacing": 1.2,
+  "editor.lightbulb.enabled": "off",
+  "editor.lineHeight": 25,
   "editor.lineNumbers": "off",
   "editor.linkedEditing": true,
   "editor.minimap.enabled": false,
+  "editor.parameterHints.enabled": true,
   "editor.quickSuggestions": {
     "comments": "on",
     "other": "on",
@@ -144,7 +121,7 @@
   "editor.rulers": [
     120
   ],
-  "editor.semanticHighlighting.enabled": true,
+  "editor.semanticHighlighting.enabled": false,
   "editor.snippetSuggestions": "top",
   "editor.suggest.matchOnWordStartOnly": false,
   "editor.suggest.preview": true,
@@ -152,14 +129,7 @@
   "editor.suggest.showStatusBar": true,
   "editor.tabSize": 2,
   "editor.tokenColorCustomizations": {
-    "textMateRules": [
-      {
-        "scope": "keyword.other.dotenv",
-        "settings": {
-          "foreground": "#FF000000"
-        }
-      }
-    ]
+    "textMateRules": []
   },
   "emmet.includeLanguages": {
     "javascript": "javascriptreact",
@@ -170,6 +140,7 @@
     "vue-html": "html"
   },
   "emmet.triggerExpansionOnTab": true,
+  "eslint.run": "onType",
   "eslint.validate": [
     "javascript",
     "javascriptreact",
@@ -183,11 +154,15 @@
     "**/storage/**": true,
     "**/vendor": true
   },
+  "explorer.compactFolders": false,
+  "explorer.confirmDragAndDrop": false,
+  "explorer.decorations.badges": false,
   "explorer.fileNesting.enabled": true,
   "explorer.openEditors.visible": 1,
   "files.associations": {
     ".env*": "dotenv",
-    "composer.json": "json",
+    "*.embeddedhtml": "html",
+    "composer.json": "jsonc",
     "package.json": "jsonc",
     "project.json": "jsonc",
     "settings.json": "json",
@@ -233,6 +208,8 @@
     "**/.metals": true,
     "**/node_modules": true
   },
+  "flow-icons.folderColor": "teal",
+  "flow-icons.hidesExplorerArrows": true,
   "git.blame.editorDecoration.enabled": true,
   "git.blame.statusBarItem.enabled": true,
   "git.enableSmartCommit": true,
@@ -240,11 +217,69 @@
   "git.smartCommitChanges": "all",
   "git.suggestSmartCommit": true,
   "git.untrackedChanges": "separate",
+  "github.copilot.chat.agent.autoFix": false,
+  "github.copilot.chat.agent.currentEditorContext.enabled": false,
+  "github.copilot.chat.codeGeneration.useInstructionFiles": false,
+  "github.copilot.chat.copilotDebugCommand.enabled": false,
+  "github.copilot.chat.customInstructionsInSystemMessage": false,
+  "github.copilot.chat.edits.suggestRelatedFilesForTests": false,
+  "github.copilot.chat.edits.suggestRelatedFilesFromGitHistory": false,
+  "github.copilot.chat.newWorkspaceCreation.enabled": false,
+  "github.copilot.chat.reviewAgent.enabled": false,
+  "github.copilot.chat.reviewSelection.enabled": false,
+  "github.copilot.chat.setupTests.enabled": false,
+  "github.copilot.chat.startDebugging.enabled": false,
+  "github.copilot.chat.summarizeAgentConversationHistory.enabled": false,
+  "github.copilot.editor.enableCodeActions": false,
+  "github.copilot.enable": {
+    "*": false
+  },
+  "github.copilot.nextEditSuggestions.allowWhitespaceOnlyChanges": false,
+  "github.copilot.nextEditSuggestions.fixes": false,
+  "github.copilot.renameSuggestions.triggerAutomatically": false,
   "gitignore.cacheExpirationInterval": 3600,
+  "highlight-matching-tag.styles": {
+    "opening": {
+      "full": {
+        "highlight": "rgba(165, 153, 233, 0.3)"
+      }
+    }
+  },
+  "html.autoClosingTags": true,
+  "httpyac.codelens": {
+    "clearHistory": true
+  },
   "importCost.largePackageColor": "#EC3A37F5",
   "importCost.mediumPackageColor": "#B362FF",
   "importCost.smallPackageColor": "#B362FF",
   "intelephense.telemetry.enabled": false,
+  "java.configuration.runtimes": [
+    {
+      "default": true,
+      "name": "JavaSE-24",
+      "path": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-crac-25"
+    },
+    {
+      "default": false,
+      "name": "JavaSE-21",
+      "path": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-crac-21"
+    },
+    {
+      "default": false,
+      "name": "JavaSE-17",
+      "path": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-crac-17"
+    },
+    {
+      "default": false,
+      "name": "JavaSE-11",
+      "path": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-javafx-11"
+    }
+  ],
+  "java.implementationCodeLens": "all",
+  "java.jdt.ls.java.home": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-crac-25",
+  "java.project.importOnFirstTimeStartup": "automatic",
+  "java.referencesCodeLens.enabled": true,
+  "java.saveActions.organizeImports": true,
   "javascript.autoClosingTags": true,
   "javascript.preferences.importModuleSpecifier": "relative",
   "javascript.preferences.quoteStyle": "single",
@@ -252,16 +287,26 @@
   "javascript.updateImportsOnFileMove.enabled": "always",
   "js/ts.implicitProjectConfig.checkJs": true,
   "json.schemas": [],
-  "Laravel.pint.runOnSave": true,
+  "laravel-pint.enable": false,
+  "Laravel.phpCommand": "/usr/local/bin/php",
+  "Laravel.pint.runOnSave": false,
+  "Lua.diagnostics.globals": [
+    "vim",
+    "nvim_bufferline",
+    "sign"
+  ],
   "markdown.validate.enabled": true,
+  "maven.executable.path": "/Volumes/Devzone/storage/mise/data/shims/mvn",
+  "maven.terminal.useJavaHome": true,
   "mergeEditor.diffAlgorithm": "advanced",
   "microprofile.alwaysShowOverview": false,
-  "php.suggest.basic": false,
-  "php.validate.enable": false,
+  "phpactor.enable": false,
+  "phpactor.executablePath": "/usr/local/bin/php",
   "prettier.arrowParens": "avoid",
   "prettier.bracketSpacing": false,
   "prettier.embeddedLanguageFormatting": "auto",
   "prettier.endOfLine": "lf",
+  "prettier.eslintIntegration": true,
   "prettier.experimentalTernaries": false,
   "prettier.htmlWhitespaceSensitivity": "css",
   "prettier.insertPragma": false,
@@ -279,31 +324,51 @@
   "prettier.useTabs": false,
   "prettier.vueIndentScriptAndStyle": true,
   "python.terminal.shellIntegration.enabled": true,
+  "quarkus.tools.alwaysShowWelcomePage": false,
+  "quarkus.tools.debug.terminateProcessOnExit": "Always terminate",
   "redhat.telemetry.enabled": false,
+  "rsp-ui.enableStartServerOnActivation": [
+    {
+      "id": "redhat.vscode-community-server-connector",
+      "name": "Community Server Connector",
+      "startOnActivation": true
+    },
+    {
+      "id": "redhat.vscode-server-connector",
+      "name": "JBoss Toolkit",
+      "startOnActivation": true
+    }
+  ],
   "scm.defaultViewMode": "tree",
   "scm.workingSets.enabled": true,
   "search.useIgnoreFiles": true,
   "security.workspace.trust.untrustedFiles": "open",
+  "spring-boot.ls.java.home": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-crac-25",
   "telemetry.telemetryLevel": "off",
   "terminal.external.osxExec": "iTerm.app",
   "terminal.integrated.copyOnSelection": true,
   "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font Mono', Monaco, monospace",
   "terminal.integrated.fontSize": 16,
+  "terminal.integrated.fontWeight": "400",
   "terminal.integrated.inheritEnv": false,
+  "terminal.integrated.macOptionIsMeta": true,
   "terminal.integrated.persistentSessionReviveProcess": "never",
   "terminal.integrated.tabs.enableAnimation": false,
   "terminal.integrated.tabs.showActiveTerminal": "singleTerminal",
+  "terraform.codelens.referenceCount": true,
   "typescript.autoClosingTags": true,
   "typescript.preferences.importModuleSpecifier": "relative",
   "typescript.preferences.quoteStyle": "single",
+  "typescript.referencesCodeLens.enabled": true,
   "typescript.suggest.autoImports": true,
   "typescript.updateImportsOnFileMove.enabled": "always",
   "vscode-kubernetes.kubectl-path": "/usr/local/bin/kubectl",
   "window.commandCenter": false,
+  "window.customTitleBarVisibility": "never",
   "window.restoreWindows": "none",
   "window.titleBarStyle": "custom",
   "workbench.activityBar.location": "bottom",
-  "workbench.colorTheme": "Catppuccin Mocha",
+  "workbench.colorTheme": "Shades of Purple",
   "workbench.editor.empty.hint": "hidden",
   "workbench.editor.enablePreview": false,
   "workbench.editor.preferHistoryBasedLanguageDetection": true,
@@ -311,10 +376,13 @@
   "workbench.editor.showTabs": "none",
   "workbench.editor.wrapTabs": true,
   "workbench.fontAliasing": "auto",
-  "workbench.iconTheme": "catppuccin-perfect-mocha",
+  "workbench.iconTheme": "flow-dark",
   "workbench.layoutControl.enabled": false,
+  "workbench.secondarySideBar.defaultVisibility": "hidden",
+  "workbench.settings.editor": "json",
   "workbench.sideBar.location": "right",
   "workbench.startupEditor": "none",
+  "workbench.statusBar.feedback.visible": false,
   "workbench.statusBar.visible": true,
   "workbench.tree.enableStickyScroll": true,
   "workbench.tree.expandMode": "doubleClick",
@@ -354,3 +422,4 @@
   },
   "yaml.validate": true
 }
+

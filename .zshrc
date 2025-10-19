@@ -37,6 +37,7 @@ zinit wait'3' lucid light-mode for \
   OMZP::command-not-found \
   zdharma-continuum/history-search-multi-word \
   zdharma/fast-syntax-highlighting \
+  as'completion' pick'_curl' Valodim/zsh-curl-completion \
   as'program' atpull'%atclone' src'fzf-git.sh' junegunn/fzf-git.sh
 
 zinit wait'10' lucid light-mode for \

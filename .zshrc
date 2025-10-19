@@ -2,9 +2,9 @@
 set termguicolors
 
 # uncomment these lines if you are using powerlevel10k
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
@@ -37,8 +37,7 @@ zinit wait'3' lucid light-mode for \
   OMZP::command-not-found \
   zdharma-continuum/history-search-multi-word \
   zdharma/fast-syntax-highlighting \
-  as'completion' pick'_curl' Valodim/zsh-curl-completion \
-  as'program' atpull'%atclone' src'fzf-git.sh' junegunn/fzf-git.sh
+  as'completion' pick'_curl' Valodim/zsh-curl-completion
 
 zinit wait'10' lucid light-mode for \
   as'program' from'gh-r' jdx/usage \
@@ -60,10 +59,10 @@ zinit wait'10' lucid light-mode for \
 #-----------------------------------------------------------------
 
 # install and load starship theme.
-# zi ice as"command" from"gh-r" \
-#   atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship;" \
-#   atpull"%atclone" src"init.zsh"
-# zi light starship/starship
+zi ice as"command" from"gh-r" \
+  atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship;" \
+  atpull"%atclone" src"init.zsh"
+zi light starship/starship
 
 # install and load ohmyposh theme
 # if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
@@ -74,8 +73,8 @@ zinit wait'10' lucid light-mode for \
 # fi
 
 # install powerline10k
-zinit ice depth'1' atload"[[ ! -f $HOME/.dotfiles/.config/p10k/p10k.zsh ]] || source $HOME/.dotfiles/.config/p10k/p10k.zsh" nocd
-zinit light romkatv/powerlevel10k
+# zinit ice depth'1' atload"[[ ! -f $HOME/.dotfiles/.config/p10k/p10k.zsh ]] || source $HOME/.dotfiles/.config/p10k/p10k.zsh" nocd
+# zinit light romkatv/powerlevel10k
 
 # autoload -Uz _zinit
 # (( ${+_comps} )) && _comps[zinit]=_zinit

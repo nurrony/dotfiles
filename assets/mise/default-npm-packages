@@ -3,6 +3,6 @@ serve
 commitizen
 serverless
 typescript
-npm-upgrade
+npm-check-updates
 create-react-app
 prettier

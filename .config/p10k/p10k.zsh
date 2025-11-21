@@ -260,8 +260,10 @@
     Cargo.toml
     composer.json
     go.mod
+    mise.toml
     package.json
-    stack.yaml
+    stack.yaml,
+    $DEV_ZONE_CONFIG_PATH/mise/config.toml
   )
   typeset -g POWERLEVEL9K_SHORTEN_FOLDER_MARKER="(${(j:|:)anchor_files})"
   # If set to "first" ("last"), remove everything before the first (last) subdirectory that contains

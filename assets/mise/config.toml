@@ -9,17 +9,15 @@ idiomatic_version_file_enable_tools                       = ["node"]
 [tools]
 deno                                                      = "latest"
 maven                                                     = "latest"
-java                                                      = ["zulu-crac-24.32.13.0", "zulu-crac-21.44.17.0", "zulu-crac-17.60.17.0", "zulu-javafx-11.80.21.0"]
-nodejs                                                    = ["latest", "lts", "lts-iron", "lts-hydrogen", "lts-gallium"]
-
+java                                                      = ["zulu-crac-25.30.19.0", "zulu-crac-21.46.23.0", "zulu-crac-17.62.19.0"]
+node                                                      = ["latest", "lts", "lts-iron", "lts-hydrogen", "lts-gallium"]
 
 [alias.java.versions]
-24                                                        = "zulu-crac-24.32.13.0"
-21                                                        = "zulu-crac-21.44.17.0"
-17                                                        = "zulu-crac-17.60.17.0"
-11                                                        = "zulu-javafx-11.80.21.0"
+25                                                        = "zulu-crac-25.30.19.0"
+21                                                        = "zulu-crac-21.46.23.0"
+17                                                        = "zulu-crac-17.62.19.0"
 
-[alias.nodejs.versions]
+[alias.node.versions]
 22                                                        = "lts-jod"
 20                                                        = "lts-iron"
 18                                                        = "lts-hydrogen"

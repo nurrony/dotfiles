@@ -1,8 +1,4 @@
-zx
 serve
-commitizen
-serverless
-typescript
-npm-check-updates
-create-react-app
 prettier
+commitizen
+npm-check-updates

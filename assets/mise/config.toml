@@ -6,17 +6,16 @@ legacy_version_file                                       = true
 plugin_autoupdate_last_check_duration                     = "1d"
 idiomatic_version_file_enable_tools                       = ["node"]
 
+[plugins]
+maven                                                     = "asdf:mise-plugins/mise-maven"
+
 [tools]
 deno                                                      = "latest"
 maven                                                     = "latest"
 java                                                      = ["zulu-crac-25.30.19.0", "zulu-crac-21.46.23.0", "zulu-crac-17.62.19.0"]
-node                                                      = ["latest", "lts", "lts-jod"]
+node                                                      = ["latest", "lts", "lts-krypton", "lts-jod"]
 
 [alias.java.versions]
 25                                                        = "zulu-crac-25.30.19.0"
 21                                                        = "zulu-crac-21.46.23.0"
 17                                                        = "zulu-crac-17.62.19.0"
-
-[alias.node.versions]
-24                                                        = "lts-krypton"
-22                                                        = "lts-jod"

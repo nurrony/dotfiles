@@ -11,7 +11,8 @@ export MISE_CACHE_DIR=${DEV_ZONE_CONFIG_PATH}/mise/caches
 ```
 ## Default npm package
 Content of `~/.default-npm-packages`
-```
+
+```bash
 serve
 prettier
 commitizen

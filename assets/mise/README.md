@@ -12,13 +12,11 @@ export MISE_CACHE_DIR=$DEV_ZONE_CONFIG_PATH/mise/caches
 ## Default npm package
 Content of `~/.default-npm-packages`
 ```
-zx
 serve
+prettier
 commitizen
-serverless
-typescript
-npm-upgrade
-create-react-app
+npm-check-updates
+
 ```
 
 [mise-url]: https://mise.jdx.dev/

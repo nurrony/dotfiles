@@ -184,8 +184,8 @@ alias gcz='git-cz'
 alias gld='git pull origin develop'
 
 # set vim alias
-alias vi=nvim
-alias vim=nvim
+alias vi='nmr_fzf_find_edit'
+alias vim='nmr_fzf_find_edit'
 
 # docker terminal ui
 alias lzd='lazydocker'
@@ -230,6 +230,5 @@ alias mtr='sudo mtr'
 
 # fzf
 alias fkill='nmr_fzf_kill'
-alias fnvim='nmr_fzf_find_edit'
 alias grl='nmr_fzf_git_reflog'
 alias glx='nmr_fzf_git_log_pickaxe'

@@ -2,7 +2,7 @@
 # setup fzf for zsh
 
 export FZF_DEFAULT_COMMAND="rg --files --hidden"
-export FZF_DEFAULT_OPTS="--multi --height 50% --layout=default --border --color=hl:#2dd4bf"
+export FZF_DEFAULT_OPTS="--multi --height 70% --layout=default --border --color=hl:#2dd4bf"
 export FZF_CTRL_T_OPTS="--multi --preview 'bat --color=always -n --line-range :100 {}'"
 
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
@@ -13,10 +13,9 @@ export FZF_CTRL_R_OPTS="--bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+ab
 source <(fzf --zsh)
 
 nmr_fzf_find_edit() {
-    local file=$(fzf)
-    if [[ -n "$file" ]]; then
-        $EDITOR "$file"
-    fi
+    rg --files --hidden \
+    | fzf --print0 --multi --height 50% --layout=default --border --preview 'bat --color=always -n --line-range :100 {}' \
+    | xargs -0 -r nvim
 }
 
 nmr_fzf_kill() {

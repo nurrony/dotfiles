@@ -1823,15 +1823,30 @@
 
   ################################[ mise: version manager ]#################################
   function prompt_mise() {
-    local plugins=("${(@f)$(mise ls --current --offline 2>/dev/null | awk '!/\(symlink\)/ && $3!="~/.tool-versions" && $3!="~/.config/mise/config.toml" && $3!="$MISE_CONFIG_DIR/config.toml" && $3!="(missing)" {if ($1) print $1, $2}')}")
+    local plugins=("${(@f)$(mise ls --local 2>/dev/null | awk '!/\(symlink\)/ && $3!="~/.tool-versions" && $3!="~/.config/mise/config.toml" {print $1, $2}')}")
     local plugin
     for plugin in ${(k)plugins}; do
       local parts=("${(@s/ /)plugin}")
       local tool=${(U)parts[1]}
       local version=${parts[2]}
-      p10k segment -r -i "${tool}_ICON" -s $tool -t "$version"
+
+      # only include tools that have icons
+      local icon_var="POWERLEVEL9K_${tool}_ICON"
+      if [[ -n "${(P)icon_var}" ]] || [[ -n "${icons[${tool}_ICON]}" ]]; then
+          p10k segment -r -i "${tool}_ICON" -s $tool -t "$version"
+      fi
     done
   }
+  # function prompt_mise() {
+  #   local plugins=("${(@f)$(mise ls --current --offline 2>/dev/null | awk '!/\(symlink\)/ && $3!="~/.tool-versions" && $3!="~/.config/mise/config.toml" && $3!="$MISE_CONFIG_DIR/config.toml" && $3!="(missing)" {if ($1) print $1, $2}')}")
+  #   local plugin
+  #   for plugin in ${(k)plugins}; do
+  #     local parts=("${(@s/ /)plugin}")
+  #     local tool=${(U)parts[1]}
+  #     local version=${parts[2]}
+  #     p10k segment -r -i "${tool}_ICON" -s $tool -t "$version"
+  #   done
+  # }
 
   # icons
   typeset -g POWERLEVEL9K_YARN_ICON=''

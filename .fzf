@@ -13,10 +13,7 @@ export FZF_CTRL_R_OPTS="--bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+ab
 source <(fzf --zsh)
 
 nmr_fzf_find_edit() {
-    local file=$(
-      fzf --query="$1" --no-multi --select-1 --exit-0 \
-          --preview 'bat --color=always --line-range :500 {}'
-    )
+    local file=$(fzf)
     if [[ -n "$file" ]]; then
         $EDITOR "$file"
     fi

@@ -35,7 +35,6 @@ zinit wait'3' lucid light-mode for \
   OMZP::ansible \
   OMZP::extract \
   OMZP::command-not-found \
-  zdharma-continuum/history-search-multi-word \
   zdharma/fast-syntax-highlighting \
   as'completion' pick'_curl' Valodim/zsh-curl-completion
 

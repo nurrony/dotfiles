@@ -40,11 +40,11 @@ zinit wait'3' lucid light-mode for \
   as'completion' pick'_curl' Valodim/zsh-curl-completion
 
 zinit wait'10' lucid light-mode for \
+  as'program' from'gh-r' jdx/fnox \
   as'program' from'gh-r' jdx/usage \
   as'program' from'gh-r' medialab/xan \
   as'program' from'gh-r' danielmiessler/Fabric \
   as'program' from'gh-r' mv'hostess* -> hostess' cbednarski/hostess \
-  as'program' from'gh-r' atclone'ln -sfv completions/dog.zsh _dog' atpull'%atclone' pick'bin/dog' ogham/dog \
   as'program' from'gh-r' atpull'%atclone' pick'phpactor.phar' mv'phpactor.phar* -> phpactor' phpactor/phpactor
 
 # zinit wait'20' lucid light-mode for \

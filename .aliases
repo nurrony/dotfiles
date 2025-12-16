@@ -230,3 +230,4 @@ alias mtr='sudo mtr'
 
 # fzf
 alias fe='nmr_fzf_find_edit'
+alias fkill='nmr_fzf_find_edit'

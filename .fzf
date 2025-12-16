@@ -21,3 +21,17 @@ nmr_fzf_find_edit() {
         $EDITOR "$file"
     fi
 }
+
+nmr_fzf_kill() {
+    if [[ $(uname) == Linux ]]; then
+        local pids=$(ps -f -u $USER | sed 1d | fzf | awk '{print $2}')
+    elif [[ $(uname) == Darwin ]]; then
+        local pids=$(ps -f -u $USER | sed 1d | fzf | awk '{print $3}')
+    else
+        echo 'Error: unknown platform'
+        return
+    fi
+    if [[ -n "$pids" ]]; then
+        echo "$pids" | xargs kill -9 "$@"
+    fi
+}

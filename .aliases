@@ -229,5 +229,7 @@ alias hostes='sudo hostess'
 alias mtr='sudo mtr'
 
 # fzf
-alias fe='nmr_fzf_find_edit'
 alias fkill='nmr_fzf_kill'
+alias fe='nmr_fzf_find_edit'
+alias grl='nmr_fzf_git_reflog'
+alias glx='nmr_fzf_git_log_pickaxe'

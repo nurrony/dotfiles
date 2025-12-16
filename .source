@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 # setup fzf for zsh
 
-export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git,node_modules,vendor "
+export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/* --glob '!node_modules/*' --glob '!vendor/*' "
 export FZF_DEFAULT_OPTS="--multi --height 50% --layout=default --border --color=hl:#2dd4bf"
 export FZF_CTRL_T_OPTS="--multi --preview 'bat --color=always -n --line-range :100 {}'"
 

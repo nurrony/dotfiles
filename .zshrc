@@ -9,7 +9,7 @@ fi
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
-for file in $HOME/.dotfiles/.{zsh_options,extra,exports,path,source,aliases,functions,containerfunctions,kubefunctions,cli-packages}; do
+for file in $HOME/.dotfiles/.{zsh_options,extra,exports,path,source,aliases,functions,fzf,containerfunctions,kubefunctions,cli-packages}; do
   [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;

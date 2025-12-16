@@ -227,3 +227,6 @@ alias zjclear='zellij delete-all-sessions --force --yes'
 alias hostes='sudo hostess'
 
 alias mtr='sudo mtr'
+
+# fzf
+alias fe='nmr_fzf_find_edit'

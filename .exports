@@ -15,7 +15,7 @@ export STARSHIP_CONFIG=$HOME/.dotfiles/starship.toml
 export _ZO_DATA_DIR=$HOME/.zoxide
 
 # Make vim the default editor.
-export EDITOR='vim';
+export EDITOR='nvim';
 
 # Enable persistent REPL history for `node`.
 export NODE_REPL_HISTORY=~/.node_history;

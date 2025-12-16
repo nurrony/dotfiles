@@ -6,9 +6,6 @@ legacy_version_file                                       = true
 plugin_autoupdate_last_check_duration                     = "1d"
 idiomatic_version_file_enable_tools                       = ["node"]
 
-[plugins]
-maven                                                     = "asdf:mise-plugins/mise-maven"
-
 [tools]
 deno                                                      = "latest"
 maven                                                     = "latest"

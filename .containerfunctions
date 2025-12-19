@@ -192,6 +192,7 @@ nifiserver() {
   local PORT=${2:-8443}
   local VOLUME_NAME=nifi-volume-${VERSION//./-}
   local NIFI_SHARED_DIR=${DEV_ZONE_CONFIG_PATH}/nifiserver/extensions
+  local NIFI_DATA_DIR=${DEV_ZONE_CONFIG_PATH}/nifiserver/data
   del_stopped nifiserver-${VERSION//./-}
   local state=$(docker inspect --format "{{.State.Running}}" nifiserver-${VERSION//./-} 2>/dev/null)
 
@@ -205,23 +206,25 @@ nifiserver() {
           --opt device=${DEV_ZONE_CONFIG_PATH}/nifiserver/${VERSION//./-} \
           ${VOLUME_NAME}
       fi
-      mkdir -p ${NIFI_SHARED_DIR} && \
+
+      mkdir -p ${NIFI_SHARED_DIR} ${NIFI_DATA_DIR} && \
       docker run -it -d \
         --publish $PORT:8443 \
+        --env VIRTUAL_PORT=8443 \
         --name nifiserver-${VERSION//./-} \
         --hostname nifiserver-${VERSION//./-} \
         --network ${DEV_CONTAINER_NETWORK_NAME} \
+        --env VIRTUAL_HOST=nifi.nurrony.localhost \
         --env SINGLE_USER_CREDENTIALS_USERNAME=admin \
+        --env SINGLE_USER_CREDENTIALS_PASSWORD=NifiAdmin@121 \
+        --volume ${NIFI_DATA_DIR}:/opt/data \
         --volume ${VOLUME_NAME}:/opt/nifi/nifi-current \
         --volume ${NIFI_SHARED_DIR}:/opt/nifi/nifi-current/extensions \
-        --env SINGLE_USER_CREDENTIALS_PASSWORD=NifiAdmin@121 \
-        --env VIRTUAL_PORT=8443 \
-        --env VIRTUAL_HOST=nifi-${VERSION//./-}.nurrony.localhost \
         apache/nifi:${VERSION}
   else
     echo "nifi server $VERSION is already running"
   fi
-  echo "URL: https://nifi-${VERSION//./-}.nurrony.localhost/nifi"
+  echo "URL: https://nifi.nurrony.localhost/nifi"
   echo "Username: admin"
   echo "Password: NifiAdmin@121"
 }

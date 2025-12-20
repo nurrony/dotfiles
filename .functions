@@ -259,6 +259,57 @@ skype() {
   open -na /Applications/Skype.app --args --secondary --datapath="/Users/$(whoami)/Library/Application\ Support/Skype-$account"
 }
 
+rmp() {
+    if [ "$#" -eq 0 ]; then
+        echo "Usage: rmp <file_or_directory> ..."
+        return 1
+    fi
+
+    [[ "$#" -lt 2 ]] && { echo "Usage: cp-progress <source> <destination>"; return 1; }
+
+    # Warn if deleting more than 10 items
+    if [ "$#" -gt 10 ]; then
+        read -p "You are about to delete $#. Proceed? [y/N] " answer
+        case "$answer" in
+            [Yy]* ) ;;
+            * ) echo "Aborted."; return 1 ;;
+        esac
+    fi
+
+    # Create timestamped trash folder
+    mkdir -p "/tmp/.empty"
+
+    # Loop through all arguments
+    for target in "$@"; do
+        if [ -e "$target" ]; then
+            # Use rsync to sync file/directory to /tmp/.empty
+            rsync --recursive --whole-file --info=progress2 --delete "$target" /tmp/.empty/ 2>/dev/null
+            # Remove any empty directories left behind
+            if [ -d "$target" ]; then
+                rm -rf "$target" /tmp/.empty 2>/dev/null
+            fi
+        else
+            echo "Warning: '$target' does not exist"
+        fi
+    done
+}
+
+cpv() {
+    [[ $# -lt 2 ]] && { echo "Usage: cp-progress <source> <destination>"; return 1; }
+    local src="$1"
+    local dest="$2"
+
+    # Detect if destination is remote (user@host:/path)
+    if [[ "$dest" == *:* ]]; then
+        # Remote transfer: use SSH optimized for speed
+        rsync -aH --compress --human-readable --progress --ignore-existing --whole-file --partial -e "ssh -T -o Compression=no" "$src" "$dest"
+    else
+        # Local transfer: no compression, whole file
+        rsync -aH --info=progress2 --human-readable --ignore-existing --whole-file --partial "$src" "$dest"
+    fi
+}
+
+
 ## Taken from https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/functions.zsh
 # take functions
 
@@ -302,6 +353,7 @@ function update_minc() {
     chmod +x ~/.local/bin/minc && ~/.local/bin/minc completion zsh > $DEV_ZONE_CONFIG_PATH/zinit/_minc
   fi
 }
+
 
 
 # toggle proxy settings for macos

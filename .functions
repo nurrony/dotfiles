@@ -265,7 +265,7 @@ rmp() {
         return 1
     fi
 
-    [[ "$#" -lt 2 ]] && { echo "Usage: cp-progress <source> <destination>"; return 1; }
+    [[ "$#" -lt 2 ]] && { echo "Usage: cpv <source> <destination>"; return 1; }
 
     # Warn if deleting more than 10 items
     if [ "$#" -gt 10 ]; then
@@ -294,15 +294,31 @@ rmp() {
     done
 }
 
+# remote and local friendly resumable copy command with progress bar
+# Examples:
+#   cpv /local/file /local/dest/
+#   cpv /local/file user@host:/remote/path/
+#   cpv user@host:/remote/file /local/dest/
+#   cpv user1@host1:/file user2@host2:/dest/
 cpv() {
-    [[ $# -lt 2 ]] && { echo "Usage: cp-progress <source> <destination>"; return 1; }
+     [[ $# -lt 2 ]] && { echo "Usage: cpv <source> <destination>"; return 1; }
+
     local src="$1"
     local dest="$2"
+    local ssh_opts="ssh -T -o Compression=no -o ControlMaster=auto -o ControlPath=/tmp/ssh-%r@%h:%p -o ControlPersist=600"
 
-    # Detect if destination is remote (user@host:/path)
-    if [[ "$dest" == *:* ]]; then
+    # Detect if source and/or destination is remote
+    local src_remote=false
+    local dest_remote=false
+    [[ "$src" == *:* ]] && src_remote=true
+    [[ "$dest" == *:* ]] && dest_remote=true
+
+    # Remote transfers: use SSH
+    if $src_remote || $dest_remote; then
         # Remote transfer: use SSH optimized for speed
-        rsync -aH --compress --human-readable --progress --ignore-existing --whole-file --partial -e "ssh -T -o Compression=no" "$src" "$dest"
+        rsync -aH --compress --human-readable --progress \
+          --skip-compress=gz/zip/z/rpm/deb/iso/bz2/tgz/7z/mp3/mp4/mov/avi/ogg/jpg/jpeg/png/pdf \
+          --ignore-existing --whole-file --partial -e "$ssh_opts" "$src" "$dest"
     else
         # Local transfer: no compression, whole file
         rsync -aH --info=progress2 --human-readable --ignore-existing --whole-file --partial "$src" "$dest"

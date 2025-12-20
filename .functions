@@ -316,12 +316,12 @@ cpv() {
     # Remote transfers: use SSH
     if $src_remote || $dest_remote; then
         # Remote transfer: use SSH optimized for speed
-        rsync -aH --compress --human-readable --progress \
-          --skip-compress=gz/zip/z/rpm/deb/iso/bz2/tgz/7z/mp3/mp4/mov/avi/ogg/jpg/jpeg/png/pdf \
-          --ignore-existing --whole-file --partial -e "$ssh_opts" "$src" "$dest"
+        rsync -aH --compress --progress --ignore-existing --whole-file --partial -e "$ssh_opts" \
+          --compress-level=1 --skip-compress=gz/zip/z/rpm/deb/iso/bz2/tgz/7z/mp3/mp4/mov/avi/ogg/jpg/jpeg/png/pdf \
+          "$src" "$dest"
     else
         # Local transfer: no compression, whole file
-        rsync -aH --info=progress2 --human-readable --ignore-existing --whole-file --partial "$src" "$dest"
+        rsync -aH --info=progress2 --ignore-existing --whole-file --partial "$src" "$dest"
     fi
 }
 

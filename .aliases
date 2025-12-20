@@ -40,7 +40,7 @@ alias cat="command bat --theme=DarkNeon --style=plain --pager=never"
 alias cask='_nmrcask(){ brew "$@" --cask};_nmrcask;'
 
 # cp
-alias cpv='rsync -Paz --progress'
+alias cpv='rsync --archive --compress --human-readable --ignore-existing --whole-file --partial --info=progress2'
 
 # Always enable colored `grep` output
 # Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.

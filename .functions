@@ -265,7 +265,7 @@ rmp() {
         return 1
     fi
 
-    [[ "$#" -lt 2 ]] && { echo "Usage: cpv <source> <destination>"; return 1; }
+    [[ "$#" -lt 2 ]] && { echo "Usage: rmp <target>"; return 1; }
 
     # Warn if deleting more than 10 items
     if [ "$#" -gt 10 ]; then
@@ -285,9 +285,7 @@ rmp() {
             # Use rsync to sync file/directory to /tmp/.empty
             rsync --recursive --whole-file --info=progress2 --delete "$target" /tmp/.empty/ 2>/dev/null
             # Remove any empty directories left behind
-            if [ -d "$target" ]; then
-                rm -rf "$target" /tmp/.empty 2>/dev/null
-            fi
+            rm -rf "$target" /tmp/.empty 2>/dev/null
         else
             echo "Warning: '$target' does not exist"
         fi

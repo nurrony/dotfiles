@@ -15,14 +15,18 @@ done;
 unset file;
 
 # load zinit plugin manager. See https://github.com/zdharma-continuum/zinit.git
-ZINIT_HOME="${${XDG_DATA_HOME:-$DEV_ZONE_CONFIG_PATH}:-${HOME}/.local/share}/zinit/zinit.git"
-[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
-[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-source "${ZINIT_HOME}/zinit.zsh"
+declare -A ZINIT
+ZINIT_BASE="${XDG_DATA_HOME:-${DEV_ZONE_CONFIG_PATH:-$HOME/.local/share}}/zinit"
+ZINIT[HOME_DIR]="$ZINIT_BASE"
+ZINIT[BIN_DIR]="$ZINIT_BASE/zinit.git"
+# Create Zinit home dir if missing
+[[ ! -d "${ZINIT[HOME_DIR]}" ]] && mkdir -p "${ZINIT[HOME_DIR]}"
+[[ ! -d "${ZINIT[BIN_DIR]}/.git" ]] && git clone https://github.com/zdharma-continuum/zinit.git "${ZINIT[BIN_DIR]}"
+source "${ZINIT[BIN_DIR]}/zinit.zsh"
 
 # COMPLETIONS FIRST (important)
-autoload -Uz compinit
-compinit -d "${XDG_CACHE_HOME:-$HOME/.cache}/zcompdump"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 
 # load essential completion
 zinit lucid light-mode for \

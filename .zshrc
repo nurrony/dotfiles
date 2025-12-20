@@ -20,6 +20,10 @@ ZINIT_HOME="${${XDG_DATA_HOME:-$DEV_ZONE_CONFIG_PATH}:-${HOME}/.local/share}/zin
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 source "${ZINIT_HOME}/zinit.zsh"
 
+# COMPLETIONS FIRST (important)
+autoload -Uz compinit
+compinit -d "${XDG_CACHE_HOME:-$HOME/.cache}/zcompdump"
+
 # load essential completion
 zinit lucid light-mode for \
   as'completion' zsh-users/zsh-completions \
@@ -78,6 +82,3 @@ zinit light romkatv/powerlevel10k
 
 # autoload -Uz _zinit
 # (( ${+_comps} )) && _comps[zinit]=_zinit
-
-autoload -Uz compinit && compinit
-zi cdreplay -q

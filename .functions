@@ -259,17 +259,6 @@ skype() {
   open -na /Applications/Skype.app --args --secondary --datapath="/Users/$(whoami)/Library/Application\ Support/Skype-$account"
 }
 
-rmfast() {
-  mkdir -p /tmp/emptydir
-  for item in "$@"
-  do
-    echo -en "deleting $item... "
-    rsync -a --delete /tmp/emptydir/ "$item" && rm -fr $item
-    echo "[done]"
-  done
-  rm -fr /tmp/emptydir
-}
-
 ## Taken from https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/functions.zsh
 # take functions
 

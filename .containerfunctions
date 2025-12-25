@@ -198,19 +198,19 @@ nifiserver() {
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
       echo "nifiserver $VERSION server is not running, starting it for you."
-
-      if ! docker volume inspect "${VOLUME_NAME}" >/dev/null 2>&1; then
-        echo "inside volume block"
-        mkdir -p ${DEV_ZONE_CONFIG_PATH}/nifiserver/${VERSION//./-} &&
-        docker volume create --opt o=bind --driver local --opt type=none \
-          --opt device=${DEV_ZONE_CONFIG_PATH}/nifiserver/${VERSION//./-} \
-          ${VOLUME_NAME}
-      fi
+      mkdir -p ${DEV_ZONE_CONFIG_PATH}/nifiserver/${VERSION//./-}
+      # if ! docker volume inspect "${VOLUME_NAME}" >/dev/null 2>&1; then
+      #   echo "inside volume block"
+      #   mkdir -p ${DEV_ZONE_CONFIG_PATH}/nifiserver/${VERSION//./-} &&
+      #   docker volume create --opt o=bind --driver local --opt type=none \
+      #     --opt device=${DEV_ZONE_CONFIG_PATH}/nifiserver/${VERSION//./-} \
+      #     ${VOLUME_NAME}
+      # fi
 
       mkdir -p ${NIFI_SHARED_DIR} ${NIFI_DATA_DIR} && \
-      docker run -it -d \
-        --publish $PORT:8443 \
-        --env VIRTUAL_PORT=8443 \
+      docker run -it -d --privileged \
+        --env VIRTUAL_PORT=8080 \
+        --env NIFI_WEB_HTTP_PORT=8080 \
         --name nifiserver-${VERSION//./-} \
         --hostname nifiserver-${VERSION//./-} \
         --network ${DEV_CONTAINER_NETWORK_NAME} \
@@ -218,8 +218,8 @@ nifiserver() {
         --env SINGLE_USER_CREDENTIALS_USERNAME=admin \
         --env SINGLE_USER_CREDENTIALS_PASSWORD=NifiAdmin@121 \
         --volume ${NIFI_DATA_DIR}:/opt/data \
-        --volume ${VOLUME_NAME}:/opt/nifi/nifi-current \
         --volume ${NIFI_SHARED_DIR}:/opt/nifi/nifi-current/extensions \
+        --volume ${DEV_ZONE_CONFIG_PATH}/nifiserver/${VERSION//./-}:/opt/nifi \
         apache/nifi:${VERSION}
   else
     echo "nifi server $VERSION is already running"

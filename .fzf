@@ -2,7 +2,7 @@
 # setup fzf for zsh
 
 export FZF_DEFAULT_COMMAND="rg --files --hidden"
-export FZF_DEFAULT_OPTS="--multi --height 70% --layout=default --border --border --color=hl:#fbb388"
+export FZF_DEFAULT_OPTS="--multi --height 70% --layout=default --border --color=hl:#fbb388"
 export FZF_CTRL_T_OPTS="--multi --preview 'bat --color=always -n --line-range :100 {}'"
 
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"

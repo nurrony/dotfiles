@@ -13,13 +13,9 @@ export FZF_CTRL_R_OPTS="--bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+ab
 source <(fzf --zsh)
 
 nmr_fzf_find_edit() {
-  if [ "$#" -ne 0 ]; then
-    nvim "$@"
-  else
-    rg --files --hidden \
-      | fzf --print0 --multi --height 50% --layout=default --border --preview 'bat --color=always -n --line-range :100 {}' \
-      | xargs -0 -r nvim
-  fi
+  [ "$#" -ne 0 ] && nvim "$@" || rg --files --hidden \
+    | fzf --print0 --multi --height 50% --layout=default --border --preview 'bat --color=always -n --line-range :100 {}' \
+    | xargs -0 -r nvim
 }
 
 nmr_fzf_kill() {

@@ -183,6 +183,7 @@ alias gld='git pull origin develop'
 # set vim alias
 alias vi='nmr_fzf_find_edit'
 alias vim='nmr_fzf_find_edit'
+alias nvim='nmr_fzf_find_edit'
 
 # docker terminal ui
 alias lzd='lazydocker'

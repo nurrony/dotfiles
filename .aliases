@@ -6,13 +6,13 @@ alias -g ND='>/dev/null'
 alias -g NE='2>/dev/null'
 
 # Easier navigation: .., ..., ...., ....., ~ and -
+alias cd="j"
+alias ~="cd ~"
 alias ..="cd .."
+alias -- -="cd -"
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
-alias ~="cd ~" # `cd` is probably faster to type though
-alias -- -="cd -"
-alias cd="j"
 
 # Shortcuts
 alias dl="cd ~/Downloads"

@@ -93,9 +93,6 @@ alias macupdate='sudo softwareupdate --list && sudo softwareupdate --install -al
 # Flush Directory Service cache
 alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
 
-# Clean up LaunchServices to remove duplicates in the “Open With” menu
-alias lscleanup="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
-
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
 alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
@@ -190,8 +187,6 @@ alias lzg='lazygit'
 # Scala Alias
 alias cs='coursier'
 
-# Scala Alias
-alias hostses='sudo txeh'
 
 # Weather
 alias weather='_weather() { http --body https://wttr.in/${1:-Dhaka}; }; _weather'
@@ -218,7 +213,7 @@ alias tfsh='terraform show'
 alias zjclear='zellij delete-all-sessions --force --yes'
 
 # hostses
-alias hostes='sudo hostess'
+alias hostses='sudo txeh'
 
 alias mtr='sudo mtr'
 

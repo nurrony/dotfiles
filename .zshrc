@@ -77,8 +77,7 @@ zinit wait'10' lucid light-mode for \
   as'program' from'gh-r' jdx/usage \
   as'program' from'gh-r' medialab/xan \
   as'program' from'gh-r' danielmiessler/Fabric \
-  as'program' from'gh-r' mv'hostess* -> hostess' cbednarski/hostess \
-  as'program' from'gh-r' atpull'%atclone' pick'phpactor.phar' mv'phpactor.phar* -> phpactor' phpactor/phpactor
+  as'program' from'gh-r' atpull'%atclone' atclone'./txeh completion zsh > _txeh' txn2/txeh
 
 # zinit wait'20' lucid light-mode for \
 # as'program' from'gh-r' mv'kube-explorer* -> kube-explorer' cnrancher/kube-explorer

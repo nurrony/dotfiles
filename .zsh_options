@@ -4,6 +4,9 @@ bindkey -e
 bindkey "^[[A" history-search-backward
 bindkey "^[[B" history-search-forward
 
+# zshell specific commands
+autoload zmv
+
 # paste behavior
 zle_highlight=('paste:none')
 

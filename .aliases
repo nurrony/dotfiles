@@ -219,9 +219,14 @@ alias zjclear='zellij delete-all-sessions --force --yes'
 # hostses
 alias hostses='sudo txeh'
 
+# https://github.com/traviscross/mtr
+# mtr combines the functionality of the 'traceroute' and 'ping' programs in a single network diagnostic tool.
 alias mtr='sudo mtr'
 
 # fzf
 alias fkill='nmr_fzf_kill'
 alias grl='nmr_fzf_git_reflog'
 alias glx='nmr_fzf_git_log_pickaxe'
+
+# jless
+alias jless="jless --mode line"

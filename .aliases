@@ -1,4 +1,9 @@
 #!/usr/bin/env zsh
+# Global alias
+alias -g JQ='| jq'
+alias -g L='| less'
+alias -g ND='>/dev/null'
+alias -g NE='2>/dev/null'
 
 # Easier navigation: .., ..., ...., ....., ~ and -
 alias ..="cd .."

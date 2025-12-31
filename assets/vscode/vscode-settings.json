@@ -59,6 +59,8 @@
   "application.shellEnvironmentResolutionTimeout": 20,
   "aws.telemetry": false,
   "boot-java.rewrite.reconcile": true,
+  "breadcrumbs.filePath": "last",
+  "breadcrumbs.symbolPath": "off",
   "camelk.integrations.runtimeVersion": "1.11.0",
   "camelk.tools": {
     "camelk.tools.kamel-path": "/Volumes/Library/Application Support/Code/User/globalStorage/redhat.vscode-camelk/camelk/tools/kamel/kamel"
@@ -81,6 +83,7 @@
   "editor.codeActions.triggerOnFocusChange": true,
   "editor.codeActionsOnSave": {
     "addMissingImport": "always",
+    "source.addMissingImport": "always",
     "source.fixAll": "always",
     "source.organizeImports": "always",
     "source.sort.json": "always",
@@ -131,6 +134,7 @@
   "editor.tokenColorCustomizations": {
     "textMateRules": []
   },
+  "editor.unicodeHighlight.ambiguousCharacters": false,
   "emmet.includeLanguages": {
     "javascript": "javascriptreact",
     "markdown": "html",
@@ -208,8 +212,6 @@
     "**/.metals": true,
     "**/node_modules": true
   },
-  "flow-icons.folderColor": "teal",
-  "flow-icons.hidesExplorerArrows": true,
   "git.blame.editorDecoration.enabled": true,
   "git.blame.statusBarItem.enabled": true,
   "git.enableSmartCommit": true,
@@ -252,11 +254,23 @@
   "importCost.largePackageColor": "#EC3A37F5",
   "importCost.mediumPackageColor": "#B362FF",
   "importCost.smallPackageColor": "#B362FF",
+  "intelephense.files.exclude": [
+    "**/node_modules/**",
+    "**/storage/**",
+    "**/bootstrap/cache/**",
+    "**/vendor/**/Tests/**/*",
+    "**/vendor/**/tests/**/*",
+    "**/var/cache/**/*",
+    "**/vendor/composer/**/*",
+    "**/tests/**",
+    "**/cache/**"
+  ],
+  "intelephense.files.maxSize": 5000000,
   "intelephense.telemetry.enabled": false,
   "java.configuration.runtimes": [
     {
       "default": true,
-      "name": "JavaSE-24",
+      "name": "JavaSE-25",
       "path": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-crac-25"
     },
     {
@@ -268,11 +282,6 @@
       "default": false,
       "name": "JavaSE-17",
       "path": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-crac-17"
-    },
-    {
-      "default": false,
-      "name": "JavaSE-11",
-      "path": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-javafx-11"
     }
   ],
   "java.implementationCodeLens": "all",
@@ -340,6 +349,7 @@
     }
   ],
   "scm.defaultViewMode": "tree",
+  "scm.repositories.explorer": true,
   "scm.workingSets.enabled": true,
   "search.useIgnoreFiles": true,
   "security.workspace.trust.untrustedFiles": "open",
@@ -368,7 +378,7 @@
   "window.restoreWindows": "none",
   "window.titleBarStyle": "custom",
   "workbench.activityBar.location": "bottom",
-  "workbench.colorTheme": "Shades of Purple",
+  "workbench.colorTheme": "Catppuccin Mocha",
   "workbench.editor.empty.hint": "hidden",
   "workbench.editor.enablePreview": false,
   "workbench.editor.preferHistoryBasedLanguageDetection": true,
@@ -376,7 +386,7 @@
   "workbench.editor.showTabs": "none",
   "workbench.editor.wrapTabs": true,
   "workbench.fontAliasing": "auto",
-  "workbench.iconTheme": "flow-dark",
+  "workbench.iconTheme": "catppuccin-perfect-mocha",
   "workbench.layoutControl.enabled": false,
   "workbench.secondarySideBar.defaultVisibility": "hidden",
   "workbench.settings.editor": "json",
@@ -422,4 +432,3 @@
   },
   "yaml.validate": true
 }
-

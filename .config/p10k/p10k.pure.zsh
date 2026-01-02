@@ -50,7 +50,7 @@
     command_execution_time  # duration of the last command
     background_jobs         # presence of background jobs
     direnv                  # direnv status (https://direnv.net/)
-    mise
+    mise                    # mise version manager (https://mise.jdx.dev/)
     # asdf                  # asdf version manager (https://github.com/asdf-vm/asdf)
     virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
     anaconda                # conda environment (https://conda.io/)
@@ -215,7 +215,7 @@
 
   ##################################[ dir: current directory ]##################################
   # Default current directory color.
-  typeset -g POWERLEVEL9K_DIR_FOREGROUND=45
+  typeset -g POWERLEVEL9K_DIR_FOREGROUND=#b4befe
   # If directory is too long, shorten some of its segments to the shortest possible unique
   # prefix. The shortened directory can be tab-completed to the original.
   typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_last
@@ -1723,7 +1723,7 @@
   typeset -g POWERLEVEL9K_MISE_DOTNET_CORE_ICON=''
 
 # Colors
-  typeset -g POWERLEVEL9K_MISE_FOREGROUND=#7287fd
+  typeset -g POWERLEVEL9K_MISE_FOREGROUND=#eba0ac
   typeset -g POWERLEVEL9K_MISE_BACKGROUND=
 
   ## background
@@ -1748,12 +1748,12 @@
   # typeset -g POWERLEVEL9K_MISE_PYTHON_BACKGROUND=#FFD54A
 
   # foreground
-  typeset -g POWERLEVEL9K_MISE_PYTHON_FOREGROUND=#4F5C93
-  typeset -g POWERLEVEL9K_MISE_PHP_FOREGROUND=#212121
-  typeset -g POWERLEVEL9K_MISE_JAVA_FOREGROUND=#2071cb
-  typeset -g POWERLEVEL9K_MISE_YARN_FOREGROUND=#2e2867
-  typeset -g POWERLEVEL9K_MISE_MAVEN_FOREGROUND=#CCCCCC
-  typeset -g POWERLEVEL9K_MISE_GRADLE_FOREGROUND=#212121
+  # typeset -g POWERLEVEL9K_MISE_PYTHON_FOREGROUND=#4F5C93
+  # typeset -g POWERLEVEL9K_MISE_PHP_FOREGROUND=#212121
+  # typeset -g POWERLEVEL9K_MISE_JAVA_FOREGROUND=#2071cb
+  # typeset -g POWERLEVEL9K_MISE_YARN_FOREGROUND=#2e2867
+  # typeset -g POWERLEVEL9K_MISE_MAVEN_FOREGROUND=#CCCCCC
+  # typeset -g POWERLEVEL9K_MISE_GRADLE_FOREGROUND=#212121
 
 
   typeset -g POWERLEVEL9K_MISE_GRADLE_SHOW_ON_UPGLOB='*.gradle'

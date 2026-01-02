@@ -13,6 +13,7 @@ for file in $HOME/.dotfiles/.{zsh_options,extra,exports,path,source,aliases,func
   [[ -r "$file" && -f "$file" && -O "$file" ]] && source "$file"
 done;
 unset file;
+
 # load zinit plugin manager. See https://github.com/zdharma-continuum/zinit.git
 declare -A ZINIT
 ZINIT_BASE="${XDG_DATA_HOME:-${DEV_ZONE_CONFIG_PATH:-$HOME/.local/share}}/zinit"
@@ -23,16 +24,37 @@ ZINIT[BIN_DIR]="$ZINIT_BASE/zinit.git"
 [[ ! -d "${ZINIT[BIN_DIR]}/.git" ]] && git clone https://github.com/zdharma-continuum/zinit.git "${ZINIT[BIN_DIR]}"
 source "${ZINIT[BIN_DIR]}/zinit.zsh"
 
+# load essential completion
+zinit lucid light-mode for \
+  as'completion' zsh-users/zsh-completions \
+  zdharma/fast-syntax-highlighting \
+  as'program' from'gh-r' atclone'./zoxide init --cmd=j zsh > init.zsh' src'init.zsh' atpull'%atclone' pick'zoxide/zoxide' ajeetdsouza/zoxide \
+  as'program' from'gh-r' mv'mise* -> mise' atclone'./mise completion zsh > _mise && ./mise activate zsh > init.zsh' src'init.zsh' atpull'%atclone' jdx/mise
+
+# install oh my zsh plugins as snippets
+zinit wait'3' lucid light-mode for \
+  OMZP::git \
+  OMZP::mvn \
+  OMZP::sudo \
+  OMZP::ansible \
+  OMZP::extract \
+  OMZP::command-not-found \
+  pick'alias-tips.plugin.zsh' djui/alias-tips \
+  as'completion' pick'_curl' Valodim/zsh-curl-completion
+
+zinit wait'10' lucid light-mode for \
+  as'program' from'gh-r' jdx/usage \
+  as'program' from'gh-r' medialab/xan \
+  as'program' from'gh-r' danielmiessler/Fabric \
+  as'program' from'gh-r' PaulJuliusMartinez/jless \
+  as'program' from'gh-r' atpull'%atclone' atclone'./txeh completion zsh > _txeh' txn2/txeh
+
+
 # COMPLETIONS FIRST (important)
 autoload -Uz compinit
 compinit -d "${XDG_CACHE_HOME:-$HOME/.cache}/zcompdump"
 
-# load essential completion
-zinit lucid light-mode for \
-  as'completion' zsh-users/zsh-completions \
-  pick'alias-tips.plugin.zsh' djui/alias-tips \
-  as'program' from'gh-r' atclone'./zoxide init --cmd=j zsh > init.zsh' src'init.zsh' atpull'%atclone' pick'zoxide/zoxide' ajeetdsouza/zoxide \
-  as'program' from'gh-r' mv'mise* -> mise' atclone'./mise completion zsh > _mise && ./mise activate zsh > init.zsh' src'init.zsh' atpull'%atclone' jdx/mise
+zinit cdreplay -q
 
 #----------------------------------------------------------------
 # THEMES
@@ -60,25 +82,6 @@ zinit lucid light-mode for \
 # install powerline10k
 zinit ice depth'1' atload"[[ ! -f $HOME/.dotfiles/.config/p10k/p10k.pure.zsh ]] || source $HOME/.dotfiles/.config/p10k/p10k.pure.zsh" nocd
 zinit light romkatv/powerlevel10k
-
-# install oh my zsh plugins as snippets
-zinit wait'3' lucid light-mode for \
-  OMZP::git \
-  OMZP::mvn \
-  OMZP::sudo \
-  OMZP::ansible \
-  OMZP::extract \
-  OMZP::command-not-found \
-  zdharma/fast-syntax-highlighting \
-  as'completion' pick'_curl' Valodim/zsh-curl-completion
-
-zinit wait'10' lucid light-mode for \
-  as'program' from'gh-r' jdx/fnox \
-  as'program' from'gh-r' jdx/usage \
-  as'program' from'gh-r' medialab/xan \
-  as'program' from'gh-r' danielmiessler/Fabric \
-  as'program' from'gh-r' PaulJuliusMartinez/jless \
-  as'program' from'gh-r' atpull'%atclone' atclone'./txeh completion zsh > _txeh' txn2/txeh
 
 # zinit wait'20' lucid light-mode for \
 # as'program' from'gh-r' mv'kube-explorer* -> kube-explorer' cnrancher/kube-explorer

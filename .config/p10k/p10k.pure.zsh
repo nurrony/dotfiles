@@ -1355,7 +1355,7 @@
 
   #############[ terraform_version: terraform version (https://www.terraform.io) ]##############
   # Terraform version color.
-  typeset -g POWERLEVEL9K_TERRAFORM_VERSION_FOREGROUND=38
+  typeset -g POWERLEVEL9K_TERRAFORM_VERSION_FOREGROUND=11
   # Custom icon.
   # typeset -g POWERLEVEL9K_TERRAFORM_VERSION_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
@@ -1723,7 +1723,7 @@
   typeset -g POWERLEVEL9K_MISE_DOTNET_CORE_ICON=''
 
 # Colors
-  typeset -g POWERLEVEL9K_MISE_FOREGROUND=#eba0ac
+  typeset -g POWERLEVEL9K_MISE_FOREGROUND=#74c7ec
   typeset -g POWERLEVEL9K_MISE_BACKGROUND=
 
   ## background

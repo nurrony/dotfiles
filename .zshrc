@@ -61,9 +61,15 @@ zinit cdreplay -q
 # - starship: https://starship.rs/
 # - OhMyPosh: https://ohmyposh.dev/
 # - powerlevel10k: https://github.com/romkatv/powerlevel10k
+#.   - p10k.pure.zsh (for pure style theme variant)
+#    - p10k.rainbow.zsh (for rainbow style theme variant)
 #
 # Note: Uncomment only the theme that you want to use.
 #-----------------------------------------------------------------
+
+# install powerline10k
+zinit ice depth'1' atload"[[ ! -f $HOME/.dotfiles/.config/p10k/p10k.pure.zsh ]] || source $HOME/.dotfiles/.config/p10k/p10k.pure.zsh" nocd
+zinit light romkatv/powerlevel10k
 
 # install and load starship theme.
 # zi ice as"command" from"gh-r" \
@@ -78,10 +84,6 @@ zinit cdreplay -q
 #     atpull"%atclone" atload'eval "$(oh-my-posh init zsh --config $HOME/.dotfiles/.config/ohmyposh/zen.toml)"'
 #   zi light JanDeDobbeleer/oh-my-posh
 # fi
-
-# install powerline10k
-zinit ice depth'1' atload"[[ ! -f $HOME/.dotfiles/.config/p10k/p10k.pure.zsh ]] || source $HOME/.dotfiles/.config/p10k/p10k.pure.zsh" nocd
-zinit light romkatv/powerlevel10k
 
 # zinit wait'20' lucid light-mode for \
 # as'program' from'gh-r' mv'kube-explorer* -> kube-explorer' cnrancher/kube-explorer

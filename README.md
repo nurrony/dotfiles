@@ -22,7 +22,10 @@ Example `.extra` file
 # Development directory path
 export DEV_ZONE=/Volumes/Devzone
 export DEV_ZONE_CONFIG_PATH=$DEV_ZONE/storage
+
+# container customization
 export DEV_CONTAINER_NETWORK_NAME=ronsvpn
+export CONTAINER_FQDN=your-local-machine-fqdn # defaults to nurrony.localhost
 
 # Set ssh key file name
 export SSH_KEY_FILE_NAME='your-ssh-key-name'

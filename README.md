@@ -25,15 +25,15 @@ export DEV_ZONE_CONFIG_PATH=$DEV_ZONE/storage
 export DEV_CONTAINER_NETWORK_NAME=ronsvpn
 
 # Set ssh key file name
-export SSH_KEY_FILE_NAME='nur-macbookpro'
+export SSH_KEY_FILE_NAME='your-ssh-key-name'
 
 # Git credentials
 # Not in the repository, to prevent people from accidentally committing under my name
 export GIT_COMMIT_GPG_SIGN=false
-export GIT_COMMIT_GPG_KEY="06B3A1B73F55F441"
-export GIT_AUTHOR_NAME="Nur Rony"
+export GIT_COMMIT_GPG_KEY="YOUR GPG KEY"
+export GIT_AUTHOR_NAME="Your Name"
 export GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
-export GIT_AUTHOR_EMAIL="pro.nmrony@gmail.com"
+export GIT_AUTHOR_EMAIL="your-email@example.com"
 export GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
 
 git config --global user.name "$GIT_AUTHOR_NAME"

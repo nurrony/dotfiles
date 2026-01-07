@@ -372,6 +372,7 @@ rabbitmq() {
       --network ${DEV_CONTAINER_NETWORK_NAME} \
       --env RABBITMQ_DEFAULT_USER=admin \
       --env RABBITMQ_DEFAULT_PASS=nurrony \
+      --env VIRTUAL_HOST=rabbitmq.${CONTAINER_FQDN:-nurrony.localhost} \
       --volume ${DEV_ZONE_CONFIG_PATH}/rabbitmq/certs:/etc/rabbitmq/ssl \
       --volume ${DEV_ZONE_CONFIG_PATH}/rabbitmq/data:/var/lib/rabbitmq \
       --volume ${DEV_ZONE_CONFIG_PATH}/rabbitmq/rabbitmq.conf:/etc/rabbitmq/conf.d/10-defaults.conf:ro \
@@ -410,6 +411,7 @@ kafka() {
       --env KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092 \
       --env KAFKA_LISTENERS=PLAINTEXT://kafka:29092,CONTROLLER://kafka:29094,PLAINTEXT_HOST://0.0.0.0:9092 \
       --env KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT \
+      --env VIRTUAL_HOST=kafka.${CONTAINER_FQDN:-nurrony.localhost} \
       confluentinc/cp-kafka:${CONFLUENT_PLATFORM_VERSION:-latest}
   else
     echo "kafka broker $CONFLUENT_PLATFORM_VERSION is already running"
@@ -435,7 +437,7 @@ mailserver() {
       --env MP_SMTP_AUTH_ACCEPT_ANY=true \
       --env MP_DATABASE=/data/mailpit.db \
       --env MP_SMTP_AUTH_ALLOW_INSECURE=true \
-      --env VIRTUAL_HOST=mail.nurrony.localhost \
+      --env VIRTUAL_HOST=mail.${CONTAINER_FQDN:-nurrony.localhost} \
       --volume ${DEV_ZONE_CONFIG_PATH}/mailserver:/data \
       axllent/mailpit:latest
   else
@@ -456,7 +458,7 @@ zipkin() {
       --network ${DEV_CONTAINER_NETWORK_NAME} \
       --publish 9411:9411 \
       --env VIRTUAL_PORT=9411 \
-      --env VIRTUAL_HOST=zipkin.nurrony.localhost \
+      --env VIRTUAL_HOST=zipkin.${CONTAINER_FQDN:-nurrony.localhost} \
       openzipkin/zipkin:latest
   else
     echo "zipkin 3.x.x is already running"
@@ -478,12 +480,12 @@ pgserver() {
       --network ${DEV_CONTAINER_NETWORK_NAME} \
       --ulimit memlock=-1:-1 \
       --memory-swappiness=0 \
-      --volume ${DEV_ZONE_CONFIG_PATH}/databases/postgres/${VERSION}:/var/lib/postgresql/data \
       --env POSTGRES_USER=postgres \
       --env POSTGRES_DB=$DBNAME \
       --env POSTGRES_PASSWORD=nurrony \
       --publish $PORT:5432 \
       --name pgserver${VERSION//./-} \
+      --volume ${DEV_ZONE_CONFIG_PATH}/databases/postgres/${VERSION}:/var/lib/postgresql/data \
       postgres:$VERSION
   else
     echo "postgres $VERSION.x.x is already running"
@@ -505,13 +507,13 @@ pga() {
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "pgAdmin4 is not running, starting it for you."
     docker container run -dit \
-      --env VIRTUAL_HOST=pga.nurrony.localhost \
-      --env PGADMIN_DEFAULT_EMAIL=rony@nurrony.info \
-      --env PGADMIN_DEFAULT_PASSWORD=nurrony \
-      --env PGADMIN_DISABLE_POSTFIX=yes \
-      --network ${DEV_CONTAINER_NETWORK_NAME} \
-      --expose 80 \
       --name pga \
+      --expose 80 \
+      --network ${DEV_CONTAINER_NETWORK_NAME} \
+      --env PGADMIN_DISABLE_POSTFIX=yes \
+      --env PGADMIN_DEFAULT_PASSWORD=nurrony \
+      --env PGADMIN_DEFAULT_EMAIL=rony@nurrony.info \
+      --env VIRTUAL_HOST=pga.${CONTAINER_FQDN:-nurrony.localhost} \
       dpage/pgadmin4
   else
     echo 'pgAdmin4 is already running'
@@ -544,7 +546,6 @@ elasticsearch() {
       --env "http.max_content_length=200mb" \
       --env "node.name=local-elasticsearch" \
       --env "cluster.name=local-elasticsearch" \
-      --env VIRTUAL_HOST=elasticserver.nurrony.localhost \
       --env "http.cors.allow-headers: X-Requested-With,Content-Type,Content-Length,Authorization" \
       docker.elastic.co/elasticsearch/elasticsearch:7.17.24 "$@"
   else
@@ -565,7 +566,7 @@ elasticview() {
       --network ${DEV_CONTAINER_NETWORK_NAME} \
       --name elasticview \
       --env VIRTUAL_PORT=8080 \
-      --env VIRTUAL_HOST=elasticsearch.nurrony.localhost \
+      --env VIRTUAL_HOST=elasticsearch.${CONTAINER_FQDN:-nurrony.localhost} \
       --volume "${DEV_ZONE_CONFIG_PATH}/databases/elasticsearch/default_clusters.json:/usr/share/nginx/html/api/default_clusters.json:ro" \
       cars10/elasticvue
   else
@@ -713,7 +714,7 @@ grafana() {
       --network ${DEV_CONTAINER_NETWORK_NAME} \
       --expose 3000 \
       --publish ${GRAFANA_PORT}:3000 \
-      --env VIRTUAL_HOST="grafana.nurrony.localhost" \
+      --env VIRTUAL_HOST=grafana.${CONTAINER_FQDN:-nurrony.localhost} \
       --env GF_FEATURE_TOGGLES_ENABLE="traceqlEditor metricsSummary" \
       --env GF_FEATURE_TOGGLES_ENABLE="accessControlOnCall" \
       --env GF_INSTALL_PLUGINS="https://storage.googleapis.com/integration-artifacts/grafana-lokiexplore-app/grafana-lokiexplore-app-latest.zip;grafana-lokiexplore-app" \
@@ -734,8 +735,8 @@ gitlab() {
       --shm-size=256m \
       --publish 8888:80 \
       --publish 22022:22 \
-      --name git.nurrony.localhost \
-      --hostname git.nurrony.localhost \
+      --name git.${CONTAINER_FQDN:-nurrony.localhost} \ \
+      --hostname git.${CONTAINER_FQDN:-nurrony.localhost} \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
       --volume ${DEV_ZONE_CONFIG_PATH}/gitlab/gitlab.rb:/gitlab.rb \
       --volume ${DEV_ZONE_CONFIG_PATH}/gitlab/storage/gitlab/configs:/etc/gitlab \
@@ -743,7 +744,7 @@ gitlab() {
       --volume ${DEV_ZONE_CONFIG_PATH}/gitlab/storage/gitlab/logs:/var/log/gitlab \
       --env VIRTUAL_PORT=80 \
       --env GITLAB_OMNIBUS_CONFIG="from_file('/gitlab.rb')" \
-      --env VIRTUAL_HOST=git.nurrony.localhost,registry-git.nurrony.localhost \
+      --env VIRTUAL_HOST=git.${CONTAINER_FQDN:-nurrony.localhost},registry-git.${CONTAINER_FQDN:-nurrony.localhost} \
       gitlab/gitlab-ce:latest
   else
     echo "gitlab server is already running"
@@ -766,10 +767,10 @@ sonarqube() {
       --env VIRTUAL_PORT=9000 \
       --env SONAR_JDBC_PASSWORD=nurrony \
       --env SONAR_JDBC_USERNAME=postgres \
-      --name sonarqube.nurrony.localhost \
-      --hostname sonarqube.nurrony.localhost \
       --env SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true \
-      --env VIRTUAL_HOST=sonarqube.nurrony.localhost \
+      --name sonarqube.${CONTAINER_FQDN:-nurrony.localhost} \
+      --hostname sonarqube.${CONTAINER_FQDN:-nurrony.localhost} \
+      --env VIRTUAL_HOST=sonarqube.${CONTAINER_FQDN:-nurrony.localhost} \
       --env SONAR_JDBC_URL=jdbc:postgresql://${RUNNING_PGSERVER_NAME}:5432/sonarqube \
       --volume ${DEV_ZONE_CONFIG_PATH}/sonarqube/storage/data:/opt/sonarqube/data \
       --volume ${DEV_ZONE_CONFIG_PATH}/sonarqube/storage/logs:/opt/sonarqube/logs \
@@ -831,12 +832,12 @@ EOF
       --publish 50000:50000 \
       --env VIRTUAL_PORT=8080 \
       --env DOCKER_TLS_VERIFY=1 \
-      --name jenkins.nurrony.localhost \
-      --hostname jenkins.nurrony.localhost \
       --env DOCKER_CERT_PATH=/certs/client \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
       --env DOCKER_HOST=tcp://docker:2376 \
-      --env VIRTUAL_HOST=jenkins.nurrony.localhost \
+      --name jenkins.${CONTAINER_FQDN:-nurrony.localhost} \
+      --hostname jenkins.${CONTAINER_FQDN:-nurrony.localhost} \
+      --env VIRTUAL_HOST=jenkins.${CONTAINER_FQDN:-nurrony.localhost} \
       --volume "${DEV_ZONE_CONFIG_PATH}/jenkins/certs:/certs/client:ro" \
       --volume "${DEV_ZONE_CONFIG_PATH}/jenkins/data:/var/jenkins_home" \
       ${IMAGE_NAME}

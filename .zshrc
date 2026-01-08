@@ -47,6 +47,7 @@ zinit wait'10' lucid light-mode for \
   as'program' from'gh-r' medialab/xan \
   as'program' from'gh-r' danielmiessler/Fabric \
   as'program' from'gh-r' PaulJuliusMartinez/jless \
+  as'program' from'gh-r' mv'witr-darwin-* -> witr' pranshuparmar/witr \
   as'program' from'gh-r' atpull'%atclone' atclone'./txeh completion zsh > _txeh' txn2/txeh
 
 

@@ -72,8 +72,8 @@ traefik() {
   --providers.docker=true \
   --providers.docker.exposedbydefault=false \
   --providers.docker.network=${DEV_CONTAINER_NETWORK_NAME} \
-  --providers.docker.tls.cert=/certs/nurrony.localhost.crt \
-  --providers.docker.tls.key=/certs/nurrony.localhost.crt \
+  --providers.docker.tls.cert=/certs/${CONTAINER_FQDN:-nurrony.localhost}.crt \
+  --providers.docker.tls.key=/certs/${CONTAINER_FQDN:-nurrony.localhost}.key \
   --entrypoints.web.address=:80 \
   --providers.file.filename=/tls.yml \
   --entrypoints.websecure.address=:443 \
@@ -135,7 +135,7 @@ portainer() {
     docker container run -it -d --privileged \
       --volume /var/run/docker.sock:/var/run/docker.sock:ro \
       --volume ${DEV_ZONE_CONFIG_PATH}/portainer:/data \
-      --env VIRTUAL_HOST=portainer.nurrony.localhost \
+      --env VIRTUAL_HOST=portainer.${CONTAINER_FQDN:-nurrony.localhost} \
       --expose 9000 \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
       --name portainer \
@@ -234,9 +234,9 @@ nifiserver() {
         --name nifiserver-${VERSION//./-} \
         --hostname nifiserver-${VERSION//./-} \
         --network ${DEV_CONTAINER_NETWORK_NAME} \
-        --env VIRTUAL_HOST=nifi.nurrony.localhost \
         --env SINGLE_USER_CREDENTIALS_USERNAME=admin \
         --env SINGLE_USER_CREDENTIALS_PASSWORD=NifiAdmin@121 \
+        --env VIRTUAL_HOST=nifi.${CONTAINER_FQDN:-nurrony.localhost} \
         --volume ${NIFI_DATA_DIR}:/opt/data \
         --volume ${NIFI_SHARED_DIR}:/opt/nifi/nifi-current/extensions \
         --volume ${DEV_ZONE_CONFIG_PATH}/nifiserver/${VERSION//./-}:/opt/nifi \
@@ -244,9 +244,9 @@ nifiserver() {
   else
     echo "nifi server $VERSION is already running"
   fi
-  echo "URL: https://nifi.nurrony.localhost/nifi"
   echo "Username: admin"
   echo "Password: NifiAdmin@121"
+  echo "URL: https://nifi.${CONTAINER_FQDN:-nurrony.localhost}/nifi"
 }
 
 mysql() {
@@ -269,7 +269,7 @@ dynamodb() {
       --workdir /home/dynamodblocal \
       --publish "8000:8000" \
       --expose 8000 \
-      --env VIRTUAL_HOST=dynamodb.nurrony.localhost \
+      --env VIRTUAL_HOST=dynamodb.${CONTAINER_FQDN:-nurrony.localhost} \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
       --name dynamodb \
       amazon/dynamodb-local -jar DynamoDBLocal.jar -sharedDb -optimizeDbBeforeStartup -dbPath ./data
@@ -291,12 +291,12 @@ pma() {
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "phpMyAdmin is not running, starting it for you."
     docker container run -it -d \
-      --env UPLOAD_LIMIT=100M \
-      --env VIRTUAL_HOST=pma.nurrony.localhost \
-      --env PMA_ARBITRARY=1 \
-      --network ${DEV_CONTAINER_NETWORK_NAME} \
       --expose 80 \
       --name pma \
+      --network ${DEV_CONTAINER_NETWORK_NAME} \
+      --env UPLOAD_LIMIT=100M \
+      --env PMA_ARBITRARY=1 \
+      --env VIRTUAL_HOST=pma.${CONTAINER_FQDN:-nurrony.localhost} \
       phpmyadmin/phpmyadmin
   else
     echo 'phpMyAdmin is already running'
@@ -314,14 +314,14 @@ myblog() {
     echo "blog server is not running, starting it for you."
     docker container run -it -d \
       --volume ${DEV_ZONE}/projects/open-sources/nurrony.info/ghost-content:/var/lib/ghost/content \
-      --env VIRTUAL_HOST=blog.nurrony.localhost \
-      --env url=http://blog.nurrony.localhost \
+      --env VIRTUAL_HOST=blog.${CONTAINER_FQDN:-nurrony.localhost} \
+      --env url=http://blog.${CONTAINER_FQDN:-nurrony.localhost} \
       --env database__client=mysql \
       --env database__connection__host=mysqlserver \
       --env database__connection__user=root \
       --env database__connection__password=nurrony \
       --env database__connection__database=rons_blog \
-      --env DEV_DOMAIN=http://blog.nurrony.localhost \
+      --env DEV_DOMAIN=http://blog.${CONTAINER_FQDN:-nurrony.localhost} \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
       --name personal-blog \
       ghost:2-alpine
@@ -692,7 +692,7 @@ keycloak() {
       --env KC_HEALTH_ENABLED=true \
       --env KC_BOOTSTRAP_ADMIN_USERNAME="root" \
       --env KC_BOOTSTRAP_ADMIN_PASSWORD="nurrony" \
-      --env VIRTUAL_HOST=keycloak.nurrony.localhost \
+      --env VIRTUAL_HOST=keycloak.${CONTAINER_FQDN:-nurrony.localhost} \
       quay.io/keycloak/keycloak:latest start-dev
   else
     echo "keycloak server is already running"

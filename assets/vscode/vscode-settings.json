@@ -95,7 +95,7 @@
   "editor.cursorWidth": 2,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.emptySelectionClipboard": false,
-  "editor.fontFamily": "'JetBrainsMono Nerd Font Mono', Monaco, monospace",
+  "editor.fontFamily": "'JetBrainsMonoNL Nerd Font Mono Propo', Monaco, monospace",
   "editor.fontLigatures": true,
   "editor.fontSize": 17,
   "editor.fontWeight": "400",
@@ -132,7 +132,26 @@
   "editor.suggest.showStatusBar": true,
   "editor.tabSize": 2,
   "editor.tokenColorCustomizations": {
-    "textMateRules": []
+    "[Tokyo Night]": {
+      "textMateRules": [
+        {
+          "scope": [
+            "comment",
+            "meta.var.expr storage.type",
+            "keyword.control.flow",
+            "keyword.control.return",
+            "meta.directive.vue punctuation.separator.key-value.html",
+            "meta.directive.vue entity.other.attribute-name.html",
+            "tag.decorator.js entity.name.tag.js",
+            "tag.decorator.js punctuation.definition.tag.js",
+            "storage.modifier"
+          ],
+          "settings": {
+            "fontStyle": ""
+          }
+        }
+      ]
+    }
   },
   "editor.unicodeHighlight.ambiguousCharacters": false,
   "emmet.includeLanguages": {
@@ -378,7 +397,7 @@
   "window.restoreWindows": "none",
   "window.titleBarStyle": "custom",
   "workbench.activityBar.location": "bottom",
-  "workbench.colorTheme": "Catppuccin Mocha",
+  "workbench.colorTheme": "Tokyo Night",
   "workbench.editor.empty.hint": "hidden",
   "workbench.editor.enablePreview": false,
   "workbench.editor.preferHistoryBasedLanguageDetection": true,

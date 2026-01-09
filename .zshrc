@@ -36,6 +36,7 @@ zinit wait'3' lucid light-mode for \
   OMZP::git \
   OMZP::mvn \
   OMZP::sudo \
+  OMZP::podman \
   OMZP::ansible \
   OMZP::extract \
   OMZP::command-not-found \

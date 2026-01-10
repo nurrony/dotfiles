@@ -154,8 +154,6 @@ traefik() {
       --providers.file.watch=true
 }
 
-
-
 nginx-proxy() {
   del_stopped nginx-proxy
   local state=$(podman inspect --format "{{.State.Running}}" nginx-proxy 2>/dev/null)
@@ -691,33 +689,6 @@ bees() {
     ${CONTAINER_REPO_PREFIX}/beeswithmachineguns "$@"
 }
 
-###
-### Awesome sauce by @jpetazzo
-###
-command_not_found_handle() {
-  # Check if there is a container image with that name
-  if ! podman inspect --format '{{ .Author }}' "$1" >&/dev/null; then
-    echo "$0: $1: command not found"
-    return
-  fi
-
-  # Check that it's really the name of the image, not a prefix
-  if podman inspect --format '{{ .Id }}' "$1" | grep -q "^$1"; then
-    echo "$0: $1: command not found"
-    return
-  fi
-
-  #  podman container run -ti -u $(whoami) -w "$HOME" \
-  #   $(env | cut -d= -f1 | awk '{print "-e", $1}') \
-  #   --device /dev/snd \
-  #   --volume /etc/passwd:/etc/passwd:ro \
-  #   --volume /etc/group:/etc/group:ro \
-  #   --volume /etc/localtime:/etc/localtime:ro \
-  #   --volume /home:/home \
-  #   --volume /tmp/.X11-unix:/tmp/.X11-unix \
-  #   "${CONTAINER_REPO_PREFIX}/$@"
-}
-
 dive() {
   del_stopped dive
   podman container run --rm -it --privileged \
@@ -762,6 +733,7 @@ keycloak() {
   fi
 
 }
+
 
 grafana() {
   del_stopped grafana
@@ -910,10 +882,29 @@ EOF
   fi
 }
 
-dind() {
-  del_stopped dind
-  local state=$(podman inspect --format "{{.State.Running}}" dind 2>/dev/null)
-  if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
-  else
+###
+### Awesome sauce by @jpetazzo
+###
+command_not_found_handle() {
+  # Check if there is a container image with that name
+  if ! podman inspect --format '{{ .Author }}' "$1" >&/dev/null; then
+    echo "$0: $1: command not found"
+    return
   fi
+
+  # Check that it's really the name of the image, not a prefix
+  if podman inspect --format '{{ .Id }}' "$1" | grep -q "^$1"; then
+    echo "$0: $1: command not found"
+    return
+  fi
+
+  #  podman container run -ti -u $(whoami) -w "$HOME" \
+  #   $(env | cut -d= -f1 | awk '{print "-e", $1}') \
+  #   --device /dev/snd \
+  #   --volume /etc/passwd:/etc/passwd:ro \
+  #   --volume /etc/group:/etc/group:ro \
+  #   --volume /etc/localtime:/etc/localtime:ro \
+  #   --volume /home:/home \
+  #   --volume /tmp/.X11-unix:/tmp/.X11-unix \
+  #   "${CONTAINER_REPO_PREFIX}/$@"
 }

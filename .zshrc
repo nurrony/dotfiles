@@ -55,7 +55,6 @@ zinit wait'10' lucid light-mode for \
 # COMPLETIONS FIRST (important)
 autoload -Uz compinit
 compinit -d "${XDG_CACHE_HOME:-$HOME/.cache}/zcompdump"
-
 zinit cdreplay -q
 
 #----------------------------------------------------------------

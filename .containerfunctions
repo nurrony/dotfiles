@@ -168,7 +168,7 @@ nginx-proxy() {
       --publish 443:443 \
       --name nginx-proxy \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
-      --volume /var/run/docker.sock:/tmp/docker.sock:ro \
+      --volume /run/podman/podman.sock:/tmp/docker.sock:ro \
       --volume ${DEV_ZONE_CONFIG_PATH}/nginx/certs:/etc/nginx/certs:ro \
       --volume ${DEV_ZONE_CONFIG_PATH}/nginx/vhost.d:/etc/nginx/vhost.d:ro \
       --volume ${DEV_ZONE_CONFIG_PATH}/nginx/conf.d/custom_settings.conf:/etc/nginx/conf.d/custom_settings.conf:ro \
@@ -209,7 +209,7 @@ portainer() {
     echo "portainer server is not running, starting it for you."
     mkdir -p ${DEV_ZONE_CONFIG_PATH}/portainer;
     podman container run -it -d --privileged \
-      --volume /var/run/docker.sock:/var/run/docker.sock:ro \
+      --volume /run/podman/podman.sock:/run/podman/podman.sock:ro \
       --volume ${DEV_ZONE_CONFIG_PATH}/portainer:/data \
       --env VIRTUAL_HOST=portainer.${CONTAINER_FQDN:-nurrony.localhost} \
       --expose 9000 \
@@ -245,7 +245,7 @@ upstream ${server} { server ${route}; }
 EOF
 
   # restart nginx
-  docker restart nginx
+  podman container restart nginx
 
   # add host to /etc/hosts
   hostess add $server 127.0.0.1
@@ -295,10 +295,10 @@ nifiserver() {
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
       echo "nifiserver $VERSION server is not running, starting it for you."
       mkdir -p ${DEV_ZONE_CONFIG_PATH}/nifiserver/${VERSION//./-}
-      # if ! docker volume inspect "${VOLUME_NAME}" >/dev/null 2>&1; then
+      # if ! podman volume inspect "${VOLUME_NAME}" >/dev/null 2>&1; then
       #   echo "inside volume block"
       #   mkdir -p ${DEV_ZONE_CONFIG_PATH}/nifiserver/${VERSION//./-} &&
-      #   docker volume create --opt o=bind --driver local --opt type=none \
+      #   podman volume create --opt o=bind --driver local --opt type=none \
       #     --opt device=${DEV_ZONE_CONFIG_PATH}/nifiserver/${VERSION//./-} \
       #     ${VOLUME_NAME}
       # fi
@@ -326,9 +326,9 @@ nifiserver() {
 }
 
 mysql() {
-  local RUNNING_DBSERVER_NAME=$(docker ps --filter "name=mysqlserver" --format "{{.Names}}")
+  local RUNNING_DBSERVER_NAME=$(podman ps --filter "name=mysqlserver" --format "{{.Names}}")
   relies_on $RUNNING_DBSERVER_NAME
-  docker exec -it $RUNNING_DBSERVER_NAME mysql "$@"
+  podman container exec -it $RUNNING_DBSERVER_NAME mysql "$@"
 }
 
 dynamodb() {
@@ -350,7 +350,7 @@ dynamodb() {
       --name dynamodb \
       amazon/dynamodb-local -jar DynamoDBLocal.jar -sharedDb -optimizeDbBeforeStartup -dbPath ./data
     if [ "$1" != "" ]; then
-      docker network connect $1 dynamodb
+      podman network connect $1 dynamodb
     fi
   else
     echo 'local dynamodb server is already running'
@@ -430,7 +430,7 @@ mongoserver() {
 }
 
 mongo() {
-  docker exec -t mongoserver5 mongo "$@"
+  podman container exec -t mongoserver5 mongo "$@"
 }
 
 # check https://github.com/GoogleCloudPlatform/click-to-deploy/blob/master/docker/rabbitmq/README.md
@@ -570,9 +570,9 @@ pgserver() {
 }
 
 psql() {
-  local RUNNING_PGSERVER_NAME=$(docker ps --filter "name=pgserver" --format "{{.Names}}")
+  local RUNNING_PGSERVER_NAME=$(podman ps --filter "name=pgserver" --format "{{.Names}}")
   relies_on $RUNNING_DBSERVER_NAME
-  docker exec -it $RUNNING_PGSERVER_NAME psql "$@"
+  podman container exec -it $RUNNING_PGSERVER_NAME psql "$@"
 }
 
 pga() {
@@ -652,10 +652,6 @@ elasticview() {
 
 }
 
-containerssh() {
-  docker exec -it "$@"
-}
-
 composer() {
   podman container run --rm --interactive --tty --name composer \
     --user $(id -u):$(id -g) \
@@ -685,7 +681,7 @@ sysdig() {
   podman container run -it \
     --privileged \
     --name sysdig-container \
-    --volume /var/run/docker.sock:/var/run/docker.sock \
+    --volume /run/podman/podman.sock:/run/podman/podman.sock \
     --volume /dev:/host/dev \
     --volume /proc:/host/proc:ro \
     --volume /boot:/host/boot:ro \
@@ -737,7 +733,7 @@ dive() {
   podman container run --rm -it --privileged \
     --network ${DEV_CONTAINER_NETWORK_NAME} \
     --name dive \
-    --volume /var/run/docker.sock:/var/run/docker.sock:ro \
+    --volume /run/podman/podman.sock:/run/podman/podman.sock:ro \
     wagoodman/dive:latest "$@"
 }
 
@@ -836,7 +832,7 @@ sonarqube() {
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     relies_on nginx-proxy
     relies_on pgserver
-    local RUNNING_PGSERVER_NAME=$(docker ps --filter "name=pgserver" --format "{{.Names}}")
+    local RUNNING_PGSERVER_NAME=$(podman ps --filter "name=pgserver" --format "{{.Names}}")
     echo "sonarqube server is not running, starting it for you."
     mkdir -p ${DEV_ZONE_CONFIG_PATH}/sonarqube/{configs,storage/{extensions,data,logs}};
     podman container run -dit \
@@ -871,9 +867,9 @@ jenkins() {
     local IMAGE_NAME="nmrony/jenkins:lts-jdk21-docker"
     relies_on nginx-proxy
     # Check if the image exists locally
-    if ! docker image inspect "$IMAGE_NAME" > /dev/null 2>&1; then
+    if ! podman image inspect "$IMAGE_NAME" > /dev/null 2>&1; then
       echo "${IMAGE_NAME} not found locally. Building it..."
-      docker build -t "$IMAGE_NAME" - <<EOF
+      podman image build -t "$IMAGE_NAME" - <<EOF
       FROM jenkins/jenkins:lts-jdk21
 
       USER root

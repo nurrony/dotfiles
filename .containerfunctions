@@ -1,7 +1,4 @@
 #!/usr/bin/env bash
-# Bash wrappers for containers run commands
-export CONTAINER_REPO_PREFIX=jess
-
 
 # run the following commands sshing into the podman machine
 # sudo ln -s /Users/nurrony/.config/containers/registries.conf \

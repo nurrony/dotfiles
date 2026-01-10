@@ -254,14 +254,6 @@ EOF
   open "http://${server}"
 }
 
-dhtop() {
-  podman container run --rm -it \
-    --pid host \
-    --network none \
-    --name htop \
-    ${CONTAINER_REPO_PREFIX}/htop
-}
-
 mysqlserver() {
   local VERSION=${1:-8.0}
   local PORT=${2:-3306}

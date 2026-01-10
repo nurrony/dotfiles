@@ -499,8 +499,6 @@ mailserver() {
       --network ${DEV_CONTAINER_NETWORK_NAME} \
       --expose 8025 \
       --name mailserver \
-      --publish 1025:1025 \
-      --publish 1110:1110 \
       --env TZ=Asia/Dhaka \
       --env VIRTUAL_PORT=8025 \
       --env MP_SMTP_AUTH_ACCEPT_ANY=true \
@@ -536,7 +534,7 @@ zipkin() {
 
 # spawn up postgres server. takes version as params. defaults to 16.x.x
 pgserver() {
-  local VERSION=${1:-17}
+  local VERSION=${1:-18}
   local PORT=${2:-5432}
   local DBNAME=${3:-experiments}
   del_stopped pgserver${VERSION//./-}

@@ -66,6 +66,7 @@
     "camelk.tools.kamel-path": "/Volumes/Library/Application Support/Code/User/globalStorage/redhat.vscode-camelk/camelk/tools/kamel/kamel"
   },
   "cfnLint.path": "/usr/local/bin/cfn-lint",
+  "debug.breakpointsView.presentation": "tree",
   "debug.console.acceptSuggestionOnEnter": "on",
   "debug.inlineValues": "on",
   "debug.toolBarLocation": "floating",
@@ -151,7 +152,8 @@
           }
         }
       ]
-    }
+    },
+    "textMateRules": []
   },
   "editor.unicodeHighlight.ambiguousCharacters": false,
   "emmet.includeLanguages": {
@@ -380,6 +382,7 @@
   "terminal.integrated.fontSize": 16,
   "terminal.integrated.fontWeight": "400",
   "terminal.integrated.inheritEnv": false,
+  "terminal.integrated.initialHint": false,
   "terminal.integrated.macOptionIsMeta": true,
   "terminal.integrated.persistentSessionReviveProcess": "never",
   "terminal.integrated.tabs.enableAnimation": false,

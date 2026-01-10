@@ -886,14 +886,4 @@ command_not_found_handle() {
     echo "$0: $1: command not found"
     return
   fi
-
-  #  podman container run -ti -u $(whoami) -w "$HOME" \
-  #   $(env | cut -d= -f1 | awk '{print "-e", $1}') \
-  #   --device /dev/snd \
-  #   --volume /etc/passwd:/etc/passwd:ro \
-  #   --volume /etc/group:/etc/group:ro \
-  #   --volume /etc/localtime:/etc/localtime:ro \
-  #   --volume /home:/home \
-  #   --volume /tmp/.X11-unix:/tmp/.X11-unix \
-  #   "${CONTAINER_REPO_PREFIX}/$@"
 }

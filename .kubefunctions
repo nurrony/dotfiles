@@ -73,6 +73,72 @@ function saildevship() {
   fi
 }
 
+function create-kind-cluster() {
+
+  # Check kind
+  if ! command -v kind >/dev/null 2>&1; then
+    echo "kind not installed, skipping cluster creation"
+    exit 0
+  fi
+
+  # Check podman
+  if ! command -v podman >/dev/null 2>&1; then
+    echo "podman not installed"
+    exit 1
+  fi
+
+  if kind get clusters | grep -q .; then
+    echo "A kind cluster is already running — skipping creation"
+    kind get clusters
+    exit 0
+  fi
+  local CLUSTER_NAME=${1:-devship}
+  local CLUSTER_NETWORK=${DEV_CONTAINER_NETWORK_NAME:-ronsvpn}
+  echo "Creating kind cluster called ${CLUSTER_NAME}"
+  KIND_EXPERIMENTAL_PROVIDER=podman KIND_EXPERIMENTAL_DOCKER_NETWORK=${CLUSTER_NETWORK} kind create cluster --name ${CLUSTER_NAME} --config - <<-EOF
+# kind-config.yaml
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+networking:
+  apiServerPort: 6443
+  apiServerAddress: "0.0.0.0"
+nodes:
+  # Control plane node
+  - role: control-plane
+    kubeadmConfigPatches:
+      - |
+        kind: InitConfiguration
+        nodeRegistration:
+          kubeletExtraArgs:
+            node-labels: "ingress-ready=true"
+    extraPortMappings:
+      # Expose ingress controller ports
+      - containerPort: 80
+        hostPort: 80
+        protocol: TCP
+      - containerPort: 443
+        hostPort: 443
+        protocol: TCP
+    extraMounts:
+      # Mount host directory for development
+      - hostPath: ${DEV_ZONE:-$HOME}
+        containerPath: /shared
+        readOnly: false
+        selinuxRelabel: false
+        propagation: Bidirectional
+
+  # Worker nodes
+  - role: worker
+    extraMounts:
+      - hostPath: ${DEV_ZONE:-$HOME}
+        containerPath: /devzone
+        readOnly: false
+        selinuxRelabel: false
+        propagation: Bidirectional
+
+EOF
+}
+
 # aliases
 alias k8s="kubectl"
 alias nukedevship='k3d cluster stop devship && k3d cluster delete devship && echo "\ndevship k8s cluster has been nuked"'

@@ -678,17 +678,6 @@ sysdig() {
     sysdig/sysdig
 }
 
-bees() {
-  podman container run -it --rm \
-    --env NOTARY_TOKEN \
-    --volume $HOME/.bees:/root/.bees \
-    --volume $HOME/.boto:/root/.boto \
-    --volume $HOME/.dev:/root/.ssh:ro \
-    --log-driver none \
-    --name bees \
-    ${CONTAINER_REPO_PREFIX}/beeswithmachineguns "$@"
-}
-
 dive() {
   del_stopped dive
   podman container run --rm -it --privileged \

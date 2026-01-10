@@ -67,7 +67,7 @@ traefik_validate() {
 
 traefik_safe_write() {
   local TARGET="$1"
-  local TMP="${TARGET}.tmp"
+  local TMP=".${TARGET}.tmp"
 
   cat > "$TMP" || return 1
 
@@ -75,7 +75,7 @@ traefik_safe_write() {
     mv "$TMP" "$TARGET"
     echo "Traefik config applied: $(basename "$TARGET")"
   else
-    echo "❌ Traefik config invalid — rejected"
+    echo "Traefik config invalid — rejected"
     rm -f "$TMP"
     return 1
   fi
@@ -164,10 +164,10 @@ nginx-proxy() {
     mkdir -p ${DEV_ZONE_CONFIG_PATH}/nginx/{certs,vhost.d,conf.d};
     podman container run -it -d \
       --privileged \
-      --network ${DEV_CONTAINER_NETWORK_NAME} \
       --publish 80:80 \
       --publish 443:443 \
       --name nginx-proxy \
+      --network ${DEV_CONTAINER_NETWORK_NAME} \
       --volume /var/run/docker.sock:/tmp/docker.sock:ro \
       --volume ${DEV_ZONE_CONFIG_PATH}/nginx/certs:/etc/nginx/certs:ro \
       --volume ${DEV_ZONE_CONFIG_PATH}/nginx/vhost.d:/etc/nginx/vhost.d:ro \
@@ -186,10 +186,10 @@ proxy-manager() {
     mkdir -p ${DEV_ZONE_CONFIG_PATH}/nginx/manager/{data,letsencrypt};
     podman container run -it --detach \
       --privileged \
-      --name proxy-manager \
       --publish 80:80 \
       --publish 443:443 \
       --publish 8888:81 \
+      --name proxy-manager \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
       --volume ${DEV_ZONE_CONFIG_PATH}/nginx/manager/data:/data:Z \
       --volume ${DEV_ZONE_CONFIG_PATH}/nginx/manager/letsencrypt:/etc/letsencrypt:Z \
@@ -272,11 +272,11 @@ mysqlserver() {
     echo "mysql $VERSION server is not running, starting it for you."
     mkdir -p ${DEV_ZONE_CONFIG_PATH}/databases/mysql/${VERSION} &&
       podman container run -it -d \
-        --volume ${DEV_ZONE_CONFIG_PATH}/databases/mysql/${VERSION}:/var/lib/mysql \
-        --env MYSQL_ROOT_PASSWORD=nurrony \
         --publish $PORT:3306 \
-        --network ${DEV_CONTAINER_NETWORK_NAME} \
+        --env MYSQL_ROOT_PASSWORD=nurrony \
         --name mysqlserver-${VERSION//./-} \
+        --network ${DEV_CONTAINER_NETWORK_NAME} \
+        --volume ${DEV_ZONE_CONFIG_PATH}/databases/mysql/${VERSION}:/var/lib/mysql \
         mysql:${VERSION}
   else
     echo "mysql server $VERSION is already running"

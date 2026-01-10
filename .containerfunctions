@@ -11,10 +11,6 @@ alias mypodmachine="podman machine init rons-podman-machine --now --cpus 4 --dis
 # alias docker to podman
 alias docker='podman'
 
-dlog() {
-  podman logs -f --tail 100 "$@"
-}
-
 # cleans all podman resources. run it cautiously
 dcleanup() {
   podman container prune --force 2>/dev/null

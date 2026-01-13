@@ -339,16 +339,16 @@ dynamodb() {
     podman container run -dit \
       --volume ${DEV_ZONE_CONFIG_PATH}/databases/dynamodb:/home/dynamodblocal/data \
       --expose 8000 \
-      --health-retries=5 \
-      --health-timeout=5s \
-      --health-interval=30s \
-      --health-start-period=20s \
-      --health-cmd="curl -f http://localhost:8000 || exit 1" \
+      --name dynamodb \
       --workdir /home/dynamodblocal \
       --env VIRTUAL_PORT=8000 \
       --env VIRTUAL_HOST=dynamodb.${CONTAINER_FQDN:-nurrony.localhost} \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
-      --name dynamodb \
+      --health-retries=5 \
+      --health-timeout=5s \
+      --health-interval=30s \
+      --health-start-period=20s \
+      --health-cmd="aws dynamodb list-tables --endpoint-url http://localhost:8000 --region us-east-1 >/dev/null 2>&1 || exit 1" \
       amazon/dynamodb-local -jar DynamoDBLocal.jar -sharedDb -optimizeDbBeforeStartup -dbPath ./data
     if [ "$1" != "" ]; then
       podman network connect $1 dynamodb

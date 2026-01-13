@@ -260,8 +260,9 @@ mysqlserver() {
     mkdir -p ${DEV_ZONE_CONFIG_PATH}/databases/mysql/${VERSION} &&
       podman container run -it -d \
         --publish $PORT:3306 \
-        --health-interval=15s \
         --health-retries=5 \
+        --health-interval=15s \
+        --health-start-period=5s \
         --health-cmd="mysqladmin ping -h localhost" \
         --env MYSQL_ROOT_PASSWORD=nurrony \
         --name mysqlserver-${VERSION//./-} \
@@ -306,6 +307,11 @@ nifiserver() {
         --volume ${NIFI_DATA_DIR}:/opt/data \
         --volume ${NIFI_SHARED_DIR}:/opt/nifi/nifi-current/extensions \
         --volume ${DEV_ZONE_CONFIG_PATH}/nifiserver/${VERSION//./-}:/opt/nifi \
+        --health-retries=5 \
+        --health-timeout=10s \
+        --health-interval=15s \
+        --health-start-period=120s \
+        --health-cmd="curl -f http://localhost:8080/nifi-api/system-diagnostics || exit 1" \
         apache/nifi:${VERSION}
   else
     echo "nifi server $VERSION is already running"

@@ -345,6 +345,7 @@ dynamodb() {
       --health-start-period=20s \
       --health-cmd="curl -f http://localhost:8000 || exit 1" \
       --workdir /home/dynamodblocal \
+      --env VIRTUAL_PORT=8000 \
       --env VIRTUAL_HOST=dynamodb.${CONTAINER_FQDN:-nurrony.localhost} \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
       --name dynamodb \

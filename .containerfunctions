@@ -260,6 +260,9 @@ mysqlserver() {
     mkdir -p ${DEV_ZONE_CONFIG_PATH}/databases/mysql/${VERSION} &&
       podman container run -it -d \
         --publish $PORT:3306 \
+        --health-interval=15s \
+        --health-retries=5 \
+        --health-cmd="mysqladmin ping -h localhost" \
         --env MYSQL_ROOT_PASSWORD=nurrony \
         --name mysqlserver-${VERSION//./-} \
         --network ${DEV_CONTAINER_NETWORK_NAME} \

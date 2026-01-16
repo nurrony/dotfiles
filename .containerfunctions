@@ -374,6 +374,11 @@ pma() {
       --env UPLOAD_LIMIT=100M \
       --env PMA_ARBITRARY=1 \
       --env VIRTUAL_HOST=pma.${CONTAINER_FQDN:-nurrony.localhost} \
+      --health-cmd='curl -fs http://127.0.0.1/ || exit 1' \
+      --health-interval=15s \
+      --health-timeout=5s \
+      --health-retries=5 \
+      --health-start-period=5s \
       phpmyadmin/phpmyadmin
   else
     echo 'phpMyAdmin is already running'

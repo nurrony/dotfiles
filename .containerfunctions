@@ -455,6 +455,10 @@ rabbitmq() {
       --env RABBITMQ_DEFAULT_USER=admin \
       --env RABBITMQ_DEFAULT_PASS=nurrony \
       --env VIRTUAL_PORT=15672 \
+      --health-retries=5 \
+      --health-interval=15s \
+      --health-start-period=10s \
+      --health-cmd="rabbitmq-diagnostics -q ping" \
       --env VIRTUAL_HOST=rabbitmq.${CONTAINER_FQDN:-nurrony.localhost} \
       --volume ${DEV_ZONE_CONFIG_PATH}/rabbitmq/certs:/etc/rabbitmq/ssl \
       --volume ${DEV_ZONE_CONFIG_PATH}/rabbitmq/data:/var/lib/rabbitmq \

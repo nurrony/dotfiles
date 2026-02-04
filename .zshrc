@@ -27,7 +27,6 @@ source "${ZINIT[BIN_DIR]}/zinit.zsh"
 # load essential completion
 zinit lucid light-mode for \
   as'completion' zsh-users/zsh-completions \
-  zdharma/fast-syntax-highlighting \
   as'program' from'gh-r' atclone'./zoxide init --cmd=j zsh > init.zsh' src'init.zsh' atpull'%atclone' pick'zoxide/zoxide' ajeetdsouza/zoxide \
   as'program' from'gh-r' mv'mise* -> mise' atclone'./mise completion zsh > _mise && ./mise activate zsh > init.zsh' src'init.zsh' atpull'%atclone' jdx/mise
 
@@ -41,7 +40,8 @@ zinit wait'3' lucid light-mode for \
   OMZP::extract \
   OMZP::command-not-found \
   pick'alias-tips.plugin.zsh' djui/alias-tips \
-  as'completion' pick'_curl' Valodim/zsh-curl-completion
+  as'completion' pick'_curl' Valodim/zsh-curl-completion \
+  zdharma/fast-syntax-highlighting
 
 zinit wait'10' lucid light-mode for \
   as'program' from'gh-r' jdx/usage \

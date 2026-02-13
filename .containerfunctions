@@ -3,7 +3,7 @@
 # run the following commands sshing into the podman machine
 # sudo ln -s /Users/nurrony/.config/containers/registries.conf \
 #  /etc/containers/registries.conf.d/999-podman-desktop-registries-from-host.conf
-alias mypodmachine="podman machine init --now --cpus 4 --disk-size 100 --memory 8192 --volume /Users:/Users --volume /private:/private --volume /var/folders:/var/folders --volume $DEV_ZONE:$DEV_ZONE --rootful"
+alias mypodmachine="podman machine init --now --cpus 4 --disk-size 30 --memory 8192 --volume /Users:/Users --volume /private:/private --volume /var/folders:/var/folders --volume $DEV_ZONE:$DEV_ZONE --rootful"
 alias docker='podman'
 
 # cleans all podman resources. run it cautiously
@@ -64,7 +64,7 @@ traefik_safe_write() {
   local TARGET="$1"
   local TMP=".${TARGET}.tmp"
 
-  cat > "$TMP" || return 1
+  cat >"$TMP" || return 1
 
   if traefik_validate; then
     mv "$TMP" "$TARGET"
@@ -107,7 +107,6 @@ http:
 EOF
 }
 
-
 traefik() {
   local TRAEFIK_BASE="${DEV_ZONE_CONFIG_PATH}/traefik"
 
@@ -132,21 +131,21 @@ traefik() {
     --volume "${TRAEFIK_BASE}/certs:/certs:ro" \
     --volume "${TRAEFIK_BASE}/dynamic:/dynamic:ro" \
     traefik:v3 \
-      --log.level=INFO \
-      --api.dashboard=true \
-      --api.insecure=true \
-      \
-      --entrypoints.web.address=:80 \
-      --entrypoints.websecure.address=:443 \
-      --entrypoints.traefik.address=:8080 \
-      \
-      --providers.podman=true \
-      --providers.podman.endpoint=unix:///run/podman/podman.sock \
-      --providers.podman.exposedbydefault=false \
-      --providers.podman.network="${DEV_CONTAINER_NETWORK_NAME}" \
-      \
-      --providers.file.directory=/dynamic \
-      --providers.file.watch=true
+    --log.level=INFO \
+    --api.dashboard=true \
+    --api.insecure=true \
+    \
+    --entrypoints.web.address=:80 \
+    --entrypoints.websecure.address=:443 \
+    --entrypoints.traefik.address=:8080 \
+    \
+    --providers.podman=true \
+    --providers.podman.endpoint=unix:///run/podman/podman.sock \
+    --providers.podman.exposedbydefault=false \
+    --providers.podman.network="${DEV_CONTAINER_NETWORK_NAME}" \
+    \
+    --providers.file.directory=/dynamic \
+    --providers.file.watch=true
 }
 
 nginx-proxy() {
@@ -154,7 +153,7 @@ nginx-proxy() {
   local state=$(podman inspect --format "{{.State.Running}}" nginx-proxy 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
-    mkdir -p ${DEV_ZONE_CONFIG_PATH}/nginx/{certs,vhost.d,conf.d};
+    mkdir -p ${DEV_ZONE_CONFIG_PATH}/nginx/{certs,vhost.d,conf.d}
     podman container run -it -d \
       --privileged \
       --publish 80:80 \
@@ -176,7 +175,7 @@ proxy-manager() {
   local state=$(podman inspect --format "{{.State.Running}}" proxy-manager 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
-    mkdir -p ${DEV_ZONE_CONFIG_PATH}/nginx/manager/{data,letsencrypt};
+    mkdir -p ${DEV_ZONE_CONFIG_PATH}/nginx/manager/{data,letsencrypt}
     podman container run -it --detach \
       --privileged \
       --publish 80:80 \
@@ -200,7 +199,7 @@ portainer() {
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "portainer server is not running, starting it for you."
-    mkdir -p ${DEV_ZONE_CONFIG_PATH}/portainer;
+    mkdir -p ${DEV_ZONE_CONFIG_PATH}/portainer
     podman container run -it -d --privileged \
       --volume /run/podman/podman.sock:/run/podman/podman.sock:ro \
       --volume ${DEV_ZONE_CONFIG_PATH}/portainer:/data \
@@ -282,17 +281,17 @@ nifiserver() {
   local state=$(podman inspect --format "{{.State.Running}}" nifiserver-${VERSION//./-} 2>/dev/null)
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
-      echo "nifiserver $VERSION server is not running, starting it for you."
-      mkdir -p ${DEV_ZONE_CONFIG_PATH}/nifiserver/${VERSION//./-}
-      # if ! podman volume inspect "${VOLUME_NAME}" >/dev/null 2>&1; then
-      #   echo "inside volume block"
-      #   mkdir -p ${DEV_ZONE_CONFIG_PATH}/nifiserver/${VERSION//./-} &&
-      #   podman volume create --opt o=bind --driver local --opt type=none \
-      #     --opt device=${DEV_ZONE_CONFIG_PATH}/nifiserver/${VERSION//./-} \
-      #     ${VOLUME_NAME}
-      # fi
+    echo "nifiserver $VERSION server is not running, starting it for you."
+    mkdir -p ${DEV_ZONE_CONFIG_PATH}/nifiserver/${VERSION//./-}
+    # if ! podman volume inspect "${VOLUME_NAME}" >/dev/null 2>&1; then
+    #   echo "inside volume block"
+    #   mkdir -p ${DEV_ZONE_CONFIG_PATH}/nifiserver/${VERSION//./-} &&
+    #   podman volume create --opt o=bind --driver local --opt type=none \
+    #     --opt device=${DEV_ZONE_CONFIG_PATH}/nifiserver/${VERSION//./-} \
+    #     ${VOLUME_NAME}
+    # fi
 
-      mkdir -p ${NIFI_SHARED_DIR} ${NIFI_DATA_DIR} && \
+    mkdir -p ${NIFI_SHARED_DIR} ${NIFI_DATA_DIR} &&
       podman container run -it -d --privileged \
         --env VIRTUAL_PORT=8080 \
         --env NIFI_WEB_HTTP_PORT=8080 \
@@ -333,7 +332,7 @@ dynamodb() {
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "local dynamodb server is not running, starting it for you."
-    mkdir -p ${DEV_ZONE_CONFIG_PATH}/databases/dynamodb;
+    mkdir -p ${DEV_ZONE_CONFIG_PATH}/databases/dynamodb
     podman container run -dit \
       --volume ${DEV_ZONE_CONFIG_PATH}/databases/dynamodb:/home/dynamodblocal/data \
       --expose 8000 \
@@ -418,7 +417,7 @@ mongoserver() {
   del_stopped mongoserver${VERSION}
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "mongoserver ${VERSION}.x.x is not running, starting it for you."
-    mkdir -p ${DEV_ZONE_CONFIG_PATH}/databases/mongodb/$VERSION;
+    mkdir -p ${DEV_ZONE_CONFIG_PATH}/databases/mongodb/$VERSION
     podman container run -dit \
       --user $(id -u):$(id -g) \
       --volume ${DEV_ZONE_CONFIG_PATH}/databases/mongodb/$VERSION:/data/db \
@@ -443,7 +442,7 @@ rabbitmq() {
   local state=$(podman inspect --format "{{.State.Running}}" rabbitmq 2>/dev/null)
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "rabbitmq broker is not running, starting it for you."
-    mkdir -p ${DEV_ZONE_CONFIG_PATH}/rabbitmq/{certs,data};
+    mkdir -p ${DEV_ZONE_CONFIG_PATH}/rabbitmq/{certs,data}
     podman container run --detach -it \
       --name rabbitmq \
       --hostname rabbitmq \
@@ -473,7 +472,7 @@ kafka() {
   local state=$(podman inspect --format "{{.State.Running}}" kafka 2>/dev/null)
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "kafka broker ${VERSION} is not running, starting it for you."
-    mkdir -p ${DEV_ZONE_CONFIG_PATH}/kafka;
+    mkdir -p ${DEV_ZONE_CONFIG_PATH}/kafka
     podman container run --detach -it \
       --name kafka \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
@@ -509,7 +508,7 @@ mailserver() {
   local state=$(podman inspect --format "{{.State.Running}}" mailserver 2>/dev/null)
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "mailserver is not running. starting is for you"
-    mkdir -p ${DEV_ZONE_CONFIG_PATH}/mailserver;
+    mkdir -p ${DEV_ZONE_CONFIG_PATH}/mailserver
     podman container run -d \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
       --expose 8025 \
@@ -611,7 +610,7 @@ elasticsearch() {
 
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "elasticsearch server is not running, starting it for you."
-    mkdir -p ${DEV_ZONE_CONFIG_PATH}/databases/elasticsearch/data;
+    mkdir -p ${DEV_ZONE_CONFIG_PATH}/databases/elasticsearch/data
     podman container run -it -d \
       --volume "${DEV_ZONE_CONFIG_PATH}/databases/elasticsearch/data:/usr/share/elasticsearch/data" \
       --publish 9200:9200 \
@@ -663,7 +662,6 @@ composer() {
     --volume ${PWD}:/var/www/html \
     nmrony/php:8.4-apache-dev composer "$@"
 }
-
 
 php7() {
   podman container run --rm --interactive --tty \
@@ -740,7 +738,6 @@ keycloak() {
 
 }
 
-
 grafana() {
   del_stopped grafana
   relies_on nginx-proxy
@@ -750,7 +747,7 @@ grafana() {
   local state=$(podman inspect --format "{{.State.Running}}" grafana 2>/dev/null)
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     echo "grafana is not running. starting grafana server for you"
-    mkdir -p ${DEV_ZONE_CONFIG_PATH}/monitoring/grafana/data;
+    mkdir -p ${DEV_ZONE_CONFIG_PATH}/monitoring/grafana/data
     podman container run -dit --name grafana \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
       --expose 3000 \
@@ -770,14 +767,13 @@ gitlab() {
   if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
     relies_on nginx-proxy
     echo "gitlab server is not running, starting it for you."
-    mkdir -p ${DEV_ZONE_CONFIG_PATH}/gitlab/storage/{runner,gitlab/{configs,data,logs}};
+    mkdir -p ${DEV_ZONE_CONFIG_PATH}/gitlab/storage/{runner,gitlab/{configs,data,logs}}
     podman container run -dit \
       --expose 80 \
       --shm-size=256m \
       --publish 8888:80 \
       --publish 22022:22 \
-      --name git.${CONTAINER_FQDN:-nurrony.localhost} \ \
-      --hostname git.${CONTAINER_FQDN:-nurrony.localhost} \
+      --name git.${CONTAINER_FQDN:-nurrony.localhost} \  --hostname git.${CONTAINER_FQDN:-nurrony.localhost} \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
       --volume ${DEV_ZONE_CONFIG_PATH}/gitlab/gitlab.rb:/gitlab.rb \
       --volume ${DEV_ZONE_CONFIG_PATH}/gitlab/storage/gitlab/configs:/etc/gitlab \
@@ -792,7 +788,6 @@ gitlab() {
   fi
 }
 
-
 # SonarQube NurRony@123456
 sonarqube() {
   del_stopped sonarqube
@@ -802,7 +797,7 @@ sonarqube() {
     relies_on pgserver
     local RUNNING_PGSERVER_NAME=$(podman ps --filter "name=pgserver" --format "{{.Names}}")
     echo "sonarqube server is not running, starting it for you."
-    mkdir -p ${DEV_ZONE_CONFIG_PATH}/sonarqube/{configs,storage/{extensions,data,logs}};
+    mkdir -p ${DEV_ZONE_CONFIG_PATH}/sonarqube/{configs,storage/{extensions,data,logs}}
     podman container run -dit \
       --publish 9000:9000 \
       --env VIRTUAL_PORT=9000 \
@@ -830,12 +825,12 @@ jenkins() {
   del_stopped jenkins-dind
   local state=$(podman inspect --format "{{.State.Running}}" jenkins 2>/dev/null)
   local dind_state=$(podman inspect --format "{{.State.Running}}" jenkins-dind 2>/dev/null)
-  mkdir -p ${DEV_ZONE_CONFIG_PATH}/jenkins/{certs,data};
+  mkdir -p ${DEV_ZONE_CONFIG_PATH}/jenkins/{certs,data}
   if [ "$state" == "false" ] || [ "$state" == "" ]; then
     local IMAGE_NAME="nmrony/jenkins:lts-jdk21-docker"
     relies_on nginx-proxy
     # Check if the image exists locally
-    if ! podman image inspect "$IMAGE_NAME" > /dev/null 2>&1; then
+    if ! podman image inspect "$IMAGE_NAME" >/dev/null 2>&1; then
       echo "${IMAGE_NAME} not found locally. Building it..."
       podman image build -t "$IMAGE_NAME" - <<EOF
       FROM jenkins/jenkins:lts-jdk21
@@ -850,20 +845,20 @@ jenkins() {
 EOF
     fi
 
-  if [ "$dind_state" == "false" ] || [ "$dind_state" == "" ]; then
-    echo "starting DinD container for jenkins..."
-    podman container run -dit --name jenkins-dind --privileged \
-      --expose 2376 \
-      --health-retries=5 \
-      --health-timeout=5s \
-      --health-interval=5s \
-      --health-cmd="docker info" \
-      --network-alias docker \
-      --env DOCKER_TLS_CERTDIR=/certs \
-      --network ${DEV_CONTAINER_NETWORK_NAME} \
-      --volume "${DEV_ZONE_CONFIG_PATH}/jenkins/certs:/certs/client" \
-      --volume "${DEV_ZONE_CONFIG_PATH}/jenkins/data:/var/jenkins_home" \
-      docker:dind --storage-driver overlay2
+    if [ "$dind_state" == "false" ] || [ "$dind_state" == "" ]; then
+      echo "starting DinD container for jenkins..."
+      podman container run -dit --name jenkins-dind --privileged \
+        --expose 2376 \
+        --health-retries=5 \
+        --health-timeout=5s \
+        --health-interval=5s \
+        --health-cmd="docker info" \
+        --network-alias docker \
+        --env DOCKER_TLS_CERTDIR=/certs \
+        --network ${DEV_CONTAINER_NETWORK_NAME} \
+        --volume "${DEV_ZONE_CONFIG_PATH}/jenkins/certs:/certs/client" \
+        --volume "${DEV_ZONE_CONFIG_PATH}/jenkins/data:/var/jenkins_home" \
+        docker:dind --storage-driver overlay2
       sleep 2s
     fi
     echo "jenkins server is not running. starting it for you"

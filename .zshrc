@@ -49,8 +49,8 @@ zinit wait'10' lucid light-mode for \
   as'program' from'gh-r' danielmiessler/Fabric \
   as'program' from'gh-r' PaulJuliusMartinez/jless \
   as'program' from'gh-r' mv'witr-darwin-* -> witr' pranshuparmar/witr \
+  as'program' from'gh-r' mv'kube-explorer* -> kube-explorer' cnrancher/kube-explorer \
   as'program' from'gh-r' atpull'%atclone' atclone'./txeh completion zsh > _txeh' txn2/txeh
-
 
 # COMPLETIONS FIRST (important)
 autoload -Uz compinit
@@ -85,6 +85,3 @@ zinit light romkatv/powerlevel10k
 #     atpull"%atclone" atload'eval "$(oh-my-posh init zsh --config $HOME/.dotfiles/.config/ohmyposh/zen.toml)"'
 #   zi light JanDeDobbeleer/oh-my-posh
 # fi
-
-# zinit wait'20' lucid light-mode for \
-# as'program' from'gh-r' mv'kube-explorer* -> kube-explorer' cnrancher/kube-explorer

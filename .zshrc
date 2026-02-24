@@ -49,10 +49,10 @@ zinit wait'10' lucid light-mode for \
   as'program' from'gh-r' bugzmanov/bookokrat \
   as'program' from'gh-r' danielmiessler/Fabric \
   as'program' from'gh-r' PaulJuliusMartinez/jless \
-  as'program' from'gh-r' atpull"%atclone" atclone'./doggo_*/doggo completions zsh > _doggo' pick'doggo*/doggo' mr-karan/doggo \
   as'program' from'gh-r' pick'llmfit-*/llmfit' AlexsJones/llmfit \
   as'program' from'gh-r' mv'hostess* -> hostess' cbednarski/hostess \
-  as'program' from'gh-r' mv'kube-explorer* -> kube-explorer' cnrancher/kube-explorer
+  as'program' from'gh-r' mv'kube-explorer* -> kube-explorer' cnrancher/kube-explorer \
+  as'program' from'gh-r' atpull"%atclone" atclone'./doggo_*/doggo completions zsh > _doggo' pick'doggo*/doggo' mr-karan/doggo
 
 # COMPLETIONS FIRST (important)
 autoload -Uz compinit

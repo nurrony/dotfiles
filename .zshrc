@@ -46,6 +46,7 @@ zinit wait'3' lucid light-mode for \
 zinit wait'10' lucid light-mode for \
   as'program' from'gh-r' jdx/usage \
   as'program' from'gh-r' medialab/xan \
+  as'program' from'gh-r' bugzmanov/bookokrat \
   as'program' from'gh-r' danielmiessler/Fabric \
   as'program' from'gh-r' PaulJuliusMartinez/jless \
   as'program' from'gh-r' pick'llmfit-*/llmfit' AlexsJones/llmfit \

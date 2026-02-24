@@ -233,3 +233,5 @@ alias jless="jless --mode line"
 
 # yt-dlp to convert youtube videos to mp3
 alias ytmp3='yt-dlp --extract-audio --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
+
+alias hostess="sudo hostess"

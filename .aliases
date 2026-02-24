@@ -24,7 +24,7 @@ alias h="history"
 alias where=which
 alias clearhistory="cat /dev/null > ~/.zsh_history && history -p && exit"
 alias du='dua -f binary'
-alias dig='dog --time'
+alias dig='doggo --time'
 alias zshrc='${=EDITOR} ${ZDOTDIR:-$HOME}/.zshrc'
 alias t='tail -f'
 alias p='ps -f'

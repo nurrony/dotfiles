@@ -376,14 +376,22 @@ function toggle_proxy() {
   local SERVICE=${2:-"Wi-Fi"}
 
   if [[ $1 == "--help" ]] || [[ $1 == "-h" ]] || [[ $1 == "help" ]]; then
+    echo
     echo "Usage: $0 <proxy-url> <service> (defaut: service: Wi-Fi, proxy-url: AUTO_PROXY_URL)"
+    echo
+    echo "Options:"
+    echo "  help      --help, -h        print help menu"
+    echo "  status    --status, -s      current status of proxy"
     return
   fi
 
-  # Get current status
   local AUTO_PROXY_STATUS=$(networksetup -getautoproxyurl "$SERVICE" | grep Enabled | awk '{print $2}')
 
-  echo "Current Auto Proxy status for $SERVICE: $AUTO_PROXY_STATUS"
+  if [[ "$1" == "--status" ]] || [[ "$1" == "-s" ]] || [[ "$1" == "status" ]]; then
+    echo -n "Auto Proxy for $SERVICE: "
+    [[ "$AUTO_PROXY_STATUS" == "No" ]] && echo "Disabled" || echo "Enabled"
+    return
+  fi
 
   if [[ $AUTO_PROXY_STATUS == "Yes" ]]; then
     echo "Disabling Auto Proxy..."
@@ -395,5 +403,5 @@ function toggle_proxy() {
     networksetup -setautoproxystate "${SERVICE}" on
     echo "Auto Proxy enabled."
   fi
-  echo "\nFor help pass --help"
+  echo "\nFor help pass help/--help/-h"
 }

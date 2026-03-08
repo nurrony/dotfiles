@@ -1,6 +1,5 @@
 local wezterm = require 'wezterm'
 local keymaps = require 'keymaps'
-local tabbar = require('tabbar')
 local config = {}
 
 local font = 'JetBrainsMono Nerd Font Mono'

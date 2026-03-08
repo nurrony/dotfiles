@@ -1,8 +1,6 @@
 local credential_helper = require 'utils.credential_helper'
 
-local credentials = credential_helper.setup {
-  path = os.getenv('PASSRELAY_CREDS_JSON_FILE')
-}
+local credentials = credential_helper.setup {}
 
 return {
   get_userlist = credentials.get_userlist,

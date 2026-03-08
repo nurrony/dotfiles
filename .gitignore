@@ -643,3 +643,4 @@ ehthumbs_vista.db
 *.msix
 
 .extra
+creds.json

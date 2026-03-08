@@ -1,7 +1,7 @@
 local credential_helper = require 'utils.credential_helper'
 
 local credentials = credential_helper.setup {
-  path = '/Volumes/Devzone/storage/wezterm/credentials.json'
+  path = os.getenv('PASSRELAY_CREDS_JSON_FILE')
 }
 
 return {

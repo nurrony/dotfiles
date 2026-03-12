@@ -31,7 +31,7 @@ config = {
   },
   -- theme
   color_scheme = 'Catppuccin Macchiato',
-  colors = { cursor_bg = '#89b4fa', cursor_border = '#89b4fa' },
+  colors = { cursor_bg = '#7aa2f7', cursor_border = '#7aa2f7' },
 
   -- tab bar
   enable_tab_bar = true,

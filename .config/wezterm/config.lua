@@ -31,6 +31,7 @@ config = {
   },
   -- theme
   color_scheme = 'Catppuccin Macchiato',
+  colors = { cursor_bg = '#89b4fa', cursor_border = '#89b4fa' },
 
   -- tab bar
   enable_tab_bar = true,
@@ -41,7 +42,7 @@ config = {
 
   -- window configuration
   window_decorations = 'RESIZE',
-  window_background_opacity = 0.90,
+  window_background_opacity = 0.85,
   macos_window_background_blur = 10,
   window_close_confirmation = 'NeverPrompt',
   window_padding = {

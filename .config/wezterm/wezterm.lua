@@ -6,7 +6,7 @@
 -- ╚███╔███╔╝███████╗███████╗   ██║   ███████╗██║  ██║██║ ╚═╝ ██║
 --  ╚══╝╚══╝ ╚══════╝╚══════╝   ╚═╝   ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝
 -- A GPU-accelerated cross-platform terminal emulator
--- https://wezfurlong.org/wezterm/
+-- https://wezterm.org
 
 require 'utils/events'
 local config = require 'config'

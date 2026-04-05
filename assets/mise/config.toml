@@ -1,5 +1,4 @@
 [settings]
-asdf                                                      = true
 experimental                                              = true
 cache_prune_age                                           = "3d"
 legacy_version_file                                       = true

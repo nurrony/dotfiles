@@ -28,7 +28,7 @@ source "${ZINIT[BIN_DIR]}/zinit.zsh"
 zinit lucid light-mode for \
   as'completion' zsh-users/zsh-completions \
   as'program' from'gh-r' atclone'./zoxide init --cmd=j zsh > init.zsh' src'init.zsh' atpull'%atclone' pick'zoxide/zoxide' ajeetdsouza/zoxide \
-  as'program' from'gh-r' mv'mise* -> mise' atclone'./mise completion zsh > _mise && ./mise activate zsh > init.zsh' src'init.zsh' atpull'%atclone' jdx/mise
+  as'program' from'gh-r' mv'mise* -> mise' atclone' chmod +x ./mise && ./mise completion zsh > _mise && ./mise activate zsh > init.zsh' src'init.zsh' atpull'%atclone' jdx/mise
 
 # install oh my zsh plugins as snippets
 zinit wait'3' lucid light-mode for \
@@ -47,7 +47,7 @@ zinit wait'10' lucid light-mode for \
   as'program' from'gh-r' jdx/usage \
   as'program' from'gh-r' medialab/xan \
   as'program' from'gh-r' bugzmanov/bookokrat \
-  as'program' from'gh-r' danielmiessler/Fabric \
+  as'program' from'gh-r' danielmiessler/Fabric \  
   as'program' from'gh-r' PaulJuliusMartinez/jless \
   as'program' from'gh-r' pick'lazyssh-*/lazyssh' Adembc/lazyssh \
   as'program' from'gh-r' pick'llmfit-*/llmfit' AlexsJones/llmfit \

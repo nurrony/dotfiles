@@ -13,7 +13,7 @@ end
 config = {
 
   -- font
-  font_size = 16,
+  font_size = 18,
   adjust_window_size_when_changing_font_size = false,
   font = wezterm.font_with_fallback {
     { family = font,     weight = 'Bold', italic = false },

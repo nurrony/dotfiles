@@ -446,8 +446,10 @@ rabbitmq() {
     podman container run --detach -it \
       --name rabbitmq \
       --hostname rabbitmq \
+      --publish 5671:5671 \
       --publish 5672:5672 \
       --publish 15672:15672 \
+      --publish 15671:15671 \
       --health-interval=15s \
       --health-start-period=10s \
       --health-cmd="rabbitmq-diagnostics -q ping" \

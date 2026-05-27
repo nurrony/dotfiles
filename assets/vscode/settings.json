@@ -98,7 +98,7 @@
   "editor.emptySelectionClipboard": false,
   "editor.fontFamily": "'JetBrainsMonoNL Nerd Font Mono Propo', Monaco, monospace",
   "editor.fontLigatures": true,
-  "editor.fontSize": 17,
+  "editor.fontSize": 18,
   "editor.fontWeight": "400",
   "editor.formatOnSave": true,
   "editor.guides.bracketPairs": true,
@@ -122,9 +122,7 @@
     "strings": "on"
   },
   "editor.renderWhitespace": "boundary",
-  "editor.rulers": [
-    120
-  ],
+  "editor.rulers": [120],
   "editor.semanticHighlighting.enabled": false,
   "editor.snippetSuggestions": "top",
   "editor.suggest.matchOnWordStartOnly": false,
@@ -309,29 +307,29 @@
   "java.jdt.ls.java.home": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-crac-25",
   "java.project.importOnFirstTimeStartup": "automatic",
   "java.referencesCodeLens.enabled": true,
-  "java.saveActions.organizeImports": true,
-  "javascript.autoClosingTags": true,
-  "javascript.preferences.importModuleSpecifier": "relative",
-  "javascript.preferences.quoteStyle": "single",
-  "javascript.suggest.autoImports": true,
-  "javascript.updateImportsOnFileMove.enabled": "always",
+  "js/ts.autoClosingTags": true,
+  "js/ts.autoClosingTags.enabled": true,
   "js/ts.implicitProjectConfig.checkJs": true,
+  "js/ts.preferences.importModuleSpecifier": "relative",
+  "js/ts.preferences.quoteStyle": "single",
+  "js/ts.referencesCodeLens.enabled": true,
+  "js/ts.suggest.autoImports": true,
+  "js/ts.updateImportsOnFileMove.enabled": "always",
   "json.schemas": [],
   "laravel-pint.enable": false,
-  "Laravel.phpCommand": "/usr/local/bin/php",
+  "Laravel.phpCommand": "/opt/homebrew/bin/php",
   "Laravel.pint.runOnSave": false,
-  "Lua.diagnostics.globals": [
-    "vim",
-    "nvim_bufferline",
-    "sign"
-  ],
+  "Lua.diagnostics.globals": ["vim", "nvim_bufferline", "sign"],
   "markdown.validate.enabled": true,
   "maven.executable.path": "/Volumes/Devzone/storage/mise/data/shims/mvn",
   "maven.terminal.useJavaHome": true,
   "mergeEditor.diffAlgorithm": "advanced",
   "microprofile.alwaysShowOverview": false,
+  "php.suggest.basic": false,
+  "php.validate.executablePath": "/opt/homebrew/bin/php",
   "phpactor.enable": false,
-  "phpactor.executablePath": "/usr/local/bin/php",
+  "phpactor.executablePath": "/opt/homebrew/bin/php",
+  "phpcompanion.class.insertFinal": false,
   "prettier.arrowParens": "avoid",
   "prettier.bracketSpacing": false,
   "prettier.embeddedLanguageFormatting": "auto",
@@ -374,6 +372,30 @@
   "scm.workingSets.enabled": true,
   "search.useIgnoreFiles": true,
   "security.workspace.trust.untrustedFiles": "open",
+  "sonarlint.automaticAnalysis": true,
+  "sonarlint.rules": {
+    "java:S117": {
+      "level": "off"
+    },
+    "java:S120": {
+      "level": "off"
+    },
+    "java:S4144": {
+      "level": "off"
+    },
+    "java:S5976": {
+      "level": "off"
+    },
+    "kubernetes:S6865": {
+      "level": "off"
+    },
+    "kubernetes:S6897": {
+      "level": "off"
+    },
+    "php:S1131": {
+      "level": "on"
+    }
+  },
   "spring-boot.ls.java.home": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-crac-25",
   "telemetry.telemetryLevel": "off",
   "terminal.external.osxExec": "iTerm.app",
@@ -388,15 +410,8 @@
   "terminal.integrated.tabs.enableAnimation": false,
   "terminal.integrated.tabs.showActiveTerminal": "singleTerminal",
   "terraform.codelens.referenceCount": true,
-  "typescript.autoClosingTags": true,
-  "typescript.preferences.importModuleSpecifier": "relative",
-  "typescript.preferences.quoteStyle": "single",
-  "typescript.referencesCodeLens.enabled": true,
-  "typescript.suggest.autoImports": true,
-  "typescript.updateImportsOnFileMove.enabled": "always",
   "vscode-kubernetes.kubectl-path": "/usr/local/bin/kubectl",
   "window.commandCenter": false,
-  "window.customTitleBarVisibility": "never",
   "window.restoreWindows": "none",
   "window.titleBarStyle": "custom",
   "workbench.activityBar.location": "bottom",
@@ -408,7 +423,6 @@
   "workbench.editor.showTabs": "none",
   "workbench.editor.wrapTabs": true,
   "workbench.fontAliasing": "auto",
-  "workbench.iconTheme": "catppuccin-perfect-mocha",
   "workbench.layoutControl.enabled": false,
   "workbench.secondarySideBar.defaultVisibility": "hidden",
   "workbench.settings.editor": "json",

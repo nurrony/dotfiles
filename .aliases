@@ -216,9 +216,6 @@ alias tfsh='terraform show'
 # zellij alias
 alias zjclear='zellij delete-all-sessions --force --yes'
 
-# hostses
-alias hostses='sudo txeh'
-
 # https://github.com/traviscross/mtr
 # mtr combines the functionality of the 'traceroute' and 'ping' programs in a single network diagnostic tool.
 alias mtr='sudo mtr'

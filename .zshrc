@@ -28,7 +28,7 @@ source "${ZINIT[BIN_DIR]}/zinit.zsh"
 zinit lucid light-mode for \
   as'completion' zsh-users/zsh-completions \
   as'program' from'gh-r' atclone'./zoxide init --cmd=j zsh > init.zsh' src'init.zsh' atpull'%atclone' pick'zoxide/zoxide' ajeetdsouza/zoxide \
-  as'program' from'gh-r' mv'mise* -> mise' atclone' chmod +x ./mise && ./mise completion zsh > _mise && ./mise activate zsh > init.zsh' src'init.zsh' atpull'%atclone' jdx/mise
+  as'program' from'gh-r' extract'!' bpick'mise-*-macos-*.tar.gz' atclone'chmod +x ./bin/mise && ./bin/mise completion zsh > _mise && ./bin/mise activate zsh > init.zsh' src'init.zsh' atpull'%atclone' jdx/mise
 
 # install oh my zsh plugins as snippets
 zinit wait'3' lucid light-mode for \

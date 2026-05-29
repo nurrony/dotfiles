@@ -27,6 +27,7 @@ source "${ZINIT[BIN_DIR]}/zinit.zsh"
 # load essential completion
 zinit lucid light-mode for \
   as'completion' zsh-users/zsh-completions \
+  as'program' atpull'%atclone' atclone'cp ./hosts hostess && chmod +x ./hosts* && ./hosts completions install' pick'hosts' xwmx/hosts \
   as'program' from'gh-r' atclone'./zoxide init --cmd=j zsh > init.zsh' src'init.zsh' atpull'%atclone' pick'zoxide/zoxide' ajeetdsouza/zoxide \
   as'program' from'gh-r' extract'!' bpick'mise-*-macos-*.tar.gz' atclone'chmod +x ./bin/mise && ./bin/mise completion zsh > _mise && ./bin/mise activate zsh > init.zsh' src'init.zsh' atpull'%atclone' jdx/mise
 
@@ -51,7 +52,6 @@ zinit wait'10' lucid light-mode for \
   as'program' from'gh-r' PaulJuliusMartinez/jless \
   as'program' from'gh-r' pick'lazyssh-*/lazyssh' Adembc/lazyssh \
   as'program' from'gh-r' pick'llmfit-*/llmfit' AlexsJones/llmfit \
-  as'program' atpull'%atclone' atclone'cp ./hosts hostess && chmod +x ./hosts* && ./hosts completions install' pick'hosts' xwmx/hosts \
   as'program' from'gh-r' atpull"%atclone" atclone'./doggo_*/doggo completions zsh > _doggo' pick'doggo*/doggo' mr-karan/doggo \
   as'program' from'gh-r' bpick'kube-explorer-darwin-*' mv'kube-explorer-darwin-* -> kube-explorer' atpull"%atclone" atclone'chmod +x ./kube-explorer' cnrancher/kube-explorer
 

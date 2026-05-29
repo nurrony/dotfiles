@@ -51,8 +51,7 @@ zinit wait'10' lucid light-mode for \
   as'program' from'gh-r' PaulJuliusMartinez/jless \
   as'program' from'gh-r' pick'lazyssh-*/lazyssh' Adembc/lazyssh \
   as'program' from'gh-r' pick'llmfit-*/llmfit' AlexsJones/llmfit \
-  as'program' from'gh-r' mv'hostess* -> hostess' cbednarski/hostess \
-  as'program' from'gh-r' mv'kube-explorer* -> kube-explorer' cnrancher/kube-explorer \
+  as'program' from'gh-r' bpick'kube-explorer-darwin-*' mv'kube-explorer-darwin-* -> kube-explorer' atpull"%atclone" atclone'chmod +x ./kube-explorer' cnrancher/kube-explorer \
   as'program' from'gh-r' atpull"%atclone" atclone'./doggo_*/doggo completions zsh > _doggo' pick'doggo*/doggo' mr-karan/doggo
 
 # COMPLETIONS FIRST (important)

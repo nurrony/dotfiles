@@ -1,0 +1,103 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": [".vscode/rules/*.md"],
+  "permission": {
+    "edit": "ask",
+    "bash": {
+      "*": "ask",
+      "git *": "allow",
+      "npm *": "allow",
+      "npx *": "allow",
+      "rm *": "deny",
+      "grep *": "allow"
+    },
+    "websearch": "allow",
+    "webfetch": "allow",
+    "read": {
+      "*": "allow",
+      "*.env": "deny",
+      "*.env.*": "deny",
+      "*.env.example": "allow"
+    }
+  },
+  "lsp": true,
+  "watcher": {
+    "ignore": [
+      "node_modules/**",
+      "dist/**",
+      ".git/**",
+      "vendor/**",
+      ".mvn/**",
+      "target/**",
+      "build/**",
+      "out/**",
+      "coverage/**",
+      "logs/**",
+      "tmp/**",
+      "temp/**",
+      "cache/**",
+      "public/**",
+      "static/**",
+      "assets/**"
+    ]
+  },
+  "compaction": {
+    "auto": true,
+    "prune": true,
+    "reserved": 10000
+  },
+  "model": "ollama/qwen3.5:9b-mlx",
+  "provider": {
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Ollama (Local)",
+      "options": {
+        "baseURL": "http://localhost:11434/v1"
+      },
+      "models": {
+        "qwen3.5:9b": {
+          "tools": true,
+          "name": "Qwen3.5 9B",
+          "variants": {
+            "thinking": {
+              "reasoningEffort": "high",
+              "textVerbosity": "low",
+              "reasoningSummary": "auto"
+            },
+            "fast": {
+              "disabled": true
+            }
+          }
+        },
+        "qwen3.5:9b-mlx": {
+          "name": "Qwen3.5 9B MLX",
+          "tools": true,
+          "variants": {
+            "thinking": {
+              "reasoningEffort": "high",
+              "textVerbosity": "low",
+              "reasoningSummary": "auto"
+            },
+            "fast": {
+              "disabled": true
+            }
+          }
+        },
+        "gemma4:12b": {
+          "name": "Gemma 4 12B",
+          "tools": true,
+          "variants": {
+            "thinking": {
+              "reasoningEffort": "high",
+              "textVerbosity": "low",
+              "reasoningSummary": "auto"
+            },
+            "fast": {
+              "disabled": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

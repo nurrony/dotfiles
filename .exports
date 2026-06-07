@@ -81,3 +81,7 @@ export GROOVY_HOME=/usr/local/opt/groovy/libexec
 
 # docker related variables
 export BUILDX_NO_DEFAULT_ATTESTATIONS=1
+
+# ollama
+export OLLAMA_FLASH_ATTENTION=1
+export OLLAMA_KV_CACHE_TYPE=q8_0

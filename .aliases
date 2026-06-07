@@ -233,3 +233,6 @@ alias ytmp3='yt-dlp --extract-audio --audio-format mp3 --audio-quality 0 -o "%(t
 
 alias hostess="hosts --auto-sudo"
 alias hosts="hosts --auto-sudo"
+
+# ollama
+alias ollama-serve='export OLLAMA_FLASH_ATTENTION="1" export OLLAMA_KV_CACHE_TYPE="q8_0" ollama serve'

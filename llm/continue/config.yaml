@@ -1,0 +1,66 @@
+name: My Assistant
+version: 1.0.0
+schema: v1
+models:
+  - name: qwen3.6:35b
+    provider: ollama
+    model: qwen3.6:35b
+    roles:
+      - chat
+      - edit
+      - apply
+      - summarize
+  - name: gemma4:26b
+    provider: ollama
+    model: gemma4:26b
+    roles:
+      - chat
+      - edit
+      - apply
+      - summarize
+  - name: qwen3-coder 30b
+    provider: ollama
+    model: qwen3-coder:30b-a3b-q4_K_M
+    roles:
+      - chat
+      - edit
+      - apply
+      - summarize
+  - name: qwen3.6:27b
+    provider: ollama
+    model: qwen3.6:27b
+    roles:
+      - chat
+      - edit
+      - apply
+      - summarize
+  - name: Qwen-Autocomplete
+    provider: ollama
+    model: qwen3.5:9b-mlx
+    roles:
+      - autocomplete
+    requestOptions:
+      extraBodyProperties:
+        think: false
+    autocompleteOptions:
+      maxTokens: 2048
+      debounceDelay: 250
+      modelTimeout: 150
+      maxSuffixPercentage: 0.2
+      prefixPercentage: 0.3
+      onlyMyCode: true
+
+  - name: embeddingsProvider
+    provider: ollama
+    model: nomic-embed-text
+    roles:
+      - embed
+
+context:
+  - provider: code
+  - provider: docs
+  - provider: diff
+  - provider: terminal
+  - provider: problems
+  - provider: folder
+  - provider: codebase

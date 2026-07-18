@@ -562,7 +562,6 @@ pgserver() {
     podman container run -it -d \
       --network ${DEV_CONTAINER_NETWORK_NAME} \
       --ulimit memlock=-1:-1 \
-      --memory-swappiness=0 \
       --env POSTGRES_USER=postgres \
       --env POSTGRES_DB=$DBNAME \
       --env POSTGRES_PASSWORD=nurrony \

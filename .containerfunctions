@@ -574,6 +574,31 @@ pgserver() {
   fi
 }
 
+pgvector() {
+  local VERSION=${1:-pg17-trixie}
+  local PORT=${2:-5432}
+  local DBNAME=${3:-experiments}
+  del_stopped pgvector${VERSION//./-}
+  local state=$(podman inspect --format "{{.State.Running}}" pgvector${VERSION//./-} 2>/dev/null)
+
+  if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
+    mkdir -p ${DEV_ZONE_CONFIG_PATH}/databases/pgvector/${VERSION}
+    echo "postgres $VERSION.x.x server is not running, starting it for you."
+    podman container run -it -d \
+      --network ${DEV_CONTAINER_NETWORK_NAME} \
+      --ulimit memlock=-1:-1 \
+      --env POSTGRES_USER=postgres \
+      --env POSTGRES_DB=$DBNAME \
+      --env POSTGRES_PASSWORD=nurrony \
+      --publish $PORT:5432 \
+      --name pgvector${VERSION//./-} \
+      --volume ${DEV_ZONE_CONFIG_PATH}/databases/pgvector/${VERSION}:/var/lib/postgresql/data \
+      pgvector/pgvector:$VERSION
+  else
+    echo "pgvector $VERSION.x.x is already running"
+  fi
+}
+
 psql() {
   local RUNNING_PGSERVER_NAME=$(podman ps --filter "name=pgserver" --format "{{.Names}}")
   relies_on $RUNNING_DBSERVER_NAME

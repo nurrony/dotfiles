@@ -56,6 +56,13 @@ models:
     roles:
       - embed
 
+  - name: Docs RAG Chatbot
+    provider: openai
+    model: gemma4:26b
+    roles:
+      - chat
+    apiBase: http://localhost:3000/v1
+
 context:
   - provider: code
   - provider: docs

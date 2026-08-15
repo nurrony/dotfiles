@@ -1,7 +1,6 @@
 tap "amioranza/tools", trusted: true
 tap "aws/tap", trusted: true
 tap "boz/repo", trusted: true
-tap "hashicorp/tap", trusted: true
 tap "mongodb/brew", trusted: true
 tap "sinelaw/fresh", trusted: true
 tap "weaveworks/tap", trusted: true
@@ -217,8 +216,6 @@ brew "tcpreplay"
 brew "telnet"
 # Tool which checks for the support of TLS/SSL ciphers and flaws
 brew "testssl"
-# Simplified and community-driven man pages
-brew "tldr"
 # Terminal multiplexer
 brew "tmux"
 # Extremely fast Python package installer and resolver, written in Rust
@@ -247,8 +244,12 @@ brew "weaveworks/tap/eksctl", trusted: true
 cask "anydesk"
 # Application uninstaller
 cask "appcleaner"
+# Open-source project and knowledge management tool
+cask "appflowy"
 # Web browser focusing on privacy
 cask "brave-browser"
+# Offline voice-to-text dictation app with AI enhancement
+cask "fluidvoice"
 cask "font-jetbrains-mono-nerd-font"
 # Tools to protect your emails and files
 cask "gpg-suite"
@@ -280,6 +281,8 @@ cask "rocket-chat"
 cask "shortcat"
 # Native database client for many database types
 cask "tablepro"
+# Development environment
+cask "vagrant"
 # Open-source code editor
 cask "visual-studio-code"
 # All-in-One Java Troubleshooting Tool
@@ -383,3 +386,4 @@ npm "npm-check"
 npm "opencode-ai"
 npm "prettier"
 npm "serve"
+npm "typescript"

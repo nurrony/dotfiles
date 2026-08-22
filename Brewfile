@@ -6,6 +6,8 @@ tap "sinelaw/fresh", trusted: true
 tap "weaveworks/tap", trusted: true
 # Cryptography and SSL/TLS Toolkit
 brew "openssl@3"
+# Code searching, linting, rewriting
+brew "ast-grep"
 # Automatic configure script builder
 brew "autoconf"
 # Tool for generating GNU Standards-compliant Makefiles
@@ -251,6 +253,8 @@ cask "brave-browser"
 # Offline voice-to-text dictation app with AI enhancement
 cask "fluidvoice"
 cask "font-jetbrains-mono-nerd-font"
+# Terminal emulator that uses platform-native UI and GPU acceleration
+cask "ghostty"
 # Tools to protect your emails and files
 cask "gpg-suite"
 # Free and open-source media player

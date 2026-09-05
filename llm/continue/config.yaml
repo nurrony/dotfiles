@@ -63,6 +63,11 @@ models:
       - chat
     apiBase: http://localhost:3000/v1
 
+mcpServers:
+  - name: Rons Weather MCP
+    type: streamable-http
+    url: http://localhost:3000/mcp
+
 context:
   - provider: code
   - provider: docs

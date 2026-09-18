@@ -9,9 +9,10 @@ idiomatic_version_file_enable_tools                       = ["node"]
 deno                                                      = "latest"
 maven                                                     = "latest"
 node                                                      = ["latest", "lts", "lts-krypton", "lts-jod"]
-java                                                      = ["zulu-crac-25.30.19.0", "zulu-crac-21.46.23.0", "zulu-crac-17.62.19.0"]
+java                                                      = ["zulu-crac-26.32.203.0", "zulu-crac-25.36.205.0", "zulu-crac-21.52.203.0", "zulu-crac-17.68.203.0"]
 
 [tool_alias.java.versions]
-25                                                        = "zulu-crac-25.30.19.0"
-21                                                        = "zulu-crac-21.46.23.0"
-17                                                        = "zulu-crac-17.62.19.0"
+26                                                        = "zulu-crac-26.32.203.0"
+25                                                        = "zulu-crac-25.36.205.0"
+21                                                        = "zulu-crac-21.52.203.0"
+17                                                        = "zulu-crac-17.68.203.0"

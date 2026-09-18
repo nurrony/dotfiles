@@ -259,6 +259,8 @@ cask "ghostty"
 cask "gpg-suite"
 # Free and open-source media player
 cask "iina"
+# Offline AI chat tool
+cask "jan"
 # File archiver
 cask "keka"
 # Provides updates to various Microsoft products
@@ -339,7 +341,7 @@ vscode "microprofile-community.vscode-microprofile-pack"
 vscode "monish.regexsnippets"
 vscode "mrchetan.phpstorm-parameter-hints-in-vscode"
 vscode "ms-azuretools.vscode-containers"
-vscode "ms-dotnettools.vscode-dotnet-modernize"
+vscode "ms-dotnettools.upgrade-agent"
 vscode "ms-dotnettools.vscode-dotnet-runtime"
 vscode "ms-kubernetes-tools.vscode-kubernetes-tools"
 vscode "ms-python.vscode-pylance"

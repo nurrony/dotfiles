@@ -63,7 +63,7 @@
   "breadcrumbs.symbolPath": "off",
   "camelk.integrations.runtimeVersion": "1.11.0",
   "camelk.tools": {
-    "camelk.tools.kamel-path": "/Volumes/Library/Application Support/Code/User/globalStorage/redhat.vscode-camelk/camelk/tools/kamel/kamel"
+    "camelk.tools.kamel-path": "/Users/egen/Library/Application Support/Code/User/globalStorage/redhat.vscode-camelk/camelk/tools/kamel/kamel"
   },
   "cfnLint.path": "/usr/local/bin/cfn-lint",
   "debug.breakpointsView.presentation": "tree",
@@ -175,6 +175,8 @@
     "**/bootstrap/cache/**": true,
     "**/node_modules": true,
     "**/storage/**": true,
+    "**/target/**": true,
+    "**/var/cache/**": true,
     "**/vendor": true
   },
   "explorer.compactFolders": false,
@@ -238,26 +240,6 @@
   "git.smartCommitChanges": "all",
   "git.suggestSmartCommit": true,
   "git.untrackedChanges": "separate",
-  "github.copilot.chat.agent.autoFix": false,
-  "github.copilot.chat.agent.currentEditorContext.enabled": false,
-  "github.copilot.chat.codeGeneration.useInstructionFiles": false,
-  "github.copilot.chat.copilotDebugCommand.enabled": false,
-  "github.copilot.chat.customInstructionsInSystemMessage": false,
-  "github.copilot.chat.edits.suggestRelatedFilesForTests": false,
-  "github.copilot.chat.edits.suggestRelatedFilesFromGitHistory": false,
-  "github.copilot.chat.newWorkspaceCreation.enabled": false,
-  "github.copilot.chat.reviewAgent.enabled": false,
-  "github.copilot.chat.reviewSelection.enabled": false,
-  "github.copilot.chat.setupTests.enabled": false,
-  "github.copilot.chat.startDebugging.enabled": false,
-  "github.copilot.chat.summarizeAgentConversationHistory.enabled": false,
-  "github.copilot.editor.enableCodeActions": false,
-  "github.copilot.enable": {
-    "*": false
-  },
-  "github.copilot.nextEditSuggestions.allowWhitespaceOnlyChanges": false,
-  "github.copilot.nextEditSuggestions.fixes": false,
-  "github.copilot.renameSuggestions.triggerAutomatically": false,
   "gitignore.cacheExpirationInterval": 3600,
   "highlight-matching-tag.styles": {
     "opening": {
@@ -289,22 +271,27 @@
   "java.configuration.runtimes": [
     {
       "default": true,
+      "name": "JavaSE-26",
+      "path": "/Users/egen/Devzone/storage/mise/data/installs/java/zulu-crac-26"
+    },
+    {
+      "default": false,
       "name": "JavaSE-25",
-      "path": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-crac-25"
+      "path": "/Users/egen/Devzone/storage/mise/data/installs/java/zulu-crac-25"
     },
     {
       "default": false,
       "name": "JavaSE-21",
-      "path": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-crac-21"
+      "path": "/Users/egen/Devzone/storage/mise/data/installs/java/zulu-crac-21"
     },
     {
       "default": false,
       "name": "JavaSE-17",
-      "path": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-crac-17"
+      "path": "/Users/egen/Devzone/storage/mise/data/installs/java/zulu-crac-17"
     }
   ],
   "java.implementationCodeLens": "all",
-  "java.jdt.ls.java.home": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-crac-25",
+  "java.jdt.ls.java.home": "/Users/egen/Devzone/storage/mise/data/installs/java/zulu-crac-26",
   "java.project.importOnFirstTimeStartup": "automatic",
   "java.referencesCodeLens.enabled": true,
   "js/ts.autoClosingTags": true,
@@ -315,13 +302,24 @@
   "js/ts.referencesCodeLens.enabled": true,
   "js/ts.suggest.autoImports": true,
   "js/ts.updateImportsOnFileMove.enabled": "always",
+  "json.schemaDownload.trustedDomains": {
+    "https://developer.microsoft.com/json-schemas/": true,
+    "https://json-schema.org/": true,
+    "https://json.schemastore.org/": true,
+    "https://models.dev": true,
+    "https://opencode.ai": true,
+    "https://raw.githubusercontent.com/devcontainers/spec/": true,
+    "https://raw.githubusercontent.com/microsoft/vscode/": true,
+    "https://schemastore.azurewebsites.net/": true,
+    "https://www.schemastore.org/": true
+  },
   "json.schemas": [],
   "laravel-pint.enable": false,
   "Laravel.phpCommand": "/opt/homebrew/bin/php",
   "Laravel.pint.runOnSave": false,
   "Lua.diagnostics.globals": ["vim", "nvim_bufferline", "sign"],
   "markdown.validate.enabled": true,
-  "maven.executable.path": "/Volumes/Devzone/storage/mise/data/shims/mvn",
+  "maven.executable.path": "/Users/egen/Devzone/storage/mise/data/shims/mvn",
   "maven.terminal.useJavaHome": true,
   "mergeEditor.diffAlgorithm": "advanced",
   "microprofile.alwaysShowOverview": false,
@@ -372,6 +370,7 @@
   "scm.workingSets.enabled": true,
   "search.useIgnoreFiles": true,
   "security.workspace.trust.untrustedFiles": "open",
+  "sessions.chatTimeline.display": "gutter",
   "sonarlint.automaticAnalysis": true,
   "sonarlint.rules": {
     "java:S117": {
@@ -396,7 +395,7 @@
       "level": "on"
     }
   },
-  "spring-boot.ls.java.home": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-crac-25",
+  "spring-boot.ls.java.home": "/Users/egen/Devzone/storage/mise/data/installs/java/zulu-crac-26",
   "telemetry.telemetryLevel": "off",
   "terminal.external.osxExec": "iTerm.app",
   "terminal.integrated.copyOnSelection": true,
@@ -415,6 +414,7 @@
   "window.restoreWindows": "none",
   "window.titleBarStyle": "custom",
   "workbench.activityBar.location": "bottom",
+  "workbench.cloudChanges.continueOn": "off",
   "workbench.colorTheme": "Tokyo Night",
   "workbench.editor.empty.hint": "hidden",
   "workbench.editor.enablePreview": false,
@@ -461,7 +461,18 @@
     "!Sub",
     "!Sub sequence"
   ],
+  "yaml.disableSchemaDetection": [
+    "**/.github/workflows/*.yml",
+    "**/.github/workflows/*.yaml",
+    "**/.gitea/workflows/*.yml",
+    "**/.gitea/workflows/*.yaml",
+    "**/.forgejo/workflows/*.yml",
+    "**/.forgejo/workflows/*.yaml"
+  ],
   "yaml.schemas": {
+    "file:///Users/egen/.vscode/extensions/continue.continue-2.0.0-darwin-arm64/config-yaml-schema.json": [
+      ".continue/**/*.yaml"
+    ],
     "file:///Users/nurrony/Library/Application%20Support/Code/User/globalStorage/amazonwebservices.aws-toolkit-vscode/sam.schema.json": [
       "template.yaml"
     ]

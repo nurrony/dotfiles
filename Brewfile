@@ -144,6 +144,8 @@ brew "lazydocker"
 brew "lazygit"
 # Terminal UI for rsync, written in Rust
 brew "lazyrsync"
+# Terminal-based SSH manager
+brew "lazyssh"
 # BSD-style licensed readline alternative
 brew "libedit"
 # Conversion library

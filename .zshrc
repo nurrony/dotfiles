@@ -49,7 +49,6 @@ zinit wait'10' lucid light-mode for \
   as'program' from'gh-r' medialab/xan \
   as'program' from'gh-r' bugzmanov/bookokrat \
   as'program' from'gh-r' danielmiessler/Fabric \
-  as'program' from'gh-r' PaulJuliusMartinez/jless \
   as'program' from'gh-r' pick'llmfit-*/llmfit' AlexsJones/llmfit \
   as'program' from'gh-r' atpull"%atclone" atclone'./doggo completions zsh > _doggo' pick'doggo*/doggo' mr-karan/doggo \
   as'program' from'gh-r' mv'phpactor.phar -> phpactor' atpull'%atclone' atclone'chmod +x ./phpactor && ./phpactor completion zsh > _phpactor' pick'phpactor.phar' phpactor/phpactor \
@@ -72,14 +71,14 @@ zinit cdreplay -q
 #-----------------------------------------------------------------
 
 # install powerline10k
-zinit ice depth'1' atload"[[ ! -f $HOME/.dotfiles/.config/p10k/p10k.pure.zsh ]] || source $HOME/.dotfiles/.config/p10k/p10k.pure.zsh" nocd
-zinit light romkatv/powerlevel10k
+# zinit ice depth'1' atload"[[ ! -f $HOME/.dotfiles/.config/p10k/p10k.pure.zsh ]] || source $HOME/.dotfiles/.config/p10k/p10k.pure.zsh" nocd
+# zinit light romkatv/powerlevel10k
 
 # install and load starship theme.
-# zi ice as"command" from"gh-r" \
-#   atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship;" \
-#   atpull"%atclone" src"init.zsh"
-# zi light starship/starship
+zi ice as"command" from"gh-r" \
+  atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship;" \
+  atpull"%atclone" src"init.zsh"
+zi light starship/starship
 
 # install and load ohmyposh theme
 # if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then

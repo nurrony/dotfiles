@@ -50,7 +50,6 @@ zinit wait'10' lucid light-mode for \
   as'program' from'gh-r' bugzmanov/bookokrat \
   as'program' from'gh-r' danielmiessler/Fabric \
   as'program' from'gh-r' PaulJuliusMartinez/jless \
-  as'program' from'gh-r' pick'lazyssh-*/lazyssh' Adembc/lazyssh \
   as'program' from'gh-r' pick'llmfit-*/llmfit' AlexsJones/llmfit \
   as'program' from'gh-r' atpull"%atclone" atclone'./doggo completions zsh > _doggo' pick'doggo*/doggo' mr-karan/doggo \
   as'program' from'gh-r' mv'phpactor.phar -> phpactor' atpull'%atclone' atclone'chmod +x ./phpactor && ./phpactor completion zsh > _phpactor' pick'phpactor.phar' phpactor/phpactor \

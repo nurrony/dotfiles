@@ -142,6 +142,8 @@ brew "kustomize"
 brew "lazydocker"
 # Simple terminal UI for git commands
 brew "lazygit"
+# Terminal UI for rsync, written in Rust
+brew "lazyrsync"
 # BSD-style licensed readline alternative
 brew "libedit"
 # Conversion library

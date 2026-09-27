@@ -8,6 +8,7 @@ idiomatic_version_file_enable_tools                       = ["node"]
 [tools]
 deno                                                      = "latest"
 maven                                                     = "latest"
+pnpm                                                     = ["latest", "11"]
 node                                                      = ["latest", "lts", "lts-krypton", "lts-jod"]
 java                                                      = ["zulu-crac-26.32.203.0", "zulu-crac-25.36.205.0", "zulu-crac-21.52.203.0", "zulu-crac-17.68.203.0"]
 

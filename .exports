@@ -85,3 +85,6 @@ export BUILDX_NO_DEFAULT_ATTESTATIONS=1
 # ollama
 export OLLAMA_FLASH_ATTENTION=1
 export OLLAMA_KV_CACHE_TYPE=q8_0
+
+# pnpm config dir
+export PNPM_HOME=$DEV_ZONE_CONFIG_PATH/nodejs/pnpm

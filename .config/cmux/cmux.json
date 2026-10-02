@@ -1,0 +1,41 @@
+{
+  "$schema": "https://raw.githubusercontent.com/manaflow-ai/cmux/main/web/data/cmux.schema.json",
+  "app": {
+    "appIcon": "dark",
+    "confirmQuit": "dirty-only",
+    "focusPaneOnFirstClick": true,
+    "minimalMode": true,
+    "sendAnonymousTelemetry": false,
+    "warnBeforeClosingTab": true,
+    "windowTitleTemplate": "[cmux:{windowToken}] {activeWorkspace}"
+  },
+  "fileEditor": {
+    "currentLineHighlight": true,
+    "indentGuides": true,
+    "lineNumbers": true,
+    "syntaxHighlighting": true,
+    "tabWidth": 2,
+    "wordWrap": false
+  },
+  "fileExplorer": {
+    "doubleClickAction": "preview"
+  },
+  "schemaVersion": 1,
+  "sidebar": {
+    "beta": {
+      "workspaceTodos": {
+        "checklistStyle": "popover",
+        "controls": {
+          "enabled": true
+        }
+      }
+    },
+    "openPortLinksInCmuxBrowser": true
+  },
+  "sidebarAppearance": {
+    "matchTerminalBackground": true
+  },
+  "terminal": {
+    "copyOnSelect": true
+  }
+}

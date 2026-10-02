@@ -1,0 +1,10 @@
+{
+  "controls": [
+    {
+      "command": "lazygit",
+      "height": 300,
+      "id": "git",
+      "title": "Git"
+    }
+  ]
+}

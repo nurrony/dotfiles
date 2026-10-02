@@ -236,3 +236,11 @@ alias hosts="hosts --auto-sudo"
 
 # ollama
 alias ollama-serve='export OLLAMA_FLASH_ATTENTION="1" export OLLAMA_KV_CACHE_TYPE="q8_0" ollama serve'
+
+# cmux
+alias cm-md="cmux markdown"
+alias cm-status="cmux list-status"
+alias cm-jump="cmux jump-to-unread"
+alias cm-browser="cmux browser open"
+alias cm-diff="cmux diff --source unstaged"
+alias cm-diff-staged="cmux diff --source staged"

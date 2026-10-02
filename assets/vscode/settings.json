@@ -63,9 +63,10 @@
   "breadcrumbs.symbolPath": "off",
   "camelk.integrations.runtimeVersion": "1.11.0",
   "camelk.tools": {
-    "camelk.tools.kamel-path": "/Users/egen/Library/Application Support/Code/User/globalStorage/redhat.vscode-camelk/camelk/tools/kamel/kamel"
+    "camelk.tools.kamel-path": "/Volumes/Library/Application Support/Code/User/globalStorage/redhat.vscode-camelk/camelk/tools/kamel/kamel"
   },
   "cfnLint.path": "/usr/local/bin/cfn-lint",
+  "chat.agentMerge.enabled": true,
   "debug.breakpointsView.presentation": "tree",
   "debug.console.acceptSuggestionOnEnter": "on",
   "debug.inlineValues": "on",
@@ -98,7 +99,7 @@
   "editor.emptySelectionClipboard": false,
   "editor.fontFamily": "'JetBrainsMonoNL Nerd Font Mono Propo', Monaco, monospace",
   "editor.fontLigatures": true,
-  "editor.fontSize": 18,
+  "editor.fontSize": 17,
   "editor.fontWeight": "400",
   "editor.formatOnSave": true,
   "editor.guides.bracketPairs": true,
@@ -123,6 +124,7 @@
   },
   "editor.renderWhitespace": "boundary",
   "editor.rulers": [120],
+  "editor.selectedTextMatchMode": "caseSensitive",
   "editor.semanticHighlighting.enabled": false,
   "editor.snippetSuggestions": "top",
   "editor.suggest.matchOnWordStartOnly": false,
@@ -175,8 +177,6 @@
     "**/bootstrap/cache/**": true,
     "**/node_modules": true,
     "**/storage/**": true,
-    "**/target/**": true,
-    "**/var/cache/**": true,
     "**/vendor": true
   },
   "explorer.compactFolders": false,
@@ -225,6 +225,7 @@
   },
   "files.hotExit": "off",
   "files.insertFinalNewline": true,
+  "files.simpleDialog.enable": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
   "files.watcherExclude": {
@@ -234,12 +235,33 @@
     "**/node_modules": true
   },
   "git.blame.editorDecoration.enabled": true,
+  "git.blame.ignoreWhitespace": true,
   "git.blame.statusBarItem.enabled": true,
   "git.enableSmartCommit": true,
   "git.mergeEditor": true,
   "git.smartCommitChanges": "all",
   "git.suggestSmartCommit": true,
   "git.untrackedChanges": "separate",
+  "github.copilot.chat.agent.autoFix": false,
+  "github.copilot.chat.agent.currentEditorContext.enabled": false,
+  "github.copilot.chat.codeGeneration.useInstructionFiles": false,
+  "github.copilot.chat.copilotDebugCommand.enabled": false,
+  "github.copilot.chat.customInstructionsInSystemMessage": false,
+  "github.copilot.chat.edits.suggestRelatedFilesForTests": false,
+  "github.copilot.chat.edits.suggestRelatedFilesFromGitHistory": false,
+  "github.copilot.chat.newWorkspaceCreation.enabled": false,
+  "github.copilot.chat.reviewAgent.enabled": false,
+  "github.copilot.chat.reviewSelection.enabled": false,
+  "github.copilot.chat.setupTests.enabled": false,
+  "github.copilot.chat.startDebugging.enabled": false,
+  "github.copilot.chat.summarizeAgentConversationHistory.enabled": false,
+  "github.copilot.editor.enableCodeActions": false,
+  "github.copilot.enable": {
+    "*": false
+  },
+  "github.copilot.nextEditSuggestions.allowWhitespaceOnlyChanges": false,
+  "github.copilot.nextEditSuggestions.fixes": false,
+  "github.copilot.renameSuggestions.triggerAutomatically": false,
   "gitignore.cacheExpirationInterval": 3600,
   "highlight-matching-tag.styles": {
     "opening": {
@@ -271,31 +293,20 @@
   "java.configuration.runtimes": [
     {
       "default": true,
-      "name": "JavaSE-26",
-      "path": "/Users/egen/Devzone/storage/mise/data/installs/java/zulu-crac-26"
-    },
-    {
-      "default": false,
       "name": "JavaSE-25",
-      "path": "/Users/egen/Devzone/storage/mise/data/installs/java/zulu-crac-25"
+      "path": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-crac-25"
     },
     {
       "default": false,
       "name": "JavaSE-21",
-      "path": "/Users/egen/Devzone/storage/mise/data/installs/java/zulu-crac-21"
-    },
-    {
-      "default": false,
-      "name": "JavaSE-17",
-      "path": "/Users/egen/Devzone/storage/mise/data/installs/java/zulu-crac-17"
+      "path": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-crac-21"
     }
   ],
   "java.implementationCodeLens": "all",
-  "java.jdt.ls.java.home": "/Users/egen/Devzone/storage/mise/data/installs/java/zulu-crac-26",
+  "java.jdt.ls.java.home": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-crac-25",
   "java.project.importOnFirstTimeStartup": "automatic",
   "java.referencesCodeLens.enabled": true,
   "js/ts.autoClosingTags": true,
-  "js/ts.autoClosingTags.enabled": true,
   "js/ts.implicitProjectConfig.checkJs": true,
   "js/ts.preferences.importModuleSpecifier": "relative",
   "js/ts.preferences.quoteStyle": "single",
@@ -306,8 +317,7 @@
     "https://developer.microsoft.com/json-schemas/": true,
     "https://json-schema.org/": true,
     "https://json.schemastore.org/": true,
-    "https://models.dev": true,
-    "https://opencode.ai": true,
+    "https://opencode.ai/config.json": true,
     "https://raw.githubusercontent.com/devcontainers/spec/": true,
     "https://raw.githubusercontent.com/microsoft/vscode/": true,
     "https://schemastore.azurewebsites.net/": true,
@@ -315,19 +325,16 @@
   },
   "json.schemas": [],
   "laravel-pint.enable": false,
-  "Laravel.phpCommand": "/opt/homebrew/bin/php",
+  "Laravel.phpCommand": "/usr/local/bin/php",
   "Laravel.pint.runOnSave": false,
   "Lua.diagnostics.globals": ["vim", "nvim_bufferline", "sign"],
   "markdown.validate.enabled": true,
-  "maven.executable.path": "/Users/egen/Devzone/storage/mise/data/shims/mvn",
+  "maven.executable.path": "/Volumes/Devzone/storage/mise/data/shims/mvn",
   "maven.terminal.useJavaHome": true,
   "mergeEditor.diffAlgorithm": "advanced",
   "microprofile.alwaysShowOverview": false,
-  "php.suggest.basic": false,
-  "php.validate.executablePath": "/opt/homebrew/bin/php",
   "phpactor.enable": false,
-  "phpactor.executablePath": "/opt/homebrew/bin/php",
-  "phpcompanion.class.insertFinal": false,
+  "phpactor.executablePath": "/usr/local/bin/php",
   "prettier.arrowParens": "avoid",
   "prettier.bracketSpacing": false,
   "prettier.embeddedLanguageFormatting": "auto",
@@ -370,32 +377,7 @@
   "scm.workingSets.enabled": true,
   "search.useIgnoreFiles": true,
   "security.workspace.trust.untrustedFiles": "open",
-  "sessions.chatTimeline.display": "gutter",
-  "sonarlint.automaticAnalysis": true,
-  "sonarlint.rules": {
-    "java:S117": {
-      "level": "off"
-    },
-    "java:S120": {
-      "level": "off"
-    },
-    "java:S4144": {
-      "level": "off"
-    },
-    "java:S5976": {
-      "level": "off"
-    },
-    "kubernetes:S6865": {
-      "level": "off"
-    },
-    "kubernetes:S6897": {
-      "level": "off"
-    },
-    "php:S1131": {
-      "level": "on"
-    }
-  },
-  "spring-boot.ls.java.home": "/Users/egen/Devzone/storage/mise/data/installs/java/zulu-crac-26",
+  "spring-boot.ls.java.home": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-crac-25",
   "telemetry.telemetryLevel": "off",
   "terminal.external.osxExec": "iTerm.app",
   "terminal.integrated.copyOnSelection": true,
@@ -411,10 +393,11 @@
   "terraform.codelens.referenceCount": true,
   "vscode-kubernetes.kubectl-path": "/usr/local/bin/kubectl",
   "window.commandCenter": false,
+  "window.customTitleBarVisibility": "never",
+  "window.density.layout": "compact",
   "window.restoreWindows": "none",
   "window.titleBarStyle": "custom",
   "workbench.activityBar.location": "bottom",
-  "workbench.cloudChanges.continueOn": "off",
   "workbench.colorTheme": "Tokyo Night",
   "workbench.editor.empty.hint": "hidden",
   "workbench.editor.enablePreview": false,
@@ -422,7 +405,10 @@
   "workbench.editor.restoreViewState": false,
   "workbench.editor.showTabs": "none",
   "workbench.editor.wrapTabs": true,
+  "workbench.experimental.modernUI": true,
+  "workbench.experimental.modernUIUppercaseViewHeaders": true,
   "workbench.fontAliasing": "auto",
+  "workbench.iconTheme": "catppuccin-macchiato",
   "workbench.layoutControl.enabled": false,
   "workbench.secondarySideBar.defaultVisibility": "hidden",
   "workbench.settings.editor": "json",
@@ -470,7 +456,7 @@
     "**/.forgejo/workflows/*.yaml"
   ],
   "yaml.schemas": {
-    "file:///Users/egen/.vscode/extensions/continue.continue-2.0.0-darwin-arm64/config-yaml-schema.json": [
+    "file:///Users/nurrony/.vscode/extensions/continue.continue-2.0.0-darwin-x64/config-yaml-schema.json": [
       ".continue/**/*.yaml"
     ],
     "file:///Users/nurrony/Library/Application%20Support/Code/User/globalStorage/amazonwebservices.aws-toolkit-vscode/sam.schema.json": [

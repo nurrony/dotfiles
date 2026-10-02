@@ -1,229 +1,215 @@
+# ~/.config/starship.toml
+# Powerlevel10k "rainbow" style: angled separators, rounded start/end caps.
+
 "$schema" = 'https://starship.rs/config-schema.json'
 
-# command_timeout = 5000
-scan_timeout = 10
+add_newline = true
+command_timeout = 5000
+palette = "p10k"
 
 format = """
-[](surface0)\
+[\ue0b6](fg:c_os)\
 $os\
-[](bg:peach fg:surface0)\
 $directory\
-[](fg:peach bg:orange)\
 $git_branch\
 $git_status\
-[](fg:orange bg:teal)\
-$c\
-$rust\
-$golang\
-$nodejs\
-$scala\
-$php\
-$java\
-$kotlin\
-$lua\
-$haskell\
-$python\
-[](fg:teal bg:blue)\
-$aws\
-$package\
-$terraform\
-$kubernetes\
-$docker_context\
-[](fg:blue bg:purple)\
+${custom.git_end}\
+${custom.nogit_end}\
+$fill\
+${custom.right}\
 $cmd_duration\
-$jobs\
-[ ](fg:purple)\
-$line_break$character"""
+$line_break\
+$character"""
 
-palette = 'catppuccin_mocha'
+[palettes.p10k]
+c_os   = "#e4e4e4"
+c_dir  = "#0087d7"
+c_git  = "#5fd700"
+c_exec = "#d7af00"
 
-[palettes.catppuccin_mocha]
-rosewater = "#f5e0dc"
-flamingo = "#f2cdcd"
-pink = "#f5c2e7"
-orange = "#cba6f7"
-red = "#f38ba8"
-maroon = "#eba0ac"
-peach = "#fab387"
-yellow = "#f9e2af"
-green = "#a6e3a1"
-teal = "#94e2d5"
-sky = "#89dceb"
-sapphire = "#74c7ec"
-blue = "#89b4fa"
-lavender = "#b4befe"
-text = "#cdd6f4"
-subtext1 = "#bac2de"
-subtext0 = "#a6adc8"
-overlay2 = "#9399b2"
-overlay1 = "#7f849c"
-overlay0 = "#6c7086"
-surface2 = "#585b70"
-surface1 = "#45475a"
-surface0 = "#313244"
-base = "#1e1e2e"
-mantle = "#181825"
-crust = "#11111b"
+[fill]
+symbol = " "
 
+# ───────────────────────── Left side ─────────────────────────
 [os]
 disabled = false
-style = "bg:surface0 fg:text"
+format = "[ $symbol ](fg:#080808 bg:c_os)"
 
 [os.symbols]
-Windows = "󰍲"
-Ubuntu = "󰕈"
-SUSE = ""
-Raspbian = "󰐿"
-Mint = "󰣭"
-Macos = ""
-Manjaro = ""
-Linux = "󰌽"
-Gentoo = "󰣨"
-Fedora = "󰣛"
-Alpine = ""
-Amazon = ""
-Android = ""
-Arch = "󰣇"
-Artix = "󰣇"
-CentOS = ""
-Debian = "󰣚"
-Redhat = "󱄛"
-RedHatEnterprise = "󱄛"
-
-[username]
-show_always = true
-style_user = "bg:surface0 fg:text"
-style_root = "bg:surface0 fg:text"
-format = '[ $user ]($style)'
+Alpine = "\uf300"
+Arch = "\uf303"
+CentOS = "\uf304"
+Debian = "\uf306"
+Fedora = "\uf30a"
+Gentoo = "\uf30d"
+Kali = "\uf327"
+Linux = "\uf17c"
+Macos = "\uf179"
+Manjaro = "\uf312"
+Mint = "\uf30e"
+NixOS = "\uf313"
+openSUSE = "\uf314"
+Pop = "\uf32a"
+Raspbian = "\uf315"
+Ubuntu = "\uf31b"
+Windows = "\uf17a"
+Android = "\uf17b"
 
 [directory]
-style = "fg:mantle bg:peach"
-format = "[ $path ]($style)"
-truncation_length = 3
+format = "[\ue0b0](fg:c_os bg:c_dir)[ $path ](fg:#e4e4e4 bg:c_dir)[$read_only](fg:#ffd700 bg:c_dir)"
+truncation_length = 2
 truncation_symbol = "…/"
-
-[directory.substitutions]
-"Documents" = "󰈙 "
-"Downloads" = " "
-"Music" = "󰝚 "
-"Pictures" = " "
-"Developer" = "󰲋 "
+truncate_to_repo = false
+home_symbol = "~"
+read_only = " \uf023"
 
 [git_branch]
-symbol = ""
-style = "bg:black"
-format = '[[ $symbol $branch ](fg:base bg:orange)]($style)'
+symbol = "\ue0a0 "
+format = "[\ue0b0](fg:c_dir bg:c_git)[ $symbol$branch ](fg:black bg:c_git)"
 
 [git_status]
-style = "bg:black"
-format = '[[($all_status$ahead_behind )](fg:base bg:orange)]($style)'
+format = "[($all_status$ahead_behind )](fg:#870000 bg:c_git)"
 
-[nodejs]
-symbol = " "
-style = "bg:teal"
-format = '[[ $symbol($version) ](fg:base bg:teal)]($style)'
+# Rounded closing cap: green inside a git repo, blue outside
+[custom.git_end]
+when = "git rev-parse --is-inside-work-tree >/dev/null 2>&1"
+command = "echo x"
+format = "[\ue0b4](fg:c_git)"
+shell = ["sh"]
 
-[c]
-symbol = " "
-style = "bg:teal"
-format = '[[ $symbol($version) ](fg:base bg:teal)]($style)'
-
-[rust]
-symbol = " "
-style = "bg:teal"
-format = '[[ $symbol($version) ](fg:base bg:teal)]($style)'
-
-[golang]
-symbol = " "
-style = "bg:teal"
-format = '[[ $symbol($version) ](fg:base bg:teal)]($style)'
-
-[php]
-symbol = " "
-style = "bg:teal"
-format = '[[ $symbol($version) ](fg:base bg:teal)]($style)'
-
-[java]
-symbol = " "
-style = "bg:teal"
-format = '[[ $symbol($version) ](fg:base bg:teal)]($style)'
-
-[kotlin]
-symbol = " "
-style = "bg:teal"
-format = '[[ $symbol($version) ](fg:base bg:teal)]($style)'
-
-[haskell]
-symbol = " "
-style = "bg:teal"
-format = '[[ $symbol($version) ](fg:base bg:teal)]($style)'
-
-[python]
-symbol = " "
-style = "bg:teal"
-format = '[[ $symbol($version) ](fg:base bg:teal)]($style)'
-
-[lua]
-symbol = ' '
-style = "bg:teal"
-format = '[[ $symbol($version) ](fg:base bg:teal)]($style)'
-
-[terraform]
-symbol = "󱁢 "
-style = "bg:teal"
-format = '[[ $symbol($version) ](fg:base bg:blue)]($style)'
-
-[docker_context]
-symbol = " "
-style = "bg:mantle"
-format = '[[ $symbol($context) ](fg:black bg:blue)]($style)'
-
-[time]
-disabled = false
-time_format = "%R"
-style = "bg:peach"
-format = '[[  $time ](fg:mantle bg:purple)]($style)'
-
-[package]
-display_private = true
-symbol = "📦 "
-style = "bg:mantle"
-format = '[[ $symbol($version) ](fg:black bg:blue)]($style)'
-
-[aws]
-disabled = false
-symbol = "󰸏 "
-style = "bg:mantle"
-format = '[[ $symbol($profile)(\($region\) )](fg:black bg:blue)]($style)'
-
-[jobs]
-symbol = ' '
-disabled = false
-style = "bg:peach"
-number_threshold = 1
-format = '[[ $symbol$number ](fg:mantle bg:purple)]($style)'
-
-[kubernetes]
-symbol = '󱃾 '
-disabled = false
-style = "bg:mantle"
-format = '[[ $symbol$context( \($namespace\)) ](fg:black bg:blue)]($style)'
-
-[cmd_duration]
-min_time = 1000
-style = "bg:peach"
-show_milliseconds = false
-format = '[[  $duration ](fg:mantle bg:purple)]($style)'
-
-
-[line_break]
-disabled = false
+[custom.nogit_end]
+when = "! git rev-parse --is-inside-work-tree >/dev/null 2>&1"
+command = "echo x"
+format = "[\ue0b4](fg:c_dir)"
+shell = ["sh"]
 
 [character]
-disabled = false
-success_symbol = '[❯](bold fg:green)'
-error_symbol = '[❯](bold fg:red)'
-vimcmd_symbol = '[❮](bold fg:creen)'
-vimcmd_replace_one_symbol = '[❮](bold fg:purple)'
-vimcmd_replace_symbol = '[❮](bold fg:purple)'
-vimcmd_visual_symbol = '[❮](bold fg:lavender)'
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+
+# ───────────────────────── Right side ─────────────────────────
+# Order: java php nodejs lua deno scala go composer maven terraform aws gcp
+#        azure k8s(version + namespace) package-version
+# A segment is only drawn when its project files / env vars are present AND the
+# tool actually returns a version, so nothing empty is ever shown.
+[custom.right]
+when = true
+command = '''
+main() {
+exec </dev/null
+export CHECKPOINT_DISABLE=1
+prev=""
+
+# colours (r;g;b)
+BLK="0;0;0"; WHT="255;255;255"
+C_JAVA="231;111;0"; C_PHP="119;123;180"; C_NODE="95;160;78"; C_LUA="44;45;114"
+C_DENO="112;255;175"; C_SCALA="220;50;47"; C_GO="0;173;216"; C_COMPOSER="136;86;48"
+C_MAVEN="199;26;54"; C_TF="123;66;188"; C_AWS="255;153;0"; C_GCP="66;133;244"
+C_AZURE="0;120;212"; C_K8S="50;108;229"; C_PKG="138;138;138"
+
+# one segment: bg fg text.  First one gets a rounded cap, the rest an angle whose
+# background is the previous segment's colour (=> no gaps)
+add() {
+  if [ -z "$prev" ]; then
+    printf '\033[0m\033[38;2;%sm\356\202\266' "$1"
+  else
+    printf '\033[38;2;%sm\033[48;2;%sm\356\202\262' "$1" "$prev"
+  fi
+  printf '\033[48;2;%sm\033[38;2;%sm %s ' "$1" "$2" "$3"
+  prev=$1
+}
+seg() { [ -n "$4" ] && add "$1" "$2" "$3 $4"; }
+ver() { [ -n "$1" ] && printf 'v%s' "${1#v}"; }
+has() { for _f in "$@"; do [ -e "$_f" ] && return 0; done; return 1; }
+
+# cache slow lookups for 30 min per directory: cached <name> <function>
+cached() {
+  _k=$(printf '%s' "$1|$PWD|$JAVA_HOME" | cksum | cut -d" " -f1)
+  _c="${TMPDIR:-/tmp}/.starship-right-$_k"
+  if [ -n "$(find "$_c" -mmin -30 2>/dev/null)" ]; then cat "$_c"; return; fi
+  _o=$("$2" 2>/dev/null)
+  [ -n "$_o" ] && printf '%s\n' "$_o" > "$_c"
+  printf '%s\n' "$_o"
+}
+
+v_java()  { java -version 2>&1 | awk -F'"' '/ version "/{print $2; exit}'; }
+v_php()   { php -r 'echo PHP_VERSION;'; }
+v_node()  { node -v; }
+v_lua()   { if command -v lua >/dev/null; then lua -v 2>&1 | awk '{print $2; exit}'; elif command -v luajit >/dev/null; then luajit -v 2>&1 | awk '{print $2; exit}'; fi; }
+v_deno()  { deno -V | awk '{print $2; exit}'; }
+v_scala() { scalac -version 2>&1 | awk '{print $4; exit}'; }
+v_go()    { go version | awk '{sub("go","",$3); print $3; exit}'; }
+v_comp()  { composer --version --no-ansi 2>/dev/null | awk '/^Composer/{print $3; exit}'; }
+v_mvn()   { mvn -v 2>/dev/null | awk '/Apache Maven/{print $3; exit}'; }
+v_tf()    { terraform version 2>/dev/null | awk 'NR==1{print $2}'; }
+v_gcp() {
+  [ -n "$CLOUDSDK_CORE_PROJECT" ] && { echo "$CLOUDSDK_CORE_PROJECT"; return; }
+  _d="${CLOUDSDK_CONFIG:-$HOME/.config/gcloud}"
+  _a="${CLOUDSDK_ACTIVE_CONFIG_NAME:-$(cat "$_d/active_config" 2>/dev/null)}"
+  awk -F' *= *' '$1=="project"{print $2; exit}' "$_d/configurations/config_${_a:-default}" 2>/dev/null
+}
+v_azure() {
+  _f="${AZURE_CONFIG_DIR:-$HOME/.azure}/azureProfile.json"
+  [ -f "$_f" ] || return
+  if command -v jq >/dev/null; then
+    jq -r '.subscriptions[]|select(.isDefault==true)|.name' "$_f"
+  elif command -v python3 >/dev/null; then
+    python3 -c 'import json,sys
+for s in json.load(open(sys.argv[1], encoding="utf-8-sig")).get("subscriptions",[]):
+    if s.get("isDefault"): print(s.get("name","")); break' "$_f"
+  fi
+}
+v_k8s() {
+  command -v kubectl >/dev/null || return
+  [ -f "${KUBECONFIG%%:*}" ] || [ -f "$HOME/.kube/config" ] || return
+  kubectl config current-context >/dev/null 2>&1 || return
+  _v=$(cached k8s v_k8sver)
+  _n=$(kubectl config view --minify -o "jsonpath={..namespace}" 2>/dev/null)
+  [ -n "$_v" ] && echo "$_v · ${_n:-default}"
+}
+v_k8sver() { kubectl version --client -o yaml | awk '/gitVersion/{print $2; exit}'; }
+v_pkg() {
+  if   [ -f package.json ];   then sed -n 's/.*"version"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' package.json | head -n 1
+  elif [ -f Cargo.toml ];     then awk -F'"' '/^version[ ]*=/{print $2; exit}' Cargo.toml
+  elif [ -f composer.json ];  then sed -n 's/.*"version"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' composer.json | head -n 1
+  elif [ -f pyproject.toml ]; then awk -F'"' '/^version[ ]*=/{print $2; exit}' pyproject.toml
+  elif [ -f pom.xml ];        then awk '/<parent>/{p=1} /<\/parent>/{p=0; next} !p && /<version>/{gsub(/.*<version>|<\/version>.*/,""); print; exit}' pom.xml
+  fi
+}
+
+has pom.xml build.gradle build.gradle.kts build.sbt .java-version .sdkmanrc *.java *.class *.jar *.gradle && seg "$C_JAVA" "$BLK" "" "$(ver "$(cached java v_java)")"
+has composer.json .php-version *.php && seg "$C_PHP" "$WHT" "" "$(ver "$(v_php 2>/dev/null)")"
+has package.json .node-version .nvmrc node_modules *.js *.mjs *.cjs *.ts *.mts *.cts && seg "$C_NODE" "$BLK" "" "$(ver "$(v_node 2>/dev/null)")"
+has .lua-version lua *.lua && seg "$C_LUA" "$WHT" "" "$(ver "$(v_lua 2>/dev/null)")"
+has deno.json deno.jsonc deno.lock mod.ts mod.js deps.ts deps.js && seg "$C_DENO" "$BLK" "🦕" "$(ver "$(v_deno 2>/dev/null)")"
+has build.sbt .scalaenv .sbtenv .metals *.scala *.sbt && seg "$C_SCALA" "$WHT" "" "$(ver "$(cached scala v_scala)")"
+has go.mod go.sum go.work glide.yaml Gopkg.yml Gopkg.lock .go-version Godeps *.go && seg "$C_GO" "$BLK" "" "$(ver "$(v_go 2>/dev/null)")"
+has composer.json && seg "$C_COMPOSER" "$WHT" "🎼" "$(ver "$(cached composer v_comp)")"
+has pom.xml && seg "$C_MAVEN" "$WHT" "" "$(ver "$(cached mvn v_mvn)")"
+if has *.tf *.tfplan *.tfstate .terraform; then
+  _t=$(ver "$(cached terraform v_tf)")
+  _w=$(cat .terraform/environment 2>/dev/null)
+  [ "$_w" = "default" ] && _w=""
+  seg "$C_TF" "$WHT" "󱁢" "$_t${_w:+ $_w}"
+fi
+_p=${AWS_VAULT:-${AWSUME_PROFILE:-${AWS_PROFILE:-$AWS_DEFAULT_PROFILE}}}
+_r=${AWS_REGION:-$AWS_DEFAULT_REGION}
+seg "$C_AWS" "$BLK" "" "$(echo $_p $_r)"
+seg "$C_GCP" "$WHT" "" "$(v_gcp)"
+seg "$C_AZURE" "$WHT" "󰠅" "$(cached azure v_azure)"
+seg "$C_K8S" "$WHT" "󱃾" "$(v_k8s)"
+has package.json Cargo.toml composer.json pyproject.toml pom.xml && seg "$C_PKG" "$BLK" "" "$(ver "$(v_pkg)")"
+
+# rounded end cap
+[ -n "$prev" ] && printf '\033[0m\033[38;2;%sm\356\202\264\033[0m' "$prev"
+}
+main
+'''
+format = "$output"
+shell = ["sh"]
+
+# Exec time: its own little pill, only shown for slow commands (p10k default: 3s)
+[cmd_duration]
+disabled = true
+min_time = 3000
+format = " [\ue0b6](fg:c_exec)[ \uf252 $duration ](fg:black bg:c_exec)[\ue0b4](fg:c_exec)"

@@ -10,7 +10,7 @@ export DEV_ZONE=${DEV_ZONE:-$HOME}
 export DEV_ZONE_CONFIG_PATH=${DEV_ZONE_CONFIG_PATH:-$DEV_ZONE/.configs}
 
 # Export starship config location
-export STARSHIP_CONFIG=$HOME/.dotfiles/starship.toml
+export STARSHIP_CONFIG=$HOME/.dotfiles/.config/starship/starship.toml
 
 export _ZO_DATA_DIR=$HOME/.zoxide
 
@@ -33,11 +33,6 @@ export NODE_REPL_MODE='sloppy';
 # Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
 export PYTHONIOENCODING='UTF-8';
 
-# Increase Bash history size. Allow 32³ entries; the default is 500.
-export HISTSIZE='32768';
-export HISTFILESIZE="${HISTSIZE}";
-# Omit duplicates and commands that begin with a space from history.
-export HISTCONTROL='ignoreboth';
 # Make some commands not show up in history
 export HISTIGNORE=" *:ls:cd:cd -:pwd:exit:date:* --help:* -h:pony:pony add *:pony update *:pony save *:pony ls:pony ls *";
 

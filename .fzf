@@ -8,16 +8,9 @@ if command -v fzf &>/dev/null; then
 
   export FZF_ALT_C_OPTS="--preview 'eza --tree {} | head -200'"
   export FZF_ALT_C_COMMAND="rg --files --hidden --type d"
-  export FZF_CTRL_R_OPTS="--bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort' --color header:italic --header 'Press CTRL-Y to copy command into clipboard'"
 
   # Set up fzf key bindings and fuzzy completion
   source <(fzf --zsh)
-
-  nmr_fzf_find_edit() {
-    [ "$#" -ne 0 ] && nvim "$@" || rg --files --hidden \
-      | fzf --print0 --multi --height 50% --layout=default --border --preview 'bat --color=always -n --line-range :100 {}' \
-      | xargs -0 -r nvim
-  }
 
   nmr_fzf_kill() {
       if [[ $(uname) == Linux ]]; then

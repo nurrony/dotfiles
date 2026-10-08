@@ -186,7 +186,7 @@ alias vim='nmr_fzf_find_edit'
 alias lzd='lazydocker'
 
 # git terminal ui
-alias lzg='lazygit'
+alias lg='lazygit'
 
 # Scala Alias
 alias cs='coursier'

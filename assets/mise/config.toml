@@ -2,7 +2,6 @@
 experimental                                              = true
 cache_prune_age                                           = "3d"
 legacy_version_file                                       = true
-plugin_autoupdate_last_check_duration                     = "1d"
 idiomatic_version_file_enable_tools                       = ["node"]
 
 [tools]

@@ -5,50 +5,47 @@ bindkey "^[[A" history-search-backward
 bindkey "^[[B" history-search-forward
 
 
-# zshell specific commands
-autoload zmv
-
-# paste behavior
+# Key bindings & paste behavior
+bindkey -e
+bindkey '^[[A' history-search-backward
+bindkey '^[[B' history-search-forward
 zle_highlight=('paste:none')
 
-# history options
-HISTSIZE=5000
-HISTDUP=erase
-HISTFILE=$ZDOTDIR/.zsh_history
-SAVEHIST=$HISTSIZE
-setopt hist_verify            # Allow editing the command before executing again
-setopt sharehistory           # Share History
-setopt appendhistory          # Append History
-setopt hist_ignore_dups       # Do not record an event that was just recorded again.
-setopt hist_find_no_dups      # Do not find an event that was just recorded again.
-setopt hist_ignore_space      # Do not record an Event Starting With A Space.
-setopt hist_reduce_blanks     # Remove superfluous blanks from history items.
-setopt hist_save_no_dups      # Do not write a duplicate event to the history file.
-setopt hist_ignore_all_dups   # Remove older duplicate entries from history.
-setopt hist_expire_dups_first # Remove expired duplicate first
+# History configuration
+HISTFILE="${ZDOTDIR:-$HOME}/.zsh_history"
+HISTSIZE=10000
+SAVEHIST=10000
 
-# list options
-setopt auto_cd              # Use cd by typing directory name if it's not a command.
-setopt auto_list            # Automatically list choices on ambiguous completion.
-setopt extendedglob         # Adds advanced syntax for complex file filtering.
-setopt nomatch              # nomatch behaviour
-setopt numericglobsort      # Sorts numeric filenames by their actual value instead of alphabetically.
+# History options (Redundant duplicates removed)
+setopt append_history          # Standard Zsh default, explicit append
+setopt share_history           # Share history live across sessions (implies inc_append_history)
+setopt hist_ignore_space       # Don't record commands leading with a space
+setopt hist_ignore_all_dups    # Remove older duplicate entries when adding new ones
+setopt hist_find_no_dups       # Don't show duplicate history results when searching
+setopt hist_save_no_dups       # Skip writing duplicates to $HISTFILE
+setopt hist_reduce_blanks      # Strip excess white space from commands
+setopt hist_verify             # Allow editing history expansion before running
 
-# completion style
-zstyle ':completion:*:matches' group 'yes'
-zstyle ':completion:*:options' description 'yes'
-zstyle ':completion:*:options' auto-description '%d'
-zstyle ':completion:*:corrections' format ' %F{green}-- %d (errors: %e) --%f'
+# Shell options
+setopt auto_cd                 # cd into directory if name is entered as a command
+setopt extended_glob           # Enable advanced globbing syntax (#, ~, ^)
+setopt numeric_glob_sort       # Sort filenames numerically (1, 2, 10 instead of 1, 10, 2)
+# auto_list and nomatch left at Zsh defaults (enabled by default)
+
+# Completion styles
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompcache"
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' menu select
+zstyle ':completion:*' verbose yes
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+
+# Formatting & feedback
 zstyle ':completion:*:descriptions' format ' %F{yellow}-- %d --%f'
+zstyle ':completion:*:corrections' format ' %F{green}-- %d (errors: %e) --%f'
 zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
 zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
 zstyle ':completion:*:default' list-prompt '%S%M matches%s'
-zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
-zstyle ':completion:*' group-name ''
-zstyle ':completion:*' verbose yes
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*:options' auto-description '%d'
 zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
-zstyle ':completion:*' use-cache true
-zstyle ':completion:*' rehash true
-zstyle ':completion:*' menu select
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}

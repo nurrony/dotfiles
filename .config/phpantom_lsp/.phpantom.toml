@@ -1,0 +1,30 @@
+#:schema https://github.com/PHPantom-dev/phpantom_lsp/raw/main/config-schema.json
+
+
+[diagnostics]
+extra-arguments = true
+unused_variables = true
+deprecated_symbols = true
+unresolved-member-access = true
+downgrade-nullable-argument-mismatch = true
+
+unused_imports = true
+undefined_variables = true
+undefined_methods = true
+deprecated_calls = true
+type_mismatches = true
+
+[semantic_tokens]
+mode = "contextual"
+
+[indexing]
+max_file_size_kb = 2048
+deep_type_inference = true
+exclude = [
+    "storage/**",
+    "bootstrap/cache/**",
+    "node_modules/**",
+    "public/storage/**",
+    "coverage/**",
+    ".git/**"
+]

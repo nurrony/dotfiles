@@ -1,9 +1,9 @@
 # fonts
-font-size = 16
+font-size = 18
 bold-is-bright = true
 font-style = Book
 font-family = Operator Mono Lig
-theme = dark:Cobalt2,light:Cobalt2
+theme = dark:Catppuccin Mocha,light:Catppuccin Latte
 
 # cursor
 cursor-style = block

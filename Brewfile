@@ -1,6 +1,7 @@
 tap "amioranza/tools", trusted: true
 tap "aws/tap", trusted: true
 tap "boz/repo", trusted: true
+tap "floci-io/floci", trusted: true
 tap "mongodb/brew", trusted: true
 tap "sinelaw/fresh", trusted: true
 tap "weaveworks/tap", trusted: true
@@ -38,6 +39,14 @@ brew "binutils"
 brew "bison"
 # Resource monitor. C++ version and continuation of bashtop and bpytop
 brew "btop"
+# Library for manipulating PNG images
+brew "libpng"
+# Software library to render fonts
+brew "freetype"
+# Validate CloudFormation templates against the CloudFormation spec
+brew "cfn-lint"
+# TIFF library and utilities
+brew "libtiff"
 # Validate CloudFormation templates against the CloudFormation spec
 brew "cfn-lint"
 # Work on automating classical cipher cracking in C
@@ -46,14 +55,14 @@ brew "cifer"
 brew "cmake"
 # Console Matrix
 brew "cmatrix"
-# Dependency manager for Cocoa projects
-brew "cocoapods"
 # GNU multiple precision arithmetic library
 brew "gmp"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 # Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
+# GNU data recovery tool
+brew "ddrescue"
 # Library for manipulating PNG images
 brew "libpng"
 # TIFF library and utilities
@@ -238,6 +247,8 @@ brew "yt-dlp"
 brew "zlib"
 # UNIX shell (command interpreter)
 brew "zsh"
+# Official CLI for the Floci local AWS emulator
+brew "floci-io/floci/floci", trusted: true
 # Terraform
 brew "hashicorp/tap/terraform", trusted: true
 # Terraform Stacks CLI
@@ -309,41 +320,30 @@ vscode "aaron-bond.better-comments"
 vscode "amazonwebservices.aws-toolkit-vscode"
 vscode "anweber.vscode-httpyac"
 vscode "aws-scripting-guy.cform"
-vscode "blanc-frederic.vs-phpcompanion"
-vscode "bmewburn.vscode-intelephense-client"
 vscode "buvan.sql-crack"
 vscode "catppuccin.catppuccin-vsc-icons"
 vscode "christian-kohler.path-intellisense"
 vscode "codezombiech.gitignore"
-vscode "continue.continue"
 vscode "dbaeumer.vscode-eslint"
 vscode "deerawan.vscode-faker"
-vscode "denoland.vscode-deno"
 vscode "dsznajder.es7-react-js-snippets"
 vscode "editorconfig.editorconfig"
-vscode "enkia.tokyo-night"
 vscode "esbenp.prettier-vscode"
 vscode "github.vscode-github-actions"
 vscode "grapecity.gc-excelviewer"
-vscode "gruntfuggly.todo-tree"
 vscode "hashicorp.terraform"
-vscode "hediet.debug-visualizer"
 vscode "ihunte.laravel-blade-wrapper"
-vscode "jaguadoromero.vscode-php-create-class"
 vscode "jeremyljackson.vs-docblock"
-vscode "just4devs.php-create-implementation"
 vscode "kamasamak.vscode-cflint"
 vscode "laravel.vscode-laravel"
 vscode "lunuan.kubernetes-templates"
 vscode "maarti.jenkins-doc"
-vscode "mehedidracula.php-namespace-resolver"
 vscode "mgmcdermott.vscode-language-babel"
 vscode "mhutchie.git-graph"
 vscode "microprofile-community.mp-rest-client-generator-vscode-ext"
 vscode "microprofile-community.mp-starter-vscode-ext"
 vscode "microprofile-community.vscode-microprofile-pack"
 vscode "monish.regexsnippets"
-vscode "mrchetan.phpstorm-parameter-hints-in-vscode"
 vscode "ms-azuretools.vscode-containers"
 vscode "ms-dotnettools.upgrade-agent"
 vscode "ms-dotnettools.vscode-dotnet-runtime"
@@ -357,14 +357,13 @@ vscode "ms-vscode-remote.vscode-remote-extensionpack"
 vscode "ms-vscode.makefile-tools"
 vscode "ms-vscode.remote-explorer"
 vscode "ms-vscode.remote-server"
+vscode "nabeeltahirdeveloper.theme-cobalt2-dark"
 vscode "onecentlin.laravel-blade"
 vscode "onecentlin.laravel5-snippets"
 vscode "open-southeners.laravel-pint"
 vscode "pflannery.vscode-versionlens"
 vscode "phiter.phpstorm-snippets"
-vscode "phpactor.vscode-phpactor"
-vscode "plustimeit.php-file-refactoring"
-vscode "pomber.git-file-history"
+vscode "phpantom.phpantom"
 vscode "quicktype.quicktype"
 vscode "redhat.java"
 vscode "redhat.vscode-microprofile"
@@ -375,25 +374,20 @@ vscode "shengchen.vscode-checkstyle"
 vscode "sleistner.vscode-fileutils"
 vscode "socheatsok78-lab.dotenv-vscode-stripped"
 vscode "sonarsource.sonarlint-vscode"
-vscode "st-pham.php-refactor-tool"
 vscode "sumneko.lua"
 vscode "tintinweb.vscode-decompiler"
 vscode "usernamehw.errorlens"
 vscode "vmware.vscode-boot-dev-pack"
 vscode "vmware.vscode-spring-boot"
-vscode "vscjava.migrate-java-to-azure"
 vscode "vscjava.vscode-gradle"
 vscode "vscjava.vscode-java-debug"
 vscode "vscjava.vscode-java-dependency"
 vscode "vscjava.vscode-java-pack"
 vscode "vscjava.vscode-java-test"
 vscode "vscjava.vscode-maven"
+vscode "vscjava.vscode-spring-boot-dashboard"
 vscode "vscjava.vscode-spring-initializr"
 vscode "wix.vscode-import-cost"
 vscode "xdebug.php-debug"
-npm "commitizen"
-npm "npm-check"
-npm "opencode-ai"
-npm "prettier"
-npm "serve"
-npm "typescript"
+uv "browser-use"
+npm "corepack"

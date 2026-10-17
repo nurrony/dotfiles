@@ -22,7 +22,7 @@ mouse-hide-while-typing = true
 window-theme = system
 initial-window = true
 resize-overlay = never
-background-opacity = 0.80
+background-opacity = 0.70
 window-save-state = always
 window-step-resize = false
 background-blur-radius = 20
@@ -47,6 +47,7 @@ macos-secure-input-indication = false
 
 # panes
 split-divider-color= #52566d
+# custom-shader = ~/.config/ghostty/shaders/space.glsl
 
 # quick terminal
 keybind = global:cmd+escape=toggle_quick_terminal

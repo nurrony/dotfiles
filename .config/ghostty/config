@@ -2,7 +2,7 @@
 font-size = 16
 font-style = medium
 bold-is-bright = true
-font-family = JetBrainsMono Nerd Font Mono
+font-family = Operator Mono Lig
 theme = dark:Catppuccin Mocha,light:Catppuccin Mocha
 
 # cursor

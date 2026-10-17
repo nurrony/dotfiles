@@ -276,31 +276,6 @@
   },
   {
     "identifier": {
-      "id": "enkia.tokyo-night",
-      "uuid": "1cac7443-911e-48b9-8341-49f3880c288a"
-    },
-    "version": "1.1.2",
-    "location": {
-      "$mid": 1,
-      "path": "/Users/nurrony/.vscode/extensions/enkia.tokyo-night-1.1.2",
-      "scheme": "file"
-    },
-    "relativeLocation": "enkia.tokyo-night-1.1.2",
-    "metadata": {
-      "installedTimestamp": 1784314848326,
-      "source": "gallery",
-      "id": "1cac7443-911e-48b9-8341-49f3880c288a",
-      "publisherId": "745c7670-02e7-4a27-b662-e1b5719f2ba7",
-      "publisherDisplayName": "enkia",
-      "targetPlatform": "undefined",
-      "updated": false,
-      "private": false,
-      "isPreReleaseVersion": false,
-      "hasPreReleaseVersion": false
-    }
-  },
-  {
-    "identifier": {
       "id": "esbenp.prettier-vscode",
       "uuid": "96fa4707-6983-4489-b7c5-d5ffdfdcce90"
     },
@@ -367,31 +342,6 @@
       "id": "8cd88401-57df-4c5d-bd32-8d7e1877b88a",
       "publisherId": "23046211-493d-484e-b677-36c91fffbc2b",
       "publisherDisplayName": "IHunte",
-      "targetPlatform": "undefined",
-      "updated": false,
-      "private": false,
-      "isPreReleaseVersion": false,
-      "hasPreReleaseVersion": false
-    }
-  },
-  {
-    "identifier": {
-      "id": "hediet.debug-visualizer",
-      "uuid": "bce78737-8848-49f7-a27d-97004928fe41"
-    },
-    "version": "2.4.0",
-    "location": {
-      "$mid": 1,
-      "path": "/Users/nurrony/.vscode/extensions/hediet.debug-visualizer-2.4.0",
-      "scheme": "file"
-    },
-    "relativeLocation": "hediet.debug-visualizer-2.4.0",
-    "metadata": {
-      "installedTimestamp": 1784314861476,
-      "source": "gallery",
-      "id": "bce78737-8848-49f7-a27d-97004928fe41",
-      "publisherId": "4d8048f9-07cf-483a-b27b-1fdc29cea931",
-      "publisherDisplayName": "Henning Dieterichs",
       "targetPlatform": "undefined",
       "updated": false,
       "private": false,
@@ -651,31 +601,6 @@
   },
   {
     "identifier": {
-      "id": "ms-dotnettools.vscode-dotnet-modernize",
-      "uuid": "c0bab0da-d870-412a-b319-952595430583"
-    },
-    "version": "1.0.1161",
-    "location": {
-      "$mid": 1,
-      "path": "/Users/nurrony/.vscode/extensions/ms-dotnettools.vscode-dotnet-modernize-1.0.1161",
-      "scheme": "file"
-    },
-    "relativeLocation": "ms-dotnettools.vscode-dotnet-modernize-1.0.1161",
-    "metadata": {
-      "installedTimestamp": 1784314923268,
-      "source": "gallery",
-      "id": "c0bab0da-d870-412a-b319-952595430583",
-      "publisherId": "d05e23de-3974-4ff0-8d47-23ee77830092",
-      "publisherDisplayName": "Microsoft",
-      "targetPlatform": "undefined",
-      "updated": false,
-      "private": false,
-      "isPreReleaseVersion": false,
-      "hasPreReleaseVersion": false
-    }
-  },
-  {
-    "identifier": {
       "id": "ms-vscode-remote.remote-wsl",
       "uuid": "f0c5397b-d357-4197-99f0-cb4202f22818"
     },
@@ -869,56 +794,6 @@
       "id": "f6c2c922-7a4d-4a60-aa8c-d7a41042f960",
       "publisherId": "81fd5435-d850-43a2-9ba2-6b812452385c",
       "publisherDisplayName": "Phiter Fernandes",
-      "targetPlatform": "undefined",
-      "updated": false,
-      "private": false,
-      "isPreReleaseVersion": false,
-      "hasPreReleaseVersion": false
-    }
-  },
-  {
-    "identifier": {
-      "id": "plustimeit.php-file-refactoring",
-      "uuid": "9199b993-dd8f-4db4-9eaa-8aa0ea43e6ad"
-    },
-    "version": "0.1.4",
-    "location": {
-      "$mid": 1,
-      "path": "/Users/nurrony/.vscode/extensions/plustimeit.php-file-refactoring-0.1.4",
-      "scheme": "file"
-    },
-    "relativeLocation": "plustimeit.php-file-refactoring-0.1.4",
-    "metadata": {
-      "installedTimestamp": 1784314960443,
-      "source": "gallery",
-      "id": "9199b993-dd8f-4db4-9eaa-8aa0ea43e6ad",
-      "publisherId": "63f75895-acf2-463c-83b8-6611edb78bb0",
-      "publisherDisplayName": "PlusTimeIT",
-      "targetPlatform": "undefined",
-      "updated": false,
-      "private": false,
-      "isPreReleaseVersion": false,
-      "hasPreReleaseVersion": false
-    }
-  },
-  {
-    "identifier": {
-      "id": "pomber.git-file-history",
-      "uuid": "7632e3e0-7d47-4be3-a5e3-a5873293f815"
-    },
-    "version": "1.0.1",
-    "location": {
-      "$mid": 1,
-      "path": "/Users/nurrony/.vscode/extensions/pomber.git-file-history-1.0.1",
-      "scheme": "file"
-    },
-    "relativeLocation": "pomber.git-file-history-1.0.1",
-    "metadata": {
-      "installedTimestamp": 1784314960302,
-      "source": "gallery",
-      "id": "7632e3e0-7d47-4be3-a5e3-a5873293f815",
-      "publisherId": "7e5e0a67-006c-44fb-bcdb-53e9f3e9ab89",
-      "publisherDisplayName": "Rodrigo Pombo",
       "targetPlatform": "undefined",
       "updated": false,
       "private": false,
@@ -1440,36 +1315,6 @@
       "publisherId": "0162ddc5-cb52-4b88-97e2-5272419cd6cd",
       "publisherDisplayName": "Xdebug",
       "targetPlatform": "undefined",
-      "updated": true,
-      "private": false,
-      "isPreReleaseVersion": false,
-      "hasPreReleaseVersion": false,
-      "preRelease": false
-    }
-  },
-  {
-    "identifier": {
-      "id": "vscjava.migrate-java-to-azure",
-      "uuid": "67eb125c-be8b-4984-82d2-d7adea5d3677"
-    },
-    "version": "1.24.0",
-    "location": {
-      "$mid": 1,
-      "path": "/Users/nurrony/.vscode/extensions/vscjava.migrate-java-to-azure-1.24.0-darwin-x64",
-      "scheme": "file"
-    },
-    "relativeLocation": "vscjava.migrate-java-to-azure-1.24.0-darwin-x64",
-    "metadata": {
-      "isApplicationScoped": false,
-      "isMachineScoped": false,
-      "isBuiltin": false,
-      "installedTimestamp": 1790356463650,
-      "pinned": false,
-      "source": "gallery",
-      "id": "67eb125c-be8b-4984-82d2-d7adea5d3677",
-      "publisherId": "bae08b87-578e-41ec-ab1c-0b036e7add88",
-      "publisherDisplayName": "Microsoft",
-      "targetPlatform": "darwin-x64",
       "updated": true,
       "private": false,
       "isPreReleaseVersion": false,
@@ -2069,12 +1914,13 @@
     }
   },
   {
-    "identifier": { "id": "redhat.vscode-yaml" },
+    "identifier": {
+      "id": "redhat.vscode-yaml",
+      "uuid": "2061917f-f76a-458a-8da9-f162de22b97e"
+    },
     "version": "2.0.0",
     "location": {
       "$mid": 1,
-      "fsPath": "/Users/nurrony/.vscode/extensions/redhat.vscode-yaml-2.0.0",
-      "external": "file:///Users/nurrony/.vscode/extensions/redhat.vscode-yaml-2.0.0",
       "path": "/Users/nurrony/.vscode/extensions/redhat.vscode-yaml-2.0.0",
       "scheme": "file"
     },
@@ -2095,6 +1941,32 @@
       "isPreReleaseVersion": false,
       "hasPreReleaseVersion": false,
       "preRelease": false
+    }
+  },
+  {
+    "identifier": {
+      "id": "ms-dotnettools.upgrade-agent",
+      "uuid": "d9c063a4-c16e-4d2f-81db-982cea6b8e3a"
+    },
+    "version": "1.1.707",
+    "location": {
+      "$mid": 1,
+      "path": "/Users/nurrony/.vscode/extensions/ms-dotnettools.upgrade-agent-1.1.707",
+      "scheme": "file"
+    },
+    "relativeLocation": "ms-dotnettools.upgrade-agent-1.1.707",
+    "metadata": {
+      "installedTimestamp": 1792222476439,
+      "pinned": false,
+      "source": "gallery",
+      "id": "d9c063a4-c16e-4d2f-81db-982cea6b8e3a",
+      "publisherId": "d05e23de-3974-4ff0-8d47-23ee77830092",
+      "publisherDisplayName": "Microsoft",
+      "targetPlatform": "undefined",
+      "updated": false,
+      "private": false,
+      "isPreReleaseVersion": false,
+      "hasPreReleaseVersion": false
     }
   }
 ]

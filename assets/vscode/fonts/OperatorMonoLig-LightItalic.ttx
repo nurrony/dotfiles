@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ttFont sfntVersion="OTTO" ttLibVersion="4.2">
+<ttFont sfntVersion="OTTO" ttLibVersion="4.67">
     <GlyphOrder>
         <!-- The 'id' attribute is only for humans; it is ignored when parsed. -->
         <GlyphID id="0" name=".notdef"/>
@@ -469,10 +469,22 @@
         <GlyphID id="464" name="question_question.liga"/>
         <GlyphID id="465" name="slash_greater.liga"/>
         <GlyphID id="466" name="underscore_underscore.liga"/>
-        <GlyphID id="467" name="LIG"/>
-        <GlyphID id="468" name="uniE0A0"/>
-        <GlyphID id="469" name="uniE0B0"/>
-        <GlyphID id="470" name="uniE0B2"/>
+        <GlyphID id="467" name="ampersand.spacer"/>
+        <GlyphID id="468" name="bar.spacer"/>
+        <GlyphID id="469" name="colon.spacer"/>
+        <GlyphID id="470" name="equal.spacer"/>
+        <GlyphID id="471" name="exclam.spacer"/>
+        <GlyphID id="472" name="greater.spacer"/>
+        <GlyphID id="473" name="hyphen.spacer"/>
+        <GlyphID id="474" name="less.spacer"/>
+        <GlyphID id="475" name="LIG"/>
+        <GlyphID id="476" name="plus.spacer"/>
+        <GlyphID id="477" name="question.spacer"/>
+        <GlyphID id="478" name="slash.spacer"/>
+        <GlyphID id="479" name="underscore.spacer"/>
+        <GlyphID id="480" name="uniE0A0"/>
+        <GlyphID id="481" name="uniE0B0"/>
+        <GlyphID id="482" name="uniE0B2"/>
     </GlyphOrder>
     <head>
         <!-- Most of this table will be recalculated by the compiler -->
@@ -511,11 +523,11 @@
         <reserved2 value="0"/>
         <reserved3 value="0"/>
         <metricDataFormat value="0"/>
-        <numberOfHMetrics value="471"/>
+        <numberOfHMetrics value="483"/>
     </hhea>
     <maxp>
         <tableVersion value="0x5000"/>
-        <numGlyphs value="471"/>
+        <numGlyphs value="483"/>
     </maxp>
     <OS_2>
         <!-- The fields 'usFirstCharIndex' and 'usLastCharIndex'
@@ -574,7 +586,7 @@
             Copyright (C) 2016 Hoefler &amp; Co. http://www.typography.com
         </namerecord>
         <namerecord nameID="1" platformID="1" platEncID="0" langID="0x0" unicode="True">
-            Operator Mono Lig Light
+            Operator Mono Lig
         </namerecord>
         <namerecord nameID="2" platformID="1" platEncID="0" langID="0x0" unicode="True">
             Light Italic
@@ -8228,47 +8240,47 @@ endchar
                 <CharString name="less_exclam_hyphen_hyphen.liga">
                     0 96 168 52 hstem
 -1557 417 213 225 vstem
--852 226 rmoveto
-39 hlineto
+-813 226 rmoveto
 25 116 56 211 30 122 rrcurveto
 -78 hlineto
 -21 -122 -29 -211 -22 -116 rrcurveto
--288 320 rmoveto
--27 45 -381 -270 -9 -52 278 -286 41 41 -237 240 rlineto
+-315 365 rmoveto
+-381 -270 -9 -52 278 -286 41 41 -237 240 rlineto
 446 hlineto
 13 52 rlineto
 -448 hlineto
-861 hmoveto
--10 -52 rlineto
+324 230 rlineto
+527 -282 rmoveto
 1044 hlineto
 13 52 rlineto
--1371 -316 rmoveto
-90 hlineto
+-1047 hlineto
+-234 -316 rmoveto
 20 96 rlineto
 -90 hlineto
+-20 -96 rlineto
 endchar
                 </CharString>
                 <CharString name="equal_equal_equal.liga">
                     16 61 187 60 187 60 hstem
-563 511 rmoveto
-13 60 rlineto
+576 571 rmoveto
 -1486 hlineto
 -12 -60 rlineto
-1437 -247 rmoveto
-13 60 rlineto
+1485 hlineto
+-35 -187 rmoveto
 -1486 hlineto
 -12 -60 rlineto
-1437 -248 rmoveto
-13 61 rlineto
+1485 hlineto
+-35 -187 rmoveto
 -1486 hlineto
 -12 -61 rlineto
+1485 hlineto
 endchar
                 </CharString>
                 <CharString name="equal_equal_greater.liga">
                     156 52 171 52 hstemhm
 -1018 1478 -393 417 hintmask 11100000
-206 591 rmoveto
--41 -40 119 -120 rlineto
+165 551 rmoveto
+119 -120 rlineto
 -1249 hlineto
 -10 -52 rlineto
 1310 hlineto
@@ -8277,15 +8289,14 @@ endchar
 -10 -52 rlineto
 1264 hlineto
 hintmask 11010000
--179 -127 27 -46 380 271 10 52 rlineto
+-179 -127 27 -46 380 271 10 52 -278 285 rlineto
 endchar
                 </CharString>
                 <CharString name="equal_less_less.liga">
                     156 52 171 52 hstemhm
--1018 1477 -666 417 -117 417 hintmask 11100000
--145 294 rmoveto
-hintmask 11010000
-355 252 -27 45 -226 -160 rlineto
+-1018 1477 -666 417 -117 417 hintmask 11010000
+210 546 rmoveto
+-27 45 -226 -160 rlineto
 -922 hlineto
 -10 -52 rlineto
 859 hlineto
@@ -8294,17 +8305,16 @@ hintmask 11010000
 hintmask 11100000
 -10 -52 rlineto
 921 hlineto
-168 -173 41 41 -259 262 rlineto
-302 8 rmoveto
+168 -173 41 41 -259 262 2 8 rlineto
 hintmask 11001000
-355 252 -27 45 -381 -270 -9 -52 278 -286 41 41 -259 262 rlineto
+655 252 rmoveto
+-27 45 -381 -270 -9 -52 278 -286 41 41 -259 262 2 8 rlineto
 endchar
                 </CharString>
                 <CharString name="exclam_equal_equal.liga">
                     16 61 187 60 187 60 hstem
 -603 665 vstem
-563 511 rmoveto
-13 60 rlineto
+576 571 rmoveto
 -597 hlineto
 83 118 -47 23 -99 -141 rlineto
 -826 hlineto
@@ -8327,37 +8337,38 @@ endchar
 13 60 rlineto
 -724 hlineto
 132 187 rlineto
+627 hlineto
 endchar
                 </CharString>
                 <CharString name="greater_equal_greater.liga">
                     156 52 171 52 hstemhm
 -1033 417 -394 1469 -392 417 hintmask 11010000
-206 591 rmoveto
--41 -40 119 -120 rlineto
+165 551 rmoveto
+119 -120 rlineto
 -1022 hlineto
 -156 160 -41 -40 259 -262 -2 -8 rlineto
 hintmask 11100000
 -355 -252 27 -46 243 173 rlineto
 1009 hlineto
 hintmask 11001000
--179 -127 27 -46 380 271 10 52 rlineto
--62 -25 rmoveto
--103 -73 rlineto
+-179 -127 27 -46 380 271 10 52 -278 285 rlineto
+113 -383 rmoveto
 -1010 hlineto
 65 46 rlineto
 hintmask 11100000
 10 52 -71 73 rlineto
 1022 hlineto
-89 -90 rlineto
+89 -90 -2 -8 rlineto
 endchar
                 </CharString>
                 <CharString name="greater_greater_equal.liga">
                     156 52 171 52 hstemhm
--1033 417 -393 1477 -1201 417 hintmask 11100000
--616 306 rmoveto
--278 285 -41 -40 259 -262 -2 -8 -355 -252 27 -46 380 271 rlineto
-1147 177 rmoveto
--959 hlineto
+-1033 417 -393 1477 -1201 417 hintmask 11010000
+-894 591 rmoveto
+-41 -40 259 -262 -2 -8 rlineto
+hintmask 11100000
+-355 -252 27 -46 380 271 10 52 rlineto
+178 125 rmoveto
 -156 160 -41 -40 259 -262 -2 -8 rlineto
 hintmask 11001000
 -355 -252 27 -46 243 173 rlineto
@@ -8369,25 +8380,25 @@ hintmask 11010000
 hintmask 11001000
 10 52 -71 73 rlineto
 897 hlineto
+11 52 rlineto
 endchar
                 </CharString>
                 <CharString name="hyphen_hyphen_greater.liga">
                     264 52 hstemhm
 -980 1440 -393 417 hintmask 11000000
-206 591 rmoveto
--41 -40 232 -235 rlineto
+165 551 rmoveto
+232 -235 rlineto
 -1367 hlineto
 -10 -52 rlineto
 1378 hlineto
 hintmask 10100000
--331 -235 27 -46 380 271 10 52 rlineto
+-331 -235 27 -46 380 271 10 52 -278 285 rlineto
 endchar
                 </CharString>
                 <CharString name="less_equal_equal.liga">
                     156 52 171 52 hstemhm
 -1010 1478 -1475 417 hintmask 11100000
--825 379 rmoveto
-1335 hlineto
+510 379 rmoveto
 11 52 rlineto
 -1273 hlineto
 hintmask 11010000
@@ -8396,44 +8407,43 @@ hintmask 11100000
 1285 hlineto
 11 52 rlineto
 -1348 hlineto
--77 78 2 8 rlineto
+-77 78 2 8 120 85 rlineto
 endchar
                 </CharString>
                 <CharString name="less_equal_greater.liga">
                     156 52 171 52 hstemhm
 -1007 417 657 417 hintmask 11010000
-206 591 rmoveto
--41 -40 119 -120 rlineto
+165 551 rmoveto
+119 -120 rlineto
 -1036 hlineto
 hintmask 11110000
 162 115 -27 45 -381 -270 -9 -52 278 -286 41 41 -130 132 rlineto
 1064 hlineto
--179 -127 27 -46 380 271 10 52 rlineto
--62 -25 rmoveto
--103 -73 rlineto
+-179 -127 27 -46 380 271 10 52 -278 285 rlineto
+113 -383 rmoveto
 -1189 hlineto
 -77 78 2 8 120 85 rlineto
 1160 hlineto
-89 -90 rlineto
+89 -90 -2 -8 rlineto
 endchar
                 </CharString>
                 <CharString name="less_equal_less.liga">
                     156 52 171 52 hstemhm
--1010 1469 -1466 417 683 417 hintmask 11100000
-155 294 rmoveto
-hintmask 11001000
-355 252 -27 45 -226 -160 rlineto
+-1007 417 683 417 hintmask 11010000
+510 546 rmoveto
+-27 45 -226 -160 rlineto
 -1009 hlineto
-hintmask 11010000
+hintmask 11100000
 162 115 -27 45 -381 -270 -9 -52 278 -286 41 41 -130 132 rlineto
 1021 hlineto
-168 -173 41 41 -259 262 rlineto
--1023 -78 rmoveto
--77 78 2 8 120 85 rlineto
+168 -173 41 41 -259 262 2 8 rlineto
+-1102 -8 rmoveto
+2 8 120 85 rlineto
 1009 hlineto
 -82 -58 rlineto
-hintmask 11001000
+hintmask 11010000
 -9 -52 59 -61 rlineto
+-1022 hlineto
 endchar
                 </CharString>
                 <CharString name="less_hyphen_greater.liga">
@@ -8450,10 +8460,10 @@ endchar
                 <CharString name="less_hyphen_hyphen.liga">
                     264 52 hstem
 -1007 417 vstem
-444 316 rmoveto
--1358 hlineto
+-914 316 rmoveto
 324 230 -27 45 -381 -270 -9 -52 278 -286 41 41 -237 240 rlineto
 1356 hlineto
+13 52 rlineto
 endchar
                 </CharString>
                 <CharString name="ampersand_ampersand.liga">
@@ -8489,66 +8499,68 @@ endchar
                 </CharString>
                 <CharString name="bar_bar.liga">
                     -312 227 158 227 vstem
--85 703 rmoveto
--56 -2 -171 -881 rlineto
+-141 701 rmoveto
+-171 -881 rlineto
 55 hlineto
-557 883 rmoveto
--56 -2 -171 -881 rlineto
+172 883 rlineto
+329 -2 rmoveto
+-171 -881 rlineto
 55 hlineto
+172 883 rlineto
 endchar
                 </CharString>
                 <CharString name="bar_greater.liga">
                     -344 56 559 53 vstem
-334 317 rmoveto
--436 456 -57 -5 -185 -949 rlineto
+-102 773 rmoveto
+-57 -5 -185 -949 rlineto
 56 hlineto
-1 4 611 440 rlineto
--53 23 rmoveto
--544 -392 156 804 390 -404 rlineto
+1 4 611 440 10 54 rlineto
+-607 -423 rmoveto
+156 804 390 -404 -2 -8 rlineto
 endchar
                 </CharString>
                 <CharString name="colon_equal.liga">
                     131 101 -76 52 147 101 -77 52 hstemhm
 -321 696 hintmask 00000000
 hintmask 01101000
--277 355 rmoveto
-96 hlineto
+-181 355 rmoveto
 22 101 rlineto
 -97 hlineto
+-21 -101 rlineto
 hintmask 10011000
-620 -77 rmoveto
-11 52 rlineto
+652 76 rmoveto
 -426 hlineto
 -10 -52 rlineto
--260 -248 rmoveto
-96 hlineto
+425 hlineto
+-589 -248 rmoveto
 22 101 rlineto
 -97 hlineto
+-21 -101 rlineto
 hintmask 01011000
-620 -76 rmoveto
-11 52 rlineto
+652 77 rmoveto
 -426 hlineto
 -10 -52 rlineto
+425 hlineto
 endchar
                 </CharString>
                 <CharString name="equal_equal.liga">
                     126 22 201 22 hstem
 -498 906 vstem
-510 379 rmoveto
-11 52 rlineto
+521 431 rmoveto
 -936 hlineto
 -10 -52 rlineto
-892 -223 rmoveto
-11 52 rlineto
+935 hlineto
+-32 -171 rmoveto
 -936 hlineto
 -10 -52 rlineto
+935 hlineto
 endchar
                 </CharString>
                 <CharString name="equal_greater.liga">
                     156 52 171 52 hstemhm
 -468 927 -392 417 hintmask 11100000
-206 591 rmoveto
--41 -40 119 -120 rlineto
+165 551 rmoveto
+119 -120 rlineto
 -699 hlineto
 -10 -52 rlineto
 760 hlineto
@@ -8557,14 +8569,13 @@ endchar
 -10 -52 rlineto
 714 hlineto
 hintmask 11010000
--179 -127 27 -46 380 271 10 52 rlineto
+-179 -127 27 -46 380 271 10 52 -278 285 rlineto
 endchar
                 </CharString>
                 <CharString name="exclam_equal.liga">
                     126 22 201 22 hstemhm
 -498 906 -768 665 hintmask 11100000
-510 379 rmoveto
-11 52 rlineto
+521 431 rmoveto
 -398 hlineto
 hintmask 11010000
 182 258 -47 23 -198 -281 rlineto
@@ -8580,79 +8591,82 @@ hintmask 11010000
 11 52 rlineto
 -513 hlineto
 121 171 rlineto
+424 hlineto
 endchar
                 </CharString>
                 <CharString name="greater_equal.liga">
                     -335 702 vstem
--293 22 rmoveto
-664 264 1 8 -555 258 34 43 614 -278 -11 -54 -730 -283 rlineto
-697 113 rmoveto
--730 -283 -17 42 758 297 rlineto
+371 286 rmoveto
+1 8 -555 258 34 43 614 -278 -11 -54 -730 -283 -17 42 rlineto
+-16 -212 rmoveto
+-17 42 758 297 -11 -56 rlineto
 endchar
                 </CharString>
                 <CharString name="hyphen_greater.liga">
                     264 52 hstemhm
 -430 890 -393 417 hintmask 11000000
-206 591 rmoveto
--41 -40 232 -235 rlineto
+165 551 rmoveto
+232 -235 rlineto
 -817 hlineto
 -10 -52 rlineto
 828 hlineto
 hintmask 10100000
--331 -235 27 -46 380 271 10 52 rlineto
+-331 -235 27 -46 380 271 10 52 -278 285 rlineto
 endchar
                 </CharString>
                 <CharString name="hyphen_hyphen.liga">
                     264 51 hstem
 -379 304 133 304 vstem
--84 264 rmoveto
-9 51 rlineto
+-75 315 rmoveto
 -295 hlineto
 -9 -51 rlineto
-732 hmoveto
-9 51 rlineto
+295 hlineto
+446 51 rmoveto
 -295 hlineto
 -9 -51 rlineto
+295 hlineto
 endchar
                 </CharString>
                 <CharString name="less_bar.liga">
-                    -411 53 559 56 vstem
-257 -194 rmoveto
--185 1018 -57 5 -436 -489 10 -58 611 -472 1 -4 rlineto
--559 501 rmoveto
--2 8 390 434 156 -862 rlineto
+                    -181 954 hstem
+-329 679 vstem
+-319 317 rmoveto
+-10 -54 438 -444 rlineto
+56 hlineto
+185 949 -55 5 rlineto
+-563 -487 rmoveto
+2 8 547 405 -158 -809 rlineto
 endchar
                 </CharString>
                 <CharString name="less_equal.liga">
                     -363 699 vstem
-377 22 rmoveto
--33 -42 -620 283 11 54 722 278 16 -43 -655 -258 -1 -8 rlineto
--126 -193 rmoveto
-11 56 642 -297 -33 -42 rlineto
+344 -20 rmoveto
+-620 283 11 54 722 278 16 -43 -655 -258 -1 -8 560 -264 rlineto
+-675 127 rmoveto
+642 -297 -33 -42 -620 283 rlineto
 endchar
                 </CharString>
                 <CharString name="less_hyphen.liga">
                     264 52 hstem
 -457 417 vstem
-444 316 rmoveto
--808 hlineto
+-364 316 rmoveto
 324 230 -27 45 -381 -270 -9 -52 278 -286 41 41 -237 240 rlineto
 806 hlineto
+13 52 rlineto
 endchar
                 </CharString>
                 <CharString name="less_slash.liga">
                     418 -457 417 -245 665 hintmask 10000000
-333 712 rmoveto
--479 -680 -251 254 2 8 355 252 -27 45 -381 -270 -9 -52 277 -285 rlineto
+-146 32 rmoveto
+-251 254 2 8 355 252 -27 45 -381 -270 -9 -52 277 -285 rlineto
 hintmask 01000000
--105 -148 53 -14 612 867 rlineto
+-105 -148 53 -14 612 867 -47 23 rlineto
 endchar
                 </CharString>
                 <CharString name="plus_plus.liga">
                     264 50 hstem
 -3 439 vstem
-248 314 rmoveto
-38 194 rlineto
+286 508 rmoveto
 -54 hlineto
 -38 -194 rlineto
 -365 hlineto
@@ -8671,54 +8685,88 @@ endchar
 38 193 rlineto
 187 hlineto
 10 50 rlineto
+-188 hlineto
 endchar
                 </CharString>
                 <CharString name="question_question.liga">
                     0 96 hstem
 -74 67 353 67 vstem
--367 678 rmoveto
--11 -59 rlineto
+-378 619 rmoveto
 201 -24 103 -33 -78 vvcurveto
 -61 -60 -60 -190 -98 vhcurveto
 19 -33 rlineto
 215 109 83 80 83 vvcurveto
 95 -117 53 -243 26 vhcurveto
-420 hmoveto
--11 -59 rlineto
+409 -59 rmoveto
 201 -24 103 -33 -78 vvcurveto
 -61 -60 -60 -190 -98 vhcurveto
 19 -33 rlineto
 215 109 83 80 83 vvcurveto
 95 -117 53 -243 26 vhcurveto
--449 -678 rmoveto
-89 hlineto
+-360 -678 rmoveto
 20 96 rlineto
 -89 hlineto
-400 -96 rmoveto
-89 hlineto
+-20 -96 rlineto
+509 hmoveto
 20 96 rlineto
 -89 hlineto
+-20 -96 rlineto
 endchar
                 </CharString>
                 <CharString name="slash_greater.liga">
-                    -378 665 -220 417 hintmask 01000000
-213 584 rmoveto
-hintmask 10000000
-74 105 -47 23 -618 -876 53 -14 504 714 245 -247 -2 -8 rlineto
+                    -378 665 -220 417 hintmask 10000000
+287 689 rmoveto
+-47 23 -618 -876 53 -14 504 714 245 -247 -2 -8 rlineto
 hintmask 01000000
--355 -252 27 -46 380 271 10 52 rlineto
+-355 -252 27 -46 380 271 10 52 -271 278 rlineto
 endchar
                 </CharString>
                 <CharString name="underscore_underscore.liga">
                     -100 50 hstem
 -553 1125 vstem
-562 -100 rmoveto
-10 50 rlineto
+572 -50 rmoveto
 -1115 hlineto
 -10 -50 rlineto
+1115 hlineto
 endchar
                 </CharString>
+                <CharString name="ampersand.spacer">
+                    endchar
+                </CharString>
+                <CharString name="bar.spacer">
+                    endchar
+                </CharString>
+                <CharString name="colon.spacer">
+                    endchar
+                </CharString>
+                <CharString name="equal.spacer">
+                    endchar
+                </CharString>
+                <CharString name="exclam.spacer">
+                    endchar
+                </CharString>
+                <CharString name="greater.spacer">
+                    endchar
+                </CharString>
+                <CharString name="hyphen.spacer">
+                    endchar
+                </CharString>
+                <CharString name="less.spacer">
+                    endchar
+                </CharString>
                 <CharString name="LIG">
+                    endchar
+                </CharString>
+                <CharString name="plus.spacer">
+                    endchar
+                </CharString>
+                <CharString name="question.spacer">
+                    endchar
+                </CharString>
+                <CharString name="slash.spacer">
+                    endchar
+                </CharString>
+                <CharString name="underscore.spacer">
                     endchar
                 </CharString>
                 <CharString name="uniE0A0">
@@ -8758,15 +8806,15 @@ endchar
                 <CharString name="uniE0B0">
                     -205 1099 hstem
 -20 629 vstem
-609 313 rmoveto
--627 581 -2 -1099 rlineto
+-18 894 rmoveto
+-2 -1099 629 518 rlineto
 endchar
                 </CharString>
                 <CharString name="uniE0B2">
                     -205 1099 hstem
 -20 629 vstem
--20 313 rmoveto
-629 -518 -2 1099 rlineto
+609 -205 rmoveto
+-2 1099 -627 -581 rlineto
 endchar
                 </CharString>
             </CharStrings>
@@ -10038,7 +10086,7 @@ return
                 <LookupFlag value="0"/>
                 <!-- SubTableCount=1 -->
                 <PairPos index="0" Format="2">
-                    <Coverage Format="2">
+                    <Coverage>
                         <Glyph value="fraction.afrc"/>
                         <Glyph value="zero.num"/>
                         <Glyph value="one.num"/>
@@ -10053,7 +10101,7 @@ return
                     </Coverage>
                     <ValueFormat1 value="4"/>
                     <ValueFormat2 value="0"/>
-                    <ClassDef1 Format="2">
+                    <ClassDef1>
                         <ClassDef glyph="eight.num" class="1"/>
                         <ClassDef glyph="five.num" class="1"/>
                         <ClassDef glyph="four.num" class="1"/>
@@ -10065,7 +10113,7 @@ return
                         <ClassDef glyph="two.num" class="1"/>
                         <ClassDef glyph="zero.num" class="1"/>
                     </ClassDef1>
-                    <ClassDef2 Format="2">
+                    <ClassDef2>
                         <ClassDef glyph="eight.den" class="1"/>
                         <ClassDef glyph="five.den" class="1"/>
                         <ClassDef glyph="four.den" class="1"/>
@@ -10164,7 +10212,6 @@ return
                         <FeatureIndex index="16" value="50"/>
                         <FeatureIndex index="17" value="53"/>
                         <FeatureIndex index="18" value="56"/>
-                        <FeatureIndex index="19" value="3"/>
                     </DefaultLangSys>
                     <!-- LangSysCount=1 -->
                     <LangSysRecord index="0">
@@ -10228,37 +10275,6 @@ return
                 <Feature>
                     <!-- LookupCount=1 -->
                     <LookupListIndex index="0" value="22"/>
-                    <LookupListIndex index="1" value="26"/>
-                    <LookupListIndex index="2" value="27"/>
-                    <LookupListIndex index="3" value="28"/>
-                    <LookupListIndex index="4" value="29"/>
-                    <LookupListIndex index="5" value="30"/>
-                    <LookupListIndex index="6" value="31"/>
-                    <LookupListIndex index="7" value="32"/>
-                    <LookupListIndex index="8" value="33"/>
-                    <LookupListIndex index="9" value="34"/>
-                    <LookupListIndex index="10" value="35"/>
-                    <LookupListIndex index="11" value="36"/>
-                    <LookupListIndex index="12" value="37"/>
-                    <LookupListIndex index="13" value="38"/>
-                    <LookupListIndex index="14" value="39"/>
-                    <LookupListIndex index="15" value="40"/>
-                    <LookupListIndex index="16" value="41"/>
-                    <LookupListIndex index="17" value="42"/>
-                    <LookupListIndex index="18" value="43"/>
-                    <LookupListIndex index="19" value="44"/>
-                    <LookupListIndex index="20" value="45"/>
-                    <LookupListIndex index="21" value="46"/>
-                    <LookupListIndex index="22" value="47"/>
-                    <LookupListIndex index="23" value="48"/>
-                    <LookupListIndex index="24" value="49"/>
-                    <LookupListIndex index="25" value="50"/>
-                    <LookupListIndex index="26" value="51"/>
-                    <LookupListIndex index="27" value="52"/>
-                    <LookupListIndex index="28" value="53"/>
-                    <LookupListIndex index="29" value="54"/>
-                    <LookupListIndex index="30" value="55"/>
-                    <LookupListIndex index="31" value="56"/>
                 </Feature>
             </FeatureRecord>
             <FeatureRecord index="4">
@@ -10778,7 +10794,7 @@ return
                 <LookupType value="1"/>
                 <LookupFlag value="0"/>
                 <!-- SubTableCount=1 -->
-                <SingleSubst index="0" Format="2">
+                <SingleSubst index="0">
                     <Substitution in="asterisk" out="asterisk.alt"/>
                     <Substitution in="bullet" out="bullet.alt"/>
                     <Substitution in="colon" out="colon.alt"/>
@@ -10791,7 +10807,7 @@ return
                 <LookupType value="3"/>
                 <LookupFlag value="0"/>
                 <!-- SubTableCount=1 -->
-                <AlternateSubst index="0" Format="1">
+                <AlternateSubst index="0">
                     <AlternateSet glyph="eight">
                         <Alternate glyph="eight.den"/>
                         <Alternate glyph="eight.num"/>
@@ -10862,39 +10878,39 @@ return
                 <ChainContextSubst index="0" Format="3">
                     <!-- BacktrackGlyphCount=0 -->
                     <!-- InputGlyphCount=2 -->
-                    <InputCoverage index="0" Format="1">
+                    <InputCoverage index="0">
                         <Glyph value="l"/>
                     </InputCoverage>
-                    <InputCoverage index="1" Format="1">
+                    <InputCoverage index="1">
                         <Glyph value="periodcentered"/>
                     </InputCoverage>
                     <!-- LookAheadGlyphCount=1 -->
-                    <LookAheadCoverage index="0" Format="1">
+                    <LookAheadCoverage index="0">
                         <Glyph value="l"/>
                     </LookAheadCoverage>
                     <!-- SubstCount=1 -->
                     <SubstLookupRecord index="0">
                         <SequenceIndex value="0"/>
-                        <LookupListIndex value="79"/>
+                        <LookupListIndex value="23"/>
                     </SubstLookupRecord>
                 </ChainContextSubst>
                 <ChainContextSubst index="1" Format="3">
                     <!-- BacktrackGlyphCount=0 -->
                     <!-- InputGlyphCount=2 -->
-                    <InputCoverage index="0" Format="1">
+                    <InputCoverage index="0">
                         <Glyph value="L"/>
                     </InputCoverage>
-                    <InputCoverage index="1" Format="1">
+                    <InputCoverage index="1">
                         <Glyph value="periodcentered"/>
                     </InputCoverage>
                     <!-- LookAheadGlyphCount=1 -->
-                    <LookAheadCoverage index="0" Format="1">
+                    <LookAheadCoverage index="0">
                         <Glyph value="L"/>
                     </LookAheadCoverage>
                     <!-- SubstCount=1 -->
                     <SubstLookupRecord index="0">
                         <SequenceIndex value="0"/>
-                        <LookupListIndex value="79"/>
+                        <LookupListIndex value="23"/>
                     </SubstLookupRecord>
                 </ChainContextSubst>
             </Lookup>
@@ -10902,7 +10918,7 @@ return
                 <LookupType value="1"/>
                 <LookupFlag value="0"/>
                 <!-- SubTableCount=1 -->
-                <SingleSubst index="0" Format="1">
+                <SingleSubst index="0">
                     <Substitution in="braceleft" out="braceleft.cap"/>
                     <Substitution in="braceright" out="braceright.cap"/>
                     <Substitution in="bracketleft" out="bracketleft.cap"/>
@@ -10919,7 +10935,7 @@ return
                 <LookupType value="1"/>
                 <LookupFlag value="0"/>
                 <!-- SubTableCount=1 -->
-                <SingleSubst index="0" Format="2">
+                <SingleSubst index="0">
                     <Substitution in="eight" out="eight.den"/>
                     <Substitution in="five" out="five.den"/>
                     <Substitution in="four" out="four.den"/>
@@ -10936,7 +10952,7 @@ return
                 <LookupType value="1"/>
                 <LookupFlag value="0"/>
                 <!-- SubTableCount=1 -->
-                <SingleSubst index="0" Format="2">
+                <SingleSubst index="0">
                     <Substitution in="eight" out="eight.num"/>
                     <Substitution in="five" out="five.num"/>
                     <Substitution in="four" out="four.num"/>
@@ -10953,7 +10969,7 @@ return
                 <LookupType value="1"/>
                 <LookupFlag value="0"/>
                 <!-- SubTableCount=1 -->
-                <SingleSubst index="0" Format="2">
+                <SingleSubst index="0">
                     <Substitution in="eight" out="eight.inf"/>
                     <Substitution in="five" out="five.inf"/>
                     <Substitution in="four" out="four.inf"/>
@@ -10970,7 +10986,7 @@ return
                 <LookupType value="1"/>
                 <LookupFlag value="0"/>
                 <!-- SubTableCount=1 -->
-                <SingleSubst index="0" Format="2">
+                <SingleSubst index="0">
                     <Substitution in="eight" out="eight.inf"/>
                     <Substitution in="five" out="five.inf"/>
                     <Substitution in="four" out="four.inf"/>
@@ -10987,7 +11003,7 @@ return
                 <LookupType value="1"/>
                 <LookupFlag value="0"/>
                 <!-- SubTableCount=1 -->
-                <SingleSubst index="0" Format="2">
+                <SingleSubst index="0">
                     <Substitution in="eight" out="eight.sup"/>
                     <Substitution in="five" out="five.sup"/>
                     <Substitution in="four" out="four.sup"/>
@@ -11006,7 +11022,7 @@ return
                 <!-- SubTableCount=1 -->
                 <ChainContextSubst index="0" Format="3">
                     <!-- BacktrackGlyphCount=1 -->
-                    <BacktrackCoverage index="0" Format="2">
+                    <BacktrackCoverage index="0">
                         <Glyph value="zero"/>
                         <Glyph value="one"/>
                         <Glyph value="two"/>
@@ -11019,11 +11035,11 @@ return
                         <Glyph value="nine"/>
                     </BacktrackCoverage>
                     <!-- InputGlyphCount=1 -->
-                    <InputCoverage index="0" Format="1">
+                    <InputCoverage index="0">
                         <Glyph value="slash"/>
                     </InputCoverage>
                     <!-- LookAheadGlyphCount=1 -->
-                    <LookAheadCoverage index="0" Format="2">
+                    <LookAheadCoverage index="0">
                         <Glyph value="zero"/>
                         <Glyph value="one"/>
                         <Glyph value="two"/>
@@ -11038,7 +11054,7 @@ return
                     <!-- SubstCount=1 -->
                     <SubstLookupRecord index="0">
                         <SequenceIndex value="0"/>
-                        <LookupListIndex value="80"/>
+                        <LookupListIndex value="24"/>
                     </SubstLookupRecord>
                 </ChainContextSubst>
             </Lookup>
@@ -11048,7 +11064,7 @@ return
                 <!-- SubTableCount=3 -->
                 <ChainContextSubst index="0" Format="3">
                     <!-- BacktrackGlyphCount=2 -->
-                    <BacktrackCoverage index="0" Format="2">
+                    <BacktrackCoverage index="0">
                         <Glyph value="zero"/>
                         <Glyph value="one"/>
                         <Glyph value="two"/>
@@ -11080,7 +11096,7 @@ return
                         <Glyph value="eight.den"/>
                         <Glyph value="nine.den"/>
                     </BacktrackCoverage>
-                    <BacktrackCoverage index="1" Format="2">
+                    <BacktrackCoverage index="1">
                         <Glyph value="zero"/>
                         <Glyph value="one"/>
                         <Glyph value="two"/>
@@ -11113,7 +11129,7 @@ return
                         <Glyph value="nine.den"/>
                     </BacktrackCoverage>
                     <!-- InputGlyphCount=1 -->
-                    <InputCoverage index="0" Format="1">
+                    <InputCoverage index="0">
                         <Glyph value="fraction"/>
                     </InputCoverage>
                     <!-- LookAheadGlyphCount=0 -->
@@ -11122,11 +11138,11 @@ return
                 <ChainContextSubst index="1" Format="3">
                     <!-- BacktrackGlyphCount=0 -->
                     <!-- InputGlyphCount=1 -->
-                    <InputCoverage index="0" Format="1">
+                    <InputCoverage index="0">
                         <Glyph value="fraction"/>
                     </InputCoverage>
                     <!-- LookAheadGlyphCount=2 -->
-                    <LookAheadCoverage index="0" Format="2">
+                    <LookAheadCoverage index="0">
                         <Glyph value="zero"/>
                         <Glyph value="one"/>
                         <Glyph value="two"/>
@@ -11158,7 +11174,7 @@ return
                         <Glyph value="eight.den"/>
                         <Glyph value="nine.den"/>
                     </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="2">
+                    <LookAheadCoverage index="1">
                         <Glyph value="zero"/>
                         <Glyph value="one"/>
                         <Glyph value="two"/>
@@ -11194,7 +11210,7 @@ return
                 </ChainContextSubst>
                 <ChainContextSubst index="2" Format="3">
                     <!-- BacktrackGlyphCount=1 -->
-                    <BacktrackCoverage index="0" Format="2">
+                    <BacktrackCoverage index="0">
                         <Glyph value="zero"/>
                         <Glyph value="one"/>
                         <Glyph value="two"/>
@@ -11227,11 +11243,11 @@ return
                         <Glyph value="nine.den"/>
                     </BacktrackCoverage>
                     <!-- InputGlyphCount=1 -->
-                    <InputCoverage index="0" Format="1">
+                    <InputCoverage index="0">
                         <Glyph value="fraction"/>
                     </InputCoverage>
                     <!-- LookAheadGlyphCount=1 -->
-                    <LookAheadCoverage index="0" Format="2">
+                    <LookAheadCoverage index="0">
                         <Glyph value="zero"/>
                         <Glyph value="one"/>
                         <Glyph value="two"/>
@@ -11266,7 +11282,7 @@ return
                     <!-- SubstCount=1 -->
                     <SubstLookupRecord index="0">
                         <SequenceIndex value="0"/>
-                        <LookupListIndex value="80"/>
+                        <LookupListIndex value="24"/>
                     </SubstLookupRecord>
                 </ChainContextSubst>
             </Lookup>
@@ -11277,7 +11293,7 @@ return
                 <ChainContextSubst index="0" Format="3">
                     <!-- BacktrackGlyphCount=0 -->
                     <!-- InputGlyphCount=1 -->
-                    <InputCoverage index="0" Format="2">
+                    <InputCoverage index="0">
                         <Glyph value="zero"/>
                         <Glyph value="one"/>
                         <Glyph value="two"/>
@@ -11290,22 +11306,22 @@ return
                         <Glyph value="nine"/>
                     </InputCoverage>
                     <!-- LookAheadGlyphCount=1 -->
-                    <LookAheadCoverage index="0" Format="1">
+                    <LookAheadCoverage index="0">
                         <Glyph value="fraction.afrc"/>
                     </LookAheadCoverage>
                     <!-- SubstCount=1 -->
                     <SubstLookupRecord index="0">
                         <SequenceIndex value="0"/>
-                        <LookupListIndex value="80"/>
+                        <LookupListIndex value="24"/>
                     </SubstLookupRecord>
                 </ChainContextSubst>
                 <ChainContextSubst index="1" Format="3">
                     <!-- BacktrackGlyphCount=1 -->
-                    <BacktrackCoverage index="0" Format="1">
+                    <BacktrackCoverage index="0">
                         <Glyph value="fraction.afrc"/>
                     </BacktrackCoverage>
                     <!-- InputGlyphCount=1 -->
-                    <InputCoverage index="0" Format="2">
+                    <InputCoverage index="0">
                         <Glyph value="zero"/>
                         <Glyph value="one"/>
                         <Glyph value="two"/>
@@ -11321,7 +11337,7 @@ return
                     <!-- SubstCount=1 -->
                     <SubstLookupRecord index="0">
                         <SequenceIndex value="0"/>
-                        <LookupListIndex value="81"/>
+                        <LookupListIndex value="25"/>
                     </SubstLookupRecord>
                 </ChainContextSubst>
             </Lookup>
@@ -11329,7 +11345,7 @@ return
                 <LookupType value="4"/>
                 <LookupFlag value="0"/>
                 <!-- SubTableCount=1 -->
-                <LigatureSubst index="0" Format="1">
+                <LigatureSubst index="0">
                     <LigatureSet glyph="five.num">
                         <Ligature components="fraction.afrc,six.den" glyph="fivesixths"/>
                         <Ligature components="fraction.afrc,eight.den" glyph="fiveeighths"/>
@@ -11363,7 +11379,7 @@ return
                 <LookupType value="1"/>
                 <LookupFlag value="0"/>
                 <!-- SubTableCount=1 -->
-                <SingleSubst index="0" Format="1">
+                <SingleSubst index="0">
                     <Substitution in="registered" out="registered.alt"/>
                 </SingleSubst>
             </Lookup>
@@ -11371,7 +11387,7 @@ return
                 <LookupType value="1"/>
                 <LookupFlag value="0"/>
                 <!-- SubTableCount=1 -->
-                <SingleSubst index="0" Format="1">
+                <SingleSubst index="0">
                     <Substitution in="colon" out="colon.alt"/>
                 </SingleSubst>
             </Lookup>
@@ -11379,7 +11395,7 @@ return
                 <LookupType value="1"/>
                 <LookupFlag value="0"/>
                 <!-- SubTableCount=1 -->
-                <SingleSubst index="0" Format="1">
+                <SingleSubst index="0">
                     <Substitution in="bullet" out="bullet.alt"/>
                 </SingleSubst>
             </Lookup>
@@ -11387,7 +11403,7 @@ return
                 <LookupType value="1"/>
                 <LookupFlag value="0"/>
                 <!-- SubTableCount=1 -->
-                <SingleSubst index="0" Format="1">
+                <SingleSubst index="0">
                     <Substitution in="asterisk" out="asterisk.alt"/>
                 </SingleSubst>
             </Lookup>
@@ -11395,7 +11411,7 @@ return
                 <LookupType value="1"/>
                 <LookupFlag value="0"/>
                 <!-- SubTableCount=1 -->
-                <SingleSubst index="0" Format="1">
+                <SingleSubst index="0">
                     <Substitution in="zero" out="zero.alt"/>
                 </SingleSubst>
             </Lookup>
@@ -11403,7 +11419,7 @@ return
                 <LookupType value="1"/>
                 <LookupFlag value="0"/>
                 <!-- SubTableCount=1 -->
-                <SingleSubst index="0" Format="1">
+                <SingleSubst index="0">
                     <Substitution in="underscore" out="underscore.alt"/>
                 </SingleSubst>
             </Lookup>
@@ -11413,7 +11429,7 @@ return
                 <!-- SubTableCount=1 -->
                 <ChainContextSubst index="0" Format="3">
                     <!-- BacktrackGlyphCount=1 -->
-                    <BacktrackCoverage index="0" Format="2">
+                    <BacktrackCoverage index="0">
                         <Glyph value="zero"/>
                         <Glyph value="one"/>
                         <Glyph value="two"/>
@@ -11446,11 +11462,11 @@ return
                         <Glyph value="nine.den"/>
                     </BacktrackCoverage>
                     <!-- InputGlyphCount=1 -->
-                    <InputCoverage index="0" Format="1">
+                    <InputCoverage index="0">
                         <Glyph value="slash"/>
                     </InputCoverage>
                     <!-- LookAheadGlyphCount=1 -->
-                    <LookAheadCoverage index="0" Format="2">
+                    <LookAheadCoverage index="0">
                         <Glyph value="zero"/>
                         <Glyph value="one"/>
                         <Glyph value="two"/>
@@ -11485,7 +11501,7 @@ return
                     <!-- SubstCount=1 -->
                     <SubstLookupRecord index="0">
                         <SequenceIndex value="0"/>
-                        <LookupListIndex value="81"/>
+                        <LookupListIndex value="25"/>
                     </SubstLookupRecord>
                 </ChainContextSubst>
             </Lookup>
@@ -11493,7 +11509,7 @@ return
                 <LookupType value="4"/>
                 <LookupFlag value="0"/>
                 <!-- SubTableCount=1 -->
-                <LigatureSubst index="0" Format="1">
+                <LigatureSubst index="0">
                     <LigatureSet glyph="R">
                         <Ligature components="p" glyph="R_p"/>
                     </LigatureSet>
@@ -11505,34 +11521,34 @@ return
                 <!-- SubTableCount=2 -->
                 <ChainContextSubst index="0" Format="3">
                     <!-- BacktrackGlyphCount=1 -->
-                    <BacktrackCoverage index="0" Format="1">
+                    <BacktrackCoverage index="0">
                         <Glyph value="f"/>
                     </BacktrackCoverage>
                     <!-- InputGlyphCount=1 -->
-                    <InputCoverage index="0" Format="1">
+                    <InputCoverage index="0">
                         <Glyph value="l"/>
                     </InputCoverage>
                     <!-- LookAheadGlyphCount=0 -->
                     <!-- SubstCount=1 -->
                     <SubstLookupRecord index="0">
                         <SequenceIndex value="0"/>
-                        <LookupListIndex value="81"/>
+                        <LookupListIndex value="25"/>
                     </SubstLookupRecord>
                 </ChainContextSubst>
                 <ChainContextSubst index="1" Format="3">
                     <!-- BacktrackGlyphCount=0 -->
                     <!-- InputGlyphCount=1 -->
-                    <InputCoverage index="0" Format="1">
+                    <InputCoverage index="0">
                         <Glyph value="f"/>
                     </InputCoverage>
                     <!-- LookAheadGlyphCount=1 -->
-                    <LookAheadCoverage index="0" Format="1">
+                    <LookAheadCoverage index="0">
                         <Glyph value="f"/>
                     </LookAheadCoverage>
                     <!-- SubstCount=1 -->
                     <SubstLookupRecord index="0">
                         <SequenceIndex value="0"/>
-                        <LookupListIndex value="81"/>
+                        <LookupListIndex value="25"/>
                     </SubstLookupRecord>
                 </ChainContextSubst>
             </Lookup>
@@ -11542,18 +11558,18 @@ return
                 <!-- SubTableCount=1 -->
                 <ChainContextSubst index="0" Format="3">
                     <!-- BacktrackGlyphCount=1 -->
-                    <BacktrackCoverage index="0" Format="1">
+                    <BacktrackCoverage index="0">
                         <Glyph value="ldot"/>
                     </BacktrackCoverage>
                     <!-- InputGlyphCount=1 -->
-                    <InputCoverage index="0" Format="1">
+                    <InputCoverage index="0">
                         <Glyph value="l"/>
                     </InputCoverage>
                     <!-- LookAheadGlyphCount=0 -->
                     <!-- SubstCount=1 -->
                     <SubstLookupRecord index="0">
                         <SequenceIndex value="0"/>
-                        <LookupListIndex value="81"/>
+                        <LookupListIndex value="25"/>
                     </SubstLookupRecord>
                 </ChainContextSubst>
             </Lookup>
@@ -11561,7 +11577,7 @@ return
                 <LookupType value="4"/>
                 <LookupFlag value="0"/>
                 <!-- SubTableCount=1 -->
-                <LigatureSubst index="0" Format="1">
+                <LigatureSubst index="0">
                     <LigatureSet glyph="L">
                         <Ligature components="periodcentered" glyph="Ldot"/>
                     </LigatureSet>
@@ -11574,7 +11590,7 @@ return
                 <LookupType value="1"/>
                 <LookupFlag value="0"/>
                 <!-- SubTableCount=1 -->
-                <SingleSubst index="0" Format="2">
+                <SingleSubst index="0">
                     <Substitution in="eight" out="eight.num"/>
                     <Substitution in="five" out="five.num"/>
                     <Substitution in="four" out="four.num"/>
@@ -11593,7 +11609,7 @@ return
                 <LookupType value="1"/>
                 <LookupFlag value="0"/>
                 <!-- SubTableCount=1 -->
-                <SingleSubst index="0" Format="2">
+                <SingleSubst index="0">
                     <Substitution in="eight" out="eight.den"/>
                     <Substitution in="f" out="f.lig"/>
                     <Substitution in="five" out="five.den"/>
@@ -11607,2175 +11623,6 @@ return
                     <Substitution in="three" out="three.den"/>
                     <Substitution in="two" out="two.den"/>
                     <Substitution in="zero" out="zero.den"/>
-                </SingleSubst>
-            </Lookup>
-            <Lookup index="26">
-                <LookupType value="6"/>
-                <LookupFlag value="0"/>
-                <ChainContextSubst index="0" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="exclam"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="hyphen"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="2" Format="1">
-                        <Glyph value="hyphen"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="1" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="exclam"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="hyphen"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="2" Format="1">
-                        <Glyph value="hyphen"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="3" Format="1">
-                        <Glyph value="hyphen"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="2" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <BacktrackCoverage index="1" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <BacktrackCoverage index="2" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </InputCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="57"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="3" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <BacktrackCoverage index="1" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="4" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="exclam"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="hyphen"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="5" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="exclam"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="hyphen"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="2" Format="1">
-                        <Glyph value="hyphen"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-            </Lookup>
-            <Lookup index="27">
-                <LookupType value="6"/>
-                <LookupFlag value="0"/>
-                <ChainContextSubst index="6" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="7" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="2" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="8" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <BacktrackCoverage index="1" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </InputCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="59"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="9" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="10" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-            </Lookup>
-            <Lookup index="28">
-                <LookupType value="6"/>
-                <LookupFlag value="0"/>
-                <ChainContextSubst index="11" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="12" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="2" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="13" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <BacktrackCoverage index="1" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </InputCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="60"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="14" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="15" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-            </Lookup>
-            <Lookup index="29">
-                <LookupType value="6"/>
-                <LookupFlag value="0"/>
-                <ChainContextSubst index="16" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="less"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="17" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="less"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="2" Format="1">
-                        <Glyph value="less"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="18" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <BacktrackCoverage index="1" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </InputCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="61"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="19" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="20" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="less"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-            </Lookup>
-            <Lookup index="30">
-                <LookupType value="6"/>
-                <LookupFlag value="0"/>
-                <ChainContextSubst index="21" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="exclam"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="exclam"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="22" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="exclam"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="2" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="23" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <BacktrackCoverage index="1" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </InputCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="62"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="24" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="25" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="exclam"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-            </Lookup>
-            <Lookup index="31">
-                <LookupType value="6"/>
-                <LookupFlag value="0"/>
-                <ChainContextSubst index="26" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="27" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="2" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="28" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <BacktrackCoverage index="1" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </InputCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="63"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="29" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="30" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-            </Lookup>
-            <Lookup index="32">
-                <LookupType value="6"/>
-                <LookupFlag value="0"/>
-                <ChainContextSubst index="31" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="32" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="2" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="33" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <BacktrackCoverage index="1" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </InputCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="64"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="34" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="35" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-            </Lookup>
-            <Lookup index="33">
-                <LookupType value="6"/>
-                <LookupFlag value="0"/>
-                <ChainContextSubst index="36" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="37" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="2" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="38" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <BacktrackCoverage index="1" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </InputCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="65"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="39" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="40" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-            </Lookup>
-            <Lookup index="34">
-                <LookupType value="6"/>
-                <LookupFlag value="0"/>
-                <ChainContextSubst index="41" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="42" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="2" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="43" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <BacktrackCoverage index="1" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </InputCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="66"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="44" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="45" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-            </Lookup>
-            <Lookup index="35">
-                <LookupType value="6"/>
-                <LookupFlag value="0"/>
-                <ChainContextSubst index="46" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="47" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="2" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="48" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <BacktrackCoverage index="1" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </InputCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="67"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="49" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="50" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-            </Lookup>
-            <Lookup index="36">
-                <LookupType value="6"/>
-                <LookupFlag value="0"/>
-                <ChainContextSubst index="51" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="less"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="52" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="less"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="2" Format="1">
-                        <Glyph value="less"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="53" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <BacktrackCoverage index="1" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </InputCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="68"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="54" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="55" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="less"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-            </Lookup>
-            <Lookup index="37">
-                <LookupType value="6"/>
-                <LookupFlag value="0"/>
-                <ChainContextSubst index="56" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="57" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="2" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="58" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <BacktrackCoverage index="1" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </InputCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="69"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="59" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="60" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-            </Lookup>
-            <Lookup index="38">
-                <LookupType value="6"/>
-                <LookupFlag value="0"/>
-                <ChainContextSubst index="61" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="hyphen"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="62" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="hyphen"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="2" Format="1">
-                        <Glyph value="hyphen"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="63" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <BacktrackCoverage index="1" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </InputCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="70"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="64" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="65" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="hyphen"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-            </Lookup>
-            <Lookup index="39">
-                <LookupType value="6"/>
-                <LookupFlag value="0"/>
-                <ChainContextSubst index="66" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="ampersand"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="ampersand"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="ampersand"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="67" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="ampersand"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="ampersand"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="ampersand"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="68" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="ampersand"/>
-                    </InputCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="71"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="69" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="ampersand"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="ampersand"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-            </Lookup>
-            <Lookup index="40">
-                <LookupType value="6"/>
-                <LookupFlag value="0"/>
-                <ChainContextSubst index="70" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="bar"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="bar"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="bar"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="71" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="bar"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="bar"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="bar"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="72" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="bar"/>
-                    </InputCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="72"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="73" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="bar"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="bar"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-            </Lookup>
-            <Lookup index="41">
-                <LookupType value="6"/>
-                <LookupFlag value="0"/>
-                <ChainContextSubst index="74" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="bar"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="bar"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="75" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="bar"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="76" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </InputCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="73"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="77" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="bar"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-            </Lookup>
-            <Lookup index="42">
-                <LookupType value="6"/>
-                <LookupFlag value="0"/>
-                <ChainContextSubst index="78" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="colon"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="colon"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="79" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="colon"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="80" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </InputCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="74"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="81" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="colon"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-            </Lookup>
-            <Lookup index="43">
-                <LookupType value="6"/>
-                <LookupFlag value="0"/>
-                <ChainContextSubst index="82" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="83" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="84" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </InputCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="75"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="85" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-            </Lookup>
-            <Lookup index="44">
-                <LookupType value="6"/>
-                <LookupFlag value="0"/>
-                <ChainContextSubst index="86" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="87" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="88" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </InputCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="76"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="89" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-            </Lookup>
-            <Lookup index="45">
-                <LookupType value="6"/>
-                <LookupFlag value="0"/>
-                <ChainContextSubst index="90" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="exclam"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="exclam"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="91" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="exclam"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="92" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </InputCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="77"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="93" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="exclam"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-            </Lookup>
-            <Lookup index="46">
-                <LookupType value="6"/>
-                <LookupFlag value="0"/>
-                <ChainContextSubst index="94" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="95" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="96" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </InputCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="78"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="97" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-            </Lookup>
-            <Lookup index="47">
-                <LookupType value="6"/>
-                <LookupFlag value="0"/>
-                <ChainContextSubst index="98" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="99" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="100" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </InputCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="79"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="101" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-            </Lookup>
-            <Lookup index="48">
-                <LookupType value="6"/>
-                <LookupFlag value="0"/>
-                <ChainContextSubst index="102" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="103" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="hyphen"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="104" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </InputCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="80"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="105" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-            </Lookup>
-            <Lookup index="49">
-                <LookupType value="6"/>
-                <LookupFlag value="0"/>
-                <ChainContextSubst index="106" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="bar"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="107" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="bar"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="bar"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="108" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="bar"/>
-                    </InputCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="81"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="109" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="bar"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-            </Lookup>
-            <Lookup index="50">
-                <LookupType value="6"/>
-                <LookupFlag value="0"/>
-                <ChainContextSubst index="110" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="111" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="112" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </InputCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="82"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="113" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="equal"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-            </Lookup>
-            <Lookup index="51">
-                <LookupType value="6"/>
-                <LookupFlag value="0"/>
-                <ChainContextSubst index="114" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="115" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="hyphen"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="116" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </InputCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="83"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="117" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="hyphen"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-            </Lookup>
-            <Lookup index="52">
-                <LookupType value="6"/>
-                <LookupFlag value="0"/>
-                <ChainContextSubst index="118" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="slash"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="119" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="slash"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="slash"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="120" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="slash"/>
-                    </InputCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="84"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="121" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="less"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="slash"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-            </Lookup>
-            <Lookup index="53">
-                <LookupType value="6"/>
-                <LookupFlag value="0"/>
-                <ChainContextSubst index="122" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="plus"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="plus"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="plus"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="123" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="plus"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="plus"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="plus"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="124" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="plus"/>
-                    </InputCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="85"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="125" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="plus"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="plus"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-            </Lookup>
-            <Lookup index="54">
-                <LookupType value="6"/>
-                <LookupFlag value="0"/>
-                <ChainContextSubst index="126" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="question"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="question"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="question"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="127" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="question"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="question"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="question"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="128" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="question"/>
-                    </InputCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="86"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="129" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="question"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="question"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-            </Lookup>
-            <Lookup index="55">
-                <LookupType value="6"/>
-                <LookupFlag value="0"/>
-                <ChainContextSubst index="130" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="slash"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="slash"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="131" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="slash"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="132" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </InputCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="87"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="133" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="slash"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="greater"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-            </Lookup>
-            <Lookup index="56">
-                <LookupType value="6"/>
-                <LookupFlag value="0"/>
-                <ChainContextSubst index="134" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="underscore"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="underscore"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="underscore"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="135" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="underscore"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="underscore"/>
-                    </LookAheadCoverage>
-                    <LookAheadCoverage index="1" Format="1">
-                        <Glyph value="underscore"/>
-                    </LookAheadCoverage>
-                </ChainContextSubst>
-                <ChainContextSubst index="136" Format="3">
-                    <BacktrackCoverage index="0" Format="1">
-                        <Glyph value="LIG"/>
-                    </BacktrackCoverage>
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="underscore"/>
-                    </InputCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="88"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-                <ChainContextSubst index="137" Format="3">
-                    <InputCoverage index="0" Format="1">
-                        <Glyph value="underscore"/>
-                    </InputCoverage>
-                    <LookAheadCoverage index="0" Format="1">
-                        <Glyph value="underscore"/>
-                    </LookAheadCoverage>
-                    <SubstLookupRecord index="0">
-                        <SequenceIndex value="0"/>
-                        <LookupListIndex value="58"/>
-                    </SubstLookupRecord>
-                </ChainContextSubst>
-            </Lookup>
-            <Lookup index="57">
-                <LookupType value="1"/>
-                <LookupFlag value="0"/>
-                <SingleSubst index="0" Format="2">
-                    <Substitution in="hyphen" out="less_exclam_hyphen_hyphen.liga"/>
-                </SingleSubst>
-            </Lookup>
-            <Lookup index="58">
-                <LookupType value="1"/>
-                <LookupFlag value="0"/>
-                <SingleSubst index="0" Format="2">
-                    <Substitution in="hyphen" out="LIG"/>
-                    <Substitution in="exclam" out="LIG"/>
-                    <Substitution in="less" out="LIG"/>
-                    <Substitution in="equal" out="LIG"/>
-                    <Substitution in="greater" out="LIG"/>
-                    <Substitution in="ampersand" out="LIG"/>
-                    <Substitution in="bar" out="LIG"/>
-                    <Substitution in="colon" out="LIG"/>
-                    <Substitution in="plus" out="LIG"/>
-                    <Substitution in="question" out="LIG"/>
-                    <Substitution in="slash" out="LIG"/>
-                    <Substitution in="underscore" out="LIG"/>
-                </SingleSubst>
-            </Lookup>
-            <Lookup index="59">
-                <LookupType value="1"/>
-                <LookupFlag value="0"/>
-                <SingleSubst index="0" Format="2">
-                    <Substitution in="equal" out="equal_equal_equal.liga"/>
-                </SingleSubst>
-            </Lookup>
-            <Lookup index="60">
-                <LookupType value="1"/>
-                <LookupFlag value="0"/>
-                <SingleSubst index="0" Format="2">
-                    <Substitution in="greater" out="equal_equal_greater.liga"/>
-                </SingleSubst>
-            </Lookup>
-            <Lookup index="61">
-                <LookupType value="1"/>
-                <LookupFlag value="0"/>
-                <SingleSubst index="0" Format="2">
-                    <Substitution in="less" out="equal_less_less.liga"/>
-                </SingleSubst>
-            </Lookup>
-            <Lookup index="62">
-                <LookupType value="1"/>
-                <LookupFlag value="0"/>
-                <SingleSubst index="0" Format="2">
-                    <Substitution in="equal" out="exclam_equal_equal.liga"/>
-                </SingleSubst>
-            </Lookup>
-            <Lookup index="63">
-                <LookupType value="1"/>
-                <LookupFlag value="0"/>
-                <SingleSubst index="0" Format="2">
-                    <Substitution in="greater" out="greater_equal_greater.liga"/>
-                </SingleSubst>
-            </Lookup>
-            <Lookup index="64">
-                <LookupType value="1"/>
-                <LookupFlag value="0"/>
-                <SingleSubst index="0" Format="2">
-                    <Substitution in="equal" out="greater_greater_equal.liga"/>
-                </SingleSubst>
-            </Lookup>
-            <Lookup index="65">
-                <LookupType value="1"/>
-                <LookupFlag value="0"/>
-                <SingleSubst index="0" Format="2">
-                    <Substitution in="greater" out="hyphen_hyphen_greater.liga"/>
-                </SingleSubst>
-            </Lookup>
-            <Lookup index="66">
-                <LookupType value="1"/>
-                <LookupFlag value="0"/>
-                <SingleSubst index="0" Format="2">
-                    <Substitution in="equal" out="less_equal_equal.liga"/>
-                </SingleSubst>
-            </Lookup>
-            <Lookup index="67">
-                <LookupType value="1"/>
-                <LookupFlag value="0"/>
-                <SingleSubst index="0" Format="2">
-                    <Substitution in="greater" out="less_equal_greater.liga"/>
-                </SingleSubst>
-            </Lookup>
-            <Lookup index="68">
-                <LookupType value="1"/>
-                <LookupFlag value="0"/>
-                <SingleSubst index="0" Format="2">
-                    <Substitution in="less" out="less_equal_less.liga"/>
-                </SingleSubst>
-            </Lookup>
-            <Lookup index="69">
-                <LookupType value="1"/>
-                <LookupFlag value="0"/>
-                <SingleSubst index="0" Format="2">
-                    <Substitution in="greater" out="less_hyphen_greater.liga"/>
-                </SingleSubst>
-            </Lookup>
-            <Lookup index="70">
-                <LookupType value="1"/>
-                <LookupFlag value="0"/>
-                <SingleSubst index="0" Format="2">
-                    <Substitution in="hyphen" out="less_hyphen_hyphen.liga"/>
-                </SingleSubst>
-            </Lookup>
-            <Lookup index="71">
-                <LookupType value="1"/>
-                <LookupFlag value="0"/>
-                <SingleSubst index="0" Format="2">
-                    <Substitution in="ampersand" out="ampersand_ampersand.liga"/>
-                </SingleSubst>
-            </Lookup>
-            <Lookup index="72">
-                <LookupType value="1"/>
-                <LookupFlag value="0"/>
-                <SingleSubst index="0" Format="2">
-                    <Substitution in="bar" out="bar_bar.liga"/>
-                </SingleSubst>
-            </Lookup>
-            <Lookup index="73">
-                <LookupType value="1"/>
-                <LookupFlag value="0"/>
-                <SingleSubst index="0" Format="2">
-                    <Substitution in="greater" out="bar_greater.liga"/>
-                </SingleSubst>
-            </Lookup>
-            <Lookup index="74">
-                <LookupType value="1"/>
-                <LookupFlag value="0"/>
-                <SingleSubst index="0" Format="2">
-                    <Substitution in="equal" out="colon_equal.liga"/>
-                </SingleSubst>
-            </Lookup>
-            <Lookup index="75">
-                <LookupType value="1"/>
-                <LookupFlag value="0"/>
-                <SingleSubst index="0" Format="2">
-                    <Substitution in="equal" out="equal_equal.liga"/>
-                </SingleSubst>
-            </Lookup>
-            <Lookup index="76">
-                <LookupType value="1"/>
-                <LookupFlag value="0"/>
-                <SingleSubst index="0" Format="2">
-                    <Substitution in="greater" out="equal_greater.liga"/>
-                </SingleSubst>
-            </Lookup>
-            <Lookup index="77">
-                <LookupType value="1"/>
-                <LookupFlag value="0"/>
-                <SingleSubst index="0" Format="2">
-                    <Substitution in="equal" out="exclam_equal.liga"/>
-                </SingleSubst>
-            </Lookup>
-            <Lookup index="78">
-                <LookupType value="1"/>
-                <LookupFlag value="0"/>
-                <SingleSubst index="0" Format="2">
-                    <Substitution in="equal" out="greater_equal.liga"/>
-                </SingleSubst>
-            </Lookup>
-            <Lookup index="79">
-                <LookupType value="1"/>
-                <LookupFlag value="0"/>
-                <SingleSubst index="0" Format="2">
-                    <Substitution in="greater" out="hyphen_greater.liga"/>
-                </SingleSubst>
-            </Lookup>
-            <Lookup index="80">
-                <LookupType value="1"/>
-                <LookupFlag value="0"/>
-                <SingleSubst index="0" Format="2">
-                    <Substitution in="hyphen" out="hyphen_hyphen.liga"/>
-                </SingleSubst>
-            </Lookup>
-            <Lookup index="81">
-                <LookupType value="1"/>
-                <LookupFlag value="0"/>
-                <SingleSubst index="0" Format="2">
-                    <Substitution in="bar" out="less_bar.liga"/>
-                </SingleSubst>
-            </Lookup>
-            <Lookup index="82">
-                <LookupType value="1"/>
-                <LookupFlag value="0"/>
-                <SingleSubst index="0" Format="2">
-                    <Substitution in="equal" out="less_equal.liga"/>
-                </SingleSubst>
-            </Lookup>
-            <Lookup index="83">
-                <LookupType value="1"/>
-                <LookupFlag value="0"/>
-                <SingleSubst index="0" Format="2">
-                    <Substitution in="hyphen" out="less_hyphen.liga"/>
-                </SingleSubst>
-            </Lookup>
-            <Lookup index="84">
-                <LookupType value="1"/>
-                <LookupFlag value="0"/>
-                <SingleSubst index="0" Format="2">
-                    <Substitution in="slash" out="less_slash.liga"/>
-                </SingleSubst>
-            </Lookup>
-            <Lookup index="85">
-                <LookupType value="1"/>
-                <LookupFlag value="0"/>
-                <SingleSubst index="0" Format="2">
-                    <Substitution in="plus" out="plus_plus.liga"/>
-                </SingleSubst>
-            </Lookup>
-            <Lookup index="86">
-                <LookupType value="1"/>
-                <LookupFlag value="0"/>
-                <SingleSubst index="0" Format="2">
-                    <Substitution in="question" out="question_question.liga"/>
-                </SingleSubst>
-            </Lookup>
-            <Lookup index="87">
-                <LookupType value="1"/>
-                <LookupFlag value="0"/>
-                <SingleSubst index="0" Format="2">
-                    <Substitution in="greater" out="slash_greater.liga"/>
-                </SingleSubst>
-            </Lookup>
-            <Lookup index="88">
-                <LookupType value="1"/>
-                <LookupFlag value="0"/>
-                <SingleSubst index="0" Format="2">
-                    <Substitution in="underscore" out="underscore_underscore.liga"/>
                 </SingleSubst>
             </Lookup>
         </LookupList>
@@ -14240,7 +12087,7 @@ return
         <mtx name="greater_equal.liga" width="550" lsb="-326"/>
         <mtx name="hyphen_greater.liga" width="550" lsb="-430"/>
         <mtx name="hyphen_hyphen.liga" width="550" lsb="-379"/>
-        <mtx name="less_bar.liga" width="550" lsb="-421"/>
+        <mtx name="less_bar.liga" width="550" lsb="-329"/>
         <mtx name="less_equal.liga" width="550" lsb="-309"/>
         <mtx name="less_hyphen.liga" width="550" lsb="-457"/>
         <mtx name="less_slash.liga" width="525" lsb="-457"/>
@@ -14248,7 +12095,19 @@ return
         <mtx name="question_question.liga" width="550" lsb="-396"/>
         <mtx name="slash_greater.liga" width="550" lsb="-378"/>
         <mtx name="underscore_underscore.liga" width="550" lsb="-553"/>
+        <mtx name="ampersand.spacer" width="600" lsb="0"/>
+        <mtx name="bar.spacer" width="600" lsb="0"/>
+        <mtx name="colon.spacer" width="600" lsb="0"/>
+        <mtx name="equal.spacer" width="600" lsb="0"/>
+        <mtx name="exclam.spacer" width="600" lsb="0"/>
+        <mtx name="greater.spacer" width="600" lsb="0"/>
+        <mtx name="hyphen.spacer" width="600" lsb="0"/>
+        <mtx name="less.spacer" width="600" lsb="0"/>
         <mtx name="LIG" width="550" lsb="0"/>
+        <mtx name="plus.spacer" width="600" lsb="0"/>
+        <mtx name="question.spacer" width="600" lsb="0"/>
+        <mtx name="slash.spacer" width="600" lsb="0"/>
+        <mtx name="underscore.spacer" width="600" lsb="0"/>
         <mtx name="uniE0A0" width="550" lsb="6"/>
         <mtx name="uniE0B0" width="550" lsb="-20"/>
         <mtx name="uniE0B2" width="550" lsb="-20"/>

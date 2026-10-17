@@ -1,4 +1,7 @@
 {
+  "chat.canvases.enabled": true,
+  "dev.containers.dockerPath": "podman",
+  "dev.containers.dockerComposePath": "podman-compose",
   "[blade]": {
     "editor.autoClosingBrackets": "always",
     "editor.defaultFormatter": "open-southeners.laravel-pint"
@@ -33,10 +36,14 @@
     "files.trimTrailingWhitespace": false
   },
   "[php]": {
-    "editor.defaultFormatter": "open-southeners.laravel-pint"
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "always"
+    },
+    "editor.defaultFormatter": "open-southeners.laravel-pint",
+    "editor.formatOnSave": true
   },
   "[python]": {
-    "editor.defaultFormatter": "ms-python.vscode-pylance"
+    "editor.defaultFormatter": "ms-python.black-formatter"
   },
   "[svelte]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -45,10 +52,10 @@
     "editor.defaultFormatter": "hashicorp.terraform"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "denoland.vscode-deno"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[typescriptreact]": {
-    "editor.defaultFormatter": "denoland.vscode-deno"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[vue]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -67,13 +74,11 @@
   },
   "cfnLint.path": "/usr/local/bin/cfn-lint",
   "chat.agentMerge.enabled": true,
+  "continue.enableTabAutocomplete": false,
   "debug.breakpointsView.presentation": "tree",
   "debug.console.acceptSuggestionOnEnter": "on",
   "debug.inlineValues": "on",
   "debug.toolBarLocation": "floating",
-  "deno.codeLens.implementations": true,
-  "deno.codeLens.references": true,
-  "deno.codeLens.referencesAllFunctions": true,
   "diffEditor.hideUnchangedRegions.enabled": true,
   "diffEditor.ignoreTrimWhitespace": false,
   "dotenv.enableAutocloaking": false,
@@ -83,24 +88,14 @@
   "editor.bracketPairColorization.enabled": true,
   "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
   "editor.codeActions.triggerOnFocusChange": true,
-  "editor.codeActionsOnSave": {
-    "addMissingImport": "always",
-    "source.addMissingImport": "always",
-    "source.fixAll": "always",
-    "source.organizeImports": "always",
-    "source.sort.json": "always",
-    "source.sort.yaml": "always",
-    "source.sortImports": "always"
-  },
   "editor.cursorBlinking": "solid",
   "editor.cursorStyle": "line",
-  "editor.cursorWidth": 2,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.emptySelectionClipboard": false,
-  "editor.fontFamily": "'JetBrainsMonoNL Nerd Font Mono Propo', Monaco, monospace",
+  "editor.fontFamily": "'Operator Mono Lig', Monaco, monospace",
   "editor.fontLigatures": true,
-  "editor.fontSize": 17,
-  "editor.fontWeight": "400",
+  "editor.fontSize": 19,
+  "editor.fontWeight": 400,
   "editor.formatOnSave": true,
   "editor.guides.bracketPairs": true,
   "editor.guides.bracketPairsHorizontal": "active",
@@ -110,12 +105,13 @@
   "editor.inlineSuggest.enabled": true,
   "editor.insertSpaces": true,
   "editor.largeFileOptimizations": false,
-  "editor.letterSpacing": 1.2,
+  "editor.letterSpacing": 0.5,
   "editor.lightbulb.enabled": "off",
   "editor.lineHeight": 25,
   "editor.lineNumbers": "off",
   "editor.linkedEditing": true,
   "editor.minimap.enabled": false,
+  "editor.multiCursorPaste": "full",
   "editor.parameterHints.enabled": true,
   "editor.quickSuggestions": {
     "comments": "on",
@@ -132,29 +128,6 @@
   "editor.suggest.showMethods": true,
   "editor.suggest.showStatusBar": true,
   "editor.tabSize": 2,
-  "editor.tokenColorCustomizations": {
-    "[Tokyo Night]": {
-      "textMateRules": [
-        {
-          "scope": [
-            "comment",
-            "meta.var.expr storage.type",
-            "keyword.control.flow",
-            "keyword.control.return",
-            "meta.directive.vue punctuation.separator.key-value.html",
-            "meta.directive.vue entity.other.attribute-name.html",
-            "tag.decorator.js entity.name.tag.js",
-            "tag.decorator.js punctuation.definition.tag.js",
-            "storage.modifier"
-          ],
-          "settings": {
-            "fontStyle": ""
-          }
-        }
-      ]
-    },
-    "textMateRules": []
-  },
   "editor.unicodeHighlight.ambiguousCharacters": false,
   "emmet.includeLanguages": {
     "javascript": "javascriptreact",
@@ -175,9 +148,7 @@
   "explorer.autoRevealExclude": {
     "**/.mvn": true,
     "**/bootstrap/cache/**": true,
-    "**/node_modules": true,
-    "**/storage/**": true,
-    "**/vendor": true
+    "**/node_modules": true
   },
   "explorer.compactFolders": false,
   "explorer.confirmDragAndDrop": false,
@@ -221,7 +192,12 @@
     "**/.venv": true,
     "**/*.bak": true,
     "**/*.egg-info": true,
-    "**/*.pyc": true
+    "**/*.pyc": true,
+    "**/bootstrap/cache/**": true,
+    "**/coverage": true,
+    "**/node_modules": true,
+    "**/public/storage": true,
+    "**/storage": true
   },
   "files.hotExit": "off",
   "files.insertFinalNewline": true,
@@ -237,9 +213,8 @@
   "git.blame.editorDecoration.enabled": true,
   "git.blame.ignoreWhitespace": true,
   "git.blame.statusBarItem.enabled": true,
-  "git.enableSmartCommit": true,
+  "git.enableSmartCommit": false,
   "git.mergeEditor": true,
-  "git.smartCommitChanges": "all",
   "git.suggestSmartCommit": true,
   "git.untrackedChanges": "separate",
   "github.copilot.chat.agent.autoFix": false,
@@ -288,8 +263,6 @@
     "**/tests/**",
     "**/cache/**"
   ],
-  "intelephense.files.maxSize": 5000000,
-  "intelephense.telemetry.enabled": false,
   "java.configuration.runtimes": [
     {
       "default": true,
@@ -306,7 +279,6 @@
   "java.jdt.ls.java.home": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-crac-25",
   "java.project.importOnFirstTimeStartup": "automatic",
   "java.referencesCodeLens.enabled": true,
-  "js/ts.autoClosingTags": true,
   "js/ts.implicitProjectConfig.checkJs": true,
   "js/ts.preferences.importModuleSpecifier": "relative",
   "js/ts.preferences.quoteStyle": "single",
@@ -318,14 +290,16 @@
     "https://json-schema.org/": true,
     "https://json.schemastore.org/": true,
     "https://opencode.ai/config.json": true,
+    "https://raw.githubusercontent.com": true,
+    "https://raw.githubusercontent.com/": true,
     "https://raw.githubusercontent.com/devcontainers/spec/": true,
-    "https://raw.githubusercontent.com/microsoft/vscode/": true,
     "https://schemastore.azurewebsites.net/": true,
+    "https://spec.openapis.org/": true,
     "https://www.schemastore.org/": true
   },
   "json.schemas": [],
   "laravel-pint.enable": false,
-  "Laravel.phpCommand": "/usr/local/bin/php",
+  "Laravel.phpCommand": ["/usr/local/bin/php"],
   "Laravel.pint.runOnSave": false,
   "Lua.diagnostics.globals": ["vim", "nvim_bufferline", "sign"],
   "markdown.validate.enabled": true,
@@ -333,8 +307,6 @@
   "maven.terminal.useJavaHome": true,
   "mergeEditor.diffAlgorithm": "advanced",
   "microprofile.alwaysShowOverview": false,
-  "phpactor.enable": false,
-  "phpactor.executablePath": "/usr/local/bin/php",
   "prettier.arrowParens": "avoid",
   "prettier.bracketSpacing": false,
   "prettier.embeddedLanguageFormatting": "auto",
@@ -376,15 +348,14 @@
   "scm.repositories.explorer": true,
   "scm.workingSets.enabled": true,
   "search.useIgnoreFiles": true,
-  "security.workspace.trust.untrustedFiles": "open",
+  "security.workspace.trust.untrustedFiles": "prompt",
   "spring-boot.ls.java.home": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-crac-25",
   "telemetry.telemetryLevel": "off",
-  "terminal.external.osxExec": "iTerm.app",
   "terminal.integrated.copyOnSelection": true,
-  "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font Mono', Monaco, monospace",
+  "terminal.integrated.fontFamily": "'Operator Mono Lig', Monaco, monospace",
   "terminal.integrated.fontSize": 16,
   "terminal.integrated.fontWeight": "400",
-  "terminal.integrated.inheritEnv": false,
+  "terminal.integrated.inheritEnv": true,
   "terminal.integrated.initialHint": false,
   "terminal.integrated.macOptionIsMeta": true,
   "terminal.integrated.persistentSessionReviveProcess": "never",
@@ -393,12 +364,15 @@
   "terraform.codelens.referenceCount": true,
   "vscode-kubernetes.kubectl-path": "/usr/local/bin/kubectl",
   "window.commandCenter": false,
-  "window.customTitleBarVisibility": "never",
-  "window.density.layout": "compact",
   "window.restoreWindows": "none",
   "window.titleBarStyle": "custom",
-  "workbench.activityBar.location": "bottom",
-  "workbench.colorTheme": "Tokyo Night",
+  "workbench.colorCustomizations": {
+    "[Cobalt2]": {
+      "editor.lineHighlightBackground": "#182a36",
+      "editor.lineHighlightBorder": "#00000000"
+    }
+  },
+  "workbench.colorTheme": "Cobalt2",
   "workbench.editor.empty.hint": "hidden",
   "workbench.editor.enablePreview": false,
   "workbench.editor.preferHistoryBasedLanguageDetection": true,
@@ -406,13 +380,15 @@
   "workbench.editor.showTabs": "none",
   "workbench.editor.wrapTabs": true,
   "workbench.experimental.modernUI": true,
+  "workbench.experimental.modernUIEditorTabStyle": "connected",
   "workbench.experimental.modernUIUppercaseViewHeaders": true,
   "workbench.fontAliasing": "auto",
   "workbench.iconTheme": "catppuccin-macchiato",
-  "workbench.layoutControl.enabled": false,
+  "workbench.layoutControl.enabled": true,
+  "workbench.modernUIFrostedGlass": true,
+  "workbench.modernUIFrostedGlassOpacity": 80,
   "workbench.secondarySideBar.defaultVisibility": "hidden",
   "workbench.settings.editor": "json",
-  "workbench.sideBar.location": "right",
   "workbench.startupEditor": "none",
   "workbench.statusBar.feedback.visible": false,
   "workbench.statusBar.visible": true,
@@ -463,5 +439,8 @@
       "template.yaml"
     ]
   },
-  "yaml.validate": true
+  "yaml.validate": true,
+  "workbench.sideBar.location": "right",
+  "window.density.layout": "compact",
+  "workbench.activityBar.location": "bottom"
 }

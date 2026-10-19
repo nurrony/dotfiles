@@ -64,6 +64,7 @@ zinit light romkatv/powerlevel10k
 # Load Plugins
 source ${XDG_CONFIG_HOME:-$HOME/.config}/zsh/plugins.zsh
 
+export PATH="/usr/local/bin:/usr/local/sbin:/opt/homebrew/bin:/opt/homebrew/sbin:$HOME/.local/bin:$PATH"
 
 # COMPLETIONS FIRST (important)
 autoload -Uz compinit

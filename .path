@@ -56,4 +56,4 @@ export BISON_BIN_PATH=$(brew --prefix bison)/bin
 export PATH="$BISON_BIN_PATH:$PATH"
 
 # Finally apped to main PATH variable
-export PATH="/usr/local/bin:/usr/local/sbin:$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"

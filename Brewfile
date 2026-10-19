@@ -3,10 +3,7 @@ tap "aws/tap", trusted: true
 tap "boz/repo", trusted: true
 tap "floci-io/floci", trusted: true
 tap "mongodb/brew", trusted: true
-tap "sinelaw/fresh", trusted: true
 tap "weaveworks/tap", trusted: true
-# Cryptography and SSL/TLS Toolkit
-brew "openssl@3"
 # Code searching, linting, rewriting
 brew "ast-grep"
 # Automatic configure script builder
@@ -31,6 +28,8 @@ brew "awscli"
 brew "gettext"
 # Programmable completion for Bash 4.2+
 brew "bash-completion@2"
+# Cryptography and SSL/TLS Toolkit
+brew "openssl@3", link: true
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # GNU binary tools for native development
@@ -39,30 +38,18 @@ brew "binutils"
 brew "bison"
 # Resource monitor. C++ version and continuation of bashtop and bpytop
 brew "btop"
-# Library for manipulating PNG images
-brew "libpng"
-# Software library to render fonts
-brew "freetype"
-# Validate CloudFormation templates against the CloudFormation spec
-brew "cfn-lint"
-# TIFF library and utilities
-brew "libtiff"
 # Validate CloudFormation templates against the CloudFormation spec
 brew "cfn-lint"
 # Work on automating classical cipher cracking in C
 brew "cifer"
 # Cross-platform make
 brew "cmake"
-# Console Matrix
-brew "cmatrix"
 # GNU multiple precision arithmetic library
 brew "gmp"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 # Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
-# GNU data recovery tool
-brew "ddrescue"
 # Library for manipulating PNG images
 brew "libpng"
 # TIFF library and utilities
@@ -101,8 +88,6 @@ brew "imagemagick"
 brew "folderify"
 # Console program to recover files based on their headers and footers
 brew "foremost"
-# Text editor for your terminal: easy, powerful and fast
-brew "fresh-editor"
 # Command-line fuzzy finder written in Go
 brew "fzf"
 # Graphics library to dynamically manipulate images
@@ -250,32 +235,23 @@ brew "zsh"
 # Official CLI for the Floci local AWS emulator
 brew "floci-io/floci/floci", trusted: true
 # Terraform
-brew "hashicorp/tap/terraform", trusted: true
+brew "hashicorp/tap/terraform"
 # Terraform Stacks CLI
-brew "hashicorp/tap/tfstacks", trusted: true
+brew "hashicorp/tap/tfstacks"
 # This package contains standard utilities for interacting with MongoDB.
 brew "mongodb/brew/mongodb-database-tools", trusted: true
 # The official CLI for Amazon EKS
 brew "weaveworks/tap/eksctl", trusted: true
-# Allows connection to a computer remotely
-cask "anydesk"
 # Application uninstaller
 cask "appcleaner"
-# Open-source project and knowledge management tool
-cask "appflowy"
 # Web browser focusing on privacy
 cask "brave-browser"
-# Offline voice-to-text dictation app with AI enhancement
-cask "fluidvoice"
-cask "font-jetbrains-mono-nerd-font"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
 # Tools to protect your emails and files
 cask "gpg-suite"
 # Free and open-source media player
 cask "iina"
-# Offline AI chat tool
-cask "jan"
 # File archiver
 cask "keka"
 # Provides updates to various Microsoft products
@@ -288,16 +264,12 @@ cask "microsoft-powerpoint"
 cask "microsoft-teams"
 # Word processor
 cask "microsoft-word"
-# Get up and running with large language models locally
-cask "ollama-app"
 # Android file transfer
 cask "openmtp"
 # Browse, manage, inspect containers and images
 cask "podman-desktop"
 # Move and resize windows using keyboard shortcuts or snap areas
 cask "rectangle"
-# Official desktop client for Rocket.Chat
-cask "rocket-chat"
 # App that enables mouse-free UI interaction
 cask "shortcat"
 # Native database client for many database types
@@ -317,38 +289,24 @@ cask "windows-app"
 # Network protocol analyzer
 cask "wireshark-app"
 vscode "aaron-bond.better-comments"
-vscode "amazonwebservices.aws-toolkit-vscode"
 vscode "anweber.vscode-httpyac"
-vscode "aws-scripting-guy.cform"
 vscode "buvan.sql-crack"
 vscode "catppuccin.catppuccin-vsc-icons"
-vscode "christian-kohler.path-intellisense"
 vscode "codezombiech.gitignore"
 vscode "dbaeumer.vscode-eslint"
 vscode "deerawan.vscode-faker"
 vscode "dsznajder.es7-react-js-snippets"
 vscode "editorconfig.editorconfig"
 vscode "esbenp.prettier-vscode"
-vscode "github.vscode-github-actions"
 vscode "grapecity.gc-excelviewer"
-vscode "hashicorp.terraform"
-vscode "ihunte.laravel-blade-wrapper"
 vscode "jeremyljackson.vs-docblock"
-vscode "kamasamak.vscode-cflint"
 vscode "laravel.vscode-laravel"
-vscode "lunuan.kubernetes-templates"
 vscode "maarti.jenkins-doc"
 vscode "mgmcdermott.vscode-language-babel"
 vscode "mhutchie.git-graph"
-vscode "microprofile-community.mp-rest-client-generator-vscode-ext"
-vscode "microprofile-community.mp-starter-vscode-ext"
-vscode "microprofile-community.vscode-microprofile-pack"
 vscode "monish.regexsnippets"
 vscode "ms-azuretools.vscode-containers"
-vscode "ms-dotnettools.upgrade-agent"
-vscode "ms-dotnettools.vscode-dotnet-runtime"
 vscode "ms-kubernetes-tools.vscode-kubernetes-tools"
-vscode "ms-python.vscode-pylance"
 vscode "ms-vscode-remote.remote-containers"
 vscode "ms-vscode-remote.remote-ssh"
 vscode "ms-vscode-remote.remote-ssh-edit"
@@ -359,8 +317,6 @@ vscode "ms-vscode.remote-explorer"
 vscode "ms-vscode.remote-server"
 vscode "nabeeltahirdeveloper.theme-cobalt2-dark"
 vscode "onecentlin.laravel-blade"
-vscode "onecentlin.laravel5-snippets"
-vscode "open-southeners.laravel-pint"
 vscode "pflannery.vscode-versionlens"
 vscode "phiter.phpstorm-snippets"
 vscode "phpantom.phpantom"
@@ -370,11 +326,7 @@ vscode "redhat.vscode-microprofile"
 vscode "redhat.vscode-quarkus"
 vscode "redhat.vscode-xml"
 vscode "redhat.vscode-yaml"
-vscode "shengchen.vscode-checkstyle"
-vscode "sleistner.vscode-fileutils"
 vscode "socheatsok78-lab.dotenv-vscode-stripped"
-vscode "sonarsource.sonarlint-vscode"
-vscode "sumneko.lua"
 vscode "tintinweb.vscode-decompiler"
 vscode "usernamehw.errorlens"
 vscode "vmware.vscode-boot-dev-pack"
@@ -387,7 +339,9 @@ vscode "vscjava.vscode-java-test"
 vscode "vscjava.vscode-maven"
 vscode "vscjava.vscode-spring-boot-dashboard"
 vscode "vscjava.vscode-spring-initializr"
-vscode "wix.vscode-import-cost"
 vscode "xdebug.php-debug"
-uv "browser-use"
-npm "corepack"
+npm "commitizen"
+npm "opencode-ai"
+npm "prettier"
+npm "serve"
+npm "typescript"

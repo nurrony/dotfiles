@@ -11,13 +11,13 @@ zinit wait'2' lucid light-mode for \
   OMZP::mvn \
   OMZP::sudo \
   OMZP::podman \
-  OMZP::ansible \
   OMZP::extract \
   OMZP::command-not-found \
   pick'alias-tips.plugin.zsh' djui/alias-tips \
   as'completion' pick'_curl' Valodim/zsh-curl-completion \
   zdharma/fast-syntax-highlighting
 
+# install binaries
 zinit wait'10' lucid light-mode for \
   as'program' from'gh-r' jdx/usage \
   as'program' from'gh-r' medialab/xan \

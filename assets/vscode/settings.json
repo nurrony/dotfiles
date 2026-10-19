@@ -1,7 +1,4 @@
 {
-  "chat.canvases.enabled": true,
-  "dev.containers.dockerPath": "podman",
-  "dev.containers.dockerComposePath": "podman-compose",
   "[blade]": {
     "editor.autoClosingBrackets": "always",
     "editor.defaultFormatter": "open-southeners.laravel-pint"

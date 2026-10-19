@@ -20,6 +20,8 @@ brew "readline"
 brew "xz"
 # Client for Amazon Elastic Beanstalk web service
 brew "aws-elasticbeanstalk"
+# Use AWS IAM credentials to authenticate to Kubernetes
+brew "aws-iam-authenticator"
 # CLI tool to build, test, debug, and deploy Serverless applications using AWS SAM
 brew "aws-sam-cli"
 # Official Amazon AWS command-line interface
@@ -29,7 +31,7 @@ brew "gettext"
 # Programmable completion for Bash 4.2+
 brew "bash-completion@2"
 # Cryptography and SSL/TLS Toolkit
-brew "openssl@3", link: true
+brew "openssl@3"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # GNU binary tools for native development
@@ -146,6 +148,8 @@ brew "libedit"
 brew "libiconv"
 # X.509 and CMS library
 brew "libksba"
+# LLVM's OpenMP runtime library
+brew "libomp"
 # Library for USB device access
 brew "libusb"
 # GNOME XML library
@@ -234,10 +238,6 @@ brew "zlib"
 brew "zsh"
 # Official CLI for the Floci local AWS emulator
 brew "floci-io/floci/floci", trusted: true
-# Terraform
-brew "hashicorp/tap/terraform"
-# Terraform Stacks CLI
-brew "hashicorp/tap/tfstacks"
 # This package contains standard utilities for interacting with MongoDB.
 brew "mongodb/brew/mongodb-database-tools", trusted: true
 # The official CLI for Amazon EKS

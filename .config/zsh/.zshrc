@@ -7,13 +7,12 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # Load the shell dotfiles, and then some:
-# * ~/.path can be used to extend `$PATH`.
-# * ~/.extra can be used for other settings you don’t want to commit.
-dotfiles=(extra exports path source aliases functions fzf containerfunctions kubefunctions cli-packages)
-for f in "$HOME/.dotfiles/."${^dotfiles}(N); do
-  source "$f"
+# * ~/.dotfiles/.extra can be used for other settings you don’t want to commit.
+dotfiles=(extra exports source aliases functions fzf containerfunctions kubefunctions cli-packages)
+for file in "$HOME/.dotfiles/."${^dotfiles}(N); do
+  source "$file"
 done
-unset dotfiles f
+unset dotfiles file
 
 # Load zsh options
 [[ -f "$HOME/.dotfiles/.config/zsh/.zsh_options" ]] && source "$HOME/.dotfiles/.config/zsh/.zsh_options"
@@ -64,7 +63,8 @@ zinit light romkatv/powerlevel10k
 # Load Plugins
 source ${XDG_CONFIG_HOME:-$HOME/.config}/zsh/plugins.zsh
 
-export PATH="/usr/local/bin:/usr/local/sbin:/opt/homebrew/bin:/opt/homebrew/sbin:$HOME/.local/bin:$PATH"
+# * ~/.dotfiles/.path can be used to extend `$PATH`.
+source ~/.dotfiles/.path
 
 # COMPLETIONS FIRST (important)
 autoload -Uz compinit

@@ -1,7 +1,7 @@
 {
   "[blade]": {
     "editor.autoClosingBrackets": "always",
-    "editor.defaultFormatter": "open-southeners.laravel-pint"
+    "editor.defaultFormatter": "phpantom.phpantom"
   },
   "[dockercompose]": {
     "editor.autoIndent": "advanced",
@@ -18,15 +18,16 @@
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
   "[java]": {
-    "editor.defaultFormatter": "redhat.java"
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    },
+    "editor.defaultFormatter": "redhat.java",
+    "editor.tabSize": 4
   },
   "[jsonc]": {
     "editor.codeActionsOnSave": {
       "source.sort.json": "never"
     }
-  },
-  "[lua]": {
-    "editor.defaultFormatter": "sumneko.lua"
   },
   "[markdown]": {
     "diffEditor.ignoreTrimWhitespace": false,
@@ -36,46 +37,38 @@
     "editor.codeActionsOnSave": {
       "source.organizeImports": "always"
     },
-    "editor.defaultFormatter": "open-southeners.laravel-pint",
+    "editor.defaultFormatter": "phpantom.phpantom",
     "editor.formatOnSave": true
+  },
+  "[properties]": {
+    "editor.tabSize": 4
   },
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter"
-  },
-  "[svelte]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[terraform]": {
-    "editor.defaultFormatter": "hashicorp.terraform"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[vue]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[xml]": {
     "editor.defaultFormatter": "redhat.vscode-xml"
   },
   "application.shellEnvironmentResolutionTimeout": 20,
   "aws.telemetry": false,
+  "bladeFormatter.format.sortHtmlAttributes": "none",
   "boot-java.rewrite.reconcile": true,
   "breadcrumbs.filePath": "last",
   "breadcrumbs.symbolPath": "off",
   "camelk.integrations.runtimeVersion": "1.11.0",
   "camelk.tools": {
-    "camelk.tools.kamel-path": "/Volumes/Library/Application Support/Code/User/globalStorage/redhat.vscode-camelk/camelk/tools/kamel/kamel"
+    "camelk.tools.kamel-path": "/Users/egen/Library/Application Support/Code/User/globalStorage/redhat.vscode-camelk/camelk/tools/kamel/kamel"
   },
   "cfnLint.path": "/usr/local/bin/cfn-lint",
   "chat.agentMerge.enabled": true,
+  "chat.canvases.enabled": true,
   "continue.enableTabAutocomplete": false,
   "debug.breakpointsView.presentation": "tree",
   "debug.console.acceptSuggestionOnEnter": "on",
   "debug.inlineValues": "on",
   "debug.toolBarLocation": "floating",
+  "dev.containers.dockerComposePath": "podman-compose",
+  "dev.containers.dockerPath": "podman",
   "diffEditor.hideUnchangedRegions.enabled": true,
   "diffEditor.ignoreTrimWhitespace": false,
   "dotenv.enableAutocloaking": false,
@@ -85,12 +78,20 @@
   "editor.bracketPairColorization.enabled": true,
   "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
   "editor.codeActions.triggerOnFocusChange": true,
+  "editor.codeActionsOnSave": {
+    "addMissingImport": "always",
+    "source.addMissingImport": "always",
+    "source.fixAll": "always",
+    "source.fixAll.eslint": "always",
+    "source.organizeImports": "always",
+    "source.sort.json": "always",
+    "source.sortImports": "always"
+  },
   "editor.cursorBlinking": "solid",
   "editor.cursorStyle": "line",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.emptySelectionClipboard": false,
   "editor.fontFamily": "OperatorMonoLig-BookItalic, Monaco, monospace",
-
   "editor.fontLigatures": true,
   "editor.fontSize": 20,
   "editor.fontWeight": 400,
@@ -128,6 +129,7 @@
   "editor.tabSize": 2,
   "editor.unicodeHighlight.ambiguousCharacters": false,
   "emmet.includeLanguages": {
+    "blade": "html",
     "javascript": "javascriptreact",
     "markdown": "html",
     "php": "html",
@@ -136,7 +138,7 @@
     "vue-html": "html"
   },
   "emmet.triggerExpansionOnTab": true,
-  "eslint.run": "onType",
+  "eslint.run": "onSave",
   "eslint.validate": [
     "javascript",
     "javascriptreact",
@@ -149,15 +151,26 @@
     "**/node_modules": true
   },
   "explorer.compactFolders": false,
+  "explorer.confirmDelete": true,
   "explorer.confirmDragAndDrop": false,
   "explorer.decorations.badges": false,
   "explorer.fileNesting.enabled": true,
   "explorer.openEditors.visible": 1,
   "files.associations": {
     ".env*": "dotenv",
+    "*.blade.php": "blade",
     "*.embeddedhtml": "html",
+    "*.tfvars": "terraform-vars",
+    "**/charts/**/templates/*.{yaml,yml,tpl}": "helm",
+    "**/templates/*.{yaml,yml,tpl}": "helm",
     "composer.json": "jsonc",
+    "Containerfile*": "dockerfile",
+    "docker-compose*": "dockercompose",
+    "Dockerfile*": "dockerfile",
+    "Jenkinsfile*": "groovy",
+    "packag-lock.json": "jsonc",
     "package.json": "jsonc",
+    "pnpm-lock.json": "jsonc",
     "project.json": "jsonc",
     "settings.json": "json",
     "tsconfig.app.json": "jsonc",
@@ -205,8 +218,12 @@
   "files.watcherExclude": {
     "**/.ammonite": true,
     "**/.bloop": true,
+    "**/.git/objects/**": true,
     "**/.metals": true,
-    "**/node_modules": true
+    "**/.terraform/**": true,
+    "**/node_modules": true,
+    "**/target/**": true,
+    "**/vendor/**": false
   },
   "git.blame.editorDecoration.enabled": true,
   "git.blame.ignoreWhitespace": true,
@@ -247,36 +264,40 @@
   "httpyac.codelens": {
     "clearHistory": true
   },
-  "importCost.largePackageColor": "#EC3A37F5",
-  "importCost.mediumPackageColor": "#B362FF",
-  "importCost.smallPackageColor": "#B362FF",
-  "intelephense.files.exclude": [
-    "**/node_modules/**",
-    "**/storage/**",
-    "**/bootstrap/cache/**",
-    "**/vendor/**/Tests/**/*",
-    "**/vendor/**/tests/**/*",
-    "**/var/cache/**/*",
-    "**/vendor/composer/**/*",
-    "**/tests/**",
-    "**/cache/**"
+  "java.codeGeneration.useBlocks": true,
+  "java.compile.nullAnalysis.mode": "automatic",
+  "java.completion.favoriteStaticMembers": [
+    "org.junit.jupiter.api.Assertions.*",
+    "org.mockito.Mockito.*",
+    "org.mockito.ArgumentMatchers.*",
+    "java.util.Objects.requireNonNull"
   ],
   "java.configuration.runtimes": [
     {
       "default": true,
-      "name": "JavaSE-25",
-      "path": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-crac-25"
+      "name": "JavaSE-27",
+      "path": "/Users/egen/Devzone/storage/mise/data/installs/java/zulu-crac-27"
     },
     {
       "default": false,
       "name": "JavaSE-21",
-      "path": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-crac-21"
+      "path": "/Users/egen/Devzone/storage/mise/data/installs/java/zulu-crac-21"
+    },
+    {
+      "default": false,
+      "name": "JavaSE-17",
+      "path": "/Users/egen/Devzone/storage/mise/data/installs/java/zulu-crac-17"
     }
   ],
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "java.format.onType.enabled": false,
   "java.implementationCodeLens": "all",
-  "java.jdt.ls.java.home": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-crac-25",
+  "java.inlayHints.parameterNames.enabled": "literals",
+  "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx2G -Xms100m",
   "java.project.importOnFirstTimeStartup": "automatic",
   "java.referencesCodeLens.enabled": true,
+  "java.sources.organizeImports.starThreshold": 99,
+  "java.sources.organizeImports.staticStarThreshold": 99,
   "js/ts.implicitProjectConfig.checkJs": true,
   "js/ts.preferences.importModuleSpecifier": "relative",
   "js/ts.preferences.quoteStyle": "single",
@@ -296,20 +317,14 @@
     "https://www.schemastore.org/": true
   },
   "json.schemas": [],
-  "laravel-pint.enable": false,
-  "Laravel.phpCommand": ["/usr/local/bin/php"],
-  "Laravel.pint.runOnSave": false,
-  "Lua.diagnostics.globals": ["vim", "nvim_bufferline", "sign"],
   "markdown.validate.enabled": true,
-  "maven.executable.path": "/Volumes/Devzone/storage/mise/data/shims/mvn",
-  "maven.terminal.useJavaHome": true,
+  "maven.executable.path": "/Users/egen/Devzone/storage/mise/data/shims/mvn",
   "mergeEditor.diffAlgorithm": "advanced",
-  "microprofile.alwaysShowOverview": false,
+  "npm.packageManager": "pnpm",
   "prettier.arrowParens": "avoid",
   "prettier.bracketSpacing": false,
   "prettier.embeddedLanguageFormatting": "auto",
   "prettier.endOfLine": "lf",
-  "prettier.eslintIntegration": true,
   "prettier.experimentalTernaries": false,
   "prettier.htmlWhitespaceSensitivity": "css",
   "prettier.insertPragma": false,
@@ -345,9 +360,33 @@
   "scm.defaultViewMode": "tree",
   "scm.repositories.explorer": true,
   "scm.workingSets.enabled": true,
+  "search.exclude": {
+    "**/.gradle": true,
+    "**/.next": true,
+    "**/.terraform": true,
+    "**/.terraform.lock.hcl": true,
+    "**/*.code-search": true,
+    "**/*.tfstate*": true,
+    "**/bower_components": true,
+    "**/build": true,
+    "**/coverage": true,
+    "**/dist": true,
+    "**/logs": true,
+    "**/node_modules": true,
+    "**/package-lock.json": true,
+    "**/pnpm-lock.yaml": true,
+    "**/public/build": true,
+    "**/storage/framework": true,
+    "**/storage/logs": true,
+    "**/target": true,
+    "**/tmp": true,
+    "**/vendor": true
+  },
   "search.useIgnoreFiles": true,
   "security.workspace.trust.untrustedFiles": "prompt",
-  "spring-boot.ls.java.home": "/Volumes/Devzone/storage/mise/data/installs/java/zulu-crac-25",
+  "sessions.chatTimeline.display": "gutter",
+  "sonarlint.automaticAnalysis": true,
+  "spring.initializr.defaultLanguage": "Java",
   "telemetry.telemetryLevel": "off",
   "terminal.integrated.copyOnSelection": true,
   "terminal.integrated.fontFamily": "OperatorMonoLig-BookItalic, Monaco, monospace",
@@ -362,8 +401,10 @@
   "terraform.codelens.referenceCount": true,
   "vscode-kubernetes.kubectl-path": "/usr/local/bin/kubectl",
   "window.commandCenter": false,
+  "window.density.layout": "compact",
   "window.restoreWindows": "none",
   "window.titleBarStyle": "custom",
+  "workbench.activityBar.location": "bottom",
   "workbench.colorCustomizations": {
     "[Cobalt2]": {
       "editor.lineHighlightBackground": "#182a36",
@@ -387,6 +428,7 @@
   "workbench.modernUIFrostedGlassOpacity": 80,
   "workbench.secondarySideBar.defaultVisibility": "hidden",
   "workbench.settings.editor": "json",
+  "workbench.sideBar.location": "right",
   "workbench.startupEditor": "none",
   "workbench.statusBar.feedback.visible": false,
   "workbench.statusBar.visible": true,
@@ -437,8 +479,5 @@
       "template.yaml"
     ]
   },
-  "yaml.validate": true,
-  "workbench.sideBar.location": "right",
-  "window.density.layout": "compact",
-  "workbench.activityBar.location": "bottom"
+  "yaml.validate": true
 }

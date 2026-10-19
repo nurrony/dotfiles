@@ -179,8 +179,8 @@ alias gcz='git-cz'
 alias gld='git pull origin develop'
 
 # set vim alias
-alias vi='nmr_fzf_find_edit'
-alias vim='nmr_fzf_find_edit'
+alias vi='nvim'
+alias vim='nvim'
 
 # docker terminal ui
 alias lzd='lazydocker'

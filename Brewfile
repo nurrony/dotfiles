@@ -278,8 +278,6 @@ cask "vagrant"
 cask "visual-studio-code"
 # All-in-One Java Troubleshooting Tool
 cask "visualvm"
-# GPU-accelerated cross-platform terminal emulator and multiplexer
-cask "wezterm"
 # Native desktop client for WhatsApp
 cask "whatsapp"
 # Connect to Windows

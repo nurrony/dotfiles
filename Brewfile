@@ -266,8 +266,6 @@ cask "microsoft-teams"
 cask "microsoft-word"
 # Android file transfer
 cask "openmtp"
-# Browse, manage, inspect containers and images
-cask "podman-desktop"
 # Move and resize windows using keyboard shortcuts or snap areas
 cask "rectangle"
 # App that enables mouse-free UI interaction

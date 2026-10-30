@@ -6,7 +6,7 @@ alias -g ND='>/dev/null'
 alias -g NE='2>/dev/null'
 
 # Easier navigation: .., ..., ...., ....., ~ and -
-alias cd="zoxide"
+alias cd="j"
 alias ~="cd ~"
 alias ..="cd .."
 alias -- -="cd -"

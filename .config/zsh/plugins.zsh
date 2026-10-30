@@ -20,5 +20,4 @@ zinit wait'2' lucid light-mode for \
 # install binaries
 zinit wait'10' lucid light-mode for \
   as'program' from'gh-r' jdx/usage \
-  as'program' from'gh-r' PHPantom-dev/phpantom_lsp \
-  as'program' from'gh-r' pick'llmfit-*/llmfit' AlexsJones/llmfit
+  as'program' from'gh-r' PHPantom-dev/phpantom_lsp

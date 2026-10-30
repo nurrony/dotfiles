@@ -4,6 +4,7 @@ tap "boz/repo", trusted: true
 tap "floci-io/floci", trusted: true
 tap "mongodb/brew", trusted: true
 tap "weaveworks/tap", trusted: true
+tap "xwmx/taps", trusted: true
 # Code searching, linting, rewriting
 brew "ast-grep"
 # Automatic configure script builder
@@ -178,6 +179,8 @@ brew "openssh"
 brew "p7zip"
 # General-purpose scripting language
 brew "php"
+# Fast PHP language server written in Rust
+brew "phpantom-lsp"
 # Parallel gzip
 brew "pigz"
 # Package compiler and linker metadata toolkit
@@ -238,6 +241,8 @@ brew "yazi"
 brew "yt-dlp"
 # General-purpose lossless data-compression library
 brew "zlib"
+# Shell extension to navigate your filesystem faster
+brew "zoxide"
 # UNIX shell (command interpreter)
 brew "zsh"
 # Official CLI for the Floci local AWS emulator

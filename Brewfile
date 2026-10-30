@@ -60,6 +60,8 @@ brew "libtiff"
 brew "dns2tcp"
 # Lightweight DNS forwarder and DHCP server
 brew "dnsmasq", restart_service: :changed
+# Command-line DNS Client for Humans
+brew "doggo"
 # Generate documentation for several programming languages
 brew "doxygen"
 # View disk space usage and delete unwanted data, fast
@@ -228,6 +230,8 @@ brew "uv"
 brew "watch"
 # Internet file retriever
 brew "wget"
+# CSV CLI magician written in Rust
+brew "xan"
 # Blazing fast terminal file manager written in Rust, based on async I/O
 brew "yazi"
 # Feature-rich command-line audio/video downloader

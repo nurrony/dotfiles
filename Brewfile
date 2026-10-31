@@ -103,6 +103,8 @@ brew "git"
 brew "git-extras"
 # Audit git repos for secrets
 brew "gitleaks"
+# Cinematic Git commit replay tool
+brew "gitlogue"
 # OpenGL Extension Wrangler Library
 brew "glew"
 # Multi-platform library for OpenGL applications
@@ -161,6 +163,8 @@ brew "libxml2"
 brew "libzip"
 # Unified display of technical and tag data for audio/video
 brew "media-info"
+# Polyglot runtime manager (asdf rust clone)
+brew "mise"
 # Simple tool to make locally trusted development certificates
 brew "mkcert"
 # Collection of tools that nobody wrote when UNIX was young
@@ -175,6 +179,8 @@ brew "netpbm"
 brew "nmap"
 # OpenBSD freely-licensed SSH connectivity tools
 brew "openssh"
+# Terminal User Interface (TUI) to view & control docker containers
+brew "oxker"
 # 7-Zip (high compression file archiver) implementation
 brew "p7zip"
 # General-purpose scripting language
@@ -304,6 +310,7 @@ vscode "dsznajder.es7-react-js-snippets"
 vscode "editorconfig.editorconfig"
 vscode "esbenp.prettier-vscode"
 vscode "grapecity.gc-excelviewer"
+vscode "hverlin.mise-vscode"
 vscode "jeremyljackson.vs-docblock"
 vscode "laravel.vscode-laravel"
 vscode "maarti.jenkins-doc"

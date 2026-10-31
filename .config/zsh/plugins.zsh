@@ -10,7 +10,6 @@ zinit wait'2' lucid light-mode for \
   OMZP::podman \
   OMZP::extract \
   OMZP::command-not-found \
-  as'program' from'gh-r' jdx/usage \
   pick'alias-tips.plugin.zsh' djui/alias-tips \
   as'completion' pick'_curl' Valodim/zsh-curl-completion \
   zdharma/fast-syntax-highlighting

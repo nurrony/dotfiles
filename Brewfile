@@ -113,6 +113,8 @@ brew "glfw"
 brew "gnu-sed"
 # GNU grep, egrep and fgrep
 brew "grep"
+# Command-line tool for generating regular expressions
+brew "grex"
 # Kubernetes package manager
 brew "helm"
 # User-friendly cURL replacement (command-line HTTP client)

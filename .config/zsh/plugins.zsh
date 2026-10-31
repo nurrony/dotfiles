@@ -1,5 +1,5 @@
 # load zoxide
-eval "$(zoxide init zsh --cmd cd)"
+eval "$(zoxide init zsh --cmd j)"
 
 # load essential completion
 zinit lucid light-mode for \

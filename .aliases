@@ -182,8 +182,8 @@ alias gld='git pull origin develop'
 alias vi='nvim'
 alias vim='nvim'
 
-# docker terminal ui
-alias lzd='lazydocker'
+# docker/porman terminal ui
+alias lzd='oxker'
 
 # git terminal ui
 alias lg='lazygit'

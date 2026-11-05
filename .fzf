@@ -215,13 +215,13 @@ nmr_fzf_rebase() {
             --layout=reverse \
             --border \
             --prompt="Rebase & Reorder > " \
-            --header="[Multi-Select commits in desired order] | [Enter: Pick | Ctrl+S: Squash | Ctrl+E: Edit | Ctrl+D: Drop]" \
+            --header="[Enter: Pick | Ctrl+S: Squash | Ctrl+E: Edit | Ctrl+D: Drop]" \
             --expect=ctrl-s,ctrl-e,ctrl-d,enter \
             --preview '
                 commit_hash=$(echo {} | awk "{print \$1}")
                 git show --color=always "$commit_hash"
             ' \
-            --preview-window=right:60%:wrap)
+            --preview-window=right:55%:wrap)
 
     if [[ -z "$selection" ]]; then
         echo "Rebase cancelled."

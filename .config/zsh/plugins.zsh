@@ -9,8 +9,6 @@ zinit wait'2' lucid light-mode for \
   OMZP::sudo \
   OMZP::podman \
   OMZP::extract \
-  OMZP::extract \
-  Aloxaf/fzf-tab \
   OMZP::command-not-found \
   pick'alias-tips.plugin.zsh' djui/alias-tips \
   as'completion' pick'_curl' Valodim/zsh-curl-completion \

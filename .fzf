@@ -274,3 +274,108 @@ nmr_fzf_rebase() {
     # Cleanup temporary file
     rm -f "$seq_file"
 }
+
+
+# git-rebase-fzf.zsh
+#
+# Interactive git rebase picker for zsh, powered by fzf.
+#
+# Install: source this file from ~/.zshrc
+#   source ~/path/to/git-rebase-fzf.zsh
+#
+# Usage:
+#   gri              pick a commit; rebase -i from it (inclusive)
+#   gri -b           pick a branch/tag; rebase -i onto it
+#   gri -a           add --autosquash (great with `git commit --fixup`)
+#   gri -s           add --autostash (stash/unstash a dirty worktree)
+#   gri -n 500       show the last 500 commits (default: 200)
+#
+# In the picker:
+#   Enter       confirm
+#   ctrl-/      toggle the diff preview
+#   ctrl-d/u    scroll the preview down/up
+
+gri() {
+  emulate -L zsh
+  setopt local_options pipe_fail
+
+  local limit=200 mode=commit
+  local -a flags=()
+
+  while (( $# )); do
+    case $1 in
+      -n)              limit=$2; shift 2 ;;
+      -b|--branch)     mode=branch; shift ;;
+      -a|--autosquash) flags+=(--autosquash); shift ;;
+      -s|--autostash)  flags+=(--autostash); shift ;;
+      -h|--help)
+        print "usage: gri [-b] [-a] [-s] [-n COUNT]"
+        return 0 ;;
+      *) print -u2 "gri: unknown option: $1"; return 2 ;;
+    esac
+  done
+
+  if ! command -v fzf >/dev/null 2>&1; then
+    print -u2 "gri: fzf is not installed"
+    return 1
+  fi
+
+  if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    print -u2 "gri: not inside a git repository"
+    return 1
+  fi
+
+  if [[ -d $(git rev-parse --git-path rebase-merge) || \
+        -d $(git rev-parse --git-path rebase-apply) ]]; then
+    print -u2 "gri: a rebase is already in progress (git rebase --continue/--abort)"
+    return 1
+  fi
+
+  local -a fzf_opts=(
+    --ansi --reverse --height=85%
+    --preview-window='right,60%,border-left'
+    --bind='ctrl-/:toggle-preview,ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up'
+  )
+
+  local pick target
+
+  if [[ $mode == branch ]]; then
+    pick=$(
+      git for-each-ref --color=always \
+        --sort=-committerdate \
+        --format='%(color:green)%(refname:short)%(color:reset)  %(color:dim)%(committerdate:relative)%(color:reset)  %(subject)' \
+        refs/heads refs/remotes refs/tags |
+      fzf $fzf_opts \
+        --header='Rebase onto which ref? (Enter to confirm)' \
+        --preview='git log --color=always --oneline --graph -n 30 {1}'
+    ) || return 0
+
+    target=${pick%% *}
+    [[ -z $target ]] && return 0
+
+    print -P "%F{cyan}→ git rebase -i ${flags[*]} $target%f"
+    git rebase -i "${flags[@]}" "$target"
+    return
+  fi
+
+  # commit mode
+  pick=$(
+    git log --color=always -n "$limit" \
+      --format='%C(yellow)%h%C(reset) %C(green)%<(14,trunc)%cr%C(reset) %C(blue)%<(16,trunc)%an%C(reset) %s%C(auto)%d' |
+    fzf $fzf_opts --no-sort \
+      --header='Rebase from which commit? (selected commit is included)' \
+      --preview='git show --color=always --stat --patch {1}'
+  ) || return 0
+
+  local sha=${pick%% *}
+  [[ -z $sha ]] && return 0
+
+  if git rev-parse --verify --quiet "${sha}^" >/dev/null; then
+    print -P "%F{cyan}→ git rebase -i ${flags[*]} ${sha}^%f"
+    git rebase -i "${flags[@]}" "${sha}^"
+  else
+    # selected commit is the root commit
+    print -P "%F{cyan}→ git rebase -i ${flags[*]} --root%f"
+    git rebase -i "${flags[@]}" --root
+  fi
+}

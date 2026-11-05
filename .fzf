@@ -1,56 +1,132 @@
 #!/usr/bin/env zsh
-# setup fzf for zsh
-if command -v fzf &>/dev/null; then
-  export FZF_DEFAULT_COMMAND="rg --files --hidden"
-  export FZF_DEFAULT_OPTS="--multi --height 70% --layout=default --border --color=hl:#fbb388"
-  export FZF_CTRL_T_OPTS="--multi --preview 'bat --color=always -n --line-range :100 {}'"
-  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+# ==============================================================================
+# Optimized & Hardened FZF Configuration for Zsh
+# ==============================================================================
 
-  export FZF_ALT_C_OPTS="--preview 'eza --tree {} | head -200'"
-  export FZF_ALT_C_COMMAND="rg --files --hidden --type d"
-
-  # Set up fzf key bindings and fuzzy completion
-  source <(fzf --zsh)
-
-  nmr_fzf_kill() {
-      if [[ $(uname) == Linux ]]; then
-          local pids=$(ps -f -u $USER | sed 1d | fzf | awk '{print $2}')
-      elif [[ $(uname) == Darwin ]]; then
-          local pids=$(ps -f -u $USER | sed 1d | fzf | awk '{print $3}')
-      else
-          echo 'Error: unknown platform'
-          return
-      fi
-      if [[ -n "$pids" ]]; then
-          echo "$pids" | xargs kill -9 "$@"
-      fi
-  }
-
-  nmr_fzf_git_reflog() {
-      local selection=$(
-        git reflog --color=always "$@" |
-          fzf --no-multi --ansi --no-sort --no-height \
-              --preview "git show --color=always {1}"
-      )
-      if [[ -n $selection ]]; then
-          git show $(echo $selection | awk '{print $1}')
-      fi
-  }
-
-
-  nmr_fzf_git_log_pickaxe() {
-      if [[ $# == 0 ]]; then
-          echo 'Error: search term was not provided.'
-          return
-      fi
-      local selection=$(
-        git log --oneline --color=always -S "$@" |
-          fzf --no-multi --ansi --no-sort --no-height \
-              --preview "git show --color=always {1}"
-      )
-      if [[ -n $selection ]]; then
-          local commit=$(echo "$selection" | awk '{print $1}' | tr -d '\n')
-          git show $commit
-      fi
-  }
+# Guard: Ensure fzf is installed before proceeding
+if ! command -v fzf &>/dev/null; then
+    return 1
 fi
+
+# Initialize fzf key bindings and fuzzy completion
+source <(fzf --zsh)
+
+# ------------------------------------------------------------------------------
+# Environment & Command Optimization
+# ------------------------------------------------------------------------------
+
+# Safe file search: Include hidden files but strictly ignore .git internals
+if command -v rg &>/dev/null; then
+    export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/*'"
+else
+    export FZF_DEFAULT_COMMAND="find . -type f -not -path '*/.git/*'"
+fi
+
+export FZF_DEFAULT_OPTS="--multi --height 70% --layout=default --border --color=hl:#fbb388"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_CTRL_T_OPTS="--multi --preview 'bat --color=always -n --line-range :100 {}'"
+
+# Fixed directory search: Use 'fd' if available (preferred), fallback to safe find/rg
+if command -v fd &>/dev/null; then
+    export FZF_ALT_C_COMMAND="fd --type d --hidden --exclude .git"
+elif command -v rg &>/dev/null; then
+    export FZF_ALT_C_COMMAND="rg --files --hidden --glob '*/' --glob '!.git/*'"
+else
+    export FZF_ALT_C_COMMAND="find . -type d -not -path '*/.git/*'"
+fi
+
+export FZF_ALT_C_OPTS="--preview 'eza --tree --level=2 --color=always {} | head -200'"
+
+# ------------------------------------------------------------------------------
+# Custom Utility Functions (Hardened & Robust)
+# ------------------------------------------------------------------------------
+
+# Interactive Process Killer (Cross-platform and safer PID extraction)
+nmr_fzf_kill() {
+    local pid
+    pid=$(ps -ef | sed 1d | fzf --header="[Kill Process]" --preview="echo {}" | awk '{print $2}')
+    if [[ -n "$pid" ]]; then
+        echo "Terminating PID: $pid"
+        kill -9 "$pid"
+    fi
+}
+
+# Git Reflog Picker
+nmr_fzf_git_reflog() {
+    local selection
+    selection=$(git reflog --color=always "$@" | fzf --no-multi --ansi --no-sort --height 80% \
+        --preview "git show --color=always \$(echo {} | awk '{print \$1}')")
+    if [[ -n "$selection" ]]; then
+        local commit=$(echo "$selection" | awk '{print $1}')
+        git show "$commit"
+    fi
+}
+
+# Git Log Pickaxe (Search code introduction/removal history)
+nmr_fzf_git_log_pickaxe() {
+    if [[ $# == 0 ]]; then
+        echo 'Error: Search term was not provided.' >&2
+        return 1
+    fi
+    local selection
+    selection=$(git log --oneline --color=always -S "$@" | fzf --no-multi --ansi --no-sort --height 80% \
+        --preview "git show --color=always \$(echo {} | awk '{print \$1}')")
+    if [[ -n "$selection" ]]; then
+        local commit=$(echo "$selection" | awk '{print $1}')
+        git show "$commit"
+    fi
+}
+
+# Advanced Git Branch Checkout with Live Graph Previews & Remote Tracking
+nmr_fzf_git_checkout() {
+    # 1. Ensure we are inside a valid git working tree
+    if ! git rev-parse --is-inside-work-tree &>/dev/null; then
+        echo "Error: Not a git repository." >&2
+        return 1
+    fi
+
+    local selection branch clean_branch
+
+    # 2. Launch fzf with a dual-pane layout and dynamic log preview
+    selection=$(git branch -a --color=always --no-column --format='%(if)%(HEAD)%(then)* %(else)  %(end)%(refname:short)' | \
+        fzf --ansi \
+            --height 75% \
+            --layout=reverse \
+            --border \
+            --prompt="Checkout Branch ❯ " \
+            --pointer="▶" \
+            --marker="✓" \
+            --header="[Enter: Checkout | Esc: Cancel]" \
+            --preview='
+                # Strip leading markers (*, spaces) to get exact branch name
+                b=$(echo {} | sed "s/^[ *]*//")
+                # If it is a remote branch, trim remote prefix for log check if needed, or inspect directly
+                git log --graph --color=always --oneline --max-count=100 --date=relative \
+                    --pretty=format:"%C(yellow)%h%C(reset) - %C(cyan)%an%C(reset): %s %C(green)(%ar)%C(reset)" "$b" 2>/dev/null || \
+                git log --graph --color=always --oneline --max-count=100 "$b"
+            ' \
+            --preview-window=right:65%:wrap)
+
+    # 3. Process selection and perform checkout
+    if [[ -n "$selection" ]]; then
+        # Clean up formatting to extract the exact branch name
+        branch=$(echo "$selection" | sed 's/^[ *]*//')
+
+        # Strip trailing pointers like ' -> origin/HEAD' if present
+        branch="${branch%% *}"
+
+        # If user selected a remote branch (e.g., origin/feature-x) that doesn't have a local counterpart
+        if [[ "$branch" == origin/* ]] && [[ "$branch" != */HEAD ]]; then
+            clean_branch="${branch#origin/}"
+            if git show-ref --verify --quiet "refs/heads/$clean_branch"; then
+                echo "Switching to existing local branch: $clean_branch"
+                git checkout "$clean_branch"
+            else
+                echo "Tracking remote branch '$clean_branch' from '$branch'..."
+                git checkout --track "$branch"
+            fi
+        else
+            git checkout "$branch"
+        fi
+    fi
+}

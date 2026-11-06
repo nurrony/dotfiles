@@ -95,7 +95,7 @@ function gitio() {
   curl -i https://git.io/ -F "url=${2}" -F "code=${1}";
 }
 
-serve-spa() {
+function serve-spa() {
   command -v npx >/dev/null 2>&1 || { echo >&2 "node >v12.x.x is required. Aborting."; exit 1; }
   local port_number=${1:-3000}
   local current_dir=${2:-$PWD}
@@ -104,7 +104,7 @@ serve-spa() {
   npx serve --single --cors --no-clipboard -p $port_number $current_dir
 }
 
-server() {
+function server() {
   command -v npx >/dev/null 2>&1 || { echo >&2 "node >v12.x.x is required. Aborting."; exit 1; }
   local port_number=${1:-3000}
   local current_dir=${2:-$PWD}
@@ -189,7 +189,7 @@ function getcertnames() {
 }
 
 #Open caniuse.com in browser
-caniuse() {
+function caniuse() {
   local domain="https://caniuse.com/"
   local query
 
@@ -205,7 +205,7 @@ caniuse() {
 
 #   ii:  display useful host related informaton
 #   -------------------------------------------------------------------
-ii() {
+function ii() {
     echo -e "\nYou are logged on ${RED}$HOST"
     echo -e "\nAdditionnal information:$NC " ; uname -a
     echo -e "\n${RED}Users logged on:$NC " ; w -h
@@ -217,7 +217,7 @@ ii() {
 }
 
 # who is using the laptop's iSight camera?
-camerausedby() {
+function camerausedby() {
   echo "Checking to see who is using the iSight camera… 📷"
   usedby=$(lsof | grep -w "AppleCamera\|USBVDC\|iSight" | awk '{printf $2"\n"}' | xargs ps)
   echo -e "Recent camera uses:\n$usedby"
@@ -229,14 +229,14 @@ function nullify() {
 }
 
 #remove remote git branches by prefix
-git-branch-rm-remote() {
+function git-branch-rm-remote() {
   vared -p "This will remove your remote branches with '$@' prefix. Are you sure? [yn] " -c answer
   if [[ $answer = y ]] ; then
     git branch -r | awk -Forigin/ '/\/'$@'/ {print $2 $3}' | xargs -I {} git push origin :{}
   fi
 }
 
-set-gitlab() {
+function set-gitlab() {
   local username
 
     if [ "$#" -eq 1 ]; then
@@ -248,18 +248,18 @@ set-gitlab() {
   git remote set-url --add --push origin git@gitlab.com:${1}/${2}.git
 }
 
-git-track-branches() {
+function git-track-branches() {
   for branch in `git branch -a | grep remotes | grep -v HEAD | grep -v master `; do
     git branch --track ${branch#remotes/origin/} $branch
   done
 }
 
-skype() {
+function skype() {
   local account=${1:-nmrony}
   open -na /Applications/Skype.app --args --secondary --datapath="/Users/$(whoami)/Library/Application\ Support/Skype-$account"
 }
 
-rmp() {
+function rmp() {
     if [ "$#" -eq 0 ]; then
         echo "Usage: rmp <file_or_directory> ..."
         return 1
@@ -298,7 +298,7 @@ rmp() {
 #   cpv /local/file user@host:/remote/path/
 #   cpv user@host:/remote/file /local/dest/
 #   cpv user1@host1:/file user2@host2:/dest/
-cpv() {
+function cpv() {
      [[ $# -lt 2 ]] && { echo "Usage: cpv <source> <destination>"; return 1; }
 
     local src="$1"
@@ -367,8 +367,6 @@ function update_minc() {
     chmod +x ~/.local/bin/minc && ~/.local/bin/minc completion zsh > $DEV_ZONE_CONFIG_PATH/zinit/_minc
   fi
 }
-
-
 
 # toggle proxy settings for macos
 function toggle_proxy() {

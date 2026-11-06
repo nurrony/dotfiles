@@ -139,10 +139,6 @@ alias afk="/System/Library/CoreServices/Menu Extras/User.menu/Contents/Resources
 # Reload the shell (i.e. invoke as a login shell)
 alias reload="exec $SHELL -l"
 
-# View HTTP traffic
-alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
-alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
-
 # 1. NETWORKING
 alias netCons='lsof -i'                           # netCons:      Show all open TCP/IP sockets
 alias flushDNS='dscacheutil -flushcache'          # flushDNS:     Flush out the DNS Cache

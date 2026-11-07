@@ -1,0 +1,6 @@
+git:
+  allBranchesLogCmds:
+    - git log --color=always --all --graph --format='%C(auto)%h%d %s %C(dim)<%an> %C(green)%cr'
+  diffRenderers:
+    - colorArg: always
+      command: DELTA_FEATURES=+lazygit delta --file-style omit --hunk-header-style omit --syntax-theme 'Catppuccin Mocha' --dark --paging=never

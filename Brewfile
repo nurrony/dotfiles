@@ -99,6 +99,8 @@ brew "fzf"
 brew "gd"
 # Distributed revision control system
 brew "git"
+# Syntax-highlighting pager for git and diff output
+brew "git-delta"
 # Small git utilities
 brew "git-extras"
 # Audit git repos for secrets
@@ -153,14 +155,16 @@ brew "libedit"
 brew "libiconv"
 # X.509 and CMS library
 brew "libksba"
-# LLVM's OpenMP runtime library
-brew "libomp"
 # Library for USB device access
 brew "libusb"
 # GNOME XML library
 brew "libxml2"
 # C library for reading, creating, and modifying zip archives
 brew "libzip"
+# LLM inference in C/C++
+brew "llama.cpp"
+# Find what models run on your hardware
+brew "llmfit"
 # Unified display of technical and tag data for audio/video
 brew "media-info"
 # Polyglot runtime manager (asdf rust clone)
@@ -233,6 +237,8 @@ brew "telnet"
 brew "testssl"
 # Terminal multiplexer
 brew "tmux"
+# Command-line tool for sharing terminal over the web
+brew "ttyd"
 # Extremely fast Python package installer and resolver, written in Rust
 brew "uv"
 # Executes a program periodically, showing output fullscreen
@@ -269,6 +275,8 @@ cask "gpg-suite"
 cask "iina"
 # File archiver
 cask "keka"
+# Menu bar app for running local LLMs
+cask "llama-app"
 # Provides updates to various Microsoft products
 cask "microsoft-auto-update"
 # Spreadsheet software
@@ -352,8 +360,8 @@ vscode "vscjava.vscode-maven"
 vscode "vscjava.vscode-spring-boot-dashboard"
 vscode "vscjava.vscode-spring-initializr"
 vscode "xdebug.php-debug"
+npm "@opencode/cli"
 npm "commitizen"
-npm "opencode-ai"
 npm "prettier"
 npm "serve"
 npm "typescript"

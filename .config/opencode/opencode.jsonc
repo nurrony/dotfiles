@@ -1,26 +1,52 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "instructions": [".vscode/rules/*.md"],
-  "permission": {
-    "edit": "ask",
-    "bash": {
-      "*": "ask",
-      "git *": "allow",
-      "npm *": "allow",
-      "npx *": "allow",
-      "rm *": "deny",
-      "grep *": "allow"
-    },
-    "websearch": "allow",
-    "webfetch": "allow",
-    "read": {
-      "*": "allow",
-      "*.env": "deny",
-      "*.env.*": "deny",
-      "*.env.example": "allow"
-    }
-  },
+
+  // Ordered rules, last match wins: broad rules first, exceptions after.
+  "permissions": [
+    { "action": "edit", "resource": "*", "effect": "ask" },
+
+    { "action": "shell", "resource": "*", "effect": "ask" },
+    { "action": "shell", "resource": "git *", "effect": "allow" },
+    { "action": "shell", "resource": "npm *", "effect": "allow" },
+    { "action": "shell", "resource": "pnpm *", "effect": "allow" },
+    { "action": "shell", "resource": "npx *", "effect": "allow" },
+    { "action": "shell", "resource": "pnx *", "effect": "allow" },
+    { "action": "shell", "resource": "grep *", "effect": "allow" },
+    { "action": "shell", "resource": "rm *", "effect": "deny" },
+
+    { "action": "websearch", "resource": "*", "effect": "allow" },
+    { "action": "webfetch", "resource": "*", "effect": "allow" },
+
+    { "action": "read", "resource": "*", "effect": "allow" },
+    { "action": "read", "resource": "*.env", "effect": "deny" },
+    { "action": "read", "resource": "*.env.*", "effect": "deny" },
+    { "action": "read", "resource": "*.env.example", "effect": "allow" },
+  ],
+  "formatter": true,
   "lsp": true,
+  "update": "notify",
+  "default_agent": "plan",
+  "experimental": {
+    "todo": true,
+    "subagent_depth": 4,
+    "background_compaction": true,
+  },
+  "agents": {
+    "build": {
+      "model": "llama/unsloth/Qwen3-Coder-30B",
+    },
+    "plan": {
+      "model": "llama/unsloth/Gemma4-E4B",
+    },
+  },
+  "model": "llama/unsloth/Qwen3-Coder-30B",
+  // Percentage buffer so it scales with each model's context size
+  // (a fixed 10000 would leave almost nothing on the 16k models).
+  "compaction": {
+    "auto": true,
+    "buffer": "15%",
+  },
   "watcher": {
     "ignore": [
       "node_modules/**",
@@ -38,66 +64,70 @@
       "cache/**",
       "public/**",
       "static/**",
-      "assets/**"
-    ]
+      "assets/**",
+    ],
   },
-  "compaction": {
-    "auto": true,
-    "prune": true,
-    "reserved": 10000
-  },
-  "model": "ollama/qwen3.5:9b-mlx",
-  "provider": {
-    "ollama": {
-      "npm": "@ai-sdk/openai-compatible",
-      "name": "Ollama (Local)",
-      "options": {
-        "baseURL": "http://localhost:11434/v1"
+  "providers": {
+    "llama": {
+      "package": "@ai-sdk/openai-compatible",
+      "name": "Llama App (Local)",
+      "settings": {
+        "baseURL": "http://127.0.0.1:9931/v1",
+      },
+      "compatibility": {
+        "reasoningField": "reasoning_content",
       },
       "models": {
-        "qwen3.5:9b": {
-          "tools": true,
-          "name": "Qwen3.5 9B",
-          "variants": {
-            "thinking": {
-              "reasoningEffort": "high",
-              "textVerbosity": "low",
-              "reasoningSummary": "auto"
-            },
-            "fast": {
-              "disabled": true
-            }
-          }
+        "unsloth/Qwen3-Coder-30B-A3B": {
+          "name": "Qwen3 Coder 30B A3B (UD-Q4_K_XL)",
+          "capabilities": {
+            "tools": true,
+            "temperature": true,
+          },
+          "limit": { "context": 32768, "output": 8192 },
+          // Same sampling as models.users.ini, sent explicitly so the
+          // client's own defaults can't override it.
+          "body": {
+            "temperature": 0.0,
+            "top_k": 20,
+            "top_p": 0.8,
+            "repeat_penalty": 1.05,
+          },
         },
-        "qwen3.5:9b-mlx": {
-          "name": "Qwen3.5 9B MLX",
-          "tools": true,
-          "variants": {
-            "thinking": {
-              "reasoningEffort": "high",
-              "textVerbosity": "low",
-              "reasoningSummary": "auto"
-            },
-            "fast": {
-              "disabled": true
-            }
-          }
+
+        "unsloth/Qwen38-27B": {
+          "name": "Qwen3.8 27B (Q4_K_M)",
+          "capabilities": {
+            "tools": true,
+            "temperature": true,
+            "reasoning": { "supported": true },
+          },
+          "limit": { "context": 32768, "output": 8192 },
+          "body": {
+            "temperature": 1,
+            "top_k": 20,
+            "min_p": 0.0,
+            "top_p": 0.95,
+            "repeat_penalty": 1.05,
+            "presence_penalty": 0.0,
+          },
         },
-        "gemma4:12b": {
-          "name": "Gemma 4 12B",
-          "tools": true,
-          "variants": {
-            "thinking": {
-              "reasoningEffort": "high",
-              "textVerbosity": "low",
-              "reasoningSummary": "auto"
-            },
-            "fast": {
-              "disabled": true
-            }
-          }
-        }
-      }
-    }
-  }
+
+        "unsloth/Gemma4-E4B": {
+          "name": "Gemma 4 E4B (UD-Q8_K_XL)",
+          "capabilities": {
+            "tools": true,
+            "temperature": true,
+            "reasoning": { "supported": true },
+          },
+          "limit": { "context": 32768, "output": 8192 },
+          "body": {
+            "temperature": 1,
+            "top_k": 64,
+            "top_p": 0.95,
+          },
+        },
+      },
+    },
+  },
 }

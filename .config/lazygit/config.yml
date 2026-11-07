@@ -1,6 +1,23 @@
 git:
+  autoFetch: false
+  branchLogCmd: git log --color=always --graph --format='%C(auto)%h%d %s %C(dim)<%an> %C(green)%cr' {{branchName}}
   allBranchesLogCmds:
     - git log --color=always --all --graph --format='%C(auto)%h%d %s %C(dim)<%an> %C(green)%cr'
   diffRenderers:
     - colorArg: always
       command: DELTA_FEATURES=+lazygit delta --file-style omit --hunk-header-style omit --syntax-theme 'Catppuccin Mocha' --dark --paging=never
+
+gui:
+  nerdFontsVersion: "3"
+  theme:
+    selectedLineBgColor:
+      - yellow
+    selectedLineFgColor:
+      - black
+    inactiveViewSelectedLineBgColor:
+      - yellow
+    cherryPickedCommitBgColor:
+      - default
+      - underline
+    cherryPickedCommitFgColor:
+      - yellow
